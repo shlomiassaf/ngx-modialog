@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+        <script src="./lib/traceur-runtime.js"></script>
+        <script src="./lib/es6-module-loader-sans-promises.js"></script>
+        <script src="./lib/Reflect.js"></script>
+        <script src="./lib/system.js"></script>
+        <script src="./lib/zone.js"></script>
+        <script src="./lib/angular2.js"></script>
+        <script src="./lib/router.js"></script>
+    </head>
+    <body>
+        <app></app>
+        <script>
+            (function () {
+                var c = System.defined['angular2/core'];
+                var i = c.deps.indexOf('angular2/src/core/compiler/interfaces');
+                if (i >= 0) {
+                    c.deps[i] = 'angular2/src/core/zone/ng_zone';
+                }
+            }());
+
+            System.baseURL += 'demo/';
+//            System.config({
+//                "paths": {
+//                    "../BootstrapModal/BootstarpModal":"src/BootstrapModal/BootstrapModal.js",
+//                    "*":"/demo/*.js"
+//                }
+//            });
+
+            System.import('main').then(function(module) {
+                module.default();
+            });
+        </script>
+    </body>
+</html>
