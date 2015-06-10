@@ -14,6 +14,24 @@ See [demo/components/App/App.ts](https://github.com/shlomiassaf/angular2-modal/b
 
 Will try to add documented examples if time allows.
 
+## Running locally
+```
+git clone https://github.com/shlomiassaf/angular2-modal.git
+npm install
+gulp serve
+```
+
+## Developing
+```
+git clone https://github.com/shlomiassaf/angular2-modal.git
+npm install
+gulp serve
+gulp watch
+```
+Component is in `src/BootstrapMoal`, any change will automatically trigger a build.
+This is the case for the demo, where you check your changes. (Sorry, no unit tests)
+
+
 # Issues and TODO's
 ## Animation
 Not so complicated but not in angular 2 at the moment.
