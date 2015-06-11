@@ -20,7 +20,7 @@ git clone https://github.com/shlomiassaf/angular2-modal.git
 npm install
 gulp serve
 ```
-Open http://http://localhost:3005 in your browser to see the app. The webpage will automatically refresh itself as you save files inside the project.
+Open http://localhost:3005 in your browser to see the app. The webpage will automatically refresh itself as you save files inside the project.
 ## Developing
 ```
 git clone https://github.com/shlomiassaf/angular2-modal.git
