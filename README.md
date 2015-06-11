@@ -6,13 +6,31 @@
  
 ## Built with angular 2, alpha 26
 
-[Demo](http://shlomiassaf.github.io/angular2-modal/), [GitHub](https://github.com/shlomiassaf/angular2-modal)
+Click for the [Demo](http://shlomiassaf.github.io/angular2-modal/)
 
 ### Blog post will be up soon! look for it in my [Blog](http://blog.assaf.co/)
 
-See (demo/components/App/App.ts)[https://github.com/shlomiassaf/angular2-modal/blob/master/demo/components/App/App.ts] for code examples.
+See [demo/components/App/App.ts](https://github.com/shlomiassaf/angular2-modal/blob/master/demo/components/App/App.ts) for code examples.
 
 Will try to add documented examples if time allows.
+
+## Running locally
+```
+git clone https://github.com/shlomiassaf/angular2-modal.git
+npm install
+gulp serve
+```
+Open http://localhost:3005 in your browser to see the app. The webpage will automatically refresh itself as you save files inside the project.
+## Developing
+```
+git clone https://github.com/shlomiassaf/angular2-modal.git
+npm install
+gulp serve
+gulp watch
+```
+Component is in `src/BootstrapMoal`, any change will automatically trigger a build.
+This is the case for the demo, where you check your changes. (Sorry, no unit tests)
+
 
 # Issues and TODO's
 ## Animation
