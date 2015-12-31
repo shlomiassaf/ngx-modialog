@@ -1,15 +1,15 @@
 {
   "version": "1.5.0",
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES5",
     "module": "commonjs",
-    "declaration": true,
-    "noImplicitAny": false,
     "removeComments": true,
-    "noLib": false,
     "emitDecoratorMetadata": true,
-    "sourceMap": true,
-    "listFiles": true
+    "experimentalDecorators": true,
+    "noEmitHelpers": false,
+    "sourceMap": true
   },
-  "files": []
+  "files": [
+    "typings/main.d.ts"
+  ]
 }
