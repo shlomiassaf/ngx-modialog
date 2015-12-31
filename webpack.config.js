@@ -15,7 +15,7 @@ module.exports = {
 
     // Config for our build files
     output: {
-        path: root('_dist'),
+        path: root('dist'),
         filename: '[name].js',
         sourceMapFilename: '[name].map',
         chunkFilename: '[id].chunk.js'
@@ -61,7 +61,7 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         contentBase: '',
-        publicPath: '/_dist'
+        publicPath: '/dist'
     }
 };
 
