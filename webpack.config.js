@@ -15,7 +15,7 @@ module.exports = {
 
     // Config for our build files
     output: {
-        path: root('angular2-modal'),
+        path: root('_dist'),
         filename: '[name].js',
         sourceMapFilename: '[name].map',
         chunkFilename: '[id].chunk.js'
@@ -61,7 +61,7 @@ module.exports = {
     devServer: {
         historyApiFallback: true,
         contentBase: '',
-        publicPath: '/angular2-modal'
+        publicPath: '/_dist'
     }
 };
 
