@@ -15,7 +15,7 @@ module.exports = {
 
     // Config for our build files
     output: {
-        path: root('angular2-moda'),
+        path: root('angular2-modal'),
         filename: '[name].js',
         sourceMapFilename: '[name].map',
         chunkFilename: '[id].chunk.js'
