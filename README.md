@@ -24,9 +24,12 @@ Will try to add documented examples if time allows.
 You can apply custom modals based on components.
 
 # Issues and TODO's
-
 ## Animation
 Not so complicated but not in angular 2 at the moment.
+
+## Module
+Set webpack do build angular2-module.js as an initial webpack module (currently its not...)
+This will allow using it as an input for other projects.
 
 ## Minimize DOM interaction
 Reduce manual DOM interaction, do more usage of `host` object in `@Component`.
