@@ -1,9 +1,40 @@
+import {Injectable} from 'angular2/core';
+let _defaultConfig: ModalConfig;
+
 
 /**
  * A configuration definition object.
  * Instruction for how to show a modal.
  */
+@Injectable()
 export class ModalConfig {
+    /**
+     * Makes a ModalConfig instance valdud.
+     * @param config
+     * @param defaultConfig A Default config to use as master, optional.
+     * @returns {ModalConfig} The same config instance sent.
+     */
+    static makeValid(config: ModalConfig, defaultConfig?: ModalConfig) {
+        defaultConfig = (defaultConfig) ? defaultConfig : _defaultConfig;
+
+        if (!config.size)
+            config.size = defaultConfig.size;
+
+        if (config.isBlocking !== false)
+            config.isBlocking = true;
+
+        if (config.keyboard !== null) {
+            if (Array.isArray(<Array<number>>config.keyboard))
+                config.keyboard = (<Array<number>>config.keyboard).length === 0 ? defaultConfig.keyboard : config.keyboard;
+            else if (!isNaN(<number>config.keyboard))
+                config.keyboard = [<number>config.keyboard];
+            else
+                config.keyboard = defaultConfig.keyboard;
+        }
+
+        return config;
+    }
+
     /**
      * Size of the modal.
      * 'lg' or 'sm' only.
@@ -27,16 +58,11 @@ export class ModalConfig {
      */
     keyboard: Array<number> | number;
 
-    constructor(size: string = 'lg', isBlocking: boolean = false, keyboard: Array<number> | number = undefined) {
+    constructor(size: string = null, isBlocking: boolean = null, keyboard: Array<number> | number = undefined) {
         this.size = size;
         this.isBlocking = isBlocking;
-
-        if (keyboard === undefined) {
-            keyboard = [27];
-        }
-        else if (keyboard !== undefined && keyboard !== null && !Array.isArray(<Array<number>>keyboard)) {
-            keyboard = (!isNaN(<number>keyboard)) ? [<number>keyboard] : null;
-        }
         this.keyboard = keyboard;
     }
 }
+
+_defaultConfig = new ModalConfig('lg', true, [27]);

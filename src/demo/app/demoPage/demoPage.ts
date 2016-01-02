@@ -27,14 +27,15 @@ export class DemoPage {
 
     }
 
+    // We defaulted quit key to 81 at app bootstrap, to make it 27 we have to specify it for each modal config
     static modalConfigs = {
-        'large': new ModalConfig("lg"),
-        'small': new ModalConfig("sm"),
-        'yesno': new ModalConfig("sm"),
-        'key': new ModalConfig("sm", true, 81),
-        'blocking': new ModalConfig("lg", true, null),
+        'large': new ModalConfig("lg", false, 27),
+        'small': new ModalConfig("sm", false, 27),
+        'yesno': new ModalConfig("sm", false, 27),
+        'key': undefined, // Modal will use default config, which we set at app bootstrap (setting in app bootstrap is optional)
+        'blocking': new ModalConfig("lg", true, null), // null for keyboard means no keyboard keys can close the modal.
         'inElement': new ModalConfig("lg", true, null),
-        'customWindow': new ModalConfig("lg")
+        'customWindow': new ModalConfig("lg", true, 27)
     };
     static modalData = {
         'large': new YesNoModalContent('Simple Large modal', 'Press ESC or click OK / outside area to close.', true),

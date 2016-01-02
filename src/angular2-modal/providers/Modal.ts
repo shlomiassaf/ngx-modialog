@@ -6,6 +6,7 @@ import {
     Injector,
     provide,
     ResolvedProvider,
+    Optional,
     ApplicationRef,
     APP_COMPONENT
 } from 'angular2/core';
@@ -18,9 +19,17 @@ import {ModalBackdrop} from '../components/modalBackdrop';
 import {BootstrapModalContainer} from '../components/bootstrapModalContainer';
 
 
+let _config: ModalConfig;
+
 @Injectable()
 export class Modal {
-    constructor(private componentLoader: DynamicComponentLoader, private appRef: ApplicationRef) {}
+    constructor(private componentLoader: DynamicComponentLoader, private appRef: ApplicationRef,
+                @Optional() defaultConfig: ModalConfig) {
+        // The Modal class should be an application wide service (i.e: singleton).
+        // This will run once in most applications...
+        // If the user provides a ModalConfig instance to the DI, the custom config will be the default one.
+        _config = (defaultConfig) ? ModalConfig.makeValid(defaultConfig) : new ModalConfig();
+    }
 
     /**
      * Creates backdrop element.
@@ -63,7 +72,8 @@ export class Modal {
     public openInside(componentType: FunctionConstructor, elementRef: ElementRef, anchorName: string,
                       bindings: ResolvedProvider[], config?: ModalConfig): Promise<ModalDialogInstance> {
 
-        config = config || new ModalConfig();
+        config = (config) ? ModalConfig.makeValid(config, _config) : _config;
+
         let dialog = new ModalDialogInstance(config);
         dialog.inElement = !!anchorName;
 
@@ -75,15 +85,13 @@ export class Modal {
                 let modalDataBindings = Injector.resolve([provide(ModalDialogInstance, {useValue: dialog})]).concat(bindings);
                 return this.componentLoader.loadIntoLocation(BootstrapModalContainer, backdropRef.location, 'modalBackdrop', dialogBindings)
                     .then(bootstrapRef => {
-                            var dialogElement = bootstrapRef.location.nativeElement;
-                            dialog.bootstrapRef = bootstrapRef;
-
-                            return this.componentLoader.loadIntoLocation(componentType, bootstrapRef.location, 'modalDialog', modalDataBindings)
-                                .then(contentRef => {
-                                        dialog.contentRef = contentRef;
-                                        return dialog;
-                                    }
-                                );
+                        dialog.bootstrapRef = bootstrapRef;
+                        return this.componentLoader.loadIntoLocation(componentType, bootstrapRef.location, 'modalDialog', modalDataBindings)
+                            .then(contentRef => {
+                                    dialog.contentRef = contentRef;
+                                    return dialog;
+                                }
+                            );
                         }
                     );
             });
