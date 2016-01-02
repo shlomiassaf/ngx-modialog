@@ -40,10 +40,16 @@ Not so complicated but not in angular 2 at the moment.
 Set webpack do build angular2-module.js as an initial webpack module (currently its not...)
 This will allow using it as an input for other projects.
 
-## Minimize DOM interaction
-Reduce manual DOM interaction, do more usage of `host` object in `@Component`.
-Append child to the DOM using the angular 2 way, if you know tell me.
+## ~~Minimize DOM interaction~~
+~~Reduce manual DOM interaction, do more usage of `host` object in `@Component`.~~
+~~Append child to the DOM using the angular 2 way, if you know tell me.~~
  
+## Allow Element blocking modal to be set on any element.
+Currently blocking an element requires it to have an angular template variable placed in one of his children.
+This is due to the current angular implementation, as I see it.
+I have yet to find an angular way of inserting a compiled element to a native element/component without effecting it.
+See issue [6071](https://github.com/angular/angular/issues/6071)
+
 ## Bootstrap free / ShadowDOM
 Make it fly solo....
 

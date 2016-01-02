@@ -5,7 +5,9 @@ import {
     ElementRef,
     Injector,
     provide,
-    ResolvedProvider
+    ResolvedProvider,
+    ApplicationRef,
+    APP_COMPONENT
 } from 'angular2/core';
 import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 
@@ -18,87 +20,72 @@ import {BootstrapModalContainer} from '../components/bootstrapModalContainer';
 
 @Injectable()
 export class Modal {
-    componentLoader: DynamicComponentLoader;
+    constructor(private componentLoader: DynamicComponentLoader, private appRef: ApplicationRef) {}
 
-    constructor(loader: DynamicComponentLoader) {
-        this.componentLoader = loader;
+    /**
+     * Creates backdrop element.
+     * @param elementRef The element to block using the modal.
+     * @param bindings Resolved providers (Must contain the ModalDialogInstance instance for this backdrop.
+     * @param anchorName An anchor name, optional, if not supplied backdrop gets applied next to elementRef, otherwise into it.
+     * @returns {Promise<ComponentRef>}
+     */
+    private createBackdrop(elementRef: ElementRef, bindings: ResolvedProvider[], anchorName?: string) : Promise<ComponentRef> {
+        return (!anchorName) ?
+            this.componentLoader.loadNextToLocation(ModalBackdrop, elementRef, bindings) :
+            this.componentLoader.loadIntoLocation(ModalBackdrop, elementRef, anchorName, bindings);
     }
 
-    private createBackdrop(elementRef: ElementRef, bindings: ResolvedProvider[], config: ModalConfig) : Promise<ComponentRef> {
-        return this.componentLoader.loadNextToLocation(ModalBackdrop, elementRef, bindings)
-            .then((componentRef) => {
-                var backdropElement = componentRef.location.nativeElement;
 
-                if (config.attachToBody) {
-                    DOM.setStyle(backdropElement, 'position', null);
-                    DOM.setStyle(backdropElement, 'height', null);
-                    DOM.setStyle(backdropElement, 'width', null);
-                    DOM.appendChild(DOM.query('body'), backdropElement);
-                }
-                else {
-                    let element = elementRef.nativeElement;
-                    DOM.setStyle(backdropElement, 'position', 'absolute');
-                    DOM.setStyle(backdropElement, 'height', element.scrollHeight + 'px');
-                    DOM.setStyle(backdropElement, 'width', element.scrollWidth + 'px');
-                    DOM.setStyle(element, 'position', 'relative');
-                    DOM.appendChild(element, backdropElement);
-                }
+    /**
+     * Opens a modal window blocking the whole screen.
+     * @param componentType The angular Component to render as modal.
+     * @param bindings Resolved providers that will inject into the component provided.
+     * @param config A Modal Configuration object.
+     * @returns {Promise<ModalDialogInstance>}
+     */
+    public open(componentType: FunctionConstructor, bindings: ResolvedProvider[], config?: ModalConfig): Promise<ModalDialogInstance> {
+        // TODO: appRef.injector.get(APP_COMPONENT) Doesn't work. When it does replace with the hack below.
+        //let myElementRef = this.appRef.injector.get(APP_COMPONENT).location;
+        let elementRef: ElementRef = this.appRef['_rootComponents'][0].location;
 
-                return componentRef;
-            });
+        return this.openInside(componentType, elementRef, null, bindings, config);
     }
 
     /**
-     * Open a new modal window.
-     * @param componentType A Component class (type) to render in the window. e.g: `ModalContent`.
-     * @param elementRef The parent location of the component. Note that it is not a rendered hierarchy, it is an injection hierarchy. e.g: the `ElementRef` of your current router view, etc...
-     * @param bindings The injector used to create new component, if your `componentType` needs special injection (e.g: ModalContnetData) make sure you supply a suitable Injector.
-     * @param config Modal configuration/options.
-     * @returns Promise<ModalDialogInstance> A promise of ModalDialogInstance.
+     * Opens a modal window inside an existing component.
+     * @param componentType The angular Component to render as modal.
+     * @param elementRef The element to block using the modal.
+     * @param anchorName A template variable within the component.
+     * @param bindings Resolved providers that will inject into the component provided.
+     * @param config A Modal Configuration object.
+     * @returns {Promise<ModalDialogInstance>}
      */
-    public open(componentType: FunctionConstructor, elementRef: ElementRef, bindings: ResolvedProvider[], config?: ModalConfig) : Promise<ModalDialogInstance> {
+    public openInside(componentType: FunctionConstructor, elementRef: ElementRef, anchorName: string,
+                      bindings: ResolvedProvider[], config?: ModalConfig): Promise<ModalDialogInstance> {
+
         config = config || new ModalConfig();
-        var dialog = new ModalDialogInstance(config);
+        let dialog = new ModalDialogInstance(config);
+        dialog.inElement = !!anchorName;
 
+        let dialogBindings = Injector.resolve([ provide(ModalDialogInstance, {useValue: dialog}) ]);
+        return this.createBackdrop(elementRef, dialogBindings, anchorName)
+            .then( (backdropRef: ComponentRef) => {
+                dialog.backdropRef = backdropRef;
 
-        this.createBackdrop(elementRef, [], config).then(backdropRef => {
-            dialog.backdropRef = backdropRef;
-        });
+                let modalDataBindings = Injector.resolve([provide(ModalDialogInstance, {useValue: dialog})]).concat(bindings);
+                return this.componentLoader.loadIntoLocation(BootstrapModalContainer, backdropRef.location, 'modalBackdrop', dialogBindings)
+                    .then(bootstrapRef => {
+                            var dialogElement = bootstrapRef.location.nativeElement;
+                            dialog.bootstrapRef = bootstrapRef;
 
-        let modalContainerBindings = Injector.resolve([provide(ModalDialogInstance, {useValue: dialog})]);
-        let modalDataBindings = Injector.resolve([provide(ModalDialogInstance, {useValue: dialog})]).concat(bindings);
-        return this.componentLoader.loadNextToLocation(BootstrapModalContainer, elementRef, modalContainerBindings)
-            .then(bootstrapRef => {
-                    var dialogElement = bootstrapRef.location.nativeElement;
-                    DOM.addClass(dialogElement, 'modal');
-                    DOM.addClass(dialogElement, 'in');
-                    DOM.setStyle(dialogElement, 'display', 'block');
-
-                    if (config.attachToBody) {
-                        DOM.appendChild(DOM.query('body'), dialogElement);
-                    }
-                    else {
-                        DOM.setStyle(dialogElement, 'position', 'absolute');
-                        DOM.appendChild(elementRef.nativeElement, dialogElement);
-                    }
-
-                    dialog.bootstrapRef = bootstrapRef;
-
-                    return this.componentLoader.loadNextToLocation(componentType, bootstrapRef.location, modalDataBindings)
-                        .then(contentRef => {
-                                var userComponent = contentRef.location.nativeElement;
-                                DOM.setStyle(dialogElement.children[0], 'display', 'block');
-                                DOM.addClass(userComponent, 'modal-content');
-                                DOM.setStyle(userComponent, 'display', 'block');
-
-                                DOM.appendChild(dialogElement.children[0], userComponent);
-
-                                dialog.contentRef = contentRef;
-
-                                return dialog;
-                            }
-                        );
-                }
-            );
+                            return this.componentLoader.loadIntoLocation(componentType, bootstrapRef.location, 'modalDialog', modalDataBindings)
+                                .then(contentRef => {
+                                        dialog.contentRef = contentRef;
+                                        return dialog;
+                                    }
+                                );
+                        }
+                    );
+            });
     }
 }

@@ -27,12 +27,9 @@ export class ModalConfig {
      */
     keyboard: Array<number> | number;
 
-    attachToBody: boolean;
-
-    constructor(size: string = 'lg', isBlocking: boolean = false, keyboard: Array<number> | number = undefined, attachToBody: boolean = true) {
+    constructor(size: string = 'lg', isBlocking: boolean = false, keyboard: Array<number> | number = undefined) {
         this.size = size;
         this.isBlocking = isBlocking;
-        this.attachToBody = attachToBody;
 
         if (keyboard === undefined) {
             keyboard = [27];

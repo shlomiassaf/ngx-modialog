@@ -1,5 +1,6 @@
 import {Component, provide, ElementRef, Injector} from 'angular2/core';
 
+import {ModalDialogInstance} from '../../../angular2-modal/models/ModalDialogInstance';
 import {ModalConfig} from '../../../angular2-modal/models/ModalConfig';
 import {Modal} from '../../../angular2-modal/providers/Modal';
 import {ICustomModal} from '../../../angular2-modal/models/ICustomModal';
@@ -14,7 +15,6 @@ import {SampleElement} from '../sampleElement/sampleElement';
     selector: 'demo-page',
     directives: [SampleElement],
     providers: [Modal],
-    pipes: [ ],
     styles: [ require('./demoPage.css') ],
     template: require('./demoPage.tpl.html')
 })
@@ -33,7 +33,7 @@ export class DemoPage {
         'yesno': new ModalConfig("sm"),
         'key': new ModalConfig("sm", true, 81),
         'blocking': new ModalConfig("lg", true, null),
-        'inElement': new ModalConfig("lg", true, null, false),
+        'inElement': new ModalConfig("lg", true, null),
         'customWindow': new ModalConfig("lg")
     };
     static modalData = {
@@ -50,13 +50,18 @@ export class DemoPage {
     public lastModalResult: string;
 
     openDialog(type: string) {
-        let elRef = (type == 'inElement') ? this.mySampleElement : this.elementRef;
+        let dialog:  Promise<ModalDialogInstance>;
         let component = (type == 'customWindow') ? AdditionCalculateWindow : YesNoModal;
-
-
         let bindings = Injector.resolve([provide(ICustomModal, {useValue: DemoPage.modalData[type]})]);
 
-        var dialog = this.modal.open(<any>component, elRef, bindings, DemoPage.modalConfigs[type]);
+
+        if (type === "inElement") {
+            dialog = this.modal.openInside(<any>component, this.mySampleElement, "myModal", bindings, DemoPage.modalConfigs[type]);
+        }
+        else {
+            dialog = this.modal.open(<any>component, bindings, DemoPage.modalConfigs[type]);
+        }
+
         dialog.then((resultPromise) => {
             return resultPromise.result.then((result) => {
                 this.lastModalResult = result;

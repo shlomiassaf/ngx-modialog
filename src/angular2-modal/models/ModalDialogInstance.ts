@@ -7,6 +7,10 @@ import {ModalConfig} from '../models/ModalConfig';
  * API to an open modal window.
  */
 export class ModalDialogInstance {
+    /**
+     * States if the modal is inside a specific element.
+     */
+    public inElement: boolean;
     private _bootstrapRef: ComponentRef;
     private _backdropRef: ComponentRef;
     private _resultDefered: any;
