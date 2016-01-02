@@ -16,6 +16,7 @@
   - Modal as a component, replace the content by supplying a custom component.  
   
 Click for the [Demo](http://shlomiassaf.github.io/angular2-modal/)
+Click for the auto generated [Docs](http://shlomiassaf.github.io/angular2-modal/docs)
 
 ### Blog post will be up soon! look for it in my [Blog](http://blog.assaf.co/)
 
