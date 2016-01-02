@@ -1,6 +1,9 @@
 {
   "name": "angular2-modal",
   "version": "0.0.1",
+  "scripts": {
+    "docs": "typedoc  --options typedoc.json  src/angular2-modal/**/*.ts"
+  },
   "devDependencies": {
     "css-loader": "^0.23.0",
     "exports-loader": "0.6.2",
