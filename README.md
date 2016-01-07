@@ -24,6 +24,11 @@ See [src/demo](https://github.com/shlomiassaf/angular2-modal/tree/master/src/dem
 
 Will try to add documented examples if time allows.
 
+## Installation
+```
+    npm install angular2-modal --save
+```
+
 ## Running locally
     git clone https://github.com/shlomiassaf/angular2-modal.git  
     npm install  
@@ -32,6 +37,13 @@ Will try to add documented examples if time allows.
     browse to localhost:3000  
 
 You can apply custom modals based on components.
+
+## Publishing
+Publishing is done using the TypeScript compiler directly (no webpack)
+The process involves compiling into a directory called `dist`
+Webpack is using the `build` directory.
+Since I didn't find a way to instruct `tsc` what config file to use (i.e: a different tsconfig.json)
+I created a `publish` directory instead and set the `--project` argument accordingly.
 
 # Issues and TODO's
 ## Animation
