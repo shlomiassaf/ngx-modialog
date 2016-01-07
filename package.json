@@ -1,9 +1,27 @@
 {
   "name": "angular2-modal",
+  "description": "Angular2 Modal (dialog) window bootstrap style.",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shlomiassaf/angular2-modal.git"
+  },
+  "keywords": [
+    "angular",
+    "angular2",
+    "bootstrap",
+    "modal"
+  ],
+  "author": "Shlomi Assaf",
+  "license": "MIT",
+  "main": "dist/angular2-modal.js",
+  "typings": "./dist/angular2-modal.d.ts",
+  "homepage": "https://github.com/shlomiassaf/angular2-modal",
+  "bugs": {
+    "url": "https://github.com/shlomiassaf/angular2-modal/issues"
+  },
   "scripts": {
-    "lint": "./node_modules/.bin/tsconfig-lint",
-    "docs": "typedoc  --options typedoc.json  src/angular2-modal/**/*.ts"
+    "prepublish": "tsc --project publish"
   },
   "devDependencies": {
     "css-loader": "^0.23.0",

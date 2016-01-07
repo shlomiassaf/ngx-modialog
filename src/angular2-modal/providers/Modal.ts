@@ -10,7 +10,6 @@ import {
     ApplicationRef,
     APP_COMPONENT
 } from 'angular2/core';
-import {DOM} from 'angular2/src/platform/dom/dom_adapter';
 
 
 import {ModalConfig} from '../models/ModalConfig';

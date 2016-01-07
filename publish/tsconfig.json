@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES5",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "declaration": true,
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "outDir": "../dist"
+  },
+  "files": [
+    "../src/angular2-modal/angular2-modal.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
