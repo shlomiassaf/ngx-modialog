@@ -9,33 +9,6 @@ let _defaultConfig: ModalConfig;
 @Injectable()
 export class ModalConfig {
     /**
-     * Makes a ModalConfig instance valdud.
-     * @param config
-     * @param defaultConfig A Default config to use as master, optional.
-     * @returns {ModalConfig} The same config instance sent.
-     */
-    static makeValid(config: ModalConfig, defaultConfig?: ModalConfig) {
-        defaultConfig = (defaultConfig) ? defaultConfig : _defaultConfig;
-
-        if (!config.size)
-            config.size = defaultConfig.size;
-
-        if (config.isBlocking !== false)
-            config.isBlocking = true;
-
-        if (config.keyboard !== null) {
-            if (Array.isArray(<Array<number>>config.keyboard))
-                config.keyboard = (<Array<number>>config.keyboard).length === 0 ? defaultConfig.keyboard : config.keyboard;
-            else if (!isNaN(<number>config.keyboard))
-                config.keyboard = [<number>config.keyboard];
-            else
-                config.keyboard = defaultConfig.keyboard;
-        }
-
-        return config;
-    }
-
-    /**
      * Size of the modal.
      * 'lg' or 'sm' only.
      * NOTE: No validation.
@@ -58,11 +31,42 @@ export class ModalConfig {
      */
     keyboard: Array<number> | number;
 
-    constructor(size: string = null, isBlocking: boolean = null, keyboard: Array<number> | number = undefined) {
+    constructor(size: string = null, isBlocking: boolean = null,
+                keyboard: Array<number> | number = undefined) {
         this.size = size;
         this.isBlocking = isBlocking;
         this.keyboard = keyboard;
     }
+
+    /**
+     * Makes a ModalConfig instance valdud.
+     * @param config
+     * @param defaultConfig A Default config to use as master, optional.
+     * @returns {ModalConfig} The same config instance sent.
+     */
+    static makeValid(config: ModalConfig, defaultConfig?: ModalConfig) {
+        defaultConfig = (defaultConfig) ? defaultConfig : _defaultConfig;
+
+        if (!config.size)
+            config.size = defaultConfig.size;
+
+        if (config.isBlocking !== false)
+            config.isBlocking = true;
+
+        if (config.keyboard !== null) {
+            if (Array.isArray(<Array<number>>config.keyboard)) {
+                config.keyboard = (<Array<number>>config.keyboard).length === 0
+                    ? defaultConfig.keyboard : config.keyboard;
+            } else if (!isNaN(<number>config.keyboard)) {
+                config.keyboard = [<number>config.keyboard];
+            } else {
+                config.keyboard = defaultConfig.keyboard;
+            }
+        }
+
+        return config;
+    }
+
 }
 
 _defaultConfig = new ModalConfig('lg', true, [27]);

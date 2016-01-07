@@ -8,10 +8,10 @@ import {ModalDialogInstance} from '../models/ModalDialogInstance';
  */
 export class OKOnlyContent {
     constructor(
-        public title: string = "Hello World Title",
-        public body: string = "Hello World Body!",
-        public okText: string = "OK"
-    ){}
+        public title: string = 'Hello World Title',
+        public body: string = 'Hello World Body!',
+        public okText: string = 'OK'
+    ) {}
 }
 
 /**
@@ -28,7 +28,7 @@ export class OKOnlyContent {
             <button class="btn btn-primary" (click)="ok()">{{context.okText}}</button>
         </div>`
 })
-export class OKOnlyModal implements ICustomModalComponent{
+export class OKOnlyModal implements ICustomModalComponent {
     dialog: ModalDialogInstance;
     context: OKOnlyContent;
 

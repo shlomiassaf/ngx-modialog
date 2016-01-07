@@ -27,6 +27,12 @@ module.exports = {
     },
 
     module: {
+        preLoaders: [
+            {
+                test: /\.ts$/,
+                loader: 'tslint-loader',
+                exclude: [/node_modules/] }
+        ],
         loaders: [
             {
                 test: /\.ts$/,
@@ -62,7 +68,11 @@ module.exports = {
         historyApiFallback: true,
         contentBase: '',
         publicPath: '/dist'
-    }
+    },
+    tslint: {
+        emitErrors: false,
+        failOnHint: false
+    },
 };
 
 // Helper functions

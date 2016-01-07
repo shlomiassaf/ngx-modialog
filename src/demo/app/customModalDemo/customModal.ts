@@ -9,7 +9,7 @@ export class AdditionCalculateWindowData {
     constructor(
         public num1: number,
         public num2: number
-    ){}
+    ) {}
 }
 
 /**
@@ -32,7 +32,7 @@ export class AdditionCalculateWindowData {
             margin-bottom: 40px;
         }
     `],
-    template: `
+    /* tslint:disable */ template: `
         <div class="container-fluid custom-modal-container">
             <div class="row custom-modal-header">
                 <div class="col-sm-12">
@@ -51,7 +51,7 @@ export class AdditionCalculateWindowData {
             </div>
         </div>`
 })
-export class AdditionCalculateWindow implements ICustomModalComponent{
+export class AdditionCalculateWindow implements ICustomModalComponent {
     dialog: ModalDialogInstance;
     context: AdditionCalculateWindowData;
 
@@ -64,7 +64,7 @@ export class AdditionCalculateWindow implements ICustomModalComponent{
     }
 
     onKeyUp(value) {
-        this.wrongAnswer = value != 5;
+        /* tslint:disable */ this.wrongAnswer = value != 5;
         this.dialog.close();
     }
 

@@ -33,12 +33,11 @@ export class ModalBackdrop {
         if (!dialog.inElement) {
             this.position = this.width = this.height = null;
             this.top = this.left = this.right = this.bottom = null;
-        }
-        else {
+        } else {
             this.position = 'absolute';
             this.height = '100%';
             this.width = '100%';
-            this.top = this.left = this.right = this.bottom = "0";
+            this.top = this.left = this.right = this.bottom = '0';
         }
     }
 }

@@ -13,7 +13,8 @@ import {ModalConfig} from '../angular2-modal/models/ModalConfig';
 function main() {
     return bootstrap(App, [
         ROUTER_PROVIDERS,
-        provide(ModalConfig, {useValue: new ModalConfig("lg", true, 81)}), // set a custom default options for the modal.
+        // set a custom default options for the modal.
+        provide(ModalConfig, {useValue: new ModalConfig('lg', true, 81)}),
         ELEMENT_PROBE_PROVIDERS // remove in production
     ])
         .catch(err => console.error(err));

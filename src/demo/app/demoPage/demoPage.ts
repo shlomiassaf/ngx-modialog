@@ -20,13 +20,12 @@ import {SampleElement} from '../sampleElement/sampleElement';
 })
 
 export class DemoPage {
-    constructor(private modal: Modal, private elementRef: ElementRef) {
-    }
+    public mySampleElement: ElementRef;
+    public lastModalResult: string;
 
-    ngOnInit() {
+    constructor(private modal: Modal, private elementRef: ElementRef) {}
 
-    }
-
+    /* tslint:disable */
     // We defaulted quit key to 81 at app bootstrap, to make it 27 we have to specify it for each modal config
     static modalConfigs = {
         'large': new ModalConfig("lg", false, 27),
@@ -46,22 +45,29 @@ export class DemoPage {
         'inElement':new YesNoModalContent('Simple In Element modal', 'Try stacking more modals, click OK to close.', true),
         'customWindow': new AdditionCalculateWindowData(2, 3)
     };
-
-    public mySampleElement: ElementRef;
-    public lastModalResult: string;
+    /* tslint:enable */
 
     openDialog(type: string) {
         let dialog:  Promise<ModalDialogInstance>;
-        let component = (type == 'customWindow') ? AdditionCalculateWindow : YesNoModal;
-        let bindings = Injector.resolve([provide(ICustomModal, {useValue: DemoPage.modalData[type]})]);
+        let component = (type === 'customWindow') ? AdditionCalculateWindow : YesNoModal;
+        let bindings = Injector.resolve([
+            provide(ICustomModal, {useValue: DemoPage.modalData[type]})
+        ]);
 
 
-        if (type === "inElement") {
-            dialog = this.modal.openInside(<any>component, this.mySampleElement, "myModal", bindings, DemoPage.modalConfigs[type]);
-        }
-        else {
-            dialog = this.modal.open(<any>component, bindings, DemoPage.modalConfigs[type]);
-        }
+        if (type === 'inElement') {
+            dialog = this.modal.openInside(
+                <any>component,
+                this.mySampleElement,
+                'myModal',
+                bindings,
+                DemoPage.modalConfigs[type]);
+        } else
+            dialog = this.modal.open(
+                <any>component,
+                bindings,
+                DemoPage.modalConfigs[type]);
+
 
         dialog.then((resultPromise) => {
             return resultPromise.result.then((result) => {
@@ -69,5 +75,4 @@ export class DemoPage {
             }, () => this.lastModalResult = 'Rejected!');
         });
     }
-
 }

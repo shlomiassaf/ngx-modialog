@@ -2,6 +2,7 @@
   "name": "angular2-modal",
   "version": "0.0.1",
   "scripts": {
+    "lint": "./node_modules/.bin/tsconfig-lint",
     "docs": "typedoc  --options typedoc.json  src/angular2-modal/**/*.ts"
   },
   "devDependencies": {
@@ -14,6 +15,9 @@
     "raw-loader": "0.5.1",
     "style-loader": "^0.13.0",
     "ts-loader": "^0.7.2",
+    "tsconfig-lint": "^0.4.3",
+    "tslint": "^3.2.1",
+    "tslint-loader": "^2.1.0",
     "typescript": "^1.7.3",
     "typings": "^0.3.1",
     "url-loader": "^0.5.6",

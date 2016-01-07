@@ -27,23 +27,10 @@ export class Modal {
                 @Optional() defaultConfig: ModalConfig) {
         // The Modal class should be an application wide service (i.e: singleton).
         // This will run once in most applications...
-        // If the user provides a ModalConfig instance to the DI, the custom config will be the default one.
+        // If the user provides a ModalConfig instance to the DI,
+        // the custom config will be the default one.
         _config = (defaultConfig) ? ModalConfig.makeValid(defaultConfig) : new ModalConfig();
     }
-
-    /**
-     * Creates backdrop element.
-     * @param elementRef The element to block using the modal.
-     * @param bindings Resolved providers (Must contain the ModalDialogInstance instance for this backdrop.
-     * @param anchorName An anchor name, optional, if not supplied backdrop gets applied next to elementRef, otherwise into it.
-     * @returns {Promise<ComponentRef>}
-     */
-    private createBackdrop(elementRef: ElementRef, bindings: ResolvedProvider[], anchorName?: string) : Promise<ComponentRef> {
-        return (!anchorName) ?
-            this.componentLoader.loadNextToLocation(ModalBackdrop, elementRef, bindings) :
-            this.componentLoader.loadIntoLocation(ModalBackdrop, elementRef, anchorName, bindings);
-    }
-
 
     /**
      * Opens a modal window blocking the whole screen.
@@ -52,8 +39,10 @@ export class Modal {
      * @param config A Modal Configuration object.
      * @returns {Promise<ModalDialogInstance>}
      */
-    public open(componentType: FunctionConstructor, bindings: ResolvedProvider[], config?: ModalConfig): Promise<ModalDialogInstance> {
-        // TODO: appRef.injector.get(APP_COMPONENT) Doesn't work. When it does replace with the hack below.
+    public open(componentType: FunctionConstructor, bindings: ResolvedProvider[],
+                config?: ModalConfig): Promise<ModalDialogInstance> {
+        // TODO: appRef.injector.get(APP_COMPONENT) Doesn't work.
+        // When it does replace with the hack below.
         //let myElementRef = this.appRef.injector.get(APP_COMPONENT).location;
         let elementRef: ElementRef = this.appRef['_rootComponents'][0].location;
 
@@ -69,8 +58,9 @@ export class Modal {
      * @param config A Modal Configuration object.
      * @returns {Promise<ModalDialogInstance>}
      */
-    public openInside(componentType: FunctionConstructor, elementRef: ElementRef, anchorName: string,
-                      bindings: ResolvedProvider[], config?: ModalConfig): Promise<ModalDialogInstance> {
+    public openInside(componentType: FunctionConstructor, elementRef: ElementRef,
+                      anchorName: string, bindings: ResolvedProvider[],
+                      config?: ModalConfig): Promise<ModalDialogInstance> {
 
         config = (config) ? ModalConfig.makeValid(config, _config) : _config;
 
@@ -82,11 +72,14 @@ export class Modal {
             .then( (backdropRef: ComponentRef) => {
                 dialog.backdropRef = backdropRef;
 
-                let modalDataBindings = Injector.resolve([provide(ModalDialogInstance, {useValue: dialog})]).concat(bindings);
-                return this.componentLoader.loadIntoLocation(BootstrapModalContainer, backdropRef.location, 'modalBackdrop', dialogBindings)
+                let modalDataBindings = Injector.resolve(
+                    [provide(ModalDialogInstance, {useValue: dialog})]).concat(bindings);
+                return this.componentLoader.loadIntoLocation(
+                    BootstrapModalContainer, backdropRef.location, 'modalBackdrop', dialogBindings)
                     .then(bootstrapRef => {
                         dialog.bootstrapRef = bootstrapRef;
-                        return this.componentLoader.loadIntoLocation(componentType, bootstrapRef.location, 'modalDialog', modalDataBindings)
+                        return this.componentLoader.loadIntoLocation(
+                            componentType, bootstrapRef.location, 'modalDialog', modalDataBindings)
                             .then(contentRef => {
                                     dialog.contentRef = contentRef;
                                     return dialog;
@@ -95,5 +88,21 @@ export class Modal {
                         }
                     );
             });
+    }
+
+    /**
+     * Creates backdrop element.
+     * @param {ElementRef} The element to block using the modal.
+     * @param {ResolvedProvider[]} Resolved providers,
+     *     must contain the ModalDialogInstance instance for this backdrop.
+     * @param {string} An anchor name, optional.
+     *     if not supplied backdrop gets applied next to elementRef, otherwise into it.
+     * @returns {Promise<ComponentRef>}
+     */
+    private createBackdrop(elementRef: ElementRef, bindings: ResolvedProvider[],
+                           anchorName?: string) : Promise<ComponentRef> {
+        return (!anchorName) ?
+            this.componentLoader.loadNextToLocation(ModalBackdrop, elementRef, bindings) :
+            this.componentLoader.loadIntoLocation(ModalBackdrop, elementRef, anchorName, bindings);
     }
 }

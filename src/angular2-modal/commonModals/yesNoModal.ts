@@ -10,12 +10,12 @@ import {ModalDialogInstance} from '../models/ModalDialogInstance';
  */
 export class YesNoModalContent {
     constructor(
-        public title: string = "Hello World Title",
-        public body: string = "Hello World Body!",
+        public title: string = 'Hello World Title',
+        public body: string = 'Hello World Body!',
         public hideNo: boolean = false,
-        public yesText: string = "YES",
-        public noText: string = "NO"
-    ){}
+        public yesText: string = 'YES',
+        public noText: string = 'NO'
+    ) {}
 }
 
 /**
@@ -24,7 +24,7 @@ export class YesNoModalContent {
 @Component({
     selector: 'modal-content',
     directives: [ NgIf ],
-    template:
+    /* tslint:disable */ template:
     `<div class="modal-header">
         <h3 class="modal-title">{{context.title}}</h3>
         </div>
@@ -34,7 +34,7 @@ export class YesNoModalContent {
             <button *ngIf="!context.hideNo" class="btn btn-warning" (click)="cancel()">{{context.noText}}</button>
         </div>`
 })
-export class YesNoModal implements ICustomModalComponent{
+export class YesNoModal implements ICustomModalComponent {
     dialog: ModalDialogInstance;
     context: YesNoModalContent;
 

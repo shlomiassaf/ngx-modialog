@@ -16,6 +16,7 @@ import {ModalDialogInstance} from '../models/ModalDialogInstance';
         '(body:keydown)': 'documentKeypress($event)',
         '(click)': 'onClick()'
     },
+    /* tslint:disable */
     template:
     `<div class="modal-dialog"
          [class.modal-lg]="dialogInstance.config.size == \'lg\'"
@@ -27,6 +28,7 @@ import {ModalDialogInstance} from '../models/ModalDialogInstance';
     //TODO: #modalDialog element is not needed but dynamicComponentLoader doesn't seem to have behavior to inject a component the way we want.
     //      We need to replace the #modalDialog element but the current implementation only adds it as a sibling.
     //      see https://github.com/angular/angular/issues/6071
+    /* tslint:enable */
 })
 export class BootstrapModalContainer {
     dialogInstance: ModalDialogInstance;
@@ -37,8 +39,7 @@ export class BootstrapModalContainer {
 
         if (!dialogInstance.inElement) {
             this.position = null;
-        }
-        else {
+        } else {
             this.position = 'absolute';
         }
     }
@@ -48,7 +49,7 @@ export class BootstrapModalContainer {
     }
 
     onClick() {
-        !this.dialogInstance.config.isBlocking && this.dialogInstance.dismiss();
+        return !this.dialogInstance.config.isBlocking && this.dialogInstance.dismiss();
     }
 
     documentKeypress(event: KeyboardEvent) {
