@@ -24,6 +24,37 @@ See [src/demo](https://github.com/shlomiassaf/angular2-modal/tree/master/src/dem
 
 Will try to add documented examples if time allows.
 
+## Known issue - DI exception:  
+If you encounter a version of the following exception:
+
+```
+EXCEPTION: No provider for XXXXX! (YYYYY -> XXXXX)
+```
+
+Where YYYYY will usually be a directive you've injected to a custom modal component you've built.
+
+This is an error raised by angular core because it can't find a resolved providers for injectable tokens request by
+the directive/s you want to use within your component.
+These providers are common runtime objects that angular should know how to fetch, even if not defined.
+There is a bug opend here [angular/angular#4330](https://github.com/angular/angular/issues/4330).
+
+To workaround this issue supply these values in the resolved bindings array sent as a parameter 
+to "open" or "openInside" calls.
+
+    let bindings = Injector.resolve([
+                provide(IterableDiffers, {useValue: this.injector.get(IterableDiffers)}),
+                provide(KeyValueDiffers, {useValue: this.injector.get(KeyValueDiffers)}),
+                provide(Renderer, {useValue: this.injector.get(Renderer)})
+            ]);
+                   
+    let dialog = modal.openInside(..., ..., ..., bindings, ...);
+
+click for [example](https://github.com/shlomiassaf/angular2-modal/blob/master/src/demo/app/demoPage/demoPage.ts#L58-L63)
+
+Another workaround that might work is to supply the resolved providers as part of the bootstrap process. 
+I'm not sure it will work as it depends on the life cycle logic of the injected values which I don't know deeply enough.
+If you got it to work let me know.
+
 ## Installation
 ```
     npm install angular2-modal --save

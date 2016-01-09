@@ -1,5 +1,5 @@
 import {Component, Input} from 'angular2/core';
-import {FORM_DIRECTIVES} from 'angular2/common';
+import {CORE_DIRECTIVES} from 'angular2/common';
 
 import {Modal} from '../../../angular2-modal/providers/Modal';
 import {ModalDialogInstance} from '../../../angular2-modal/models/ModalDialogInstance';
@@ -17,6 +17,7 @@ export class AdditionCalculateWindowData {
  */
 @Component({
     selector: 'modal-content',
+    directives: [CORE_DIRECTIVES],
     styles: [`
         .custom-modal-container {
             padding: 15px;
@@ -32,6 +33,7 @@ export class AdditionCalculateWindowData {
             margin-bottom: 40px;
         }
     `],
+    //TODO: [ngClass] here on purpose, no real use, just to show how to workaround ng2 issue #4330. Remove when solved.
     /* tslint:disable */ template: `
         <div class="container-fluid custom-modal-container">
             <div class="row custom-modal-header">
@@ -39,7 +41,7 @@ export class AdditionCalculateWindowData {
                     <h1>A Custom modal design</h1>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" [ngClass]="{'myclass' : shouldUseMyClass}">
                 <div class="col-xs-12">
                     <div class="jumbotron">
                         <h1>Do the math to quit:</h1>

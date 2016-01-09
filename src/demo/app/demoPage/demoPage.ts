@@ -1,4 +1,4 @@
-import {Component, provide, ElementRef, Injector} from 'angular2/core';
+import {Component, provide, ElementRef, Injector, IterableDiffers, KeyValueDiffers, Renderer} from 'angular2/core';
 
 import {ModalDialogInstance} from '../../../angular2-modal/models/ModalDialogInstance';
 import {ModalConfig} from '../../../angular2-modal/models/ModalConfig';
@@ -23,7 +23,7 @@ export class DemoPage {
     public mySampleElement: ElementRef;
     public lastModalResult: string;
 
-    constructor(private modal: Modal, private elementRef: ElementRef) {}
+    constructor(private modal: Modal, private elementRef: ElementRef, private injector: Injector) {}
 
     /* tslint:disable */
     // We defaulted quit key to 81 at app bootstrap, to make it 27 we have to specify it for each modal config
@@ -50,10 +50,17 @@ export class DemoPage {
     openDialog(type: string) {
         let dialog:  Promise<ModalDialogInstance>;
         let component = (type === 'customWindow') ? AdditionCalculateWindow : YesNoModal;
-        let bindings = Injector.resolve([
-            provide(ICustomModal, {useValue: DemoPage.modalData[type]})
-        ]);
 
+        // Workaround for https://github.com/angular/angular/issues/4330
+        // providing resolved providers to IterableDiffers, KeyValueDiffers & Renderer.
+        // Since customWindow uses 'ngClass' directive & 'ngClass' requires the above providers we need to supply them.
+        // One would expect angular to get them automatically but that not the case at the moment.
+        let bindings = Injector.resolve([
+            provide(ICustomModal, {useValue: DemoPage.modalData[type]}),
+            provide(IterableDiffers, {useValue: this.injector.get(IterableDiffers)}),
+            provide(KeyValueDiffers, {useValue: this.injector.get(KeyValueDiffers)}),
+            provide(Renderer, {useValue: this.injector.get(Renderer)})
+        ]);
 
         if (type === 'inElement') {
             dialog = this.modal.openInside(
