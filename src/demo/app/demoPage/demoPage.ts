@@ -1,13 +1,9 @@
 import { Component, provide, ElementRef, Injector,
     IterableDiffers, KeyValueDiffers, Renderer} from 'angular2/core';
 
-import {ModalDialogInstance} from '../../../angular2-modal/models/ModalDialogInstance';
-import {ModalConfig} from '../../../angular2-modal/models/ModalConfig';
-import {Modal} from '../../../angular2-modal/providers/Modal';
-import {ICustomModal} from '../../../angular2-modal/models/ICustomModal';
+import {ModalDialogInstance, ModalConfig, Modal, ICustomModal,
+    YesNoModalContent, YesNoModal, OKOnlyContent, OKOnlyModal} from 'angular2-modal';
 
-import {YesNoModalContent, YesNoModal} from '../../../angular2-modal/commonModals/yesNoModal';
-import {OKOnlyContent, OKOnlyModal} from '../../../angular2-modal/commonModals/okOnlyModal';
 import {AdditionCalculateWindowData, AdditionCalculateWindow} from '../customModalDemo/customModal';
 
 import {SampleElement} from '../sampleElement/sampleElement';

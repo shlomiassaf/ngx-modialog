@@ -9,7 +9,6 @@ module.exports = {
 
     entry: {
         'vendor': './src/demo/vendor.ts',
-        'angular2-modal': './src/angular2-modal/angular2-modal.ts',
         'app': './src/demo/bootstrap.ts' // our angular app
     },
 
@@ -64,6 +63,10 @@ module.exports = {
         new CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.js', minChunks: Infinity }),
         new CommonsChunkPlugin({ name: 'common', filename: 'common.js', minChunks: 2, chunks: ['app', 'vendor'] })
     ],
+    resolve: {
+        extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
+        modulesDirectories: ["node_modules", "src/components"]
+    },
     devServer: {
         historyApiFallback: true,
         contentBase: '',

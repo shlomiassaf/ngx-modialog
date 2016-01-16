@@ -1,9 +1,7 @@
 import {Component, Input} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
-import {Modal} from '../../../angular2-modal/providers/Modal';
-import {ModalDialogInstance} from '../../../angular2-modal/models/ModalDialogInstance';
-import {ICustomModal, ICustomModalComponent} from '../../../angular2-modal/models/ICustomModal';
+import {Modal, ModalDialogInstance, ICustomModal, ICustomModalComponent} from 'angular2-modal';
 
 export class AdditionCalculateWindowData {
     constructor(
