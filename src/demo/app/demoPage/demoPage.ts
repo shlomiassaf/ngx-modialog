@@ -1,4 +1,5 @@
-import {Component, provide, ElementRef, Injector, IterableDiffers, KeyValueDiffers, Renderer} from 'angular2/core';
+import { Component, provide, ElementRef, Injector,
+    IterableDiffers, KeyValueDiffers, Renderer} from 'angular2/core';
 
 import {ModalDialogInstance} from '../../../angular2-modal/models/ModalDialogInstance';
 import {ModalConfig} from '../../../angular2-modal/models/ModalConfig';
@@ -23,7 +24,8 @@ export class DemoPage {
     public mySampleElement: ElementRef;
     public lastModalResult: string;
 
-    constructor(private modal: Modal, private elementRef: ElementRef, private injector: Injector) {}
+    constructor(private modal: Modal, private elementRef: ElementRef,
+                private injector: Injector, private _renderer: Renderer) {}
 
     /* tslint:disable */
     // We defaulted quit key to 81 at app bootstrap, to make it 27 we have to specify it for each modal config
@@ -59,7 +61,7 @@ export class DemoPage {
             provide(ICustomModal, {useValue: DemoPage.modalData[type]}),
             provide(IterableDiffers, {useValue: this.injector.get(IterableDiffers)}),
             provide(KeyValueDiffers, {useValue: this.injector.get(KeyValueDiffers)}),
-            provide(Renderer, {useValue: this.injector.get(Renderer)})
+            provide(Renderer, {useValue: this._renderer})
         ]);
 
         if (type === 'inElement') {

@@ -33,7 +33,8 @@ export class AdditionCalculateWindowData {
             margin-bottom: 40px;
         }
     `],
-    //TODO: [ngClass] here on purpose, no real use, just to show how to workaround ng2 issue #4330. Remove when solved.
+    //TODO: [ngClass] here on purpose, no real use, just to show how to workaround ng2 issue #4330.
+    // Remove when solved.
     /* tslint:disable */ template: `
         <div class="container-fluid custom-modal-container">
             <div class="row custom-modal-header">
