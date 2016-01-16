@@ -9,7 +9,7 @@ import {AdditionCalculateWindowData, AdditionCalculateWindow} from '../customMod
 import {SampleElement} from '../sampleElement/sampleElement';
 
 @Component({
-    selector: 'demo-page',
+    selector: 'angular2-modal-demo',
     directives: [SampleElement],
     providers: [Modal],
     styles: [ require('./demoPage.css') ],

@@ -3,7 +3,7 @@ import {RouteConfig, Router, ROUTER_DIRECTIVES} from 'angular2/router';
 import {Http} from 'angular2/http';
 import {FORM_PROVIDERS} from 'angular2/common';
 
-import {DemoPage} from './demoPage/demoPage';
+import {ComponentGallery} from './components/componentGallery/componentGallery';
 
 /*
  * App Component
@@ -28,7 +28,7 @@ import {DemoPage} from './demoPage/demoPage';
   `
 })
 @RouteConfig([
-    { path: '/', component: DemoPage, name: 'Demo' }
+    { path: '/', component: ComponentGallery, name: 'ComponentGallery' }
 ])
 export class App {
     constructor() {}
