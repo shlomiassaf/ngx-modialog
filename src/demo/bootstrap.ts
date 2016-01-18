@@ -9,11 +9,12 @@ import {ELEMENT_PROBE_PROVIDERS} from 'angular2/platform/common_dom';
 
 import {App} from './app/app';
 import {ModalConfig} from 'angular2-modal';
+import {Position, DomPosition} from '../components/index'
 
 function main() {
     return bootstrap(App, [
+        provide(Position, {useValue: new DomPosition()}),
         ROUTER_PROVIDERS,
-        // set a custom default options for the modal.
         provide(ModalConfig, {useValue: new ModalConfig('lg', true, 81)}),
         ELEMENT_PROBE_PROVIDERS // remove in production
     ])

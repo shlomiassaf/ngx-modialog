@@ -8,11 +8,15 @@ import {
     Injector,
     provide} from 'angular2/core';
 
+
 import {TypeaheadResultContainer} from './typeaheadResultContainer';
 
 @Injectable()
 @Directive({
     selector: '[typeahead]',
+    host: {
+        '(keyup)': 'onKeyup($event)'
+    },
     properties: [
         'data:typeahead'
     ]
@@ -20,27 +24,57 @@ import {TypeaheadResultContainer} from './typeaheadResultContainer';
 export class Typeahead {
     public results;
     private data:any;
-    private resultContainer: Promise<ComponentRef>;
+    private resultElement: Promise<ComponentRef>;
+    private resultInstance: TypeaheadResultContainer;
 
     constructor(private componentLoader: DynamicComponentLoader,
                 private renderer:Renderer,
-                private element:ElementRef) {
+                private _element:ElementRef) {
     }
 
-    ngOnInit() {
+    get element(): ElementRef {
+        return this._element;
+    }
+
+    onKeyup(e:KeyboardEvent) {
+        this.resultInstance && this.resultInstance.onKeyup(e);
+
+
+        //this.typeaheadLoading.next(true);
+
+        //if (this.async === true) {
+        //    this.debouncer();
+        //}
+
+        //if (this.async === false) {
+        //    this.processMatches();
+        //    this.finalizeAsyncCall();
+        //}
         this.results = this.data;
-        this.show();
+        if (!this.resultInstance && this.results.length > 0) {
+            this.show();
+        }
     }
 
     show() {
-
         let binding = Injector.resolve([ provide(Typeahead, {useValue: this}) ]);
 
-        this.resultContainer = this.componentLoader
+        this.resultElement = this.componentLoader
             .loadNextToLocation(TypeaheadResultContainer, this.element, binding)
             .then((componentRef:ComponentRef) => {
+                this.resultInstance = componentRef.instance;
                 return componentRef;
             });
     }
 
+
+    hide() {
+        if (this.resultInstance) {
+            this.resultElement.then((componentRef:ComponentRef) => {
+                componentRef.dispose();
+                this.resultInstance = null;
+                return componentRef;
+            });
+        }
+    }
 }

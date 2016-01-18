@@ -1,3 +1,2 @@
-export * from './components/typeahead';
-export * from './components/typeaheadResult';
-export * from './components/typeaheadResultContainer';
+// WEBPACK development runtime helper.
+export * from './angular2-typeahead';
