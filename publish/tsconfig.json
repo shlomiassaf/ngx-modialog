@@ -11,7 +11,7 @@
     "outDir": "../dist"
   },
   "files": [
-    "../src/angular2-modal/angular2-modal.ts"
+    "../src/components/angular2-modal/angular2-modal.ts"
   ],
   "exclude": [
     "node_modules"
