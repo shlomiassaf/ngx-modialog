@@ -34,7 +34,7 @@ Desktop.ini
 .DS_Store
 
 
-src
+src/demo
 typings
 publish
 build
