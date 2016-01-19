@@ -7,4 +7,4 @@
  * See open issue: https://youtrack.jetbrains.com/issue/WEB-17533
  */
 
-export * from './src/components/angular2-typeahead/index';
+export * from './src/components/ng2-bs-typeahead/ng2-bs-typeahead';

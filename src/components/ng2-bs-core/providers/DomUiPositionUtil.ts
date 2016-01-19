@@ -1,12 +1,12 @@
 import {Injectable} from 'angular2/core';
-import {Position, Rect, Location, ResolvedLocation, PLACEMENT_REGEX} from './Position';
+import {UiPositionUtil, Rect, Location, ResolvedLocation, PLACEMENT_REGEX} from './UiPositionUtil';
 
 function isDefined(value ) {
     return typeof value !== 'undefined';
 }
 
 @Injectable()
-export class DomPosition extends Position {
+export class DomUiPositionUtil extends UiPositionUtil {
     offset(elem: any): Rect {
         let boundingClientRect = elem.getBoundingClientRect();
         return new Rect(
@@ -15,39 +15,6 @@ export class DomPosition extends Position {
             boundingClientRect.width || elem.offsetWidth,
             boundingClientRect.height || elem.offsetHeight
         );
-    }
-
-    private isStaticPositioned(el) {
-        return (window.getComputedStyle(el).position || 'static') === 'static';
-    }
-
-    /**
-     * Provides the closest positioned ancestor.
-     * @param {element} element - The element to get the offest parent for.
-     * @returns {element} The closest positioned ancestor.
-     */
-    private offsetParent(elem: HTMLElement): Element {
-        let offsetParent = elem.offsetParent || document.documentElement;
-
-        while (offsetParent && offsetParent !== document.documentElement
-                && this.isStaticPositioned(offsetParent)) {
-            offsetParent = (<HTMLElement>offsetParent).offsetParent;
-        }
-
-        return offsetParent || document.documentElement;
-    }
-
-
-    /**
-     * Provides a parsed number for a style property.
-     * Strips units and casts invalid numbers to 0.
-     *
-     * @param {string} value - The style value to parse.
-     * @returns {number} A valid number.
-     */
-    private parseStyle(value: string): number {
-        let val = parseFloat(value);
-        return isFinite(val) ? val : 0;
     }
 
     position(elem: any, includeMargins: boolean = false): Rect {
@@ -73,8 +40,8 @@ export class DomPosition extends Position {
         );
     }
 
-    positionElements(hostElem:any, targetElem:any,
-                     placement:string = "top",
+    positionElements(hostElem: any, targetElem: any,
+                     placement: string = 'top',
                      appendToBody: boolean = false): ResolvedLocation {
         let targetWidth = isDefined(targetElem.offsetWidth) ? targetElem.offsetWidth :
             targetElem.prop('offsetWidth');
@@ -170,5 +137,38 @@ export class DomPosition extends Position {
             parsedPlacement.p1 : parsedPlacement.p1 + '-' + parsedPlacement.p2;
 
         return targetElemPos;
+    }
+
+    private isStaticPositioned(el) {
+        return (window.getComputedStyle(el).position || 'static') === 'static';
+    }
+
+    /**
+     * Provides the closest positioned ancestor.
+     * @param {element} element - The element to get the offset parent for.
+     * @returns {element} The closest positioned ancestor.
+     */
+    private offsetParent(elem: HTMLElement): Element {
+        let offsetParent = elem.offsetParent || document.documentElement;
+
+        while (offsetParent && offsetParent !== document.documentElement
+        && this.isStaticPositioned(offsetParent)) {
+            offsetParent = (<HTMLElement>offsetParent).offsetParent;
+        }
+
+        return offsetParent || document.documentElement;
+    }
+
+
+    /**
+     * Provides a parsed number for a style property.
+     * Strips units and casts invalid numbers to 0.
+     *
+     * @param {string} value - The style value to parse.
+     * @returns {number} A valid number.
+     */
+    private parseStyle(value: string): number {
+        let val = parseFloat(value);
+        return isFinite(val) ? val : 0;
     }
 }

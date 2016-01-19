@@ -1,0 +1,9 @@
+{
+  "name": "ng2-bs-typeahead",
+  "description": "Typeahead component for angualr 2 bootstrap.",
+  "version": "0.0.3",
+  "main": "ng2-bs-typeahead.ts",
+  "peerDependencies": {
+    "ng2-bs-core": "^0.0.3"
+  }
+}

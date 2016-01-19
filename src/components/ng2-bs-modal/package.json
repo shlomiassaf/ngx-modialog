@@ -1,0 +1,6 @@
+{
+  "name": "ng2-bs-modal",
+  "description": "Modal component for angualr 2 bootstrap.",
+  "version": "0.0.3",
+  "main": "ng2-bs-modal.ts"
+}

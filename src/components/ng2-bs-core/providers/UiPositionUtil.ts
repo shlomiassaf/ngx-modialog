@@ -32,7 +32,7 @@ export class ResolvedLocation extends Location {
     }
 }
 
-export class Rect extends Location{
+export class Rect extends Location {
     width: number;
     height: number;
 
@@ -44,25 +44,25 @@ export class Rect extends Location{
 }
 
 @Injectable()
-export abstract class Position {
+export abstract class UiPositionUtil {
 
     /**
      * Parses a placement string.
      * Along with the 'auto' indicator, supported placement strings are:
-     *   <ul>
-     *     <li>top: element on top, horizontally centered on host element.</li>
-     *     <li>top-left: element on top, left edge aligned with host element left edge.</li>
-     *     <li>top-right: element on top, lerightft edge aligned with host element right edge.</li>
-     *     <li>bottom: element on bottom, horizontally centered on host element.</li>
-     *     <li>bottom-left: element on bottom, left edge aligned with host element left edge.</li>
-     *     <li>bottom-right: element on bottom, right edge aligned with host element right edge.</li>
-     *     <li>left: element on left, vertically centered on host element.</li>
-     *     <li>left-top: element on left, top edge aligned with host element top edge.</li>
-     *     <li>left-bottom: element on left, bottom edge aligned with host element bottom edge.</li>
-     *     <li>right: element on right, vertically centered on host element.</li>
-     *     <li>right-top: element on right, top edge aligned with host element top edge.</li>
-     *     <li>right-bottom: element on right, bottom edge aligned with host element bottom edge.</li>
-     *   </ul>
+     * <ul>
+     *   <li>top: element on top, horizontally centered on host element.</li>
+     *   <li>top-left: element on top, left edge aligned with host element left edge.</li>
+     *   <li>top-right: element on top, lerightft edge aligned with host element right edge.</li>
+     *   <li>bottom: element on bottom, horizontally centered on host element.</li>
+     *   <li>bottom-left: element on bottom, left edge aligned with host element left edge.</li>
+     *   <li>bottom-right: element on bottom, right edge aligned with host element right edge.</li>
+     *   <li>left: element on left, vertically centered on host element.</li>
+     *   <li>left-top: element on left, top edge aligned with host element top edge.</li>
+     *   <li>left-bottom: element on left, bottom edge aligned with host element bottom edge.</li>
+     *   <li>right: element on right, vertically centered on host element.</li>
+     *   <li>right-top: element on right, top edge aligned with host element top edge.</li>
+     *   <li>right-bottom: element on right, bottom edge aligned with host element bottom edge.</li>
+     * </ul>
      * A placement string with an 'auto' indicator is expected to be
      * space separated from the placement, i.e: 'auto bottom-left'  If
      * the primary and secondary placement values do not match 'top,
@@ -85,7 +85,7 @@ export abstract class Position {
             p1: PLACEMENT_REGEX.primary.test(arr[0]) ? arr[0] : 'top',
             p2: PLACEMENT_REGEX.secondary.test(arr[1]) ? arr[1] : 'center',
             auto: autoPlace
-        }
+        };
     }
 
     /**
@@ -140,7 +140,7 @@ export abstract class Position {
      *
      * @returns {ResolvedLocation}
      */
-    abstract positionElements(hostElem:any, targetElem:any,
-                              placement:string,
+    abstract positionElements(hostElem: any, targetElem: any,
+                              placement: string,
                               appendToBody: boolean): ResolvedLocation;
 }

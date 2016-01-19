@@ -1,0 +1,6 @@
+{
+  "name": "ng2-bs-core",
+  "description": "Core package for angualr 2 bootstrap.",
+  "version": "0.0.3",
+  "main": "ng2-bs-core.ts"
+}

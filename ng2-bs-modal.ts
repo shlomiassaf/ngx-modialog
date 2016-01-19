@@ -7,4 +7,4 @@
  * See open issue: https://youtrack.jetbrains.com/issue/WEB-17533
  */
 
-export * from './src/components/angular2-modal/index';
+export * from './src/components/ng2-bs-modal/ng2-bs-modal';
