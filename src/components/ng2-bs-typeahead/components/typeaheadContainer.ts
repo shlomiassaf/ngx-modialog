@@ -47,11 +47,12 @@ export class TypeaheadContainer implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.setPosition();
+
 
     }
 
     ngAfterViewChecked() {
+        this.setPosition();
         this.doS();
     }
     doS() {}
@@ -61,12 +62,14 @@ export class TypeaheadContainer implements AfterViewInit {
     }
 
     private setPosition() {
-        let pos = this.position.positionElements(this.thNativeElement,
-                this.listEl.nativeElement,
-                'bottom-left', false);
+        let nativeListElement = this.listEl.nativeElement;
+        let pos = this.position.positionElements(
+            this.thNativeElement,
+            nativeListElement,
+            'bottom-left', false);
 
-        this.renderer.setElementStyle(this.listEl, 'top', pos.top + 'px');
-        this.renderer.setElementStyle(this.listEl, 'left', pos.left + 'px');
-        this.renderer.setElementStyle(this.listEl, 'display', 'block');
+        this.renderer.setElementStyle(nativeListElement, 'top', pos.top + 'px');
+        this.renderer.setElementStyle(nativeListElement, 'left', pos.left + 'px');
+        this.renderer.setElementStyle(nativeListElement, 'display', 'block');
     }
 }
