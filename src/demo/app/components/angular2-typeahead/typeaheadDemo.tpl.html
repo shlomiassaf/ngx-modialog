@@ -1,6 +1,17 @@
 <div class="container">
     <h1>Angular 2 (beta) Bootstrap Typeahead</h1>
     <br>
-    <input [typeahead]="states"
-           [(ngModel)]="searchInput" />
+    <input type="text"
+           class="form-control"
+           [(ngModel)]="searchInput"
+           [typeahead]="states"
+           [typeaheadMinLength]="2"
+           [typeaheadWaitMs]="300" />
+
+    <input type="text"
+           class="form-control"
+           [(ngModel)]="searchInputAsync"
+           [typeahead]="searchValueToHttpMapper"
+           [typeaheadMinLength]="3"
+           [typeaheadWaitMs]="300" />
 </div>
