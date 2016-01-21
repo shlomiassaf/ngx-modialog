@@ -1,19 +1,30 @@
 import {
     Component,
+    Output,
+    EventEmitter,
     Renderer,
     Inject,
     ElementRef,
     ViewChild,
     AfterViewInit,
-    OnDestroy,
-    DynamicComponentLoader, ViewResolver
+    OnDestroy
 } from 'angular2/core';
 
 import {Observable, Subscription} from 'rxjs/Rx';
 import {NgFor} from 'angular2/common';
-import {AsyncPipe} from 'angular2/common';
 
 import {UiPositionUtil} from 'ng2-bs-core';
+
+const DEFAULT_TEMPLATE: string =
+    `<ul #thContainer class="dropdown-menu">
+        <li *ngFor="#match of matches"
+            [class.active]="isActive(match)">
+             <a href="#"
+                tabindex="-1"
+                (click)="onMatchSelect($event, match)"
+                [innerHtml]="match"></a>
+        </li>
+    </ul>`;
 
 /**
  * Dependency Injection resolution token for matched object.
@@ -27,27 +38,22 @@ export const TH_MATCHES_TOKEN: string = 'typeaheadMatches';
 export const TH_NATIVE_ELEMENT_TOKEN: string = 'typeaheadNativeElement';
 
 
+
 @Component({
     selector: 'typeahead-result-container',
-    pipes: [AsyncPipe],
-    template:
-        `<ul #thContainer class="dropdown-menu">
-            <li *ngFor="#match of matches"
-                [class.active]="isActive(match)">
-                <a>{{match}}</a>
-            </li>
-        </ul>`
+    template: DEFAULT_TEMPLATE
 })
 export class TypeaheadContainer implements AfterViewInit, OnDestroy {
     public active: any;
     public matches = [];
+    @Output() public matchSelect:EventEmitter<any> = new EventEmitter();
+
+
     private matchesSubscription: Subscription<any>;
     @ViewChild ('thContainer') private listEl: ElementRef;
 
     constructor(@Inject(TH_MATCHES_TOKEN) matches$: Observable<any>,
                 @Inject(TH_NATIVE_ELEMENT_TOKEN) private thNativeElement: any[],
-                private elementRef: ElementRef,
-                private loader: DynamicComponentLoader,
                 private renderer: Renderer,
                 private position: UiPositionUtil) {
 
@@ -62,17 +68,12 @@ export class TypeaheadContainer implements AfterViewInit, OnDestroy {
     }
 
     ngAfterViewInit() {
-        //let template =
-        //    `<li *ngFor="#match of matches"
-        //        [class.active]="isActive(match)">
-        //        <a>{{match}}</a>
-        //    </li>`;
-        //this.loader.loadIntoLocation(toComponent(template), this.elementRef, 'mock').then(componentRef => componentRef.instance.matches = this.matches);
-
         this.setPosition();
-
     }
 
+    selectActive() {
+        this.onMatchSelect(null, this.active);
+    }
     private isActive(value: any): boolean {
         return this.active === value;
     }
@@ -87,5 +88,20 @@ export class TypeaheadContainer implements AfterViewInit, OnDestroy {
         this.renderer.setElementStyle(nativeListElement, 'top', pos.top + 'px');
         this.renderer.setElementStyle(nativeListElement, 'left', pos.left + 'px');
         this.renderer.setElementStyle(nativeListElement, 'display', 'block');
+    }
+
+    private onMatchSelect(event: MouseEvent, match: any) {
+        if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        this.matchSelect.emit(match);
+
+        return false;
+    }
+
+    static get DEFAULT_TEMPLATE(): string {
+        return DEFAULT_TEMPLATE;
     }
 }

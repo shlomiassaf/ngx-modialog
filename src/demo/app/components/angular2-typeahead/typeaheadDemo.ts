@@ -32,6 +32,16 @@ export class TypeaheadDemo {
     private searchInput: string;
     private searchInputAsync: string;
 
+    private customItemTemplate =  `<ul #thContainer class="dropdown-menu">
+        <li *ngFor="#match of matches"
+            [class.active]="isActive(match)">
+             <a href="#"
+                tabindex="-1"
+                (click)="onMatchSelect($event, match)"
+                [innerHtml]="match.formatted_address"></a>
+        </li>
+    </ul>`;
+
     public searchValueToHttpMapper =  (value: string) => {
         let params = new URLSearchParams();
         params.set('address', value);

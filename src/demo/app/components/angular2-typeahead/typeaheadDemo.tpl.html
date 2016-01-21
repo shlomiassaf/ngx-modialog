@@ -12,6 +12,7 @@
            class="form-control"
            [(ngModel)]="searchInputAsync"
            [typeahead]="searchValueToHttpMapper"
+           [typeaheadItemTemplate]="customItemTemplate"
            [typeaheadMinLength]="3"
            [typeaheadWaitMs]="300" />
 </div>

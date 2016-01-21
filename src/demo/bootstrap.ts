@@ -1,4 +1,3 @@
-// TODO: Add to the components per demand
 import "rxjs/Rx";
 
 import {provide} from 'angular2/core';

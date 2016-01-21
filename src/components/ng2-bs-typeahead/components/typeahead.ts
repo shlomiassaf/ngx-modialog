@@ -6,14 +6,16 @@ import {
     HostListener,
     Input,
     Output,
-    ElementRef,RuntimeMetadataResolver
+    ElementRef,
     ComponentRef,
     Injectable,
     Injector,
     provide,
     OnDestroy,
+    OnInit,
     Injector,
-    ViewResolver, Compiler , APPLICATION_COMMON_PROVIDERS
+    ViewResolver,
+    EventEmitter
 } from 'angular2/core';
 
 import {TemplateCompiler} from 'angular2/compiler';
@@ -30,66 +32,36 @@ import {Observable, Subscription, Subscriber} from 'rxjs/Rx';
 @Directive({
     selector: '[typeahead][ngModel]'
 })
-export class Typeahead implements OnDestroy {
+export class Typeahead implements OnDestroy, OnInit {
 
+    @Output() public matchSelected: EventEmitter<any> = new EventEmitter();
     @Input('typeahead') private source: any;
     @Input() private typeaheadWaitMs: number;
+    @Input() private typeaheadItemTemplate: string;
     @Input() private typeaheadMinLength: number;
+    @Input() private typeaheadFieldMap:  string | ((obj: string) => string);
 
     private containerComponentRef: Promise<ComponentRef>;
     private containerInstance: TypeaheadContainer;
     private matches: any[] = [];
     private matchesSubscription: Subscription<any>;
     private matchesObserver: Subscriber<any>;
-
+    private matches$: Observable<any>;
 
     constructor(private componentLoader: DynamicComponentLoader,
-
                 private injector: Injector,
-                private compiler: Compiler,
-                private templateCompiler: TemplateCompiler,
-                private viewResolver: ViewResolver,
-
-
                 private element: ElementRef,
                 private model: NgModel) {
 
     }
 
+
     ngOnInit() {
-        this.typeaheadWaitMs = (this.typeaheadWaitMs > 0) ? this.typeaheadWaitMs : 0;
-        this.typeaheadMinLength = (this.typeaheadMinLength > 0) ? this.typeaheadMinLength : 0;
-
-        let matches$: Observable<any> = this.model.control.valueChanges
-            .debounceTime<string>(this.typeaheadWaitMs)
-            .map(value => value.length >= this.typeaheadMinLength ? value : '')
-            .distinctUntilChanged();
-
-        if (typeof this.source === 'function') {
-            matches$ = matches$.switchMap<any>(value => value ? this.source(value) : Observable.of([]));
-        } else {
-            matches$ = matches$.map<any>(value => this.processQuery(value, this.source));
-        }
-
-        this.matchesSubscription = matches$
-            .subscribe(values => {
-                this.matches = values;
-                if (values.length === 0) {
-                    this.destroyContainer();
-                } else if (!this.containerInstance) {
-                    this.createContainer()
-                        .then(compRef => {
-                            this.onMatchesUpdate();
-                            return compRef;
-                        });
-                } else {
-                    this.onMatchesUpdate();
-                }
-            });
+       this.initObservable();
     }
 
     ngOnDestroy() {
-        this.matchesSubscription.unsubscribe();
+        this.unsubscribe();
     }
 
     onMatchesUpdate() {
@@ -117,11 +89,16 @@ export class Typeahead implements OnDestroy {
 
     @HostListener('blur')
     onBlur() {
-        //this.destroyContainer();
+        //setTimeout(_=> this.destroyContainer(), 10);
+    }
+
+    @HostListener('focus')
+    onFocus() {
+        this.subscribe();
     }
 
     @HostListener('keyup', ['$event'])
-    onKeyup(event: KeyboardEvent) {
+    onKeyup(event: KeyboardEvent): any {
         if (event.keyCode === 27)
             return this.destroyContainer();
 
@@ -131,53 +108,118 @@ export class Typeahead implements OnDestroy {
             case 40: // DOWN
                 return this.nextActiveMatch();
             case 13: // ENTER
-                return; //this.selectActiveMatch();
+                return this.containerInstance.selectActive();
 
         }
     }
 
-    createContainer() {
+    createContainer(): Promise<ComponentRef> {
         let binding = Injector.resolve([
             provide(TH_MATCHES_TOKEN, {useValue: new Observable(observer => this.matchesObserver = observer)}),
             provide(TH_NATIVE_ELEMENT_TOKEN, {useValue: this.element.nativeElement})
         ]);
 
-        console.log(Injector.resolveAndCreate(APPLICATION_COMMON_PROVIDERS.concat(BROWSER_APP_PROVIDERS)).resolveAndInstantiate(TemplateCompiler));
 
-        //this.injector.resolveAndCreateChild(APPLICATION_COMMON_PROVIDERS.concat(provide(TemplateCompiler, {useValue: new TemplateCompiler()}))).resolveAndInstantiate()
-        //console.log( this.injector.resolveAndInstantiate(APPLICATION_COMMON_PROVIDERS[10]));
-
-
-
-        //this.templateCompiler.clearCache();
-        //this.templateCompiler._runtimeMetadataResolver._directiveCache.delete(TypeaheadContainer);
-        //this.compiler.clearCache();
-
-        this.viewResolver.resolve(TypeaheadContainer).template = `<ul #thContainer class="dropdown-menu">
-            <li *ngFor="#match of matches"
-                [class.active]="isActive(match)">
-                <a>{{match}} ${new Date()}</a>
-            </li>
-        </ul>`;
-
+        let template = this.injector.get(ViewResolver).resolve(TypeaheadContainer).template;
+        if (!this.typeaheadItemTemplate && TypeaheadContainer.DEFAULT_TEMPLATE != template) {
+            this.updateTempalte(TypeaheadContainer, TypeaheadContainer.DEFAULT_TEMPLATE);
+        } else if (this.typeaheadItemTemplate && this.typeaheadItemTemplate != template) {
+            this.updateTempalte(TypeaheadContainer, this.typeaheadItemTemplate);
+        }
 
         return this.containerComponentRef = this.componentLoader
             .loadNextToLocation(TypeaheadContainer, this.element, binding)
             .then((componentRef: ComponentRef) => {
                 this.containerInstance = componentRef.instance;
+                this.containerInstance.matchSelect.subscribe(match => {
+                    this.destroyContainer().then(_ => {
+                        this.unsubscribe();
+                        this.model.update.emit(match);
+                        this.matchSelected.emit(match);
+                    });
+                });
                 return componentRef;
             });
     }
 
 
-    destroyContainer() {
+    destroyContainer(): Promise<ComponentRef> {
         if (this.containerInstance) {
-            this.containerComponentRef.then((componentRef: ComponentRef) => {
+            return this.containerComponentRef.then((componentRef: ComponentRef) => {
                 this.matchesObserver.complete();
                 componentRef.dispose();
                 this.containerInstance = null;
                 return componentRef;
             });
         }
+        return Promise.resolve(null);
+    }
+
+    private initObservable() {
+        this.typeaheadWaitMs = (this.typeaheadWaitMs > 0) ? this.typeaheadWaitMs : 0;
+        this.typeaheadMinLength = (this.typeaheadMinLength > 0) ? this.typeaheadMinLength : 0;
+
+        let matches$: Observable<any> = this.model.control.valueChanges
+            .debounceTime<string>(this.typeaheadWaitMs)
+            .map(value => value.length >= this.typeaheadMinLength ? value : '')
+            .distinctUntilChanged();
+
+
+        if (this.source && this.source instanceof Observable) { // user supplied observable
+            matches$ = matches$.switchMap<any>(value => value ? this.source.map(value => this.processQuery(value, this.source)) : Observable.of([]));
+        } else if (typeof this.source === 'function') { // user supplied map operator
+            matches$ = matches$.switchMap<any>(value => value ? this.source(value) : Observable.of([]));
+        }
+        else {
+            matches$ = matches$.map<any>(value => this.processQuery(value, this.source));
+        }
+
+        //if (typeof this.typeaheadFieldMap === 'string') {
+        //    matches$ = matches$.map<NormalizedSource>( (source: NormalizedSource) => {
+        //        return {
+        //            search: source.search,
+        //            data: source.data.map(<any>this.typeaheadFieldMap)
+        //        }
+        //    });
+        //} else if (typeof this.typeaheadFieldMap === 'function') {
+        //    matches$ = matches$.map()
+        //}
+
+        this.matches$ = matches$;
+    }
+
+    private subscribe() {
+        if (this.matchesSubscription && !this.matchesSubscription.isUnsubscribed) return;
+        this.matchesSubscription = this.matches$
+            .subscribe(values => {
+                this.matches = values;
+                if (values.length === 0) {
+                    this.destroyContainer();
+                } else if (!this.containerInstance) {
+                    this.createContainer()
+                        .then(compRef => {
+                            this.onMatchesUpdate();
+                            return compRef;
+                        });
+                } else {
+                    this.onMatchesUpdate();
+                }
+            });
+    }
+
+    private unsubscribe() {
+        this.matchesSubscription && !this.matchesSubscription.isUnsubscribed && this.matchesSubscription.unsubscribe();
+    }
+
+    private updateTempalte(component: any, template: string) {
+        //TODO : fix when public API is more flexible.
+        //       see https://github.com/angular/angular/issues/6591
+        let templateCompiler: any = this.injector.get(TemplateCompiler); // avoid TS screaming
+        templateCompiler._compiledTemplateCache.delete(component);
+        templateCompiler._compiledTemplateDone.delete(component);
+        templateCompiler._hostCacheKeys.delete(component);
+        templateCompiler._runtimeMetadataResolver._directiveCache.delete(component);
+
+        this.injector.get(ViewResolver).resolve(component).template = template;
     }
 }
