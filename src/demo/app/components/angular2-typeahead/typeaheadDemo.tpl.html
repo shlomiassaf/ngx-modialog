@@ -3,16 +3,28 @@
     <br>
     <input type="text"
            class="form-control"
-           [(ngModel)]="searchInput"
+           [(ngModel)]="statesInput"
            [typeahead]="states"
+           (matchSelected)="onMatchSelected($event)"
            [typeaheadMinLength]="2"
            [typeaheadWaitMs]="300" />
 
     <input type="text"
            class="form-control"
-           [(ngModel)]="searchInputAsync"
+           [(ngModel)]="statesComplexInput"
+           [typeahead]="statesComplex"
+           typeaheadFieldMap="name"
+           (matchSelected)="onMatchSelected($event)"
+           [typeaheadMinLength]="2"
+           [typeaheadWaitMs]="300" />
+
+    <input type="text"
+           class="form-control"
+           [(ngModel)]="httpInput"
            [typeahead]="searchValueToHttpMapper"
            [typeaheadItemTemplate]="customItemTemplate"
+           typeaheadFieldMap="formatted_address"
+           (matchSelected)="onMatchSelected($event)"
            [typeaheadMinLength]="3"
            [typeaheadWaitMs]="300" />
 </div>

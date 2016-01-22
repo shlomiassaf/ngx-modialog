@@ -28,6 +28,36 @@ import {
 } from './typeaheadContainer';
 
 import {Observable, Subscription, Subscriber} from 'rxjs/Rx';
+import {isPromise} from "angular2/src/facade/lang";
+
+function transformSource(source, mapOrProp) {
+    if (typeof mapOrProp === 'string') {
+        return source.map(value => {
+            return {
+                key: value[mapOrProp],
+                value: value
+            };
+        });
+    } else if (typeof mapOrProp === 'function') {
+        return source.map(value => {
+            return {
+                key: mapOrProp(value),
+                value: value
+            };
+        });
+    } else {
+        return source.map(value => {
+            return {
+                key: value,
+                value: value
+            };
+        });
+    }
+}
+
+function filterMatch(search, value) {
+    return value.toLowerCase().indexOf(search.toLowerCase()) >= 0;
+}
 
 @Directive({
     selector: '[typeahead][ngModel]'
@@ -66,10 +96,6 @@ export class Typeahead implements OnDestroy, OnInit {
 
     onMatchesUpdate() {
         this.matchesObserver && this.matchesObserver.next(this.matches);
-    }
-
-    processQuery(value, source) {
-        return source && value ? source.filter(r => r.toLowerCase().indexOf(value.toLowerCase()) >= 0) : [];
     }
 
 
@@ -122,20 +148,21 @@ export class Typeahead implements OnDestroy, OnInit {
 
         let template = this.injector.get(ViewResolver).resolve(TypeaheadContainer).template;
         if (!this.typeaheadItemTemplate && TypeaheadContainer.DEFAULT_TEMPLATE != template) {
-            this.updateTempalte(TypeaheadContainer, TypeaheadContainer.DEFAULT_TEMPLATE);
+            this.updateTemplate(TypeaheadContainer, TypeaheadContainer.DEFAULT_TEMPLATE);
         } else if (this.typeaheadItemTemplate && this.typeaheadItemTemplate != template) {
-            this.updateTempalte(TypeaheadContainer, this.typeaheadItemTemplate);
+            this.updateTemplate(TypeaheadContainer, this.typeaheadItemTemplate);
         }
 
         return this.containerComponentRef = this.componentLoader
             .loadNextToLocation(TypeaheadContainer, this.element, binding)
             .then((componentRef: ComponentRef) => {
                 this.containerInstance = componentRef.instance;
-                this.containerInstance.matchSelect.subscribe(match => {
-                    this.destroyContainer().then(_ => {
+
+                this.containerInstance.matchSelect.subscribe(match => {  //TODO: Dispose.
+                    this.destroyContainer().then( () => {
                         this.unsubscribe();
-                        this.model.update.emit(match);
-                        this.matchSelected.emit(match);
+                        this.model.update.emit(match.key);
+                        this.matchSelected.emit({match: match.value});
                     });
                 });
                 return componentRef;
@@ -155,37 +182,46 @@ export class Typeahead implements OnDestroy, OnInit {
         return Promise.resolve(null);
     }
 
+
+
     private initObservable() {
         this.typeaheadWaitMs = (this.typeaheadWaitMs > 0) ? this.typeaheadWaitMs : 0;
         this.typeaheadMinLength = (this.typeaheadMinLength > 0) ? this.typeaheadMinLength : 0;
 
-        let matches$: Observable<any> = this.model.control.valueChanges
+        this.matches$ = this.model.control.valueChanges
             .debounceTime<string>(this.typeaheadWaitMs)
             .map(value => value.length >= this.typeaheadMinLength ? value : '')
-            .distinctUntilChanged();
+            .distinctUntilChanged()
+            .switchMap(search => {
+                // main transformation and query functor.
+                // Makes sure the final processing is done on an Observable.
+                // Logic could be done at build time (rather then stream time) but since
+                // all logic runs on the input value stream code clarity was more important.
+                if (!search || !this.source) {
+                    return Observable.of([]);
+                } else {
+                    let source: any, skipFilter: boolean;
+                    if (typeof this.source === 'function') { // user supplied function
+                        skipFilter = true;
+                        source = this.source(search); // can be observable / promise / array
+                    }  else {
+                        source = this.source; // user supplied observable / promise / array.
+                    }
 
+                    if (Array.isArray(source)) {
+                        source = Observable.of(source);
+                    } else if (source instanceof Promise) {
+                        source = Observable.fromPromise(source);
+                    } else if (!(source instanceof Observable)) {
+                        throw new Error("Invalid source supplied.");
+                    }
 
-        if (this.source && this.source instanceof Observable) { // user supplied observable
-            matches$ = matches$.switchMap<any>(value => value ? this.source.map(value => this.processQuery(value, this.source)) : Observable.of([]));
-        } else if (typeof this.source === 'function') { // user supplied map operator
-            matches$ = matches$.switchMap<any>(value => value ? this.source(value) : Observable.of([]));
-        }
-        else {
-            matches$ = matches$.map<any>(value => this.processQuery(value, this.source));
-        }
-
-        //if (typeof this.typeaheadFieldMap === 'string') {
-        //    matches$ = matches$.map<NormalizedSource>( (source: NormalizedSource) => {
-        //        return {
-        //            search: source.search,
-        //            data: source.data.map(<any>this.typeaheadFieldMap)
-        //        }
-        //    });
-        //} else if (typeof this.typeaheadFieldMap === 'function') {
-        //    matches$ = matches$.map()
-        //}
-
-        this.matches$ = matches$;
+                    return source.map(source => {
+                        let transformed$ = transformSource(source, this.typeaheadFieldMap);
+                        return (skipFilter) ? transformed$ : transformed$.filter(kvp => filterMatch(search, kvp.key))
+                    });
+                }
+            });
     }
 
     private subscribe() {
@@ -211,7 +247,7 @@ export class Typeahead implements OnDestroy, OnInit {
         this.matchesSubscription && !this.matchesSubscription.isUnsubscribed && this.matchesSubscription.unsubscribe();
     }
 
-    private updateTempalte(component: any, template: string) {
+    private updateTemplate(component: any, template: string) {
         //TODO : fix when public API is more flexible.
         //       see https://github.com/angular/angular/issues/6591
         let templateCompiler: any = this.injector.get(TemplateCompiler); // avoid TS screaming

@@ -22,7 +22,7 @@ const DEFAULT_TEMPLATE: string =
              <a href="#"
                 tabindex="-1"
                 (click)="onMatchSelect($event, match)"
-                [innerHtml]="match"></a>
+                [innerHtml]="match.key"></a>
         </li>
     </ul>`;
 
@@ -36,8 +36,6 @@ export const TH_MATCHES_TOKEN: string = 'typeaheadMatches';
  * @type {string}
  */
 export const TH_NATIVE_ELEMENT_TOKEN: string = 'typeaheadNativeElement';
-
-
 
 @Component({
     selector: 'typeahead-result-container',

@@ -12,25 +12,26 @@ import {Http, RequestOptionsArgs, URLSearchParams} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 
 import {Typeahead} from 'ng2-bs-typeahead';
-import {debug} from "util";
+import * as dataSource from './dataSource';
+
 @Component({
     selector: 'angular2-typeahead-demo',
     directives: [Typeahead],
-    providers: [],
     template: require('./typeaheadDemo.tpl.html')
 })
-
 export class TypeaheadDemo {
-    public states: Array<string> = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
-        'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa',
-        'Kansas', 'Kentucky', 'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-        'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
-        'New York', 'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-        'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
-        'West Virginia', 'Wisconsin', 'Wyoming'];
+    public states: Array<string> = dataSource.states;
 
-    private searchInput: string;
-    private searchInputAsync: string;
+    // make sure you send an observable that omits Array's, not objects.
+    // For example,  dataSource.statesComplex is an array of possible matches but we
+    // need the observer to omit it as whole.
+    // Observable.fromArray(dataSource.statesComplex) will omit single values, not good.
+    public statesComplex = Observable.of(dataSource.statesComplex);
+
+
+    private statesInput: string;
+    private statesComplexInput: string;
+    private httpInput: string;
 
     private customItemTemplate =  `<ul #thContainer class="dropdown-menu">
         <li *ngFor="#match of matches"
@@ -38,7 +39,7 @@ export class TypeaheadDemo {
              <a href="#"
                 tabindex="-1"
                 (click)="onMatchSelect($event, match)"
-                [innerHtml]="match.formatted_address"></a>
+                [innerHtml]="match.value.formatted_address"></a>
         </li>
     </ul>`;
 
@@ -47,22 +48,20 @@ export class TypeaheadDemo {
         params.set('address', value);
         params.set('sensor', "false");
 
+        // As an observable:
+        //return this.http.get('//maps.googleapis.com/maps/api/geocode/json', {search: params})
+        //    .map(res => res.json().results);
+
+        // As a promise:
         return this.http.get('//maps.googleapis.com/maps/api/geocode/json', {search: params})
-            .map(res => res.json().results);
+            .toPromise().then((res => res.json().results));
     };
+
+    public onMatchSelected($event) {
+        console.log("SELECTED: ",$event.match);
+    }
 
     constructor(public http: Http) {
     }
 
-    /**
-     * Async data example.
-     * Typeahead will send a value, the async handler should return an Observable.
-     * In this example its quite clear, the function is a map operator mapping from a string to an http call.
-     * @param value
-     * @returns {Observable<R>}
-     */
-    get getAsyncData(): (value: string) => Observable<any> {
-        console.log('asdflkjsadlkgfjsdal;kfjlsdakjsda');
-        return this.searchValueToHttpMapper;
-    }
 }
