@@ -11,10 +11,11 @@ import {
 import {Http, RequestOptionsArgs, URLSearchParams} from 'angular2/http';
 import {Observable} from 'rxjs/Rx';
 
-import {Typeahead} from 'ng2-bs-typeahead';
+import {Typeahead, generateTemplate} from 'ng2-bs-typeahead';
 import * as dataSource from './dataSource';
 
 @Component({
+    moduleId: module.id,
     selector: 'angular2-typeahead-demo',
     directives: [Typeahead],
     template: require('./typeaheadDemo.tpl.html')
@@ -33,15 +34,10 @@ export class TypeaheadDemo {
     private statesComplexInput: string;
     private httpInput: string;
 
-    private customItemTemplate =  `<ul #thContainer class="dropdown-menu">
-        <li *ngFor="#match of matches"
-            [class.active]="isActive(match)">
-             <a href="#"
-                tabindex="-1"
-                (click)="onMatchSelect($event, match)"
-                [innerHtml]="match.value.formatted_address"></a>
-        </li>
-    </ul>`;
+    private customItemTemplate = generateTemplate({
+        match: ` <a href="#" tabindex="-1" (click)="onMatchSelect($event, match)"
+                [style.color]="'red'" [innerHtml]="match.value.formatted_address"></a>`
+    });
 
     public searchValueToHttpMapper =  (value: string) => {
         let params = new URLSearchParams();

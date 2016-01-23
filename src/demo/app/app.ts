@@ -25,6 +25,7 @@ import {ComponentGallery} from './components/componentGallery/componentGallery';
     <main>
       <router-outlet></router-outlet>
     </main>
+    <span #typeaheadDropdownPlaceholder></span>
   `
 })
 @RouteConfig([

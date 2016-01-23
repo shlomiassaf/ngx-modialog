@@ -5,16 +5,18 @@
            class="form-control"
            [(ngModel)]="statesInput"
            [typeahead]="states"
-           (matchSelected)="onMatchSelected($event)"
-           [typeaheadMinLength]="2"
-           [typeaheadWaitMs]="300" />
+           [typeaheadLimit]="3"
+           typeaheadAppendToBody="typeaheadDropdownPlaceholder"
+           [typeaheadFocusFirst]="true"
+           [typeaheadWaitMs]="300"
+           (typeaheadMatchSelected)="onMatchSelected($event)"/>
 
     <input type="text"
            class="form-control"
            [(ngModel)]="statesComplexInput"
            [typeahead]="statesComplex"
            typeaheadFieldMap="name"
-           (matchSelected)="onMatchSelected($event)"
+           (typeaheadMatchSelected)="onMatchSelected($event)"
            [typeaheadMinLength]="2"
            [typeaheadWaitMs]="300" />
 
@@ -22,9 +24,11 @@
            class="form-control"
            [(ngModel)]="httpInput"
            [typeahead]="searchValueToHttpMapper"
-           [typeaheadItemTemplate]="customItemTemplate"
-           typeaheadFieldMap="formatted_address"
-           (matchSelected)="onMatchSelected($event)"
+           [typeaheadTemplate]="customItemTemplate"
+           [typeaheadFieldMap]="'formatted_address'"
            [typeaheadMinLength]="3"
-           [typeaheadWaitMs]="300" />
+           [typeaheadLimit]="5"
+           [typeaheadWaitMs]="300"
+           [typeaheadShowLoading]="true"
+           (typeaheadMatchSelected)="onMatchSelected($event)" />
 </div>
