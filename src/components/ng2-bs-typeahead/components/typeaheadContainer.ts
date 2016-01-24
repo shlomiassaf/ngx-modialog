@@ -81,7 +81,6 @@ export class TypeaheadContainer implements AfterViewInit, OnDestroy {
     @Output() public matchSelect:EventEmitter<any> = new EventEmitter();
 
     private showLoading: boolean;
-    private matchesSubscription: Subscription<any>;
     @ViewChild ('thContainer') private listEl: ElementRef;
 
     constructor(@Inject(TH_MATCHES_TOKEN) matches$: Observable<any>,
@@ -92,11 +91,11 @@ export class TypeaheadContainer implements AfterViewInit, OnDestroy {
 
         // AsyncPipe doesn't work as needed, since it register late (ngAfterViewInit)
         // the first stream is sent to nowhere and it must run after the first change anyway
-        this.matchesSubscription = matches$.subscribe(m => this.matches = m);
+        matches$.subscribe(m => this.matches = m);
     }
 
     ngOnDestroy() {
-        this.matchesSubscription.unsubscribe();
+        this.matchSelect.complete();
     }
 
     ngAfterViewInit() {

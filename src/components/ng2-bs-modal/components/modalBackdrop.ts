@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component, Renderer, ElementRef, ViewChild, AfterViewInit } from 'angular2/core';
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
 
 
@@ -7,37 +7,17 @@ import {ModalDialogInstance} from '../models/ModalDialogInstance';
  */
 @Component({
     selector: 'modal-backdrop',
-    host: {
-        '[style.position]': 'position',
-        '[style.height]': 'height',
-        '[style.width]': 'width',
-        '[style.top]': 'top',
-        '[style.left]': 'left',
-        '[style.right]': 'right',
-        '[style.bottom]': 'bottom'
-
-    },
-    template: '<div [style.position]="position" class="in modal-backdrop" #modalBackdrop></div>'
+    template: '<div class="in modal-backdrop" #modalBackdrop></div>'
 })
-export class ModalBackdrop {
-    public position: string;
-    public height: string;
-    public width: string;
-    public top: string;
-    public left: string;
-    public right: string;
-    public bottom: string;
+export class ModalBackdrop implements AfterViewInit {
+    @ViewChild('modalBackdrop') private backdrop: ElementRef;
 
+    constructor(private dialog: ModalDialogInstance, private renderer: Renderer) {
+    }
 
-    constructor(dialog: ModalDialogInstance) {
-        if (!dialog.inElement) {
-            this.position = this.width = this.height = null;
-            this.top = this.left = this.right = this.bottom = null;
-        } else {
-            this.position = 'absolute';
-            this.height = '100%';
-            this.width = '100%';
-            this.top = this.left = this.right = this.bottom = '0';
+    ngAfterViewInit() {
+        if (this.dialog.inElement) {
+            this.renderer.setElementStyle(this.backdrop.nativeElement, 'position', 'absolute');
         }
     }
 }

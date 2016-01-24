@@ -5,6 +5,7 @@ import {
     Input,
     Output,
     ElementRef,
+    Optional,
     ComponentRef,
     Injectable,
     Injector,
@@ -74,7 +75,7 @@ export interface TypeaheadMatchItem<T> {
 }
 
 @Directive({
-    selector: '[typeahead][ngModel]'
+    selector: '[typeahead]'
 })
 export class Typeahead implements OnDestroy, OnInit {
     /**
@@ -167,7 +168,7 @@ export class Typeahead implements OnDestroy, OnInit {
     constructor(private componentLoader: DynamicComponentLoader,
                 private injector: Injector,
                 private element: ElementRef,
-                private model: NgModel) {
+                @Optional() private model: NgModel) {
     }
 
 
@@ -175,7 +176,9 @@ export class Typeahead implements OnDestroy, OnInit {
        this.initObservable();
     }
 
+
     ngOnDestroy() {
+        this.destroyContainer();
         this.unsubscribe();
     }
 
@@ -217,11 +220,6 @@ export class Typeahead implements OnDestroy, OnInit {
                 this.destroyContainer();
             }
         }, 150);
-    }
-
-    @HostListener('focus')
-    onFocus() {
-        this.subscribe();
     }
 
     @HostListener('keyup', ['$event'])
@@ -298,22 +296,36 @@ export class Typeahead implements OnDestroy, OnInit {
     private onContainerCreated(componentRef: ComponentRef): ComponentRef | Promise<ComponentRef> {
         this.containerInstance = componentRef.instance;
 
-        this.containerInstance.matchSelect.subscribe(match => {  //TODO: Dispose.
+        this.containerInstance.matchSelect.subscribe(match => {
             this.destroyContainer().then( () => {
-                this.unsubscribe();
-                this.model.update.emit(match.key);
+                if (this.model) this.safeUpdateModel(match);
                 this.typeaheadMatchSelected.emit({match: match.value});
             });
         });
         return componentRef;
     }
 
+    /**
+     * Updates the model but not trigger a matching process.
+     * Updating the model using code also triggers a valueChange event, this will in turn provide
+     * a value to the observable stream thus triggering a matching proces and opening the popup.
+     * We need to unsubscribe then resubscrive when the value arrives.
+     * @param match
+     */
+    private safeUpdateModel(match) {
+        this.unsubscribe();
+        let unsubscribe = this.model.update.subscribe(() => {
+            unsubscribe.unsubscribe();
+            this.subscribe()
+        });
+        this.model.update.emit(match.key);
+    }
 
     private initObservable() {
         this.typeaheadWaitMs = (this.typeaheadWaitMs > 0) ? this.typeaheadWaitMs : 0;
         this.typeaheadMinLength = (this.typeaheadMinLength > 0) ? this.typeaheadMinLength : 0;
 
-        this.matches$ = this.model.control.valueChanges
+        this.matches$ = Observable.fromEvent(this.element.nativeElement, 'keyup', $event => $event.target.value)
             .debounceTime<string>(this.typeaheadWaitMs)
             .map(value => value.length >= this.typeaheadMinLength ? value : '')
             .distinctUntilChanged()
@@ -340,7 +352,7 @@ export class Typeahead implements OnDestroy, OnInit {
                     if (typeof this.source === 'function') { // user supplied function
                         applyFilter = false;
                         source = this.source(search); // can be observable / promise / array
-                    }  else {
+                    } else {
                         source = this.source; // user supplied observable / promise / array.
                     }
 
@@ -353,7 +365,7 @@ export class Typeahead implements OnDestroy, OnInit {
                     }
 
                     return source.map(source => {
-                        let transformed$ = transformSource(source, this.typeaheadFieldMap);
+                        let transformed$ = transformSource(<any>source, this.typeaheadFieldMap);
 
                         if (applyFilter) {
                             transformed$ = transformed$.filter(kvp => filterMatch(search, kvp.key));
@@ -367,7 +379,7 @@ export class Typeahead implements OnDestroy, OnInit {
                     });
                 }
             })
-            .do( (values) => {
+            .do( (values: any) => {
                 if (values.length && this.typeaheadShowLoading) {
                     this.createContainer()
                         .then(compRef => {
@@ -377,10 +389,13 @@ export class Typeahead implements OnDestroy, OnInit {
                         });
                 }
             });
+        this.subscribe();
     }
 
     /**
-     * Subscribes to the observable stream coming from search values to search results.
+     * Safely subscribes to model value changes streams.
+     * You can call this even if there is a registered subscription, it will not register
+     * multiple times.
      */
     private subscribe() {
         if (this.matchesSubscription && !this.matchesSubscription.isUnsubscribed) return;
@@ -401,6 +416,9 @@ export class Typeahead implements OnDestroy, OnInit {
             });
     }
 
+    /**
+     * Safely unsubscribe from model value changes.
+     */
     private unsubscribe() {
         if (this.matchesSubscription && !this.matchesSubscription.isUnsubscribed ) {
             this.matchesSubscription.unsubscribe();
