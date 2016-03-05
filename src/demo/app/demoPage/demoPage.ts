@@ -2,7 +2,7 @@ import { Component, provide, ElementRef, Injector,
     IterableDiffers, KeyValueDiffers, Renderer} from 'angular2/core';
 
 import {ModalDialogInstance, ModalConfig, Modal, ICustomModal,
-    YesNoModalContent, YesNoModal, OKOnlyContent, OKOnlyModal} from 'angular2-modal';
+    YesNoModalContent, YesNoModal} from 'angular2-modal';
 
 import {AdditionCalculateWindowData, AdditionCalculateWindow} from '../customModalDemo/customModal';
 
