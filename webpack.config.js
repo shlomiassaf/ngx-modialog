@@ -14,17 +14,11 @@ module.exports = {
 
     // Config for our build files
     output: {
-        path: root('build'),
+        path: path.resolve('./build'),
         filename: '[name].js',
         sourceMapFilename: '[name].map',
         chunkFilename: '[id].chunk.js'
     },
-
-    resolve: {
-        // ensure loader extensions match
-        extensions: ['','.ts','.js','.json', '.css', '.html']
-    },
-
     module: {
         preLoaders: [
             {
@@ -64,8 +58,11 @@ module.exports = {
         new CommonsChunkPlugin({ name: 'common', filename: 'common.js', minChunks: 2, chunks: ['app', 'vendor'] })
     ],
     resolve: {
-        extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
-        modulesDirectories: ["node_modules", "src/components"]
+        root: [
+            path.resolve('./src/demo'),
+            path.resolve('./src/components')
+        ],
+        extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js', '.json', '.css', '.html']
     },
     devServer: {
         historyApiFallback: true,
@@ -77,15 +74,3 @@ module.exports = {
         failOnHint: false
     },
 };
-
-// Helper functions
-
-function root(args) {
-    args = Array.prototype.slice.call(arguments, 0);
-    return path.join.apply(path, [__dirname].concat(args));
-}
-
-function rootNode(args) {
-    args = Array.prototype.slice.call(arguments, 0);
-    return root.apply(path, ['node_modules'].concat(args));
-}
