@@ -10,6 +10,7 @@
     "sourceMap": true
   },
   "files": [
-    "typings/browser.d.ts"
+    "typings/browser.d.ts",
+    "dist/angular2-modal.d.ts"
   ]
 }
