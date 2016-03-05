@@ -11,6 +11,7 @@
     "outDir": "../dist"
   },
   "files": [
+    "../typings/browser.d.ts",
     "../src/components/angular2-modal/angular2-modal.ts"
   ],
   "exclude": [
