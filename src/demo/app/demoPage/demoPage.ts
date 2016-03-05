@@ -48,16 +48,9 @@ export class DemoPage {
     openDialog(type: string) {
         let dialog:  Promise<ModalDialogInstance>;
         let component = (type === 'customWindow') ? AdditionCalculateWindow : YesNoModal;
-
-        // Workaround for https://github.com/angular/angular/issues/4330
-        // providing resolved providers to IterableDiffers, KeyValueDiffers & Renderer.
-        // Since customWindow uses 'ngClass' directive & 'ngClass' requires the above providers we need to supply them.
-        // One would expect angular to get them automatically but that not the case at the moment.
+        
         let bindings = Injector.resolve([
-            provide(ICustomModal, {useValue: DemoPage.modalData[type]}),
-            provide(IterableDiffers, {useValue: this.injector.get(IterableDiffers)}),
-            provide(KeyValueDiffers, {useValue: this.injector.get(KeyValueDiffers)}),
-            provide(Renderer, {useValue: this._renderer})
+            provide(ICustomModal, {useValue: DemoPage.modalData[type]})
         ]);
 
         if (type === 'inElement') {
