@@ -44,7 +44,7 @@ export class BootstrapModalContainer {
         }
     }
 
-    onContainerClick($event) {
+    onContainerClick($event: any) {
         $event.stopPropagation();
     }
 

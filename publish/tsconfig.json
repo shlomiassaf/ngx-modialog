@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
+    "noImplicitAny": true,
     "module": "commonjs",
-    "target": "ES5",
+    "target": "es5",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "sourceMap": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
     "declaration": true,
-    "noImplicitAny": false,
     "moduleResolution": "node",
-    "outDir": "../dist"
+    "outDir": "../dist/commonjs"
   },
   "files": [
     "../typings/browser.d.ts",

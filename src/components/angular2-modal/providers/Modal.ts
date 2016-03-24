@@ -43,7 +43,7 @@ export class Modal {
         // TODO: appRef.injector.get(APP_COMPONENT) Doesn't work.
         // When it does replace with the hack below.
         //let myElementRef = this.appRef.injector.get(APP_COMPONENT).location;
-        let elementRef: ElementRef = this.appRef['_rootComponents'][0].location;
+        let elementRef: ElementRef = (<any>this.appRef)._rootComponents[0].location;
 
         return this.openInside(componentType, elementRef, null, bindings, config);
     }

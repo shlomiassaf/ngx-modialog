@@ -1,5 +1,4 @@
-import { Component, provide, ElementRef, Injector,
-    IterableDiffers, KeyValueDiffers, Renderer} from 'angular2/core';
+import { Component, provide, ElementRef, Injector, Renderer} from 'angular2/core';
 
 import {ModalDialogInstance, ModalConfig, Modal, ICustomModal,
     YesNoModalContent, YesNoModal} from 'angular2-modal';
@@ -48,7 +47,6 @@ export class DemoPage {
     openDialog(type: string) {
         let dialog:  Promise<ModalDialogInstance>;
         let component = (type === 'customWindow') ? AdditionCalculateWindow : YesNoModal;
-        
         let bindings = Injector.resolve([
             provide(ICustomModal, {useValue: DemoPage.modalData[type]})
         ]);

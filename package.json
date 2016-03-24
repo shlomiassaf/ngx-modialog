@@ -1,7 +1,7 @@
 {
   "name": "angular2-modal",
   "description": "Angular2 Modal (dialog) window bootstrap style.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/shlomiassaf/angular2-modal.git"
@@ -14,18 +14,18 @@
   ],
   "author": "Shlomi Assaf",
   "license": "MIT",
-  "main": "dist/angular2-modal.js",
+  "main": "dist/commonjs/angular2-modal.js",
   "typings": "./dist/angular2-modal.d.ts",
   "homepage": "https://github.com/shlomiassaf/angular2-modal",
   "bugs": {
     "url": "https://github.com/shlomiassaf/angular2-modal/issues"
   },
   "scripts": {
-    "prepublish": "tsc --project publish"
+    "prepublish": "tsc --project publish && node make.js"
   },
   "devDependencies": {
     "angular2": "2.0.0-beta.8",
-    "zone.js": "^0.5.15",
+    "async": "^1.5.2",
     "bootstrap": "^3.3.6",
     "css-loader": "^0.23.0",
     "del": "^2.2.0",
@@ -38,6 +38,7 @@
     "json-loader": "^0.5.3",
     "raw-loader": "0.5.1",
     "style-loader": "^0.13.0",
+    "systemjs-builder": "^0.15.10",
     "ts-loader": "^0.8.1",
     "tsconfig-lint": "^0.6.0",
     "tslint": "^3.5.0 ",
@@ -46,6 +47,7 @@
     "typings": "^0.3.1",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.12.1"
+    "webpack-dev-server": "^1.12.1",
+    "zone.js": "^0.5.15"
   }
 }

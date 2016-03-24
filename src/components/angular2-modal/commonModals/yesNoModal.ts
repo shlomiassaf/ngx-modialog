@@ -43,7 +43,7 @@ export class YesNoModal implements ICustomModalComponent {
         this.context = <YesNoModalContent>modelContentData;
     }
 
-    ok($event) {
+    ok($event: any) {
         $event.stopPropagation();
         this.dialog.close(true);
     }
