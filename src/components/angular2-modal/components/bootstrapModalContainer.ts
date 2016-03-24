@@ -1,12 +1,14 @@
 import { Component } from 'angular2/core';
 
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
+import {Modal} from '../providers/Modal';
 
 /**
  * A component that acts as a top level container for an open modal window.
  */
 @Component({
     selector: 'bootstrap-modal',
+    providers: [Modal],
     host: {
         'tabindex': '0',
         'role': 'dialog',
@@ -34,7 +36,7 @@ export class BootstrapModalContainer {
     dialogInstance: ModalDialogInstance;
     public position: string;
 
-    constructor(dialogInstance: ModalDialogInstance) {
+    constructor(dialogInstance: ModalDialogInstance, private modal: Modal) {
         this.dialogInstance = dialogInstance;
 
         if (!dialogInstance.inElement) {
@@ -53,8 +55,10 @@ export class BootstrapModalContainer {
     }
 
     documentKeypress(event: KeyboardEvent) {
-        if ( this.dialogInstance.config.keyboard &&
-            (<Array<number>>this.dialogInstance.config.keyboard).indexOf(event.keyCode) > -1) {
+        // check that this modal is the last in the stack.
+        if (this.modal.stackPosition(this.dialogInstance) !== this.modal.stackLength - 1) return;
+
+        if (this.dialogInstance.config.supportsKey(event.keyCode)) {
             this.dialogInstance.dismiss();
         }
     }

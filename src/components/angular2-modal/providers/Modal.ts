@@ -7,28 +7,86 @@ import {
     provide,
     ResolvedProvider,
     Optional,
-    ApplicationRef,
-    APP_COMPONENT
+    ApplicationRef
 } from 'angular2/core';
-
-
 import {ModalConfig} from '../models/ModalConfig';
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
 import {ModalBackdrop} from '../components/modalBackdrop';
 import {BootstrapModalContainer} from '../components/bootstrapModalContainer';
 
 
-let _config: ModalConfig;
+/**
+ * A dumb stack implementation over an array.
+ */
+class ModalInstanceStack {
+    private _stack: ModalDialogInstance[] = [];
+
+
+    push(mInstance: ModalDialogInstance): void {
+        let idx = this._stack.indexOf(mInstance);
+        if (idx === -1) this._stack.push(mInstance);
+    }
+
+    /**
+     * Push a ModalDialogInstance into the stack and manage it so when it's done
+     * it will automatically kick itself out of the stack.
+     * @param mInstance
+     */
+    pushManaged(mInstance: ModalDialogInstance): void {
+        this.push(mInstance);
+        mInstance.result
+            .then(() => this.remove(mInstance))
+            .catch(() => this.remove(mInstance));
+        // we don't "pop" because we can't know for sure that our instance is the last.
+        // In a user event world it will be the last, but since modals can close programmatically
+        // we can't tell.
+    }
+
+    pop(): void {
+        this._stack.pop();
+    }
+
+    /**
+     * Remove a ModalDialogInstance from the stack.
+     * @param mInstance
+     */
+    remove(mInstance: ModalDialogInstance): void {
+        let idx = this._stack.indexOf(mInstance);
+        if (idx > -1) this._stack.splice(idx, 1);
+    }
+
+
+    index(index: number): ModalDialogInstance {
+        return this._stack[index];
+    }
+
+    indexOf(mInstance: ModalDialogInstance): number {
+        return this._stack.indexOf(mInstance);
+    }
+
+    get length(): number {
+        return this._stack.length;
+    }
+}
+const _stack = new ModalInstanceStack();
 
 @Injectable()
 export class Modal {
+    private config: ModalConfig;
+
     constructor(private componentLoader: DynamicComponentLoader, private appRef: ApplicationRef,
                 @Optional() defaultConfig: ModalConfig) {
         // The Modal class should be an application wide service (i.e: singleton).
         // This will run once in most applications...
         // If the user provides a ModalConfig instance to the DI,
         // the custom config will be the default one.
-        _config = (defaultConfig) ? ModalConfig.makeValid(defaultConfig) : new ModalConfig();
+
+        Object.defineProperty(this, 'config', <any>{
+            configurable: false,
+            enumerable: true,
+            value: (defaultConfig) ? ModalConfig.makeValid(defaultConfig) : new ModalConfig(),
+            writable: false
+        });
     }
 
     /**
@@ -61,7 +119,7 @@ export class Modal {
                       anchorName: string, bindings: ResolvedProvider[],
                       config?: ModalConfig): Promise<ModalDialogInstance> {
 
-        config = (config) ? ModalConfig.makeValid(config, _config) : _config;
+        config = (config) ? ModalConfig.makeValid(config, this.config) : this.config;
 
         let dialog = new ModalDialogInstance(config);
         dialog.inElement = !!anchorName;
@@ -80,13 +138,21 @@ export class Modal {
                         return this.componentLoader.loadIntoLocation(
                             componentType, bootstrapRef.location, 'modalDialog', modalDataBindings)
                             .then(contentRef => {
-                                    dialog.contentRef = contentRef;
-                                    return dialog;
-                                }
-                            );
+                                dialog.contentRef = contentRef;
+                                _stack.pushManaged(dialog);
+                                return dialog;
+                            });
                         }
                     );
             });
+    }
+
+    stackPosition(mInstande: ModalDialogInstance) {
+        return _stack.indexOf(mInstande);
+    }
+
+    get stackLength(): number {
+        return _stack.length;
     }
 
     /**

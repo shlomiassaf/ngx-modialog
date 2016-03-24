@@ -31,6 +31,7 @@ export class ModalConfig {
      */
     keyboard: Array<number> | number;
 
+
     constructor(size: string = null, isBlocking: boolean = null,
                 keyboard: Array<number> | number = undefined) {
         this.size = size;
@@ -53,20 +54,25 @@ export class ModalConfig {
         if (config.isBlocking !== false)
             config.isBlocking = true;
 
-        if (config.keyboard !== null) {
-            if (Array.isArray(<Array<number>>config.keyboard)) {
-                config.keyboard = (<Array<number>>config.keyboard).length === 0
-                    ? defaultConfig.keyboard : config.keyboard;
-            } else if (!isNaN(<number>config.keyboard)) {
-                config.keyboard = [<number>config.keyboard];
-            } else {
-                config.keyboard = defaultConfig.keyboard;
-            }
+        if (config.keyboard === null) {
+            config.keyboard = [];
+        } else if (typeof config.keyboard === 'number') {
+            config.keyboard = [<number>config.keyboard];
+        } else if (!Array.isArray(<Array<number>>config.keyboard)) {
+            config.keyboard = defaultConfig.keyboard;
         }
 
         return config;
     }
 
+    /**
+     * Returns true if the config instance supports a given key.
+     * @param key
+     * @returns {boolean}
+     */
+    supportsKey(keyCode: number): boolean {
+        return (<Array<number>>this.keyboard).indexOf(keyCode) > -1;
+    }
 }
 
 _defaultConfig = new ModalConfig('lg', true, [27]);
