@@ -13,7 +13,9 @@ export class YesNoModalContent {
         public title: string = 'Hello World Title',
         public body: string = 'Hello World Body!',
         public hideNo: boolean = false,
+        public yesClass: string = 'btn-primary',
         public yesText: string = 'YES',
+        public noClass: string = 'btn-warning',
         public noText: string = 'NO'
     ) {}
 }
@@ -30,8 +32,8 @@ export class YesNoModalContent {
         </div>
         <div class="modal-body" [innerHtml]="context.body"></div>
         <div class="modal-footer">
-            <button class="btn btn-primary" (click)="ok($event)">{{context.yesText}}</button>
-            <button *ngIf="!context.hideNo" class="btn btn-warning" (click)="cancel()">{{context.noText}}</button>
+            <button class="btn" [ngClass]="[context.yesClass]" (click)="ok($event)">{{context.yesText}}</button>
+            <button *ngIf="!context.hideNo" class="btn" [ngClass]="[context.noClass]" (click)="cancel()">{{context.noText}}</button>
         </div>`
 })
 export class YesNoModal implements ICustomModalComponent {

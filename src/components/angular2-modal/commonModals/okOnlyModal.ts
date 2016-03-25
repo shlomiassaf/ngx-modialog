@@ -10,7 +10,8 @@ export class OKOnlyContent {
     constructor(
         public title: string = 'Hello World Title',
         public body: string = 'Hello World Body!',
-        public okText: string = 'OK'
+        public okText: string = 'OK',
+        public okClass: string = 'btn-primary'
     ) {}
 }
 
@@ -25,7 +26,7 @@ export class OKOnlyContent {
         </div>
         <div class="modal-body" [innerHtml]="context.body"></div>
         <div class="modal-footer">
-            <button class="btn btn-primary" (click)="ok()">{{context.okText}}</button>
+            <button class="btn" [ngClass]="[context.okClass]" (click)="ok()">{{context.okText}}</button>
         </div>`
 })
 export class OKOnlyModal implements ICustomModalComponent {
