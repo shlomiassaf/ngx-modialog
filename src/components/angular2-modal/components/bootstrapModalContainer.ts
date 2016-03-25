@@ -1,5 +1,4 @@
 import { Component } from 'angular2/core';
-
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
 import {Modal} from '../providers/Modal';
 
@@ -38,7 +37,6 @@ export class BootstrapModalContainer {
 
     constructor(dialogInstance: ModalDialogInstance, private modal: Modal) {
         this.dialogInstance = dialogInstance;
-
         if (!dialogInstance.inElement) {
             this.position = null;
         } else {

@@ -24,7 +24,17 @@ module.exports = {
             {
                 test: /\.ts$/,
                 loader: 'tslint-loader',
-                exclude: [/node_modules/] }
+                exclude: [/node_modules/] 
+            },
+            {
+                test: /\.js$/,
+                include: [
+                path.resolve(__dirname, "node_modules", "angular2")
+                  // Add more as needed or replace to include all modules:
+                  //path.resolve(__dirname, "node_modules2")
+                    ],
+                loader: "source-map-loader"
+          }
         ],
         loaders: [
             {

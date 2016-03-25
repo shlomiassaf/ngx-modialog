@@ -13,6 +13,7 @@ import {ModalConfig} from '../models/ModalConfig';
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
 import {ModalBackdrop} from '../components/modalBackdrop';
 import {BootstrapModalContainer} from '../components/bootstrapModalContainer';
+import { DOM } from 'angular2/src/platform/dom/dom_adapter';
 
 
 /**
@@ -25,6 +26,18 @@ class ModalInstanceStack {
     push(mInstance: ModalDialogInstance): void {
         let idx = this._stack.indexOf(mInstance);
         if (idx === -1) this._stack.push(mInstance);
+
+        /* TODO: this is wrong for several reasons:
+            1) This is a direct DOM access we need to find another way or to separate it.
+            2) It not the place for it.
+            3) It doesn't care if its a modal inside an element or a wide open one.
+               If its inside an element we need to add the 'modal-open' to that element.
+               If its wide open we add to the body, we need to traverse the stack every time
+               know what's going on and do it.
+         */
+        if (this._stack.length === 1) {
+            DOM.addClass(DOM.query('body'), 'modal-open');
+        }
     }
 
     /**
@@ -53,6 +66,9 @@ class ModalInstanceStack {
     remove(mInstance: ModalDialogInstance): void {
         let idx = this._stack.indexOf(mInstance);
         if (idx > -1) this._stack.splice(idx, 1);
+        if (this._stack.length === 0) {
+            DOM.removeClass(DOM.query('body'), 'modal-open');
+        }
     }
 
 
