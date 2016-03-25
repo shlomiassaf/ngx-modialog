@@ -21,9 +21,9 @@ export class OKOnlyContent {
     selector: 'modal-content',
     template:
     `<div class="modal-header">
-        <h3 class="modal-title">{{context.title}}</h3>
+        <h3 class="modal-title" [innerHtml]="context.title"></h3>
         </div>
-        <div class="modal-body">{{context.body}}</div>
+        <div class="modal-body" [innerHtml]="context.body"></div>
         <div class="modal-footer">
             <button class="btn btn-primary" (click)="ok()">{{context.okText}}</button>
         </div>`
