@@ -4,14 +4,11 @@
     <br>
     <div class="row">
         <div class="col-xs-12">
-            <button class="btn btn-default" (click)="openDialog('large')">Large Modal</button>
-            <button class="btn btn-default" (click)="openDialog('small')">Small Modal</button>
-            <button class="btn btn-default" (click)="openDialog('yesno')">Custom Buttons Modal</button>
-            <button class="btn btn-default" (click)="openDialog('key')">Keyboard quit</button>
-            <button class="btn btn-default" (click)="openDialog('blocking')">Blocking Modal</button>
-            <button class="btn btn-default" (click)="openDialog('blocking'); openDialog('small'); openDialog('large')">Cascading</button>
-            <button class="btn btn-default" (click)="openDialog('inElement')">In Element Modal</button>
-            <button class="btn btn-default" (click)="openDialog('customWindow')">Custom Window</button>
+            <button *ngFor="#btn of buttons;"
+                    class="btn btn-default"
+                    (click)="open(btn)">{{btn.text}}</button>
+            <button class="btn btn-default" (click)="openCustomModal()">Custom Modal</button>
+            <a [routerLink]="['CustomizeModals']">Or use the modal code Generator!</a>
         </div>
     </div>
     <br><br><br><br>

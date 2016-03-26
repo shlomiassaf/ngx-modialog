@@ -6,7 +6,7 @@ import {ICustomModal, ICustomModalComponent} from '../models/ICustomModal';
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
 
 /**
- * Data definition
+ * @deprecated
  */
 export class YesNoModalContent {
     constructor(
@@ -19,7 +19,7 @@ export class YesNoModalContent {
 }
 
 /**
- * A 2 state bootstrap modal window, representing 2 possible answer, true/false.
+ * @deprecated
  */
 @Component({
     selector: 'modal-content',
@@ -41,6 +41,9 @@ export class YesNoModal implements ICustomModalComponent {
     constructor(dialog: ModalDialogInstance, modelContentData: ICustomModal) {
         this.dialog = dialog;
         this.context = <YesNoModalContent>modelContentData;
+        console.warn('DEPRECATED: YesNoModal will not be available in next version of ' +
+            'angular2-modal, please move to the preset API.')
+
     }
 
     ok($event: any) {

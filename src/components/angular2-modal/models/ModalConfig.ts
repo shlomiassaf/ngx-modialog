@@ -1,13 +1,37 @@
 import {Injectable} from 'angular2/core';
 let _defaultConfig: ModalConfig;
 
+export interface IModalConfig {
+    /**
+     * Size of the modal.
+     * 'lg' or 'sm' only.
+     * NOTE: No validation.
+     * Default to 'lg'
+     */
+    size: string;
+
+    /**
+     * Describes if the modal is blocking modal.
+     * A Blocking modal is not closable by clicking outside of the modal window.
+     * Defaults to false.
+     */
+    isBlocking: boolean;
+
+    /**
+     * Keyboard value/s that close the modal.
+     * Accepts either a single numeric value or an array of numeric values.
+     * A modal closed by a keyboard stroke will result in a 'reject' notification from the promise.
+     * Defaults to 27, set `null` implicitly to disable.
+     */
+    keyboard: Array<number> | number;
+}
 
 /**
  * A configuration definition object.
  * Instruction for how to show a modal.
  */
 @Injectable()
-export class ModalConfig {
+export class ModalConfig implements IModalConfig {
     /**
      * Size of the modal.
      * 'lg' or 'sm' only.
