@@ -8,6 +8,8 @@
 
 ## Features:  
 
+  - Easy to use API via Fluent API Presets (alert, propmt, confirm
+  - Easily add your own Presets.
   - Bootstrap model size configurable.  
   - Select cancel/quit key.  
   - Cascading.  
@@ -15,7 +17,7 @@
   - Blocking / Non blocking modal.  
   - Modal as a component, replace the content by supplying a custom component.  
   
-Click for the [Demo](http://shlomiassaf.github.io/angular2-modal/)  
+Click for the [Demo](http://shlomiassaf.github.io/angular2-modal/) Make sure to check the [code generator!](http://shlomiassaf.github.io/angular2-modal#/customizeModals)  
 If you're looking for a SystemJS demo, please see [this plunker](http://plnkr.co/edit/FnGdwU)  
 Click for the auto generated [Docs](http://shlomiassaf.github.io/angular2-modal/docs)   
 

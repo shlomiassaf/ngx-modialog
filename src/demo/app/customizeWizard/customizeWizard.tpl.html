@@ -1,0 +1,172 @@
+<div class="container-fluid">
+    <h1>Customize A modal window</h1>
+    <p class="lead">Configure a modal, see the code and view the output!</p>
+    <hr>
+    <div class="col-md-6">
+        <div class="col-xs-6">
+            <h3>Configuration:</h3>
+        </div>
+        <div class="col-xs-6 col-md-4">
+            <button class="btn btn-success pull-right" (click)="createModal()">Open Modal</button>
+        </div>
+        <div class="col-xs-12">
+            <form class="form-horizontal" #form="ngForm" (ngSubmit)="logForm(form.value)">
+                <fieldset>
+
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="modalType">Type</label>
+                        <div class="col-md-6">
+                            <select id="modalType" name="modalType" class="form-control"
+                                    [(ngModel)]="type">
+                                <option value="alert">Alert</option>
+                                <option value="prompt">Prompt</option>
+                                <option value="confirm">Confirm</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="modalSize">Modal Size</label>
+                        <div class="col-md-6">
+                            <select id="modalSize" name="modalSize" class="form-control"
+                                    [(ngModel)]="preset.size">
+                                <option value="sm">Small</option>
+                                <option value="lg">Large</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <!-- Multiple Checkboxes (inline) -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="checkbox">Blocking?</label>
+                        <div class="col-md-6">
+                            <input type="checkbox" name="checkbox" id="checkbox"
+                                   [(ngModel)]="preset.isBlocking">
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="closeKeys">Close Key</label>
+                        <div class="col-md-6">
+                            <input id="closeKeys" name="closeKeys" type="number" placeholder="27"
+                                   class="form-control input-md" [(ngModel)]="preset.keyboard">
+                            <span class="help-block">Key code for closing the window (e.g: 27 for ESC)</span>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="headerClass">Header Class</label>
+                        <div class="col-md-6">
+                            <input id="headerClass" name="headerClass" type="text"
+                                   placeholder="modal-header" class="form-control input-md"
+                                   [(ngModel)]="preset.headerClass">
+                            <span class="help-block"> A Class for the header (title) container.  Default: modal-header</span>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="title">Title</label>
+                        <div class="col-md-6">
+                            <input id="title" name="title" type="text" placeholder="This is a title"
+                                   class="form-control input-md" [(ngModel)]="preset.title">
+                            <span class="help-block">Caption for the title, enclosed in a H3 container.</span>
+                        </div>
+                    </div>
+
+                    <!-- Textarea -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="titleHtml">Title (HTML)</label>
+                        <div class="col-md-6">
+                        <textarea class="form-control" id="titleHtml" name="titleHtml"
+                                  [(ngModel)]="preset.titleHtml"></textarea>
+                        </div>
+                        <p class="help-block">An HTML (not compiled) body, if set Title is ignored.</p>
+                    </div>
+
+                    <!-- Textarea -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="body">Body</label>
+                        <div class="col-md-4">
+                        <textarea class="form-control" id="body" name="body"
+                                  [(ngModel)]="preset.body"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="bodyClass">Body Class</label>
+                        <div class="col-md-6">
+                            <input id="bodyClass" name="bodyClass" type="text" placeholder="modal-body"
+                                   class="form-control input-md" [(ngModel)]="preset.bodyClass">
+                            <span class="help-block">A Class for the body container. Default: modal-body</span>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="footerClass">Footer Class</label>
+                        <div class="col-md-6">
+                            <input id="footerClass" name="footerClass" type="text"
+                                   placeholder="modal-footer" class="form-control input-md"
+                                   [(ngModel)]="preset.footerClass">
+                            <span class="help-block">A Class for the footer container. Default: modal-footer</span>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="okBtn">OK Button Text</label>
+                        <div class="col-md-6">
+                            <input id="okBtn" name="okBtn" type="text" placeholder="OK"
+                                   class="form-control input-md"
+                                   [(ngModel)]="preset.okBtn">
+                            <span class="help-block">Caption for the OK button. Default: OK</span>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="okBtnClass">OK Button Class</label>
+                        <div class="col-md-6">
+                            <input id="okBtnClass" name="okBtnClass" type="text"
+                                   placeholder="btn btn-primary" class="form-control input-md"
+                                   [(ngModel)]="preset.okBtnClass">
+                            <span class="help-block">A Class for the OK button. Default: btn btn-primary</span>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" *ngIf="type === 'confirm'">
+                        <label class="col-md-4 control-label" for="cancelBtn">Cancel Button Text</label>
+                        <div class="col-md-6">
+                            <input id="cancelBtn" name="cancelBtn" type="text" placeholder="Cancel"
+                                   class="form-control input-md" [(ngModel)]="preset.cancelBtn">
+                            <span class="help-block">Caption for the Cancel button. Default: Cancel</span>
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group" *ngIf="type === 'confirm'">
+                        <label class="col-md-4 control-label" for="cancelBtnClass">Cancel Button Class</label>
+                        <div class="col-md-6">
+                            <input id="cancelBtnClass" name="cancelBtnClass" type="text"
+                                   placeholder="btn btn-default" class="form-control input-md"
+                                   [(ngModel)]="preset.cancelBtnClass">
+                            <span class="help-block">A Class for the Cancel button. Default: btn btn-default</span>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h3>Code:</h3>
+        <pre>{{code}}</pre>
+    </div>
+</div>
