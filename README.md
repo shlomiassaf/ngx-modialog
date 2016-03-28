@@ -1,4 +1,7 @@
-# Angular 2: Bootstrap Modal/Dialog window.
+# Angular 2: Modal/Dialog window (with Bootstrap presets).
+
+A fully generic, customizable and fluent modal window implementation for Angular 2 with built in Bootstrap support.  
+Generic means it can support any CSS framework or be a standalone, supply a Component, replace some Tokens and add some presets (optional) and you have an identical fluent API modal for your framework of choice.
 
 >**DISCLAIMER**  
 >
@@ -8,14 +11,16 @@
 
 ## Features:  
 
-  - Easy to use API via Fluent API Presets (alert, propmt, confirm
-  - Easily add your own Presets.
-  - Bootstrap model size configurable.  
+  - Easy to use API via Fluent API Presets (alert, propmt, confirm)
+  - Fully customizable.
+  - Easily add your own Presets.  
   - Select cancel/quit key.  
   - Cascading.  
   - Element blocking.  
   - Blocking / Non blocking modal.  
-  - Modal as a component, replace the content by supplying a custom component.  
+  - Modal as a component, replace the content by supplying a custom component.
+  - Built-in bootstrap implementation.
+  - Bootstrap model size configurable.
   
 
 That's how easy it is:  
