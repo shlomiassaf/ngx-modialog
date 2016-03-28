@@ -17,6 +17,16 @@
   - Blocking / Non blocking modal.  
   - Modal as a component, replace the content by supplying a custom component.  
   
+
+That's how easy it is:  
+```
+modal.alert()
+    .title('Hello World')
+    .body('In Angular 2')
+    .open();
+```
+
+
 Click for the [Demo](http://shlomiassaf.github.io/angular2-modal/) Make sure to check the [code generator!](http://shlomiassaf.github.io/angular2-modal#/customizeModals)  
 If you're looking for a SystemJS demo, please see [this plunker](http://plnkr.co/edit/FnGdwU)  
 Click for the auto generated [Docs](http://shlomiassaf.github.io/angular2-modal/docs)   
