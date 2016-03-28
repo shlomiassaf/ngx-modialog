@@ -9,6 +9,7 @@ module.exports = {
 
     entry: {
         'vendor': './src/demo/vendor.ts',
+        'angular2-modal': './angular2-modal.ts',
         'app': './src/demo/bootstrap.ts' // our angular app
     },
 
