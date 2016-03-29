@@ -19,9 +19,9 @@ import {Modal} from '../providers/Modal';
     },
     /* tslint:disable */
     template:
-    `<div class="modal-dialog"
-         [class.modal-lg]="dialogInstance.config.size == \'lg\'"
-         [class.modal-sm]="dialogInstance.config.size == \'sm\'">
+    `<div [ngClass]="dialogInstance.config.dialogClass"
+          [class.modal-lg]="dialogInstance.config.size == \'lg\'"
+          [class.modal-sm]="dialogInstance.config.size == \'sm\'">
          <div class="modal-content" (click)="onContainerClick($event)" style="display: block">
             <div style="display: none" #modalDialog></div>
          </div>

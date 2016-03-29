@@ -15,6 +15,7 @@ export class CustomizeWizard {
         size: 'lg',
         isBlocking: true,
         keyboard: 27,
+        dialogClass: '',
         headerClass: '',
         title: 'Hello World',
         titleHtml: '',

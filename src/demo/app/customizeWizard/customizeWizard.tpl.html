@@ -37,7 +37,6 @@
                         </div>
                     </div>
 
-
                     <!-- Multiple Checkboxes (inline) -->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="checkbox">Blocking?</label>
@@ -54,6 +53,16 @@
                             <input id="closeKeys" name="closeKeys" type="number" placeholder="27"
                                    class="form-control input-md" [(ngModel)]="preset.keyboard">
                             <span class="help-block">Key code for closing the window (e.g: 27 for ESC)</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="dialogClass">Dialog Class</label>
+                        <div class="col-md-6">
+                            <input id="dialogClass" name="dialogClass" type="text"
+                                   placeholder="modal-dialog"  class="form-control input-md"
+                                   [(ngModel)]="preset.dialogClass">
+                            <span class="help-block">A Class for the dialog container.  Default: modal-dialog</span>
                         </div>
                     </div>
 

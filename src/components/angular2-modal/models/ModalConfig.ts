@@ -1,6 +1,9 @@
 import {Injectable} from 'angular2/core';
 let _defaultConfig: ModalConfig;
 
+export type BootstrapModalSize = 'sm' | 'lg';
+
+// TODO: Move bootstrap specific settings (size) to a derived interface
 export interface IModalConfig {
     /**
      * Size of the modal.
@@ -8,7 +11,7 @@ export interface IModalConfig {
      * NOTE: No validation.
      * Default to 'lg'
      */
-    size: string;
+    size: BootstrapModalSize;
 
     /**
      * Describes if the modal is blocking modal.
@@ -24,6 +27,12 @@ export interface IModalConfig {
      * Defaults to 27, set `null` implicitly to disable.
      */
     keyboard: Array<number> | number;
+
+    /**
+     * A Class for the modal dialog container.
+     * Default: modal-dialog
+     */
+    dialogClass: string;
 }
 
 /**
@@ -38,7 +47,13 @@ export class ModalConfig implements IModalConfig {
      * NOTE: No validation.
      * Default to 'lg'
      */
-    size: string;
+    size: BootstrapModalSize;
+
+    /**
+     * A Class for the modal dialog container.
+     * Default: modal-dialog
+     */
+    dialogClass: string;
 
     /**
      * Describes if the modal is blocking modal.
@@ -55,12 +70,15 @@ export class ModalConfig implements IModalConfig {
      */
     keyboard: Array<number> | number;
 
-
-    constructor(size: string = null, isBlocking: boolean = null,
-                keyboard: Array<number> | number = undefined) {
+    //TODO: Change size to defined type
+    constructor(size: BootstrapModalSize = undefined,
+                isBlocking: boolean = null,
+                keyboard: Array<number> | number = undefined,
+                dialogClass: string = undefined) {
         this.size = size;
         this.isBlocking = isBlocking;
         this.keyboard = keyboard;
+        this.dialogClass = dialogClass;
     }
 
     /**
@@ -86,6 +104,10 @@ export class ModalConfig implements IModalConfig {
             config.keyboard = defaultConfig.keyboard;
         }
 
+        if (!config.dialogClass) {
+            config.dialogClass = defaultConfig.dialogClass;
+        }
+
         return config;
     }
 
@@ -99,4 +121,4 @@ export class ModalConfig implements IModalConfig {
     }
 }
 
-_defaultConfig = new ModalConfig('lg', true, [27]);
+_defaultConfig = new ModalConfig('lg', true, [27], 'modal-dialog');

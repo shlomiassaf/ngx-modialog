@@ -17,6 +17,7 @@ export interface ModalButtonConfig {
  * Data definition
  */
 export class MessageModalContext implements ICustomModal {
+
     /**
      * A Class for the header (title) container.
      * Default: modal-header
@@ -45,6 +46,7 @@ export class MessageModalContext implements ICustomModal {
      * Note: HTML is not compiled.
      */
     body: string;
+
     /**
      * A Class for the body container.
      * Default: modal-body

@@ -1,6 +1,6 @@
 import { ResolvedProvider, ElementRef } from 'angular2/core';
 import {Modal} from '../../providers/Modal';
-import {IModalConfig, ModalConfig} from '../../models/ModalConfig';
+import {IModalConfig, ModalConfig, BootstrapModalSize} from '../../models/ModalConfig';
 import {FluentAssign, FluentAssignMethod, setAssignMethod} from './../../framework/FluentAssign';
 import {ModalDialogInstance} from '../../models/ModalDialogInstance';
 
@@ -33,11 +33,34 @@ export class ModalAwarePreset<T extends ModalAwarePresetData> extends FluentAssi
         setAssignMethod(this, 'size');
         setAssignMethod(this, 'isBlocking');
         setAssignMethod(this, 'keyboard');
+        setAssignMethod(this, 'dialogClass');
     }
 
+    /**
+     * Size of the modal.
+     * 'lg' or 'sm' only.
+     * NOTE: No validation.
+     * Default to 'lg'
+     */
     size: FluentAssignMethod<string, this>;
+    /**
+     * Describes if the modal is blocking modal.
+     * A Blocking modal is not closable by clicking outside of the modal window.
+     * Defaults to false.
+     */
     isBlocking: FluentAssignMethod<boolean, this>;
+    /**
+     * Keyboard value/s that close the modal.
+     * Accepts either a single numeric value or an array of numeric values.
+     * A modal closed by a keyboard stroke will result in a 'reject' notification from the promise.
+     * Defaults to 27, set `null` implicitly to disable.
+     */
     keyboard: FluentAssignMethod<Array<number> | number, this>;
+    /**
+     * A Class for the modal dialog container.
+     * Default: modal-dialog
+     */
+    dialogClass: FluentAssignMethod<BootstrapModalSize, this>;
 
     /**
      * Open a modal window based on the configuration of this config instance.
@@ -65,7 +88,10 @@ export class ModalAwarePreset<T extends ModalAwarePresetData> extends FluentAssi
         } else {
             return config.modal.open(config.component,
                 config.bindings(config),
-                new ModalConfig(config.size, config.isBlocking, config.keyboard));
+                new ModalConfig(config.size,
+                    config.isBlocking,
+                    config.keyboard,
+                    config.dialogClass));
         }
     }
 }
