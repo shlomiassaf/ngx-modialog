@@ -65,7 +65,8 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="angular-2-bootstrap-modal-dialog-window-">Angular 2: Bootstrap Modal/Dialog window.</h1>
+				<h1 id="angular-2-modal-dialog-window-with-bootstrap-presets-">Angular 2: Modal/Dialog window (with Bootstrap presets).</h1>
+				<p>A fully generic, customizable and fluent modal window implementation for Angular 2 with built in Bootstrap support.<br>Generic means it can support any CSS framework or be a standalone, supply a Component, replace some Tokens and add some presets (optional) and you have an identical fluent API modal for your framework of choice.</p>
 				<blockquote>
 					<p><strong>DISCLAIMER</strong>  </p>
 					<p>Angular 2 is still in the works. The core concepts are solid, but the API may change. If you find that a code snippet that does not work, please message me, and I will update.</p>
@@ -73,24 +74,64 @@
 				<h2 id="built-with-angular-2-beta">Built with angular 2 Beta</h2>
 				<h2 id="features-">Features:</h2>
 				<ul>
-					<li>Bootstrap model size configurable.  </li>
+					<li>Easy to use API via Fluent API Presets (alert, propmt, confirm)</li>
+					<li>Fully customizable.</li>
+					<li>Easily add your own Presets.  </li>
 					<li>Select cancel/quit key.  </li>
 					<li>Cascading.  </li>
 					<li>Element blocking.  </li>
 					<li>Blocking / Non blocking modal.  </li>
-					<li>Modal as a component, replace the content by supplying a custom component.  </li>
+					<li>Modal as a component, replace the content by supplying a custom component.</li>
+					<li>Built-in bootstrap implementation.</li>
+					<li>Bootstrap model size configurable.</li>
 				</ul>
-				<p>Click for the <a href="http://shlomiassaf.github.io/angular2-modal/">Demo</a></p>
+				<p>That&#39;s how easy it is:  </p>
+				<pre><code>modal.alert()
+    .title(<span class="hljs-attribute">'Hello</span> World')
+    .<span class="hljs-keyword">body</span>(<span class="hljs-attribute">'In</span> Angular <span class="hljs-number">2</span>')
+    .<span class="hljs-keyword">open</span>();
+</code></pre><p>Click for the <a href="http://shlomiassaf.github.io/angular2-modal/">Demo</a> Make sure to check the <a href="http://shlomiassaf.github.io/angular2-modal#/customizeModals">code generator!</a><br>If you&#39;re looking for a SystemJS demo, please see <a href="http://plnkr.co/edit/FnGdwU">this plunker</a><br>Click for the auto generated <a href="http://shlomiassaf.github.io/angular2-modal/docs">Docs</a>   </p>
+				<p><img src="/preview.png" alt="Code Generator!"></p>
 				<h3 id="blog-post-will-be-up-soon-look-for-it-in-my-blog-http-blog-assaf-co-">Blog post will be up soon! look for it in my <a href="http://blog.assaf.co/">Blog</a></h3>
 				<p>See <a href="https://github.com/shlomiassaf/angular2-modal/tree/master/src/demo">src/demo</a> for demo app with examples.</p>
 				<p>Will try to add documented examples if time allows.</p>
-				<h2 id="running-locally">Running locally</h2>
+				<h2 id="-known-issue-di-exception-"><del>Known issue - DI exception:</del></h2>
+				<p>Issues fixed in angular2.0-beta.6</p>
+				<p><del>If you encounter a version of the following exception:</del></p>
+				<pre><code><span class="hljs-constant">EXCEPTION:</span> <span class="hljs-constant">No </span>provider <span class="hljs-keyword">for</span> <span class="hljs-constant">XXXXX!</span> (<span class="hljs-constant">YYYYY </span>-&gt; <span class="hljs-constant">XXXXX)</span>
+</code></pre><p><del>Where YYYYY will usually be a directive you&#39;ve injected to a custom modal component you&#39;ve built.</del></p>
+				<p><del>This is an error raised by angular core because it can&#39;t find a resolved providers for injectable tokens request by</del>
+					<del>the directive/s you want to use within your component.</del>
+					<del>These providers are common runtime objects that angular should know how to fetch, even if not defined.</del>
+				<del>There is a bug opend here <a href="https://github.com/angular/angular/issues/4330">angular/angular#4330</a>.</del></p>
+				<p><del>To workaround this issue supply these values in the resolved bindings array sent as a parameter ~~
+				~~to &quot;open&quot; or &quot;openInside&quot; calls.</del></p>
+				<pre><code><span class="hljs-keyword">let</span> bindings = Injector.resolve([
+            provide(IterableDiffers, {useValue: <span class="hljs-keyword">this</span>.injector.<span class="hljs-keyword">get</span>(IterableDiffers)}),
+            provide(KeyValueDiffers, {useValue: <span class="hljs-keyword">this</span>.injector.<span class="hljs-keyword">get</span>(KeyValueDiffers)}),
+            provide(Renderer, {useValue: <span class="hljs-keyword">this</span>.injector.<span class="hljs-keyword">get</span>(Renderer)})
+        ]);
+
+<span class="hljs-keyword">let</span> dialog = modal.openInside(..., ..., ..., bindings, ...);
+</code></pre><p><del>click for <a href="https://github.com/shlomiassaf/angular2-modal/blob/master/src/demo/app/demoPage/demoPage.ts#L58-L63">example</a></del></p>
+				<p><del>Another workaround that might work is to supply the resolved providers as part of the bootstrap process. ~~
+					~~I&#39;m not sure it will work as it depends on the life cycle logic of the injected values which I don&#39;t know deeply enough.</del>
+				<del>If you got it to work let me know.</del></p>
+				<h2 id="installation">Installation</h2>
+				<pre><code>    npm <span class="hljs-operator"><span class="hljs-keyword">install</span> angular2-modal <span class="hljs-comment">--save</span></span>
+</code></pre><h2 id="running-locally">Running locally</h2>
 				<pre><code>git clone https://github.com/shlomiassaf/angular2-modal.git
 npm <span class="hljs-operator"><span class="hljs-keyword">install</span>  
 typings <span class="hljs-keyword">install</span>  
 webpack-dev-<span class="hljs-keyword">server</span> // development, webpack -<span class="hljs-keyword">p</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">build</span>.  
 browse <span class="hljs-keyword">to</span> localhost:<span class="hljs-number">3000</span>  </span>
 </code></pre><p>You can apply custom modals based on components.</p>
+				<h2 id="publishing">Publishing</h2>
+				<p>Publishing is done using the TypeScript compiler directly (no webpack)
+					The process involves compiling into a directory called <code>dist</code>
+					Webpack is using the <code>build</code> directory.
+					Since I didn&#39;t find a way to instruct <code>tsc</code> what config file to use (i.e: a different tsconfig.json)
+				I created a <code>publish</code> directory instead and set the <code>--project</code> argument accordingly.</p>
 				<h1 id="issues-and-todo-s">Issues and TODO&#39;s</h1>
 				<h2 id="animation">Animation</h2>
 				<p>Not so complicated but not in angular 2 at the moment.</p>
@@ -117,28 +158,88 @@ browse <span class="hljs-keyword">to</span> localhost:<span class="hljs-number">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_commonmodals_okonlymodal_.html">"common<wbr>Modals/ok<wbr>Only<wbr>Modal"</a>
+						<a href="modules/_components_angular2_modal_angular2_modal_.html">"components/angular2-<wbr>modal/angular2-<wbr>modal"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_commonmodals_yesnomodal_.html">"common<wbr>Modals/yes<wbr>NoModal"</a>
+						<a href="modules/_components_angular2_modal_commonmodals_okonlymodal_.html">"components/angular2-<wbr>modal/common<wbr>Modals/ok<wbr>Only<wbr>Modal"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_components_bootstrapmodalcontainer_.html">"components/bootstrap<wbr>Modal<wbr>Container"</a>
+						<a href="modules/_components_angular2_modal_commonmodals_yesnomodal_.html">"components/angular2-<wbr>modal/common<wbr>Modals/yes<wbr>NoModal"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_components_modalbackdrop_.html">"components/modal<wbr>Backdrop"</a>
+						<a href="modules/_components_angular2_modal_components_bootstrapmodalcontainer_.html">"components/angular2-<wbr>modal/components/bootstrap<wbr>Modal<wbr>Container"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_models_icustommodal_.html">"models/ICustom<wbr>Modal"</a>
+						<a href="modules/_components_angular2_modal_components_modalbackdrop_.html">"components/angular2-<wbr>modal/components/modal<wbr>Backdrop"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_models_modalconfig_.html">"models/<wbr>Modal<wbr>Config"</a>
+						<a href="modules/_components_angular2_modal_components_modalfooter_.html">"components/angular2-<wbr>modal/components/modal<wbr>Footer"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_models_modaldialoginstance_.html">"models/<wbr>Modal<wbr>Dialog<wbr>Instance"</a>
+						<a href="modules/_components_angular2_modal_framework_fluentassign_.html">"components/angular2-<wbr>modal/framework/<wbr>Fluent<wbr>Assign"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_providers_modal_.html">"providers/<wbr>Modal"</a>
+						<a href="modules/_components_angular2_modal_framework_modalinstancestack_.html">"components/angular2-<wbr>modal/framework/<wbr>Modal<wbr>Instance<wbr>Stack"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_angular2_modal_framework_utils_.html">"components/angular2-<wbr>modal/framework/<wbr>Utils"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_angular2_modal_index_.html">"components/angular2-<wbr>modal/index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_angular2_modal_modals_messagemodal_.html">"components/angular2-<wbr>modal/modals/<wbr>Message<wbr>Modal"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_angular2_modal_models_icustommodal_.html">"components/angular2-<wbr>modal/models/ICustom<wbr>Modal"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_angular2_modal_models_modalconfig_.html">"components/angular2-<wbr>modal/models/<wbr>Modal<wbr>Config"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_angular2_modal_models_modaldialoginstance_.html">"components/angular2-<wbr>modal/models/<wbr>Modal<wbr>Dialog<wbr>Instance"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_angular2_modal_presets_.html">"components/angular2-<wbr>modal/presets"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_angular2_modal_presets_onebuttonpreset_.html">"components/angular2-<wbr>modal/presets/<wbr>One<wbr>Button<wbr>Preset"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_angular2_modal_presets_twobuttonpreset_.html">"components/angular2-<wbr>modal/presets/<wbr>Two<wbr>Button<wbr>Preset"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_angular2_modal_presets_base_messagemodalpreset_.html">"components/angular2-<wbr>modal/presets/base/<wbr>Message<wbr>Modal<wbr>Preset"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_angular2_modal_presets_base_modalawarepreset_.html">"components/angular2-<wbr>modal/presets/base/<wbr>Modal<wbr>Aware<wbr>Preset"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_components_angular2_modal_providers_modal_.html">"components/angular2-<wbr>modal/providers/<wbr>Modal"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_demo_app_app_.html">"demo/app/app"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_demo_app_custommodaldemo_custommodal_.html">"demo/app/custom<wbr>Modal<wbr>Demo/custom<wbr>Modal"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_demo_app_customizewizard_customizewizard_.html">"demo/app/customize<wbr>Wizard/customize<wbr>Wizard"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_demo_app_demopage_demopage_.html">"demo/app/demo<wbr>Page/demo<wbr>Page"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_demo_app_demopage_presets_.html">"demo/app/demo<wbr>Page/presets"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_demo_app_sampleelement_sampleelement_.html">"demo/app/sample<wbr>Element/sample<wbr>Element"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_demo_bootstrap_.html">"demo/bootstrap"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_demo_vendor_.html">"demo/vendor"</a>
 					</li>
 				</ul>
 			</nav>
