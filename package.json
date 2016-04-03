@@ -23,8 +23,10 @@
   "scripts": {
     "prepublish": "tsc --project publish && node make.js"
   },
+  "peerDependencies": {
+    "angular2": "2.0.0-beta.13"
+  },
   "devDependencies": {
-    "angular2": "2.0.0-beta.12",
     "async": "^1.5.2",
     "bootstrap": "^3.3.6",
     "css-loader": "^0.23.0",
