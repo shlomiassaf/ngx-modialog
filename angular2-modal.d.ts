@@ -1,0 +1,1 @@
+export * from './dist/commonjs/angular2-modal';
