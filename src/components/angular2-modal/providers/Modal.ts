@@ -34,7 +34,8 @@ export class Modal {
         Object.defineProperty(this, 'config', <any>{
             configurable: false,
             enumerable: true,
-            value: (defaultConfig) ? ModalConfig.makeValid(defaultConfig) : new ModalConfig(),
+            value: (defaultConfig)
+                ? ModalConfig.makeValid(defaultConfig) : ModalConfig.makeValid(new ModalConfig()),
             writable: false
         });
     }
