@@ -1,4 +1,4 @@
-import { ComponentRef } from 'angular2/core';
+import {ComponentRef, ResolvedReflectiveProvider} from 'angular2/core';
 import {PromiseWrapper} from 'angular2/src/facade/async';
 
 import {ModalConfig} from '../models/ModalConfig';
@@ -8,14 +8,11 @@ import {ModalConfig} from '../models/ModalConfig';
  */
 export class ModalDialogInstance {
     contentRef: ComponentRef;
-    /**
-     * States if the modal is inside a specific element.
-     */
-    public inElement: boolean;
 
-    private _bootstrapRef: ComponentRef;
     private _backdropRef: ComponentRef;
     private _resultDefered: any;
+    private _modalDataBindings: ResolvedReflectiveProvider[];
+    private _componentType: FunctionConstructor;
 
     constructor(public config: ModalConfig) {
         this._resultDefered = PromiseWrapper.completer();
@@ -24,8 +21,11 @@ export class ModalDialogInstance {
     set backdropRef(value: ComponentRef) {
         this._backdropRef = value;
     }
-    set bootstrapRef(value: ComponentRef) {
-        this._bootstrapRef = value;
+    set modalDataBindings(value: ResolvedReflectiveProvider[]) {
+        this._modalDataBindings = value;
+    }
+    set componentType(value: FunctionConstructor) {
+        this._componentType = value;
     }
 
     /**
@@ -35,6 +35,12 @@ export class ModalDialogInstance {
     get result(): Promise<any> {
         return this._resultDefered.promise;
     }
+    get modalDataBindings(): ResolvedReflectiveProvider[] {
+        return this._modalDataBindings;
+    }
+    get componentType(): FunctionConstructor {
+        return this._componentType;
+    }
 
     /**
      *  Close the modal with a return value, i.e: result.
@@ -42,7 +48,7 @@ export class ModalDialogInstance {
     close(result: any = null) {
         if ( this.contentRef.instance.beforeClose &&
                 this.contentRef.instance.beforeClose() === true ) return;
-        this.dispose();
+        this.destroy();
         this._resultDefered.resolve(result);
     }
 
@@ -56,13 +62,12 @@ export class ModalDialogInstance {
     dismiss() {
         if ( this.contentRef.instance.beforeDismiss &&
             this.contentRef.instance.beforeDismiss() === true ) return;
-        this.dispose();
+        this.destroy();
         this._resultDefered.reject();
     }
 
-    private dispose() {
-        this._bootstrapRef.dispose();
-        this._backdropRef.dispose();
-        this.contentRef.dispose();
+    private destroy() {
+        this._backdropRef.destroy();
+        this.contentRef.destroy();
     }
 }

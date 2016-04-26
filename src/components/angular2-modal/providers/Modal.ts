@@ -1,11 +1,12 @@
 import {
-    Injectable,
+    ReflectiveInjector,
     DynamicComponentLoader,
     ComponentRef,
-    ElementRef,
-    Injector,
+    ViewChild,
+    ViewContainerRef,
+    Injectable,
     provide,
-    ResolvedProvider,
+    ResolvedReflectiveProvider,
     Optional,
     ApplicationRef
 } from 'angular2/core';
@@ -24,7 +25,7 @@ const _stack = new ModalInstanceStack();
 export class Modal {
     private config: ModalConfig;
 
-    constructor(private componentLoader: DynamicComponentLoader, private appRef: ApplicationRef,
+    constructor(private componentLoader: DynamicComponentLoader,
                 @Optional() defaultConfig: ModalConfig) {
         // The Modal class should be an application wide service (i.e: singleton).
         // This will run once in most applications...
@@ -53,60 +54,48 @@ export class Modal {
     }
 
     /**
-     * Opens a modal window blocking the whole screen.
-     * @param componentType The angular Component to render as modal.
-     * @param bindings Resolved providers that will inject into the component provided.
-     * @param config A Modal Configuration object.
-     * @returns {Promise<ModalDialogInstance>}
-     */
-    public open(componentType: FunctionConstructor, bindings: ResolvedProvider[],
-                config?: ModalConfig): Promise<ModalDialogInstance> {
-        // TODO: appRef.injector.get(APP_COMPONENT) Doesn't work.
-        // When it does replace with the hack below.
-        //let myElementRef = this.appRef.injector.get(APP_COMPONENT).location;
-        let elementRef: ElementRef = (<any>this.appRef)._rootComponents[0].location;
-
-        return this.openInside(componentType, elementRef, null, bindings, config);
-    }
-
-    /**
      * Opens a modal window inside an existing component.
      * @param componentType The angular Component to render as modal.
-     * @param elementRef The element to block using the modal.
-     * @param anchorName A template variable within the component.
+     * @param viewRef The element to block using the modal.
      * @param bindings Resolved providers that will inject into the component provided.
      * @param config A Modal Configuration object.
      * @returns {Promise<ModalDialogInstance>}
      */
-    public openInside(componentType: FunctionConstructor, elementRef: ElementRef,
-                      anchorName: string, bindings: ResolvedProvider[],
-                      config?: ModalConfig): Promise<ModalDialogInstance> {
+    public open(componentType: FunctionConstructor, viewRef: ViewContainerRef,
+                bindings: ResolvedReflectiveProvider[], config?: ModalConfig
+               ): Promise<ModalDialogInstance> {
 
         config = (config) ? ModalConfig.makeValid(config, this.config) : this.config;
 
         let dialog = new ModalDialogInstance(config);
-        dialog.inElement = !!anchorName;
 
-        let dialogBindings = Injector.resolve([ provide(ModalDialogInstance, {useValue: dialog}) ]);
-        return this.createBackdrop(elementRef, dialogBindings, anchorName)
+        let dialogBindings = ReflectiveInjector.resolve(
+            [ provide(ModalDialogInstance, {useValue: dialog})
+        ]);
+        return this.createBackdrop(viewRef, dialogBindings)
             .then( (backdropRef: ComponentRef) => {
-                dialog.backdropRef = backdropRef;
-
-                let modalDataBindings = Injector.resolve(
+                let modalDataBindings = ReflectiveInjector.resolve(
                     [provide(ModalDialogInstance, {useValue: dialog})]).concat(bindings);
-                return this.componentLoader.loadIntoLocation(
-                    BootstrapModalContainer, backdropRef.location, 'modalBackdrop', dialogBindings)
-                    .then(bootstrapRef => {
+                dialog.modalDataBindings = modalDataBindings;
+                dialog.componentType = componentType;
+                dialog.backdropRef = backdropRef;
+                _stack.pushManaged(dialog);
+                return dialog;
+/*
+                return this.componentLoader.loadNextToLocation(
+                    BootstrapModalContainer, backdropRef.instance.viewRef, dialogBindings)
+                    .then((bootstrapRef: ComponentRef) => {
                         dialog.bootstrapRef = bootstrapRef;
-                        return this.componentLoader.loadIntoLocation(
-                            componentType, bootstrapRef.location, 'modalDialog', modalDataBindings)
-                            .then(contentRef => {
+                        return this.componentLoader.loadNextToLocation(
+                            componentType, bootstrapRef.instance.viewRef, modalDataBindings)
+                            .then((contentRef: ComponentRef) => {
                                 dialog.contentRef = contentRef;
                                 _stack.pushManaged(dialog);
                                 return dialog;
                             });
                         }
                     );
+*/
             });
     }
 
@@ -120,17 +109,13 @@ export class Modal {
 
     /**
      * Creates backdrop element.
-     * @param {ElementRef} The element to block using the modal.
-     * @param {ResolvedProvider[]} Resolved providers,
+     * @param {ViewContainerRef} The element to block using the modal.
+     * @param {ResolvedReflectiveProvider[]} Resolved providers,
      *     must contain the ModalDialogInstance instance for this backdrop.
-     * @param {string} An anchor name, optional.
-     *     if not supplied backdrop gets applied next to elementRef, otherwise into it.
      * @returns {Promise<ComponentRef>}
      */
-    private createBackdrop(elementRef: ElementRef, bindings: ResolvedProvider[],
-                           anchorName?: string) : Promise<ComponentRef> {
-        return (!anchorName) ?
-            this.componentLoader.loadNextToLocation(ModalBackdrop, elementRef, bindings) :
-            this.componentLoader.loadIntoLocation(ModalBackdrop, elementRef, anchorName, bindings);
+    private createBackdrop(viewRef: ViewContainerRef,
+                           bindings: ResolvedReflectiveProvider[]): Promise<ComponentRef> {
+        return this.componentLoader.loadNextToLocation(ModalBackdrop, viewRef, bindings);
     }
 }
