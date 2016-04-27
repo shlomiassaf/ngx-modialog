@@ -1,6 +1,6 @@
-import { Component } from 'angular2/core';
+import {Component} from 'angular2/core';
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
-
+import {BootstrapModalContainer} from './bootstrapModalContainer';
 
 /**
  * Represents the modal backdrop.
@@ -15,9 +15,11 @@ import {ModalDialogInstance} from '../models/ModalDialogInstance';
         '[style.left]': 'left',
         '[style.right]': 'right',
         '[style.bottom]': 'bottom'
-
     },
-    template: '<div [style.position]="position" class="in modal-backdrop" #modalBackdrop></div>'
+    directives: [ BootstrapModalContainer ],
+    template:
+    `<div [style.position]="position" class="in modal-backdrop"></div>
+     <bootstrap-modal></bootstrap-modal>`
 })
 export class ModalBackdrop {
     public position: string;
@@ -28,16 +30,10 @@ export class ModalBackdrop {
     public right: string;
     public bottom: string;
 
-
     constructor(dialog: ModalDialogInstance) {
-        if (!dialog.inElement) {
-            this.position = this.width = this.height = null;
-            this.top = this.left = this.right = this.bottom = null;
-        } else {
-            this.position = 'absolute';
-            this.height = '100%';
-            this.width = '100%';
-            this.top = this.left = this.right = this.bottom = '0';
-        }
+        this.position = 'absolute';
+        this.height = '100%';
+        this.width = '100%';
+        this.top = this.left = this.right = this.bottom = '0';
     }
 }
