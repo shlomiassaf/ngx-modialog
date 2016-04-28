@@ -1,22 +1,22 @@
-import { Injector, provide , ResolvedBinding} from 'angular2/core';
-import {FluentAssignMethod} from '../framework/FluentAssign';
-import {Modal} from '../providers/Modal';
-import {MessageModalContext, MessageModal} from '../modals/MessageModal';
-import {MessageModalPreset, MessageModalPresetData} from './base/MessageModalPreset';
-import {extend} from '../framework/Utils';
+import { ReflectiveInjector, provide , ResolvedReflectiveProvider} from 'angular2/core';
+import {FluentAssignMethod} from '../framework/fluent-assign';
+import {Modal} from '../providers/modal';
+import {MessageModalContext, BSMessageModal} from '../platform/bootstrap/message-modal';
+import {MessageModalPreset, MessageModalPresetData} from './base/message-modal-preset';
+import {extend} from '../framework/utils_';
 
 
-function createBindings(config: OneButtonPresetData): ResolvedBinding[] {
+function createBindings(config: OneButtonPresetData): ResolvedReflectiveProvider[] {
     config.buttons = [
         {
             cssClass: config.okBtnClass,
             caption: config.okBtn,
-            onClick: (modalComponent: MessageModal, $event?: MouseEvent) =>
+            onClick: (modalComponent: BSMessageModal, $event?: MouseEvent) =>
                 modalComponent.dialog.close(true)
         }
     ];
 
-    return Injector.resolve([
+    return ReflectiveInjector.resolve([
         provide(MessageModalContext, {useValue: config})
     ]);
 }

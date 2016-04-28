@@ -1,30 +1,37 @@
 import {
-    Injectable,
-    DynamicComponentLoader,
+    ReflectiveInjector,
     ComponentRef,
-    ElementRef,
-    Injector,
+    ViewContainerRef,
+    Provider,
     provide,
-    ResolvedProvider,
-    Optional,
-    ApplicationRef
+    Injectable,
+    ResolvedReflectiveProvider,
+    Optional
 } from 'angular2/core';
 
-import {ModalInstanceStack} from '../framework/ModalInstanceStack';
-import {ModalConfig} from '../models/ModalConfig';
-import {ModalDialogInstance} from '../models/ModalDialogInstance';
-import {ModalBackdrop} from '../components/modalBackdrop';
-import {BootstrapModalContainer} from '../components/bootstrapModalContainer';
+import {BackdropRenderer, ModalCompileConfig, ModalBackdropComponent} from '../models/tokens';
+
+import {DialogRefStack} from '../models/dialog-ref-stack';
+import {ModalConfig} from '../models/modal-config';
+import {DialogRef} from '../models/dialog-ref';
 import {OneButtonPreset, TwoButtonPreset} from '../presets';
 
-const _stack = new ModalInstanceStack();
-
+const _stack = new DialogRefStack();
 
 @Injectable()
 export class Modal {
+    /**
+     * A Default view container ref, usually the app root container ref.
+     * Make sure not to provide something that might get destroyed, it will destroy the modals too.
+     * The container is used as logical view holder, elements might be moved.
+     * Has to be set manually until we can find a way to get it automatically.
+     */
+    public defaultViewContainer: ViewContainerRef;
+    
     private config: ModalConfig;
 
-    constructor(private componentLoader: DynamicComponentLoader, private appRef: ApplicationRef,
+    constructor(private _bdRenderer: BackdropRenderer,
+                private _backdrop: ModalBackdropComponent,
                 @Optional() defaultConfig: ModalConfig) {
         // The Modal class should be an application wide service (i.e: singleton).
         // This will run once in most applications...
@@ -57,80 +64,73 @@ export class Modal {
      * @param componentType The angular Component to render as modal.
      * @param bindings Resolved providers that will inject into the component provided.
      * @param config A Modal Configuration object.
-     * @returns {Promise<ModalDialogInstance>}
+     * @returns {Promise<DialogRef>}
      */
-    public open(componentType: FunctionConstructor, bindings: ResolvedProvider[],
-                config?: ModalConfig): Promise<ModalDialogInstance> {
-        // TODO: appRef.injector.get(APP_COMPONENT) Doesn't work.
-        // When it does replace with the hack below.
-        //let myElementRef = this.appRef.injector.get(APP_COMPONENT).location;
-        let elementRef: ElementRef = (<any>this.appRef)._rootComponents[0].location;
-
-        return this.openInside(componentType, elementRef, null, bindings, config);
+    public open(componentType: FunctionConstructor,
+                bindings: ResolvedReflectiveProvider[],
+                config?: ModalConfig): Promise<DialogRef> {
+        return this.openInside(componentType, this.defaultViewContainer, bindings, false, config);
     }
 
     /**
      * Opens a modal window inside an existing component.
      * @param componentType The angular Component to render as modal.
-     * @param elementRef The element to block using the modal.
-     * @param anchorName A template variable within the component.
+     * @param viewContainer The element to block using the modal.
      * @param bindings Resolved providers that will inject into the component provided.
+     * @param inside
      * @param config A Modal Configuration object.
-     * @returns {Promise<ModalDialogInstance>}
+     * @returns {Promise<DialogRef>}
      */
-    public openInside(componentType: FunctionConstructor, elementRef: ElementRef,
-                      anchorName: string, bindings: ResolvedProvider[],
-                      config?: ModalConfig): Promise<ModalDialogInstance> {
+    public openInside(componentType: FunctionConstructor,
+                      viewContainer: ViewContainerRef,
+                      bindings: ResolvedReflectiveProvider[],
+                      inside: boolean = true,
+                      config?: ModalConfig): Promise<DialogRef> {
 
         config = (config) ? ModalConfig.makeValid(config, this.config) : this.config;
 
-        let dialog = new ModalDialogInstance(config);
-        dialog.inElement = !!anchorName;
 
-        let dialogBindings = Injector.resolve([ provide(ModalDialogInstance, {useValue: dialog}) ]);
-        return this.createBackdrop(elementRef, dialogBindings, anchorName)
+        let dialog = new DialogRef(config);
+        dialog.inElement = inside;
+
+        let compileConfig = new ModalCompileConfig(componentType, bindings || []);
+
+        
+        let b = ReflectiveInjector.resolve([
+            provide(Modal, {useValue: this}),
+            provide(BackdropRenderer, {useValue: this._bdRenderer}),
+            provide(DialogRef, {useValue: dialog}),
+            provide(ModalCompileConfig, {useValue: compileConfig})
+        ]);
+
+
+        return this._bdRenderer.createBackdrop(this._backdrop, viewContainer, b, dialog.inElement)
             .then( (backdropRef: ComponentRef) => {
-                dialog.backdropRef = backdropRef;
-
-                let modalDataBindings = Injector.resolve(
-                    [provide(ModalDialogInstance, {useValue: dialog})]).concat(bindings);
-                return this.componentLoader.loadIntoLocation(
-                    BootstrapModalContainer, backdropRef.location, 'modalBackdrop', dialogBindings)
-                    .then(bootstrapRef => {
-                        dialog.bootstrapRef = bootstrapRef;
-                        return this.componentLoader.loadIntoLocation(
-                            componentType, bootstrapRef.location, 'modalDialog', modalDataBindings)
-                            .then(contentRef => {
-                                dialog.contentRef = contentRef;
-                                _stack.pushManaged(dialog);
-                                return dialog;
-                            });
-                        }
-                    );
+                dialog.destroy = () => backdropRef.destroy();
+                _stack.pushManaged(dialog);
+                return dialog;
             });
     }
 
-    stackPosition(mInstande: ModalDialogInstance) {
-        return _stack.indexOf(mInstande);
+    /**
+     * Check if a given DialogRef is the top most ref in the stack.
+     * TODO: distinguish between body modal vs in element modal.
+     * @param dialogRef
+     * @returns {boolean}
+     */
+    isTopMost(dialogRef: DialogRef): boolean {
+        return _stack.indexOf(dialogRef) === _stack.length - 1;
+    }
+    
+    stackPosition(dialogRef: DialogRef) {
+        return _stack.indexOf(dialogRef);
     }
 
     get stackLength(): number {
         return _stack.length;
     }
-
-    /**
-     * Creates backdrop element.
-     * @param {ElementRef} The element to block using the modal.
-     * @param {ResolvedProvider[]} Resolved providers,
-     *     must contain the ModalDialogInstance instance for this backdrop.
-     * @param {string} An anchor name, optional.
-     *     if not supplied backdrop gets applied next to elementRef, otherwise into it.
-     * @returns {Promise<ComponentRef>}
-     */
-    private createBackdrop(elementRef: ElementRef, bindings: ResolvedProvider[],
-                           anchorName?: string) : Promise<ComponentRef> {
-        return (!anchorName) ?
-            this.componentLoader.loadNextToLocation(ModalBackdrop, elementRef, bindings) :
-            this.componentLoader.loadIntoLocation(ModalBackdrop, elementRef, anchorName, bindings);
-    }
 }
+
+export const MODAL_PROVIDERS: any[] = [
+    new Provider(Modal, {useClass: Modal})
+];

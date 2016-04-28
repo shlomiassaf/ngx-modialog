@@ -1,5 +1,4 @@
-import {Component, ElementRef, Inject, forwardRef} from 'angular2/core';
-import {DemoPage} from '../demoPage/demoPage';
+import {Component} from 'angular2/core';
 
 @Component({
     selector: 'sample-element',
@@ -12,8 +11,5 @@ import {DemoPage} from '../demoPage/demoPage';
      `
 })
 export class SampleElement {
-    constructor( @Inject(forwardRef(() => DemoPage)) demoPage: DemoPage, elementRef: ElementRef) {
-        //TODO: Replace with querying instead of letting the DI decide?
-        demoPage.mySampleElement = elementRef;
-    }
+    constructor() {}
 }

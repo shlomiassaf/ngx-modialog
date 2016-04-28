@@ -6,7 +6,6 @@ let html = require('./customizeWizard.tpl.html');
 @Component({
     selector: 'customize-wizard',
     directives: [],
-    providers: [Modal],
     template: html
 })
 export class CustomizeWizard {

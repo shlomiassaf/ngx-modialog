@@ -1,29 +1,29 @@
-import { Injector, provide , ResolvedBinding} from 'angular2/core';
-import {FluentAssignMethod} from '../framework/FluentAssign';
-import {extend} from '../framework/Utils';
-import {Modal} from '../providers/Modal';
-import {MessageModalContext, MessageModal} from '../modals/MessageModal';
-import {MessageModalPreset} from './base/MessageModalPreset';
-import {OneButtonPresetData} from './OneButtonPreset';
+import { ReflectiveInjector, provide , ResolvedReflectiveProvider} from 'angular2/core';
+import {FluentAssignMethod} from '../framework/fluent-assign';
+import {extend} from '../framework/utils_';
+import {Modal} from '../providers/modal';
+import {MessageModalContext, BSMessageModal} from '../platform/bootstrap/message-modal';
+import {MessageModalPreset} from './base/message-modal-preset';
+import {OneButtonPresetData} from './one-button-preset';
 
 
-function createBindings(config: TwoButtonPresetData): ResolvedBinding[] {
+function createBindings(config: TwoButtonPresetData): ResolvedReflectiveProvider[] {
     config.buttons = [
         {
             cssClass: config.okBtnClass,
             caption: config.okBtn,
-            onClick: (modalComponent: MessageModal, $event: MouseEvent) =>
+            onClick: (modalComponent: BSMessageModal, $event: MouseEvent) =>
                 modalComponent.dialog.close(true)
         },
         {
             cssClass: config.cancelBtnClass,
             caption: config.cancelBtn,
-            onClick: (modalComponent: MessageModal, $event: MouseEvent) =>
+            onClick: (modalComponent: BSMessageModal, $event: MouseEvent) =>
                 modalComponent.dialog.dismiss()
         }
     ];
 
-    return Injector.resolve([
+    return ReflectiveInjector.resolve([
         provide(MessageModalContext, {useValue: config})
     ]);
 }

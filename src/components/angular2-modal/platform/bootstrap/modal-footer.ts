@@ -1,5 +1,5 @@
-import { Component, Input, Output, EventEmitter } from 'angular2/core';
-import {ModalButtonConfig} from '../modals/MessageModal';
+import {Component, Input, Output, EventEmitter, ViewEncapsulation} from 'angular2/core';
+import {ModalButtonConfig} from './message-modal';
 
 export interface FooterButtonClickEvent {
     btn: ModalButtonConfig;
@@ -11,6 +11,7 @@ export interface FooterButtonClickEvent {
  */
 @Component({
     selector: 'modal-footer',
+    encapsulation: ViewEncapsulation.None,
     template:
 `<div [ngClass]="footerClass">
     <button *ngFor="#btn of buttons;"
@@ -18,7 +19,7 @@ export interface FooterButtonClickEvent {
             (click)="onClick(btn, $event)">{{btn.caption}}</button>
 </div>`
 })
-export class ModalFooter {
+export class BSModalFooter {
     /**
      * Class name used for the footer container.
      */

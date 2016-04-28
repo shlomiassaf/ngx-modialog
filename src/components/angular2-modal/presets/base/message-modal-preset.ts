@@ -1,11 +1,11 @@
-import {FluentAssignMethod} from '../../framework/FluentAssign';
-import {ModalAwarePreset, ModalAwarePresetData} from './ModalAwarePreset';
-import {MessageModal, MessageModalContext} from '../../modals/MessageModal';
-import {extend, arrayUnion} from '../../framework/Utils';
+import {FluentAssignMethod} from '../../framework/fluent-assign';
+import {ModalAwarePreset, ModalAwarePresetData} from './modal-aware-preset';
+import {BSMessageModal , MessageModalContext} from '../../platform/bootstrap/message-modal';
+import {extend, arrayUnion} from '../../framework/utils_';
 
 
 const DEFAULT_CONFIG_VALUES = {
-    component: MessageModal,
+    component: BSMessageModal,
     headerClass: 'modal-header',
     bodyClass: 'modal-body',
     footerClass: 'modal-footer'

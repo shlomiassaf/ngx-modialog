@@ -1,13 +1,13 @@
-import { ResolvedProvider, ElementRef } from 'angular2/core';
-import {Modal} from '../../providers/Modal';
-import {IModalConfig, ModalConfig, BootstrapModalSize} from '../../models/ModalConfig';
-import {FluentAssign, FluentAssignMethod, setAssignMethod} from './../../framework/FluentAssign';
-import {ModalDialogInstance} from '../../models/ModalDialogInstance';
+import { ResolvedReflectiveProvider, ViewContainerRef } from 'angular2/core';
+import {Modal} from '../../providers/modal';
+import {IModalConfig, ModalConfig, BootstrapModalSize} from '../../models/modal-config';
+import {FluentAssign, FluentAssignMethod, setAssignMethod} from './../../framework/fluent-assign';
+import {DialogRef} from '../../models/dialog-ref';
 
 export interface ModalAwarePresetData extends IModalConfig {
     component: any;
     modal: Modal;
-    bindings: <T>(config: T) => ResolvedProvider[];
+    bindings: <T>(config: T) => ResolvedReflectiveProvider[];
 }
 
 
@@ -64,10 +64,10 @@ export class ModalAwarePreset<T extends ModalAwarePresetData> extends FluentAssi
 
     /**
      * Open a modal window based on the configuration of this config instance.
-     * @param inside If set opens the modal inside the supplied elements ref at the specified anchor
-     * @returns Promise<ModalDialogInstance>
+     * @param viewContainer If set opens the modal inside the supplied viewContainer
+     * @returns Promise<DialogRef>
      */
-    open(inside?: {elementRef: ElementRef, anchorName: string}): Promise<ModalDialogInstance> {
+    open(viewContainer?: ViewContainerRef): Promise<DialogRef> {
         let config: T = this.toJSON();
 
         if (! (config.modal instanceof Modal) ) {
@@ -78,12 +78,12 @@ export class ModalAwarePreset<T extends ModalAwarePresetData> extends FluentAssi
             return <any>Promise.reject(new Error('Configuration Error: bindings not set.'));
         }
 
-        if (inside) {
+        if (viewContainer) {
             // TODO: Validate inside?
             return config.modal.openInside(config.component,
-                inside.elementRef,
-                inside.anchorName,
+                viewContainer,
                 config.bindings(config),
+                true,
                 new ModalConfig(config.size, config.isBlocking, config.keyboard));
         } else {
             return config.modal.open(config.component,

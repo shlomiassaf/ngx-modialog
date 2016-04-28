@@ -1,8 +1,8 @@
-import {Component} from 'angular2/core';
+import {Component, ViewEncapsulation} from 'angular2/core';
 
-import {ICustomModal, ICustomModalComponent} from '../models/ICustomModal';
-import {ModalDialogInstance} from '../models/ModalDialogInstance';
-import {ModalFooter, FooterButtonClickEvent} from '../components/modalFooter';
+import {ModalContext, ModalComponent} from '../../models/tokens';
+import {DialogRef} from '../../models/dialog-ref';
+import {BSModalFooter, FooterButtonClickEvent} from './modal-footer';
 
 /**
  * Interface for button definition
@@ -10,13 +10,13 @@ import {ModalFooter, FooterButtonClickEvent} from '../components/modalFooter';
 export interface ModalButtonConfig {
     cssClass: string;
     caption: string;
-    onClick: (modalComponent: any, $event?: MouseEvent) => void;
+    onClick: (modalComponent: ModalComponent, $event?: MouseEvent) => void;
 }
 
 /**
  * Data definition
  */
-export class MessageModalContext implements ICustomModal {
+export class MessageModalContext implements ModalContext {
 
     /**
      * A Class for the header (title) container.
@@ -82,7 +82,8 @@ export class MessageModalContext implements ICustomModal {
  */
 @Component({
     selector: 'modal-content',
-    directives: [ModalFooter],
+    directives: [BSModalFooter],
+    encapsulation: ViewEncapsulation.None,
     template:
     `<div [ngClass]="context.headerClass" [ngSwitch]="titleHtml">
         <div *ngSwitchWhen="1" [innerHtml]="context.titleHtml"></div>
@@ -93,8 +94,8 @@ export class MessageModalContext implements ICustomModal {
                   [buttons]="context.buttons"
                   (onButtonClick)="onFooterButtonClick($event)"></modal-footer>`
 })
-export class MessageModal implements ICustomModalComponent {
-    constructor(public dialog: ModalDialogInstance, public context: MessageModalContext) {}
+export class BSMessageModal implements ModalComponent {
+    constructor(public dialog: DialogRef, public context: MessageModalContext) {}
 
     onFooterButtonClick($event: FooterButtonClickEvent) {
         $event.btn.onClick(this, $event.$event);

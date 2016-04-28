@@ -1,9 +1,13 @@
-import { Component, provide, ElementRef, Injector} from 'angular2/core';
+import { Component, provide, ViewContainerRef, ViewChild, ReflectiveInjector, ViewEncapsulation} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
-import {ModalConfig, Modal, ICustomModal, ModalDialogInstance} from 'angular2-modal';
+
+import {ModalConfig, Modal, ModalContext, DialogRef, MODAL_PROVIDERS} from 'angular2-modal';
 import {AdditionCalculateWindowData, AdditionCalculateWindow} from '../customModalDemo/customModal';
 import {SampleElement} from '../sampleElement/sampleElement';
 import * as presets from './presets';
+
+import {BS_MODAL_PROVIDERS} from '../../../components/angular2-modal/platform/bootstrap';
+
 
 const BUTTONS = [
     {
@@ -29,19 +33,35 @@ const BUTTONS = [
 ];
 
 @Component({
-    selector: 'demo-page',
+    selector: 'bootstrap-demo',
     directives: [SampleElement, RouterLink],
-    providers: [Modal],
-    styles: [ require('./demoPage.css') ],
-    template: require('./demoPage.tpl.html')
+    styles: [
+        require('bootstrap/dist/css/bootstrap.css'),
+        require('./bootstrap-demo.css')
+    ],
+    template: require('./bootstrap-demo.tpl.html'),
+    providers: [
+        ...MODAL_PROVIDERS,
+        ...BS_MODAL_PROVIDERS,
+        provide(ModalConfig, {useValue: new ModalConfig('lg', true, 27)})
+    ],
+    encapsulation: ViewEncapsulation.None
 })
-export class DemoPage {
-    public mySampleElement: ElementRef;
+export class BootstrapDemo {
+    @ViewChild(SampleElement, {read: ViewContainerRef}) private _sampleElementVC: ViewContainerRef;
+
     public lastModalResult: string;
     public buttons = BUTTONS;
-    constructor(private modal: Modal) {}
+    
+    constructor(public modal: Modal, viewContainer: ViewContainerRef) {
+        /**
+         * A Default view container ref, usually the app root container ref.
+         * Has to be set manually until we can find a way to get it automatically.
+         */
+        modal.defaultViewContainer = viewContainer;
+    }
 
-    processDialog(dialog: Promise<ModalDialogInstance>) {
+    processDialog(dialog: Promise<DialogRef>) {
         dialog.then((resultPromise) => {
             return resultPromise.result.then((result) => {
                 this.lastModalResult = result;
@@ -52,10 +72,7 @@ export class DemoPage {
         let dialog,
             preset = btn.preset(this.modal);
         if (btn.text === 'In Element') {
-            dialog = preset.open({
-                elementRef: this.mySampleElement,
-                anchorName: 'myModal'
-            });
+            dialog = preset.open(this._sampleElementVC);
         } else {
             dialog = preset.open();
         }
@@ -63,9 +80,8 @@ export class DemoPage {
         this.processDialog(dialog);
     }
 
-
     openCustomModal() {
-        let resolvedBindings = Injector.resolve([provide(ICustomModal, {
+        let resolvedBindings = ReflectiveInjector.resolve([provide(ModalContext, {
                                                 useValue: new AdditionCalculateWindowData(2, 3)})]),
             dialog = this.modal.open(
                 <any>AdditionCalculateWindow,

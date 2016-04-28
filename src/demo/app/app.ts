@@ -2,7 +2,9 @@ import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 
-import {DemoPage} from './demoPage/demoPage';
+import {Home} from './home/home';
+import {BootstrapDemo} from './bootstrap-demo/bootstrap-demo';
+import {VexDemo} from './vex-demo/vex-demo';
 import {CustomizeWizard} from './customizeWizard/customizeWizard';
 /*
  * App Component
@@ -21,14 +23,19 @@ import {CustomizeWizard} from './customizeWizard/customizeWizard';
     styles: [ ],
     // Every Angular template is first compiled by the browser before Angular runs it's compiler
     template: `
+    <a [routerLink]="['Home']">Home</a>
+    <a [routerLink]="['BootstrapDemo']">Bootstrap demo</a>
+    <a [routerLink]="['VexDemo']">Vex demo</a>
     <main>
       <router-outlet></router-outlet>
     </main>
   `
 })
 @RouteConfig([
-    { path: '/', component: DemoPage, name: 'Demo' },
-    { path: '/customizeModals', component: CustomizeWizard, name: 'CustomizeModals' }
+    { path: '/', component: Home, name: 'Home' },
+    { path: '/bootstrap-demo', component: BootstrapDemo, name: 'BootstrapDemo' },
+    { path: '/customizeModals', component: CustomizeWizard, name: 'CustomizeModals' },
+    { path: '/vex-demo', component: VexDemo, name: 'VexDemo' }
 ])
 export class App {
     constructor() {}

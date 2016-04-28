@@ -1,7 +1,7 @@
 import {Component, Input} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
-import {Modal, ModalDialogInstance, ICustomModal, ICustomModalComponent} from 'angular2-modal';
+import {Modal, DialogRef, ModalContext, ModalComponent} from 'angular2-modal';
 
 export class AdditionCalculateWindowData {
     constructor(
@@ -52,13 +52,13 @@ export class AdditionCalculateWindowData {
             </div>
         </div>`
 })
-export class AdditionCalculateWindow implements ICustomModalComponent {
-    dialog: ModalDialogInstance;
+export class AdditionCalculateWindow implements ModalComponent {
+    dialog: DialogRef;
     context: AdditionCalculateWindowData;
 
     public wrongAnswer: boolean;
 
-    constructor(dialog: ModalDialogInstance, modelContentData: ICustomModal) {
+    constructor(dialog: DialogRef, modelContentData: ModalContext) {
         this.dialog = dialog;
         this.context = <AdditionCalculateWindowData>modelContentData;
         this.wrongAnswer = true;

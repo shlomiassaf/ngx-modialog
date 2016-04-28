@@ -1,6 +1,9 @@
-import { Component } from 'angular2/core';
-import {ModalDialogInstance} from '../models/ModalDialogInstance';
+import {Component, ViewEncapsulation, OnDestroy} from 'angular2/core';
+import {DialogRef} from '../../models/dialog-ref';
 
+import {BSModalContainer} from './modal-container';
+
+let dialogRefCount = 0;
 
 /**
  * Represents the modal backdrop.
@@ -15,11 +18,14 @@ import {ModalDialogInstance} from '../models/ModalDialogInstance';
         '[style.left]': 'left',
         '[style.right]': 'right',
         '[style.bottom]': 'bottom'
-
     },
-    template: '<div [style.position]="position" class="in modal-backdrop" #modalBackdrop></div>'
+    directives: [BSModalContainer],
+    encapsulation: ViewEncapsulation.None,
+    template:
+`<div [style.position]="position" class="modal-backdrop fade in"></div>
+<modal-container></modal-container>`
 })
-export class ModalBackdrop {
+export class BSModalBackdrop implements OnDestroy {
     public position: string;
     public height: string;
     public width: string;
@@ -27,9 +33,11 @@ export class ModalBackdrop {
     public left: string;
     public right: string;
     public bottom: string;
-
-
-    constructor(dialog: ModalDialogInstance) {
+    
+    constructor(dialog: DialogRef) {
+        dialogRefCount++;
+        document.body.classList.add('modal-open');
+        
         if (!dialog.inElement) {
             this.position = this.width = this.height = null;
             this.top = this.left = this.right = this.bottom = null;
@@ -38,6 +46,12 @@ export class ModalBackdrop {
             this.height = '100%';
             this.width = '100%';
             this.top = this.left = this.right = this.bottom = '0';
+        }
+    }
+    
+    ngOnDestroy() {
+        if (--dialogRefCount === 0) {
+            document.body.classList.remove('modal-open');
         }
     }
 }
