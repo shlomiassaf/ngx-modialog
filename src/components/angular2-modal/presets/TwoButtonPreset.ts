@@ -1,7 +1,7 @@
 import { ReflectiveInjector, provide , ResolvedReflectiveBinding} from 'angular2/core';
 import {FluentAssignMethod} from '../framework/FluentAssign';
 import {extend} from '../framework/Utils';
-import {Modal} from '../providers/modal_';
+import {Modal} from '../providers/modal';
 import {MessageModalContext, MessageModal} from '../modals/MessageModal';
 import {MessageModalPreset} from './base/MessageModalPreset';
 import {OneButtonPresetData} from './OneButtonPreset';

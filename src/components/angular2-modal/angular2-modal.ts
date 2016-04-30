@@ -4,7 +4,7 @@ export * from './models/ModalDialogInstance';
 export * from './components/modalBackdrop';
 export * from './components/bootstrapModalContainer';
 export * from './components/modalFooter';
-export * from './providers/modal_';
+export * from './providers/modal';
 
 export * from './framework/FluentAssign';
 export * from './modals/MessageModal';
