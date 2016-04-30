@@ -1,5 +1,5 @@
 import { ResolvedReflectiveProvider, ViewContainerRef } from 'angular2/core';
-import {Modal} from '../../providers/Modal';
+import {Modal} from '../../providers/modal_';
 import {IModalConfig, ModalConfig, BootstrapModalSize} from '../../models/ModalConfig';
 import {FluentAssign, FluentAssignMethod, setAssignMethod} from './../../framework/FluentAssign';
 import {ModalDialogInstance} from '../../models/ModalDialogInstance';

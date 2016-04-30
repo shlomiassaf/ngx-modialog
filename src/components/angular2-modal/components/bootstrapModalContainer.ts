@@ -7,7 +7,7 @@ import {
 } from 'angular2/core';
 
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
-import {Modal, ModalCompileConfig} from '../providers/Modal';
+import {Modal, ModalCompileConfig} from '../providers/modal_';
 
 /**
  * A component that acts as a top level container for an open modal window.

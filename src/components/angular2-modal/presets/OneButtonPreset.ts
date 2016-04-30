@@ -1,6 +1,6 @@
 import { ReflectiveInjector, provide , ResolvedReflectiveBinding} from 'angular2/core';
 import {FluentAssignMethod} from '../framework/FluentAssign';
-import {Modal} from '../providers/Modal';
+import {Modal} from '../providers/modal_';
 import {MessageModalContext, MessageModal} from '../modals/MessageModal';
 import {MessageModalPreset, MessageModalPresetData} from './base/MessageModalPreset';
 import {extend} from '../framework/Utils';
