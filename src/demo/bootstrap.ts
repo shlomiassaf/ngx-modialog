@@ -9,7 +9,7 @@ import {ELEMENT_PROBE_PROVIDERS} from 'angular2/platform/common_dom';
 // enableProdMode() // include for production builds
 
 import {App} from './app/app';
-import {ModalConfig} from 'angular2-modal';
+
 
 function main() {
     return bootstrap(App, [

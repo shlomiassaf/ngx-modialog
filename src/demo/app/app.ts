@@ -1,10 +1,12 @@
-import {Component, ViewContainerRef} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 
-import {Modal, MODAL_PROVIDERS} from 'angular2-modal';
-import {DemoPage} from './demoPage/demoPage';
-import {CustomizeWizard} from './customizeWizard/customizeWizard';
+import {Home} from './home/home';
+import {BootstrapDemo} from './bootstrap-demo/bootstrap-demo';
+import {VexDemo} from './vex-demo/vex-demo';
+import {JSNativeDemo} from './js-native-demo/js-native-demo';
+
 /*
  * App Component
  * Top Level Component
@@ -12,7 +14,7 @@ import {CustomizeWizard} from './customizeWizard/customizeWizard';
 @Component({
     selector: 'app', // <app></app>
     // We need to tell Angular's Dependency Injection which providers are in our app.
-    providers: [ ...FORM_PROVIDERS, ...MODAL_PROVIDERS],
+    providers: [ ...FORM_PROVIDERS],
     // We need to tell Angular's compiler which directives are in our template.
     // Doing so will allow Angular to attach our behavior to an element
     directives: [ ...ROUTER_DIRECTIVES],
@@ -22,21 +24,21 @@ import {CustomizeWizard} from './customizeWizard/customizeWizard';
     styles: [ ],
     // Every Angular template is first compiled by the browser before Angular runs it's compiler
     template: `
+    <a [routerLink]="['Home']">Home</a>
+    <a [routerLink]="['BootstrapDemo']">Bootstrap demo</a>
+    <a [routerLink]="['VexDemo']">Vex demo</a>
+    <a [routerLink]="['JSNativeDemo']">JS Native demo</a>
     <main>
       <router-outlet></router-outlet>
     </main>
   `
 })
 @RouteConfig([
-    { path: '/', component: DemoPage, name: 'Demo' },
-    { path: '/customizeModals', component: CustomizeWizard, name: 'CustomizeModals' }
+    { path: '/', component: Home, name: 'Home', useAsDefault: true },
+    { path: '/bootstrap-demo/...', component: BootstrapDemo, name: 'BootstrapDemo' },
+    { path: '/vex-demo', component: VexDemo, name: 'VexDemo' },
+    { path: '/js-native-demo', component: JSNativeDemo, name: 'JSNativeDemo' }
 ])
 export class App {
-    constructor(public modal: Modal, viewContainer: ViewContainerRef) {
-        /**
-         * A Default view container ref, usually the app root container ref.
-         * Has to be set manually until we can find a way to get it automatically.
-         */
-        modal.defaultViewContainer = viewContainer;
-    }
+    constructor() {}
 }

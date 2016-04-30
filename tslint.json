@@ -6,7 +6,7 @@
     "indent": "spaces",
     "max-line-length": [
       true,
-      100
+      105
     ],
     "member-ordering": [
       true,
@@ -20,7 +20,7 @@
     "no-duplicate-variable": true,
     "no-empty": false,
     "no-eval": true,
-    "no-trailing-whitespace": true,
+    "no-trailing-whitespace": false,
     "no-unused-expression": true,
     "no-unused-variable": false,
     "no-unreachable": true,
