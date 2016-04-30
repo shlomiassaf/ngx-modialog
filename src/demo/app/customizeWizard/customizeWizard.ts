@@ -1,12 +1,10 @@
-import { Component } from 'angular2/core';
+import {Component} from 'angular2/core';
 import {Modal, TwoButtonPresetData, TwoButtonPreset} from 'angular2-modal';
 let html = require('./customizeWizard.tpl.html');
 
 
 @Component({
     selector: 'customize-wizard',
-    directives: [],
-    providers: [Modal],
     template: html
 })
 export class CustomizeWizard {

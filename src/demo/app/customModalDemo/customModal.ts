@@ -1,7 +1,6 @@
-import {Component, Input} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
+import {Component} from 'angular2/core';
 
-import {Modal, ModalDialogInstance, ICustomModal, ICustomModalComponent} from 'angular2-modal';
+import {ModalDialogInstance, ICustomModal, ICustomModalComponent} from 'angular2-modal';
 
 export class AdditionCalculateWindowData {
     constructor(
@@ -15,7 +14,6 @@ export class AdditionCalculateWindowData {
  */
 @Component({
     selector: 'modal-content',
-    directives: [CORE_DIRECTIVES],
     styles: [`
         .custom-modal-container {
             padding: 15px;

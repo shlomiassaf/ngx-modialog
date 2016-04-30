@@ -13,7 +13,7 @@ export interface FooterButtonClickEvent {
     selector: 'modal-footer',
     template:
 `<div [ngClass]="footerClass">
-    <button *ngFor="#btn of buttons;"
+    <button *ngFor="let btn of buttons;"
             [ngClass]="btn.cssClass"
             (click)="onClick(btn, $event)">{{btn.caption}}</button>
 </div>`

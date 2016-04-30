@@ -1,15 +1,42 @@
-# Angular 2: Modal/Dialog window (with Bootstrap presets).
+# Angular 2 (beta.17): Modal/Dialog window (with Bootstrap presets).
 
 A fully generic, customizable and fluent modal window implementation for Angular 2 with built in Bootstrap support.  
 Generic means it can support any CSS framework or be a standalone, supply a Component, replace some Tokens and add some presets (optional) and you have an identical fluent API modal for your framework of choice.
 
->**DISCLAIMER**  
->
->Angular 2 is still in the works. The core concepts are solid, but the API may change. If you find that a code snippet that does not work, please message me, and I will update.
+>**DISCLAIMER**
+Angular 2 is still in the works. The core concepts are solid, but the API may change. If you find that a code snippet that does not work, please message me, and I will update.
  
-## Built with angular 2 Beta
+## Built with angular 2 Beta 17
 
-## Features:  
+## Breaking changing from 0.1.4 to 0.1.5 (angular2 beta 15 to beta 17)
+See [here](https://github.com/shlomiassaf/angular2-modal/tree/master/CHANGELOG.md)
+
+## Note: Next major version, 1.0.0
+The next major version of angular2-modal will be ui platform/framework agnostic.
+
+UI platforms/framework will describe their UI implementation and register with `angular2-modal` via angular's DI module.  
+This means virtually any modal implementation out there can be ported into `angular2-modal`.
+`angular2-modal' will come with some built in UI platforms, external UI platform can be added in the future or externally used using NPM modules.
+
+`angular2-modal` makes heavy use of angular's dependency injection module to provide abstraction around modal creation so creating a plugin is straight forward.
+This will also make customization a lot easier.
+##### The current beta of 1.0.0 implements the following UI platforms:
+  
+  * Bootstrap's modal
+  * [Vex](http://github.hubspot.com/vex/docs/welcome/) (WIP) 
+  * POC implementation of JS Native modal (window.alert/prompt/confirm) to demonstrate a hostile takeover :)
+
+Developer's using ES6 modules will import the providers for the UI platform of their choice.
+
+End users of `angular2-modal` should expect mild breaking API changes in 1.0.0   
+If you are currently extending `angular2-modal` you should expect some refactoring of your work. 1.0.0 include changes in:
+  * File structure (UI platform holds it's own presets...)
+  * File naming convention (moving to snake-case)
+  * The logic to extend `angular2-modal`
+  
+1.0.0 is 70% complete.  
+ 
+## Features  
 
   - Easy to use API via Fluent API Presets (alert, propmt, confirm)
   - Fully customizable.
@@ -44,38 +71,6 @@ See [src/demo](https://github.com/shlomiassaf/angular2-modal/tree/master/src/dem
 
 Will try to add documented examples if time allows.
 
-## ~~Known issue - DI exception:~~  
-Issues fixed in angular2.0-beta.6
-
-~~If you encounter a version of the following exception:~~
-
-```
-EXCEPTION: No provider for XXXXX! (YYYYY -> XXXXX)
-```
-
-~~Where YYYYY will usually be a directive you've injected to a custom modal component you've built.~~
-
-~~This is an error raised by angular core because it can't find a resolved providers for injectable tokens request by~~
-~~the directive/s you want to use within your component.~~
-~~These providers are common runtime objects that angular should know how to fetch, even if not defined.~~
-~~There is a bug opend here [angular/angular#4330](https://github.com/angular/angular/issues/4330).~~
-
-~~To workaround this issue supply these values in the resolved bindings array sent as a parameter ~~
-~~to "open" or "openInside" calls.~~
-
-    let bindings = Injector.resolve([
-                provide(IterableDiffers, {useValue: this.injector.get(IterableDiffers)}),
-                provide(KeyValueDiffers, {useValue: this.injector.get(KeyValueDiffers)}),
-                provide(Renderer, {useValue: this.injector.get(Renderer)})
-            ]);
-                   
-    let dialog = modal.openInside(..., ..., ..., bindings, ...);
-
-~~click for [example](https://github.com/shlomiassaf/angular2-modal/blob/master/src/demo/app/demoPage/demoPage.ts#L58-L63)~~
-
-~~Another workaround that might work is to supply the resolved providers as part of the bootstrap process. ~~
-~~I'm not sure it will work as it depends on the life cycle logic of the injected values which I don't know deeply enough.~~
-~~If you got it to work let me know.~~
 
 ## Installation
 ```
@@ -101,20 +96,6 @@ I created a `publish` directory instead and set the `--project` argument accordi
 # Issues and TODO's
 ## Animation
 Not so complicated but not in angular 2 at the moment.
-
-## Module
-Set webpack do build angular2-module.js as an initial webpack module (currently its not...)
-This will allow using it as an input for other projects.
-
-## ~~Minimize DOM interaction~~
-~~Reduce manual DOM interaction, do more usage of `host` object in `@Component`.~~
-~~Append child to the DOM using the angular 2 way, if you know tell me.~~
- 
-## Allow Element blocking modal to be set on any element.
-Currently blocking an element requires it to have an angular template variable placed in one of his children.
-This is due to the current angular implementation, as I see it.
-I have yet to find an angular way of inserting a compiled element to a native element/component without effecting it.
-See issue [6071](https://github.com/angular/angular/issues/6071)
 
 ## Bootstrap free / ShadowDOM
 Make it fly solo....

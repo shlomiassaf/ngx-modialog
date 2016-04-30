@@ -1,4 +1,4 @@
-import { Injector, provide , ResolvedBinding} from 'angular2/core';
+import { ReflectiveInjector, provide , ResolvedReflectiveBinding} from 'angular2/core';
 import {FluentAssignMethod} from '../framework/FluentAssign';
 import {Modal} from '../providers/Modal';
 import {MessageModalContext, MessageModal} from '../modals/MessageModal';
@@ -6,7 +6,7 @@ import {MessageModalPreset, MessageModalPresetData} from './base/MessageModalPre
 import {extend} from '../framework/Utils';
 
 
-function createBindings(config: OneButtonPresetData): ResolvedBinding[] {
+function createBindings(config: OneButtonPresetData): ResolvedReflectiveBinding[] {
     config.buttons = [
         {
             cssClass: config.okBtnClass,
@@ -16,7 +16,7 @@ function createBindings(config: OneButtonPresetData): ResolvedBinding[] {
         }
     ];
 
-    return Injector.resolve([
+    return ReflectiveInjector.resolve([
         provide(MessageModalContext, {useValue: config})
     ]);
 }
