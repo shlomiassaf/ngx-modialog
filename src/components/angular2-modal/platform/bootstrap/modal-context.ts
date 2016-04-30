@@ -1,4 +1,4 @@
-import {ModalContextBuilder, ModalContext} from '../../models/modal-context';
+import {ModalOpenContext, ModalOpenContextBuilder} from '../../models/modal-open-context';
 import {FluentAssignMethod} from './../../framework/fluent-assign';
 import {extend, arrayUnion} from './../../framework/utils';
 
@@ -17,7 +17,7 @@ const DEFAULT_SETTERS = [
 
 export type BootstrapModalSize = 'sm' | 'lg';
 
-export class BSModalContext extends ModalContext {
+export class BSModalContext extends ModalOpenContext {
     /**
      * A Class for the modal dialog container.
      * Default: modal-dialog
@@ -51,7 +51,7 @@ export class BSModalContext extends ModalContext {
 }
 
 
-export class BSModalContextBuilder<T extends BSModalContext> extends ModalContextBuilder<T> {
+export class BSModalContextBuilder<T extends BSModalContext> extends ModalOpenContextBuilder<T> {
 
     constructor(
         defaultValues: T = undefined,

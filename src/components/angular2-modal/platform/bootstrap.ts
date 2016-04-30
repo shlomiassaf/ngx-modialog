@@ -17,7 +17,7 @@ export {
     MessageModalPreset,
     MessageModalPresetBuilder
 } from './bootstrap/presets/message-modal-preset';
-export {ModalAwarePreset, ModalAwarePresetBuilder} from './bootstrap/presets/modal-aware-preset';
+export {ModalOpenContext, ModalOpenContextBuilder} from './../models/modal-open-context';
 export {OneButtonPreset, OneButtonPresetBuilder} from './bootstrap/presets/one-button-preset';
 export {TwoButtonPreset, TwoButtonPresetBuilder} from './bootstrap/presets/two-button-preset';
 export {Modal} from './bootstrap/modal';

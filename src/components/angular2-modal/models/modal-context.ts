@@ -47,8 +47,8 @@ export class ModalContext {
 }
 
 /**
- * A configuration definition object.
- * Instruction for how to show a modal.
+ * A core context builder for a modal window instance, used to define the context upon
+ * a modal choose it's behaviour.
  */
 @Injectable()
 export class ModalContextBuilder<T extends ModalContext> extends FluentAssign<T> {

@@ -1,33 +1,27 @@
 import {ResolvedReflectiveProvider, ViewContainerRef} from 'angular2/core';
-import {FluentAssignMethod} from '../../../framework/fluent-assign';
-import {ModalComponent} from '../../../models/tokens';
-import {Modal} from '../../../providers/modal';
-import {DialogRef} from '../../../models/dialog-ref';
-import {ModalControllingContextBuilder} from '../../../models/modal-context';
-import {BSModalContextBuilder, BSModalContext} from '../modal-context';
-import {arrayUnion} from '../../../framework/utils';
+import {FluentAssignMethod} from '../framework/fluent-assign';
+import {ModalComponent} from './tokens';
+import {Modal} from '../providers/modal';
+import {DialogRef} from './dialog-ref';
+import {ModalContext, ModalContextBuilder, ModalControllingContextBuilder} from './modal-context';
+import {arrayUnion} from '../framework/utils';
 
 const DEFAULT_SETTERS = [
     'component'
 ];
 
-export interface ModalAwarePreset extends BSModalContext {
+export class ModalOpenContext extends ModalContext {
     component: any;
     modal: Modal;
 }
 
 /**
- * A Preset that knows about the modal service, and so can open a modal window on demand.
+ * A Modal Context that knows about the modal service, and so can open a modal window on demand.
  * Use the fluent API to configure the preset and then invoke the 'open' method to open a modal
- * based on the preset.
- * ModalAwarePreset occupy the following properties:
- * - ModalConfig (size, isBlocking, keyboard): You can set them, if not they will get the 
- * default values defined in the Modal service.  
- * - component, modal, bindings: Preset values needed to fire up the modal.
- * - open: A Method used to open the modal window.
+ * based on the context.
  */
-export abstract class ModalAwarePresetBuilder<T extends ModalAwarePreset>
-                                                    extends BSModalContextBuilder<T>
+export abstract class ModalOpenContextBuilder<T extends ModalOpenContext>
+                                                    extends ModalContextBuilder<T>
                                                     implements ModalControllingContextBuilder<T> {
 
     constructor(

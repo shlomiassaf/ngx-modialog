@@ -1,6 +1,6 @@
 import {FluentAssignMethod, privateKey} from '../../../framework/fluent-assign';
 import {BSMessageModalButtonConfig, BSMessageModalButtonHandler} from '../message-modal';
-import {ModalAwarePresetBuilder, ModalAwarePreset} from './modal-aware-preset';
+import {BSModalContext, BSModalContextBuilder} from '../modal-context';
 import {BSMessageModal} from '../message-modal';
 import {extend, arrayUnion} from '../../../framework/utils';
 
@@ -25,7 +25,7 @@ const DEFAULT_SETTERS = [
 /**
  * Data definition
  */
-export interface MessageModalPreset extends ModalAwarePreset {
+export interface MessageModalPreset extends BSModalContext {
 
     /**
      * A Class for the header (title) container.
@@ -77,7 +77,7 @@ export interface MessageModalPreset extends ModalAwarePreset {
  * Use derived implementation.
  */
 export abstract class MessageModalPresetBuilder<T extends MessageModalPreset>
-                                                                extends ModalAwarePresetBuilder<T> {
+                                                                extends BSModalContextBuilder<T> {
 
     constructor(
         defaultValues: T = undefined,
