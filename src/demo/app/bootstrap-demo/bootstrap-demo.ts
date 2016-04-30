@@ -1,20 +1,15 @@
 import {Component, ViewEncapsulation, ViewContainerRef} from 'angular2/core';
 import {RouterOutlet, RouteConfig} from 'angular2/router';
 
-import {Modal, MODAL_PROVIDERS} from 'angular2-modal';
-import {BS_MODAL_PROVIDERS} from '../../../components/angular2-modal/platform/bootstrap';
+import {Modal, BS_MODAL_PROVIDERS} from '../../../components/angular2-modal/platform/bootstrap';
 
 import {BootstrapDemoPage} from './bootstrap-demo-page/bootstrap-demo-page';
 import {ModalCustomisationWizard} from './modal-customisation-wizard/modal-customisation-wizard';
 
-
 @Component({
     selector: 'bootstrap-demo',
     styles: [ require('bootstrap/dist/css/bootstrap.css') ],
-    viewProviders: [
-        ...MODAL_PROVIDERS,
-        ...BS_MODAL_PROVIDERS
-    ],
+    viewProviders: [ ...BS_MODAL_PROVIDERS ],
     template: '<router-outlet></router-outlet>',
     directives: [RouterOutlet],
     encapsulation: ViewEncapsulation.None

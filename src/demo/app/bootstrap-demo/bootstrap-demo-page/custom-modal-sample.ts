@@ -63,7 +63,7 @@ export class AdditionCalculateWindow implements ModalComponent<AdditionCalculate
     }
 
     onKeyUp(value) {
-        /* tslint:disable */ this.wrongAnswer = value != 5;
+        this.wrongAnswer = value != 5;
         this.dialog.close();
     }
 

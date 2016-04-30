@@ -29,8 +29,7 @@ export class DialogRef<T> {
      *  Close the modal with a return value, i.e: result.
      */
     close(result: any = null) {
-        if ( this.contentRef.instance.beforeClose &&
-                this.contentRef.instance.beforeClose() === true ) return;
+        if (this._fireHook<boolean>('beforeClose') === true) return;
         this.destroy();
         this._resultDeferred.resolve(result);
     }
@@ -43,12 +42,21 @@ export class DialogRef<T> {
      *  Usually, dismiss represent a Cancel button or a X button.
      */
     dismiss() {
-        if ( this.contentRef.instance.beforeDismiss &&
-            this.contentRef.instance.beforeDismiss() === true ) return;
+        if (this._fireHook<boolean>('beforeDismiss') === true) return;
         this.destroy();
         this._resultDeferred.reject();
     }
 
-
     destroy() {}
+
+    private _fireHook<T>(name: 'beforeClose' | 'beforeDismiss'): T {
+        let instance = this.contentRef && this.contentRef.instance,
+            fn = instance && typeof instance[name] === 'function' && instance[name];
+
+        if (fn) {
+            return fn.call(instance);
+        } else {
+            return undefined;
+        }
+    }
 }

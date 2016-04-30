@@ -1,14 +1,13 @@
 import {
     ReflectiveInjector,
-    ComponentRef,
-    ViewContainerRef, 
+    ViewContainerRef,
     provide,
     Injectable,
     ResolvedReflectiveProvider,
     Optional
 } from 'angular2/core';
 import {
-    BackdropRenderer,
+    ModalRenderer,
     ModalCompileConfig,
     ModalBackdropComponent,
     ModalDropInFactory
@@ -47,7 +46,7 @@ export class Modal {
     public defaultViewContainer: ViewContainerRef;
     private _dropIn: ModalDropInFactory;
 
-    constructor(private _bdRenderer: BackdropRenderer,
+    constructor(private _modalRenderer: ModalRenderer,
                 private _backdrop: ModalBackdropComponent,
                 @Optional() _dropIn: ModalDropInFactory) {
         this._dropIn = normalizeDropInFactory(_dropIn);
@@ -106,15 +105,13 @@ export class Modal {
 
         let b = ReflectiveInjector.resolve([
             provide(Modal, {useValue: this}),
-            provide(BackdropRenderer, {useValue: this._bdRenderer}),
+            provide(ModalRenderer, {useValue: this._modalRenderer}),
             provide(DialogRef, {useValue: dialog}),
             provide(ModalCompileConfig, {useValue: compileConfig})
         ]);
 
-
-        return this._bdRenderer.createBackdrop(this._backdrop, viewContainer, b, dialog.inElement)
-            .then( (backdropRef: ComponentRef) => {
-                dialog.destroy = () => backdropRef.destroy();
+        return this._modalRenderer.render(this._backdrop, viewContainer, b, dialog)
+            .then(dialog => {
                 _stack.pushManaged(dialog);
                 return dialog;
             });

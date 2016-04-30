@@ -1,5 +1,6 @@
 import {provide} from 'angular2/core';
-import {ModalBackdropComponent, ModalDropInFactory} from '../models/tokens';
+import {ModalBackdropComponent, ModalDropInFactory, MODAL_PROVIDERS} from 'angular2-modal';
+
 import {BSModalBackdrop} from './bootstrap/modal-backdrop';
 import {OneButtonPresetBuilder} from './bootstrap/presets/one-button-preset';
 import {TwoButtonPresetBuilder} from './bootstrap/presets/two-button-preset';
@@ -22,6 +23,7 @@ export {TwoButtonPreset, TwoButtonPresetBuilder} from './bootstrap/presets/two-b
 export {Modal} from './bootstrap/modal';
 
 export const BS_MODAL_PROVIDERS: any[] = [
+    ...MODAL_PROVIDERS,
     provide(Modal, {useClass: Modal}),
     provide(ModalBackdropComponent, {useValue: BSModalBackdrop}),
     provide(ModalDropInFactory, {useValue: {

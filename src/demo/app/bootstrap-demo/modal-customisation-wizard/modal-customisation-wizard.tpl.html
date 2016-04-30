@@ -37,12 +37,19 @@
                         </div>
                     </div>
 
-                    <!-- Multiple Checkboxes (inline) -->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="checkbox">Blocking?</label>
                         <div class="col-md-6">
                             <input type="checkbox" name="checkbox" id="checkbox"
                                    [(ngModel)]="preset.isBlocking">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="showClose">Show Close Button?</label>
+                        <div class="col-md-6">
+                            <input type="checkbox" name="checkbox" id="showClose"
+                                   [(ngModel)]="preset.showClose">
                         </div>
                     </div>
 

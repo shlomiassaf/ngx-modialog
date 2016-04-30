@@ -1,5 +1,4 @@
 import {
-    ComponentRef,
     ViewContainerRef,
     ResolvedReflectiveProvider,
     Type
@@ -27,13 +26,12 @@ export class ModalCompileConfig {
     constructor(public component: Type, public bindings: ResolvedReflectiveProvider[]) {}
 }
 
-export abstract class BackdropRenderer {
-    public abstract createBackdrop(
-        type: Type,
-        viewContainer: ViewContainerRef,
-        bindings: ResolvedReflectiveProvider[],
-        inside: boolean
-    ): Promise<ComponentRef>;
+export abstract class ModalRenderer {
+    public abstract render(type: Type,
+           viewContainer: ViewContainerRef,
+           bindings: ResolvedReflectiveProvider[],
+           dialog: DialogRef<any>
+    ): Promise<DialogRef<any>>;
 }
 
 export abstract class ModalBackdropComponent extends Type {}

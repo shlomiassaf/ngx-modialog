@@ -5,6 +5,7 @@ import {FORM_PROVIDERS} from 'angular2/common';
 import {Home} from './home/home';
 import {BootstrapDemo} from './bootstrap-demo/bootstrap-demo';
 import {VexDemo} from './vex-demo/vex-demo';
+import {JSNativeDemo} from './js-native-demo/js-native-demo';
 
 /*
  * App Component
@@ -26,6 +27,7 @@ import {VexDemo} from './vex-demo/vex-demo';
     <a [routerLink]="['Home']">Home</a>
     <a [routerLink]="['BootstrapDemo']">Bootstrap demo</a>
     <a [routerLink]="['VexDemo']">Vex demo</a>
+    <a [routerLink]="['JSNativeDemo']">JS Native demo</a>
     <main>
       <router-outlet></router-outlet>
     </main>
@@ -34,7 +36,8 @@ import {VexDemo} from './vex-demo/vex-demo';
 @RouteConfig([
     { path: '/', component: Home, name: 'Home', useAsDefault: true },
     { path: '/bootstrap-demo/...', component: BootstrapDemo, name: 'BootstrapDemo' },
-    { path: '/vex-demo', component: VexDemo, name: 'VexDemo' }
+    { path: '/vex-demo', component: VexDemo, name: 'VexDemo' },
+    { path: '/js-native-demo', component: JSNativeDemo, name: 'JSNativeDemo' }
 ])
 export class App {
     constructor() {}

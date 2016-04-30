@@ -17,6 +17,7 @@ export class ModalCustomisationWizard {
     public preset: TwoButtonPreset = <any>{
         size: 'lg',
         isBlocking: true,
+        showClose: true,
         keyboard: 27,
         dialogClass: '',
         headerClass: '',
@@ -38,7 +39,6 @@ export class ModalCustomisationWizard {
         for (let key in p) {
             let value = p[key];
             if (value === null || value === '') continue;
-            console.log(key);
             fluent[key](value);
         }
 

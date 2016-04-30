@@ -1,5 +1,4 @@
 import {
-    ComponentRef,
     ViewContainerRef,
     DynamicComponentLoader,
     Renderer,
@@ -8,21 +7,21 @@ import {
     Type
 } from 'angular2/core';
 
-import {BackdropRenderer} from '../models/tokens';
+import {DialogRef} from '../models/dialog-ref';
+import {ModalRenderer} from '../models/tokens';
 
 @Injectable()
-export class DOMBackdropRenderer implements BackdropRenderer {
+export class DOMModalRenderer implements ModalRenderer {
     constructor(private _dlc: DynamicComponentLoader,
                 private _renderer: Renderer) {}
 
-    public createBackdrop(type: Type, viewContainer: ViewContainerRef,
-                          bindings: ResolvedReflectiveProvider[], 
-                          inside: boolean): Promise<ComponentRef> {
-
+    render(type: Type,
+           viewContainer: ViewContainerRef,
+           bindings: ResolvedReflectiveProvider[],
+           dialog: DialogRef<any>): Promise<DialogRef<any>> {
         return this._dlc.loadNextToLocation(type, viewContainer, bindings)
             .then((cmpRef: any) => {
-               
-                if (inside) {
+                if (dialog.inElement) {
                     this._renderer.invokeElementMethod(
                         viewContainer.element.nativeElement,
                         'appendChild',
@@ -31,7 +30,10 @@ export class DOMBackdropRenderer implements BackdropRenderer {
                 } else {
                     document.body.appendChild(cmpRef.hostView.rootNodes[0]);
                 }
-                return cmpRef;
+
+                dialog.destroy = () => cmpRef.destroy();
+
+                return dialog;
             });
     }
 }

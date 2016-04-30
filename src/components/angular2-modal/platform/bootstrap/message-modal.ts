@@ -42,6 +42,10 @@ export interface BSMessageModalButtonConfig {
     encapsulation: ViewEncapsulation.None,
     template:
     `<div [ngClass]="context.headerClass" [ngSwitch]="titleHtml">
+        <button *ngIf="context.showClose" type="button" class="close" 
+                aria-label="Close" (click)="dialog.dismiss()">
+            <span aria-hidden="true">×</span>
+        </button>
         <div *ngSwitchWhen="1" [innerHtml]="context.titleHtml"></div>
         <h3 *ngSwitchDefault class="modal-title">{{context.title}}</h3>
     </div>

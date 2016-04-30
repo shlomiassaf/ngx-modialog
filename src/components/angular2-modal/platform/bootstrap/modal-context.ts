@@ -4,12 +4,14 @@ import {extend, arrayUnion} from './../../framework/utils';
 
 const DEFAULT_VALUES = {
     size: <BootstrapModalSize>'lg',
-    dialogClass: 'modal-dialog'
+    dialogClass: 'modal-dialog',
+    showClose: false
 };
 
 const DEFAULT_SETTERS = [
     'dialogClass',
-    'size'
+    'size',
+    'showClose'
 ];
 
 
@@ -29,6 +31,12 @@ export class BSModalContext extends ModalContext {
      * Default to 'lg'
      */
     size: BootstrapModalSize;
+
+    /**
+     * When true, show a close button on the top right corner.
+     */
+    showClose: boolean;
+    
 
     normalize(): void {
         if (!this.size)
@@ -70,5 +78,10 @@ export class BSModalContextBuilder<T extends BSModalContext> extends ModalContex
      * Default: modal-dialog
      */
     dialogClass: FluentAssignMethod<BootstrapModalSize, this>;
+
+    /**
+     * When true, show a close button on the top right corner.
+     */
+    showClose: FluentAssignMethod<boolean, this>;
 }
 
