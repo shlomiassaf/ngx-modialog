@@ -70,7 +70,7 @@ export class Modal {
      * @param config A Modal Configuration object.
      * @returns {Promise<ModalDialogInstance>}
      */
-    public open(component: FunctionConstructor, 
+    public open(component: FunctionConstructor,
                 bindings: ResolvedReflectiveProvider[],
                 config?: ModalConfig): Promise<ModalDialogInstance> {
         return this.openInside(component, this.defaultViewContainer, bindings, config);
@@ -84,7 +84,7 @@ export class Modal {
      * @param config A Modal Configuration object.
      * @returns {Promise<ModalDialogInstance>}
      */
-    public openInside(component: FunctionConstructor, 
+    public openInside(component: FunctionConstructor,
                       viewContainer: ViewContainerRef,
                       bindings: ResolvedReflectiveProvider[],
                       config?: ModalConfig): Promise<ModalDialogInstance> {
@@ -100,7 +100,7 @@ export class Modal {
             provide(ModalDialogInstance, {useValue: dialog}),
             provide(ModalCompileConfig, {useValue: compileConfig})
         ]);
-        
+
         return this.createBackdrop(viewContainer, dialogBindings, dialog.inElement)
             .then( (backdropRef: ComponentRef) => {
                 // killing the root (backdrop) will cascade automatically.
@@ -126,7 +126,7 @@ export class Modal {
      * @param  attachToBody Attach to body or leave in the original view of the viewContainer.
      * @returns {Promise<ComponentRef>}
      */
-    private createBackdrop(viewContainer: ViewContainerRef, 
+    private createBackdrop(viewContainer: ViewContainerRef,
                            bindings: ResolvedReflectiveProvider[],
                            attachToBody: boolean): Promise<ComponentRef> {
         return this._dcl.loadNextToLocation(ModalBackdrop, viewContainer, bindings)

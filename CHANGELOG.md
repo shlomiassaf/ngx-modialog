@@ -9,7 +9,7 @@
     This can be handy for advanced scenarios but for most cases setting the default view container once is what you should do. 
     If you set it once from in the top level component don’t request the Modal in the providers property of a component meta, if you do so you will get a new instance of `Modal`.
     **This is how a setting it once looks:**
-    ```ts
+```ts
     @Component({
         selector: 'app', 
         providers: [ ...MODAL_PROVIDERS], // list of angular2-modal tokens, Modal included.
@@ -28,17 +28,17 @@
             modal.defaultViewContainer = viewContainer;
         }
     }
-    ```
-    From here on, there's no need to require a new provider for `Modal`      
-    So **don't** do this:
-    ```ts
+```
+From here on, there's no need to require a new provider for `Modal`      
+So **don't** do this:
+```ts
         @Component({
             selector: 'myComponent', 
             providers: [Modal], // results in a brand new instance of Modal
             template: `<h1>My Component></h1>`
         })
         export class MyComponent {}
-    ```
+```
 
 ## Generic type changes from angular2@2.0.0-beta.16
   * Every `ResolveProvider` is now `ResolvedReflectiveProviders`

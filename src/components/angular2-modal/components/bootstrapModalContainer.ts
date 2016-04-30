@@ -40,7 +40,7 @@ import {Modal, ModalCompileConfig} from '../providers/Modal';
 export class BootstrapModalContainer implements AfterViewInit {
     public position: string;
     @ViewChild('modalDialog', {read: ViewContainerRef}) private _viewContainer: ViewContainerRef;
-    
+
     constructor(public dialog: ModalDialogInstance,
                 private _modal: Modal,
                 private _dlc: DynamicComponentLoader,
@@ -59,7 +59,7 @@ export class BootstrapModalContainer implements AfterViewInit {
                 this._compileConfig.bindings)
             .then(contentRef => this.dialog.contentRef = contentRef);
     }
-    
+
     onContainerClick($event: any) {
         $event.stopPropagation();
     }
