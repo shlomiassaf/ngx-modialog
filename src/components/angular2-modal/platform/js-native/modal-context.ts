@@ -1,4 +1,4 @@
-import {ModalContextBuilder, ModalContext} from '../../models/modal-context';
+import {ModalOpenContextBuilder, ModalOpenContext} from '../../models/modal-open-context';
 import {FluentAssignMethod} from './../../framework/fluent-assign';
 import {arrayUnion} from './../../framework/utils';
 
@@ -13,7 +13,7 @@ export enum JS_NATIVE_DIALOG_TYPE {
     confirm
 }
 
-export class JSNativeModalContext extends ModalContext {
+export class JSNativeModalContext extends ModalOpenContext {
     message: string;
     promptDefault: string;
     dialogType: JS_NATIVE_DIALOG_TYPE;
@@ -26,7 +26,7 @@ export class JSNativeModalContext extends ModalContext {
 
 
 export class JSNativeModalContextBuilder<T extends JSNativeModalContext>
-                                                                    extends ModalContextBuilder<T> {
+                                                                extends ModalOpenContextBuilder<T> {
 
     constructor(
         defaultValues: T = undefined,
