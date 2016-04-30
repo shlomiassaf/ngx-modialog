@@ -19,7 +19,7 @@ import {VexModalContent} from './modal-content';
 })
 export class VexModalBackdrop {
 
-    constructor(dialog: DialogRef) {
+    constructor(dialog: DialogRef<any>) {
     }
 
     

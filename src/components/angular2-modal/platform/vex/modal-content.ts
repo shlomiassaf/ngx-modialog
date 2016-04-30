@@ -10,6 +10,7 @@ import {
 import {ModalCompileConfig} from '../../models/tokens';
 import {DialogRef} from '../../models/dialog-ref';
 import {Modal} from '../../providers/modal';
+import {supportsKey} from '../../framework/utils';
 
 /**
  * A component that acts as a top level container for an open modal window.
@@ -28,7 +29,7 @@ export class VexModalContent implements AfterViewInit {
     
     @ViewChild('modalDialog', {read: ViewContainerRef}) private _viewContainer: ViewContainerRef;
 
-    constructor(public dialogRef: DialogRef,
+    constructor(public dialog: DialogRef<any>,
                 private _compileConfig: ModalCompileConfig,
                 private _modal: Modal,
                 private _dlc: DynamicComponentLoader) {
@@ -39,7 +40,7 @@ export class VexModalContent implements AfterViewInit {
             .loadNextToLocation(this._compileConfig.component,
                 this._viewContainer,
                 this._compileConfig.bindings)
-            .then(contentRef => this.dialogRef.contentRef = contentRef);
+            .then(contentRef => this.dialog.contentRef = contentRef);
     }
 
     onContainerClick($event: any) {
@@ -47,16 +48,16 @@ export class VexModalContent implements AfterViewInit {
     }
 
     onClick() {
-        return !this.dialogRef.config.isBlocking && this.dialogRef.dismiss();
+        return !this.dialog.context.isBlocking && this.dialog.dismiss();
     }
 
     documentKeypress(event: KeyboardEvent) {
         // check that this modal is the last in the stack.
-        if (!this._modal.isTopMost(this.dialogRef)) return;
+        if (!this._modal.isTopMost(this.dialog)) return;
 
 
-        if (this.dialogRef.config.supportsKey(event.keyCode)) {
-            this.dialogRef.dismiss();
+        if (supportsKey(event.keyCode, this.dialog.context.keyboard)) {
+            this.dialog.dismiss();
         }
     }
 }

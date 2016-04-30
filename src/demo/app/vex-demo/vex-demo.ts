@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, ViewContainerRef} from 'angular2/core';
 
-import {ModalConfig, Modal, ModalContext, DialogRef, MODAL_PROVIDERS} from 'angular2-modal';
+import {Modal, DialogRef, MODAL_PROVIDERS} from 'angular2-modal';
 
 import {VEX_MODAL_PROVIDERS, VexMessageModal} from '../../../components/angular2-modal/platform/vex';
 
@@ -19,7 +19,7 @@ import {VEX_MODAL_PROVIDERS, VexMessageModal} from '../../../components/angular2
     encapsulation: ViewEncapsulation.None
 })
 export class VexDemo {
-    public modal: Modal
+    public modal: Modal;
 
     constructor(public modal: Modal, viewContainer: ViewContainerRef) {
         /**
@@ -29,7 +29,7 @@ export class VexDemo {
         this.modal.defaultViewContainer = viewContainer;
     }
 
-    processDialog(dialog: Promise<DialogRef>) {
+    processDialog(dialog: Promise<DialogRef<any>>) {
         dialog.then((resultPromise) => {
             return resultPromise.result;
         });
@@ -37,9 +37,7 @@ export class VexDemo {
 
     open() {
             let dialog = this.modal.open(
-                <any>VexMessageModal,
-                [],
-                new ModalConfig('lg', true, 27)
+                <any>VexMessageModal
             );
         this.processDialog(dialog);
     }

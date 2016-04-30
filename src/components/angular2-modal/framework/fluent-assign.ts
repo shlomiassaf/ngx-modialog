@@ -21,7 +21,7 @@ function getAssignedPropertyNames(subject: any): string[] {
         .map(name => name.substr(2));
 }
 
-function privateKey(name: string): string {
+export function privateKey(name: string): string {
     return PRIVATE_PREFIX + name;
 }
 
@@ -112,13 +112,17 @@ export class FluentAssignFactory<T> {
  // { some: 'thing', went: 'wrong' }
  */
 export class FluentAssign<T> {
+    private __fluent$base__: new () => T;
 
     /**
      *
      * @param defaultValues An object representing default values for the underlying object.
      * @param initialSetters A list of initial setters for this FluentAssign.
+     * @param baseType the class/type to create a new base. optional, {} is used if not supplied.
      */
-    constructor(defaultValues: T = undefined, initialSetters: string[] = undefined) {
+    constructor(defaultValues: T = undefined,
+                initialSetters: string[] = undefined,
+                baseType: new () => T = undefined) {
         if (defaultValues) {
             Object.getOwnPropertyNames(defaultValues)
                 .forEach(name => (<any>this)[privateKey(name)] = (<any>defaultValues)[name]);
@@ -126,6 +130,10 @@ export class FluentAssign<T> {
 
         if (Array.isArray(initialSetters)) {
             initialSetters.forEach(name => setAssignMethod(this, name));
+        }
+
+        if (baseType) {
+            this.__fluent$base__ = baseType;
         }
     }
 
@@ -158,6 +166,6 @@ export class FluentAssign<T> {
             .reduce((obj: T, name: string) => {
                 (<any>obj)[name] = (<any>this)[privateKey(name)];
                 return obj;
-            }, <T><any>{});
+            }, this.__fluent$base__ ? new this.__fluent$base__() : <any>{});
     }
 }

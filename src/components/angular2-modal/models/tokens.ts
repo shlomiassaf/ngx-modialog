@@ -5,15 +5,12 @@ import {
     Type
 } from 'angular2/core';
 
+import {Modal} from '../providers/modal';
 import {DialogRef} from './dialog-ref';
+import {ModalControllingContextBuilder} from '../models/modal-context';
 
-/**
- * A Type used as a binding key for dialog window Components
- */
-export class ModalContext {}
-
-export interface ModalComponent {
-    dialog: DialogRef;
+export interface ModalComponent<T> {
+    dialog: DialogRef<T>;
 
     /**
      * Invoked before a modal is dismissed, return true to cancel dismissal.
@@ -27,7 +24,7 @@ export interface ModalComponent {
 }
 
 export class ModalCompileConfig {
-    constructor(public component: Type, public bindings: ResolvedReflectiveProvider[]){}
+    constructor(public component: Type, public bindings: ResolvedReflectiveProvider[]) {}
 }
 
 export abstract class BackdropRenderer {
@@ -40,3 +37,9 @@ export abstract class BackdropRenderer {
 }
 
 export abstract class ModalBackdropComponent extends Type {}
+
+export class ModalDropInFactory {
+    alert: <T>(modal: Modal) => ModalControllingContextBuilder<T>;
+    prompt: <T>(modal: Modal) => ModalControllingContextBuilder<T>;
+    confirm: <T>(modal: Modal) => ModalControllingContextBuilder<T>;
+}

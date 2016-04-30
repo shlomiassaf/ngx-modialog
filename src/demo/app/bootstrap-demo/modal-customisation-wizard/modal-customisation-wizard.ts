@@ -1,16 +1,20 @@
-import { Component } from 'angular2/core';
-import {Modal, TwoButtonPresetData, TwoButtonPreset} from 'angular2-modal';
-let html = require('./customizeWizard.tpl.html');
+import {Component} from 'angular2/core';
+import {Modal} from 'angular2-modal';
+import {
+    TwoButtonPreset,
+    TwoButtonPresetBuilder
+} from '../../../../components/angular2-modal/platform/bootstrap';
+
+let html = require('./modal-customisation-wizard.tpl.html');
 
 
 @Component({
     selector: 'customize-wizard',
-    directives: [],
     template: html
 })
-export class CustomizeWizard {
+export class ModalCustomisationWizard {
     type: 'alert' | 'prompt' | 'confirm' = 'alert';
-    public preset: TwoButtonPresetData = <any>{
+    public preset: TwoButtonPreset = <any>{
         size: 'lg',
         isBlocking: true,
         keyboard: 27,
@@ -25,15 +29,16 @@ export class CustomizeWizard {
         okBtnClass: '',
     };
 
-    constructor(private modal: Modal) {}
+    constructor(public modal: Modal) {}
 
     createModal() {
         let p = this.preset;
 
-        let fluent: TwoButtonPreset = <any>this.modal[this.type]();
+        let fluent: TwoButtonPresetBuilder = <any>this.modal[this.type]();
         for (let key in p) {
             let value = p[key];
             if (value === null || value === '') continue;
+            console.log(key);
             fluent[key](value);
         }
 

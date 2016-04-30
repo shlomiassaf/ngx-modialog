@@ -1,13 +1,15 @@
 import {Component, ViewEncapsulation} from 'angular2/core';
 
-import {ModalContext, ModalComponent} from '../../models/tokens';
+import {ModalComponent} from '../../models/tokens';
 import {DialogRef} from '../../models/dialog-ref';
 
 
 @Component({
     selector: 'modal-dialog',
     encapsulation: ViewEncapsulation.None,
+
     template:
+    /* tslint:disable */
 `<form class="vex-dialog-form">
     <div class="vex-dialog-message">Confirm this for me.</div>
     <div class="vex-dialog-input">
@@ -18,7 +20,8 @@ import {DialogRef} from '../../models/dialog-ref';
     </div>
 </form>
 `
+    /* tslint:enable */
 })
-export class VexMessageModal implements ModalComponent {
-    constructor(public dialog: DialogRef) {}
+export class VexMessageModal implements ModalComponent<any> {
+    constructor(public dialog: DialogRef<any>) {}
 }

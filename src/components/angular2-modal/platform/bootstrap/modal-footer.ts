@@ -1,8 +1,8 @@
 import {Component, Input, Output, EventEmitter, ViewEncapsulation} from 'angular2/core';
-import {ModalButtonConfig} from './message-modal';
+import {BSMessageModalButtonConfig} from './message-modal';
 
 export interface FooterButtonClickEvent {
-    btn: ModalButtonConfig;
+    btn: BSMessageModalButtonConfig;
     $event: MouseEvent;
 }
 
@@ -14,7 +14,7 @@ export interface FooterButtonClickEvent {
     encapsulation: ViewEncapsulation.None,
     template:
 `<div [ngClass]="footerClass">
-    <button *ngFor="#btn of buttons;"
+    <button *ngFor="let btn of buttons;"
             [ngClass]="btn.cssClass"
             (click)="onClick(btn, $event)">{{btn.caption}}</button>
 </div>`
@@ -28,7 +28,7 @@ export class BSModalFooter {
     /**
      * A collection of button configurations, each configuration is a button to display.
      */
-    @Input() public buttons: ModalButtonConfig[];
+    @Input() public buttons: BSMessageModalButtonConfig[];
 
     /**
      * Emitted when a button was clicked 

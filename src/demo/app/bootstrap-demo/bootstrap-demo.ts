@@ -1,93 +1,34 @@
-import { Component, provide, ViewContainerRef, ViewChild, ReflectiveInjector, ViewEncapsulation} from 'angular2/core';
-import {RouterLink} from 'angular2/router';
+import {Component, ViewEncapsulation, ViewContainerRef} from 'angular2/core';
+import {RouterOutlet, RouteConfig} from 'angular2/router';
 
-import {ModalConfig, Modal, ModalContext, DialogRef, MODAL_PROVIDERS} from 'angular2-modal';
-import {AdditionCalculateWindowData, AdditionCalculateWindow} from '../customModalDemo/customModal';
-import {SampleElement} from '../sampleElement/sampleElement';
-import * as presets from './presets';
-
+import {Modal, MODAL_PROVIDERS} from 'angular2-modal';
 import {BS_MODAL_PROVIDERS} from '../../../components/angular2-modal/platform/bootstrap';
 
+import {BootstrapDemoPage} from './bootstrap-demo-page/bootstrap-demo-page';
+import {ModalCustomisationWizard} from './modal-customisation-wizard/modal-customisation-wizard';
 
-const BUTTONS = [
-    {
-        text: 'Alert',
-        preset: presets.alert
-    },
-    {
-        text: 'Prompt',
-        preset: presets.prompt
-    },
-    {
-        text: 'Confirm',
-        preset: presets.confirm
-    },
-    {
-        text: 'Cascading',
-        preset: presets.cascading
-    },
-    {
-        text: 'In Element',
-        preset: presets.inElement
-    }
-];
 
 @Component({
     selector: 'bootstrap-demo',
-    directives: [SampleElement, RouterLink],
-    styles: [
-        require('bootstrap/dist/css/bootstrap.css'),
-        require('./bootstrap-demo.css')
-    ],
-    template: require('./bootstrap-demo.tpl.html'),
-    providers: [
+    styles: [ require('bootstrap/dist/css/bootstrap.css') ],
+    viewProviders: [
         ...MODAL_PROVIDERS,
-        ...BS_MODAL_PROVIDERS,
-        provide(ModalConfig, {useValue: new ModalConfig('lg', true, 27)})
+        ...BS_MODAL_PROVIDERS
     ],
+    template: '<router-outlet></router-outlet>',
+    directives: [RouterOutlet],
     encapsulation: ViewEncapsulation.None
 })
+@RouteConfig([
+    { path: '/', component: BootstrapDemoPage, name: 'BootstrapDemo', useAsDefault: true },
+    { path: '/customizeModals', component: ModalCustomisationWizard, name: 'CustomizeModals' },
+])
 export class BootstrapDemo {
-    @ViewChild(SampleElement, {read: ViewContainerRef}) private _sampleElementVC: ViewContainerRef;
-
-    public lastModalResult: string;
-    public buttons = BUTTONS;
-    
     constructor(public modal: Modal, viewContainer: ViewContainerRef) {
         /**
          * A Default view container ref, usually the app root container ref.
          * Has to be set manually until we can find a way to get it automatically.
          */
         modal.defaultViewContainer = viewContainer;
-    }
-
-    processDialog(dialog: Promise<DialogRef>) {
-        dialog.then((resultPromise) => {
-            return resultPromise.result.then((result) => {
-                this.lastModalResult = result;
-            }, () => this.lastModalResult = 'Rejected!');
-        });
-    }
-    open(btn) {
-        let dialog,
-            preset = btn.preset(this.modal);
-        if (btn.text === 'In Element') {
-            dialog = preset.open(this._sampleElementVC);
-        } else {
-            dialog = preset.open();
-        }
-
-        this.processDialog(dialog);
-    }
-
-    openCustomModal() {
-        let resolvedBindings = ReflectiveInjector.resolve([provide(ModalContext, {
-                                                useValue: new AdditionCalculateWindowData(2, 3)})]),
-            dialog = this.modal.open(
-                <any>AdditionCalculateWindow,
-                resolvedBindings,
-                new ModalConfig('lg', true, 27)
-        );
-       this.processDialog(dialog);
     }
 }

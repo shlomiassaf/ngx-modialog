@@ -2,6 +2,7 @@ import {Component, ViewEncapsulation, OnDestroy} from 'angular2/core';
 import {DialogRef} from '../../models/dialog-ref';
 
 import {BSModalContainer} from './modal-container';
+import {BSModalContext} from './modal-context';
 
 let dialogRefCount = 0;
 
@@ -34,7 +35,7 @@ export class BSModalBackdrop implements OnDestroy {
     public right: string;
     public bottom: string;
     
-    constructor(dialog: DialogRef) {
+    constructor(dialog: DialogRef<BSModalContext>) {
         dialogRefCount++;
         document.body.classList.add('modal-open');
         

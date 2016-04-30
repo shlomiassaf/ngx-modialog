@@ -5,7 +5,7 @@ import {FORM_PROVIDERS} from 'angular2/common';
 import {Home} from './home/home';
 import {BootstrapDemo} from './bootstrap-demo/bootstrap-demo';
 import {VexDemo} from './vex-demo/vex-demo';
-import {CustomizeWizard} from './customizeWizard/customizeWizard';
+
 /*
  * App Component
  * Top Level Component
@@ -32,9 +32,8 @@ import {CustomizeWizard} from './customizeWizard/customizeWizard';
   `
 })
 @RouteConfig([
-    { path: '/', component: Home, name: 'Home' },
-    { path: '/bootstrap-demo', component: BootstrapDemo, name: 'BootstrapDemo' },
-    { path: '/customizeModals', component: CustomizeWizard, name: 'CustomizeModals' },
+    { path: '/', component: Home, name: 'Home', useAsDefault: true },
+    { path: '/bootstrap-demo/...', component: BootstrapDemo, name: 'BootstrapDemo' },
     { path: '/vex-demo', component: VexDemo, name: 'VexDemo' }
 ])
 export class App {

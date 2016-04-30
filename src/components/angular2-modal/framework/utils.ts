@@ -32,3 +32,13 @@ export function arrayUnion<T>(arr1: any[], arr2: any[]): T[] {
         .concat(arr2.filter(v => arr1.indexOf(v) === -1));
 
 }
+
+/**
+ * Returns true if the config supports a given key.
+ * @param key
+ * @returns {boolean}
+ */
+export function supportsKey(keyCode: number, config: Array<number>): boolean {
+    if (!Array.isArray(config)) return config === null ? false : true;
+    return config.indexOf(keyCode) > -1;
+}

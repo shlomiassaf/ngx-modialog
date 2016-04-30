@@ -1,13 +1,13 @@
-import {Component, Input} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
-import {Modal, DialogRef, ModalContext, ModalComponent} from 'angular2-modal';
+import {DialogRef, ModalComponent} from 'angular2-modal';
+import {BSModalContext} from '../../../../components/angular2-modal/platform/bootstrap';
 
-export class AdditionCalculateWindowData {
-    constructor(
-        public num1: number,
-        public num2: number
-    ) {}
+export class AdditionCalculateWindowData extends BSModalContext {
+    constructor(public num1: number, public num2: number) {
+        super();
+    }
 }
 
 /**
@@ -52,15 +52,13 @@ export class AdditionCalculateWindowData {
             </div>
         </div>`
 })
-export class AdditionCalculateWindow implements ModalComponent {
-    dialog: DialogRef;
+export class AdditionCalculateWindow implements ModalComponent<AdditionCalculateWindowData> {
     context: AdditionCalculateWindowData;
 
     public wrongAnswer: boolean;
 
-    constructor(dialog: DialogRef, modelContentData: ModalContext) {
-        this.dialog = dialog;
-        this.context = <AdditionCalculateWindowData>modelContentData;
+    constructor(public dialog: DialogRef<AdditionCalculateWindowData>) {
+        this.context = dialog.context;
         this.wrongAnswer = true;
     }
 

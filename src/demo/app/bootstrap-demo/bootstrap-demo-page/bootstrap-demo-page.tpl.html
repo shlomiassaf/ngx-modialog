@@ -4,7 +4,7 @@
     <br>
     <div class="row">
         <div class="col-xs-12">
-            <button *ngFor="#btn of buttons;"
+            <button *ngFor="let btn of buttons;"
                     class="btn btn-default"
                     (click)="open(btn)">{{btn.text}}</button>
             <button class="btn btn-default" (click)="openCustomModal()">Custom Modal</button>

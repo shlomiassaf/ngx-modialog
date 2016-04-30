@@ -1,12 +1,10 @@
 import { ComponentRef } from 'angular2/core';
 import {PromiseWrapper} from 'angular2/src/facade/async';
 
-import {ModalConfig} from './modal-config';
-
 /**
  * API to an open modal window.
  */
-export class DialogRef {
+export class DialogRef<T> {
     contentRef: ComponentRef;
     /**
      * States if the modal is inside a specific element.
@@ -15,7 +13,7 @@ export class DialogRef {
 
     private _resultDeferred: any;
     
-    constructor(public config: ModalConfig) {
+    constructor(public context?: T) {
         this._resultDeferred = PromiseWrapper.completer();
     }
 

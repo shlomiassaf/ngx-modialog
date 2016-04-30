@@ -1,65 +1,21 @@
 import {Component, ViewEncapsulation} from 'angular2/core';
 
-import {ModalContext, ModalComponent} from '../../models/tokens';
+import {ModalComponent} from '../../models/tokens';
 import {DialogRef} from '../../models/dialog-ref';
 import {BSModalFooter, FooterButtonClickEvent} from './modal-footer';
+import {MessageModalPreset} from'./presets/message-modal-preset';
+
+export interface BSMessageModalButtonHandler {
+    (cmp:  ModalComponent<MessageModalPreset>, $event: MouseEvent): void;
+}
 
 /**
  * Interface for button definition
  */
-export interface ModalButtonConfig {
+export interface BSMessageModalButtonConfig {
     cssClass: string;
     caption: string;
-    onClick: (modalComponent: ModalComponent, $event?: MouseEvent) => void;
-}
-
-/**
- * Data definition
- */
-export class MessageModalContext implements ModalContext {
-
-    /**
-     * A Class for the header (title) container.
-     * Default: modal-header
-     */
-    headerClass: string;
-
-    /**
-     * Caption for the title, enclosed in a H3 container.
-     */
-    title: string;
-
-    /**
-     * HTML for the title, if set overrides title property.
-     * The HTML is wrapped in a DIV element, inside the header container.
-     * Example:
-     <div class="modal-header">
-        <div> HTML CONTENT INSERTED HERE </div>
-     </div>
-     * Note: HTML is not compiled.
-     */
-    titleHtml: string;
-
-    /**
-     * The body of the message.
-     * Can be either text or HTML.
-     * Note: HTML is not compiled.
-     */
-    body: string;
-
-    /**
-     * A Class for the body container.
-     * Default: modal-body
-     */
-    bodyClass: string;
-
-    /**
-     * A Class for the footer container.
-     * Default: modal-footer
-     */
-    footerClass: string;
-
-    buttons: ModalButtonConfig[];
+    onClick: BSMessageModalButtonHandler;
 }
 
 /**
@@ -94,9 +50,13 @@ export class MessageModalContext implements ModalContext {
                   [buttons]="context.buttons"
                   (onButtonClick)="onFooterButtonClick($event)"></modal-footer>`
 })
-export class BSMessageModal implements ModalComponent {
-    constructor(public dialog: DialogRef, public context: MessageModalContext) {}
-
+export class BSMessageModal implements ModalComponent<MessageModalPreset> {
+    public context: MessageModalPreset;
+    
+    constructor(public dialog: DialogRef<MessageModalPreset>) {
+        this.context = dialog.context;
+    }
+    
     onFooterButtonClick($event: FooterButtonClickEvent) {
         $event.btn.onClick(this, $event.$event);
     }
