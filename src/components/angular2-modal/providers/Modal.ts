@@ -1,7 +1,7 @@
 import {
     ReflectiveInjector,
     ViewContainerRef,
-    provide,
+    Provider,
     Injectable,
     ResolvedReflectiveProvider,
     DynamicComponentLoader,
@@ -96,9 +96,9 @@ export class Modal {
         dialog.inElement = viewContainer !== this.defaultViewContainer;
 
         let dialogBindings = ReflectiveInjector.resolve([
-            provide(Modal, {useValue: this}), // use same Modal instance
-            provide(ModalDialogInstance, {useValue: dialog}),
-            provide(ModalCompileConfig, {useValue: compileConfig})
+            new Provider(Modal, {useValue: this}), // use same Modal instance
+            new Provider(ModalDialogInstance, {useValue: dialog}),
+            new Provider(ModalCompileConfig, {useValue: compileConfig})
         ]);
 
         return this.createBackdrop(viewContainer, dialogBindings, dialog.inElement)
@@ -146,6 +146,6 @@ export class Modal {
 }
 
 export const MODAL_PROVIDERS = [
-    provide(Modal, {useClass: Modal}),
-    provide(ModalConfig, {useValue: new ModalConfig('lg', true, 27)})
+    new Provider(Modal, {useClass: Modal}),
+    new Provider(ModalConfig, {useValue: new ModalConfig('lg', true, 27)})
 ];
