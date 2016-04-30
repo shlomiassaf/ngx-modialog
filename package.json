@@ -1,7 +1,7 @@
 {
   "name": "angular2-modal",
   "description": "Angular2 Modal (dialog) window bootstrap style.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/shlomiassaf/angular2-modal.git"
@@ -24,7 +24,7 @@
     "prepublish": "tsc --project publish && node make.js"
   },
   "peerDependencies": {
-    "angular2": "2.0.0-beta.15"
+    "angular2": "2.0.0-beta.17"
   },
   "devDependencies": {
     "async": "^1.5.2",

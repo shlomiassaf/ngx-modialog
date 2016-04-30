@@ -1,7 +1,8 @@
-import {Component} from 'angular2/core';
+import {Component, ViewContainerRef} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {FORM_PROVIDERS} from 'angular2/common';
 
+import {Modal, MODAL_PROVIDERS} from 'angular2-modal';
 import {DemoPage} from './demoPage/demoPage';
 import {CustomizeWizard} from './customizeWizard/customizeWizard';
 /*
@@ -11,7 +12,7 @@ import {CustomizeWizard} from './customizeWizard/customizeWizard';
 @Component({
     selector: 'app', // <app></app>
     // We need to tell Angular's Dependency Injection which providers are in our app.
-    providers: [ ...FORM_PROVIDERS],
+    providers: [ ...FORM_PROVIDERS, ...MODAL_PROVIDERS],
     // We need to tell Angular's compiler which directives are in our template.
     // Doing so will allow Angular to attach our behavior to an element
     directives: [ ...ROUTER_DIRECTIVES],
@@ -31,5 +32,11 @@ import {CustomizeWizard} from './customizeWizard/customizeWizard';
     { path: '/customizeModals', component: CustomizeWizard, name: 'CustomizeModals' }
 ])
 export class App {
-    constructor() {}
+    constructor(public modal: Modal, viewContainer: ViewContainerRef) {
+        /**
+         * A Default view container ref, usually the app root container ref.
+         * Has to be set manually until we can find a way to get it automatically.
+         */
+        modal.defaultViewContainer = viewContainer;
+    }
 }

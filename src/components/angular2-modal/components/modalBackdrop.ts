@@ -1,6 +1,6 @@
-import { Component } from 'angular2/core';
+import {Component} from 'angular2/core';
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
-
+import {BootstrapModalContainer} from './bootstrapModalContainer';
 
 /**
  * Represents the modal backdrop.
@@ -17,7 +17,10 @@ import {ModalDialogInstance} from '../models/ModalDialogInstance';
         '[style.bottom]': 'bottom'
 
     },
-    template: '<div [style.position]="position" class="in modal-backdrop" #modalBackdrop></div>'
+    directives: [BootstrapModalContainer],
+    template:
+`<div [style.position]="position" class="modal-backdrop fade in"></div>
+<modal-container></modal-container>`
 })
 export class ModalBackdrop {
     public position: string;

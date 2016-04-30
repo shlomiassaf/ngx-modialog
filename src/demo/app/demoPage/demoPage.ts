@@ -1,4 +1,4 @@
-import { Component, provide, ElementRef, Injector} from 'angular2/core';
+import {Component, provide, ViewContainerRef, ReflectiveInjector, ViewChild} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
 import {ModalConfig, Modal, ICustomModal, ModalDialogInstance} from 'angular2-modal';
 import {AdditionCalculateWindowData, AdditionCalculateWindow} from '../customModalDemo/customModal';
@@ -31,14 +31,14 @@ const BUTTONS = [
 @Component({
     selector: 'demo-page',
     directives: [SampleElement, RouterLink],
-    providers: [Modal],
     styles: [ require('./demoPage.css') ],
     template: require('./demoPage.tpl.html')
 })
 export class DemoPage {
-    public mySampleElement: ElementRef;
     public lastModalResult: string;
     public buttons = BUTTONS;
+    @ViewChild(SampleElement, {read: ViewContainerRef}) private mySampleElement: ViewContainerRef;
+
     constructor(private modal: Modal) {}
 
     processDialog(dialog: Promise<ModalDialogInstance>) {
@@ -52,10 +52,7 @@ export class DemoPage {
         let dialog,
             preset = btn.preset(this.modal);
         if (btn.text === 'In Element') {
-            dialog = preset.open({
-                elementRef: this.mySampleElement,
-                anchorName: 'myModal'
-            });
+            dialog = preset.open(this.mySampleElement);
         } else {
             dialog = preset.open();
         }
@@ -65,7 +62,7 @@ export class DemoPage {
 
 
     openCustomModal() {
-        let resolvedBindings = Injector.resolve([provide(ICustomModal, {
+        let resolvedBindings = ReflectiveInjector.resolve([provide(ICustomModal, {
                                                 useValue: new AdditionCalculateWindowData(2, 3)})]),
             dialog = this.modal.open(
                 <any>AdditionCalculateWindow,
