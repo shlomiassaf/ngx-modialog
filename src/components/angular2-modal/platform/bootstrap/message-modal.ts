@@ -49,7 +49,7 @@ export interface BSMessageModalButtonConfig {
         <div *ngSwitchWhen="1" [innerHtml]="context.titleHtml"></div>
         <h3 *ngSwitchDefault class="modal-title">{{context.title}}</h3>
     </div>
-    <div [ngClass]="context.bodyClass" [innerHtml]="context.body"></div>
+    <div [ngClass]="context.bodyClass" [innerHtml]="context.message"></div>
     <modal-footer [footerClass]="context.footerClass" 
                   [buttons]="context.buttons"
                   (onButtonClick)="onFooterButtonClick($event)"></modal-footer>`

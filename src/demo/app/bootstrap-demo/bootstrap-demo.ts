@@ -8,7 +8,6 @@ import {ModalCustomisationWizard} from './modal-customisation-wizard/modal-custo
 
 @Component({
     selector: 'bootstrap-demo',
-    styles: [ require('bootstrap/dist/css/bootstrap.css') ],
     viewProviders: [ ...BS_MODAL_PROVIDERS ],
     template: '<router-outlet></router-outlet>',
     directives: [RouterOutlet],

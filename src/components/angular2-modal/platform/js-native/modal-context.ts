@@ -3,7 +3,6 @@ import {FluentAssignMethod} from './../../framework/fluent-assign';
 import {arrayUnion} from './../../framework/utils';
 
 const DEFAULT_SETTERS = [
-    'message',
     'promptDefault'
 ];
 
@@ -14,7 +13,6 @@ export enum JS_NATIVE_DIALOG_TYPE {
 }
 
 export class JSNativeModalContext extends ModalOpenContext {
-    message: string;
     promptDefault: string;
     dialogType: JS_NATIVE_DIALOG_TYPE;
 
@@ -40,11 +38,6 @@ export class JSNativeModalContextBuilder<T extends JSNativeModalContext>
             // https://github.com/Microsoft/TypeScript/issues/7234
         );
     }
-
-    /**
-     * The message to show.
-     */
-    message: FluentAssignMethod<string, this>;
 
     /**
      * The default value for the prompt input

@@ -13,7 +13,8 @@ export const DEFAULT_VALUES = {
 
 const DEFAULT_SETTERS = [
     'isBlocking',
-    'keyboard'
+    'keyboard',
+    'message'
 ];
 
 export class ModalContext {
@@ -32,6 +33,13 @@ export class ModalContext {
      */
     keyboard: Array<number> | number;
 
+    /**
+     * The core message to display.
+     * A modal might have an extended message (e.g: HTML message) or other fields (e.g: title) but
+     * all models, at core, convey a message thus message is common to all modals.
+     */
+    message: string;
+    
     normalize(): void {
         if (this.isBlocking !== false)
             this.isBlocking = true;
@@ -71,6 +79,7 @@ export class ModalContextBuilder<T extends ModalContext> extends FluentAssign<T>
      * Defaults to false.
      */
     isBlocking: FluentAssignMethod<boolean, this>;
+    
     /**
      * Keyboard value/s that close the modal.
      * Accepts either a single numeric value or an array of numeric values.
@@ -78,6 +87,13 @@ export class ModalContextBuilder<T extends ModalContext> extends FluentAssign<T>
      * Defaults to 27, set `null` implicitly to disable.
      */
     keyboard: FluentAssignMethod<Array<number> | number, this>;
+
+    /**
+     * The core message to display.
+     * A modal might have an extended message (e.g: HTML message) or other fields (e.g: title) but
+     * all models, at core, convey a message thus message is common to all modals.
+     */
+    message: FluentAssignMethod<string, this>;
 }
 
 export interface ModalControllingContextBuilder<T> {

@@ -1,7 +1,7 @@
 import {FluentAssignMethod} from '../../../framework/fluent-assign';
 import {VEXModalContext, VEXModalContextBuilder} from '../modal-context';
 import {Modal} from '../modal';
-import {DropInModal} from '../dropin-modal';
+import {DropInModal as component} from '../dropin-modal';
 import {extend} from '../../../framework/utils';
 
 export enum DROP_IN_TYPE {
@@ -11,7 +11,6 @@ export enum DROP_IN_TYPE {
 }
 
 const DEFAULT_SETTERS = [
-    'message',
     'placeholder',
     'showCloseButton'
 ];
@@ -45,9 +44,9 @@ export interface DropInPreset extends VEXModalContext {
  */
 export class DropInPresetBuilder extends VEXModalContextBuilder<DropInPreset> {
 
-    constructor(modal: Modal, defaultValues: DropInPreset = undefined) {
+    constructor(modal: Modal, dropInType: DROP_IN_TYPE, defaultValues: DropInPreset = undefined) {
         super(
-            extend<any>( { modal: modal, component: DropInModal}, defaultValues || {}),
+            extend<any>({modal, component, dropInType}, defaultValues || {}),
             DEFAULT_SETTERS
         );
     }

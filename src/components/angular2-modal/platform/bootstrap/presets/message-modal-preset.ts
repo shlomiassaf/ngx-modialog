@@ -1,4 +1,4 @@
-import {FluentAssignMethod, privateKey} from '../../../framework/fluent-assign';
+import {FluentAssignMethod, privateKey, setAssignAlias} from '../../../framework/fluent-assign';
 import {BSMessageModalButtonConfig, BSMessageModalButtonHandler} from '../message-modal';
 import {BSModalContext, BSModalContextBuilder} from '../modal-context';
 import {BSMessageModal} from '../message-modal';
@@ -16,7 +16,6 @@ const DEFAULT_SETTERS = [
     'headerClass',
     'title',
     'titleHtml',
-    'body',
     'bodyClass',
     'footerClass'
 ];
@@ -50,9 +49,16 @@ export interface MessageModalPreset extends BSModalContext {
     titleHtml: string;
 
     /**
-     * The body of the message.
+     * aliased by 'body'
+     * @aliasedBy body
+     */
+    message: string;
+
+    /**
+     * The body of the modal.
      * Can be either text or HTML.
-     * Note: HTML is not compiled.
+     * Note: When using HTML, the template is not compiled. (binding and expression will not parse)
+     * @aliasOf message
      */
     body: string;
 
@@ -89,6 +95,8 @@ export abstract class MessageModalPresetBuilder<T extends MessageModalPreset>
             arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
             baseType
         );
+        
+        setAssignAlias(this, 'body', 'message', true);
     }
 
     /**
@@ -114,9 +122,16 @@ export abstract class MessageModalPresetBuilder<T extends MessageModalPreset>
     titleHtml: FluentAssignMethod<string, this>;
 
     /**
-     * The body of the message.
+     * aliased by 'body'
+     * @aliasedBy body
+     */
+    message: FluentAssignMethod<string, this>;
+
+    /**
+     * The body of the modal.
      * Can be either text or HTML.
-     * Note: HTML is not compiled.
+     * Note: When using HTML, the template is not compiled. (binding and expression will not parse)
+     * @aliasOf message
      */
     body: FluentAssignMethod<string, this>;
 
