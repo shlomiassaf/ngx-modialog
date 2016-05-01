@@ -33,8 +33,14 @@ export class JSNativeModalRenderer implements ModalRenderer {
         }
 
         dialog.destroy = () => {};
-        
-        dialog.close(result);
+
+        if (result === false) {
+            dialog.dismiss();
+        }
+        else {
+            dialog.close(result);
+        }
+
         return Promise.resolve(dialog);
     }
 }

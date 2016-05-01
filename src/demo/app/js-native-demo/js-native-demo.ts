@@ -1,7 +1,9 @@
 import {Component, ViewEncapsulation} from 'angular2/core';
+import {DialogRef} from 'angular2-modal';
 
 import {
     Modal,
+    JSNativeModalContext,
     JS_NATIVE_MODAL_PROVIDERS
 } from '../../../components/angular2-modal/platform/js-native';
 
@@ -17,33 +19,38 @@ export class JSNativeDemo {
 
     result: any;
 
+    processDialog(dialog: Promise<DialogRef<JSNativeModalContext>>) {
+        dialog.then((resultPromise) => {
+            return resultPromise.result.then((result) => {
+                this.result = result;
+            }, () => this.result = 'Rejected!');
+        });
+    }
+
     open(type: string) {
+        let dialog: any;
         switch (type) {
             case 'alert':
-                this.modal.alert()
+                dialog = this.modal.alert()
                     .message('This is a native alert!')
-                    .open()
-                    .then(value => value.result)
-                    .then(result => this.result = result);
+                    .open();
                 break;
             case 'prompt':
-                this.modal.prompt()
+                dialog = this.modal.prompt()
                     .message('This is a native prompt!')
                     .promptDefault('This is a default value')
-                    .open()
-                    .then(value => value.result)
-                    .then(result => this.result = result);
+                    .open();
                 break;
             case 'confirm':
-                this.modal.confirm()
+                dialog = this.modal.confirm()
                     .message('Yes or No?')
-                    .open()
-                    .then(value => value.result)
-                    .then(result => this.result = result);
+                    .open();
                 break;
             default:
                 break;
         }
+
+        this.processDialog(dialog);
         
     }
 }

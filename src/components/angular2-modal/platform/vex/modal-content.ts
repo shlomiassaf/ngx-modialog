@@ -9,30 +9,28 @@ import {
 
 import {ModalCompileConfig} from '../../models/tokens';
 import {DialogRef} from '../../models/dialog-ref';
-import {Modal} from '../../providers/modal';
-import {supportsKey} from '../../framework/utils';
+import {VEXModalContext} from './modal-context';
 
 /**
  * A component that acts as a top level container for an open modal window.
  */
 @Component({
     selector: 'modal-content',
-    encapsulation: ViewEncapsulation.None,
-    /* tslint:disable */
     template:
-`<div class="vex-content">
+`<div class="vex-content" (click)="onContainerClick($event)">
     <div style="display: none" #modalDialog></div>    
-    <div class="vex-close"></div>
-</div>`
+    <div *ngIf="context.showCloseButton" class="vex-close" (click)="dialog.dismiss()"></div>
+</div>`,
+    encapsulation: ViewEncapsulation.None,
 })
 export class VexModalContent implements AfterViewInit {
-    
+    private context: VEXModalContext;
     @ViewChild('modalDialog', {read: ViewContainerRef}) private _viewContainer: ViewContainerRef;
 
-    constructor(public dialog: DialogRef<any>,
+    constructor(public dialog: DialogRef<VEXModalContext>,
                 private _compileConfig: ModalCompileConfig,
-                private _modal: Modal,
                 private _dlc: DynamicComponentLoader) {
+        this.context = dialog.context;
     }
 
     ngAfterViewInit() {
@@ -45,19 +43,5 @@ export class VexModalContent implements AfterViewInit {
 
     onContainerClick($event: any) {
         $event.stopPropagation();
-    }
-
-    onClick() {
-        return !this.dialog.context.isBlocking && this.dialog.dismiss();
-    }
-
-    documentKeypress(event: KeyboardEvent) {
-        // check that this modal is the last in the stack.
-        if (!this._modal.isTopMost(this.dialog)) return;
-
-
-        if (supportsKey(event.keyCode, this.dialog.context.keyboard)) {
-            this.dialog.dismiss();
-        }
     }
 }
