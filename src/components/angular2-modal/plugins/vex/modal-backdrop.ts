@@ -22,8 +22,8 @@ let dialogRefCount = 0;
     directives: [VexModalContent],
     encapsulation: ViewEncapsulation.None,
     template:
-`<div [class]="cssClass" class="vex">
-    <div [class]="dialog.context.overlayClassName"  (click)="onClick()"></div>
+`<div [class]="cssClass">
+    <div [class]="dialog.context.overlayClassName"></div>
     <modal-content></modal-content>    
 </div>`
 })
@@ -44,10 +44,6 @@ export class VexModalBackdrop implements OnDestroy {
         if (--dialogRefCount === 0) {
             document.body.classList.remove('vex-open');
         }
-    }
-
-    onClick() {
-        return !this.dialog.context.isBlocking && this.dialog.dismiss();
     }
 
     documentKeypress(event: KeyboardEvent) {

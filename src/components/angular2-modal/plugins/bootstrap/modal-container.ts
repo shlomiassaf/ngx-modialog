@@ -24,8 +24,7 @@ import {BSModalContext} from './modal-context';
         'class': 'in modal',
         'style': 'display: block',
         '[style.position]': 'position',
-        '(body:keydown)': 'documentKeypress($event)',
-        '(click)': 'onClick()'
+        '(body:keydown)': 'documentKeypress($event)'
     },
     encapsulation: ViewEncapsulation.None,
     /* tslint:disable */
@@ -36,7 +35,7 @@ import {BSModalContext} from './modal-context';
          <div class="modal-content"              
               style="display:block"              
               role="document"
-              (click)="onContainerClick($event)">
+              (clickOutside)="onClickOutside()">
             <div style="display: none" #modalDialog></div>
          </div>
     </div>`
@@ -69,12 +68,10 @@ export class BSModalContainer implements AfterViewInit {
             .then(contentRef => this.dialog.contentRef = contentRef);
     }
 
-    onContainerClick($event: any) {
-        $event.stopPropagation();
-    }
-
-    onClick() {
-        return !this.dialog.context.isBlocking && this.dialog.dismiss();
+    onClickOutside() {
+        return this._modal.isTopMost(this.dialog) &&
+            !this.dialog.context.isBlocking &&
+            this.dialog.dismiss();
     }
 
     documentKeypress(event: KeyboardEvent) {
