@@ -49,6 +49,25 @@ export function setAssignMethod<T>(obj: T, propertyName: string, writeOnce: bool
     });
 }
 
+/**
+ * Create a function for setting a value that is an alias to an other setter function.
+ * @param obj The object to apply the key & setter on.
+ * @param propertyName The name of the property on the object
+ * @param srcPropertyName The name of the property on the object this alias points to
+ */
+export function setAssignAlias<T>(obj: T, propertyName: string, srcPropertyName: string): void {
+    validateMethodName.call(obj, propertyName);
+
+    Object.defineProperty(obj, propertyName, <any>{
+        configurable: false,
+        enumerable: false,
+        writable: false,
+        value: function (value: any) {
+            this[srcPropertyName](value);
+            return this;
+        }
+    });
+}
 
 /**
  * Describes a fluent assign method.
