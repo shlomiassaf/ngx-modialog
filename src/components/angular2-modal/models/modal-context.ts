@@ -62,7 +62,7 @@ export class ModalContext {
 export class ModalContextBuilder<T extends ModalContext> extends FluentAssign<T> {
 
     constructor(
-        defaultValues: T = undefined,
+        defaultValues: T | T[] = undefined,
         initialSetters: string[] = undefined,
         baseType: new () => T = undefined
     ) {

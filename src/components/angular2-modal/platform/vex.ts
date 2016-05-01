@@ -8,8 +8,15 @@ export {Modal} from './vex/modal';
 export {VexModalBackdrop} from './vex/modal-backdrop';
 export {VexModalContent} from './vex/modal-content';
 export {VEXBuiltInThemes, VEXModalContext, VEXModalContextBuilder} from './vex/modal-context';
-export {DropInModal} from './vex/dropin-modal';
 export {DROP_IN_TYPE, DropInPreset, DropInPresetBuilder} from './vex/presets/dropin-preset';
+export {
+    DialogModal,
+    VEXButtonClickEvent,
+    VEXButtonConfig,
+    VEXButtonHandler,
+    VEXDialogButtons
+} from './vex/dialog-modal';
+export {DialogPreset, DialogPresetBuilder} from './vex/presets/dialog-preset';
 
 const dropInFactory: ModalDropInFactory = {
     alert: modal => new Builder(modal, DIType.alert, <any>{isBlocking: false}),

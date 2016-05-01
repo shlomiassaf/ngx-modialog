@@ -1,7 +1,9 @@
+import {ResolvedReflectiveProvider} from 'angular2/core';
 import {FluentAssignMethod} from '../../../framework/fluent-assign';
-import {VEXModalContext, VEXModalContextBuilder} from '../modal-context';
 import {Modal} from '../modal';
-import {DropInModal as component} from '../dropin-modal';
+import {DialogModal as component} from '../dialog-modal';
+import {DialogPreset, DialogPresetBuilder} from './dialog-preset';
+
 import {extend} from '../../../framework/utils';
 
 export enum DROP_IN_TYPE {
@@ -18,7 +20,7 @@ const DEFAULT_SETTERS = [
 /**
  * Data definition
  */
-export interface DropInPreset extends VEXModalContext {
+export class DropInPreset extends DialogPreset {
 
     /**
      * the message to display on the modal.
@@ -31,24 +33,38 @@ export interface DropInPreset extends VEXModalContext {
      */
     placeholder: string;
 
-    showCloseButton: boolean;
-
     dropInType: DROP_IN_TYPE;
 
+    get showInput(): boolean {
+        return this.dropInType === DROP_IN_TYPE.prompt;
+    }
 } 
 
 /**
- * A Preset representing the configuration needed to open MessageModal.
- * This is an abstract implementation with no concrete behaviour.
- * Use derived implementation.
+ * A Preset representing all 3 drop ins (alert, prompt, confirm)
  */
-export class DropInPresetBuilder extends VEXModalContextBuilder<DropInPreset> {
+export class DropInPresetBuilder extends DialogPresetBuilder<DropInPreset> {
 
     constructor(modal: Modal, dropInType: DROP_IN_TYPE, defaultValues: DropInPreset = undefined) {
         super(
+            modal,
             extend<any>({modal, component, dropInType}, defaultValues || {}),
-            DEFAULT_SETTERS
+            DEFAULT_SETTERS,
+            DropInPreset
         );
+    }
+
+    $$beforeOpen(config: DropInPreset): ResolvedReflectiveProvider[] {
+        this.addOkButton('Yep');
+
+        switch (config.dropInType) {
+            case DROP_IN_TYPE.prompt:
+                config.defaultResult = undefined;
+            case DROP_IN_TYPE.confirm:
+                this.addCancelButton('Nope');
+                break;
+        }
+        return super.$$beforeOpen(config);
     }
 
     /**
@@ -61,6 +77,4 @@ export class DropInPresetBuilder extends VEXModalContextBuilder<DropInPreset> {
      * Valid only for prompt modal.
      */
     placeholder: FluentAssignMethod<string, this>;
-
-    showCloseButton: FluentAssignMethod<boolean, this>;
 }

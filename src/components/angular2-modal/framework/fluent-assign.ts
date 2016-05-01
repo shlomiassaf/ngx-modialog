@@ -1,4 +1,4 @@
-
+import {extend, arrayUnion} from './utils';
 const PRIVATE_PREFIX = '$$';
 const RESERVED_REGEX = /^(\$\$).*/;
 
@@ -32,6 +32,17 @@ function objectDefinePropertyValue(obj: any, propertyName, value: (value: any) =
         writable: false,
         value
     });
+}
+
+/**
+ * Given a FluentAssign instance, apply all of the supplied default values so calling
+ * instance.toJSON will return those values (does not create a setter function)
+ * @param instance
+ * @param defaultValues
+ */
+function applyDefaultValues(instance: any, defaultValues: Object): void {
+    Object.getOwnPropertyNames(defaultValues)
+        .forEach(name => (<any>instance)[privateKey(name)] = (<any>defaultValues)[name]);
 }
 
 /**
@@ -163,6 +174,8 @@ export class FluentAssignFactory<T> {
     }
 }
 
+
+
 /**
  * Represent an object where every property is a function representing an assignment function.
  * Calling each function with a value will assign the value to the object and return the object.
@@ -184,15 +197,17 @@ export class FluentAssign<T> {
      * @param initialSetters A list of initial setters for this FluentAssign.
      * @param baseType the class/type to create a new base. optional, {} is used if not supplied.
      */
-    constructor(defaultValues: T = undefined,
+    constructor(defaultValues: T | T[] = undefined,
                 initialSetters: string[] = undefined,
                 baseType: new () => T = undefined) {
-        if (defaultValues) {
-            Object.getOwnPropertyNames(defaultValues)
-                .forEach(name => (<any>this)[privateKey(name)] = (<any>defaultValues)[name]);
+        if (Array.isArray(defaultValues)) {
+            defaultValues.forEach(d => applyDefaultValues(this, d));
+        } else if (defaultValues) {
+            applyDefaultValues(this, defaultValues)
         }
-
+        
         if (Array.isArray(initialSetters)) {
+            
             initialSetters.forEach(name => setAssignMethod(this, name));
         }
 

@@ -1,10 +1,6 @@
 import {
     Component,
     ViewEncapsulation,
-    Renderer,
-    ViewChild,
-    AfterViewInit,
-    ElementRef,
     OnDestroy
 } from 'angular2/core';
 import {DialogRef} from '../../models/dialog-ref';
@@ -26,25 +22,22 @@ let dialogRefCount = 0;
     directives: [VexModalContent],
     encapsulation: ViewEncapsulation.None,
     template:
-`<div #backdrop class="vex">
-    <div class="vex-overlay" (click)="onClick()"></div>
+`<div [class]="cssClass" class="vex">
+    <div [class]="dialog.context.overlayClassName"  (click)="onClick()"></div>
     <modal-content></modal-content>    
 </div>`
 })
-export class VexModalBackdrop implements AfterViewInit, OnDestroy {
-    @ViewChild('backdrop') private _backdropEl: ElementRef;
+export class VexModalBackdrop implements OnDestroy {
 
     constructor(
         private dialog: DialogRef<VEXModalContext>,
-        private _modal: Modal,
-        private renderer: Renderer) {
+        private _modal: Modal) {
         dialogRefCount++;
         document.body.classList.add('vex-open');
     }
 
-    ngAfterViewInit() {
-        // class is not bindable.
-        this.renderer.setElementClass(this._backdropEl.nativeElement, `vex-theme-${this.dialog.context.className}`, true);
+    get cssClass(): string {
+        return `vex vex-theme-${this.dialog.context.className}`;
     }
 
     ngOnDestroy() {

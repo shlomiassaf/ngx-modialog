@@ -17,9 +17,11 @@ import {VEXModalContext} from './modal-context';
 @Component({
     selector: 'modal-content',
     template:
-`<div class="vex-content" (click)="onContainerClick($event)">
+`<div [class]="context.contentClassName" (click)="onContainerClick($event)">
     <div style="display: none" #modalDialog></div>    
-    <div *ngIf="context.showCloseButton" class="vex-close" (click)="dialog.dismiss()"></div>
+    <div *ngIf="context.showCloseButton" 
+         [class]="context.closeClassName" 
+         (click)="dialog.dismiss()"></div>
 </div>`,
     encapsulation: ViewEncapsulation.None,
 })

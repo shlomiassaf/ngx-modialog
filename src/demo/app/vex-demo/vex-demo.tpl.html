@@ -6,6 +6,7 @@
             <button class="btn btn-default" (click)="dropIn('alert')">alert</button>
             <button class="btn btn-default" (click)="dropIn('prompt')">prompt</button>
             <button class="btn btn-default" (click)="dropIn('confirm')">confirm</button>
+            <button class="btn btn-default" (click)="dialog()">dialog</button>
             <div class="form-group">
                 <label class="col-md-4 control-label" for="theme">VEX Theme:</label>
                 <div class="col-md-6">
@@ -24,3 +25,14 @@
         <h2>Last modal result: {{result}}</h2>
     </div>
 </div>
+<template #customContent let-context="context">
+    <button type="button" (click)="xxx(context)"></button>
+    <div class="vex-dialog-message">{{context.message}}</div>
+    <div class="vex-dialog-input">
+        <input name="vex"
+               type="text"
+               class="vex-dialog-prompt-input"
+               [(ngModel)]="dialogResult"
+               placeholder="{{context.placeholder}}">
+    </div>
+</template>

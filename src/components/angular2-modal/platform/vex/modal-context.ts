@@ -1,13 +1,19 @@
 import {ModalOpenContext, ModalOpenContextBuilder} from '../../models/modal-open-context';
-import {FluentAssignMethod} from './../../framework/fluent-assign';
+import {FluentAssignMethod, privateKey} from './../../framework/fluent-assign';
 import {extend, arrayUnion} from './../../framework/utils';
 
 const DEFAULT_VALUES = {
-    className: <VEXBuiltInThemes>'default'
+    className: <VEXBuiltInThemes>'default',
+    overlayClassName: 'vex-overlay',
+    contentClassName: 'vex-content',
+    closeClassName: 'vex-close'
 };
 
 const DEFAULT_SETTERS = [
-    'className'
+    'className',
+    'overlayClassName',
+    'contentClassName',
+    'closeClassName'
 ];
 
 export type VEXBuiltInThemes
@@ -18,6 +24,12 @@ export class VEXModalContext extends ModalOpenContext {
      * Set the built in schema to use.
      */
     className: VEXBuiltInThemes;
+
+    overlayClassName: string;
+    contentClassName: string;
+    closeClassName: string;
+    
+    showCloseButton: boolean;
 }
 
 export class VEXModalContextBuilder<T extends VEXModalContext> extends ModalOpenContextBuilder<T> {
@@ -39,5 +51,19 @@ export class VEXModalContextBuilder<T extends VEXModalContext> extends ModalOpen
      */
     className: FluentAssignMethod<VEXBuiltInThemes, this>;
 
+    overlayClassName: FluentAssignMethod<string, this>;
+    contentClassName: FluentAssignMethod<string, this>;
+    closeClassName: FluentAssignMethod<string, this>;
+
+    showCloseButton: FluentAssignMethod<boolean, this>;
+
+    /**
+     *
+     * @aliasFor isBlocking
+     */
+    overlayClosesOnClick(value: boolean): this {
+        this[privateKey('isBlocking')] = !value;
+        return this;
+    }
 }
 
