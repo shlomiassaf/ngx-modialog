@@ -25,27 +25,44 @@ export function privateKey(name: string): string {
     return PRIVATE_PREFIX + name;
 }
 
+function objectDefinePropertyValue(obj: any, propertyName, value: (value: any) => void): void {
+    Object.defineProperty(obj, propertyName, <any>{
+        configurable: false,
+        enumerable: false,
+        writable: false,
+        value
+    });
+}
+
 /**
  * Create a function for setting a value for a property on a given object.
  * @param obj The object to apply the key & setter on.
  * @param propertyName The name of the property on the object
  * @param writeOnce If true will allow writing once (default: false)
+ *
+ * Example:
+ * let obj = new FluentAssign<any>;
+ * setAssignMethod(obj, 'myProp');
+ * obj.myProp('someValue');
+ * const result = obj.toJSON();
+ * console.log(result); //{ myProp: 'someValue' }
+ *
+ *
+ * let obj = new FluentAssign<any>;
+ * setAssignMethod(obj, 'myProp', true); // applying writeOnce
+ * obj.myProp('someValue');
+ * obj.myProp('someValue'); // ERROR: Overriding config property 'myProp' is not allowed.
  */
 export function setAssignMethod<T>(obj: T, propertyName: string, writeOnce: boolean = false): void {
     validateMethodName.call(obj, propertyName);
 
-    Object.defineProperty(obj, propertyName, <any>{
-        configurable: false,
-        enumerable: false,
-        writable: false,
-        value: function (value: any) {
-            let key = privateKey(propertyName);
-            if (writeOnce && this.hasOwnProperty(key)) {
-                throw new Error(`Overriding config property '${propertyName}' is not allowed.`);
-            }
-            this[key] = value;
-            return this;
+    const key = privateKey(propertyName);
+    objectDefinePropertyValue(obj, propertyName, (value: any) => {
+        if (writeOnce && this.hasOwnProperty(key)) {
+            throw new Error(`Overriding config property '${propertyName}' is not allowed.`);
         }
+        obj[key] = value;
+        return obj;
     });
 }
 
@@ -54,19 +71,47 @@ export function setAssignMethod<T>(obj: T, propertyName: string, writeOnce: bool
  * @param obj The object to apply the key & setter on.
  * @param propertyName The name of the property on the object
  * @param srcPropertyName The name of the property on the object this alias points to
+ * @param hard If true, will set a readonly property on the object that returns 
+ *        the value of the source property. Default: false
+ *        
+ * Example:
+ * let obj = new FluentAssign<any> ;
+ * setAssignMethod(obj, 'myProp'); 
+ * setAssignAlias(obj, 'myPropAlias', 'myProp');
+ * obj.myPropAlias('someValue');
+ * const result = obj.toJSON();
+ * console.log(result); //{ myProp: 'someValue' }
+ * result.myPropAlias // undefined
+ * 
+ *
+ * let obj = new FluentAssign<any> ;
+ * setAssignMethod(obj, 'myProp');
+ * setAssignAlias(obj, 'myPropAlias', 'myProp', true); // setting a hard alias.
+ * obj.myPropAlias('someValue');
+ * const result = obj.toJSON();
+ * console.log(result); //{ myProp: 'someValue' }
+ * result.myPropAlias // someValue
  */
-export function setAssignAlias<T>(obj: T, propertyName: string, srcPropertyName: string): void {
+export function setAssignAlias<T>(obj: T, propertyName: string, 
+                                  srcPropertyName: string, 
+                                  hard: boolean = false): void {
     validateMethodName.call(obj, propertyName);
-
-    Object.defineProperty(obj, propertyName, <any>{
-        configurable: false,
-        enumerable: false,
-        writable: false,
-        value: function (value: any) {
-            this[srcPropertyName](value);
-            return this;
-        }
+    
+    objectDefinePropertyValue(obj, propertyName, (value: any) => {
+        obj[srcPropertyName](value);
+        return obj;
     });
+    
+    if (hard === true) {
+        const key = privateKey(propertyName), 
+              srcKey = privateKey(srcPropertyName);
+
+        Object.defineProperty(obj, key, <any>{
+            configurable: false,
+            enumerable: false,
+            get: () => obj[srcKey]
+        });
+    }
 }
 
 /**
@@ -183,7 +228,15 @@ export class FluentAssign<T> {
     toJSON(): T {
         return getAssignedPropertyNames(this)
             .reduce((obj: T, name: string) => {
-                (<any>obj)[name] = (<any>this)[privateKey(name)];
+                const key = privateKey(name);
+                // re-define property descriptors (we dont want their value)
+                let propDesc = Object.getOwnPropertyDescriptor(this, key);
+                if (propDesc) {
+                    Object.defineProperty(obj, name, propDesc);
+                }
+                else {
+                    (<any>obj)[name] = (<any>this)[key];
+                }
                 return obj;
             }, this.__fluent$base__ ? new this.__fluent$base__() : <any>{});
     }
