@@ -5,7 +5,7 @@ import {
     Modal,
     JSNativeModalContext,
     JS_NATIVE_MODAL_PROVIDERS
-} from '../../../components/angular2-modal/platform/js-native';
+} from '../../../components/angular2-modal/plugins/js-native';
 
 
 @Component({

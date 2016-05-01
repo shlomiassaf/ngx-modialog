@@ -10,7 +10,7 @@ import {
     DialogPreset,
     DialogModal,
     DialogPresetBuilder
-} from '../../../components/angular2-modal/platform/vex';
+} from '../../../components/angular2-modal/plugins/vex';
 
 @Component({
     selector: 'vex-demo',

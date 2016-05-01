@@ -2,7 +2,7 @@ import {Component} from 'angular2/core';
 import {CORE_DIRECTIVES} from 'angular2/common';
 
 import {DialogRef, ModalComponent} from 'angular2-modal';
-import {BSModalContext} from '../../../../components/angular2-modal/platform/bootstrap';
+import {BSModalContext} from '../../../../components/angular2-modal/plugins/bootstrap';
 
 export class AdditionCalculateWindowData extends BSModalContext {
     constructor(public num1: number, public num2: number) {

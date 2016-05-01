@@ -2,7 +2,7 @@ import {Component, ViewContainerRef, ViewChild} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
 
 import {DialogRef} from 'angular2-modal';
-import {Modal} from '../../../../components/angular2-modal/platform/bootstrap';
+import {Modal} from '../../../../components/angular2-modal/plugins/bootstrap';
 
 
 import {AdditionCalculateWindowData, AdditionCalculateWindow} from './custom-modal-sample';

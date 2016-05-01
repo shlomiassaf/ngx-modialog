@@ -1,7 +1,7 @@
 import {Component, ViewEncapsulation, ViewContainerRef} from 'angular2/core';
 import {RouterOutlet, RouteConfig} from 'angular2/router';
 
-import {Modal, BS_MODAL_PROVIDERS} from '../../../components/angular2-modal/platform/bootstrap';
+import {Modal, BS_MODAL_PROVIDERS} from '../../../components/angular2-modal/plugins/bootstrap';
 
 import {BootstrapDemoPage} from './bootstrap-demo-page/bootstrap-demo-page';
 import {ModalCustomisationWizard} from './modal-customisation-wizard/modal-customisation-wizard';

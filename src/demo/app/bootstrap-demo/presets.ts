@@ -1,4 +1,4 @@
-import {Modal} from '../../../components/angular2-modal/platform/bootstrap';
+import {Modal} from '../../../components/angular2-modal/plugins/bootstrap';
 
 export function alert(modal: Modal) {
     return modal.alert()

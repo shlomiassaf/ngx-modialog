@@ -3,7 +3,7 @@ import {Modal} from 'angular2-modal';
 import {
     TwoButtonPreset,
     TwoButtonPresetBuilder
-} from '../../../../components/angular2-modal/platform/bootstrap';
+} from '../../../../components/angular2-modal/plugins/bootstrap';
 
 let html = require('./modal-customisation-wizard.tpl.html');
 
