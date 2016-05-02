@@ -1,7 +1,8 @@
 import {
     Component,
-    DynamicComponentLoader,
+    ComponentResolver,
     ViewContainerRef,
+    ReflectiveInjector,
     ViewChild,
     ViewEncapsulation,
     AfterViewInit
@@ -39,9 +40,6 @@ import {BSModalContext} from './modal-context';
             <div style="display: none" #modalDialog></div>
          </div>
     </div>`
-    //TODO: #modalDialog element is not needed but dynamicComponentLoader doesn't seem to have behavior to inject a component the way we want.
-    //      We need to replace the #modalDialog element but the current implementation only adds it as a sibling.
-    //      see https://github.com/angular/angular/issues/6071
     /* tslint:enable */
 })
 export class BSModalContainer implements AfterViewInit {
@@ -52,7 +50,7 @@ export class BSModalContainer implements AfterViewInit {
     constructor(public dialog: DialogRef<BSModalContext>,
                 private _compileConfig: ModalCompileConfig,
                 private _modal: Modal,
-                private _dlc: DynamicComponentLoader) {
+                private _cr: ComponentResolver) {
         if (!dialog.inElement) {
             this.position = null;
         } else {
@@ -61,11 +59,17 @@ export class BSModalContainer implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this._dlc
-            .loadNextToLocation(this._compileConfig.component,
-                this._viewContainer,
-                this._compileConfig.bindings)
-            .then(contentRef => this.dialog.contentRef = contentRef);
+        this._cr.resolveComponent(this._compileConfig.component)
+            .then(cmpFactory => {
+                const vcr = this._viewContainer,
+                    bindings = this._compileConfig.bindings,
+                    ctxInjector = vcr.parentInjector;
+
+                const childInjector = Array.isArray(bindings) && bindings.length > 0 ?
+                    ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
+                return this.dialog.contentRef =
+                    vcr.createComponent(cmpFactory, vcr.length, childInjector);
+            });
     }
 
     onClickOutside() {
