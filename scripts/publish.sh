@@ -15,10 +15,9 @@ fi
 
 set -ex
 
-for package in ./dist/cjs/*
-do
-  npm publish --access public ${package}
-done
+
+npm publish --access public ./dist/build/components/angular2-modal
+
 
 # Always log out of npm when publish is complete.
 #npm logout

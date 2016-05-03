@@ -15,14 +15,14 @@ import {
 @Component({
     selector: 'vex-demo',
     styleUrls: [
-        // 'demo/app/vex-demo//css/vex.css',
-        // 'demo/app/vex-demo//css/vex-theme-default.css',
-        // 'demo/app/vex-demo//css/vex-theme-os.css',
-        // 'demo/app/vex-demo//css/vex-theme-plain.css',
-        // 'demo/app/vex-demo//css/vex-theme-wireframe.css',
-        // 'demo/app/vex-demo//css/vex-theme-flat-attack.css',
-        // 'demo/app/vex-demo//css/vex-theme-top.css',
-        // 'demo/app/vex-demo//css/vex-theme-bottom-right-corner.css'
+        'demo/app/vex-demo//css/vex.css',
+        'demo/app/vex-demo//css/vex-theme-default.css',
+        'demo/app/vex-demo//css/vex-theme-os.css',
+        'demo/app/vex-demo//css/vex-theme-plain.css',
+        'demo/app/vex-demo//css/vex-theme-wireframe.css',
+        'demo/app/vex-demo//css/vex-theme-flat-attack.css',
+        'demo/app/vex-demo//css/vex-theme-top.css',
+        'demo/app/vex-demo//css/vex-theme-bottom-right-corner.css'
     ],
     templateUrl: 'demo/app/vex-demo/vex-demo.tpl.html',
     providers: [...VEX_MODAL_PROVIDERS],
