@@ -1,4 +1,4 @@
-# Angular 2 (beta.17): Modal/Dialog window (with Bootstrap presets).
+# Angular 2 (rc.0): Modal/Dialog window (with Bootstrap presets).
 
 A fully generic, customizable and fluent modal window implementation for Angular 2 with built in Bootstrap support.  
 Generic means it can support any CSS framework or be a standalone, supply a Component, replace some Tokens and add some presets (optional) and you have an identical fluent API modal for your framework of choice.
@@ -6,9 +6,9 @@ Generic means it can support any CSS framework or be a standalone, supply a Comp
 >**DISCLAIMER**
 Angular 2 is still in the works. The core concepts are solid, but the API may change. If you find that a code snippet that does not work, please message me, and I will update.
  
-## Built with angular 2 Beta 17
+## Built with angular 2 rc.0
 
-## Breaking changing from 0.1.4 to 0.1.5 (angular2 beta 15 to beta 17)
+## Breaking changing from 0.1.4 to 0.1.5 (angular2 beta 15 to beta 17 and beyond)
 See [here](https://github.com/shlomiassaf/angular2-modal/tree/master/CHANGELOG.md)
 
 ## Note: Next major version, 1.0.0

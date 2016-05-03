@@ -1,4 +1,4 @@
-import {Provider} from 'angular2/core';
+import {Provider} from '@angular/core';
 import {Modal} from './vex/modal';
 import {MODAL_PROVIDERS, ModalBackdropComponent, ModalDropInFactory} from 'angular2-modal';
 import {VexModalBackdrop} from './vex/modal-backdrop';

@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from 'angular2/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 import {ModalComponent} from '../../models/tokens';
 import {DialogRef} from '../../models/dialog-ref';

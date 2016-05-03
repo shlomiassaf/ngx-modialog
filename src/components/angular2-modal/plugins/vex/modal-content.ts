@@ -6,7 +6,7 @@ import {
     ViewChild,
     ViewEncapsulation,
     AfterViewInit
-} from 'angular2/core';
+} from '@angular/core';
 
 import {Modal} from '../../providers/modal';
 import {ModalCompileConfig} from '../../models/tokens';

@@ -1,10 +1,10 @@
 // heavily inspired by:
 // http://www.bennadel.com/blog/3025-creating-custom-dom-and-host-event-bindings-in-angular-2-beta-6.htm
 
-import {Injectable} from 'angular2/core';
-import {DomEventsPlugin} from 'angular2/platform/common_dom';
-import {DOM} from 'angular2/src/platform/dom/dom_adapter';
-import {noop} from 'angular2/src/facade/lang';
+import {Injectable} from '@angular/core';
+import {DomEventsPlugin} from '@angular/platform-browser';
+import {getDOM, DomAdapter} from '@angular/platform-browser/src/dom/dom_adapter';
+import {noop} from '@angular/core/src/facade/lang';
 
 const eventMap = {
     clickOutside: 'click',
@@ -35,7 +35,11 @@ function bubbleNonAncestorHandlerFactory(element: HTMLElement, handler: (event) 
 
 @Injectable()
 export class DOMOutsideEventPlugin extends DomEventsPlugin {
-
+    private _DOM: DomAdapter;
+    constructor() {
+        super();
+        this._DOM = getDOM();
+    }
     supports(eventName: string): boolean {
         return eventMap.hasOwnProperty(eventName);
     }
@@ -48,8 +52,8 @@ export class DOMOutsideEventPlugin extends DomEventsPlugin {
         // bubble up the event (i.e: execute our original event handler) only if the event targer
         // is an ancestor of our element.
         // The event is fired inside the angular zone so change detection can kick into action.
-        const onceOnOutside = () => DOM.onAndCancel(
-            DOM.getGlobalEventTarget('document'),
+        const onceOnOutside = () => this._DOM.onAndCancel(
+            this._DOM.getGlobalEventTarget('document'),
             eventMap[eventName],
             bubbleNonAncestorHandlerFactory(element, evt => zone.runGuarded(() => handler(evt)))
         );
@@ -76,11 +80,11 @@ export class DOMOutsideEventPlugin extends DomEventsPlugin {
         if ((target === 'document') || (target === 'window' )) {
             return noop;
         } else {
-            const element = DOM.getGlobalEventTarget(target),
+            const element = this._DOM.getGlobalEventTarget(target),
                   zone = this.manager.getZone();
 
             return this.manager.getZone().runOutsideAngular(
-                () => DOM.onAndCancel(
+                () => this._DOM.onAndCancel(
                     element,
                     eventName,
                     evt => zone.runGuarded(() => handler(evt))

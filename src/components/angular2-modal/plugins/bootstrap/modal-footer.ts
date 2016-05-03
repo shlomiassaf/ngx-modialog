@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, ViewEncapsulation} from 'angular2/core';
+import {Component, Input, Output, EventEmitter, ViewEncapsulation} from '@angular/core';
 import {BSMessageModalButtonConfig} from './message-modal';
 
 export interface FooterButtonClickEvent {

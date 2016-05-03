@@ -1,4 +1,4 @@
-import {Injectable, ViewContainerRef} from 'angular2/core';
+import {Injectable, ViewContainerRef} from '@angular/core';
 import {FluentAssign, FluentAssignMethod} from './../framework/fluent-assign';
 import {extend, arrayUnion} from './../framework/utils';
 import {DialogRef} from './dialog-ref';

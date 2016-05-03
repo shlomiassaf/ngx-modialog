@@ -6,7 +6,7 @@ import {
     ReflectiveInjector,
     Injectable,
     Type
-} from 'angular2/core';
+} from '@angular/core';
 
 
 import {DialogRef} from '../models/dialog-ref';

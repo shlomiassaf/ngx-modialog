@@ -1,4 +1,4 @@
-import {provide} from 'angular2/core';
+import {provide} from '@angular/core';
 import {ModalBackdropComponent, ModalDropInFactory, MODAL_PROVIDERS} from 'angular2-modal';
 
 import {BSModalBackdrop} from './bootstrap/modal-backdrop';

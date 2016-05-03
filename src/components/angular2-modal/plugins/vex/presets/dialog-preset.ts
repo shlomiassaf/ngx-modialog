@@ -1,4 +1,4 @@
-import {TemplateRef} from 'angular2/core';
+import {TemplateRef} from '@angular/core';
 import {FluentAssignMethod, privateKey} from '../../../framework/fluent-assign';
 import {VEXModalContext, VEXModalContextBuilder} from '../modal-context';
 import {Modal} from '../modal';
@@ -15,7 +15,7 @@ const DEFAULT_SETTERS = [
  */
 export class DialogPreset extends VEXModalContext {
     defaultResult: any;
-    templateRef: TemplateRef;
+    templateRef: TemplateRef<DialogPreset>;
     buttons: VEXButtonConfig[];
 } 
 
@@ -41,7 +41,7 @@ export class DialogPresetBuilder<T extends DialogPreset>
     /**
      * the message to display on the modal.
      */
-    templateRef: FluentAssignMethod<TemplateRef, this>;
+    templateRef: FluentAssignMethod<TemplateRef<T>, this>;
 
     addButton(css: string, caption: string, onClick: VEXButtonHandler): this {
         let btn = {

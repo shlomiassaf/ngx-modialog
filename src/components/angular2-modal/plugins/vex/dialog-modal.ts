@@ -1,5 +1,5 @@
-import {Directive, EmbeddedViewRef, Component, ViewContainerRef, TemplateRef, ViewEncapsulation, Input, Output, EventEmitter} from 'angular2/core';
-import {NgTemplateOutlet} from 'angular2/common';
+import {Directive, EmbeddedViewRef, Component, ViewContainerRef, TemplateRef, ViewEncapsulation, Input, Output, EventEmitter} from '@angular/core';
+import {NgTemplateOutlet} from '@angular/common';
 import {ModalComponent} from '../../models/tokens';
 import {DialogRef} from '../../models/dialog-ref';
 import {DialogPreset} from './presets/dialog-preset';

@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, OnDestroy} from 'angular2/core';
+import {Component, ViewEncapsulation, OnDestroy} from '@angular/core';
 import {DialogRef} from '../../models/dialog-ref';
 
 import {BSModalContainer} from './modal-container';

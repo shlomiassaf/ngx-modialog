@@ -1,6 +1,6 @@
-import {provide} from 'angular2/core';
+import {provide} from '@angular/core';
 
-import {EVENT_MANAGER_PLUGINS} from 'angular2/platform/common_dom';
+import {EVENT_MANAGER_PLUGINS} from '@angular/platform-browser';
 import {DOMOutsideEventPlugin} from './browser/outside-event-plugin';
 
 export {DOMOutsideEventPlugin} from './browser/outside-event-plugin';

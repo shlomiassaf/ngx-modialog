@@ -1,4 +1,4 @@
-import {ResolvedReflectiveProvider} from 'angular2/core';
+import {ResolvedReflectiveProvider} from '@angular/core';
 import {FluentAssignMethod} from '../../../framework/fluent-assign';
 import {Modal} from '../../../providers/modal';
 import {BSMessageModal} from '../message-modal';

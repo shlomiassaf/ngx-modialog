@@ -3,7 +3,7 @@ import {
     ResolvedReflectiveProvider,
     Injectable,
     Type
-} from 'angular2/core';
+} from '@angular/core';
 
 import {JS_NATIVE_DIALOG_TYPE} from './modal-context';
 import {DialogRef} from '../../models/dialog-ref';

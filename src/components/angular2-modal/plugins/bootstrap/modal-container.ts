@@ -6,7 +6,7 @@ import {
     ViewChild,
     ViewEncapsulation,
     AfterViewInit
-} from 'angular2/core';
+} from '@angular/core';
 
 import {ModalCompileConfig} from '../../models/tokens';
 import {DialogRef} from '../../models/dialog-ref';

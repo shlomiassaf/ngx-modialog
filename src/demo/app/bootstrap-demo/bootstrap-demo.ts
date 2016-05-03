@@ -1,5 +1,5 @@
-import {Component, ViewEncapsulation, ViewContainerRef} from 'angular2/core';
-import {RouterOutlet, RouteConfig} from 'angular2/router';
+import {Component, ViewEncapsulation, ViewContainerRef} from '@angular/core';
+import {RouterOutlet, RouteConfig} from '@angular/router-deprecated';
 
 import {Modal, BS_MODAL_PROVIDERS} from '../../../components/angular2-modal/plugins/bootstrap';
 

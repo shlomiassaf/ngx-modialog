@@ -2,7 +2,7 @@ import {
     Component,
     ViewEncapsulation,
     OnDestroy
-} from 'angular2/core';
+} from '@angular/core';
 import {DialogRef} from '../../models/dialog-ref';
 import {Modal} from './modal';
 import {VEXModalContext} from './modal-context';

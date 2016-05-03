@@ -1,11 +1,11 @@
-import { ComponentRef } from 'angular2/core';
-import {PromiseWrapper} from 'angular2/src/facade/async';
+import {ComponentRef} from '@angular/core';
+import {PromiseWrapper} from '@angular/core/src/facade/promise';
 
 /**
  * API to an open modal window.
  */
 export class DialogRef<T> {
-    contentRef: ComponentRef;
+    contentRef: ComponentRef<any>;
     /**
      * States if the modal is inside a specific element.
      */

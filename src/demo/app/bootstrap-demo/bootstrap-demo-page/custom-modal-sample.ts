@@ -1,5 +1,4 @@
-import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES} from 'angular2/common';
+import {Component} from '@angular/core';
 
 import {DialogRef, ModalComponent} from 'angular2-modal';
 import {BSModalContext} from '../../../../components/angular2-modal/plugins/bootstrap';
@@ -15,7 +14,6 @@ export class AdditionCalculateWindowData extends BSModalContext {
  */
 @Component({
     selector: 'modal-content',
-    directives: [CORE_DIRECTIVES],
     styles: [`
         .custom-modal-container {
             padding: 15px;

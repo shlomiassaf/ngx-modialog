@@ -5,7 +5,7 @@ import {
     Injectable,
     ResolvedReflectiveProvider,
     Optional
-} from 'angular2/core';
+} from '@angular/core';
 import {
     ModalRenderer,
     ModalCompileConfig,

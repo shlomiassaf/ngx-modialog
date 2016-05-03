@@ -1,5 +1,5 @@
-import {Component, ViewContainerRef, ViewChild} from 'angular2/core';
-import {RouterLink} from 'angular2/router';
+import {Component, ViewContainerRef, ViewChild} from '@angular/core';
+import {RouterLink} from '@angular/router-deprecated';
 
 import {DialogRef} from 'angular2-modal';
 import {Modal} from '../../../../components/angular2-modal/plugins/bootstrap';

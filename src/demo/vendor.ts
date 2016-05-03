@@ -1,10 +1,14 @@
-// Angular 2
-import 'angular2/bundles/angular2-polyfills';
+import 'core-js/es6';
+import 'core-js/es7/reflect';
+require('zone.js/dist/zone');
 
-import 'angular2/platform/browser';
-import 'angular2/platform/common_dom';
-import 'angular2/core';
-import 'angular2/router';
+// Typescript emit helpers polyfill
+import 'ts-helpers';
+
+import '@angular/platform-browser';
+import '@angular/platform-browser-dynamic';
+import '@angular/core';
+import '@angular/router-deprecated';
 
 require('!!style!css!bootstrap/dist/css/bootstrap.css');
 

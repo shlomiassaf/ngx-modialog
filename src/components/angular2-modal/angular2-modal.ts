@@ -1,4 +1,4 @@
-import {Provider} from 'angular2/core';
+import {Provider} from '@angular/core';
 import {ModalRenderer} from './models/tokens';
 import {Modal} from './providers/modal';
 import {DOMModalRenderer} from './providers/dom-modal-renderer';

@@ -2,7 +2,7 @@ import {
     ViewContainerRef,
     ResolvedReflectiveProvider,
     Type
-} from 'angular2/core';
+} from '@angular/core';
 
 import {Modal} from '../providers/modal';
 import {DialogRef} from './dialog-ref';

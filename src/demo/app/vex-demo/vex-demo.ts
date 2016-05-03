@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, ViewContainerRef, ViewChild, TemplateRef} from 'angular2/core';
+import {Component, ViewEncapsulation, ViewContainerRef, ViewChild, TemplateRef} from '@angular/core';
 
 import {DialogRef} from 'angular2-modal';
 
@@ -33,7 +33,7 @@ export class VexDemo {
     result: any;
     theme: VEXBuiltInThemes = <VEXBuiltInThemes>'default';
 
-    @ViewChild('customContent') private _customContent: TemplateRef;
+    @ViewChild('customContent') private _customContent: TemplateRef<any>;
     
     constructor(public modal: Modal, viewContainer: ViewContainerRef) {
         /**

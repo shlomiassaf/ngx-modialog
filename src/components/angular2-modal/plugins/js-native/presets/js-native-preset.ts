@@ -1,4 +1,4 @@
-import {ViewContainerRef, ResolvedReflectiveProvider} from 'angular2/core';
+import {ViewContainerRef, ResolvedReflectiveProvider} from '@angular/core';
 import {DialogRef} from 'angular2-modal';
 import {Modal} from '../modal';
 

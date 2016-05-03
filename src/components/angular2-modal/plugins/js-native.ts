@@ -1,4 +1,4 @@
-import {provide} from 'angular2/core';
+import {provide} from '@angular/core';
 import {ModalBackdropComponent, ModalDropInFactory, ModalRenderer} from 'angular2-modal';
 
 import {Modal} from './js-native/modal';
