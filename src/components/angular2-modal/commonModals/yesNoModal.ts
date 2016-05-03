@@ -1,5 +1,4 @@
-import {Component, provide, ElementRef, Injector} from 'angular2/core';
-import {NgIf} from 'angular2/common';
+import {Component, provide, ElementRef, Injector} from '@angular/core';
 
 
 import {ICustomModal, ICustomModalComponent} from '../models/ICustomModal';
@@ -23,7 +22,7 @@ export class YesNoModalContent {
  */
 @Component({
     selector: 'modal-content',
-    directives: [ NgIf ],
+    directives: [],
     /* tslint:disable */ template:
     `<div class="modal-header">
         <h3 class="modal-title">{{context.title}}</h3>

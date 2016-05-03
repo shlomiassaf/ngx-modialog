@@ -1,4 +1,4 @@
-import { ReflectiveInjector, provide , ResolvedReflectiveBinding} from 'angular2/core';
+import { ReflectiveInjector, provide , ResolvedReflectiveBinding} from '@angular/core';
 import {FluentAssignMethod} from '../framework/FluentAssign';
 import {extend} from '../framework/Utils';
 import {Modal} from '../providers/Modal';

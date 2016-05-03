@@ -1,5 +1,5 @@
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
-import { DOM } from 'angular2/src/platform/dom/dom_adapter';
+import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
 
 /**
  * A dumb stack implementation over an array.
@@ -20,6 +20,7 @@ export class ModalInstanceStack {
          If its wide open we add to the body, we need to traverse the stack every time
          know what's going on and do it.
          */
+        const DOM = getDOM();
         if (DOM && this._stack.length === 1) {
             DOM.addClass(DOM.query('body'), 'modal-open');
         }
@@ -51,6 +52,7 @@ export class ModalInstanceStack {
     remove(mInstance: ModalDialogInstance): void {
         let idx = this._stack.indexOf(mInstance);
         if (idx > -1) this._stack.splice(idx, 1);
+        const DOM = getDOM();
         if (DOM && this._stack.length === 0) {
             DOM.removeClass(DOM.query('body'), 'modal-open');
         }

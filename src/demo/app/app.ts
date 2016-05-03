@@ -1,6 +1,6 @@
-import {Component, ViewContainerRef} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {FORM_PROVIDERS} from 'angular2/common';
+import {Component, ViewContainerRef} from '@angular/core';
+import {RouteConfig, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
+import {FORM_PROVIDERS} from '@angular/common';
 
 import {Modal, MODAL_PROVIDERS} from 'angular2-modal';
 import {DemoPage} from './demoPage/demoPage';

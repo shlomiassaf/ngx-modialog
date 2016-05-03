@@ -1,10 +1,11 @@
 import {
     Component,
-    DynamicComponentLoader,
+    ComponentResolver,
     ViewContainerRef,
+    ReflectiveInjector,
     ViewChild,
     AfterViewInit
-} from 'angular2/core';
+} from '@angular/core';
 
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
 import {Modal, ModalCompileConfig} from '../providers/Modal';
@@ -43,7 +44,7 @@ export class BootstrapModalContainer implements AfterViewInit {
 
     constructor(public dialog: ModalDialogInstance,
                 private _modal: Modal,
-                private _dlc: DynamicComponentLoader,
+                private _cr: ComponentResolver,
                 private _compileConfig: ModalCompileConfig) {
         if (!dialog.inElement) {
             this.position = null;
@@ -53,11 +54,17 @@ export class BootstrapModalContainer implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this._dlc
-            .loadNextToLocation(this._compileConfig.component,
-                this._viewContainer,
-                this._compileConfig.bindings)
-            .then(contentRef => this.dialog.contentRef = contentRef);
+        this._cr.resolveComponent(this._compileConfig.component)
+            .then(cmpFactory => {
+                const vcr = this._viewContainer,
+                    bindings = this._compileConfig.bindings,
+                    ctxInjector = vcr.parentInjector;
+
+                const childInjector = Array.isArray(bindings) && bindings.length > 0 ?
+                    ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
+                return this.dialog.contentRef =
+                    vcr.createComponent(cmpFactory, vcr.length, childInjector);
+            });
     }
 
     onContainerClick($event: any) {

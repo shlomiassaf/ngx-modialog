@@ -4,12 +4,12 @@ import {
     Provider,
     Injectable,
     ResolvedReflectiveProvider,
-    DynamicComponentLoader,
+    ComponentResolver,
     Optional,
     ComponentRef,
     Renderer,
     Type
-} from 'angular2/core';
+} from '@angular/core';
 
 import {ModalInstanceStack} from '../framework/ModalInstanceStack';
 import {ModalConfig} from '../models/ModalConfig';
@@ -34,7 +34,7 @@ export class Modal {
     public defaultViewContainer: ViewContainerRef;
     private config: ModalConfig;
 
-    constructor(private _dcl: DynamicComponentLoader,
+    constructor(private _cr: ComponentResolver,
                 private _renderer: Renderer,
                 @Optional() defaultConfig: ModalConfig) {
         // The Modal class should be an application wide service (i.e: singleton).
@@ -102,7 +102,7 @@ export class Modal {
         ]);
 
         return this.createBackdrop(viewContainer, dialogBindings, dialog.inElement)
-            .then( (backdropRef: ComponentRef) => {
+            .then( (backdropRef: ComponentRef<any>) => {
                 // killing the root (backdrop) will cascade automatically.
                 dialog.destroy = () => backdropRef.destroy();
                 _stack.pushManaged(dialog);
@@ -128,8 +128,16 @@ export class Modal {
      */
     private createBackdrop(viewContainer: ViewContainerRef,
                            bindings: ResolvedReflectiveProvider[],
-                           attachToBody: boolean): Promise<ComponentRef> {
-        return this._dcl.loadNextToLocation(ModalBackdrop, viewContainer, bindings)
+                           attachToBody: boolean): Promise<ComponentRef<any>> {
+        return this._cr.resolveComponent(ModalBackdrop)
+            .then(cmpFactory => {
+                const ctxInjector = viewContainer.parentInjector;
+                const childInjector = Array.isArray(bindings) && bindings.length > 0 ?
+                    ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
+
+                return viewContainer.createComponent(cmpFactory, viewContainer.length,
+                    childInjector);
+            })
             .then((cmpRef: any) => {
                 if (attachToBody) {
                     this._renderer.invokeElementMethod(

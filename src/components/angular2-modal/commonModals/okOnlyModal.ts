@@ -1,4 +1,4 @@
-import {Component, provide, ElementRef, Injector} from 'angular2/core';
+import {Component, provide, ElementRef, Injector} from '@angular/core';
 
 import {ICustomModal, ICustomModalComponent} from '../models/ICustomModal';
 import {ModalDialogInstance} from '../models/ModalDialogInstance';

@@ -1,4 +1,4 @@
-import { ResolvedReflectiveProvider, ViewContainerRef } from 'angular2/core';
+import { ResolvedReflectiveProvider, ViewContainerRef } from '@angular/core';
 import {Modal} from '../../providers/Modal';
 import {IModalConfig, ModalConfig, BootstrapModalSize} from '../../models/ModalConfig';
 import {FluentAssign, FluentAssignMethod, setAssignMethod} from './../../framework/FluentAssign';

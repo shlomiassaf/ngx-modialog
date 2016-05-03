@@ -1,5 +1,5 @@
-import {Component, provide, ViewContainerRef, ReflectiveInjector, ViewChild} from 'angular2/core';
-import {RouterLink} from 'angular2/router';
+import {Component, provide, ViewContainerRef, ReflectiveInjector, ViewChild} from '@angular/core';
+import {RouterLink} from '@angular/router-deprecated';
 import {ModalConfig, Modal, ICustomModal, ModalDialogInstance} from 'angular2-modal';
 import {AdditionCalculateWindowData, AdditionCalculateWindow} from '../customModalDemo/customModal';
 import {SampleElement} from '../sampleElement/sampleElement';

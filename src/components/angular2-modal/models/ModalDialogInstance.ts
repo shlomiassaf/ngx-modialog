@@ -1,5 +1,5 @@
-import { ComponentRef } from 'angular2/core';
-import {PromiseWrapper} from 'angular2/src/facade/async';
+import {ComponentRef} from '@angular/core';
+import {PromiseWrapper} from '@angular/core/src/facade/promise';
 
 import {ModalConfig} from '../models/ModalConfig';
 
@@ -7,7 +7,7 @@ import {ModalConfig} from '../models/ModalConfig';
  * API to an open modal window.
  */
 export class ModalDialogInstance {
-    contentRef: ComponentRef;
+    contentRef: ComponentRef<any>;
     /**
      * States if the modal is inside a specific element.
      */

@@ -1,4 +1,4 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 let _defaultConfig: ModalConfig;
 
 export type BootstrapModalSize = 'sm' | 'lg';

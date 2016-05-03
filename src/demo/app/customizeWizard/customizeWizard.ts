@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {Modal, TwoButtonPresetData, TwoButtonPreset} from 'angular2-modal';
 let html = require('./customizeWizard.tpl.html');
 

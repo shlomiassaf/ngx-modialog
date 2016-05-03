@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 import {ModalDialogInstance} from '../models/ModalDialogInstance';
 import {BootstrapModalContainer} from './bootstrapModalContainer';
 
