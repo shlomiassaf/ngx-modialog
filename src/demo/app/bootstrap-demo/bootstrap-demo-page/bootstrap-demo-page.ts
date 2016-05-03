@@ -1,8 +1,14 @@
 import {Component, ViewContainerRef, ViewChild} from '@angular/core';
 import {RouterLink} from '@angular/router-deprecated';
 
-import {DialogRef} from 'angular2-modal';
-import {Modal} from '../../../../components/angular2-modal/plugins/bootstrap';
+import {DialogRef} from '../../../../components/angular2-modal';
+import {
+    Modal,
+    // Not used but if not set, TS build errors:
+    // Return type of exported function has or is using name 'X'from external module 'Y'
+    // but cannot be named.
+    BSModal
+} from '../../../../components/angular2-modal/plugins/bootstrap';
 
 
 import {AdditionCalculateWindowData, AdditionCalculateWindow} from './custom-modal-sample';
@@ -35,8 +41,8 @@ const BUTTONS = [
 @Component({
     selector: 'bootstrap-demo-page',
     directives: [SampleElement, RouterLink],
-    styles: [ require('./bootstrap-demo-page.css') ],
-    template: require('./bootstrap-demo-page.tpl.html')
+    styleUrls: [ 'demo/app/bootstrap-demo/bootstrap-demo-page/bootstrap-demo-page.css' ],
+    templateUrl: 'demo/app/bootstrap-demo/bootstrap-demo-page/bootstrap-demo-page.tpl.html'
 })
 export class BootstrapDemoPage {
     public lastModalResult: string;

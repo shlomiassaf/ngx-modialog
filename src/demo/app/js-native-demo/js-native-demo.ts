@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation} from '@angular/core';
-import {DialogRef} from 'angular2-modal';
+import {DialogRef} from '../../../components/angular2-modal';
 
 import {
     Modal,
@@ -11,7 +11,7 @@ import {
 @Component({
     selector: 'js-native-demo',
     viewProviders: [ ...JS_NATIVE_MODAL_PROVIDERS ],
-    template: require('./js-native-demo.tpl.html'),
+    templateUrl: 'demo/app/js-native-demo/js-native-demo.tpl.html',
     encapsulation: ViewEncapsulation.None
 })
 export class JSNativeDemo {

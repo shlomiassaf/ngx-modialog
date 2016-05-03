@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/angular2-modal">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Angular2 modal example.">
+    <title>Angular 2 Modal - Bootstrap style.</title>
+    <script src="vendor/es6-shim/es6-shim.js"></script>
+    <script src="vendor/zone.js/dist/zone.js"></script>
+    <script src="vendor/zone.js/dist/long-stack-trace-zone.js"></script>
+    <script src="vendor/reflect-metadata/Reflect.js"></script>
+    <script src="vendor/systemjs/dist/system.src.js"></script>
+    <script src="vendor/rxjs/bundles/Rx.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+
+<app></app>
+
+<script>
+    System.config({
+        map: {
+            '@angular/core': '/vendor/@angular/core/core.umd.js',
+            '@angular/common': '/vendor/@angular/common/common.umd.js',
+            '@angular/compiler': '/vendor/@angular/compiler/compiler.umd.js',
+            '@angular/platform-browser-dynamic': '/vendor/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js',
+            '@angular/http': '/vendor/@angular/http/http.umd.js',
+            '@angular/upgrade': '/vendor/@angular/upgrade/upgrade.umd.js',
+            '@angular/router': '/vendor/@angular/router/router.umd.js',
+            '@angular/router-deprecated': '/vendor/@angular/router-deprecated/router-deprecated.umd.js',
+
+            //'@angular/platform-browser': '/vendor/@angular/platform-browser/platform-browser.umd.js',
+            '@angular/platform-browser': '/vendor/@angular/platform-browser',
+
+            '@angular/core/src/facade': '/vendor/@angular/core/src/facade',
+            //'@angular/platform-browser/src/dom': '/vendor/@angular/platform-browser/src/dom',
+
+            'angular2-modal': '/components/angular2-modal',
+            'angular2-modal/platform-browser': '/components/angular2-modal/platform-browser'
+        },
+        packages: {
+            '@angular/core/src/facade': {defaultExtension: 'js'},
+
+            //'@angular/platform-browser/src/dom': {defaultExtension: 'js'},
+            '@angular/platform-browser': {main: 'index.js', defaultExtension: 'js'},
+
+            'demo': {defaultExtension: 'js'},
+
+            'angular2-modal/platform-browser': {main: 'index.js', defaultExtension: 'js'},
+            'angular2-modal': {main: 'index.js', defaultExtension: 'js'}
+
+        }
+    });
+
+    System.import('bootstrap.js')
+            .then(function(bootstrap) {
+                if(!bootstrap.isBootstrapped()) {
+                    bootstrap.main();
+                }
+            })
+            .catch(function(err) {
+                console.log(err);
+            });
+</script>
+
+<a href="https://github.com/shlomiassaf/angular2-modal">
+    <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png">
+</a>
+</body>
+</html>

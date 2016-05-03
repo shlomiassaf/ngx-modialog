@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation, ViewContainerRef, ViewChild, TemplateRef} from '@angular/core';
 
-import {DialogRef} from 'angular2-modal';
+import {DialogRef} from '../../../components/angular2-modal';
 
 import {
     VEXBuiltInThemes,
@@ -14,22 +14,21 @@ import {
 
 @Component({
     selector: 'vex-demo',
-    styles: [
-        require('./css/vex.css'),
-        require('./css/vex-theme-default.css'),
-        require('./css/vex-theme-os.css'),
-        require('./css/vex-theme-plain.css'),
-        require('./css/vex-theme-wireframe.css'),
-        require('./css/vex-theme-flat-attack.css'),
-        require('./css/vex-theme-top.css'),
-        require('./css/vex-theme-bottom-right-corner.css')
+    styleUrls: [
+        // 'demo/app/vex-demo//css/vex.css',
+        // 'demo/app/vex-demo//css/vex-theme-default.css',
+        // 'demo/app/vex-demo//css/vex-theme-os.css',
+        // 'demo/app/vex-demo//css/vex-theme-plain.css',
+        // 'demo/app/vex-demo//css/vex-theme-wireframe.css',
+        // 'demo/app/vex-demo//css/vex-theme-flat-attack.css',
+        // 'demo/app/vex-demo//css/vex-theme-top.css',
+        // 'demo/app/vex-demo//css/vex-theme-bottom-right-corner.css'
     ],
-    template: require('./vex-demo.tpl.html'),
+    templateUrl: 'demo/app/vex-demo/vex-demo.tpl.html',
     providers: [...VEX_MODAL_PROVIDERS],
     encapsulation: ViewEncapsulation.None
 })
 export class VexDemo {
-    modal: Modal;
     result: any;
     theme: VEXBuiltInThemes = <VEXBuiltInThemes>'default';
 

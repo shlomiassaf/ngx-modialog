@@ -1,6 +1,6 @@
 import {Provider} from '@angular/core';
 import {Modal} from './vex/modal';
-import {MODAL_PROVIDERS, ModalBackdropComponent, ModalDropInFactory} from 'angular2-modal';
+import {MODAL_PROVIDERS, ModalBackdropComponent, ModalDropInFactory} from '../angular2-modal';
 import {VexModalBackdrop} from './vex/modal-backdrop';
 import {DROP_IN_TYPE as DIType, DropInPresetBuilder as Builder} from './vex/presets/dropin-preset';
 

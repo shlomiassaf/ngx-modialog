@@ -1,5 +1,5 @@
 import {provide} from '@angular/core';
-import {ModalBackdropComponent, ModalDropInFactory, MODAL_PROVIDERS} from 'angular2-modal';
+import {ModalBackdropComponent, ModalDropInFactory, MODAL_PROVIDERS} from '../angular2-modal';
 
 import {BSModalBackdrop} from './bootstrap/modal-backdrop';
 import {OneButtonPresetBuilder} from './bootstrap/presets/one-button-preset';
@@ -7,7 +7,6 @@ import {TwoButtonPresetBuilder} from './bootstrap/presets/two-button-preset';
 import {Modal} from './bootstrap/modal';
 
 export {BootstrapModalSize, BSModalContext, BSModalContextBuilder} from './bootstrap/modal-context';
-export {BSModalFooter} from './bootstrap/modal-footer';
 export {BSModalBackdrop} from './bootstrap/modal-backdrop';
 export {BSModalContainer} from './bootstrap/modal-container';
 export {BSMessageModal} from './bootstrap/message-modal';
@@ -20,7 +19,7 @@ export {
 export {ModalOpenContext, ModalOpenContextBuilder} from './../models/modal-open-context';
 export {OneButtonPreset, OneButtonPresetBuilder} from './bootstrap/presets/one-button-preset';
 export {TwoButtonPreset, TwoButtonPresetBuilder} from './bootstrap/presets/two-button-preset';
-export {Modal} from './bootstrap/modal';
+export {BSModal, Modal} from './bootstrap/modal';
 
 export const BS_MODAL_PROVIDERS: any[] = [
     ...MODAL_PROVIDERS,

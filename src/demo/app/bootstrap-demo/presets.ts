@@ -1,6 +1,11 @@
-import {Modal} from '../../../components/angular2-modal/plugins/bootstrap';
+import {
+    Modal,
+    BSModal,
+    OneButtonPresetBuilder,
+    TwoButtonPresetBuilder
+} from '../../../components/angular2-modal/plugins/bootstrap';
 
-export function alert(modal: Modal) {
+export function alert(modal: Modal): OneButtonPresetBuilder {
     return modal.alert()
         .size('lg')
         .showClose(true)
@@ -18,7 +23,7 @@ export function alert(modal: Modal) {
         </ul>`);
 }
 
-export function prompt(modal: Modal) {
+export function prompt(modal: Modal): OneButtonPresetBuilder {
     return modal.prompt()
         .size('lg')
         .title('A simple Prompt style modal window')
@@ -34,7 +39,7 @@ export function prompt(modal: Modal) {
             </ul>`);
 }
 
-export function confirm(modal: Modal) {
+export function confirm(modal: Modal): TwoButtonPresetBuilder {
     return modal.confirm()
         .size('lg')
         .titleHtml(`

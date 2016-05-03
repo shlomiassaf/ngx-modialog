@@ -1,16 +1,15 @@
 import {Component} from '@angular/core';
-import {Modal} from 'angular2-modal';
+import {Modal} from '../../../../components/angular2-modal';
 import {
     TwoButtonPreset,
     TwoButtonPresetBuilder
 } from '../../../../components/angular2-modal/plugins/bootstrap';
 
-let html = require('./modal-customisation-wizard.tpl.html');
-
 
 @Component({
     selector: 'customize-wizard',
-    template: html
+    templateUrl:
+        'demo/app/bootstrap-demo/modal-customisation-wizard/modal-customisation-wizard.tpl.html'
 })
 export class ModalCustomisationWizard {
     type: 'alert' | 'prompt' | 'confirm' = 'alert';
