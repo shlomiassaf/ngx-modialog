@@ -42,14 +42,14 @@ function getSystemJsBundleConfig(cb) {
             },
             map: {
                 typescript: 'node_modules/typescript/lib/typescript.js',
-                angular2: 'node_modules/angular2',
+                '@angular': 'node_modules/@angular',
                 rxjs: 'node_modules/rxjs'
             },
             paths: {
                 '*': '*.js'
             },
             meta: {
-                'node_modules/angular2/*': { build: false },
+                'node_modules/@angular/*': { build: false },
                 'node_modules/rxjs/*': { build: false }
             },
         };
