@@ -10,12 +10,13 @@ export {VexModalContent} from './vex/modal-content';
 export {VEXBuiltInThemes, VEXModalContext, VEXModalContextBuilder} from './vex/modal-context';
 export {DROP_IN_TYPE, DropInPreset, DropInPresetBuilder} from './vex/presets/dropin-preset';
 export {
-    DialogModal,
+    DialogFormModal,
+    FormDropIn,
     VEXButtonClickEvent,
     VEXButtonConfig,
     VEXButtonHandler,
     VEXDialogButtons
-} from './vex/dialog-modal';
+} from './vex/dialog-form-modal';
 export {DialogPreset, DialogPresetBuilder} from './vex/presets/dialog-preset';
 
 const dropInFactory: ModalDropInFactory = {

@@ -8,7 +8,7 @@ import {
     AfterViewInit
 } from '@angular/core';
 
-import {Modal} from '../../providers/modal';
+import {Modal} from './modal';
 import {ModalCompileConfig} from '../../models/tokens';
 import {DialogRef} from '../../models/dialog-ref';
 import {VEXModalContext} from './modal-context';

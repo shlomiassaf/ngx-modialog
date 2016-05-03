@@ -1,7 +1,7 @@
 import {ResolvedReflectiveProvider} from '@angular/core';
 import {FluentAssignMethod} from '../../../framework/fluent-assign';
 import {Modal} from '../modal';
-import {DialogModal as component} from '../dialog-modal';
+import {DialogFormModal as component,  FormDropIn as content} from '../dialog-form-modal';
 import {DialogPreset, DialogPresetBuilder} from './dialog-preset';
 
 import {extend} from '../../../framework/utils';
@@ -48,7 +48,7 @@ export class DropInPresetBuilder extends DialogPresetBuilder<DropInPreset> {
     constructor(modal: Modal, dropInType: DROP_IN_TYPE, defaultValues: DropInPreset = undefined) {
         super(
             modal,
-            extend<any>({modal, component, dropInType}, defaultValues || {}),
+            extend<any>({modal, component, content, dropInType}, defaultValues || {}),
             DEFAULT_SETTERS,
             DropInPreset
         );

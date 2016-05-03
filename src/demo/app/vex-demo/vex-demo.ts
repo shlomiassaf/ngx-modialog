@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, ViewContainerRef, ViewChild, TemplateRef} from '@angular/core';
+import {Component, ViewEncapsulation, ViewContainerRef, ViewChild} from '@angular/core';
 
 import {DialogRef} from '../../../components/angular2-modal';
 
@@ -8,10 +8,11 @@ import {
     Modal,
     DropInPreset,
     DialogPreset,
-    DialogModal,
+    DialogFormModal,
     DialogPresetBuilder
 } from '../../../components/angular2-modal/plugins/vex';
 
+import {LoginDialog} from './login-dialog';
 @Component({
     selector: 'vex-demo',
     styleUrls: [
@@ -32,8 +33,6 @@ export class VexDemo {
     result: any;
     theme: VEXBuiltInThemes = <VEXBuiltInThemes>'default';
 
-    @ViewChild('customContent') private _customContent: TemplateRef<any>;
-    
     constructor(public modal: Modal, viewContainer: ViewContainerRef) {
         /**
          * A Default view container ref, usually the app root container ref.
@@ -53,16 +52,15 @@ export class VexDemo {
     dialog() {
         let dialog = new DialogPresetBuilder<DialogPreset>(this.modal)
             .className(this.theme)
-            .templateRef(this._customContent)
+            .content(LoginDialog)
             .message("Ary you coming to the event?")
             .addOkButton('Yep!')
             .addButton(
                 'vex-dialog-button-primary vex-dialog-button',
                 'Maybe?',
-                (cmp: DialogModal, $event:MouseEvent) => cmp.dialog.close('Maybe')
+                (cmp: DialogFormModal, $event:MouseEvent) => cmp.dialog.close('Maybe')
             )
             .addCancelButton('Nope!')
-
             .open();
         
         this.processDialog(<any>dialog);
@@ -96,10 +94,5 @@ export class VexDemo {
         }
 
         this.processDialog(dialog);
-
-    }
-
-    xxx(ctx) {
-        debugger;
     }
 }

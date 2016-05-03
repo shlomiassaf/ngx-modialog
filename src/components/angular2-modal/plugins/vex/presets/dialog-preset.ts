@@ -1,13 +1,18 @@
-import {TemplateRef} from '@angular/core';
+import {Type} from '@angular/core';
 import {FluentAssignMethod, privateKey} from '../../../framework/fluent-assign';
 import {VEXModalContext, VEXModalContextBuilder} from '../modal-context';
 import {Modal} from '../modal';
-import {DialogModal as component, VEXButtonHandler, VEXButtonConfig} from '../dialog-modal';
+import {
+    DialogFormModal as component, 
+    VEXButtonHandler, 
+    VEXButtonConfig
+} from '../dialog-form-modal';
+
 import {extend, arrayUnion} from '../../../framework/utils';
 
 
 const DEFAULT_SETTERS = [
-    'templateRef'
+    'content'
 ];
 
 /**
@@ -15,7 +20,7 @@ const DEFAULT_SETTERS = [
  */
 export class DialogPreset extends VEXModalContext {
     defaultResult: any;
-    templateRef: TemplateRef<DialogPreset>;
+    content: Type;
     buttons: VEXButtonConfig[];
 } 
 
@@ -41,7 +46,7 @@ export class DialogPresetBuilder<T extends DialogPreset>
     /**
      * the message to display on the modal.
      */
-    templateRef: FluentAssignMethod<TemplateRef<T>, this>;
+    content: FluentAssignMethod<Type, this>;
 
     addButton(css: string, caption: string, onClick: VEXButtonHandler): this {
         let btn = {
@@ -60,7 +65,7 @@ export class DialogPresetBuilder<T extends DialogPreset>
         this.addButton(
             'vex-dialog-button-primary vex-dialog-button vex-first',
             text,
-            (cmp: component, $event:MouseEvent) => cmp.dialog.close(cmp.dialogResult)
+            (cmp: component, $event:MouseEvent) => cmp.dialog.close(cmp.dialog.context.defaultResult)
         );
         return this;
     }
