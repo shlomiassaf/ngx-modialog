@@ -5,7 +5,7 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import {ELEMENT_PROBE_PROVIDERS} from '@angular/platform-browser';
 
 // Register providers for browser, this is mandatory.
-import {MODAL_BROWSER_PROVIDERS} from 'angular2-modal/platform/browser';
+import {MODAL_BROWSER_PROVIDERS} from 'angular2-modal/platform-browser';
 
 import {App} from './app/app';
 
