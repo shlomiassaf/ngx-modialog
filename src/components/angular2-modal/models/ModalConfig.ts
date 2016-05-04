@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 let _defaultConfig: ModalConfig;
 
-export type BootstrapModalSize = 'sm' | 'lg';
+export type BootstrapModalSize = 'default' | 'sm' | 'lg';
 
 // TODO: Move bootstrap specific settings (size) to a derived interface
 export interface IModalConfig {
     /**
      * Size of the modal.
-     * 'lg' or 'sm' only.
+     * 'default', 'lg' or 'sm' only.
      * NOTE: No validation.
-     * Default to 'lg'
+     * Default to 'default'
      */
     size: BootstrapModalSize;
 
@@ -43,9 +43,9 @@ export interface IModalConfig {
 export class ModalConfig implements IModalConfig {
     /**
      * Size of the modal.
-     * 'lg' or 'sm' only.
+     * 'default', 'lg' or 'sm' only.
      * NOTE: No validation.
-     * Default to 'lg'
+     * Default to 'default'
      */
     size: BootstrapModalSize;
 
@@ -121,4 +121,4 @@ export class ModalConfig implements IModalConfig {
     }
 }
 
-_defaultConfig = new ModalConfig('lg', true, [27], 'modal-dialog');
+_defaultConfig = new ModalConfig('default', true, [27], 'modal-dialog');

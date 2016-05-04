@@ -60,7 +60,7 @@ export class ModalAwarePreset<T extends ModalAwarePresetData> extends FluentAssi
      * A Class for the modal dialog container.
      * Default: modal-dialog
      */
-    dialogClass: FluentAssignMethod<BootstrapModalSize, this>;
+    dialogClass: FluentAssignMethod<string, this>;
 
     /**
      * Open a modal window based on the configuration of this config instance.
