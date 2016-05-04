@@ -155,5 +155,5 @@ export class Modal {
 
 export const MODAL_PROVIDERS = [
     new Provider(Modal, {useClass: Modal}),
-    new Provider(ModalConfig, {useValue: new ModalConfig('lg', true, 27)})
+    new Provider(ModalConfig, {useValue: new ModalConfig('default', true, 27)})
 ];
