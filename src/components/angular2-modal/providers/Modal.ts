@@ -70,7 +70,7 @@ export class Modal {
      * @param config A Modal Configuration object.
      * @returns {Promise<ModalDialogInstance>}
      */
-    public open(component: FunctionConstructor,
+    public open(component: Type,
                 bindings: ResolvedReflectiveProvider[],
                 config?: ModalConfig): Promise<ModalDialogInstance> {
         return this.openInside(component, this.defaultViewContainer, bindings, config);
@@ -84,7 +84,7 @@ export class Modal {
      * @param config A Modal Configuration object.
      * @returns {Promise<ModalDialogInstance>}
      */
-    public openInside(component: FunctionConstructor,
+    public openInside(component: Type,
                       viewContainer: ViewContainerRef,
                       bindings: ResolvedReflectiveProvider[],
                       config?: ModalConfig): Promise<ModalDialogInstance> {
