@@ -70,10 +70,12 @@ export class Modal {
      * @param config A Modal Configuration object.
      * @returns {Promise<ModalDialogInstance>}
      */
+    public open(component: Type, config?: ModalConfig): Promise<ModalDialogInstance>;
+    public open(component: Type, bindings?: ResolvedReflectiveProvider[], config?: ModalConfig): Promise<ModalDialogInstance>;
     public open(component: Type,
-                bindings: ResolvedReflectiveProvider[],
-                config?: ModalConfig): Promise<ModalDialogInstance> {
-        return this.openInside(component, this.defaultViewContainer, bindings, config);
+                bindings?: ModalConfig | ResolvedReflectiveProvider[],
+                config?: ModalConfig): Promise<ModalDialogInstance> {                    
+        return this.openInside(component, this.defaultViewContainer, bindings as ResolvedReflectiveProvider[], config);
     }
 
     /**
@@ -84,15 +86,20 @@ export class Modal {
      * @param config A Modal Configuration object.
      * @returns {Promise<ModalDialogInstance>}
      */
+    public openInside(component: Type, viewContainer: ViewContainerRef, config?: ModalConfig): Promise<ModalDialogInstance>;
+    public openInside(component: Type, viewContainer: ViewContainerRef, bindings?: ResolvedReflectiveProvider[], config?: ModalConfig): Promise<ModalDialogInstance>;
     public openInside(component: Type,
                       viewContainer: ViewContainerRef,
-                      bindings: ResolvedReflectiveProvider[],
+                      bindings?: ModalConfig | ResolvedReflectiveProvider[],
                       config?: ModalConfig): Promise<ModalDialogInstance> {
-
+        if(!Array.isArray(bindings)){
+            config = bindings as any;
+            bindings = [];
+        }
         config = (config) ? ModalConfig.makeValid(config, this.config) : this.config;
 
         const dialog = new ModalDialogInstance(config);
-        const compileConfig = new ModalCompileConfig(component, bindings || []);
+        const compileConfig = new ModalCompileConfig(component, bindings as ResolvedReflectiveProvider[] || []);
         dialog.inElement = viewContainer !== this.defaultViewContainer;
 
         let dialogBindings = ReflectiveInjector.resolve([
