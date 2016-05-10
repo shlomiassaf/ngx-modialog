@@ -53,6 +53,11 @@ See [src/demo](https://github.com/shlomiassaf/angular2-modal/tree/master/src/dem
     npm install angular2-modal --save
 ```
 
+## SystemJS
+Demo application is built with `Webpack` and `SystemJS`.   
+The only difference is the `index.html` file.  
+The deployed demo site is in `SystemJS`, development is done with `Webpack`
+
 ## Plugins
 Plugins serve as a concrete UI implementation for a modal. It can be an implementation for a known library (e.g: bootstrap) or something unique.  
 While `angular2-modal` has some built in plugins it is also possible to use external plugins from NPM, if someone decide to build one.
@@ -68,6 +73,7 @@ While `angular2-modal` has some built in plugins it is also possible to use exte
 
 You can apply custom modals based on components.
 
+
 ## Publishing
 Publishing is done using the TypeScript compiler directly (no webpack)
 The process involves compiling into a directory called `dist`
@@ -80,3 +86,7 @@ I created a `publish` directory instead and set the `--project` argument accordi
 Not so complicated but not in angular 2 at the moment.
 ## Overlay
 Switch to material2 overlay implementation when done.
+## Bundle
+Build a umd bundle.
+## Base support
+Provide base classes for generic components
