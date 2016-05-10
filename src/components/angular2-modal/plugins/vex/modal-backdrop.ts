@@ -18,55 +18,19 @@ let dialogRefCount = 0;
     selector: 'modal-backdrop',
     host: {
         '[class.in-element]': 'dialog.inElement',
-        '[style]': 'hostStyle',
+        '[style.position]': 'hs.ps',
+        '[style.height]': 'hs.sz',
+        '[style.width]': 'hs.sz',
+        '[style.top]': 'hs.pt',
+        '[style.left]': 'hs.pt',
+        '[style.right]': 'hs.pt',
+        '[style.bottom]': 'hs.pt',
         '(body:keydown)': 'documentKeypress($event)'
     },
-    styles: [`
-.in-element .vex.vex-theme-default,
-.in-element .vex.vex-theme-os,
-.in-element .vex.vex-theme-plain,
-.in-element .vex.vex-theme-wireframe ,
-.in-element .vex.vex-theme-flat-attack,
-.in-element .vex.vex-theme-top,
-.in-element .vex.vex-theme-bottom-right-corner {
-    position: relative;
-    padding: 0px;
-    width: 100%;
-    height: 100%;
-}
-
-.in-element .vex-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-}
-
-.in-element modal-content {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding-top: 20px;
-    overflow-x: hidden;
-    overflow-y: auto
-}
-
-.in-element .vex.vex-theme-bottom-right-corner, 
-.in-element .vex.vex-theme-bottom-right-corner modal-content {
-    overflow-y: hidden
-}
-.in-element .vex.vex-theme-bottom-right-corner .vex-content {
-    position: absolute;
-}`
+    styleUrls: [
+        'components/angular2-modal/plugins/vex/modal-backdrop.css'
     ],
-    directives: [VexModalContent],
+    directives: [ VexModalContent ],
     encapsulation: ViewEncapsulation.None,
     template:
 `<div [class]="cssClass">
@@ -75,7 +39,7 @@ let dialogRefCount = 0;
 </div>`
 })
 export class VexModalBackdrop implements OnDestroy {
-    private hostStyle: string;
+    private hs: any = {};
 
     constructor(
         private dialog: DialogRef<VEXModalContext>,
@@ -84,15 +48,9 @@ export class VexModalBackdrop implements OnDestroy {
         document.body.classList.add('vex-open');
 
         if (dialog.inElement) {
-            this.hostStyle = toStyleString({
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                top: '0',
-                left: '0',
-                right: '0',
-                bottom: '0'
-            });
+            this.hs.ps = 'absolute';
+            this.hs.sz = '100%';
+            this.hs.pt = 0;
         }
     }
 

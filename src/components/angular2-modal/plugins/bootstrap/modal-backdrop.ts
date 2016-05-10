@@ -1,8 +1,8 @@
-import {Component, ViewEncapsulation, OnDestroy} from '@angular/core';
-import {DialogRef} from '../../models/dialog-ref';
+import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { DialogRef } from '../../models/dialog-ref';
 
-import {BSModalContainer} from './modal-container';
-import {BSModalContext} from './modal-context';
+import { BSModalContainer } from './modal-container';
+import { BSModalContext } from './modal-context';
 
 let dialogRefCount = 0;
 
@@ -12,35 +12,31 @@ let dialogRefCount = 0;
 @Component({
     selector: 'modal-backdrop',
     host: {
-        '[style.position]': 'position',
-        '[style.height]': 'size',
-        '[style.width]': 'size',
-        '[style.top]': 'point',
-        '[style.left]': 'point',
-        '[style.right]': 'point',
-        '[style.bottom]': 'point'
+        '[style.position]': 'hs.ps',
+        '[style.height]': 'hs.sz',
+        '[style.width]': 'hs.sz',
+        '[style.top]': 'hs.pt',
+        '[style.left]': 'hs.pt',
+        '[style.right]': 'hs.pt',
+        '[style.bottom]': 'hs.pt'
     },
     directives: [BSModalContainer],
     encapsulation: ViewEncapsulation.None,
     template:
-`<div [style.position]="position" class="modal-backdrop fade in"></div>
+`<div [style.position]="hs.ps" class="modal-backdrop fade in"></div>
 <modal-container></modal-container>`
 })
 export class BSModalBackdrop implements OnDestroy {
-    private position: string;
-    private size: string;
-    private point: string;
-    
+    private hs = { ps: null, sz: null, pt: null };
+
     constructor(dialog: DialogRef<BSModalContext>) {
         dialogRefCount++;
         document.body.classList.add('modal-open');
 
-        if (!dialog.inElement) {
-            this.position = this.size = this.point = null;
-        } else {
-            this.position = 'absolute';
-            this.size = '100%';
-            this.point = '0';
+        if (dialog.inElement) {
+            this.hs.ps = 'absolute';
+            this.hs.sz = '100%';
+            this.hs.pt = '0';
         }
     }
     
