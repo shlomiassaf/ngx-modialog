@@ -14,8 +14,7 @@ let _bootstrapped = false;
 export function main(): Promise<ComponentRef<App>> {
     if (_bootstrapped) {
         return <any>Promise.reject(null);
-    }
-    else {
+    } else {
         _bootstrapped = true;
         return bootstrap(App, [
             ...MODAL_BROWSER_PROVIDERS,

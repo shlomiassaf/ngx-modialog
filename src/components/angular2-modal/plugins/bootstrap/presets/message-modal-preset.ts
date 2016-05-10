@@ -85,20 +85,6 @@ export interface MessageModalPreset extends BSModalContext {
 export abstract class MessageModalPresetBuilder<T extends MessageModalPreset>
                                                                 extends BSModalContextBuilder<T> {
 
-    constructor(
-        defaultValues: T = undefined,
-        initialSetters: string[] = undefined,
-        baseType: new () => T = undefined
-    ) {
-        super(
-            extend<any>(extend({buttons: []}, DEFAULT_VALUES), defaultValues || {}),
-            arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
-            baseType
-        );
-        
-        setAssignAlias(this, 'body', 'message', true);
-    }
-
     /**
      * A Class for the header (title) container.
      * Default: modal-header
@@ -146,6 +132,20 @@ export abstract class MessageModalPresetBuilder<T extends MessageModalPreset>
      * Default: modal-footer
      */
     footerClass: FluentAssignMethod<string, this>;
+
+    constructor(
+        defaultValues: T = undefined,
+        initialSetters: string[] = undefined,
+        baseType: new () => T = undefined
+    ) {
+        super(
+            extend<any>(extend({buttons: []}, DEFAULT_VALUES), defaultValues || {}),
+            arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
+            baseType
+        );
+
+        setAssignAlias(this, 'body', 'message', true);
+    }
     
     addButton(css: string, caption: string, onClick: BSMessageModalButtonHandler): this {
         let btn = {

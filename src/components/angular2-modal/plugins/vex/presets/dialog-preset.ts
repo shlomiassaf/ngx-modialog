@@ -31,6 +31,10 @@ export class DialogPreset extends VEXModalContext {
  */
 export class DialogPresetBuilder<T extends DialogPreset> 
                                                     extends VEXModalContextBuilder<T> {
+    /**
+     * the message to display on the modal.
+     */
+    content: FluentAssignMethod<Type, this>;
 
     constructor(modal: Modal,
                 defaultValues: T = undefined,
@@ -42,11 +46,6 @@ export class DialogPresetBuilder<T extends DialogPreset>
             baseType || <any>DialogPreset // https://github.com/Microsoft/TypeScript/issues/7234
         );
     }
-
-    /**
-     * the message to display on the modal.
-     */
-    content: FluentAssignMethod<Type, this>;
 
     addButton(css: string, caption: string, onClick: VEXButtonHandler): this {
         let btn = {
@@ -65,7 +64,7 @@ export class DialogPresetBuilder<T extends DialogPreset>
         this.addButton(
             'vex-dialog-button-primary vex-dialog-button vex-first',
             text,
-            (cmp: component, $event:MouseEvent) => cmp.dialog.close(cmp.dialog.context.defaultResult)
+            (cmp: component, $event: MouseEvent) => cmp.dialog.close(cmp.dialog.context.defaultResult)
         );
         return this;
     }
@@ -74,7 +73,7 @@ export class DialogPresetBuilder<T extends DialogPreset>
         this.addButton(
             'vex-dialog-button-secondary vex-dialog-button vex-last',
             text,
-            (cmp: component, $event:MouseEvent) => cmp.dialog.dismiss()
+            (cmp: component, $event: MouseEvent) => cmp.dialog.dismiss()
         );
         return this;
     }

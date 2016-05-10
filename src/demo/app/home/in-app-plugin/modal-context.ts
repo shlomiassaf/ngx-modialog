@@ -18,6 +18,8 @@ export class InAppModalContext extends ModalOpenContext {
 
 
 export class InAppModalContextBuilder extends ModalOpenContextBuilder<InAppModalContext> {
+    title: FluentAssignMethod<string, this>;
+    templateRef: FluentAssignMethod<TemplateRef<any>, this>;
 
     constructor(
         modal: Modal
@@ -29,9 +31,5 @@ export class InAppModalContextBuilder extends ModalOpenContextBuilder<InAppModal
             // https://github.com/Microsoft/TypeScript/issues/7234
         );
     }
-
-    title: FluentAssignMethod<string, this>;
-    templateRef: FluentAssignMethod<TemplateRef<any>, this>;
-
 }
 

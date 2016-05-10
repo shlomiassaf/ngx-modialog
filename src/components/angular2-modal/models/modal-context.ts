@@ -60,26 +60,13 @@ export class ModalContext {
  */
 @Injectable()
 export class ModalContextBuilder<T extends ModalContext> extends FluentAssign<T> {
-
-    constructor(
-        defaultValues: T | T[] = undefined,
-        initialSetters: string[] = undefined,
-        baseType: new () => T = undefined
-    ) {
-        super(
-            extend<any>(DEFAULT_VALUES, defaultValues || {}),
-            arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
-            baseType
-        );
-    }
-
     /**
      * Describes if the modal is blocking modal.
      * A Blocking modal is not closable by clicking outside of the modal window.
      * Defaults to false.
      */
     isBlocking: FluentAssignMethod<boolean, this>;
-    
+
     /**
      * Keyboard value/s that close the modal.
      * Accepts either a single numeric value or an array of numeric values.
@@ -94,6 +81,18 @@ export class ModalContextBuilder<T extends ModalContext> extends FluentAssign<T>
      * all models, at core, convey a message thus message is common to all modals.
      */
     message: FluentAssignMethod<string, this>;
+
+    constructor(
+        defaultValues: T | T[] = undefined,
+        initialSetters: string[] = undefined,
+        baseType: new () => T = undefined
+    ) {
+        super(
+            extend<any>(DEFAULT_VALUES, defaultValues || {}),
+            arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
+            baseType
+        );
+    }
 }
 
 export interface ModalControllingContextBuilder<T> {

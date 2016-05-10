@@ -48,19 +48,6 @@ export class BSModalContext extends ModalOpenContext {
 
 
 export class BSModalContextBuilder<T extends BSModalContext> extends ModalOpenContextBuilder<T> {
-
-    constructor(
-        defaultValues: T = undefined,
-        initialSetters: string[] = undefined,
-        baseType: new () => T = undefined
-    ) {
-        super(
-            extend<any>(DEFAULT_VALUES, defaultValues || {}),
-            arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
-            baseType || <any>BSModalContext // https://github.com/Microsoft/TypeScript/issues/7234
-        );
-    }
-
     /**
      * Size of the modal.
      * 'lg' or 'sm' only.
@@ -79,5 +66,17 @@ export class BSModalContextBuilder<T extends BSModalContext> extends ModalOpenCo
      * When true, show a close button on the top right corner.
      */
     showClose: FluentAssignMethod<boolean, this>;
+    
+    constructor(
+        defaultValues: T = undefined,
+        initialSetters: string[] = undefined,
+        baseType: new () => T = undefined
+    ) {
+        super(
+            extend<any>(DEFAULT_VALUES, defaultValues || {}),
+            arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
+            baseType || <any>BSModalContext // https://github.com/Microsoft/TypeScript/issues/7234
+        );
+    }
 }
 

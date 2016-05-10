@@ -1,14 +1,22 @@
-import { Component, ViewEncapsulation, Input, Output, EventEmitter, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+    Component,
+    ViewEncapsulation,
+    Input,
+    Output,
+    EventEmitter,
+    ViewChild,
+    ViewContainerRef
+} from '@angular/core';
 
 import { DialogRef } from '../../../components/angular2-modal';
 
 export interface ModalCommandDescriptor {
-    text: string,
-    factory: () => Promise<DialogRef<any>>
+    text: string;
+    factory: () => Promise<DialogRef<any>>;
 }
 export interface DropInClickEvent {
-    event: Event,
-    source: ModalCommandDescriptor
+    event: Event;
+    source: ModalCommandDescriptor;
 }
 
 @Component({

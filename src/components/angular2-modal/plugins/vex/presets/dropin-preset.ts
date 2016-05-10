@@ -40,6 +40,17 @@ export class DropInPreset extends DialogPreset {
  */
 export class DropInPresetBuilder extends DialogPresetBuilder<DropInPreset> {
 
+    /**
+     * the message to display on the modal.
+     */
+    message: FluentAssignMethod<string, this>;
+
+    /**
+     * A placeholder for the input element.
+     * Valid only for prompt modal.
+     */
+    placeholder: FluentAssignMethod<string, this>;
+    
     constructor(modal: Modal, dropInType: DROP_IN_TYPE, defaultValues: DropInPreset = undefined) {
         super(
             modal,
@@ -61,15 +72,4 @@ export class DropInPresetBuilder extends DialogPresetBuilder<DropInPreset> {
         }
         return super.$$beforeOpen(config);
     }
-
-    /**
-     * the message to display on the modal.
-     */
-    message: FluentAssignMethod<string, this>;
-
-    /**
-     * A placeholder for the input element.
-     * Valid only for prompt modal.
-     */
-    placeholder: FluentAssignMethod<string, this>;
 }

@@ -49,7 +49,8 @@ export class BootstrapDemoPage {
             },
             {
                 text: 'Custom Modal example',
-                factory: () => this.modal.open(AdditionCalculateWindow, new AdditionCalculateWindowData(2, 3))
+                factory: () =>
+                    this.modal.open(AdditionCalculateWindow, new AdditionCalculateWindowData(2, 3))
             }
         ];
     }

@@ -35,8 +35,7 @@ export class JSNativeModalRenderer implements ModalRenderer {
 
         if (result === false) {
             dialog.dismiss();
-        }
-        else {
+        } else {
             dialog.close(result);
         }
 

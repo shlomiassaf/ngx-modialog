@@ -69,15 +69,15 @@ export class VexDemo {
                     return new DialogPresetBuilder<DialogPreset>(this.modal)
                         .className(this.theme)
                         .content(LoginDialog)
-                        .message("Ary you coming to the event?")
+                        .message('Ary you coming to the event?')
                         .addOkButton('Yep!')
                         .addButton(
                             'vex-dialog-button-primary vex-dialog-button',
                             'Maybe?',
-                            (cmp: DialogFormModal, $event:MouseEvent) => cmp.dialog.close('Maybe')
+                            (cmp: DialogFormModal, $event: MouseEvent) => cmp.dialog.close('Maybe')
                         )
                         .addCancelButton('Nope!')
-                        .open()
+                        .open();
                 }
             }
         ];

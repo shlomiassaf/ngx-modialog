@@ -192,32 +192,6 @@ export class FluentAssign<T> {
     private __fluent$base__: new () => T;
 
     /**
-     *
-     * @param defaultValues An object representing default values for the underlying object.
-     * @param initialSetters A list of initial setters for this FluentAssign.
-     * @param baseType the class/type to create a new base. optional, {} is used if not supplied.
-     */
-    constructor(defaultValues: T | T[] = undefined,
-                initialSetters: string[] = undefined,
-                baseType: new () => T = undefined) {
-        if (Array.isArray(defaultValues)) {
-            defaultValues.forEach(d => applyDefaultValues(this, d));
-        } else if (defaultValues) {
-            applyDefaultValues(this, defaultValues)
-        }
-        
-        if (Array.isArray(initialSetters)) {
-            
-            initialSetters.forEach(name => setAssignMethod(this, name));
-        }
-
-        if (baseType) {
-            this.__fluent$base__ = baseType;
-        }
-    }
-
-
-    /**
      * Returns a FluentAssignFactory<FluentAssign<T>> ready to define a FluentAssign type.
      * @param defaultValues An object representing default values for the instance.
      * @param initialSetters A list of initial setters for the instance.
@@ -239,6 +213,31 @@ export class FluentAssign<T> {
     static composeWith<Z>(fluentAssign: Z): IFluentAssignFactory<Z> {
         return <any>new FluentAssignFactory<any>(<any>fluentAssign);
     }
+    
+    /**
+     *
+     * @param defaultValues An object representing default values for the underlying object.
+     * @param initialSetters A list of initial setters for this FluentAssign.
+     * @param baseType the class/type to create a new base. optional, {} is used if not supplied.
+     */
+    constructor(defaultValues: T | T[] = undefined,
+                initialSetters: string[] = undefined,
+                baseType: new () => T = undefined) {
+        if (Array.isArray(defaultValues)) {
+            defaultValues.forEach(d => applyDefaultValues(this, d));
+        } else if (defaultValues) {
+            applyDefaultValues(this, defaultValues);
+        }
+        
+        if (Array.isArray(initialSetters)) {
+            
+            initialSetters.forEach(name => setAssignMethod(this, name));
+        }
+
+        if (baseType) {
+            this.__fluent$base__ = baseType;
+        }
+    }
 
     toJSON(): T {
         return getAssignedPropertyNames(this)
@@ -248,8 +247,7 @@ export class FluentAssign<T> {
                 let propDesc = Object.getOwnPropertyDescriptor(this, key);
                 if (propDesc) {
                     Object.defineProperty(obj, name, propDesc);
-                }
-                else {
+                } else {
                     (<any>obj)[name] = (<any>this)[key];
                 }
                 return obj;

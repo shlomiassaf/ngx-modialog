@@ -24,6 +24,12 @@ export abstract class ModalOpenContextBuilder<T extends ModalOpenContext>
                                                     extends ModalContextBuilder<T>
                                                     implements ModalControllingContextBuilder<T> {
 
+    /**
+     * A Class for the footer container.
+     * Default: modal-footer
+     */
+    component: FluentAssignMethod<ModalComponent<T>, this>;
+
     constructor(
         defaultValues: T = undefined,
         initialSetters: string[] = undefined,
@@ -35,13 +41,7 @@ export abstract class ModalOpenContextBuilder<T extends ModalOpenContext>
             baseType
         );
     }
-
-    /**
-     * A Class for the footer container.
-     * Default: modal-footer
-     */
-    component: FluentAssignMethod<ModalComponent<T>, this>;
-
+    
     /**
      * Hook to alter config and return bindings.
      * @param config

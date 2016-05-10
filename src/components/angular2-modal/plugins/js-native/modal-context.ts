@@ -21,6 +21,11 @@ export class JSNativeModalContext extends ModalOpenContext {
 export class JSNativeModalContextBuilder<T extends JSNativeModalContext>
                                                                 extends ModalOpenContextBuilder<T> {
 
+    /**
+     * The default value for the prompt input
+     */
+    promptDefault: FluentAssignMethod<string, this>;
+
     constructor(
         defaultValues: T = undefined,
         initialSetters: string[] = undefined,
@@ -29,14 +34,8 @@ export class JSNativeModalContextBuilder<T extends JSNativeModalContext>
         super(
             defaultValues || <any>{},
             arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
-            baseType || <any>JSNativeModalContext 
+            baseType || <any>JSNativeModalContext
             // https://github.com/Microsoft/TypeScript/issues/7234
         );
     }
-
-    /**
-     * The default value for the prompt input
-     */
-    promptDefault: FluentAssignMethod<string, this>;
 }
-

@@ -33,7 +33,17 @@ export class VEXModalContext extends ModalOpenContext {
 }
 
 export class VEXModalContextBuilder<T extends VEXModalContext> extends ModalOpenContextBuilder<T> {
+    /**
+     * Set the built in schema to use.
+     */
+    className: FluentAssignMethod<VEXBuiltInThemes, this>;
 
+    overlayClassName: FluentAssignMethod<string, this>;
+    contentClassName: FluentAssignMethod<string, this>;
+    closeClassName: FluentAssignMethod<string, this>;
+
+    showCloseButton: FluentAssignMethod<boolean, this>;
+    
     constructor(
         defaultValues: T = undefined,
         initialSetters: string[] = undefined,
@@ -47,17 +57,6 @@ export class VEXModalContextBuilder<T extends VEXModalContext> extends ModalOpen
     }
 
     /**
-     * Set the built in schema to use.
-     */
-    className: FluentAssignMethod<VEXBuiltInThemes, this>;
-
-    overlayClassName: FluentAssignMethod<string, this>;
-    contentClassName: FluentAssignMethod<string, this>;
-    closeClassName: FluentAssignMethod<string, this>;
-
-    showCloseButton: FluentAssignMethod<boolean, this>;
-
-    /**
      *
      * @aliasFor isBlocking
      */
@@ -66,4 +65,3 @@ export class VEXModalContextBuilder<T extends VEXModalContext> extends ModalOpen
         return this;
     }
 }
-
