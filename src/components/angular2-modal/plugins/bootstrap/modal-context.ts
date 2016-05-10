@@ -60,7 +60,7 @@ export class BSModalContextBuilder<T extends BSModalContext> extends ModalOpenCo
      * A Class for the modal dialog container.
      * Default: modal-dialog
      */
-    dialogClass: FluentAssignMethod<BootstrapModalSize, this>;
+    dialogClass: FluentAssignMethod<string, this>;
 
     /**
      * When true, show a close button on the top right corner.
