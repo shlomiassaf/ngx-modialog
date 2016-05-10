@@ -5,6 +5,9 @@ A fully generic, customizable and fluent modal window implementation for Angular
 This means virtually any modal implementation out there can be ported into `angular2-modal`.
 `angular2-modal` will come with some built in UI platforms, external UI platform can be added in the future or externally used using NPM modules.
 
+See the DEMO: [shlomiassaf.github.io/angular2-modal](http://shlomiassaf.github.io/angular2-modal/)
+
+
 ## Built in plugins:
   * [Bootstrap]()
   * [Vex](http://github.hubspot.com/vex/docs/welcome/)
