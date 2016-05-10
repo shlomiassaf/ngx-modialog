@@ -1,7 +1,7 @@
 {
   "name": "angular2-modal",
-  "description": "Angular2 Modal (dialog) window bootstrap style.",
-  "version": "0.1.7",
+  "description": "Angular2 Modal (dialog) window.",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/shlomiassaf/angular2-modal.git"
@@ -21,37 +21,51 @@
     "url": "https://github.com/shlomiassaf/angular2-modal/issues"
   },
   "scripts": {
-    "prepublish": "tsc --project publish && node make.js"
+    "rimraf": "rimraf",
+    "webpack-dev-server": "webpack-dev-server",
+    "ngServer": "ng serve",
+    "server": "npm run server:dev",
+    "server:dev": "webpack-dev-server --config webpack.config.js --hot --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
+    "build": "exec ./scripts/build_release.sh",
+    "prepublish": "npm run build",
+    "start": "npm run server:dev"
   },
   "peerDependencies": {
-    "@angular/common": "^2.0.0-rc.0",
-    "@angular/compiler": "^2.0.0-rc.0",
-    "@angular/core": "^2.0.0-rc.0",
-    "@angular/platform-browser": "^2.0.0-rc.0",
-    "@angular/platform-browser-dynamic": "^2.0.0-rc.0",
-    "rxjs": "^5.0.0-beta.6",
+    "@angular/core": "^2.0.0-rc.1",
+    "@angular/compiler": "^2.0.0-rc.1",
+    "@angular/common": "^2.0.0-rc.1",
+    "@angular/platform-browser": "^2.0.0-rc.1",
+    "@angular/platform-browser-dynamic": "^2.0.0-rc.1",
+    "rxjs": "5.0.0-beta.6",
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
-    "@angular/router": "^2.0.0-rc.0",
-    "@angular/router-deprecated": "^2.0.0-rc.0",
-    "core-js": "^2.3.0",
-    "ts-helpers": "^1.1.1",
+    "@angular/router": "^2.0.0-rc.1",
+    "@angular/router-deprecated": "^2.0.0-rc.1",
+    "angular-cli": "0.0.31",
     "async": "^1.5.2",
     "bootstrap": "^3.3.6",
+    "broccoli-autoprefixer": "^4.1.0",
+    "broccoli-funnel": "^1.0.1",
+    "broccoli-merge-trees": "^1.1.1",
+    "core-js": "^2.3.0",
     "css-loader": "^0.23.0",
     "del": "^2.2.0",
     "exports-loader": "0.6.2",
     "expose-loader": "^0.7.1",
     "file-loader": "^0.8.4",
     "gulp": "^3.9.0",
+    "gulp-inline-ng2-template": "^1.1.3",
     "gulp-shell": "^0.5.1",
+    "gulp-transform-js-ast": "^1.0.2",
     "imports-loader": "^0.6.4",
+    "js-string-escape": "^1.0.1",
     "json-loader": "^0.5.3",
     "raw-loader": "0.5.1",
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.0",
     "systemjs-builder": "^0.15.10",
+    "ts-helpers": "^1.1.1",
     "ts-loader": "^0.8.1",
     "tsconfig-lint": "^0.6.0",
     "tslint": "^3.5.0 ",
@@ -60,6 +74,7 @@
     "typings": "^0.3.1",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.12.1"
+    "webpack-dev-server": "^1.12.1",
+    "zone.js": "^0.6.12"
   }
 }

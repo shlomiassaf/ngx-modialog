@@ -1,14 +1,17 @@
-export * from './models/ICustomModal';
-export * from './models/ModalConfig';
-export * from './models/ModalDialogInstance';
-export * from './components/modalBackdrop';
-export * from './components/bootstrapModalContainer';
-export * from './components/modalFooter';
-export * from './providers/Modal';
+import {Provider} from '@angular/core';
+import {ModalRenderer} from './models/tokens';
+import {Modal} from './providers/modal';
+import {DOMModalRenderer} from './providers/dom-modal-renderer';
 
-export * from './framework/FluentAssign';
-export * from './modals/MessageModal';
-export * from './presets';
+export * from './framework/fluent-assign';
+export * from './models/tokens';
+export * from './models/dialog-ref';
+export * from './models/modal-context';
+export * from './models/modal-open-context';
+export {Modal} from './providers/modal';
+export {DOMModalRenderer} from './providers/dom-modal-renderer';
 
-export * from './commonModals/yesNoModal';
-export * from './commonModals/okOnlyModal';
+export const MODAL_PROVIDERS: any[] = [
+    new Provider(Modal, {useClass: Modal}),
+    new Provider(ModalRenderer, {useClass: DOMModalRenderer})
+];

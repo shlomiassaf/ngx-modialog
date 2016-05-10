@@ -8,9 +8,8 @@ module.exports = {
     debug: true, // remove in production
 
     entry: {
-        'vendor': './src/demo/vendor.ts',
-        'angular2-modal': './angular2-modal.ts',
-        'app': './src/demo/bootstrap.ts' // our angular app
+        'vendor': ['webpack/hot/dev-server', './src/demo/vendor.ts'],
+        'app': './src/bootstrap.ts' // our angular app
     },
 
     // Config for our build files

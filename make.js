@@ -11,13 +11,13 @@ const Builder = require('systemjs-builder');
 
 const pkg = require('./package.json');
 const name = pkg.name;
+
 const TARGET_DIR = path.resolve('./dist/systemjs');
 
 async.waterfall([
-    //clearTarget,
-    getSystemJsBundleConfig,
+    async.apply(getSystemJsBundleConfig, 'angular2-modal'),
     buildSystemJs({mangle: false}),
-    getSystemJsBundleConfig,
+    async.apply(getSystemJsBundleConfig, 'angular2-modal'),
     buildSystemJs({minify: true, sourceMaps: true, mangle: false})
 ], function (err) {
     if (err) {
@@ -25,17 +25,10 @@ async.waterfall([
     }
 });
 
-function clearTarget(cb) {
-    return del(TARGET_DIR, {force: true})
-            .then( paths => console.log(`Deleted files and folders:\n${paths.join('\n')}`) )
-            .then( _ => cb())
-            .catch( err => cb(err));
-}
-
-function getSystemJsBundleConfig(cb) {
+function getSystemJsBundleConfig(name, cb) {
     try {
         let config = {
-            baseURL: './dist/commonjs',
+            baseURL: `./dist/commonjs_all`,
             transpiler: 'typescript',
             typescriptOptions: {
                 module: 'cjs'
@@ -51,29 +44,35 @@ function getSystemJsBundleConfig(cb) {
             meta: {
                 'node_modules/@angular/*': { build: false },
                 'node_modules/rxjs/*': { build: false }
-            },
+            }
         };
 
 
-        cb(null, config);
+        cb(null, config, name);
     }
     catch (ex) {
         cb(ex);
     }
 }
 
-
-
 function buildSystemJs(options) {
-    return function (config, cb) {
+    return function (config, name, cb) {
         let fileName = `${name}-${pkg.version}` + (options && options.minify ? '.min' : '') + '.js';
         let dest = path.resolve(__dirname, TARGET_DIR, fileName);
         console.log('Bundling system.js file:', fileName, options);
 
         let builder = new Builder();
         builder.config(config);
+
+        // Promise.all([builder.trace('name'), builder.trace('plugins/bootstrap.js')])
+        //     .then(function(trees) {
+        //         return builder.bundle(builder.addTrees(trees[0], trees[1]), dest, options);
+        //     })
+        //     .catch(cb);
+
         return builder
-                .bundle([name].join('/'), dest, options)
-                .then(()=>cb()).catch(cb);
+            .bundle(name, dest, options)
+            .then( () => cb())
+            .catch(cb);
     };
 }
