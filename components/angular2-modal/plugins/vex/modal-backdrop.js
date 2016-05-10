@@ -64,9 +64,7 @@ var VexModalBackdrop = (function () {
                 '[style.bottom]': 'hs.pt',
                 '(body:keydown)': 'documentKeypress($event)'
             },
-            styleUrls: [
-                'components/angular2-modal/plugins/vex/modal-backdrop.css'
-            ],
+            styles: ["\n              .in-element .vex.vex-theme-default,\n.in-element .vex.vex-theme-os,\n.in-element .vex.vex-theme-plain,\n.in-element .vex.vex-theme-wireframe ,\n.in-element .vex.vex-theme-flat-attack,\n.in-element .vex.vex-theme-top,\n.in-element .vex.vex-theme-bottom-right-corner {\n    position: relative;\n    padding: 0px;\n    width: 100%;\n    height: 100%;\n}\n\n.in-element .vex-overlay {\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    bottom: 0px;\n}\n\n.in-element modal-content {\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    padding-top: 20px;\n    overflow-x: hidden;\n    overflow-y: auto\n}\n\n.in-element .vex.vex-theme-bottom-right-corner,\n.in-element .vex.vex-theme-bottom-right-corner modal-content {\n    overflow-y: hidden\n}\n.in-element .vex.vex-theme-bottom-right-corner .vex-content {\n    position: absolute;\n}\n            "],
             directives: [modal_content_1.VexModalContent],
             encapsulation: core_1.ViewEncapsulation.None,
             template: "<div [class]=\"cssClass\">\n    <div [class]=\"dialog.context.overlayClassName\"></div>\n    <modal-content></modal-content>    \n</div>"
