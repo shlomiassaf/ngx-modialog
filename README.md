@@ -1,3 +1,5 @@
+# UPDATE: Angular 2 Modal version 1 is out.
+
 # Angular 2 (rc.1): AIO Modal / Dialog window 
 
 A fully generic, customizable and fluent modal window implementation for Angular.
