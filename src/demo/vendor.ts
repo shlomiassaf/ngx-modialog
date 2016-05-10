@@ -10,5 +10,7 @@ import '@angular/platform-browser-dynamic';
 import '@angular/core';
 import '@angular/router-deprecated';
 
-require('!!style!css!bootstrap/dist/css/bootstrap.css');
+// require('../assets/prism');
 
+// require('!!style!css!../assets/prism.css');
+require('!!style!css!bootstrap/dist/css/bootstrap.css');

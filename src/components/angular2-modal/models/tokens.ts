@@ -8,6 +8,12 @@ import {Modal} from '../providers/modal';
 import {DialogRef} from './dialog-ref';
 import {ModalControllingContextBuilder} from '../models/modal-context';
 
+export enum DROP_IN_TYPE {
+    alert,
+    prompt,
+    confirm
+}
+
 export interface ModalComponent<T> {
     dialog: DialogRef<T>;
 

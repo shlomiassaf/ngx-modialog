@@ -1,0 +1,15 @@
+<section class="section  padding--small">
+    <div class="container">
+        <h2>{{title}}</h2>
+        <p class="lead" [innerHtml]="description"></p>
+        <br>
+        <ng-content select="[extra-desc-content]"></ng-content>
+    </div>
+    <section #commands class="section background-gray-lighter padding--small" style="text-align: center">
+        <button class="btn btn-white btn-dropin" *ngFor="let btn of modalCommands" (click)="onClick($event, btn)">{{btn.text}}</button>
+        <h5>Last modal result: {{result}}</h5>
+    </section>
+
+
+    <ng-content></ng-content>
+</section>

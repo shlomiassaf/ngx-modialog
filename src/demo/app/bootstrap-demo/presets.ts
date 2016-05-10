@@ -3,7 +3,7 @@ import {
     BSModal,
     OneButtonPresetBuilder,
     TwoButtonPresetBuilder
-} from '../../../components/angular2-modal/plugins/bootstrap';
+} from '../../../components/angular2-modal/plugins/bootstrap/index';
 
 export function alert(modal: Modal): OneButtonPresetBuilder {
     return modal.alert()

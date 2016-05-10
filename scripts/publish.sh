@@ -9,14 +9,14 @@
 NPM_USER=$(npm whoami 2> /dev/null)
 
 if [ "${NPM_USER}" != "shlomiassaf" ]; then
-  echo "You must be logged in as 'angular2-material' to publish. Use 'npm login'."
+  echo "You must be logged in as 'shlomiassaf' to publish. Use 'npm login'."
   exit
 fi
 
 set -ex
 
 
-npm publish --access public ./dist/build/components/angular2-modal
+npm publish --access public ./dist/commonjs
 
 
 # Always log out of npm when publish is complete.

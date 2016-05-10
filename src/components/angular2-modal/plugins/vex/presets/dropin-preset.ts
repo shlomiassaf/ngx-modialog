@@ -1,16 +1,11 @@
-import {ResolvedReflectiveProvider} from '@angular/core';
-import {FluentAssignMethod} from '../../../framework/fluent-assign';
-import {Modal} from '../modal';
-import {DialogFormModal as component,  FormDropIn as content} from '../dialog-form-modal';
-import {DialogPreset, DialogPresetBuilder} from './dialog-preset';
+import { ResolvedReflectiveProvider } from '@angular/core';
+import { DROP_IN_TYPE } from '../../../models/tokens';
+import { FluentAssignMethod } from '../../../framework/fluent-assign';
+import { Modal } from '../modal';
+import { DialogFormModal as component,  FormDropIn as content } from '../dialog-form-modal';
+import { DialogPreset, DialogPresetBuilder } from './dialog-preset';
 
-import {extend} from '../../../framework/utils';
-
-export enum DROP_IN_TYPE {
-    alert,
-    prompt,
-    confirm
-}
+import { extend } from '../../../framework/utils';
 
 const DEFAULT_SETTERS = [
     'placeholder',

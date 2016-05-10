@@ -15,3 +15,7 @@ export const MODAL_PROVIDERS: any[] = [
     new Provider(Modal, {useClass: Modal}),
     new Provider(ModalRenderer, {useClass: DOMModalRenderer})
 ];
+
+import * as bootstrap from './plugins/bootstrap/index';
+import * as vex from './plugins/vex/index';
+export const plugins = { bootstrap, vex };

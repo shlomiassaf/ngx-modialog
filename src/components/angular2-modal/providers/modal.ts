@@ -1,4 +1,5 @@
 import {
+    Type,
     ReflectiveInjector,
     ViewContainerRef,
     provide,
@@ -78,7 +79,7 @@ export class Modal {
      *        Default: true if ViewContainer supplied, false if not supplied.
      * @returns {Promise<DialogRef>}
      */
-    public open(componentType: FunctionConstructor,
+    public open(componentType: Type,
                 context: ModalContext = undefined,
                 bindings: ResolvedReflectiveProvider[] = undefined,
                 viewContainer: ViewContainerRef = undefined,

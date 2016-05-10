@@ -8,7 +8,7 @@ import {ModalComponent, DialogRef} from '../../../components/angular2-modal';
 import {
     DialogPreset,
     VEXDialogButtons
-} from '../../../components/angular2-modal/plugins/vex';
+} from '../../../components/angular2-modal/plugins/vex/index';
 
 @Component({
     selector: 'login-dialog',

@@ -3,7 +3,6 @@ import {FluentAssignMethod} from './../../framework/fluent-assign';
 import {extend, arrayUnion} from './../../framework/utils';
 
 const DEFAULT_VALUES = {
-    size: <BootstrapModalSize>'lg',
     dialogClass: 'modal-dialog',
     showClose: false
 };
@@ -28,7 +27,7 @@ export class BSModalContext extends ModalOpenContext {
      * Size of the modal.
      * 'lg' or 'sm' only.
      * NOTE: No validation.
-     * Default to 'lg'
+     * Default to ''
      */
     size: BootstrapModalSize;
 
@@ -39,9 +38,6 @@ export class BSModalContext extends ModalOpenContext {
     
 
     normalize(): void {
-        if (!this.size)
-            this.size = DEFAULT_VALUES.size;
-
         if (!this.dialogClass) {
             this.dialogClass = DEFAULT_VALUES.dialogClass;
         }

@@ -1,24 +1,19 @@
-import {ModalOpenContextBuilder, ModalOpenContext} from '../../models/modal-open-context';
-import {FluentAssignMethod} from './../../framework/fluent-assign';
-import {arrayUnion} from './../../framework/utils';
+import { DROP_IN_TYPE } from '../../models/tokens';
+import { ModalOpenContextBuilder, ModalOpenContext } from '../../models/modal-open-context';
+import { FluentAssignMethod } from './../../framework/fluent-assign';
+import { arrayUnion } from './../../framework/utils';
 
 const DEFAULT_SETTERS = [
     'promptDefault'
 ];
 
-export enum JS_NATIVE_DIALOG_TYPE {
-    alert,
-    prompt,
-    confirm
-}
-
 export class JSNativeModalContext extends ModalOpenContext {
     promptDefault: string;
-    dialogType: JS_NATIVE_DIALOG_TYPE;
+    dialogType: DROP_IN_TYPE;
 
     normalize(): void {
         if (!this.message) this.message = '';
-        if (this.dialogType === undefined) this.dialogType = JS_NATIVE_DIALOG_TYPE.alert;
+        if (this.dialogType === undefined) this.dialogType = DROP_IN_TYPE.alert;
     }
 }
 

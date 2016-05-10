@@ -13,12 +13,12 @@ let dialogRefCount = 0;
     selector: 'modal-backdrop',
     host: {
         '[style.position]': 'position',
-        '[style.height]': 'height',
-        '[style.width]': 'width',
-        '[style.top]': 'top',
-        '[style.left]': 'left',
-        '[style.right]': 'right',
-        '[style.bottom]': 'bottom'
+        '[style.height]': 'size',
+        '[style.width]': 'size',
+        '[style.top]': 'point',
+        '[style.left]': 'point',
+        '[style.right]': 'point',
+        '[style.bottom]': 'point'
     },
     directives: [BSModalContainer],
     encapsulation: ViewEncapsulation.None,
@@ -27,26 +27,20 @@ let dialogRefCount = 0;
 <modal-container></modal-container>`
 })
 export class BSModalBackdrop implements OnDestroy {
-    public position: string;
-    public height: string;
-    public width: string;
-    public top: string;
-    public left: string;
-    public right: string;
-    public bottom: string;
+    private position: string;
+    private size: string;
+    private point: string;
     
     constructor(dialog: DialogRef<BSModalContext>) {
         dialogRefCount++;
         document.body.classList.add('modal-open');
-        
+
         if (!dialog.inElement) {
-            this.position = this.width = this.height = null;
-            this.top = this.left = this.right = this.bottom = null;
+            this.position = this.size = this.point = null;
         } else {
             this.position = 'absolute';
-            this.height = '100%';
-            this.width = '100%';
-            this.top = this.left = this.right = this.bottom = '0';
+            this.size = '100%';
+            this.point = '0';
         }
     }
     

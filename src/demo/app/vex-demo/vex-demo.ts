@@ -1,18 +1,18 @@
-import {Component, ViewEncapsulation, ViewContainerRef, ViewChild} from '@angular/core';
-
-import {DialogRef} from '../../../components/angular2-modal';
+import { Component, ViewEncapsulation, ViewContainerRef, ViewChild } from '@angular/core';
 
 import {
     VEXBuiltInThemes,
     VEX_MODAL_PROVIDERS,
     Modal,
-    DropInPreset,
     DialogPreset,
     DialogFormModal,
     DialogPresetBuilder
 } from '../../../components/angular2-modal/plugins/vex';
 
+import { DemoHead, ModalCommandDescriptor} from '../demo-head/index';
+import * as presets from './presets';
 import {LoginDialog} from './login-dialog';
+
 @Component({
     selector: 'vex-demo',
     styleUrls: [
@@ -27,11 +27,13 @@ import {LoginDialog} from './login-dialog';
     ],
     templateUrl: 'demo/app/vex-demo/vex-demo.tpl.html',
     providers: [...VEX_MODAL_PROVIDERS],
+    directives: [ DemoHead ],
     encapsulation: ViewEncapsulation.None
 })
 export class VexDemo {
-    result: any;
+    modalCommands: ModalCommandDescriptor[];
     theme: VEXBuiltInThemes = <VEXBuiltInThemes>'default';
+    @ViewChild(DemoHead) private demoHead: DemoHead;
 
     constructor(public modal: Modal, viewContainer: ViewContainerRef) {
         /**
@@ -39,60 +41,45 @@ export class VexDemo {
          * Has to be set manually until we can find a way to get it automatically.
          */
         this.modal.defaultViewContainer = viewContainer;
-    }
 
-    processDialog(dialog: Promise<DialogRef<DropInPreset>>) {
-        dialog.then((resultPromise) => {
-            return resultPromise.result.then((result) => {
-                this.result = result;
-            }, () => this.result = 'Rejected!');
-        });
-    }
-
-    dialog() {
-        let dialog = new DialogPresetBuilder<DialogPreset>(this.modal)
-            .className(this.theme)
-            .content(LoginDialog)
-            .message("Ary you coming to the event?")
-            .addOkButton('Yep!')
-            .addButton(
-                'vex-dialog-button-primary vex-dialog-button',
-                'Maybe?',
-                (cmp: DialogFormModal, $event:MouseEvent) => cmp.dialog.close('Maybe')
-            )
-            .addCancelButton('Nope!')
-            .open();
-        
-        this.processDialog(<any>dialog);
-    }
-
-    dropIn(type: string){
-        let dialog: any;
-        switch (type) {
-            case 'alert':
-                dialog = this.modal.alert()
-                    .className(this.theme)
-                    .message('This is a native alert!')
-                    .showCloseButton(true)
-                    .open();
-                break;
-            case 'prompt':
-                dialog = this.modal.prompt()
-                    .className(this.theme)
-                    .message('This is a native prompt!')
-                    .placeholder('This is a default value')
-                    .open();
-                break;
-            case 'confirm':
-                dialog = this.modal.confirm()
-                    .className(this.theme)
-                    .message('Yes or No?')
-                    .open();
-                break;
-            default:
-                break;
-        }
-
-        this.processDialog(dialog);
+        this.modalCommands = [
+            {
+                text: 'alert drop in',
+                factory: () => presets.alert.call(this, this.modal).open()
+            },
+            {
+                text: 'prompt drop in',
+                factory: () => presets.prompt.call(this, this.modal).open()
+            },
+            {
+                text: 'confirm drop in',
+                factory: () => presets.confirm.call(this, this.modal).open()
+            },
+            {
+                text: 'Cascading example',
+                factory: () => presets.cascading.call(this, this.modal).open()
+            },
+            {
+                text: 'In Element example',
+                factory: () => presets.alert.call(this, this.modal).open(this.demoHead.vcCommands)
+            },
+            {
+                text: 'Custom Modal example',
+                factory: () => {
+                    return new DialogPresetBuilder<DialogPreset>(this.modal)
+                        .className(this.theme)
+                        .content(LoginDialog)
+                        .message("Ary you coming to the event?")
+                        .addOkButton('Yep!')
+                        .addButton(
+                            'vex-dialog-button-primary vex-dialog-button',
+                            'Maybe?',
+                            (cmp: DialogFormModal, $event:MouseEvent) => cmp.dialog.close('Maybe')
+                        )
+                        .addCancelButton('Nope!')
+                        .open()
+                }
+            }
+        ];
     }
 }

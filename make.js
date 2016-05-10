@@ -28,7 +28,7 @@ async.waterfall([
 function getSystemJsBundleConfig(name, cb) {
     try {
         let config = {
-            baseURL: `./dist/commonjs`,
+            baseURL: `./dist/commonjs_all`,
             transpiler: 'typescript',
             typescriptOptions: {
                 module: 'cjs'

@@ -1,16 +1,15 @@
-import {ViewContainerRef, ResolvedReflectiveProvider} from '@angular/core';
-import {DialogRef} from '../../../angular2-modal';
-import {Modal} from '../modal';
+import { ViewContainerRef, ResolvedReflectiveProvider } from '@angular/core';
+import { DialogRef, DROP_IN_TYPE } from '../../../angular2-modal';
+import { Modal } from '../modal';
 
 import {
     JSNativeModalContext,
-    JSNativeModalContextBuilder,
-    JS_NATIVE_DIALOG_TYPE
+    JSNativeModalContextBuilder
 } from '../modal-context';
 
 export class JSNativePresetBuilder extends JSNativeModalContextBuilder<JSNativeModalContext> {
     
-    constructor(modal: Modal, dialogType: JS_NATIVE_DIALOG_TYPE) {
+    constructor(modal: Modal, dialogType: DROP_IN_TYPE) {
         super(<any>{modal, dialogType});
     }
 
