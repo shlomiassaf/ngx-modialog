@@ -1,0 +1,25 @@
+<demo-head title="VEX dialog plugin"
+           description="An implementation of <a href='http://github.hubspot.com/vex/docs/welcome/' target='_blank'>VEX</a>"
+           [modalCommands]="modalCommands">
+    <div extra-desc-content>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="theme">Select a VEX Theme:</label>
+                    <div class="col-md-6">
+                        <select id="theme" name="theme" class="form-control" [(ngModel)]="theme">
+                            <option value="default">default</option>
+                            <option value="os">os</option>
+                            <option value="plain">plain</option>
+                            <option value="wireframe">wireframe</option>
+                            <option value="flat-attack">flat-attack</option>
+                            <option value="top">top</option>
+                            <option value="bottom-right-corner">bottom-right-corner</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </div>
+</demo-head>

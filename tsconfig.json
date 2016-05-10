@@ -1,15 +1,21 @@
 {
-  "version": "1.5.0",
   "compilerOptions": {
-    "target": "ES5",
-    "module": "commonjs",
-    "removeComments": true,
+    "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noEmitHelpers": false,
-    "sourceMap": true
+    "mapRoot": "",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "outDir": "../dist/build/",
+    "rootDir": ".",
+    "sourceMap": true,
+    "target": "es5",
+    "inlineSources": true
   },
   "files": [
-    "typings/browser.d.ts"
+    "./bootstrap.ts",
+    "typings.d.ts"
   ]
 }

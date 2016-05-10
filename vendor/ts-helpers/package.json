@@ -1,0 +1,82 @@
+{
+  "name": "ts-helpers",
+  "version": "1.1.1",
+  "description": "Typescript helpers for compiling typescript while specifying `--noEmitHelpers` within your `tsconfig.json`. Cross platform ( Node/Browser/WebWorker )",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc -w",
+    "pretest": "tsc",
+    "test": "mocha index.test.js",
+    "test:live": "npm start & npm test -- -w",
+    "prepublish": "npm run typings -- install && tsc",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w",
+    "typings": "typings"
+  },
+  "bugs": {
+    "url": "https://github.com/ngParty/ts-helpers/issues"
+  },
+  "homepage": "https://github.com/ngParty/ts-helpers#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngParty/ts-helpers.git"
+  },
+  "keywords": [
+    "typescript",
+    "emit-helpers",
+    "payload"
+  ],
+  "author": {
+    "name": "Martin Hochel",
+    "email": "hochelmartin@gmail.com"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "typescript": ">=1.8.0 || >=1.9.0-dev"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "conventional-changelog": "1.1.0",
+    "ghooks": "1.0.1",
+    "mocha": "2.4.5",
+    "typescript": "1.8.10",
+    "typings": "0.7.12",
+    "validate-commit-msg": "2.0.0"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "tsc && npm test",
+      "commit-msg": "validate-commit-msg"
+    },
+    "validate-commit-msg": {
+      "warnOnFail": true,
+      "maxSubjectLength": 120
+    }
+  },
+  "gitHead": "06d2a4b725138bab91af5817dbea48b0c78a7d29",
+  "_id": "ts-helpers@1.1.1",
+  "_shasum": "89553d2b8d313e7f0e3e0c85c08d6d3f03401f57",
+  "_from": "ts-helpers@latest",
+  "_npmVersion": "3.5.4",
+  "_nodeVersion": "4.2.1",
+  "_npmUser": {
+    "name": "ngparty",
+    "email": "info@ngparty.cz"
+  },
+  "dist": {
+    "shasum": "89553d2b8d313e7f0e3e0c85c08d6d3f03401f57",
+    "tarball": "https://registry.npmjs.org/ts-helpers/-/ts-helpers-1.1.1.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "ngparty",
+      "email": "info@ngparty.cz"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/ts-helpers-1.1.1.tgz_1461572062513_0.44838009867817163"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/ts-helpers/-/ts-helpers-1.1.1.tgz",
+  "readme": "ERROR: No README data found!"
+}
