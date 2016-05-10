@@ -7,66 +7,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Angular2 modal example.">
     <title>Angular 2 Modal - Bootstrap style.</title>
-    <script src="vendor/es6-shim/es6-shim.js"></script>
-    <script src="vendor/zone.js/dist/zone.js"></script>
-    <script src="vendor/zone.js/dist/long-stack-trace-zone.js"></script>
-    <script src="vendor/reflect-metadata/Reflect.js"></script>
-    <script src="vendor/systemjs/dist/system.src.js"></script>
-    <script src="vendor/rxjs/bundles/Rx.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
 
-<app></app>
+<app>
+    Loading...
+</app>
 
 <script>
-    System.config({
-        map: {
-            '@angular/core': '/vendor/@angular/core/core.umd.js',
-            '@angular/common': '/vendor/@angular/common/common.umd.js',
-            '@angular/compiler': '/vendor/@angular/compiler/compiler.umd.js',
-            '@angular/platform-browser-dynamic': '/vendor/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js',
-            '@angular/http': '/vendor/@angular/http/http.umd.js',
-            '@angular/upgrade': '/vendor/@angular/upgrade/upgrade.umd.js',
-            '@angular/router': '/vendor/@angular/router/router.umd.js',
-            '@angular/router-deprecated': '/vendor/@angular/router-deprecated/router-deprecated.umd.js',
+    (function() {
+        function loadScript(url,callback){
+            var script = document.createElement('script');
 
-            //'@angular/platform-browser': '/vendor/@angular/platform-browser/platform-browser.umd.js',
-            '@angular/platform-browser': '/vendor/@angular/platform-browser',
+            script.onload = function(){
+                //once the script is loaded, run the callback
+                if (callback){callback()};
+            };
 
-            '@angular/core/src/facade': '/vendor/@angular/core/src/facade',
-            //'@angular/platform-browser/src/dom': '/vendor/@angular/platform-browser/src/dom',
-
-            'angular2-modal': '/components/angular2-modal',
-            'angular2-modal/platform-browser': '/components/angular2-modal/platform-browser'
-        },
-        packages: {
-            '@angular/core/src/facade': {defaultExtension: 'js'},
-
-            //'@angular/platform-browser/src/dom': {defaultExtension: 'js'},
-            '@angular/platform-browser': {main: 'index.js', defaultExtension: 'js'},
-
-            'demo': {defaultExtension: 'js'},
-
-            'components/angular2-modal/platform-browser': {main: 'index.js', defaultExtension: 'js'},
-            'components/angular2-modal': {main: 'index.js', defaultExtension: 'js'},
-            'components/angular2-modal/plugins/bootstrap': {main: 'index.js', defaultExtension: 'js'},
-            'components/angular2-modal/plugins/vex': {main: 'index.js', defaultExtension: 'js'},
-            'components/angular2-modal/plugins/js-native': {main: 'index.js', defaultExtension: 'js'}
-
+            //create the script and add it to the DOM
+            script.src = url;
+            document.getElementsByTagName('head')[0].appendChild(script);
         }
-    });
 
-    System.import('bootstrap.js')
-            .then(function(bootstrap) {
-                if(!bootstrap.isBootstrapped()) {
-                    bootstrap.main();
+        var isGithub = location.host.indexOf('github.io') > -1;
+
+        if (isGithub)
+            document.querySelector('head base').setAttribute('href', '/angular2-modal');
+
+        var prefix = isGithub ? 'angular2-modal/vendor/' : 'vendor/';
+        var sources = [
+            'es6-shim/es6-shim.js',
+            'zone.js/dist/zone.js',
+            'zone.js/dist/long-stack-trace-zone.js',
+            'reflect-metadata/Reflect.js',
+            'systemjs/dist/system.src.js'
+        ];
+
+
+        function getScripts(cb) {
+            if (sources.length) {
+                loadScript(prefix + sources.shift(), function() { getScripts(cb); });
+            }
+            else {
+                cb();
+            }
+        }
+
+        getScripts( function() {
+            System.config({
+                baseURL: isGithub ? '/angular2-modal' : '/',
+                map: {
+                    'rxjs': 'vendor/rxjs',
+                    '@angular/core': 'vendor/@angular/core/core.umd.js',
+                    '@angular/common': 'vendor/@angular/common/common.umd.js',
+                    '@angular/compiler': 'vendor/@angular/compiler/compiler.umd.js',
+                    '@angular/platform-browser-dynamic': 'vendor/@angular/platform-browser-dynamic/platform-browser-dynamic.umd.js',
+                    '@angular/http': 'vendor/@angular/http/http.umd.js',
+                    '@angular/upgrade': 'vendor/@angular/upgrade/upgrade.umd.js',
+                    '@angular/router': 'vendor/@angular/router/router.umd.js',
+                    '@angular/router-deprecated': 'vendor/@angular/router-deprecated/router-deprecated.umd.js',
+
+                    //'@angular/platform-browser': '/vendor/@angular/platform-browser/platform-browser.umd.js',
+                    '@angular/platform-browser': 'vendor/@angular/platform-browser',
+
+                    '@angular/core/src/facade': 'vendor/@angular/core/src/facade',
+                    //'@angular/platform-browser/src/dom': '/vendor/@angular/platform-browser/src/dom',
+
+                    'angular2-modal': 'components/angular2-modal',
+                    'angular2-modal/platform-browser': 'components/angular2-modal/platform-browser'
+                },
+                packages: {
+                    'rxjs': {main: 'index'},
+                    '@angular/core/src/facade': {defaultExtension: 'js'},
+
+                    //'@angular/platform-browser/src/dom': {defaultExtension: 'js'},
+                    '@angular/platform-browser': {main: 'index.js', defaultExtension: 'js'},
+
+                    'demo': {defaultExtension: 'js'},
+
+                    'components/angular2-modal': {main: 'index.js', defaultExtension: 'js'},
+                    'components/angular2-modal/platform-browser': {main: 'index.js', defaultExtension: 'js'},
+                    'components/angular2-modal/plugins/bootstrap': {main: 'index.js', defaultExtension: 'js'},
+                    'components/angular2-modal/plugins/vex': {main: 'index.js', defaultExtension: 'js'},
+                    'components/angular2-modal/plugins/js-native': {main: 'index.js', defaultExtension: 'js'}
                 }
-            })
-            .catch(function(err) {
-                console.log(err);
             });
+
+            System.import('bootstrap.js')
+                    .then(function(bootstrap) {
+                        if(!bootstrap.isBootstrapped()) {
+                            bootstrap.main();
+                        }
+                    })
+                    .catch(function(err) {
+                        console.log(err);
+                    });
+        });
+    }());
 </script>
 
 </body>

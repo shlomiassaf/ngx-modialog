@@ -21,6 +21,7 @@ module.exports = function(defaults) {
             ]
         },
         vendorNpmFiles: [
+            'rxjs/**/*.js',
             'core-js/**',
             'ts-helpers/**',
             '@angular/**/*.js',
