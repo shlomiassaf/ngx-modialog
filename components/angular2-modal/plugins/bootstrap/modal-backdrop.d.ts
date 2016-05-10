@@ -5,9 +5,7 @@ import { BSModalContext } from './modal-context';
  * Represents the modal backdrop.
  */
 export declare class BSModalBackdrop implements OnDestroy {
-    private position;
-    private size;
-    private point;
+    private hs;
     constructor(dialog: DialogRef<BSModalContext>);
     ngOnDestroy(): void;
 }

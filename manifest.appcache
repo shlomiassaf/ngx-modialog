@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # sw.bundle: ng-cli
-# sw.version: 6d0cabfa4fef24878d2a0cb138d3e264d57e9e08
+# sw.version: b63390a847e1965c11191afb66ca02c63987276a
 # sw.file.hash: 9d7f969081e52c43edb76aac02ceb94195b87fe6
 /bootstrap.js
 # sw.file.hash: 84014623c0b6d62230b107764848934f2b600ebb
@@ -115,11 +115,11 @@ CACHE MANIFEST
 /components/angular2-modal/plugins/bootstrap/message-modal.js
 # sw.file.hash: f634515d5ed3bd85d62b01ee979ddcec6452e753
 /components/angular2-modal/plugins/bootstrap/message-modal.js.map
-# sw.file.hash: 0e07f862afc96dc9a4b591074f2890632a48073a
+# sw.file.hash: df7acdc609f44f87bcf7c973fdfe2e27d0660fdd
 /components/angular2-modal/plugins/bootstrap/modal-backdrop.d.ts
-# sw.file.hash: a7b1ced1339b1d25f1da2f36576f70fd27e070bb
+# sw.file.hash: e9fa970f65465940ad45d878ba4d8064cbe970f6
 /components/angular2-modal/plugins/bootstrap/modal-backdrop.js
-# sw.file.hash: 7299e2cbb8f3123c39c7777775cd6f101d7d4b46
+# sw.file.hash: 0db122dbb0de571712609613c0906eefde5a4114
 /components/angular2-modal/plugins/bootstrap/modal-backdrop.js.map
 # sw.file.hash: 1a2a47a1925ddf0fa9b8cad4a2f6609196c37e93
 /components/angular2-modal/plugins/bootstrap/modal-container.d.ts
@@ -205,11 +205,13 @@ CACHE MANIFEST
 /components/angular2-modal/plugins/vex/index.js
 # sw.file.hash: 451be7fdc2024773fc28df1873b924884b96b6b6
 /components/angular2-modal/plugins/vex/index.js.map
-# sw.file.hash: 1263c39776216cd138887d7a1d15b48e7c9c88fc
+# sw.file.hash: 79c12926232c175e5a99a7ad0b9835cec695cfba
+/components/angular2-modal/plugins/vex/modal-backdrop.css
+# sw.file.hash: 60c64bd0a33c4f4b66f40c338c03edcc626d0670
 /components/angular2-modal/plugins/vex/modal-backdrop.d.ts
-# sw.file.hash: e9a8a00975e332f7085d9b05b83ed3935cf04ab4
+# sw.file.hash: 41f88510949b4fbac1a1a36e22ff59cec320d47f
 /components/angular2-modal/plugins/vex/modal-backdrop.js
-# sw.file.hash: c801342047476c934b348f73b736f0004c618515
+# sw.file.hash: 540217f99df17a9eae6a43cbf015b07a8b1518b4
 /components/angular2-modal/plugins/vex/modal-backdrop.js.map
 # sw.file.hash: 0488c53381013c0248f2c4bce3a2bcfd5d0bc46e
 /components/angular2-modal/plugins/vex/modal-content.d.ts

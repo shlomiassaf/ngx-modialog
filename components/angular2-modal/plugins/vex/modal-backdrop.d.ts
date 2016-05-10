@@ -8,7 +8,7 @@ import { VEXModalContext } from './modal-context';
 export declare class VexModalBackdrop implements OnDestroy {
     private dialog;
     private _modal;
-    private hostStyle;
+    private hs;
     constructor(dialog: DialogRef<VEXModalContext>, _modal: Modal);
     cssClass: string;
     ngOnDestroy(): void;

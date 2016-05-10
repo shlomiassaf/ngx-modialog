@@ -21,18 +21,13 @@ var VexModalBackdrop = (function () {
     function VexModalBackdrop(dialog, _modal) {
         this.dialog = dialog;
         this._modal = _modal;
+        this.hs = {};
         dialogRefCount++;
         document.body.classList.add('vex-open');
         if (dialog.inElement) {
-            this.hostStyle = utils_1.toStyleString({
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                top: '0',
-                left: '0',
-                right: '0',
-                bottom: '0'
-            });
+            this.hs.ps = 'absolute';
+            this.hs.sz = '100%';
+            this.hs.pt = 0;
         }
     }
     Object.defineProperty(VexModalBackdrop.prototype, "cssClass", {
@@ -60,10 +55,17 @@ var VexModalBackdrop = (function () {
             selector: 'modal-backdrop',
             host: {
                 '[class.in-element]': 'dialog.inElement',
-                '[style]': 'hostStyle',
+                '[style.position]': 'hs.ps',
+                '[style.height]': 'hs.sz',
+                '[style.width]': 'hs.sz',
+                '[style.top]': 'hs.pt',
+                '[style.left]': 'hs.pt',
+                '[style.right]': 'hs.pt',
+                '[style.bottom]': 'hs.pt',
                 '(body:keydown)': 'documentKeypress($event)'
             },
-            styles: ["\n.in-element .vex.vex-theme-default,\n.in-element .vex.vex-theme-os,\n.in-element .vex.vex-theme-plain,\n.in-element .vex.vex-theme-wireframe ,\n.in-element .vex.vex-theme-flat-attack,\n.in-element .vex.vex-theme-top,\n.in-element .vex.vex-theme-bottom-right-corner {\n    position: relative;\n    padding: 0px;\n    width: 100%;\n    height: 100%;\n}\n\n.in-element .vex-overlay {\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    top: 0px;\n    left: 0px;\n    right: 0px;\n    bottom: 0px;\n}\n\n.in-element modal-content {\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    padding-top: 20px;\n    overflow-x: hidden;\n    overflow-y: auto\n}\n\n.in-element .vex.vex-theme-bottom-right-corner, \n.in-element .vex.vex-theme-bottom-right-corner modal-content {\n    overflow-y: hidden\n}\n.in-element .vex.vex-theme-bottom-right-corner .vex-content {\n    position: absolute;\n}"
+            styleUrls: [
+                'components/angular2-modal/plugins/vex/modal-backdrop.css'
             ],
             directives: [modal_content_1.VexModalContent],
             encapsulation: core_1.ViewEncapsulation.None,

@@ -17,15 +17,13 @@ var dialogRefCount = 0;
  */
 var BSModalBackdrop = (function () {
     function BSModalBackdrop(dialog) {
+        this.hs = { ps: null, sz: null, pt: null };
         dialogRefCount++;
         document.body.classList.add('modal-open');
-        if (!dialog.inElement) {
-            this.position = this.size = this.point = null;
-        }
-        else {
-            this.position = 'absolute';
-            this.size = '100%';
-            this.point = '0';
+        if (dialog.inElement) {
+            this.hs.ps = 'absolute';
+            this.hs.sz = '100%';
+            this.hs.pt = '0';
         }
     }
     BSModalBackdrop.prototype.ngOnDestroy = function () {
@@ -37,17 +35,17 @@ var BSModalBackdrop = (function () {
         core_1.Component({
             selector: 'modal-backdrop',
             host: {
-                '[style.position]': 'position',
-                '[style.height]': 'size',
-                '[style.width]': 'size',
-                '[style.top]': 'point',
-                '[style.left]': 'point',
-                '[style.right]': 'point',
-                '[style.bottom]': 'point'
+                '[style.position]': 'hs.ps',
+                '[style.height]': 'hs.sz',
+                '[style.width]': 'hs.sz',
+                '[style.top]': 'hs.pt',
+                '[style.left]': 'hs.pt',
+                '[style.right]': 'hs.pt',
+                '[style.bottom]': 'hs.pt'
             },
             directives: [modal_container_1.BSModalContainer],
             encapsulation: core_1.ViewEncapsulation.None,
-            template: "<div [style.position]=\"position\" class=\"modal-backdrop fade in\"></div>\n<modal-container></modal-container>"
+            template: "<div [style.position]=\"hs.ps\" class=\"modal-backdrop fade in\"></div>\n<modal-container></modal-container>"
         }), 
         __metadata('design:paramtypes', [dialog_ref_1.DialogRef])
     ], BSModalBackdrop);
