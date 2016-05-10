@@ -42,9 +42,10 @@ modal.alert()
     .open();
 ```
 
-Click [HERE](https://github.com/shlomiassaf/angular2-modal/tree/master/QUICKTHROUGH.md) for a quick walkthrough
+Click [HERE](https://github.com/shlomiassaf/angular2-modal/tree/master/QUICKTHROUGH.md) for a quick walkthrough  
 Click for the [Demo](http://shlomiassaf.github.io/angular2-modal/) Make sure to check the [code generator!](http://shlomiassaf.github.io/angular2-modal#/bootstrap-demo/customizeModals)  
-If you're looking for a SystemJS demo, please see [this plunker](http://plnkr.co/edit/FnGdwU)  
+If you're looking for a SystemJS demo, please see [this plunker](http://plnkr.co/edit/FnGdwU) (< 1.0.0)
+
 
 ![Code Generator!](/preview.png)
 
@@ -92,3 +93,9 @@ Switch to material2 overlay implementation when done.
 Build a umd bundle.
 ## Base support
 Provide base classes for generic components
+## Unit & E2E test
+Add tests...
+## Support Universal
+Test against `universal-starter` to enable universal support.
+## Support Change detection
+Support `OnPush` with an observable api model (fluent observables)
