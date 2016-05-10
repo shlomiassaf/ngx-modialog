@@ -9,6 +9,8 @@ This means virtually any modal implementation out there can be ported into `angu
 
 See the DEMO: [shlomiassaf.github.io/angular2-modal](http://shlomiassaf.github.io/angular2-modal/)
 
+## Quick walk through
+Take 5 minutes to read a [quick walk through](https://github.com/shlomiassaf/angular2-modal/tree/master/QUICKTHROUGH.md) with samples of how to use **Angular 2 Modal**
 
 ## Built in plugins:
   * [Bootstrap]()

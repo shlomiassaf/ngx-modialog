@@ -58,11 +58,14 @@ From here on, all ancestors of our root component have access to `Modal` via DI.
 In the constructor we set the default view container, this is done once for the whole app.
 Why?  
 
-  * A modal does not exist until requested, it is added on demand. 
-  * In `angular` adding components requires a logical UI parent
+  * A modal element does not exist until requested, the element added on demand. 
+  * In `angular` adding components requires a logical UI parent.
 
 The default view container serves as a logical UI parent for our modal.  
-This can be overridden if a `ViewContainerRef` is supplied when calling one of the methods to open a modal, this happens to be the way to create a modal trapped inside an element.
+This can be overridden if a `ViewContainerRef` is supplied when calling one of the methods to open a modal, this happens to be the way to create a modal trapped inside an element.  
+To sum up:
+The default container is used to block the whole view.  
+Overriding with a `ViewContainerRef` will block it, i.e: block only the element with an overlay.
 
 #### Opening a modal
 ```ts
