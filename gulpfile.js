@@ -7,6 +7,10 @@ function doCss (ext, file) {
     return jsStringEscape(file);
 }
 gulp.task('inline-resources', function(){
+    gulp.src('./dist/build/components/**/*.js')
+        .pipe(inlineNg2Template({base: './dist/build/', target: 'es5', styleProcessor: doCss}))
+        .pipe(gulp.dest('./dist/build/components/'));
+
     gulp.src('./dist/build/demo/**/*.js')
         .pipe(inlineNg2Template({base: './dist/build/', target: 'es5', styleProcessor: doCss}))
         .pipe(gulp.dest('./dist/build/demo/'));
