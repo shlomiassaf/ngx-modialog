@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 
-import { DialogRef } from '../../../../components/angular2-modal';
+import { DialogRef } from '../../../../components/angular2-modal/models/dialog-ref';
 import { Modal } from './modal';
 import { InAppModalContext } from './modal-context';
 

@@ -1,5 +1,6 @@
 import { ViewContainerRef, ResolvedReflectiveProvider } from '@angular/core';
-import { DialogRef, DROP_IN_TYPE } from '../../../angular2-modal';
+import { DROP_IN_TYPE } from '../../../angular2-modal';
+import { DialogRef } from '../../../models/dialog-ref';
 import { Modal } from '../modal';
 
 import {

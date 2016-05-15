@@ -3,7 +3,8 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 
-import {ModalComponent, DialogRef} from '../../../components/angular2-modal';
+import {ModalComponent} from '../../../components/angular2-modal';
+import {DialogRef} from '../../../components/angular2-modal/models/dialog-ref';
 
 import {
     DialogPreset,
