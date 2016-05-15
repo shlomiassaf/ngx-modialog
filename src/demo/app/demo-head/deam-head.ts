@@ -8,7 +8,7 @@ import {
     ViewContainerRef
 } from '@angular/core';
 
-import { DialogRef } from '../../../components/angular2-modal';
+import { DialogRef } from '../../../components/angular2-modal/models/dialog-ref';
 
 export interface ModalCommandDescriptor {
     text: string;

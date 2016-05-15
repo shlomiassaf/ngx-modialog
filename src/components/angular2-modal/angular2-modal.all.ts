@@ -5,7 +5,8 @@ import {DOMModalRenderer} from './providers/dom-modal-renderer';
 
 export * from './framework/fluent-assign';
 export * from './models/tokens';
-export * from './models/dialog-ref';
+// Fixes https://github.com/shlomiassaf/angular2-modal/issues/79
+// export * from './models/dialog-ref';
 export * from './models/modal-context';
 export * from './models/modal-open-context';
 export {Modal} from './providers/modal';

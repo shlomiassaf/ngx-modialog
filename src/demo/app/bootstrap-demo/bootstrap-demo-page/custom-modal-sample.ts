@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 
-import {DialogRef, ModalComponent} from '../../../../components/angular2-modal';
+import {ModalComponent} from '../../../../components/angular2-modal';
+import {DialogRef} from '../../../../components/angular2-modal/models/dialog-ref';
 import {BSModalContext} from '../../../../components/angular2-modal/plugins/bootstrap/index';
 
 export class AdditionCalculateWindowData extends BSModalContext {
