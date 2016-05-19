@@ -17,7 +17,9 @@ export function prompt(modal: Modal): DropInPresetBuilder {
 export function confirm(modal: Modal): DropInPresetBuilder {
     return modal.confirm()
         .className(this.theme)
-        .message('Yes or No?');
+        .message('Yes or No?')
+        .okBtn('Yes')
+        .cancelBtn('No');
 }
 
 export function cascading(modal: Modal): DropInPresetBuilder {
