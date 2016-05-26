@@ -48,9 +48,14 @@ export class DialogRef<T> {
      *  Close the modal with a return value, i.e: result.
      */
     close(result: any = null) {
-        if (this._fireHook<boolean>('beforeClose') === true) return;
-        this.destroy();
-        this._resultDeferred.resolve(result);
+        const _close = () => {
+            this.destroy();
+            this._resultDeferred.resolve(result);
+        }
+        this._fireHook<boolean>('beforeDismiss').then(value => {
+            if (value === true) return;
+            _close();
+        }, _close);
     }
 
     /**
@@ -61,21 +66,27 @@ export class DialogRef<T> {
      *  Usually, dismiss represent a Cancel button or a X button.
      */
     dismiss() {
-        if (this._fireHook<boolean>('beforeDismiss') === true) return;
-        this.destroy();
-        this._resultDeferred.reject();
+        const _dismiss = () => {
+            this.destroy();
+            this._resultDeferred.reject();
+        }
+        this._fireHook<boolean>('beforeDismiss').then(value => {
+            if (value === true) return;
+            _dismiss();
+        }, _dismiss);
     }
 
     destroy() { }
 
-    private _fireHook<T>(name: 'beforeClose' | 'beforeDismiss'): T {
+    private _fireHook<T>(name: 'beforeClose' | 'beforeDismiss'): Promise<T> {
         let instance = this.contentRef && this.contentRef.instance,
             fn = instance && typeof instance[name] === 'function' && instance[name];
 
         if (fn) {
-            return fn.call(instance);
+            const retVal = fn.call(instance);
+            return typeof retVal.then === 'function' ? retVal : PromiseWrapper.resolve(retVal);
         } else {
-            return undefined;
+            return PromiseWrapper.resolve(undefined);
         }
     }
 }
