@@ -21,7 +21,7 @@ export class DialogRef<T> {
      * A promise that is resolved when the component ref is set.
      * @return {Promise<ComponentRef<any>>}
      */
-    get componentRefPromise() { return this._conponentRefDeferred.promise; }
+    get contentRefPromise() { return this._conponentRefDeferred.promise; }
     /**
      * States if the modal is inside a specific element.
      */
