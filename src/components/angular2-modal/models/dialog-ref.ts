@@ -1,20 +1,39 @@
 import {ComponentRef} from '@angular/core';
-import {PromiseWrapper} from '@angular/core/src/facade/promise';
+import {PromiseWrapper, PromiseCompleter} from '@angular/core/src/facade/promise';
 
 /**
  * API to an open modal window.
  */
 export class DialogRef<T> {
-    contentRef: ComponentRef<any>;
+    /** 
+     * The reference to the component ref.
+     * This can be return undefined, since the componentRef is set only when the modal is shown.
+     * Use componentRefPromise to get a promise that will resolve when the componentRet is set.
+     * @return {ComponentRef<any>}
+     */
+    get contentRef(): ComponentRef<any> { return this._contentRef; }
+    set contentRef(value: ComponentRef<any>) {
+        this._contentRef = value;
+        this._conponentRefDeferred.resolve(value);
+    }
+
+    /**
+     * A promise that is resolved when the component ref is set.
+     * @return {Promise<ComponentRef<any>>}
+     */
+    get componentRefPromise() { return this._conponentRefDeferred.promise; }
     /**
      * States if the modal is inside a specific element.
      */
     public inElement: boolean;
 
-    private _resultDeferred: any;
-    
+    private _contentRef: ComponentRef<any>;
+    private _resultDeferred: PromiseCompleter<any>;
+    private _conponentRefDeferred: PromiseCompleter<ComponentRef<any>>;
+
     constructor(public context?: T) {
         this._resultDeferred = PromiseWrapper.completer();
+        this._conponentRefDeferred = PromiseWrapper.completer<ComponentRef<any>>();
     }
 
     /**
@@ -47,7 +66,7 @@ export class DialogRef<T> {
         this._resultDeferred.reject();
     }
 
-    destroy() {}
+    destroy() { }
 
     private _fireHook<T>(name: 'beforeClose' | 'beforeDismiss'): T {
         let instance = this.contentRef && this.contentRef.instance,
