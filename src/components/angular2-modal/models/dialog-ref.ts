@@ -52,7 +52,7 @@ export class DialogRef<T> {
             this.destroy();
             this._resultDeferred.resolve(result);
         }
-        this._fireHook<boolean>('beforeDismiss').then(value => {
+        this._fireHook<boolean>('beforeClose').then(value => {
             if (value === true) return;
             _close();
         }, _close);
