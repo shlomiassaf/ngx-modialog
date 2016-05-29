@@ -1,5 +1,5 @@
-import {ComponentRef} from '@angular/core';
-import {PromiseWrapper} from '@angular/core/src/facade/promise';
+import { ComponentRef } from '@angular/core';
+import { PromiseWrapper } from '@angular/core/src/facade/promise';
 
 /**
  * API to an open modal window.

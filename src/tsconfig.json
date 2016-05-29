@@ -15,6 +15,7 @@
     "inlineSources": true
   },
   "files": [
+    "./system.config.ts",
     "./bootstrap.ts",
     "typings.d.ts"
   ]

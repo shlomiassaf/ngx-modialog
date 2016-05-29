@@ -1,9 +1,8 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
-import {ModalComponent} from '../../models/tokens';
-import {DialogRef} from '../../models/dialog-ref';
-import {BSModalFooter, FooterButtonClickEvent} from './modal-footer';
-import {MessageModalPreset} from'./presets/message-modal-preset';
+import { DialogRef, ModalComponent } from '../../angular2-modal';
+import { BSModalFooter, FooterButtonClickEvent } from './modal-footer';
+import { MessageModalPreset } from'./presets/message-modal-preset';
 
 export interface BSMessageModalButtonHandler {
     (cmp:  ModalComponent<MessageModalPreset>, $event: MouseEvent): void;

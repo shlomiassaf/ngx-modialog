@@ -1,11 +1,14 @@
 import { Provider } from '@angular/core';
 import { Modal } from './modal';
+
 import {
     MODAL_PROVIDERS,
+    Modal as BaseModal,
     ModalBackdropComponent,
     ModalDropInFactory,
     DROP_IN_TYPE as DIType
 } from '../../angular2-modal';
+
 import { VexModalBackdrop } from './modal-backdrop';
 import { DropInPresetBuilder as Builder } from './presets/dropin-preset';
 
@@ -32,7 +35,8 @@ const dropInFactory: ModalDropInFactory = {
 
 export const VEX_MODAL_PROVIDERS: any[] = [
     ...MODAL_PROVIDERS,
-    new Provider(Modal, {useClass: Modal}),
-    new Provider(ModalBackdropComponent, {useValue: VexModalBackdrop}),
-    new Provider(ModalDropInFactory, {useValue: dropInFactory})
+    new Provider(BaseModal, { useClass: Modal }),
+    new Provider(Modal, { useClass: Modal }),
+    new Provider(ModalBackdropComponent, { useValue: VexModalBackdrop }),
+    new Provider(ModalDropInFactory, { useValue: dropInFactory })
 ];

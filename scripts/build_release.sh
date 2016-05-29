@@ -48,6 +48,7 @@ mkdir ./dist/commonjs
 # Copy all components/ to ./dist/commonjs/
 cp -R ./dist/build/components/angular2-modal/* ./dist/commonjs/
 
+./node_modules/gulp/bin/gulp.js replace-core-relative-imports
 
 # Create a SystemJS bundle for all components and core.
 mkdir ./dist/commonjs_all
@@ -60,3 +61,5 @@ mv ./dist/commonjs_all/angular2-modal.all.js.map ./dist/commonjs_all/angular2-mo
 mv ./dist/commonjs_all/angular2-modal.all.d.ts ./dist/commonjs_all/angular2-modal.d.ts
 node make.js
 rm -rf ./dist/commonjs_all
+
+cp ./README.md ./dist/commonjs

@@ -1,8 +1,8 @@
-import {FluentAssignMethod, privateKey, setAssignAlias} from '../../../framework/fluent-assign';
-import {BSMessageModalButtonConfig, BSMessageModalButtonHandler} from '../message-modal';
-import {BSModalContext, BSModalContextBuilder} from '../modal-context';
-import {BSMessageModal} from '../message-modal';
-import {extend, arrayUnion} from '../../../framework/utils';
+import { FluentAssignMethod, privateKey, setAssignAlias } from '../../../framework/fluent-assign';
+import { BSMessageModalButtonConfig, BSMessageModalButtonHandler } from '../message-modal';
+import { BSModalContext, BSModalContextBuilder}  from '../modal-context';
+import { BSMessageModal } from '../message-modal';
+import { extend, arrayUnion } from '../../../framework/utils';
 
 
 const DEFAULT_VALUES = {
