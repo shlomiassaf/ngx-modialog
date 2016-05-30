@@ -13,8 +13,8 @@ import { JSNativeDemo } from './js-native-demo/js-native-demo';
  */
 @Component({
     selector: 'app',
-    providers: [ ...FORM_PROVIDERS],
-    directives: [ ...ROUTER_DIRECTIVES],
+    providers: [ ...FORM_PROVIDERS ],
+    directives: [ ...ROUTER_DIRECTIVES ],
     pipes: [],
     encapsulation: ViewEncapsulation.None,
     styleUrls: [

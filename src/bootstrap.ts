@@ -1,11 +1,12 @@
-import {provide, ComponentRef} from '@angular/core';
-import {bootstrap} from '@angular/platform-browser-dynamic';
-import {ROUTER_PROVIDERS} from '@angular/router-deprecated';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
-import {ELEMENT_PROBE_PROVIDERS} from '@angular/platform-browser';
+import { provide, ComponentRef } from '@angular/core';
+import { bootstrap } from '@angular/platform-browser-dynamic';
+import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { ELEMENT_PROBE_PROVIDERS } from '@angular/platform-browser';
+
+import { MODAL_BROWSER_PROVIDERS } from './components/angular2-modal/platform-browser';
 
 // Register providers for browser, this is mandatory.
-import {MODAL_BROWSER_PROVIDERS} from './components/angular2-modal/platform-browser';
 
 import {App} from './demo/app/app';
 

@@ -1,7 +1,6 @@
 import {
     ViewContainerRef,
     ComponentResolver,
-    Renderer,
     ResolvedReflectiveProvider,
     ReflectiveInjector,
     Injectable,
@@ -14,13 +13,13 @@ import {ModalRenderer} from '../models/tokens';
 
 @Injectable()
 export class DOMModalRenderer implements ModalRenderer {
-    constructor(private _cr: ComponentResolver,
-                private _renderer: Renderer) {}
+    constructor(private _cr: ComponentResolver) {}
 
     render(type: Type,
            viewContainer: ViewContainerRef,
            bindings: ResolvedReflectiveProvider[],
            dialog: DialogRef<any>): Promise<DialogRef<any>> {
+
         return this._cr.resolveComponent(type)
             .then(cmpFactory => {
                 const ctxInjector = viewContainer.parentInjector;
@@ -30,11 +29,7 @@ export class DOMModalRenderer implements ModalRenderer {
             })
             .then((cmpRef: any) => {
                 if (dialog.inElement) {
-                    this._renderer.invokeElementMethod(
-                        viewContainer.element.nativeElement,
-                        'appendChild',
-                        [cmpRef.hostView.rootNodes[0]]
-                    );
+                    viewContainer.element.nativeElement.appendChild(cmpRef.hostView.rootNodes[0]);
                 } else {
                     document.body.appendChild(cmpRef.hostView.rootNodes[0]);
                 }

@@ -1,4 +1,4 @@
-import {DialogRef} from './dialog-ref';
+import { DialogRef } from './dialog-ref';
 
 /**
  * A dumb stack implementation over an array.

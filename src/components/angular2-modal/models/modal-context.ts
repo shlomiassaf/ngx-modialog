@@ -1,7 +1,8 @@
-import {Injectable, ViewContainerRef} from '@angular/core';
-import {FluentAssign, FluentAssignMethod} from './../framework/fluent-assign';
-import {extend, arrayUnion} from './../framework/utils';
-import {DialogRef} from './dialog-ref';
+import { Injectable, ViewContainerRef } from '@angular/core';
+
+import { FluentAssign, FluentAssignMethod } from './../framework/fluent-assign';
+import { extend, arrayUnion } from './../framework/utils';
+import { DialogRef } from './dialog-ref';
 
 export const DEFAULT_VALUES = {
     isBlocking: true,

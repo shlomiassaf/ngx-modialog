@@ -8,8 +8,8 @@ import {
     AfterViewInit
 } from '@angular/core';
 
-import {ModalCompileConfig} from '../../models/tokens';
-import {DialogRef} from '../../models/dialog-ref';
+import { DialogRef, ModalCompileConfig } from '../../angular2-modal';
+
 import {Modal} from './modal';
 import {supportsKey} from '../../framework/utils';
 import {BSModalContext} from './modal-context';

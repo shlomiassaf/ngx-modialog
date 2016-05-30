@@ -7,6 +7,7 @@ import {
     ResolvedReflectiveProvider,
     Optional
 } from '@angular/core';
+
 import {
     ModalRenderer,
     ModalCompileConfig,
@@ -14,9 +15,9 @@ import {
     ModalDropInFactory
 } from '../models/tokens';
 
-import {DialogRefStack} from '../models/dialog-ref-stack';
-import {DialogRef} from '../models/dialog-ref';
-import {ModalContext, ModalControllingContextBuilder} from '../models/modal-context';
+import { DialogRefStack } from '../models/dialog-ref-stack';
+import { DialogRef } from '../angular2-modal';
+import { ModalContext, ModalControllingContextBuilder } from '../models/modal-context';
  
 const _stack = new DialogRefStack<any>();
 const unsupportedDropIn: any = () => { throw new Error('Unsupported Drop-in.'); };

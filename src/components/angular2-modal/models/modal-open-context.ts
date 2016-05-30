@@ -1,10 +1,11 @@
-import {ResolvedReflectiveProvider, ViewContainerRef} from '@angular/core';
-import {FluentAssignMethod} from '../framework/fluent-assign';
-import {ModalComponent} from './tokens';
-import {Modal} from '../providers/modal';
-import {DialogRef} from './dialog-ref';
-import {ModalContext, ModalContextBuilder, ModalControllingContextBuilder} from './modal-context';
-import {arrayUnion} from '../framework/utils';
+import { ResolvedReflectiveProvider, ViewContainerRef } from '@angular/core';
+
+import { FluentAssignMethod } from '../framework/fluent-assign';
+import { ModalComponent } from './tokens';
+import { Modal } from '../providers/modal';
+import { DialogRef } from './dialog-ref';
+import { ModalContext, ModalContextBuilder, ModalControllingContextBuilder } from './modal-context';
+import { arrayUnion } from '../framework/utils';
 
 const DEFAULT_SETTERS = [
     'component'
