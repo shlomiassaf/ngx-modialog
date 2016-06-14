@@ -29,6 +29,7 @@ var dropInFactory = {
     confirm: function (modal) { return new dropin_preset_1.DropInPresetBuilder(modal, angular2_modal_1.DROP_IN_TYPE.confirm, { isBlocking: true, keyboard: null }); }
 };
 exports.VEX_MODAL_PROVIDERS = angular2_modal_1.MODAL_PROVIDERS.concat([
+    new core_1.Provider(angular2_modal_1.Modal, { useClass: modal_1.Modal }),
     new core_1.Provider(modal_1.Modal, { useClass: modal_1.Modal }),
     new core_1.Provider(angular2_modal_1.ModalBackdropComponent, { useValue: modal_backdrop_1.VexModalBackdrop }),
     new core_1.Provider(angular2_modal_1.ModalDropInFactory, { useValue: dropInFactory })

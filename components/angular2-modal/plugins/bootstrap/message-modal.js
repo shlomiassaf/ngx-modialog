@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var dialog_ref_1 = require('../../models/dialog-ref');
+var angular2_modal_1 = require('../../angular2-modal');
 var modal_footer_1 = require('./modal-footer');
 /**
  * A Component representing a generic bootstrap modal content element.
@@ -51,7 +51,7 @@ var BSMessageModal = (function () {
             encapsulation: core_1.ViewEncapsulation.None,
             template: "<div [ngClass]=\"context.headerClass\" [ngSwitch]=\"titleHtml\">\n        <button *ngIf=\"context.showClose\" type=\"button\" class=\"close\" \n                aria-label=\"Close\" (click)=\"dialog.dismiss()\">\n            <span aria-hidden=\"true\">\u00D7</span>\n        </button>\n        <div *ngSwitchWhen=\"1\" [innerHtml]=\"context.titleHtml\"></div>\n        <h3 *ngSwitchDefault class=\"modal-title\">{{context.title}}</h3>\n    </div>\n    <div [ngClass]=\"context.bodyClass\" [innerHtml]=\"context.message\"></div>\n    <modal-footer [footerClass]=\"context.footerClass\" \n                  [buttons]=\"context.buttons\"\n                  (onButtonClick)=\"onFooterButtonClick($event)\"></modal-footer>"
         }), 
-        __metadata('design:paramtypes', [dialog_ref_1.DialogRef])
+        __metadata('design:paramtypes', [angular2_modal_1.DialogRef])
     ], BSMessageModal);
     return BSMessageModal;
 }());

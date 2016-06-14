@@ -8,7 +8,15 @@ var tokens_1 = require('../../../models/tokens');
 var dialog_form_modal_1 = require('../dialog-form-modal');
 var dialog_preset_1 = require('./dialog-preset');
 var utils_1 = require('../../../framework/utils');
+var DEFAULT_VALUES = {
+    component: dialog_form_modal_1.DialogFormModal,
+    content: dialog_form_modal_1.FormDropIn,
+    okBtn: 'OK',
+    cancelBtn: 'Cancel'
+};
 var DEFAULT_SETTERS = [
+    'okBtn',
+    'cancelBtn',
     'placeholder',
     'showCloseButton'
 ];
@@ -37,15 +45,19 @@ var DropInPresetBuilder = (function (_super) {
     __extends(DropInPresetBuilder, _super);
     function DropInPresetBuilder(modal, dropInType, defaultValues) {
         if (defaultValues === void 0) { defaultValues = undefined; }
-        _super.call(this, modal, utils_1.extend({ modal: modal, component: dialog_form_modal_1.DialogFormModal, content: dialog_form_modal_1.FormDropIn, dropInType: dropInType }, defaultValues || {}), DEFAULT_SETTERS, DropInPreset);
+        _super.call(this, modal, utils_1.extend(utils_1.extend({ modal: modal, dropInType: dropInType }, DEFAULT_VALUES), defaultValues || {}), DEFAULT_SETTERS, DropInPreset);
     }
     DropInPresetBuilder.prototype.$$beforeOpen = function (config) {
-        this.addOkButton('Yep');
+        if (config.okBtn) {
+            this.addOkButton(config.okBtn);
+        }
         switch (config.dropInType) {
             case tokens_1.DROP_IN_TYPE.prompt:
                 config.defaultResult = undefined;
             case tokens_1.DROP_IN_TYPE.confirm:
-                this.addCancelButton('Nope');
+                if (config.cancelBtn) {
+                    this.addCancelButton(config.cancelBtn);
+                }
                 break;
         }
         return _super.prototype.$$beforeOpen.call(this, config);

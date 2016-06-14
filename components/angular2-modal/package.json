@@ -1,7 +1,7 @@
 {
   "name": "angular2-modal",
   "description": "Angular2 Modal (dialog) window.",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/shlomiassaf/angular2-modal.git"
@@ -15,7 +15,7 @@
   ],
   "author": "Shlomi Assaf",
   "license": "MIT",
-  "main": "angular2-modal.js",
+  "main": "index.js",
   "typings": "angular2-modal.d.ts",
   "homepage": "https://github.com/shlomiassaf/angular2-modal",
   "bugs": {

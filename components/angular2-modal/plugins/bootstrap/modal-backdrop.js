@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var dialog_ref_1 = require('../../models/dialog-ref');
+var angular2_modal_1 = require('../../angular2-modal');
 var modal_container_1 = require('./modal-container');
 var dialogRefCount = 0;
 /**
@@ -47,7 +47,7 @@ var BSModalBackdrop = (function () {
             encapsulation: core_1.ViewEncapsulation.None,
             template: "<div [style.position]=\"hs.ps\" class=\"modal-backdrop fade in\"></div>\n<modal-container></modal-container>"
         }), 
-        __metadata('design:paramtypes', [dialog_ref_1.DialogRef])
+        __metadata('design:paramtypes', [angular2_modal_1.DialogRef])
     ], BSModalBackdrop);
     return BSModalBackdrop;
 }());

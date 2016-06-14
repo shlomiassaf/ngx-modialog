@@ -1,6 +1,6 @@
 import { Type, ViewContainerRef, ResolvedReflectiveProvider } from '@angular/core';
 import { ModalRenderer, ModalBackdropComponent, ModalDropInFactory } from '../models/tokens';
-import { DialogRef } from '../models/dialog-ref';
+import { DialogRef } from '../angular2-modal';
 import { ModalContext, ModalControllingContextBuilder } from '../models/modal-context';
 export declare class Modal {
     private _modalRenderer;

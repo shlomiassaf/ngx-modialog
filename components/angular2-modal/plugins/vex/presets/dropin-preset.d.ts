@@ -12,6 +12,18 @@ export declare class DropInPreset extends DialogPreset {
      */
     message: string;
     /**
+     * OK button caption.
+     * Default: OK
+     * Set to false ('', undefined, null, false) to remove button.
+     */
+    okBtn: string;
+    /**
+     * Cancel button caption.
+     * Default: Cancel
+     * Set to false ('', undefined, null, false) to remove button.
+     */
+    cancelBtn: string;
+    /**
      * A placeholder for the input element.
      * Valid only for prompt modal.
      */
@@ -27,6 +39,14 @@ export declare class DropInPresetBuilder extends DialogPresetBuilder<DropInPrese
      * the message to display on the modal.
      */
     message: FluentAssignMethod<string, this>;
+    /**
+     * The default Ok button caption.
+     */
+    okBtn: FluentAssignMethod<string, this>;
+    /**
+     * The default Cancel button caption.
+     */
+    cancelBtn: FluentAssignMethod<string, this>;
     /**
      * A placeholder for the input element.
      * Valid only for prompt modal.

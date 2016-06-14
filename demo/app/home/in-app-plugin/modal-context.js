@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var angular2_modal_1 = require('../../../../components/angular2-modal');
+var angular2_modal_1 = require("angular2-modal");
 var InAppModalContext = (function (_super) {
     __extends(InAppModalContext, _super);
     function InAppModalContext() {

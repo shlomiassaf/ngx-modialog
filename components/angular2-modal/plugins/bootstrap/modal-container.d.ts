@@ -1,6 +1,5 @@
 import { ComponentResolver, AfterViewInit } from '@angular/core';
-import { ModalCompileConfig } from '../../models/tokens';
-import { DialogRef } from '../../models/dialog-ref';
+import { DialogRef, ModalCompileConfig } from '../../angular2-modal';
 import { Modal } from './modal';
 import { BSModalContext } from './modal-context';
 /**

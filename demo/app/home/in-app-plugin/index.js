@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require('@angular/core');
-var angular2_modal_1 = require('../../../../components/angular2-modal');
+var angular2_modal_1 = require("angular2-modal");
 var modal_1 = require('./modal');
 var modal_backdrop_1 = require('./modal-backdrop');
 var modal_context_1 = require('./modal-context');

@@ -14,7 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 var core_1 = require('@angular/core');
 var tokens_1 = require('../models/tokens');
 var dialog_ref_stack_1 = require('../models/dialog-ref-stack');
-var dialog_ref_1 = require('../models/dialog-ref');
+var angular2_modal_1 = require('../angular2-modal');
 var _stack = new dialog_ref_stack_1.DialogRefStack();
 var unsupportedDropIn = function () { throw new Error('Unsupported Drop-in.'); };
 var UnsupportedDropInFactory = {
@@ -75,13 +75,13 @@ var Modal = (function () {
         if (context) {
             context.normalize();
         }
-        var dialog = new dialog_ref_1.DialogRef(context || {});
+        var dialog = new angular2_modal_1.DialogRef(context || {});
         dialog.inElement = inside;
         var compileConfig = new tokens_1.ModalCompileConfig(componentType, bindings || []);
         var b = core_1.ReflectiveInjector.resolve([
             core_1.provide(Modal, { useValue: this }),
             core_1.provide(tokens_1.ModalRenderer, { useValue: this._modalRenderer }),
-            core_1.provide(dialog_ref_1.DialogRef, { useValue: dialog }),
+            core_1.provide(angular2_modal_1.DialogRef, { useValue: dialog }),
             core_1.provide(tokens_1.ModalCompileConfig, { useValue: compileConfig })
         ]);
         return this._modalRenderer.render(this._backdrop, viewContainer, b, dialog)

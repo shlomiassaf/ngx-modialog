@@ -10,12 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var DOMModalRenderer = (function () {
-    function DOMModalRenderer(_cr, _renderer) {
+    function DOMModalRenderer(_cr) {
         this._cr = _cr;
-        this._renderer = _renderer;
     }
     DOMModalRenderer.prototype.render = function (type, viewContainer, bindings, dialog) {
-        var _this = this;
         return this._cr.resolveComponent(type)
             .then(function (cmpFactory) {
             var ctxInjector = viewContainer.parentInjector;
@@ -25,7 +23,7 @@ var DOMModalRenderer = (function () {
         })
             .then(function (cmpRef) {
             if (dialog.inElement) {
-                _this._renderer.invokeElementMethod(viewContainer.element.nativeElement, 'appendChild', [cmpRef.hostView.rootNodes[0]]);
+                viewContainer.element.nativeElement.appendChild(cmpRef.hostView.rootNodes[0]);
             }
             else {
                 document.body.appendChild(cmpRef.hostView.rootNodes[0]);
@@ -36,7 +34,7 @@ var DOMModalRenderer = (function () {
     };
     DOMModalRenderer = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [core_1.ComponentResolver, core_1.Renderer])
+        __metadata('design:paramtypes', [core_1.ComponentResolver])
     ], DOMModalRenderer);
     return DOMModalRenderer;
 }());

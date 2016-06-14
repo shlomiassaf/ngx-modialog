@@ -17,7 +17,8 @@ var DEFAULT_SETTERS = [
     'className',
     'overlayClassName',
     'contentClassName',
-    'closeClassName'
+    'closeClassName',
+    'showCloseButton'
 ];
 var VEXModalContext = (function (_super) {
     __extends(VEXModalContext, _super);

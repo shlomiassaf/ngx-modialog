@@ -1,10 +1,10 @@
 "use strict";
 var core_1 = require('@angular/core');
-var angular2_modal_1 = require('../../angular2-modal');
+var modal_1 = require('./modal');
 var modal_backdrop_1 = require('./modal-backdrop');
 var one_button_preset_1 = require('./presets/one-button-preset');
 var two_button_preset_1 = require('./presets/two-button-preset');
-var modal_1 = require('./modal');
+var angular2_modal_1 = require('../../angular2-modal');
 var modal_context_1 = require('./modal-context');
 exports.BSModalContext = modal_context_1.BSModalContext;
 exports.BSModalContextBuilder = modal_context_1.BSModalContextBuilder;
@@ -28,9 +28,10 @@ exports.TwoButtonPresetBuilder = two_button_preset_2.TwoButtonPresetBuilder;
 var modal_2 = require('./modal');
 exports.Modal = modal_2.Modal;
 exports.BS_MODAL_PROVIDERS = angular2_modal_1.MODAL_PROVIDERS.concat([
-    core_1.provide(modal_1.Modal, { useClass: modal_1.Modal }),
-    core_1.provide(angular2_modal_1.ModalBackdropComponent, { useValue: modal_backdrop_1.BSModalBackdrop }),
-    core_1.provide(angular2_modal_1.ModalDropInFactory, { useValue: {
+    new core_1.Provider(angular2_modal_1.Modal, { useClass: modal_1.Modal }),
+    new core_1.Provider(modal_1.Modal, { useClass: modal_1.Modal }),
+    new core_1.Provider(angular2_modal_1.ModalBackdropComponent, { useValue: modal_backdrop_1.BSModalBackdrop }),
+    new core_1.Provider(angular2_modal_1.ModalDropInFactory, { useValue: {
             alert: function (modal) { return new one_button_preset_1.OneButtonPresetBuilder(modal, { isBlocking: false }); },
             prompt: function (modal) { return new one_button_preset_1.OneButtonPresetBuilder(modal, { isBlocking: true, keyboard: null }); },
             confirm: function (modal) { return new two_button_preset_1.TwoButtonPresetBuilder(modal, { isBlocking: true, keyboard: null }); }

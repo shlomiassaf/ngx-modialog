@@ -9,8 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var tokens_1 = require('../../models/tokens');
-var dialog_ref_1 = require('../../models/dialog-ref');
+var angular2_modal_1 = require('../../angular2-modal');
 var modal_1 = require('./modal');
 var utils_1 = require('../../framework/utils');
 /**
@@ -72,7 +71,7 @@ var BSModalContainer = (function () {
             /* tslint:disable */
             template: "<div [ngClass]=\"dialog.context.dialogClass\"\n          [class.modal-lg]=\"dialog.context.size == 'lg'\"\n          [class.modal-sm]=\"dialog.context.size == 'sm'\">\n         <div class=\"modal-content\"              \n              style=\"display:block\"              \n              role=\"document\"\n              (clickOutside)=\"onClickOutside()\">\n            <div style=\"display: none\" #modalDialog></div>\n         </div>\n    </div>"
         }), 
-        __metadata('design:paramtypes', [dialog_ref_1.DialogRef, tokens_1.ModalCompileConfig, modal_1.Modal, core_1.ComponentResolver])
+        __metadata('design:paramtypes', [angular2_modal_1.DialogRef, angular2_modal_1.ModalCompileConfig, modal_1.Modal, core_1.ComponentResolver])
     ], BSModalContainer);
     return BSModalContainer;
 }());

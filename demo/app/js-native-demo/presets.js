@@ -1,5 +1,5 @@
 "use strict";
-var js_native_1 = require('../../../components/angular2-modal/plugins/js-native');
+var js_native_1 = require("angular2-modal/plugins/js-native");
 exports.JSNativePresetBuilder = js_native_1.JSNativePresetBuilder;
 function alert(modal) {
     return modal.alert().message('This is a native alert!');

@@ -1,5 +1,5 @@
 import { OnDestroy } from '@angular/core';
-import { DialogRef } from '../../models/dialog-ref';
+import { DialogRef } from '../../angular2-modal';
 import { BSModalContext } from './modal-context';
 /**
  * Represents the modal backdrop.

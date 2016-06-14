@@ -4,8 +4,8 @@ var platform_browser_dynamic_1 = require('@angular/platform-browser-dynamic');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var common_1 = require('@angular/common');
 var platform_browser_1 = require('@angular/platform-browser');
+var platform_browser_2 = require("angular2-modal/platform-browser");
 // Register providers for browser, this is mandatory.
-var platform_browser_2 = require('./components/angular2-modal/platform-browser');
 var app_1 = require('./demo/app/app');
 var _bootstrapped = false;
 function main() {
