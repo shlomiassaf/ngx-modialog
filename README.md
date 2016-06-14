@@ -105,3 +105,9 @@ Add tests...
 Test against `universal-starter` to enable universal support.
 ## Support Change detection
 Support `OnPush` with an observable api model (fluent observables)
+
+# Known bugs
+### The dialog closes when removing the target DOM element in a click event 
+ref [issue#111](https://github.com/shlomiassaf/angular2-modal/issues/111)
+
+To avoild this problem use `event.stopPropagation();` or put the element removal inside a `setTimeout` call
