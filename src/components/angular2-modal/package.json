@@ -15,7 +15,7 @@
   ],
   "author": "Shlomi Assaf",
   "license": "MIT",
-  "main": "angular2-modal.js",
+  "main": "index.js",
   "typings": "angular2-modal.d.ts",
   "homepage": "https://github.com/shlomiassaf/angular2-modal",
   "bugs": {
