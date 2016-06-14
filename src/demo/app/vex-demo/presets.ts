@@ -33,9 +33,7 @@ export function noButtons(modal: Modal): DropInPresetBuilder {
         .isBlocking(true)
         .message('Luckily I have an X button, phew...')
         .okBtn(null)
-        .cancelBtn(null)
-        .addButton('btn-primary', 'BOOTSTRAP STYLE BUTTON',
-            (cmp: DialogFormModal, $event: MouseEvent) => cmp.dialog.close('Maybe'));
+        .cancelBtn(null);
 
 }
 
