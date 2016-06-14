@@ -49,6 +49,10 @@ Click for the [Demo](http://shlomiassaf.github.io/angular2-modal/) Make sure to 
 Use [this plunker](http://plnkr.co/edit/iiQett?p=preview) for quick showcasing and issue reports.
 
 
+## Sample code: Custom plugin that accepts TemplateRef as dialogs.
+http://plnkr.co/edit/9HYPPK?p=preview
+
+
 ![Code Generator!](/preview.png)
 
 See [src/demo](https://github.com/shlomiassaf/angular2-modal/tree/master/src/demo) for demo app with examples.
