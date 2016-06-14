@@ -9,31 +9,18 @@ export class DialogRef<T> {
      * The reference to the component ref.
      * This can be return undefined, since the componentRef is set only when the modal is shown.
      * Use componentRefPromise to get a promise that will resolve when the componentRet is set.
+     * @internal
      * @return {ComponentRef<any>}
      */
-    get contentRef(): ComponentRef<any> { return this._contentRef; }
-    set contentRef(value: ComponentRef<any>) {
-        this._contentRef = value;
-        this._conponentRefDeferred.resolve(value);
-    }
-
-    /**
-     * A promise that is resolved when the component ref is set.
-     * @return {Promise<ComponentRef<any>>}
-     */
-    get contentRefPromise() { return this._conponentRefDeferred.promise; }
+    contentRef: ComponentRef<any>;
     /**
      * States if the modal is inside a specific element.
      */
     public inElement: boolean;
-
-    private _contentRef: ComponentRef<any>;
     private _resultDeferred: PromiseCompleter<any>;
-    private _conponentRefDeferred: PromiseCompleter<ComponentRef<any>>;
 
     constructor(public context?: T) {
         this._resultDeferred = PromiseWrapper.completer();
-        this._conponentRefDeferred = PromiseWrapper.completer<ComponentRef<any>>();
     }
 
     /**
@@ -84,7 +71,7 @@ export class DialogRef<T> {
 
         if (fn) {
             const retVal = fn.call(instance);
-            return typeof retVal.then === 'function' ? retVal : PromiseWrapper.resolve(retVal);
+            return PromiseWrapper.resolve(retVal);
         } else {
             return PromiseWrapper.resolve(undefined);
         }
