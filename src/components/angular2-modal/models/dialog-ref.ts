@@ -7,8 +7,6 @@ import { PromiseWrapper, PromiseCompleter } from '@angular/core/src/facade/promi
 export class DialogRef<T> {
     /** 
      * The reference to the component ref.
-     * This can be return undefined, since the componentRef is set only when the modal is shown.
-     * Use componentRefPromise to get a promise that will resolve when the componentRet is set.
      * @internal
      * @return {ComponentRef<any>}
      */
