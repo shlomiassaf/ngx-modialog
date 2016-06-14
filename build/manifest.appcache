@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # sw.bundle: ng-cli
-# sw.version: 92a6bbda4f2503333092f39365e5d57c95a088ea
+# sw.version: 9066533eca6e017f6a8ad64428cccd7a924c227d
 # sw.file.hash: b4357cf0cb00e19853e6041824ec1ef95a2a2e45
 /bootstrap.js
 # sw.file.hash: 613fa699b334d0ff59567a16843204c85ec640c0
@@ -405,7 +405,7 @@ CACHE MANIFEST
 /demo/vendor.js.map
 # sw.file.hash: 4d2efda8e1ee55b4ea33ba4783b0265553ff8d63
 /index.SystemJS.html
-# sw.file.hash: 25dc5eddbb532bb47433b92b23f8c00761fc468e
+# sw.file.hash: a8ac6e442fa282bfc069f7b9b41900b15b73eea7
 /index.ghpages.html
 # sw.file.hash: 65c55184544a724e126c2aac66942b20aac45414
 /index.html
