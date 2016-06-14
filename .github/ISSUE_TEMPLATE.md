@@ -1,3 +1,5 @@
+IMPORTANT: Please provide a sample using http://plnkr.co/edit/iiQett?p=preview 
+
 * **I'm submitting a ...**
 [ ] bug report
 [ ] feature request
