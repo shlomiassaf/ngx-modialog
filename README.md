@@ -44,7 +44,9 @@ modal.alert()
 
 Click [HERE](https://github.com/shlomiassaf/angular2-modal/tree/master/QUICKTHROUGH.md) for a quick walkthrough  
 Click for the [Demo](http://shlomiassaf.github.io/angular2-modal/) Make sure to check the [code generator!](http://shlomiassaf.github.io/angular2-modal#/bootstrap-demo/customizeModals)  
-If you're looking for a SystemJS demo, please see [this plunker](http://plnkr.co/edit/FnGdwU) (< 1.0.0)
+
+## Plunker
+Use [this plunker](http://plnkr.co/edit/iiQett?p=preview) for quick showcasing and issue reports.
 
 
 ![Code Generator!](/preview.png)
