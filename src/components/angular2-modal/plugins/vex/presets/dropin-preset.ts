@@ -7,6 +7,13 @@ import { DialogPreset, DialogPresetBuilder } from './dialog-preset';
 
 import { extend } from '../../../framework/utils';
 
+const DEFAULT_VALUES = {
+    component,
+    content,
+    okBtn: 'OK',
+    cancelBtn: 'Cancel'
+};
+
 const DEFAULT_SETTERS = [
     'okBtn',
     'cancelBtn',
@@ -25,14 +32,18 @@ export class DropInPreset extends DialogPreset {
     message: string;
 
     /**
-     * The default Ok button caption.
+     * OK button caption.
+     * Default: OK
+     * Set to false ('', undefined, null, false) to remove button.
      */
-    okBtn: string = 'Yep';
+    okBtn: string;
 
     /**
-     * The default Cancel button caption.
+     * Cancel button caption.
+     * Default: Cancel
+     * Set to false ('', undefined, null, false) to remove button.
      */
-    cancelBtn: string = 'Nope';
+    cancelBtn: string;
 
     /**
      * A placeholder for the input element.
@@ -76,20 +87,24 @@ export class DropInPresetBuilder extends DialogPresetBuilder<DropInPreset> {
     constructor(modal: Modal, dropInType: DROP_IN_TYPE, defaultValues: DropInPreset = undefined) {
         super(
             modal,
-            extend<any>({modal, component, content, dropInType}, defaultValues || {}),
+            extend<any>(extend({modal, dropInType}, DEFAULT_VALUES), defaultValues || {}),
             DEFAULT_SETTERS,
             DropInPreset
         );
     }
 
     $$beforeOpen(config: DropInPreset): ResolvedReflectiveProvider[] {
-        this.addOkButton(config.okBtn);
+        if (config.okBtn) {
+            this.addOkButton(config.okBtn);
+        }
 
         switch (config.dropInType) {
             case DROP_IN_TYPE.prompt:
                 config.defaultResult = undefined;
             case DROP_IN_TYPE.confirm:
-                this.addCancelButton(config.cancelBtn);
+                if (config.cancelBtn) {
+                    this.addCancelButton(config.cancelBtn);
+                }
                 break;
         }
         return super.$$beforeOpen(config);

@@ -79,6 +79,14 @@ export class VexDemo {
                         .addCancelButton('Nope!')
                         .open();
                 }
+            },
+            {
+                text: 'no buttons',
+                factory: () => presets.noButtons.call(this, this.modal).open()
+            },
+            {
+                text: 'custom buttons',
+                factory: () => presets.customButtons.call(this, this.modal).open()
             }
         ];
     }
