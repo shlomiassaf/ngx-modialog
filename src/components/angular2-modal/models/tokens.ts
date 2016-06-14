@@ -18,14 +18,16 @@ export interface ModalComponent<T> {
     dialog: DialogRef<T>;
 
     /**
-     * Invoked before a modal is dismissed, return true to cancel dismissal.
+     * Invoked before a modal is dismissed.
+     * @return true or a promise that resolves to true to cancel dismissal.
      */
-    beforeDismiss?(): boolean;
+    beforeDismiss?(): boolean | Promise<boolean>;
 
     /**
-     * Invoked before a modal is closed, return true to cancel closing.
+     * Invoked before a modal is closed.
+     * @return true or a promise that resolves to true to cancel closing.
      */
-    beforeClose?(): boolean;
+    beforeClose?(): boolean | Promise<boolean>;
 }
 
 export class ModalCompileConfig {
