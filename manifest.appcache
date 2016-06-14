@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # sw.bundle: ng-cli
-# sw.version: 9066533eca6e017f6a8ad64428cccd7a924c227d
+# sw.version: 4cad93b9c7b70edbf86813569ba30bce7a2ec323
 # sw.file.hash: b4357cf0cb00e19853e6041824ec1ef95a2a2e45
 /bootstrap.js
 # sw.file.hash: 613fa699b334d0ff59567a16843204c85ec640c0
@@ -121,11 +121,11 @@ CACHE MANIFEST
 /components/angular2-modal/plugins/bootstrap/modal-backdrop.js
 # sw.file.hash: 46f948fe51037f65a9ef058c4aae92ff14b69f68
 /components/angular2-modal/plugins/bootstrap/modal-backdrop.js.map
-# sw.file.hash: 37aef274762b5db3c2e33eb9b19aeaf4baff48bb
+# sw.file.hash: f6bdc441ad5fb06c9f46dbb65b4c084c37e57232
 /components/angular2-modal/plugins/bootstrap/modal-container.d.ts
-# sw.file.hash: 0bcd2cc8ab315ebab27f641d07590db7d06d92e5
+# sw.file.hash: 08d90a06f0ee234b5cebf9f95de3684c8096481c
 /components/angular2-modal/plugins/bootstrap/modal-container.js
-# sw.file.hash: eb31b4aef8fbef5a09f65a6b7ae70bd89a41ba09
+# sw.file.hash: 27d75555fc83816aba4ed3e8cafbe8b158a8197c
 /components/angular2-modal/plugins/bootstrap/modal-container.js.map
 # sw.file.hash: 3d421b9b5ef85894899d9c506a281d9daca29f3a
 /components/angular2-modal/plugins/bootstrap/modal-context.d.ts
@@ -385,9 +385,9 @@ CACHE MANIFEST
 /demo/app/vex-demo/login-dialog.js.map
 # sw.file.hash: 23694cc32ea12275db0c283e34edabac07943dc6
 /demo/app/vex-demo/presets.d.ts
-# sw.file.hash: d8d9a0af27dfe4bee0dfd7060b099c28bcd2990f
+# sw.file.hash: 07bb4f70dda83944a5894c62476466afa9465926
 /demo/app/vex-demo/presets.js
-# sw.file.hash: 5d59c543289dac64d74a5d568c274faef02cb574
+# sw.file.hash: db25a8a94b32deb947a5f3f37135c534bb1448ca
 /demo/app/vex-demo/presets.js.map
 # sw.file.hash: 661515c248a05d03a29ae3bbec151b58f5218364
 /demo/app/vex-demo/vex-demo.d.ts

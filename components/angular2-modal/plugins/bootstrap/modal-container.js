@@ -16,8 +16,9 @@ var utils_1 = require('../../framework/utils');
  * A component that acts as a top level container for an open modal window.
  */
 var BSModalContainer = (function () {
-    function BSModalContainer(dialog, _compileConfig, _modal, _cr) {
+    function BSModalContainer(dialog, el, _compileConfig, _modal, _cr) {
         this.dialog = dialog;
+        this.el = el;
         this._compileConfig = _compileConfig;
         this._modal = _modal;
         this._cr = _cr;
@@ -35,8 +36,10 @@ var BSModalContainer = (function () {
             var vcr = _this._viewContainer, bindings = _this._compileConfig.bindings, ctxInjector = vcr.parentInjector;
             var childInjector = Array.isArray(bindings) && bindings.length > 0 ?
                 core_1.ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
-            return _this.dialog.contentRef =
-                vcr.createComponent(cmpFactory, vcr.length, childInjector);
+            if (_this.el.nativeElement) {
+                _this.el.nativeElement.focus();
+            }
+            _this.dialog.contentRef = vcr.createComponent(cmpFactory, vcr.length, childInjector);
         });
     };
     BSModalContainer.prototype.onClickOutside = function () {
@@ -71,7 +74,7 @@ var BSModalContainer = (function () {
             /* tslint:disable */
             template: "<div [ngClass]=\"dialog.context.dialogClass\"\n          [class.modal-lg]=\"dialog.context.size == 'lg'\"\n          [class.modal-sm]=\"dialog.context.size == 'sm'\">\n         <div class=\"modal-content\"              \n              style=\"display:block\"              \n              role=\"document\"\n              (clickOutside)=\"onClickOutside()\">\n            <div style=\"display: none\" #modalDialog></div>\n         </div>\n    </div>"
         }), 
-        __metadata('design:paramtypes', [angular2_modal_1.DialogRef, angular2_modal_1.ModalCompileConfig, modal_1.Modal, core_1.ComponentResolver])
+        __metadata('design:paramtypes', [angular2_modal_1.DialogRef, core_1.ElementRef, angular2_modal_1.ModalCompileConfig, modal_1.Modal, core_1.ComponentResolver])
     ], BSModalContainer);
     return BSModalContainer;
 }());

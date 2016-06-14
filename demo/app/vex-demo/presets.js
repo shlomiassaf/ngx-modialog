@@ -28,8 +28,7 @@ function noButtons(modal) {
         .isBlocking(true)
         .message('Luckily I have an X button, phew...')
         .okBtn(null)
-        .cancelBtn(null)
-        .addButton('btn-primary', 'BOOTSTRAP STYLE BUTTON', function (cmp, $event) { return cmp.dialog.close('Maybe'); });
+        .cancelBtn(null);
 }
 exports.noButtons = noButtons;
 function customButtons(modal) {
