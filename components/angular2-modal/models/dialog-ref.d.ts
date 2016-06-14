@@ -4,6 +4,11 @@ import { ComponentRef } from '@angular/core';
  */
 export declare class DialogRef<T> {
     context: T;
+    /**
+     * The reference to the component ref.
+     * @internal
+     * @return {ComponentRef<any>}
+     */
     contentRef: ComponentRef<any>;
     /**
      * States if the modal is inside a specific element.

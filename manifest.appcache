@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # sw.bundle: ng-cli
-# sw.version: 4cad93b9c7b70edbf86813569ba30bce7a2ec323
+# sw.version: e1f36477ff28fcd460a6e3eea4ea99f707d029fa
 # sw.file.hash: b4357cf0cb00e19853e6041824ec1ef95a2a2e45
 /bootstrap.js
 # sw.file.hash: 613fa699b334d0ff59567a16843204c85ec640c0
@@ -41,11 +41,11 @@ CACHE MANIFEST
 /components/angular2-modal/models/dialog-ref-stack.js
 # sw.file.hash: b8dbd12f1f95f06eb637b2836a9801cf6428809b
 /components/angular2-modal/models/dialog-ref-stack.js.map
-# sw.file.hash: cb77d89b74ee322867f9a5542b6e70c38db2619a
+# sw.file.hash: d1d201409203adf012b3cd37c824b856331c2a86
 /components/angular2-modal/models/dialog-ref.d.ts
-# sw.file.hash: 61843cb996d6073a56b5367a95ad8c0bd8673130
+# sw.file.hash: 1a4c1dcc3c3265ad4ec3d5864878c641842cc2c6
 /components/angular2-modal/models/dialog-ref.js
-# sw.file.hash: 518d6a278eb84de0d3bfa06b1a906cc95b6263f0
+# sw.file.hash: 8c1d01b256e7457505581fee3642c052d4064272
 /components/angular2-modal/models/dialog-ref.js.map
 # sw.file.hash: 6debb0c9c1cdf50744b6f3eb8b5a9f63c6d97ca8
 /components/angular2-modal/models/modal-context.d.ts
@@ -59,11 +59,11 @@ CACHE MANIFEST
 /components/angular2-modal/models/modal-open-context.js
 # sw.file.hash: fd8e234b7e1cf9dbb6c0a7c83f0fc7a0040aef6e
 /components/angular2-modal/models/modal-open-context.js.map
-# sw.file.hash: 577ecc64f03a32be89d1c724340e963133021984
+# sw.file.hash: ab9ec95786c27d02acf8ccd19b0e6707ffda98f1
 /components/angular2-modal/models/tokens.d.ts
 # sw.file.hash: 75f263ec81cd1004e0e43b9ba686b9ab0cd71f5a
 /components/angular2-modal/models/tokens.js
-# sw.file.hash: 29af2de1acae23d85e4ac4cb62eff9c1def5a20f
+# sw.file.hash: 8ea471d2c7a5a10d3cbb7c6eebf8f3bc788f8328
 /components/angular2-modal/models/tokens.js.map
 # sw.file.hash: bdd4abb046b5713e3ee5547612013fe75831ff43
 /components/angular2-modal/package.json
@@ -213,11 +213,11 @@ CACHE MANIFEST
 /components/angular2-modal/plugins/vex/modal-backdrop.js
 # sw.file.hash: 540217f99df17a9eae6a43cbf015b07a8b1518b4
 /components/angular2-modal/plugins/vex/modal-backdrop.js.map
-# sw.file.hash: 0488c53381013c0248f2c4bce3a2bcfd5d0bc46e
+# sw.file.hash: 55b1b7286073ed8a37090adc246001f297803a41
 /components/angular2-modal/plugins/vex/modal-content.d.ts
-# sw.file.hash: 267a6956f1476f9fc69b50d4432f4aaacab75b1e
+# sw.file.hash: e46f7419cd3ab6b621474759254e5a1ff22bc937
 /components/angular2-modal/plugins/vex/modal-content.js
-# sw.file.hash: 381104d98f5ed15273aa498617be19368ec04121
+# sw.file.hash: 8bd06d96414914e71e7a84284349b53d71c6a971
 /components/angular2-modal/plugins/vex/modal-content.js.map
 # sw.file.hash: c4a2a50e16f53a8d2cd1e31bd492360ac116fd86
 /components/angular2-modal/plugins/vex/modal-context.d.ts

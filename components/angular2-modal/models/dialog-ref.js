@@ -6,7 +6,7 @@ var promise_1 = require('@angular/core/src/facade/promise');
 var DialogRef = (function () {
     function DialogRef(context) {
         this.context = context;
-        this._resultDeferred = promise_1.PromiseWrapper.completer();
+        this._resultDeferred = new promise_1.PromiseCompleter();
     }
     Object.defineProperty(DialogRef.prototype, "result", {
         /**
@@ -23,11 +23,15 @@ var DialogRef = (function () {
      *  Close the modal with a return value, i.e: result.
      */
     DialogRef.prototype.close = function (result) {
+        var _this = this;
         if (result === void 0) { result = null; }
-        if (this._fireHook('beforeClose') === true)
-            return;
-        this.destroy();
-        this._resultDeferred.resolve(result);
+        var _close = function () {
+            _this.destroy();
+            _this._resultDeferred.resolve(result);
+        };
+        this._fireHook('beforeClose')
+            .then(function (value) { return value !== true && _close(); })
+            .catch(_close);
     };
     /**
      *  Close the modal without a return value, i.e: cancelled.
@@ -37,20 +41,19 @@ var DialogRef = (function () {
      *  Usually, dismiss represent a Cancel button or a X button.
      */
     DialogRef.prototype.dismiss = function () {
-        if (this._fireHook('beforeDismiss') === true)
-            return;
-        this.destroy();
-        this._resultDeferred.reject();
+        var _this = this;
+        var _dismiss = function () {
+            _this.destroy();
+            _this._resultDeferred.reject();
+        };
+        this._fireHook('beforeDismiss')
+            .then(function (value) { return value !== true && _dismiss(); })
+            .catch(_dismiss);
     };
     DialogRef.prototype.destroy = function () { };
     DialogRef.prototype._fireHook = function (name) {
         var instance = this.contentRef && this.contentRef.instance, fn = instance && typeof instance[name] === 'function' && instance[name];
-        if (fn) {
-            return fn.call(instance);
-        }
-        else {
-            return undefined;
-        }
+        return Promise.resolve(fn ? fn() : false);
     };
     return DialogRef;
 }());
