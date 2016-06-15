@@ -65,6 +65,6 @@ export class DialogRef<T> {
         const instance: ModalComponent<this> = this.contentRef && this.contentRef.instance,
               fn: Function = instance && typeof instance[name] === 'function' && instance[name];
 
-        return Promise.resolve( fn ? fn() : false );
+        return Promise.resolve( fn ? fn.call(instance) : false );
     }
 }
