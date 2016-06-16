@@ -45,7 +45,7 @@ export interface BSMessageModalButtonConfig {
                 aria-label="Close" (click)="dialog.dismiss()">
             <span aria-hidden="true">×</span>
         </button>
-        <div *ngSwitchWhen="1" [innerHtml]="context.titleHtml"></div>
+        <div *ngSwitchCase="1" [innerHtml]="context.titleHtml"></div>
         <h3 *ngSwitchDefault class="modal-title">{{context.title}}</h3>
     </div>
     <div [ngClass]="context.bodyClass" [innerHtml]="context.message"></div>
