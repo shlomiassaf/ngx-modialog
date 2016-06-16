@@ -1,6 +1,7 @@
 import {
     Component,
     ComponentResolver,
+    ElementRef,
     ViewContainerRef,
     ReflectiveInjector,
     ViewChild,
@@ -18,8 +19,13 @@ import {VEXModalContext} from './modal-context';
  */
 @Component({
     selector: 'modal-content',
+    host: {
+        'tabindex': '-1',
+        'role': 'dialog'
+    },
     template:
-`<div [class]="context.contentClassName" (clickOutside)="onClickOutside()">
+`<div tabindex="-1" role="dialog"
+      [class]="context.contentClassName" (clickOutside)="onClickOutside()">
     <div style="display: none" #modalDialog></div>    
     <div *ngIf="context.showCloseButton" 
          [class]="context.closeClassName" 
@@ -32,6 +38,7 @@ export class VexModalContent implements AfterViewInit {
     @ViewChild('modalDialog', {read: ViewContainerRef}) private _viewContainer: ViewContainerRef;
 
     constructor(public dialog: DialogRef<VEXModalContext>,
+                private el: ElementRef,
                 private _modal: Modal,
                 private _compileConfig: ModalCompileConfig,
                 private _cr: ComponentResolver) {
@@ -47,6 +54,11 @@ export class VexModalContent implements AfterViewInit {
 
                 const childInjector = Array.isArray(bindings) && bindings.length > 0 ?
                     ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
+
+                if (this.el.nativeElement) {
+                    this.el.nativeElement.focus();
+                }
+
                 return this.dialog.contentRef =
                     vcr.createComponent(cmpFactory, vcr.length, childInjector);
             });

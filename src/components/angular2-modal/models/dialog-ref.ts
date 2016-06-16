@@ -1,5 +1,6 @@
 import { ComponentRef } from '@angular/core';
-import { PromiseWrapper, PromiseCompleter } from '@angular/core/src/facade/promise';
+import { PromiseCompleter } from '@angular/core/src/facade/promise';
+import { ModalComponent } from '../models/tokens';
 
 /**
  * API to an open modal window.
@@ -11,15 +12,14 @@ export class DialogRef<T> {
      * @return {ComponentRef<any>}
      */
     contentRef: ComponentRef<any>;
+
     /**
      * States if the modal is inside a specific element.
      */
     public inElement: boolean;
-    private _resultDeferred: PromiseCompleter<any>;
+    private _resultDeferred: PromiseCompleter<any> = new PromiseCompleter<any>();
 
-    constructor(public context?: T) {
-        this._resultDeferred = PromiseWrapper.completer();
-    }
+    constructor(public context?: T) { }
 
     /**
      * A Promise that is resolved on a close event and rejected on a dismiss event.
@@ -36,11 +36,10 @@ export class DialogRef<T> {
         const _close = () => {
             this.destroy();
             this._resultDeferred.resolve(result);
-        }
-        this._fireHook<boolean>('beforeClose').then(value => {
-            if (value === true) return;
-            _close();
-        }, _close);
+        };
+        this._fireHook<boolean>('beforeClose')
+            .then( value => value !== true && _close() )
+            .catch(_close);
     }
 
     /**
@@ -54,24 +53,18 @@ export class DialogRef<T> {
         const _dismiss = () => {
             this.destroy();
             this._resultDeferred.reject();
-        }
-        this._fireHook<boolean>('beforeDismiss').then(value => {
-            if (value === true) return;
-            _dismiss();
-        }, _dismiss);
+        };
+        this._fireHook<boolean>('beforeDismiss')
+            .then( value => value !== true && _dismiss() )
+            .catch(_dismiss);
     }
 
     destroy() { }
 
     private _fireHook<T>(name: 'beforeClose' | 'beforeDismiss'): Promise<T> {
-        let instance = this.contentRef && this.contentRef.instance,
-            fn = instance && typeof instance[name] === 'function' && instance[name];
+        const instance: ModalComponent<this> = this.contentRef && this.contentRef.instance,
+              fn: Function = instance && typeof instance[name] === 'function' && instance[name];
 
-        if (fn) {
-            const retVal = fn.call(instance);
-            return PromiseWrapper.resolve(retVal);
-        } else {
-            return PromiseWrapper.resolve(undefined);
-        }
+        return Promise.resolve( fn ? fn.call(instance) : false );
     }
 }

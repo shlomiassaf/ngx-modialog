@@ -44,7 +44,13 @@ modal.alert()
 
 Click [HERE](https://github.com/shlomiassaf/angular2-modal/tree/master/QUICKTHROUGH.md) for a quick walkthrough  
 Click for the [Demo](http://shlomiassaf.github.io/angular2-modal/) Make sure to check the [code generator!](http://shlomiassaf.github.io/angular2-modal#/bootstrap-demo/customizeModals)  
-If you're looking for a SystemJS demo, please see [this plunker](http://plnkr.co/edit/FnGdwU) (< 1.0.0)
+
+## Plunker
+Use [this plunker](http://plnkr.co/edit/iiQett?p=preview) for quick showcasing and issue reports.
+
+
+## Sample code: Custom plugin that accepts TemplateRef as dialogs.
+http://plnkr.co/edit/9HYPPK?p=preview
 
 
 ![Code Generator!](/preview.png)
@@ -99,3 +105,9 @@ Add tests...
 Test against `universal-starter` to enable universal support.
 ## Support Change detection
 Support `OnPush` with an observable api model (fluent observables)
+
+# Known bugs
+### The dialog closes when removing the target DOM element in a click event 
+ref [issue#111](https://github.com/shlomiassaf/angular2-modal/issues/111)
+
+To avoild this problem use `event.stopPropagation();` or put the element removal inside a `setTimeout` call

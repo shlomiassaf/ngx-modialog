@@ -5,7 +5,8 @@ import {
     ReflectiveInjector,
     ViewChild,
     ViewEncapsulation,
-    AfterViewInit
+    AfterViewInit,
+    ElementRef
 } from '@angular/core';
 
 import { DialogRef, ModalCompileConfig } from '../../angular2-modal';
@@ -48,6 +49,7 @@ export class BSModalContainer implements AfterViewInit {
     @ViewChild('modalDialog', {read: ViewContainerRef}) private _viewContainer: ViewContainerRef;
 
     constructor(public dialog: DialogRef<BSModalContext>,
+                private el: ElementRef,
                 private _compileConfig: ModalCompileConfig,
                 private _modal: Modal,
                 private _cr: ComponentResolver) {
@@ -67,8 +69,12 @@ export class BSModalContainer implements AfterViewInit {
 
                 const childInjector = Array.isArray(bindings) && bindings.length > 0 ?
                     ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
-                return this.dialog.contentRef =
-                    vcr.createComponent(cmpFactory, vcr.length, childInjector);
+
+                if (this.el.nativeElement) {
+                    this.el.nativeElement.focus();
+                }
+                
+                this.dialog.contentRef = vcr.createComponent(cmpFactory, vcr.length, childInjector);
             });
     }
 

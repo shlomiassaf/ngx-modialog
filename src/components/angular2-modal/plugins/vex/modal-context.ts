@@ -13,7 +13,8 @@ const DEFAULT_SETTERS = [
     'className',
     'overlayClassName',
     'contentClassName',
-    'closeClassName'
+    'closeClassName',
+    'showCloseButton'
 ];
 
 export type VEXBuiltInThemes
