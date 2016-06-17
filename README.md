@@ -1,6 +1,6 @@
 # UPDATE: Angular 2 Modal version 1 is out.
 
-# Angular 2 (rc.1): AIO Modal / Dialog window 
+# Angular 2 (rc.2): AIO Modal / Dialog window 
 
 A fully generic, customizable and fluent modal window implementation for Angular.
 `angular2-modal` is UI platform/framework agnostic, **plugins**** are used to describe a UI implementation (e.g: Bootstrap)  
@@ -18,7 +18,7 @@ Take 5 minutes to read a [quick walk through](https://github.com/shlomiassaf/ang
   * POC implementation of JS Native modal (window.alert/prompt/confirm) to demonstrate a hostile takeover :)
   
   
-## Built with angular 2 rc.1
+## Built with angular 2 RC.2
 
 ## Features  
 
