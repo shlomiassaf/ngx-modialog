@@ -4,8 +4,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 var EventListener = (function () {
     function EventListener(name, callback) {
         this.name = name;
@@ -15,6 +15,9 @@ var EventListener = (function () {
     return EventListener;
 }());
 exports.EventListener = EventListener;
+/**
+ * @experimental
+ */
 var DebugNode = (function () {
     function DebugNode(nativeNode, parent, _debugInfo) {
         this._debugInfo = _debugInfo;
@@ -72,12 +75,17 @@ var DebugNode = (function () {
     return DebugNode;
 }());
 exports.DebugNode = DebugNode;
+/**
+ * @experimental
+ */
 var DebugElement = (function (_super) {
     __extends(DebugElement, _super);
     function DebugElement(nativeNode, parent, _debugInfo) {
         _super.call(this, nativeNode, parent, _debugInfo);
         this.properties = {};
         this.attributes = {};
+        this.classes = {};
+        this.styles = {};
         this.childNodes = [];
         this.nativeElement = nativeNode;
     }
@@ -147,6 +155,9 @@ var DebugElement = (function (_super) {
     return DebugElement;
 }(DebugNode));
 exports.DebugElement = DebugElement;
+/**
+ * @experimental
+ */
 function asNativeElements(debugEls) {
     return debugEls.map(function (el) { return el.nativeElement; });
 }
@@ -175,6 +186,9 @@ function _queryNodeChildren(parentNode, predicate, matches) {
 }
 // Need to keep the nodes in a global Map so that multiple angular apps are supported.
 var _nativeNodeToDebugNode = new Map();
+/**
+ * @experimental
+ */
 function getDebugNode(nativeNode) {
     return _nativeNodeToDebugNode.get(nativeNode);
 }

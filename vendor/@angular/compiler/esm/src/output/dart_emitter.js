@@ -1,5 +1,5 @@
-import { isPresent, isBlank, isArray } from '../../src/facade/lang';
-import { BaseException } from '../../src/facade/exceptions';
+import { BaseException } from '../facade/exceptions';
+import { isArray, isBlank, isPresent } from '../facade/lang';
 import * as o from './output_ast';
 import { EmitterVisitorContext, AbstractEmitterVisitor, CATCH_ERROR_VAR, CATCH_STACK_VAR } from './abstract_emitter';
 var _debugModuleUrl = 'asset://debug/lib';
@@ -318,7 +318,7 @@ class _DartEmitterVisitor extends AbstractEmitterVisitor {
         return null;
     }
     _visitParams(params, ctx) {
-        this.visitAllObjects((param) => {
+        this.visitAllObjects((param /** TODO #9100 */) => {
             if (isPresent(param.type)) {
                 param.type.visitType(this, ctx);
                 ctx.print(' ');
@@ -341,7 +341,7 @@ class _DartEmitterVisitor extends AbstractEmitterVisitor {
         ctx.print(value.name);
         if (isPresent(typeParams) && typeParams.length > 0) {
             ctx.print(`<`);
-            this.visitAllObjects((type) => type.visitType(this, ctx), typeParams, ctx, ',');
+            this.visitAllObjects((type /** TODO #9100 */) => type.visitType(this, ctx), typeParams, ctx, ',');
             ctx.print(`>`);
         }
     }

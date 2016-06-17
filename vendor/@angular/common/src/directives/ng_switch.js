@@ -1,8 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
-var _WHEN_DEFAULT = new Object();
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
+var _CASE_DEFAULT = new Object();
 var SwitchView = (function () {
     function SwitchView(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
@@ -28,7 +28,7 @@ var NgSwitch = (function () {
             var views = this._valueViews.get(value);
             if (lang_1.isBlank(views)) {
                 this._useDefault = true;
-                views = lang_1.normalizeBlank(this._valueViews.get(_WHEN_DEFAULT));
+                views = lang_1.normalizeBlank(this._valueViews.get(_CASE_DEFAULT));
             }
             this._activateViews(views);
             this._switchValue = value;
@@ -37,14 +37,14 @@ var NgSwitch = (function () {
         configurable: true
     });
     /** @internal */
-    NgSwitch.prototype._onWhenValueChanged = function (oldWhen, newWhen, view) {
-        this._deregisterView(oldWhen, view);
-        this._registerView(newWhen, view);
-        if (oldWhen === this._switchValue) {
+    NgSwitch.prototype._onCaseValueChanged = function (oldCase, newCase, view) {
+        this._deregisterView(oldCase, view);
+        this._registerView(newCase, view);
+        if (oldCase === this._switchValue) {
             view.destroy();
             collection_1.ListWrapper.remove(this._activeViews, view);
         }
-        else if (newWhen === this._switchValue) {
+        else if (newCase === this._switchValue) {
             if (this._useDefault) {
                 this._useDefault = false;
                 this._emptyAllActiveViews();
@@ -55,7 +55,7 @@ var NgSwitch = (function () {
         // Switch to default when there is no more active ViewContainers
         if (this._activeViews.length === 0 && !this._useDefault) {
             this._useDefault = true;
-            this._activateViews(this._valueViews.get(_WHEN_DEFAULT));
+            this._activateViews(this._valueViews.get(_CASE_DEFAULT));
         }
     };
     /** @internal */
@@ -87,8 +87,8 @@ var NgSwitch = (function () {
     };
     /** @internal */
     NgSwitch.prototype._deregisterView = function (value, view) {
-        // `_WHEN_DEFAULT` is used a marker for non-registered whens
-        if (value === _WHEN_DEFAULT)
+        // `_CASE_DEFAULT` is used a marker for non-registered cases
+        if (value === _CASE_DEFAULT)
             return;
         var views = this._valueViews.get(value);
         if (views.length == 1) {
@@ -98,46 +98,63 @@ var NgSwitch = (function () {
             collection_1.ListWrapper.remove(views, view);
         }
     };
+    /** @nocollapse */
     NgSwitch.decorators = [
         { type: core_1.Directive, args: [{ selector: '[ngSwitch]', inputs: ['ngSwitch'] },] },
     ];
     return NgSwitch;
 }());
 exports.NgSwitch = NgSwitch;
-var NgSwitchWhen = (function () {
-    function NgSwitchWhen(viewContainer, templateRef, ngSwitch) {
-        // `_WHEN_DEFAULT` is used as a marker for a not yet initialized value
+var NgSwitchCase = (function () {
+    function NgSwitchCase(viewContainer, templateRef, ngSwitch) {
+        // `_CASE_DEFAULT` is used as a marker for a not yet initialized value
         /** @internal */
-        this._value = _WHEN_DEFAULT;
+        this._value = _CASE_DEFAULT;
         this._switch = ngSwitch;
         this._view = new SwitchView(viewContainer, templateRef);
     }
-    Object.defineProperty(NgSwitchWhen.prototype, "ngSwitchWhen", {
+    Object.defineProperty(NgSwitchCase.prototype, "ngSwitchCase", {
         set: function (value) {
-            this._switch._onWhenValueChanged(this._value, value, this._view);
+            this._switch._onCaseValueChanged(this._value, value, this._view);
             this._value = value;
         },
         enumerable: true,
         configurable: true
     });
-    NgSwitchWhen.decorators = [
-        { type: core_1.Directive, args: [{ selector: '[ngSwitchWhen]', inputs: ['ngSwitchWhen'] },] },
+    Object.defineProperty(NgSwitchCase.prototype, "ngSwitchWhen", {
+        set: function (value) {
+            if (!this._warned) {
+                this._warned = true;
+                console.warn('*ngSwitchWhen is deprecated and will be removed. Use *ngSwitchCase instead');
+            }
+            this._switch._onCaseValueChanged(this._value, value, this._view);
+            this._value = value;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /** @nocollapse */
+    NgSwitchCase.decorators = [
+        { type: core_1.Directive, args: [{ selector: '[ngSwitchCase],[ngSwitchWhen]', inputs: ['ngSwitchCase', 'ngSwitchWhen'] },] },
     ];
-    NgSwitchWhen.ctorParameters = [
+    /** @nocollapse */
+    NgSwitchCase.ctorParameters = [
         { type: core_1.ViewContainerRef, },
         { type: core_1.TemplateRef, },
         { type: NgSwitch, decorators: [{ type: core_1.Host },] },
     ];
-    return NgSwitchWhen;
+    return NgSwitchCase;
 }());
-exports.NgSwitchWhen = NgSwitchWhen;
+exports.NgSwitchCase = NgSwitchCase;
 var NgSwitchDefault = (function () {
     function NgSwitchDefault(viewContainer, templateRef, sswitch) {
-        sswitch._registerView(_WHEN_DEFAULT, new SwitchView(viewContainer, templateRef));
+        sswitch._registerView(_CASE_DEFAULT, new SwitchView(viewContainer, templateRef));
     }
+    /** @nocollapse */
     NgSwitchDefault.decorators = [
         { type: core_1.Directive, args: [{ selector: '[ngSwitchDefault]' },] },
     ];
+    /** @nocollapse */
     NgSwitchDefault.ctorParameters = [
         { type: core_1.ViewContainerRef, },
         { type: core_1.TemplateRef, },

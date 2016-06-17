@@ -1,6 +1,6 @@
 "use strict";
-var lang_1 = require('../src/facade/lang');
 var exceptions_1 = require('../src/facade/exceptions');
+var lang_1 = require('../src/facade/lang');
 function assertArrayOfStrings(identifier, value) {
     if (!lang_1.assertionsEnabled() || lang_1.isBlank(value)) {
         return;

@@ -1,7 +1,7 @@
-import { resolveForwardRef, Injectable, PipeMetadata, reflector } from '@angular/core';
-import { ReflectorReader } from '../core_private';
-import { isPresent, stringify } from '../src/facade/lang';
+import { Injectable, PipeMetadata, resolveForwardRef } from '@angular/core';
+import { ReflectorReader, reflector } from '../core_private';
 import { BaseException } from '../src/facade/exceptions';
+import { isPresent, stringify } from '../src/facade/lang';
 function _isPipeMetadata(type) {
     return type instanceof PipeMetadata;
 }
@@ -28,9 +28,11 @@ export class PipeResolver {
         throw new BaseException(`No Pipe decorator found on ${stringify(type)}`);
     }
 }
+/** @nocollapse */
 PipeResolver.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 PipeResolver.ctorParameters = [
     { type: ReflectorReader, },
 ];

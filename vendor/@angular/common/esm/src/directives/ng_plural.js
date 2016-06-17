@@ -1,8 +1,11 @@
-import { Directive, ViewContainerRef, TemplateRef, ContentChildren, Attribute, Input } from '@angular/core';
-import { isPresent, NumberWrapper } from '../../src/facade/lang';
-import { Map } from '../../src/facade/collection';
+import { Attribute, ContentChildren, Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Map } from '../facade/collection';
+import { NumberWrapper, isPresent } from '../facade/lang';
 import { SwitchView } from './ng_switch';
 const _CATEGORY_DEFAULT = 'other';
+/**
+ * @experimental
+ */
 export class NgLocalization {
 }
 export class NgPluralCase {
@@ -11,9 +14,11 @@ export class NgPluralCase {
         this._view = new SwitchView(viewContainer, template);
     }
 }
+/** @nocollapse */
 NgPluralCase.decorators = [
     { type: Directive, args: [{ selector: '[ngPluralCase]' },] },
 ];
+/** @nocollapse */
 NgPluralCase.ctorParameters = [
     { type: undefined, decorators: [{ type: Attribute, args: ['ngPluralCase',] },] },
     { type: TemplateRef, },
@@ -62,7 +67,7 @@ export class NgPlural {
         return isPresent(categoryView) ? categoryView : this._caseViews.get(_CATEGORY_DEFAULT);
     }
     /** @internal */
-    _isValueView(pluralCase) { return pluralCase.value[0] === "="; }
+    _isValueView(pluralCase) { return pluralCase.value[0] === '='; }
     /** @internal */
     _formatValue(pluralCase) {
         return this._isValueView(pluralCase) ? this._stripValue(pluralCase.value) : pluralCase.value;
@@ -70,12 +75,15 @@ export class NgPlural {
     /** @internal */
     _stripValue(value) { return NumberWrapper.parseInt(value.substring(1), 10); }
 }
+/** @nocollapse */
 NgPlural.decorators = [
     { type: Directive, args: [{ selector: '[ngPlural]' },] },
 ];
+/** @nocollapse */
 NgPlural.ctorParameters = [
     { type: NgLocalization, },
 ];
+/** @nocollapse */
 NgPlural.propDecorators = {
     'cases': [{ type: ContentChildren, args: [NgPluralCase,] },],
     'ngPlural': [{ type: Input },],

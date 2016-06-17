@@ -1,5 +1,5 @@
-import { Type, isBlank, isPresent, isArray } from '../../src/facade/lang';
-import { MapWrapper, ListWrapper } from '../../src/facade/collection';
+import { Type, isBlank, isPresent, isArray } from '../facade/lang';
+import { MapWrapper, ListWrapper } from '../facade/collection';
 import { reflector } from '../reflection/reflection';
 import { ReflectiveKey } from './reflective_key';
 import { InjectMetadata, OptionalMetadata, SelfMetadata, HostMetadata, SkipSelfMetadata, DependencyMetadata } from './metadata';
@@ -34,6 +34,7 @@ export class ResolvedReflectiveProvider_ {
 }
 /**
  * An internal resolved representation of a factory function created by resolving {@link Provider}.
+ * @experimental
  */
 export class ResolvedReflectiveFactory {
     constructor(
@@ -61,7 +62,7 @@ export function resolveReflectiveFactory(provider) {
         resolvedDeps = _dependenciesFor(useClass);
     }
     else if (isPresent(provider.useExisting)) {
-        factoryFn = (aliasInstance) => aliasInstance;
+        factoryFn = (aliasInstance /** TODO #9100 */) => aliasInstance;
         resolvedDeps = [ReflectiveDependency.fromKey(ReflectiveKey.get(provider.useExisting))];
     }
     else if (isPresent(provider.useFactory)) {
@@ -167,7 +168,7 @@ function _dependenciesFor(typeOrFunc) {
     }
     return params.map((p) => _extractToken(typeOrFunc, p, params));
 }
-function _extractToken(typeOrFunc, metadata /*any[] | any*/, params) {
+function _extractToken(typeOrFunc /** TODO #9100 */, metadata /** TODO #9100 */ /*any[] | any*/, params) {
     var depProps = [];
     var token = null;
     var optional = false;
@@ -216,7 +217,7 @@ function _extractToken(typeOrFunc, metadata /*any[] | any*/, params) {
         throw new NoAnnotationError(typeOrFunc, params);
     }
 }
-function _createDependency(token, optional, lowerBoundVisibility, upperBoundVisibility, depProps) {
+function _createDependency(token /** TODO #9100 */, optional /** TODO #9100 */, lowerBoundVisibility /** TODO #9100 */, upperBoundVisibility /** TODO #9100 */, depProps /** TODO #9100 */) {
     return new ReflectiveDependency(ReflectiveKey.get(token), optional, lowerBoundVisibility, upperBoundVisibility, depProps);
 }
 //# sourceMappingURL=reflective_provider.js.map

@@ -1,10 +1,10 @@
-import { reflector } from '@angular/core';
-import { isPresent, IS_DART, FunctionWrapper } from '../../src/facade/lang';
-import { ObservableWrapper } from '../../src/facade/async';
-import { BaseException, unimplemented } from '../../src/facade/exceptions';
-import { ListWrapper } from '../../src/facade/collection';
-import * as o from './output_ast';
+import { reflector } from '../../core_private';
+import { ObservableWrapper } from '../facade/async';
+import { ListWrapper } from '../facade/collection';
+import { BaseException, unimplemented } from '../facade/exceptions';
+import { FunctionWrapper, IS_DART, isPresent } from '../facade/lang';
 import { debugOutputAstAsDart } from './dart_emitter';
+import * as o from './output_ast';
 import { debugOutputAstAsTypeScript } from './ts_emitter';
 export function interpretStatements(statements, resultVar, instanceFactory) {
     var stmtsWithReturn = statements.concat([new o.ReturnStatement(o.variable(resultVar))]);
@@ -370,25 +370,25 @@ function _declareFn(varNames, statements, ctx, visitor) {
         case 0:
             return () => _executeFunctionStatements(varNames, [], statements, ctx, visitor);
         case 1:
-            return (d0) => _executeFunctionStatements(varNames, [d0], statements, ctx, visitor);
+            return (d0 /** TODO #9100 */) => _executeFunctionStatements(varNames, [d0], statements, ctx, visitor);
         case 2:
-            return (d0, d1) => _executeFunctionStatements(varNames, [d0, d1], statements, ctx, visitor);
+            return (d0 /** TODO #9100 */, d1 /** TODO #9100 */) => _executeFunctionStatements(varNames, [d0, d1], statements, ctx, visitor);
         case 3:
-            return (d0, d1, d2) => _executeFunctionStatements(varNames, [d0, d1, d2], statements, ctx, visitor);
+            return (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */) => _executeFunctionStatements(varNames, [d0, d1, d2], statements, ctx, visitor);
         case 4:
-            return (d0, d1, d2, d3) => _executeFunctionStatements(varNames, [d0, d1, d2, d3], statements, ctx, visitor);
+            return (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */) => _executeFunctionStatements(varNames, [d0, d1, d2, d3], statements, ctx, visitor);
         case 5:
-            return (d0, d1, d2, d3, d4) => _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4], statements, ctx, visitor);
+            return (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */, d4 /** TODO #9100 */) => _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4], statements, ctx, visitor);
         case 6:
-            return (d0, d1, d2, d3, d4, d5) => _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5], statements, ctx, visitor);
+            return (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */, d4 /** TODO #9100 */, d5 /** TODO #9100 */) => _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5], statements, ctx, visitor);
         case 7:
-            return (d0, d1, d2, d3, d4, d5, d6) => _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6], statements, ctx, visitor);
+            return (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */, d4 /** TODO #9100 */, d5 /** TODO #9100 */, d6 /** TODO #9100 */) => _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6], statements, ctx, visitor);
         case 8:
-            return (d0, d1, d2, d3, d4, d5, d6, d7) => _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6, d7], statements, ctx, visitor);
+            return (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */, d4 /** TODO #9100 */, d5 /** TODO #9100 */, d6 /** TODO #9100 */, d7 /** TODO #9100 */) => _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6, d7], statements, ctx, visitor);
         case 9:
-            return (d0, d1, d2, d3, d4, d5, d6, d7, d8) => _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6, d7, d8], statements, ctx, visitor);
+            return (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */, d4 /** TODO #9100 */, d5 /** TODO #9100 */, d6 /** TODO #9100 */, d7 /** TODO #9100 */, d8 /** TODO #9100 */) => _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6, d7, d8], statements, ctx, visitor);
         case 10:
-            return (d0, d1, d2, d3, d4, d5, d6, d7, d8, d9) => _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6, d7, d8, d9], statements, ctx, visitor);
+            return (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */, d4 /** TODO #9100 */, d5 /** TODO #9100 */, d6 /** TODO #9100 */, d7 /** TODO #9100 */, d8 /** TODO #9100 */, d9 /** TODO #9100 */) => _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6, d7, d8, d9], statements, ctx, visitor);
         default:
             throw new BaseException('Declaring functions with more than 10 arguments is not supported right now');
     }

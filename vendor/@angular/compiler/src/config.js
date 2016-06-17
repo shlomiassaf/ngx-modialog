@@ -1,17 +1,18 @@
 "use strict";
-var lang_1 = require('../src/facade/lang');
+var core_1 = require('@angular/core');
 var exceptions_1 = require('../src/facade/exceptions');
+var lang_1 = require('../src/facade/lang');
 var identifiers_1 = require('./identifiers');
 var CompilerConfig = (function () {
-    function CompilerConfig(genDebugInfo, logBindingUpdate, useJit, renderTypes) {
-        if (renderTypes === void 0) { renderTypes = null; }
+    function CompilerConfig(_a) {
+        var _b = _a === void 0 ? {} : _a, _c = _b.renderTypes, renderTypes = _c === void 0 ? new DefaultRenderTypes() : _c, _d = _b.defaultEncapsulation, defaultEncapsulation = _d === void 0 ? core_1.ViewEncapsulation.Emulated : _d, _e = _b.genDebugInfo, genDebugInfo = _e === void 0 ? lang_1.assertionsEnabled() : _e, _f = _b.logBindingUpdate, logBindingUpdate = _f === void 0 ? lang_1.assertionsEnabled() : _f, _g = _b.useJit, useJit = _g === void 0 ? true : _g, _h = _b.platformDirectives, platformDirectives = _h === void 0 ? [] : _h, _j = _b.platformPipes, platformPipes = _j === void 0 ? [] : _j;
+        this.renderTypes = renderTypes;
+        this.defaultEncapsulation = defaultEncapsulation;
         this.genDebugInfo = genDebugInfo;
         this.logBindingUpdate = logBindingUpdate;
         this.useJit = useJit;
-        if (lang_1.isBlank(renderTypes)) {
-            renderTypes = new DefaultRenderTypes();
-        }
-        this.renderTypes = renderTypes;
+        this.platformDirectives = platformDirectives;
+        this.platformPipes = platformPipes;
     }
     return CompilerConfig;
 }());

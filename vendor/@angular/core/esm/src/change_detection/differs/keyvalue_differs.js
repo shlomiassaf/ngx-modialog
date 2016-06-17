@@ -1,10 +1,11 @@
-import { isBlank, isPresent } from '../../../src/facade/lang';
-import { BaseException } from '../../../src/facade/exceptions';
-import { ListWrapper } from '../../../src/facade/collection';
-import { Provider, SkipSelfMetadata, OptionalMetadata } from '../../di';
+import { OptionalMetadata, Provider, SkipSelfMetadata } from '../../di';
+import { ListWrapper } from '../../facade/collection';
+import { BaseException } from '../../facade/exceptions';
+import { isBlank, isPresent } from '../../facade/lang';
 /**
  * A repository of different Map diffing strategies used by NgClass, NgStyle, and others.
  * @ts2dart_const
+ * @stable
  */
 export class KeyValueDiffers {
     /*@ts2dart_const*/

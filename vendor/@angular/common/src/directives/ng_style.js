@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 var NgStyle = (function () {
     function NgStyle(_differs, _ngEl, _renderer) {
         this._differs = _differs;
@@ -34,9 +34,11 @@ var NgStyle = (function () {
     NgStyle.prototype._setStyle = function (name, val) {
         this._renderer.setElementStyle(this._ngEl.nativeElement, name, val);
     };
+    /** @nocollapse */
     NgStyle.decorators = [
         { type: core_1.Directive, args: [{ selector: '[ngStyle]', inputs: ['rawStyle: ngStyle'] },] },
     ];
+    /** @nocollapse */
     NgStyle.ctorParameters = [
         { type: core_1.KeyValueDiffers, },
         { type: core_1.ElementRef, },

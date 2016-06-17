@@ -1,15 +1,15 @@
-import { IterableDiffers } from './differs/iterable_differs';
 import { DefaultIterableDifferFactory } from './differs/default_iterable_differ';
-import { KeyValueDiffers } from './differs/keyvalue_differs';
 import { DefaultKeyValueDifferFactory } from './differs/default_keyvalue_differ';
-export { DefaultKeyValueDifferFactory, KeyValueChangeRecord } from './differs/default_keyvalue_differ';
-export { DefaultIterableDifferFactory, CollectionChangeRecord } from './differs/default_iterable_differ';
-export { ChangeDetectionStrategy, CHANGE_DETECTION_STRATEGY_VALUES, ChangeDetectorState, CHANGE_DETECTOR_STATE_VALUES, isDefaultChangeDetectionStrategy } from './constants';
+import { IterableDiffers } from './differs/iterable_differs';
+import { KeyValueDiffers } from './differs/keyvalue_differs';
+export { SimpleChange, ValueUnwrapper, WrappedValue, devModeEqual, looseIdentical, uninitialized } from './change_detection_util';
 export { ChangeDetectorRef } from './change_detector_ref';
+export { CHANGE_DETECTION_STRATEGY_VALUES, CHANGE_DETECTOR_STATE_VALUES, ChangeDetectionStrategy, ChangeDetectorState, isDefaultChangeDetectionStrategy } from './constants';
+export { CollectionChangeRecord, DefaultIterableDifferFactory } from './differs/default_iterable_differ';
+export { DefaultIterableDiffer } from './differs/default_iterable_differ';
+export { DefaultKeyValueDifferFactory, KeyValueChangeRecord } from './differs/default_keyvalue_differ';
 export { IterableDiffers } from './differs/iterable_differs';
 export { KeyValueDiffers } from './differs/keyvalue_differs';
-export { DefaultIterableDiffer } from './differs/default_iterable_differ';
-export { WrappedValue, ValueUnwrapper, SimpleChange, devModeEqual, looseIdentical, uninitialized } from './change_detection_util';
 /**
  * Structural diffing for `Object`s and `Map`s.
  */

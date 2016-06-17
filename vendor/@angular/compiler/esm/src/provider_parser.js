@@ -1,9 +1,9 @@
-import { isPresent, isBlank, isArray, normalizeBlank } from '../src/facade/lang';
 import { ListWrapper } from '../src/facade/collection';
-import { ProviderAst, ProviderAstType } from './template_ast';
-import { CompileTypeMetadata, CompileTokenMap, CompileTokenMetadata, CompileProviderMetadata, CompileDiDependencyMetadata } from './compile_metadata';
+import { isArray, isBlank, isPresent, normalizeBlank } from '../src/facade/lang';
+import { CompileDiDependencyMetadata, CompileProviderMetadata, CompileTokenMap, CompileTokenMetadata, CompileTypeMetadata } from './compile_metadata';
 import { Identifiers, identifierToken } from './identifiers';
 import { ParseError } from './parse_util';
+import { ProviderAst, ProviderAstType } from './template_ast';
 export class ProviderError extends ParseError {
     constructor(message, span) {
         super(span, message);
@@ -16,8 +16,7 @@ export class ProviderViewContext {
         this.errors = [];
         this.viewQueries = _getViewQueries(component);
         this.viewProviders = new CompileTokenMap();
-        _normalizeProviders(component.viewProviders, sourceSpan, this.errors)
-            .forEach((provider) => {
+        _normalizeProviders(component.viewProviders, sourceSpan, this.errors).forEach((provider) => {
             if (isBlank(this.viewProviders.get(provider.token))) {
                 this.viewProviders.add(provider.token, true);
             }

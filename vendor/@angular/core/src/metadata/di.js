@@ -4,9 +4,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var metadata_1 = require('../di/metadata');
 var forward_ref_1 = require('../di/forward_ref');
+var metadata_1 = require('../di/metadata');
+var lang_1 = require('../facade/lang');
 /**
  * Specifies that a constant attribute value should be injected.
  *
@@ -24,6 +24,7 @@ var forward_ref_1 = require('../di/forward_ref');
  *
  * {@example core/ts/metadata/metadata.ts region='attributeMetadata'}
  * @ts2dart_const
+ * @stable
  */
 var AttributeMetadata = (function (_super) {
     __extends(AttributeMetadata, _super);
@@ -154,6 +155,7 @@ exports.AttributeMetadata = AttributeMetadata;
  * The injected object is an unmodifiable live list.
  * See {@link QueryList} for more details.
  * @ts2dart_const
+ * @deprecated
  */
 var QueryMetadata = (function (_super) {
     __extends(QueryMetadata, _super);
@@ -194,7 +196,7 @@ var QueryMetadata = (function (_super) {
          * returns a list of variable bindings this is querying for.
          * Only applicable if this is a variable bindings query.
          */
-        get: function () { return this.selector.split(','); },
+        get: function () { return lang_1.StringWrapper.split(this.selector, /\s*,\s*/g); },
         enumerable: true,
         configurable: true
     });
@@ -223,6 +225,7 @@ exports.QueryMetadata = QueryMetadata;
  * }
  * ```
  * @ts2dart_const
+ * @stable
  */
 var ContentChildrenMetadata = (function (_super) {
     __extends(ContentChildrenMetadata, _super);
@@ -254,6 +257,7 @@ exports.ContentChildrenMetadata = ContentChildrenMetadata;
  * }
  * ```
  * @ts2dart_const
+ * @stable
  */
 var ContentChildMetadata = (function (_super) {
     __extends(ContentChildMetadata, _super);
@@ -299,6 +303,7 @@ exports.ContentChildMetadata = ContentChildMetadata;
  * The injected object is an iterable and observable live list.
  * See {@link QueryList} for more details.
  * @ts2dart_const
+ * @deprecated
  */
 var ViewQueryMetadata = (function (_super) {
     __extends(ViewQueryMetadata, _super);
@@ -395,6 +400,7 @@ exports.ViewQueryMetadata = ViewQueryMetadata;
  * }
  * ```
  * @ts2dart_const
+ * @stable
  */
 var ViewChildrenMetadata = (function (_super) {
     __extends(ViewChildrenMetadata, _super);
@@ -475,6 +481,7 @@ exports.ViewChildrenMetadata = ViewChildrenMetadata;
  * }
  * ```
  * @ts2dart_const
+ * @stable
  */
 var ViewChildMetadata = (function (_super) {
     __extends(ViewChildMetadata, _super);

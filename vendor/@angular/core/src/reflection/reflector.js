@@ -4,9 +4,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
-var collection_1 = require('../../src/facade/collection');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var reflector_reader_1 = require('./reflector_reader');
 /**
  * Reflective information about a symbol, including annotations, interfaces, and other metadata.
@@ -41,6 +41,7 @@ var Reflector = (function (_super) {
         this._usedKeys = null;
         this.reflectionCapabilities = reflectionCapabilities;
     }
+    Reflector.prototype.updateCapabilities = function (caps) { this.reflectionCapabilities = caps; };
     Reflector.prototype.isReflectionEnabled = function () { return this.reflectionCapabilities.isReflectionEnabled(); };
     /**
      * Causes `this` reflector to track keys used to access
@@ -112,6 +113,15 @@ var Reflector = (function (_super) {
         }
         else {
             return this.reflectionCapabilities.interfaces(type);
+        }
+    };
+    Reflector.prototype.hasLifecycleHook = function (type, lcInterface, lcProperty) {
+        var interfaces = this.interfaces(type);
+        if (interfaces.indexOf(lcInterface) !== -1) {
+            return true;
+        }
+        else {
+            return this.reflectionCapabilities.hasLifecycleHook(type, lcInterface, lcProperty);
         }
     };
     Reflector.prototype.getter = function (name) {

@@ -1,7 +1,7 @@
 import { setTestabilityGetter } from '@angular/core';
-import { ListWrapper } from '../../src/facade/collection';
-import { global, isPresent } from '../../src/facade/lang';
 import { getDOM } from '../dom/dom_adapter';
+import { ListWrapper } from '../facade/collection';
+import { global, isPresent } from '../facade/lang';
 class PublicTestability {
     constructor(testability) {
         this._testability = testability;
@@ -30,18 +30,20 @@ export class BrowserGetTestability {
             return testabilities.map((testability) => { return new PublicTestability(testability); });
         };
         global.getAllAngularRootElements = () => registry.getAllRootElements();
-        var whenAllStable = (callback) => {
+        var whenAllStable = (callback /** TODO #9100 */) => {
             var testabilities = global.getAllAngularTestabilities();
             var count = testabilities.length;
             var didWork = false;
-            var decrement = function (didWork_) {
+            var decrement = function (didWork_ /** TODO #9100 */) {
                 didWork = didWork || didWork_;
                 count--;
                 if (count == 0) {
                     callback(didWork);
                 }
             };
-            testabilities.forEach(function (testability) { testability.whenStable(decrement); });
+            testabilities.forEach(function (testability /** TODO #9100 */) {
+                testability.whenStable(decrement);
+            });
         };
         if (!global.frameworkStabilizers) {
             global.frameworkStabilizers = ListWrapper.createGrowableSize(0);

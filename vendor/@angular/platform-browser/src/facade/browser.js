@@ -1,7 +1,7 @@
 "use strict";
 /**
-* JS version of browser APIs. This library can only run in the browser.
-*/
+ * JS version of browser APIs. This library can only run in the browser.
+ */
 var win = typeof window !== 'undefined' && window || {};
 exports.window = win;
 exports.document = win.document;

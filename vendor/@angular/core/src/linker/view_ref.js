@@ -4,8 +4,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var exceptions_1 = require('../../src/facade/exceptions');
 var constants_1 = require('../change_detection/constants');
+var exceptions_1 = require('../facade/exceptions');
+/**
+ * @stable
+ */
 var ViewRef = (function () {
     function ViewRef() {
     }
@@ -40,7 +43,7 @@ exports.ViewRef = ViewRef;
  * </ul>
  * ```
  *
- * ... we have two {@link TemplateRef}s:
+ * We have two {@link TemplateRef}s:
  *
  * Outer {@link TemplateRef}:
  * ```
@@ -69,6 +72,7 @@ exports.ViewRef = ViewRef;
  * </ul>
  * <!-- /ViewRef: outer-0 -->
  * ```
+ * @experimental
  */
 var EmbeddedViewRef = (function (_super) {
     __extends(EmbeddedViewRef, _super);

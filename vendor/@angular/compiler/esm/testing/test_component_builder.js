@@ -1,18 +1,18 @@
-import { OpaqueToken, ComponentResolver, Injector, Injectable, NgZone, getDebugNode } from '@angular/core';
-import { DirectiveResolver, ViewResolver } from '../index';
-import { BaseException } from '../src/facade/exceptions';
-import { isPresent, IS_DART, scheduleMicroTask } from '../src/facade/lang';
-import { PromiseWrapper, ObservableWrapper, PromiseCompleter } from '../src/facade/async';
-import { MapWrapper } from '../src/facade/collection';
+import { ComponentResolver, Injectable, Injector, NgZone, OpaqueToken, getDebugNode } from '@angular/core';
 import { tick } from '@angular/core/testing';
+import { DirectiveResolver, ViewResolver } from '../index';
+import { ObservableWrapper, PromiseCompleter, PromiseWrapper } from '../src/facade/async';
+import { MapWrapper } from '../src/facade/collection';
+import { BaseException } from '../src/facade/exceptions';
+import { IS_DART, isPresent, scheduleMicroTask } from '../src/facade/lang';
 /**
  * An abstract class for inserting the root test component element in a platform independent way.
  */
 export class TestComponentRenderer {
     insertRootElement(rootElementId) { }
 }
-export var ComponentFixtureAutoDetect = new OpaqueToken("ComponentFixtureAutoDetect");
-export var ComponentFixtureNoNgZone = new OpaqueToken("ComponentFixtureNoNgZone");
+export var ComponentFixtureAutoDetect = new OpaqueToken('ComponentFixtureAutoDetect');
+export var ComponentFixtureNoNgZone = new OpaqueToken('ComponentFixtureNoNgZone');
 /**
  * Fixture for debugging and testing a component.
  */
@@ -152,6 +152,8 @@ export class TestComponentBuilder {
         /** @internal */
         this._templateOverrides = new Map();
         /** @internal */
+        this._animationOverrides = new Map();
+        /** @internal */
         this._viewBindingsOverrides = new Map();
         /** @internal */
         this._viewOverrides = new Map();
@@ -169,24 +171,19 @@ export class TestComponentBuilder {
     /**
      * Overrides only the html of a {@link ComponentMetadata}.
      * All the other properties of the component's {@link ViewMetadata} are preserved.
-     *
-     * @param {Type} component
-     * @param {string} html
-     *
-     * @return {TestComponentBuilder}
      */
     overrideTemplate(componentType, template) {
         let clone = this._clone();
         clone._templateOverrides.set(componentType, template);
         return clone;
     }
+    overrideAnimations(componentType, animations) {
+        var clone = this._clone();
+        clone._animationOverrides.set(componentType, animations);
+        return clone;
+    }
     /**
      * Overrides a component's {@link ViewMetadata}.
-     *
-     * @param {Type} component
-     * @param {view} View
-     *
-     * @return {TestComponentBuilder}
      */
     overrideView(componentType, view) {
         let clone = this._clone();
@@ -195,12 +192,6 @@ export class TestComponentBuilder {
     }
     /**
      * Overrides the directives from the component {@link ViewMetadata}.
-     *
-     * @param {Type} component
-     * @param {Type} from
-     * @param {Type} to
-     *
-     * @return {TestComponentBuilder}
      */
     overrideDirective(componentType, from, to) {
         let clone = this._clone();
@@ -221,11 +212,6 @@ export class TestComponentBuilder {
      * The providers specified via this method are appended to the existing `providers` causing the
      * duplicated providers to
      * be overridden.
-     *
-     * @param {Type} component
-     * @param {any[]} providers
-     *
-     * @return {TestComponentBuilder}
      */
     overrideProviders(type, providers) {
         let clone = this._clone();
@@ -247,11 +233,6 @@ export class TestComponentBuilder {
      * The providers specified via this method are appended to the existing `providers` causing the
      * duplicated providers to
      * be overridden.
-     *
-     * @param {Type} component
-     * @param {any[]} providers
-     *
-     * @return {TestComponentBuilder}
      */
     overrideViewProviders(type, providers) {
         let clone = this._clone();
@@ -274,8 +255,6 @@ export class TestComponentBuilder {
     }
     /**
      * Builds and returns a ComponentFixture.
-     *
-     * @return {Promise<ComponentFixture>}
      */
     createAsync(rootComponentType) {
         let noNgZone = IS_DART || this._injector.get(ComponentFixtureNoNgZone, false);
@@ -285,11 +264,12 @@ export class TestComponentBuilder {
             let mockViewResolver = this._injector.get(ViewResolver);
             this._viewOverrides.forEach((view, type) => mockViewResolver.setView(type, view));
             this._templateOverrides.forEach((template, type) => mockViewResolver.setInlineTemplate(type, template));
+            this._animationOverrides.forEach((animationsEntry, type) => mockViewResolver.setAnimations(type, animationsEntry));
             this._directiveOverrides.forEach((overrides, component) => {
                 overrides.forEach((to, from) => { mockViewResolver.overrideViewDirective(component, from, to); });
             });
-            this._bindingsOverrides.forEach((bindings, type) => mockDirectiveResolver.setBindingsOverride(type, bindings));
-            this._viewBindingsOverrides.forEach((bindings, type) => mockDirectiveResolver.setViewBindingsOverride(type, bindings));
+            this._bindingsOverrides.forEach((bindings, type) => mockDirectiveResolver.setProvidersOverride(type, bindings));
+            this._viewBindingsOverrides.forEach((bindings, type) => mockDirectiveResolver.setViewProvidersOverride(type, bindings));
             let promise = this._injector.get(ComponentResolver).resolveComponent(rootComponentType);
             return promise.then(componentFactory => this._create(ngZone, componentFactory));
         };
@@ -312,9 +292,11 @@ export class TestComponentBuilder {
         return ngZone == null ? initComponent() : ngZone.run(initComponent);
     }
 }
+/** @nocollapse */
 TestComponentBuilder.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 TestComponentBuilder.ctorParameters = [
     { type: Injector, },
 ];

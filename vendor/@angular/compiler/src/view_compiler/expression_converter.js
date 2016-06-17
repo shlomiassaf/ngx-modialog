@@ -1,8 +1,8 @@
 "use strict";
-var exceptions_1 = require('../../src/facade/exceptions');
-var lang_1 = require('../../src/facade/lang');
-var o = require('../output/output_ast');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var identifiers_1 = require('../identifiers');
+var o = require('../output/output_ast');
 var IMPLICIT_RECEIVER = o.variable('#implicit');
 var ExpressionWithWrappedValueInfo = (function () {
     function ExpressionWithWrappedValueInfo(expression, needsValueUnwrapper) {
@@ -124,8 +124,7 @@ var _AstToIrVisitor = (function () {
         return convertToStatementIfNeeded(mode, this._valueUnwrapper.callMethod('unwrap', [value]));
     };
     _AstToIrVisitor.prototype.visitFunctionCall = function (ast, mode) {
-        return convertToStatementIfNeeded(mode, ast.target.visit(this, _Mode.Expression)
-            .callFn(this.visitAll(ast.args, _Mode.Expression)));
+        return convertToStatementIfNeeded(mode, ast.target.visit(this, _Mode.Expression).callFn(this.visitAll(ast.args, _Mode.Expression)));
     };
     _AstToIrVisitor.prototype.visitImplicitReceiver = function (ast, mode) {
         ensureExpressionMode(mode, ast);

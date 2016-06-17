@@ -1,9 +1,9 @@
-import { Injectable, Inject, Optional } from '@angular/core';
-import { isBlank } from '../../src/facade/lang';
-import { BaseException } from '../../src/facade/exceptions';
-import { PlatformLocation } from './platform_location';
-import { LocationStrategy, APP_BASE_HREF } from './location_strategy';
+import { Inject, Injectable, Optional } from '@angular/core';
+import { BaseException } from '../facade/exceptions';
+import { isBlank } from '../facade/lang';
 import { Location } from './location';
+import { APP_BASE_HREF, LocationStrategy } from './location_strategy';
+import { PlatformLocation } from './platform_location';
 export class PathLocationStrategy extends LocationStrategy {
     constructor(_platformLocation, href) {
         super();
@@ -39,9 +39,11 @@ export class PathLocationStrategy extends LocationStrategy {
     forward() { this._platformLocation.forward(); }
     back() { this._platformLocation.back(); }
 }
+/** @nocollapse */
 PathLocationStrategy.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 PathLocationStrategy.ctorParameters = [
     { type: PlatformLocation, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },

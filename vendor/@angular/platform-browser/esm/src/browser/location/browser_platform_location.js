@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
 import { PlatformLocation } from '@angular/common';
+import { Injectable } from '@angular/core';
 import { getDOM } from '../../dom/dom_adapter';
+import { supportsState } from './history';
 export class BrowserPlatformLocation extends PlatformLocation {
     constructor() {
         super();
@@ -26,16 +27,28 @@ export class BrowserPlatformLocation extends PlatformLocation {
     get hash() { return this._location.hash; }
     set pathname(newPath) { this._location.pathname = newPath; }
     pushState(state, title, url) {
-        this._history.pushState(state, title, url);
+        if (supportsState()) {
+            this._history.pushState(state, title, url);
+        }
+        else {
+            this._location.hash = url;
+        }
     }
     replaceState(state, title, url) {
-        this._history.replaceState(state, title, url);
+        if (supportsState()) {
+            this._history.replaceState(state, title, url);
+        }
+        else {
+            this._location.hash = url;
+        }
     }
     forward() { this._history.forward(); }
     back() { this._history.back(); }
 }
+/** @nocollapse */
 BrowserPlatformLocation.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 BrowserPlatformLocation.ctorParameters = [];
 //# sourceMappingURL=browser_platform_location.js.map

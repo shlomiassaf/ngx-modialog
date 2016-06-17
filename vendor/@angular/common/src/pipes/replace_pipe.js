@@ -1,6 +1,6 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
 var ReplacePipe = (function () {
     function ReplacePipe() {
@@ -38,6 +38,7 @@ var ReplacePipe = (function () {
     ReplacePipe.prototype._supportedReplacement = function (replacement) {
         return lang_1.isString(replacement) || lang_1.isFunction(replacement);
     };
+    /** @nocollapse */
     ReplacePipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'replace' },] },
         { type: core_1.Injectable },

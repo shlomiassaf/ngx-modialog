@@ -1,9 +1,12 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 var ng_switch_1 = require('./ng_switch');
 var _CATEGORY_DEFAULT = 'other';
+/**
+ * @experimental
+ */
 var NgLocalization = (function () {
     function NgLocalization() {
     }
@@ -15,9 +18,11 @@ var NgPluralCase = (function () {
         this.value = value;
         this._view = new ng_switch_1.SwitchView(viewContainer, template);
     }
+    /** @nocollapse */
     NgPluralCase.decorators = [
         { type: core_1.Directive, args: [{ selector: '[ngPluralCase]' },] },
     ];
+    /** @nocollapse */
     NgPluralCase.ctorParameters = [
         { type: undefined, decorators: [{ type: core_1.Attribute, args: ['ngPluralCase',] },] },
         { type: core_1.TemplateRef, },
@@ -74,19 +79,22 @@ var NgPlural = (function () {
         return lang_1.isPresent(categoryView) ? categoryView : this._caseViews.get(_CATEGORY_DEFAULT);
     };
     /** @internal */
-    NgPlural.prototype._isValueView = function (pluralCase) { return pluralCase.value[0] === "="; };
+    NgPlural.prototype._isValueView = function (pluralCase) { return pluralCase.value[0] === '='; };
     /** @internal */
     NgPlural.prototype._formatValue = function (pluralCase) {
         return this._isValueView(pluralCase) ? this._stripValue(pluralCase.value) : pluralCase.value;
     };
     /** @internal */
     NgPlural.prototype._stripValue = function (value) { return lang_1.NumberWrapper.parseInt(value.substring(1), 10); };
+    /** @nocollapse */
     NgPlural.decorators = [
         { type: core_1.Directive, args: [{ selector: '[ngPlural]' },] },
     ];
+    /** @nocollapse */
     NgPlural.ctorParameters = [
         { type: NgLocalization, },
     ];
+    /** @nocollapse */
     NgPlural.propDecorators = {
         'cases': [{ type: core_1.ContentChildren, args: [NgPluralCase,] },],
         'ngPlural': [{ type: core_1.Input },],

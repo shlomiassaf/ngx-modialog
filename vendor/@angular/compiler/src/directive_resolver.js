@@ -13,7 +13,7 @@ var DirectiveResolver = (function () {
             this._reflector = _reflector;
         }
         else {
-            this._reflector = core_1.reflector;
+            this._reflector = core_private_1.reflector;
         }
     }
     /**
@@ -123,14 +123,16 @@ var DirectiveResolver = (function () {
             });
         }
     };
+    /** @nocollapse */
     DirectiveResolver.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     DirectiveResolver.ctorParameters = [
         { type: core_private_1.ReflectorReader, },
     ];
     return DirectiveResolver;
 }());
 exports.DirectiveResolver = DirectiveResolver;
-exports.CODEGEN_DIRECTIVE_RESOLVER = new DirectiveResolver(core_1.reflector);
+exports.CODEGEN_DIRECTIVE_RESOLVER = new DirectiveResolver(core_private_1.reflector);
 //# sourceMappingURL=directive_resolver.js.map

@@ -1,6 +1,6 @@
-import { ListWrapper } from '../src/facade/collection';
 import { getDOM } from '../src/dom/dom_adapter';
-import { isPresent, isString, StringWrapper } from '../src/facade/lang';
+import { ListWrapper } from '../src/facade/collection';
+import { StringWrapper, isPresent, isString } from '../src/facade/lang';
 export class BrowserDetection {
     constructor(ua) {
         this._overrideUa = ua;
@@ -34,8 +34,13 @@ export class BrowserDetection {
     get supportsIntlApi() {
         return this._ua.indexOf('Chrome/4') > -1 && this._ua.indexOf('Edge') == -1;
     }
+    get isChromeDesktop() {
+        return this._ua.indexOf('Chrome') > -1 && this._ua.indexOf('Mobile Safari') == -1 &&
+            this._ua.indexOf('Edge') == -1;
+    }
 }
-export function dispatchEvent(element, eventType) {
+BrowserDetection.setup();
+export function dispatchEvent(element /** TODO #9100 */, eventType /** TODO #9100 */) {
     getDOM().dispatchEvent(element, getDOM().createEvent(eventType));
 }
 export function el(html) {
@@ -46,12 +51,12 @@ export function normalizeCSS(css) {
     css = StringWrapper.replaceAll(css, /:\s/g, ':');
     css = StringWrapper.replaceAll(css, /'/g, '"');
     css = StringWrapper.replaceAll(css, / }/g, '}');
-    css = StringWrapper.replaceAllMapped(css, /url\((\"|\s)(.+)(\"|\s)\)(\s*)/g, (match) => `url("${match[2]}")`);
-    css = StringWrapper.replaceAllMapped(css, /\[(.+)=([^"\]]+)\]/g, (match) => `[${match[1]}="${match[2]}"]`);
+    css = StringWrapper.replaceAllMapped(css, /url\((\"|\s)(.+)(\"|\s)\)(\s*)/g, (match /** TODO #9100 */) => `url("${match[2]}")`);
+    css = StringWrapper.replaceAllMapped(css, /\[(.+)=([^"\]]+)\]/g, (match /** TODO #9100 */) => `[${match[1]}="${match[2]}"]`);
     return css;
 }
 var _singleTagWhitelist = ['br', 'hr', 'input'];
-export function stringifyElement(el) {
+export function stringifyElement(el /** TODO #9100 */) {
     var result = '';
     if (getDOM().isElementNode(el)) {
         var tagName = getDOM().tagName(el).toLowerCase();

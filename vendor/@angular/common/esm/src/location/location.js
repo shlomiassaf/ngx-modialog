@@ -1,21 +1,27 @@
-import { Injectable } from '@angular/core';
-import { EventEmitter, ObservableWrapper } from '../../src/facade/async';
+import { EventEmitter, Injectable } from '@angular/core';
+import { ObservableWrapper } from '../facade/async';
 import { LocationStrategy } from './location_strategy';
 export class Location {
     constructor(platformStrategy) {
-        this.platformStrategy = platformStrategy;
         /** @internal */
         this._subject = new EventEmitter();
-        var browserBaseHref = this.platformStrategy.getBaseHref();
+        this._platformStrategy = platformStrategy;
+        var browserBaseHref = this._platformStrategy.getBaseHref();
         this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
-        this.platformStrategy.onPopState((ev) => {
+        this._platformStrategy.onPopState((ev) => {
             ObservableWrapper.callEmit(this._subject, { 'url': this.path(), 'pop': true, 'type': ev.type });
         });
     }
     /**
      * Returns the normalized URL path.
      */
-    path() { return this.normalize(this.platformStrategy.path()); }
+    path() { return this.normalize(this._platformStrategy.path()); }
+    /**
+     * Normalizes the given path and compares to the current normalized path.
+     */
+    isCurrentPathEqualTo(path, query = '') {
+        return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
+    }
     /**
      * Given a string representing a URL, returns the normalized URL path without leading or
      * trailing slashes
@@ -33,7 +39,7 @@ export class Location {
         if (url.length > 0 && !url.startsWith('/')) {
             url = '/' + url;
         }
-        return this.platformStrategy.prepareExternalUrl(url);
+        return this._platformStrategy.prepareExternalUrl(url);
     }
     // TODO: rename this method to pushState
     /**
@@ -41,23 +47,23 @@ export class Location {
      * new item onto the platform's history.
      */
     go(path, query = '') {
-        this.platformStrategy.pushState(null, '', path, query);
+        this._platformStrategy.pushState(null, '', path, query);
     }
     /**
      * Changes the browsers URL to the normalized version of the given URL, and replaces
      * the top item on the platform's history stack.
      */
     replaceState(path, query = '') {
-        this.platformStrategy.replaceState(null, '', path, query);
+        this._platformStrategy.replaceState(null, '', path, query);
     }
     /**
      * Navigates forward in the platform's history.
      */
-    forward() { this.platformStrategy.forward(); }
+    forward() { this._platformStrategy.forward(); }
     /**
      * Navigates back in the platform's history.
      */
-    back() { this.platformStrategy.back(); }
+    back() { this._platformStrategy.back(); }
     /**
      * Subscribe to the platform's `popState` events.
      */
@@ -106,9 +112,11 @@ export class Location {
         return url;
     }
 }
+/** @nocollapse */
 Location.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 Location.ctorParameters = [
     { type: LocationStrategy, },
 ];

@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var collection_1 = require('../../src/facade/collection');
+var collection_1 = require('../facade/collection');
 var dom_adapter_1 = require('./dom_adapter');
 var dom_tokens_1 = require('./dom_tokens');
 var SharedStylesHost = (function () {
@@ -29,9 +29,11 @@ var SharedStylesHost = (function () {
     };
     SharedStylesHost.prototype.onStylesAdded = function (additions) { };
     SharedStylesHost.prototype.getAllStyles = function () { return this._styles; };
+    /** @nocollapse */
     SharedStylesHost.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     SharedStylesHost.ctorParameters = [];
     return SharedStylesHost;
 }());
@@ -59,9 +61,11 @@ var DomSharedStylesHost = (function (_super) {
         var _this = this;
         this._hostNodes.forEach(function (hostNode) { _this._addStylesToHost(additions, hostNode); });
     };
+    /** @nocollapse */
     DomSharedStylesHost.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     DomSharedStylesHost.ctorParameters = [
         { type: undefined, decorators: [{ type: core_1.Inject, args: [dom_tokens_1.DOCUMENT,] },] },
     ];

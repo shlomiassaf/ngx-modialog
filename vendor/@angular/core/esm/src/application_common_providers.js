@@ -1,13 +1,14 @@
-import { APP_ID_RANDOM_PROVIDER } from './application_tokens';
 import { APPLICATION_CORE_PROVIDERS } from './application_ref';
-import { IterableDiffers, defaultIterableDiffers, KeyValueDiffers, defaultKeyValueDiffers } from './change_detection/change_detection';
-import { ViewUtils } from './linker/view_utils';
+import { APP_ID_RANDOM_PROVIDER } from './application_tokens';
+import { IterableDiffers, KeyValueDiffers, defaultIterableDiffers, defaultKeyValueDiffers } from './change_detection/change_detection';
 import { ComponentResolver, ReflectorComponentResolver } from './linker/component_resolver';
 import { DynamicComponentLoader, DynamicComponentLoader_ } from './linker/dynamic_component_loader';
+import { ViewUtils } from './linker/view_utils';
 let __unused; // avoid unused import when Type union types are erased
 /**
  * A default set of providers which should be included in any Angular
  * application, regardless of the platform it runs onto.
+ * @stable
  */
 export const APPLICATION_COMMON_PROVIDERS = 
 /*@ts2dart_const*/ [
@@ -17,6 +18,6 @@ export const APPLICATION_COMMON_PROVIDERS =
     ViewUtils,
     /* @ts2dart_Provider */ { provide: IterableDiffers, useValue: defaultIterableDiffers },
     /* @ts2dart_Provider */ { provide: KeyValueDiffers, useValue: defaultKeyValueDiffers },
-    /* @ts2dart_Provider */ { provide: DynamicComponentLoader, useClass: DynamicComponentLoader_ }
+    /* @ts2dart_Provider */ { provide: DynamicComponentLoader, useClass: DynamicComponentLoader_ },
 ];
 //# sourceMappingURL=application_common_providers.js.map

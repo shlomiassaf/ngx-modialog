@@ -5,9 +5,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var location_strategy_1 = require('./location_strategy');
+var lang_1 = require('../facade/lang');
 var location_1 = require('./location');
+var location_strategy_1 = require('./location_strategy');
 var platform_location_1 = require('./platform_location');
 var HashLocationStrategy = (function (_super) {
     __extends(HashLocationStrategy, _super);
@@ -55,9 +55,11 @@ var HashLocationStrategy = (function (_super) {
     };
     HashLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
     HashLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
+    /** @nocollapse */
     HashLocationStrategy.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     HashLocationStrategy.ctorParameters = [
         { type: platform_location_1.PlatformLocation, },
         { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [location_strategy_1.APP_BASE_HREF,] },] },

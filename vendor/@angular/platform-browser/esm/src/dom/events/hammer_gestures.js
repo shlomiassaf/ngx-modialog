@@ -1,9 +1,8 @@
-import { Injectable, Inject, OpaqueToken } from '@angular/core';
-import { isPresent } from '../../../src/facade/lang';
-import { BaseException } from '../../../src/facade/exceptions';
+import { Inject, Injectable, OpaqueToken } from '@angular/core';
+import { BaseException } from '../../facade/exceptions';
+import { isPresent } from '../../facade/lang';
 import { HammerGesturesPluginCommon } from './hammer_common';
-export const HAMMER_GESTURE_CONFIG = 
-/*@ts2dart_const*/ new OpaqueToken("HammerGestureConfig");
+export const HAMMER_GESTURE_CONFIG = new OpaqueToken('HammerGestureConfig');
 export class HammerGestureConfig {
     constructor() {
         this.events = [];
@@ -19,6 +18,7 @@ export class HammerGestureConfig {
         return mc;
     }
 }
+/** @nocollapse */
 HammerGestureConfig.decorators = [
     { type: Injectable },
 ];
@@ -41,16 +41,20 @@ export class HammerGesturesPlugin extends HammerGesturesPluginCommon {
         return zone.runOutsideAngular(() => {
             // Creating the manager bind events, must be done outside of angular
             var mc = this._config.buildHammer(element);
-            var callback = function (eventObj) { zone.runGuarded(function () { handler(eventObj); }); };
+            var callback = function (eventObj /** TODO #???? */) {
+                zone.runGuarded(function () { handler(eventObj); });
+            };
             mc.on(eventName, callback);
             return () => { mc.off(eventName, callback); };
         });
     }
     isCustomEvent(eventName) { return this._config.events.indexOf(eventName) > -1; }
 }
+/** @nocollapse */
 HammerGesturesPlugin.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 HammerGesturesPlugin.ctorParameters = [
     { type: HammerGestureConfig, decorators: [{ type: Inject, args: [HAMMER_GESTURE_CONFIG,] },] },
 ];

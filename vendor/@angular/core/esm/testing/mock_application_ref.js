@@ -14,6 +14,7 @@ export class MockApplicationRef extends ApplicationRef {
     get componentTypes() { return null; }
     ;
 }
+/** @nocollapse */
 MockApplicationRef.decorators = [
     { type: Injectable },
 ];

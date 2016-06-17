@@ -1,10 +1,10 @@
-import { global, noop } from './lang';
-export { PromiseWrapper, PromiseCompleter } from './promise';
 import { Subject } from 'rxjs/Subject';
 import { PromiseObservable } from 'rxjs/observable/PromiseObservable';
 import { toPromise } from 'rxjs/operator/toPromise';
+import { global, noop } from './lang';
 export { Observable } from 'rxjs/Observable';
 export { Subject } from 'rxjs/Subject';
+export { PromiseCompleter, PromiseWrapper } from './promise';
 export class TimerWrapper {
     static setTimeout(fn, millis) {
         return global.setTimeout(fn, millis);
@@ -18,8 +18,8 @@ export class TimerWrapper {
 export class ObservableWrapper {
     // TODO(vsavkin): when we use rxnext, try inferring the generic type from the first arg
     static subscribe(emitter, onNext, onError, onComplete = () => { }) {
-        onError = (typeof onError === "function") && onError || noop;
-        onComplete = (typeof onComplete === "function") && onComplete || noop;
+        onError = (typeof onError === 'function') && onError || noop;
+        onComplete = (typeof onComplete === 'function') && onComplete || noop;
         return emitter.subscribe({ next: onNext, error: onError, complete: onComplete });
     }
     static isObservable(obs) { return !!obs.subscribe; }
@@ -74,19 +74,27 @@ export class ObservableWrapper {
  * }
  * ```
  *
- * Use Rx.Observable but provides an adapter to make it work as specified here:
+ * The events payload can be accessed by the parameter `$event` on the components output event
+ * handler:
+ *
+ * ```
+ * <zippy (open)="onOpen($event)" (close)="onClose($event)"></zippy>
+ * ```
+ *
+ * Uses Rx.Observable but provides an adapter to make it work as specified here:
  * https://github.com/jhusain/observable-spec
  *
  * Once a reference implementation of the spec is available, switch to it.
+ * @stable
  */
 export class EventEmitter extends Subject {
     /**
      * Creates an instance of [EventEmitter], which depending on [isAsync],
      * delivers events synchronously or asynchronously.
      */
-    constructor(isAsync = true) {
+    constructor(isAsync = false) {
         super();
-        this._isAsync = isAsync;
+        this.__isAsync = isAsync;
     }
     emit(value) { super.next(value); }
     /**
@@ -98,27 +106,29 @@ export class EventEmitter extends Subject {
         let errorFn = (err) => null;
         let completeFn = () => null;
         if (generatorOrNext && typeof generatorOrNext === 'object') {
-            schedulerFn = this._isAsync ? (value) => { setTimeout(() => generatorOrNext.next(value)); } :
-                    (value) => { generatorOrNext.next(value); };
+            schedulerFn = this.__isAsync ? (value /** TODO #9100 */) => {
+                setTimeout(() => generatorOrNext.next(value));
+            } : (value /** TODO #9100 */) => { generatorOrNext.next(value); };
             if (generatorOrNext.error) {
-                errorFn = this._isAsync ? (err) => { setTimeout(() => generatorOrNext.error(err)); } :
+                errorFn = this.__isAsync ? (err) => { setTimeout(() => generatorOrNext.error(err)); } :
                         (err) => { generatorOrNext.error(err); };
             }
             if (generatorOrNext.complete) {
-                completeFn = this._isAsync ? () => { setTimeout(() => generatorOrNext.complete()); } :
+                completeFn = this.__isAsync ? () => { setTimeout(() => generatorOrNext.complete()); } :
                         () => { generatorOrNext.complete(); };
             }
         }
         else {
-            schedulerFn = this._isAsync ? (value) => { setTimeout(() => generatorOrNext(value)); } :
-                    (value) => { generatorOrNext(value); };
+            schedulerFn = this.__isAsync ? (value /** TODO #9100 */) => {
+                setTimeout(() => generatorOrNext(value));
+            } : (value /** TODO #9100 */) => { generatorOrNext(value); };
             if (error) {
                 errorFn =
-                    this._isAsync ? (err) => { setTimeout(() => error(err)); } : (err) => { error(err); };
+                    this.__isAsync ? (err) => { setTimeout(() => error(err)); } : (err) => { error(err); };
             }
             if (complete) {
                 completeFn =
-                    this._isAsync ? () => { setTimeout(() => complete()); } : () => { complete(); };
+                    this.__isAsync ? () => { setTimeout(() => complete()); } : () => { complete(); };
             }
         }
         return super.subscribe(schedulerFn, errorFn, completeFn);

@@ -1,5 +1,8 @@
 "use strict";
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
+/**
+ * @experimental
+ */
 var RenderComponentType = (function () {
     function RenderComponentType(id, templateUrl, slotCount, encapsulation, styles) {
         this.id = id;
@@ -47,6 +50,9 @@ var RenderDebugInfo = (function () {
     return RenderDebugInfo;
 }());
 exports.RenderDebugInfo = RenderDebugInfo;
+/**
+ * @experimental
+ */
 var Renderer = (function () {
     function Renderer() {
     }
@@ -64,6 +70,7 @@ exports.Renderer = Renderer;
  * If you are implementing a custom renderer, you must implement this interface.
  *
  * The default Renderer implementation is `DomRenderer`. Also available is `WebWorkerRenderer`.
+ * @experimental
  */
 var RootRenderer = (function () {
     function RootRenderer() {

@@ -4,8 +4,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 /**
  * Describes how the {@link Injector} should instantiate a given token.
  *
@@ -21,9 +21,10 @@ var exceptions_1 = require('../../src/facade/exceptions');
  * expect(injector.get("message")).toEqual('Hello');
  * ```
  * @ts2dart_const
+ * @deprecated
  */
 var Provider = (function () {
-    function Provider(token, _a) {
+    function Provider(token /** TODO #9100 */, _a) {
         var useClass = _a.useClass, useValue = _a.useValue, useExisting = _a.useExisting, useFactory = _a.useFactory, deps = _a.deps, multi = _a.multi;
         this.token = token;
         this.useClass = useClass;
@@ -79,7 +80,7 @@ exports.Provider = Provider;
  */
 var Binding = (function (_super) {
     __extends(Binding, _super);
-    function Binding(token, _a) {
+    function Binding(token /** TODO #9100 */, _a) {
         var toClass = _a.toClass, toValue = _a.toValue, toAlias = _a.toAlias, toFactory = _a.toFactory, deps = _a.deps, multi = _a.multi;
         _super.call(this, token, {
             useClass: toClass,
@@ -137,15 +138,16 @@ exports.Binding = Binding;
  *
  * @deprecated
  */
-function bind(token) {
+function bind(token /** TODO #9100 */) {
     return new ProviderBuilder(token);
 }
 exports.bind = bind;
 /**
  * Helper class for the {@link bind} function.
+ * @deprecated
  */
 var ProviderBuilder = (function () {
-    function ProviderBuilder(token) {
+    function ProviderBuilder(token /** TODO #9100 */) {
         this.token = token;
     }
     /**
@@ -163,11 +165,11 @@ var ProviderBuilder = (function () {
      *
      * var injectorClass = Injector.resolveAndCreate([
      *   Car,
-     *   provide(Vehicle, {useClass: Car})
+     *   {provide: Vehicle, useClass: Car}
      * ]);
      * var injectorAlias = Injector.resolveAndCreate([
      *   Car,
-     *   provide(Vehicle, {useExisting: Car})
+     *   {provide: Vehicle, useExisting: Car}
      * ]);
      *
      * expect(injectorClass.get(Vehicle)).not.toBe(injectorClass.get(Car));
@@ -190,7 +192,7 @@ var ProviderBuilder = (function () {
      *
      * ```typescript
      * var injector = Injector.resolveAndCreate([
-     *   provide('message', {useValue: 'Hello'})
+     *   {provide: 'message', useValue: 'Hello'}
      * ]);
      *
      * expect(injector.get('message')).toEqual('Hello');
@@ -215,11 +217,11 @@ var ProviderBuilder = (function () {
      *
      * var injectorAlias = Injector.resolveAndCreate([
      *   Car,
-     *   provide(Vehicle, {useExisting: Car})
+     *   {provide: Vehicle, useExisting: Car}
      * ]);
      * var injectorClass = Injector.resolveAndCreate([
      *   Car,
-     *   provide(Vehicle, {useClass: Car})
+     *   {provide: Vehicle, useClass: Car})
      * ]);
      *
      * expect(injectorAlias.get(Vehicle)).toBe(injectorAlias.get(Car));
@@ -242,8 +244,8 @@ var ProviderBuilder = (function () {
      *
      * ```typescript
      * var injector = Injector.resolveAndCreate([
-     *   provide(Number, {useFactory: () => { return 1+2; }}),
-     *   provide(String, {useFactory: (v) => { return "Value: " + v; }, deps: [Number]})
+     *   {provide: Number, useFactory: () => { return 1+2; }},
+     *   {provide: String, useFactory: (v) => { return "Value: " + v; }, deps: [Number]}
      * ]);
      *
      * expect(injector.get(Number)).toEqual(3);
@@ -265,8 +267,9 @@ exports.ProviderBuilder = ProviderBuilder;
  * See {@link Provider} for more details.
  *
  * <!-- TODO: improve the docs -->
+ * @deprecated
  */
-function provide(token, _a) {
+function provide(token /** TODO #9100 */, _a) {
     var useClass = _a.useClass, useValue = _a.useValue, useExisting = _a.useExisting, useFactory = _a.useFactory, deps = _a.deps, multi = _a.multi;
     return new Provider(token, {
         useClass: useClass,

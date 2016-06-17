@@ -1,5 +1,5 @@
 "use strict";
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 var _DOM = null;
 function getDOM() {
     return _DOM;

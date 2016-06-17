@@ -4,9 +4,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
+var core_1 = require('@angular/core');
 var dom_adapter_1 = require('../../dom/dom_adapter');
+var history_1 = require('./history');
 var BrowserPlatformLocation = (function (_super) {
     __extends(BrowserPlatformLocation, _super);
     function BrowserPlatformLocation() {
@@ -49,16 +50,28 @@ var BrowserPlatformLocation = (function (_super) {
         configurable: true
     });
     BrowserPlatformLocation.prototype.pushState = function (state, title, url) {
-        this._history.pushState(state, title, url);
+        if (history_1.supportsState()) {
+            this._history.pushState(state, title, url);
+        }
+        else {
+            this._location.hash = url;
+        }
     };
     BrowserPlatformLocation.prototype.replaceState = function (state, title, url) {
-        this._history.replaceState(state, title, url);
+        if (history_1.supportsState()) {
+            this._history.replaceState(state, title, url);
+        }
+        else {
+            this._location.hash = url;
+        }
     };
     BrowserPlatformLocation.prototype.forward = function () { this._history.forward(); };
     BrowserPlatformLocation.prototype.back = function () { this._history.back(); };
+    /** @nocollapse */
     BrowserPlatformLocation.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     BrowserPlatformLocation.ctorParameters = [];
     return BrowserPlatformLocation;
 }(common_1.PlatformLocation));

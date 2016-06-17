@@ -1,4 +1,4 @@
-import { stringify, isFunction } from '../../src/facade/lang';
+import { isFunction, stringify } from '../facade/lang';
 /**
  * Allows to refer to references which are not yet defined.
  *
@@ -9,6 +9,7 @@ import { stringify, isFunction } from '../../src/facade/lang';
  *
  * ### Example
  * {@example core/di/ts/forward_ref/forward_ref.ts region='forward_ref'}
+ * @experimental
  */
 export function forwardRef(forwardRefFn) {
     forwardRefFn.__forward_ref__ = forwardRef;
@@ -29,6 +30,7 @@ export function forwardRef(forwardRefFn) {
  * ```
  *
  * See: {@link forwardRef}
+ * @experimental
  */
 export function resolveForwardRef(type) {
     if (isFunction(type) && type.hasOwnProperty('__forward_ref__') &&

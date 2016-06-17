@@ -1,6 +1,6 @@
-import { ReflectiveInjector, PLATFORM_INITIALIZER } from '../index';
-import { BaseException } from '../src/facade/exceptions';
+import { PLATFORM_INITIALIZER, ReflectiveInjector } from '../index';
 import { ListWrapper } from '../src/facade/collection';
+import { BaseException } from '../src/facade/exceptions';
 import { FunctionWrapper, isPresent } from '../src/facade/lang';
 import { async } from './async';
 import { AsyncTestCompleter } from './async_test_completer';
@@ -107,9 +107,6 @@ export function resetBaseTestProviders() {
  * eventually
  *   becomes `it('...', @Inject (object: AClass, async: AsyncTestCompleter) => { ... });`
  *
- * @param {Array} tokens
- * @param {Function} fn
- * @return {Function}
  */
 export function inject(tokens, fn) {
     let testInjector = getTestInjector();
@@ -143,7 +140,7 @@ export class InjectSetupWrapper {
             return inject_impl(tokens, fn)();
         };
     }
-    /** @Deprecated {use async(withProviders().inject())} */
+    /** @deprecated {use async(withProviders().inject())} */
     injectAsync(tokens, fn) {
         return () => {
             this._addProviders();
@@ -155,7 +152,7 @@ export function withProviders(providers) {
     return new InjectSetupWrapper(providers);
 }
 /**
- * @Deprecated {use async(inject())}
+ * @deprecated {use async(inject())}
  *
  * Allows injecting dependencies in `beforeEach()` and `it()`. The test must return
  * a promise which will resolve when all asynchronous activity is complete.
@@ -170,9 +167,6 @@ export function withProviders(providers) {
  * })
  * ```
  *
- * @param {Array} tokens
- * @param {Function} fn
- * @return {Function}
  */
 export function injectAsync(tokens, fn) {
     return async(inject(tokens, fn));

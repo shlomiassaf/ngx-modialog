@@ -1,11 +1,11 @@
 "use strict";
 var core_1 = require('@angular/core');
+var testing_1 = require('@angular/core/testing');
 var index_1 = require('../index');
-var exceptions_1 = require('../src/facade/exceptions');
-var lang_1 = require('../src/facade/lang');
 var async_1 = require('../src/facade/async');
 var collection_1 = require('../src/facade/collection');
-var testing_1 = require('@angular/core/testing');
+var exceptions_1 = require('../src/facade/exceptions');
+var lang_1 = require('../src/facade/lang');
 /**
  * An abstract class for inserting the root test component element in a platform independent way.
  */
@@ -16,8 +16,8 @@ var TestComponentRenderer = (function () {
     return TestComponentRenderer;
 }());
 exports.TestComponentRenderer = TestComponentRenderer;
-exports.ComponentFixtureAutoDetect = new core_1.OpaqueToken("ComponentFixtureAutoDetect");
-exports.ComponentFixtureNoNgZone = new core_1.OpaqueToken("ComponentFixtureNoNgZone");
+exports.ComponentFixtureAutoDetect = new core_1.OpaqueToken('ComponentFixtureAutoDetect');
+exports.ComponentFixtureNoNgZone = new core_1.OpaqueToken('ComponentFixtureNoNgZone');
 /**
  * Fixture for debugging and testing a component.
  */
@@ -163,6 +163,8 @@ var TestComponentBuilder = (function () {
         /** @internal */
         this._templateOverrides = new Map();
         /** @internal */
+        this._animationOverrides = new Map();
+        /** @internal */
         this._viewBindingsOverrides = new Map();
         /** @internal */
         this._viewOverrides = new Map();
@@ -180,24 +182,19 @@ var TestComponentBuilder = (function () {
     /**
      * Overrides only the html of a {@link ComponentMetadata}.
      * All the other properties of the component's {@link ViewMetadata} are preserved.
-     *
-     * @param {Type} component
-     * @param {string} html
-     *
-     * @return {TestComponentBuilder}
      */
     TestComponentBuilder.prototype.overrideTemplate = function (componentType, template) {
         var clone = this._clone();
         clone._templateOverrides.set(componentType, template);
         return clone;
     };
+    TestComponentBuilder.prototype.overrideAnimations = function (componentType, animations) {
+        var clone = this._clone();
+        clone._animationOverrides.set(componentType, animations);
+        return clone;
+    };
     /**
      * Overrides a component's {@link ViewMetadata}.
-     *
-     * @param {Type} component
-     * @param {view} View
-     *
-     * @return {TestComponentBuilder}
      */
     TestComponentBuilder.prototype.overrideView = function (componentType, view) {
         var clone = this._clone();
@@ -206,12 +203,6 @@ var TestComponentBuilder = (function () {
     };
     /**
      * Overrides the directives from the component {@link ViewMetadata}.
-     *
-     * @param {Type} component
-     * @param {Type} from
-     * @param {Type} to
-     *
-     * @return {TestComponentBuilder}
      */
     TestComponentBuilder.prototype.overrideDirective = function (componentType, from, to) {
         var clone = this._clone();
@@ -232,11 +223,6 @@ var TestComponentBuilder = (function () {
      * The providers specified via this method are appended to the existing `providers` causing the
      * duplicated providers to
      * be overridden.
-     *
-     * @param {Type} component
-     * @param {any[]} providers
-     *
-     * @return {TestComponentBuilder}
      */
     TestComponentBuilder.prototype.overrideProviders = function (type, providers) {
         var clone = this._clone();
@@ -258,11 +244,6 @@ var TestComponentBuilder = (function () {
      * The providers specified via this method are appended to the existing `providers` causing the
      * duplicated providers to
      * be overridden.
-     *
-     * @param {Type} component
-     * @param {any[]} providers
-     *
-     * @return {TestComponentBuilder}
      */
     TestComponentBuilder.prototype.overrideViewProviders = function (type, providers) {
         var clone = this._clone();
@@ -285,8 +266,6 @@ var TestComponentBuilder = (function () {
     };
     /**
      * Builds and returns a ComponentFixture.
-     *
-     * @return {Promise<ComponentFixture>}
      */
     TestComponentBuilder.prototype.createAsync = function (rootComponentType) {
         var _this = this;
@@ -296,14 +275,13 @@ var TestComponentBuilder = (function () {
             var mockDirectiveResolver = _this._injector.get(index_1.DirectiveResolver);
             var mockViewResolver = _this._injector.get(index_1.ViewResolver);
             _this._viewOverrides.forEach(function (view, type) { return mockViewResolver.setView(type, view); });
-            _this._templateOverrides.forEach(function (template, type) {
-                return mockViewResolver.setInlineTemplate(type, template);
-            });
+            _this._templateOverrides.forEach(function (template, type) { return mockViewResolver.setInlineTemplate(type, template); });
+            _this._animationOverrides.forEach(function (animationsEntry, type) { return mockViewResolver.setAnimations(type, animationsEntry); });
             _this._directiveOverrides.forEach(function (overrides, component) {
                 overrides.forEach(function (to, from) { mockViewResolver.overrideViewDirective(component, from, to); });
             });
-            _this._bindingsOverrides.forEach(function (bindings, type) { return mockDirectiveResolver.setBindingsOverride(type, bindings); });
-            _this._viewBindingsOverrides.forEach(function (bindings, type) { return mockDirectiveResolver.setViewBindingsOverride(type, bindings); });
+            _this._bindingsOverrides.forEach(function (bindings, type) { return mockDirectiveResolver.setProvidersOverride(type, bindings); });
+            _this._viewBindingsOverrides.forEach(function (bindings, type) { return mockDirectiveResolver.setViewProvidersOverride(type, bindings); });
             var promise = _this._injector.get(core_1.ComponentResolver).resolveComponent(rootComponentType);
             return promise.then(function (componentFactory) { return _this._create(ngZone, componentFactory); });
         };
@@ -326,9 +304,11 @@ var TestComponentBuilder = (function () {
         var initComponent = function () { return _this._create(ngZone, componentFactory); };
         return ngZone == null ? initComponent() : ngZone.run(initComponent);
     };
+    /** @nocollapse */
     TestComponentBuilder.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     TestComponentBuilder.ctorParameters = [
         { type: core_1.Injector, },
     ];

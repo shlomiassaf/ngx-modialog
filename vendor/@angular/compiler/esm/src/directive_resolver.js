@@ -1,5 +1,5 @@
-import { resolveForwardRef, Injectable, DirectiveMetadata, ComponentMetadata, InputMetadata, OutputMetadata, HostBindingMetadata, HostListenerMetadata, ContentChildrenMetadata, ViewChildrenMetadata, ContentChildMetadata, ViewChildMetadata, reflector } from '@angular/core';
-import { ReflectorReader } from '../core_private';
+import { resolveForwardRef, Injectable, DirectiveMetadata, ComponentMetadata, InputMetadata, OutputMetadata, HostBindingMetadata, HostListenerMetadata, ContentChildrenMetadata, ViewChildrenMetadata, ContentChildMetadata, ViewChildMetadata } from '@angular/core';
+import { ReflectorReader, reflector } from '../core_private';
 import { isPresent, stringify } from '../src/facade/lang';
 import { BaseException } from '../src/facade/exceptions';
 import { ListWrapper, StringMapWrapper } from '../src/facade/collection';
@@ -123,9 +123,11 @@ export class DirectiveResolver {
         }
     }
 }
+/** @nocollapse */
 DirectiveResolver.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 DirectiveResolver.ctorParameters = [
     { type: ReflectorReader, },
 ];

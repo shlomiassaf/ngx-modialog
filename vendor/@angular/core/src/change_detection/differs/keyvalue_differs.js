@@ -1,11 +1,12 @@
 "use strict";
-var lang_1 = require('../../../src/facade/lang');
-var exceptions_1 = require('../../../src/facade/exceptions');
-var collection_1 = require('../../../src/facade/collection');
 var di_1 = require('../../di');
+var collection_1 = require('../../facade/collection');
+var exceptions_1 = require('../../facade/exceptions');
+var lang_1 = require('../../facade/lang');
 /**
  * A repository of different Map diffing strategies used by NgClass, NgStyle, and others.
  * @ts2dart_const
+ * @stable
  */
 var KeyValueDiffers = (function () {
     /*@ts2dart_const*/

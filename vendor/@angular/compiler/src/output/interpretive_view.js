@@ -5,8 +5,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_private_1 = require('../../core_private');
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var InterpretiveAppViewInstanceFactory = (function () {
     function InterpretiveAppViewInstanceFactory() {
     }
@@ -50,6 +50,15 @@ var _InterpretiveAppView = (function (_super) {
         }
         else {
             return _super.prototype.injectorGet.call(this, token, nodeIndex, notFoundResult);
+        }
+    };
+    _InterpretiveAppView.prototype.detachInternal = function () {
+        var m = this.methods.get('detachInternal');
+        if (lang_1.isPresent(m)) {
+            return m();
+        }
+        else {
+            return _super.prototype.detachInternal.call(this);
         }
     };
     _InterpretiveAppView.prototype.destroyInternal = function () {

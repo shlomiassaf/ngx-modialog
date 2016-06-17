@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { isPresent, StringWrapper } from '../../../src/facade/lang';
-import { StringMapWrapper, ListWrapper } from '../../../src/facade/collection';
+import { isPresent, StringWrapper } from '../../facade/lang';
+import { StringMapWrapper, ListWrapper } from '../../facade/collection';
 import { getDOM } from '../dom_adapter';
 import { EventManagerPlugin } from './event_manager';
 var modifierKeys = ['alt', 'control', 'meta', 'shift'];
@@ -72,7 +72,7 @@ export class KeyEventsPlugin extends EventManagerPlugin {
         return fullKey;
     }
     static eventCallback(element, fullKey, handler, zone) {
-        return (event) => {
+        return (event /** TODO #9100 */) => {
             if (StringWrapper.equals(KeyEventsPlugin.getEventFullKey(event), fullKey)) {
                 zone.runGuarded(() => handler(event));
             }
@@ -89,8 +89,10 @@ export class KeyEventsPlugin extends EventManagerPlugin {
         }
     }
 }
+/** @nocollapse */
 KeyEventsPlugin.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 KeyEventsPlugin.ctorParameters = [];
 //# sourceMappingURL=key_events.js.map

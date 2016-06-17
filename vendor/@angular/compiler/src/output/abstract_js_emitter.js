@@ -4,10 +4,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
-var o = require('./output_ast');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var abstract_emitter_1 = require('./abstract_emitter');
+var o = require('./output_ast');
 var AbstractJsEmitterVisitor = (function (_super) {
     __extends(AbstractJsEmitterVisitor, _super);
     function AbstractJsEmitterVisitor() {
@@ -130,17 +130,16 @@ var AbstractJsEmitterVisitor = (function (_super) {
         ctx.decIndent();
         ctx.println("} catch (" + abstract_emitter_1.CATCH_ERROR_VAR.name + ") {");
         ctx.incIndent();
-        var catchStmts = [
-            abstract_emitter_1.CATCH_STACK_VAR.set(abstract_emitter_1.CATCH_ERROR_VAR.prop('stack'))
-                .toDeclStmt(null, [o.StmtModifier.Final])
-        ].concat(stmt.catchStmts);
+        var catchStmts = [abstract_emitter_1.CATCH_STACK_VAR.set(abstract_emitter_1.CATCH_ERROR_VAR.prop('stack')).toDeclStmt(null, [
+                o.StmtModifier.Final
+            ])].concat(stmt.catchStmts);
         this.visitAllStatements(catchStmts, ctx);
         ctx.decIndent();
         ctx.println("}");
         return null;
     };
     AbstractJsEmitterVisitor.prototype._visitParams = function (params, ctx) {
-        this.visitAllObjects(function (param) { return ctx.print(param.name); }, params, ctx, ',');
+        this.visitAllObjects(function (param /** TODO #9100 */) { return ctx.print(param.name); }, params, ctx, ',');
     };
     AbstractJsEmitterVisitor.prototype.getBuiltinMethodName = function (method) {
         var name;

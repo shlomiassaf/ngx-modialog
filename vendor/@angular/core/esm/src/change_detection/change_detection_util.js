@@ -1,13 +1,12 @@
-import { looseIdentical, isPrimitive } from '../../src/facade/lang';
-import { isListLikeIterable, areIterablesEqual } from '../../src/facade/collection';
-export { looseIdentical } from '../../src/facade/lang';
+import { areIterablesEqual, isListLikeIterable } from '../facade/collection';
+import { isPrimitive, looseIdentical } from '../facade/lang';
+export { looseIdentical } from '../facade/lang';
 export var uninitialized = new Object();
 export function devModeEqual(a, b) {
     if (isListLikeIterable(a) && isListLikeIterable(b)) {
         return areIterablesEqual(a, b, devModeEqual);
     }
-    else if (!isListLikeIterable(a) && !isPrimitive(a) && !isListLikeIterable(b) &&
-        !isPrimitive(b)) {
+    else if (!isListLikeIterable(a) && !isPrimitive(a) && !isListLikeIterable(b) && !isPrimitive(b)) {
         return true;
     }
     else {
@@ -31,6 +30,7 @@ export function devModeEqual(a, b) {
  *    return WrappedValue.wrap(this._latestValue); // this will force update
  *  }
  * ```
+ * @stable
  */
 export class WrappedValue {
     constructor(wrapped) {
@@ -56,6 +56,7 @@ export class ValueUnwrapper {
 }
 /**
  * Represents a basic change from a previous to a new value.
+ * @stable
  */
 export class SimpleChange {
     constructor(previousValue, currentValue) {

@@ -227,6 +227,10 @@ export var PropertyBindingType;
      * A binding to a style rule (e.g. `[style.rule]="expression"`).
      */
     PropertyBindingType[PropertyBindingType["Style"] = 3] = "Style";
+    /**
+     * A binding to an animation reference (e.g. `[animate.key]="expression"`).
+     */
+    PropertyBindingType[PropertyBindingType["Animation"] = 4] = "Animation";
 })(PropertyBindingType || (PropertyBindingType = {}));
 /**
  * Visit every node in a list of {@link TemplateAst}s with the given {@link TemplateAstVisitor}.

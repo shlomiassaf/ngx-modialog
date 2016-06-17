@@ -1,8 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
-var collection_1 = require('../../src/facade/collection');
-var lang_1 = require('../../src/facade/lang');
 var dom_adapter_1 = require('../dom/dom_adapter');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 var PublicTestability = (function () {
     function PublicTestability(testability) {
         this._testability = testability;
@@ -35,18 +35,20 @@ var BrowserGetTestability = (function () {
             return testabilities.map(function (testability) { return new PublicTestability(testability); });
         };
         lang_1.global.getAllAngularRootElements = function () { return registry.getAllRootElements(); };
-        var whenAllStable = function (callback) {
+        var whenAllStable = function (callback /** TODO #9100 */) {
             var testabilities = lang_1.global.getAllAngularTestabilities();
             var count = testabilities.length;
             var didWork = false;
-            var decrement = function (didWork_) {
+            var decrement = function (didWork_ /** TODO #9100 */) {
                 didWork = didWork || didWork_;
                 count--;
                 if (count == 0) {
                     callback(didWork);
                 }
             };
-            testabilities.forEach(function (testability) { testability.whenStable(decrement); });
+            testabilities.forEach(function (testability /** TODO #9100 */) {
+                testability.whenStable(decrement);
+            });
         };
         if (!lang_1.global.frameworkStabilizers) {
             lang_1.global.frameworkStabilizers = collection_1.ListWrapper.createGrowableSize(0);

@@ -1,4 +1,4 @@
-import { global } from '../../../src/facade/lang';
+import { global } from '../../facade/lang';
 import { AngularTools } from './common_tools';
 var context = global;
 /**
@@ -14,6 +14,7 @@ var context = global;
  */
 export function enableDebugTools(ref) {
     context.ng = new AngularTools(ref);
+    return ref;
 }
 /**
  * Disables Angular 2 tools.

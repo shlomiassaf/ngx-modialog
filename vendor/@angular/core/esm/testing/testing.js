@@ -1,6 +1,6 @@
-import { getTestInjector } from './test_injector';
 import { isPromise } from '../src/facade/lang';
-export { inject, async, injectAsync } from './test_injector';
+import { getTestInjector } from './test_injector';
+export { async, inject, injectAsync } from './test_injector';
 var _global = (typeof window === 'undefined' ? global : window);
 export var expect = _global.expect;
 /**

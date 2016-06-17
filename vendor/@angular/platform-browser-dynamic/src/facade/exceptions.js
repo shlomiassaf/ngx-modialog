@@ -8,10 +8,13 @@ var base_wrapped_exception_1 = require('./base_wrapped_exception');
 var exception_handler_1 = require('./exception_handler');
 var exception_handler_2 = require('./exception_handler');
 exports.ExceptionHandler = exception_handler_2.ExceptionHandler;
+/**
+ * @stable
+ */
 var BaseException = (function (_super) {
     __extends(BaseException, _super);
     function BaseException(message) {
-        if (message === void 0) { message = "--"; }
+        if (message === void 0) { message = '--'; }
         _super.call(this, message);
         this.message = message;
         this.stack = (new Error(message)).stack;
@@ -22,10 +25,11 @@ var BaseException = (function (_super) {
 exports.BaseException = BaseException;
 /**
  * Wraps an exception and provides additional context or information.
+ * @stable
  */
 var WrappedException = (function (_super) {
     __extends(WrappedException, _super);
-    function WrappedException(_wrapperMessage, _originalException, _originalStack, _context) {
+    function WrappedException(_wrapperMessage, _originalException /** TODO #9100 */, _originalStack /** TODO #9100 */, _context /** TODO #9100 */) {
         _super.call(this, _wrapperMessage);
         this._wrapperMessage = _wrapperMessage;
         this._originalException = _originalException;

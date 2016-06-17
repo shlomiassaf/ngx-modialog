@@ -1,7 +1,7 @@
 "use strict";
-var lang_1 = require('./lang');
 var base_wrapped_exception_1 = require('./base_wrapped_exception');
 var collection_1 = require('./collection');
+var lang_1 = require('./lang');
 var _ArrayLogger = (function () {
     function _ArrayLogger() {
         this.res = [];
@@ -30,9 +30,10 @@ var _ArrayLogger = (function () {
  *   }
  * }
  *
- * bootstrap(MyApp, [provide(ExceptionHandler, {useClass: MyExceptionHandler})])
+ * bootstrap(MyApp, {provide: ExceptionHandler, useClass: MyExceptionHandler}])
  *
  * ```
+ * @stable
  */
 var ExceptionHandler = (function () {
     function ExceptionHandler(_logger, _rethrowException) {
@@ -46,7 +47,7 @@ var ExceptionHandler = (function () {
         var l = new _ArrayLogger();
         var e = new ExceptionHandler(l, false);
         e.call(exception, stackTrace, reason);
-        return l.res.join("\n");
+        return l.res.join('\n');
     };
     ExceptionHandler.prototype.call = function (exception, stackTrace, reason) {
         if (stackTrace === void 0) { stackTrace = null; }
@@ -56,7 +57,7 @@ var ExceptionHandler = (function () {
         var context = this._findContext(exception);
         this._logger.logGroup("EXCEPTION: " + this._extractMessage(exception));
         if (lang_1.isPresent(stackTrace) && lang_1.isBlank(originalStack)) {
-            this._logger.logError("STACKTRACE:");
+            this._logger.logError('STACKTRACE:');
             this._logger.logError(this._longStackTrace(stackTrace));
         }
         if (lang_1.isPresent(reason)) {
@@ -66,11 +67,11 @@ var ExceptionHandler = (function () {
             this._logger.logError("ORIGINAL EXCEPTION: " + this._extractMessage(originalException));
         }
         if (lang_1.isPresent(originalStack)) {
-            this._logger.logError("ORIGINAL STACKTRACE:");
+            this._logger.logError('ORIGINAL STACKTRACE:');
             this._logger.logError(this._longStackTrace(originalStack));
         }
         if (lang_1.isPresent(context)) {
-            this._logger.logError("ERROR CONTEXT:");
+            this._logger.logError('ERROR CONTEXT:');
             this._logger.logError(context);
         }
         this._logger.logGroupEnd();
@@ -86,7 +87,7 @@ var ExceptionHandler = (function () {
     };
     /** @internal */
     ExceptionHandler.prototype._longStackTrace = function (stackTrace) {
-        return collection_1.isListLikeIterable(stackTrace) ? stackTrace.join("\n\n-----async gap-----\n") :
+        return collection_1.isListLikeIterable(stackTrace) ? stackTrace.join('\n\n-----async gap-----\n') :
             stackTrace.toString();
     };
     /** @internal */

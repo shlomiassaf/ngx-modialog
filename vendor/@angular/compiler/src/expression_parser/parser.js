@@ -5,11 +5,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
-var collection_1 = require('../../src/facade/collection');
-var lexer_1 = require('./lexer');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var ast_1 = require('./ast');
+var lexer_1 = require('./lexer');
 var _implicitReceiver = new ast_1.ImplicitReceiver();
 // TODO(tbosch): Cannot make this const/final right now because of the transpiler...
 var INTERPOLATION_REGEXP = /\{\{([\s\S]*?)\}\}/g;
@@ -154,9 +154,11 @@ var Parser = (function () {
         }
         return errLocation.length;
     };
+    /** @nocollapse */
     Parser.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     Parser.ctorParameters = [
         { type: lexer_1.Lexer, },
     ];
@@ -242,7 +244,7 @@ var _ParseAST = (function () {
             exprs.push(expr);
             if (this.optionalCharacter(lexer_1.$SEMICOLON)) {
                 if (!this.parseAction) {
-                    this.error("Binding expression cannot contain chained expression");
+                    this.error('Binding expression cannot contain chained expression');
                 }
                 while (this.optionalCharacter(lexer_1.$SEMICOLON)) {
                 } // read all semicolons
@@ -259,9 +261,9 @@ var _ParseAST = (function () {
     };
     _ParseAST.prototype.parsePipe = function () {
         var result = this.parseExpression();
-        if (this.optionalOperator("|")) {
+        if (this.optionalOperator('|')) {
             if (this.parseAction) {
-                this.error("Cannot have a pipe in an action expression");
+                this.error('Cannot have a pipe in an action expression');
             }
             do {
                 var name = this.expectIdentifierOrKeyword();
@@ -270,7 +272,7 @@ var _ParseAST = (function () {
                     args.push(this.parseExpression());
                 }
                 result = new ast_1.BindingPipe(result, name, args);
-            } while (this.optionalOperator("|"));
+            } while (this.optionalOperator('|'));
         }
         return result;
     };
@@ -409,7 +411,7 @@ var _ParseAST = (function () {
             else if (this.optionalCharacter(lexer_1.$LBRACKET)) {
                 var key = this.parsePipe();
                 this.expectCharacter(lexer_1.$RBRACKET);
-                if (this.optionalOperator("=")) {
+                if (this.optionalOperator('=')) {
                     var value = this.parseConditional();
                     result = new ast_1.KeyedWrite(result, key, value);
                 }
@@ -473,7 +475,7 @@ var _ParseAST = (function () {
             this.error("Unexpected token " + this.next);
         }
         // error() throws, so we don't reach here.
-        throw new exceptions_1.BaseException("Fell through all cases in parsePrimary");
+        throw new exceptions_1.BaseException('Fell through all cases in parsePrimary');
     };
     _ParseAST.prototype.parseExpressionList = function (terminator) {
         var result = [];
@@ -509,17 +511,17 @@ var _ParseAST = (function () {
         }
         else {
             if (isSafe) {
-                if (this.optionalOperator("=")) {
-                    this.error("The '?.' operator cannot be used in the assignment");
+                if (this.optionalOperator('=')) {
+                    this.error('The \'?.\' operator cannot be used in the assignment');
                 }
                 else {
                     return new ast_1.SafePropertyRead(receiver, id);
                 }
             }
             else {
-                if (this.optionalOperator("=")) {
+                if (this.optionalOperator('=')) {
                     if (!this.parseAction) {
-                        this.error("Bindings cannot contain assignments");
+                        this.error('Bindings cannot contain assignments');
                     }
                     var value = this.parseConditional();
                     return new ast_1.PropertyWrite(receiver, id, value);
@@ -539,25 +541,6 @@ var _ParseAST = (function () {
             positionals.push(this.parsePipe());
         } while (this.optionalCharacter(lexer_1.$COMMA));
         return positionals;
-    };
-    _ParseAST.prototype.parseBlockContent = function () {
-        if (!this.parseAction) {
-            this.error("Binding expression cannot contain chained expression");
-        }
-        var exprs = [];
-        while (this.index < this.tokens.length && !this.next.isCharacter(lexer_1.$RBRACE)) {
-            var expr = this.parseExpression();
-            exprs.push(expr);
-            if (this.optionalCharacter(lexer_1.$SEMICOLON)) {
-                while (this.optionalCharacter(lexer_1.$SEMICOLON)) {
-                } // read all semicolons
-            }
-        }
-        if (exprs.length == 0)
-            return new ast_1.EmptyExpr();
-        if (exprs.length == 1)
-            return exprs[0];
-        return new ast_1.Chain(exprs);
     };
     /**
      * An identifier, a keyword, a string with an optional `-` inbetween.
@@ -604,7 +587,7 @@ var _ParseAST = (function () {
             var name = null;
             var expression = null;
             if (keyIsVar) {
-                if (this.optionalOperator("=")) {
+                if (this.optionalOperator('=')) {
                     name = this.expectTemplateBindingKey();
                 }
                 else {

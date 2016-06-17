@@ -1,7 +1,7 @@
-import { BaseException } from '../../src/facade/exceptions';
-import { isBlank, isPresent, isArray } from '../../src/facade/lang';
-import * as o from '../output/output_ast';
+import { BaseException } from '../facade/exceptions';
+import { isArray, isBlank, isPresent } from '../facade/lang';
 import { Identifiers } from '../identifiers';
+import * as o from '../output/output_ast';
 var IMPLICIT_RECEIVER = o.variable('#implicit');
 export class ExpressionWithWrappedValueInfo {
     constructor(expression, needsValueUnwrapper) {
@@ -119,8 +119,7 @@ class _AstToIrVisitor {
         return convertToStatementIfNeeded(mode, this._valueUnwrapper.callMethod('unwrap', [value]));
     }
     visitFunctionCall(ast, mode) {
-        return convertToStatementIfNeeded(mode, ast.target.visit(this, _Mode.Expression)
-            .callFn(this.visitAll(ast.args, _Mode.Expression)));
+        return convertToStatementIfNeeded(mode, ast.target.visit(this, _Mode.Expression).callFn(this.visitAll(ast.args, _Mode.Expression)));
     }
     visitImplicitReceiver(ast, mode) {
         ensureExpressionMode(mode, ast);

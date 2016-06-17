@@ -1,8 +1,7 @@
-import { Injectable, Inject, OpaqueToken, NgZone } from '@angular/core';
-import { BaseException } from '../../../src/facade/exceptions';
-import { ListWrapper } from '../../../src/facade/collection';
-export const EVENT_MANAGER_PLUGINS = 
-/*@ts2dart_const*/ new OpaqueToken("EventManagerPlugins");
+import { Inject, Injectable, NgZone, OpaqueToken } from '@angular/core';
+import { ListWrapper } from '../../facade/collection';
+import { BaseException } from '../../facade/exceptions';
+export const EVENT_MANAGER_PLUGINS = new OpaqueToken('EventManagerPlugins');
 export class EventManager {
     constructor(plugins, _zone) {
         this._zone = _zone;
@@ -30,21 +29,23 @@ export class EventManager {
         throw new BaseException(`No event manager plugin found for event ${eventName}`);
     }
 }
+/** @nocollapse */
 EventManager.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 EventManager.ctorParameters = [
-    { type: undefined, decorators: [{ type: Inject, args: [EVENT_MANAGER_PLUGINS,] },] },
+    { type: Array, decorators: [{ type: Inject, args: [EVENT_MANAGER_PLUGINS,] },] },
     { type: NgZone, },
 ];
 export class EventManagerPlugin {
     // That is equivalent to having supporting $event.target
     supports(eventName) { return false; }
     addEventListener(element, eventName, handler) {
-        throw "not implemented";
+        throw 'not implemented';
     }
     addGlobalEventListener(element, eventName, handler) {
-        throw "not implemented";
+        throw 'not implemented';
     }
 }
 //# sourceMappingURL=event_manager.js.map

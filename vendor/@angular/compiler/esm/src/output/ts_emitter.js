@@ -1,7 +1,7 @@
+import { BaseException } from '../facade/exceptions';
+import { isArray, isBlank, isPresent } from '../facade/lang';
+import { AbstractEmitterVisitor, CATCH_ERROR_VAR, CATCH_STACK_VAR, EmitterVisitorContext } from './abstract_emitter';
 import * as o from './output_ast';
-import { isPresent, isBlank, isArray } from '../../src/facade/lang';
-import { BaseException } from '../../src/facade/exceptions';
-import { EmitterVisitorContext, AbstractEmitterVisitor, CATCH_ERROR_VAR, CATCH_STACK_VAR } from './abstract_emitter';
 var _debugModuleUrl = 'asset://debug/lib';
 export function debugOutputAstAsTypeScript(ast) {
     var converter = new _TsEmitterVisitor(_debugModuleUrl);
@@ -53,6 +53,14 @@ class _TsEmitterVisitor extends AbstractEmitterVisitor {
         this._moduleUrl = _moduleUrl;
         this.importsWithPrefixes = new Map();
     }
+    visitType(t, ctx, defaultType = 'any') {
+        if (isPresent(t)) {
+            t.visitType(this, ctx);
+        }
+        else {
+            ctx.print(defaultType);
+        }
+    }
     visitExternalExpr(ast, ctx) {
         this._visitIdentifier(ast.value, ast.typeParams, ctx);
         return null;
@@ -67,11 +75,8 @@ class _TsEmitterVisitor extends AbstractEmitterVisitor {
         else {
             ctx.print(`var`);
         }
-        ctx.print(` ${stmt.name}`);
-        if (isPresent(stmt.type)) {
-            ctx.print(`:`);
-            stmt.type.visitType(this, ctx);
-        }
+        ctx.print(` ${stmt.name}:`);
+        this.visitType(stmt.type, ctx);
         ctx.print(` = `);
         stmt.value.visitExpression(this, ctx);
         ctx.println(`;`);
@@ -113,13 +118,8 @@ class _TsEmitterVisitor extends AbstractEmitterVisitor {
             ctx.print(`private `);
         }
         ctx.print(field.name);
-        if (isPresent(field.type)) {
-            ctx.print(`:`);
-            field.type.visitType(this, ctx);
-        }
-        else {
-            ctx.print(`: any`);
-        }
+        ctx.print(':');
+        this.visitType(field.type, ctx);
         ctx.println(`;`);
     }
     _visitClassGetter(getter, ctx) {
@@ -127,10 +127,8 @@ class _TsEmitterVisitor extends AbstractEmitterVisitor {
             ctx.print(`private `);
         }
         ctx.print(`get ${getter.name}()`);
-        if (isPresent(getter.type)) {
-            ctx.print(`:`);
-            getter.type.visitType(this, ctx);
-        }
+        ctx.print(':');
+        this.visitType(getter.type, ctx);
         ctx.println(` {`);
         ctx.incIndent();
         this.visitAllStatements(getter.body, ctx);
@@ -153,12 +151,7 @@ class _TsEmitterVisitor extends AbstractEmitterVisitor {
         ctx.print(`${method.name}(`);
         this._visitParams(method.params, ctx);
         ctx.print(`):`);
-        if (isPresent(method.type)) {
-            method.type.visitType(this, ctx);
-        }
-        else {
-            ctx.print(`void`);
-        }
+        this.visitType(method.type, ctx, 'void');
         ctx.println(` {`);
         ctx.incIndent();
         this.visitAllStatements(method.body, ctx);
@@ -169,12 +162,7 @@ class _TsEmitterVisitor extends AbstractEmitterVisitor {
         ctx.print(`(`);
         this._visitParams(ast.params, ctx);
         ctx.print(`):`);
-        if (isPresent(ast.type)) {
-            ast.type.visitType(this, ctx);
-        }
-        else {
-            ctx.print(`void`);
-        }
+        this.visitType(ast.type, ctx, 'void');
         ctx.println(` => {`);
         ctx.incIndent();
         this.visitAllStatements(ast.statements, ctx);
@@ -189,12 +177,7 @@ class _TsEmitterVisitor extends AbstractEmitterVisitor {
         ctx.print(`function ${stmt.name}(`);
         this._visitParams(stmt.params, ctx);
         ctx.print(`):`);
-        if (isPresent(stmt.type)) {
-            stmt.type.visitType(this, ctx);
-        }
-        else {
-            ctx.print(`void`);
-        }
+        this.visitType(stmt.type, ctx, 'void');
         ctx.println(` {`);
         ctx.incIndent();
         this.visitAllStatements(stmt.statements, ctx);
@@ -209,10 +192,9 @@ class _TsEmitterVisitor extends AbstractEmitterVisitor {
         ctx.decIndent();
         ctx.println(`} catch (${CATCH_ERROR_VAR.name}) {`);
         ctx.incIndent();
-        var catchStmts = [
-            CATCH_STACK_VAR.set(CATCH_ERROR_VAR.prop('stack'))
-                .toDeclStmt(null, [o.StmtModifier.Final])
-        ].concat(stmt.catchStmts);
+        var catchStmts = [CATCH_STACK_VAR.set(CATCH_ERROR_VAR.prop('stack')).toDeclStmt(null, [
+                o.StmtModifier.Final
+            ])].concat(stmt.catchStmts);
         this.visitAllStatements(catchStmts, ctx);
         ctx.decIndent();
         ctx.println(`}`);
@@ -250,23 +232,13 @@ class _TsEmitterVisitor extends AbstractEmitterVisitor {
         return null;
     }
     visitArrayType(type, ctx) {
-        if (isPresent(type.of)) {
-            type.of.visitType(this, ctx);
-        }
-        else {
-            ctx.print(`any`);
-        }
+        this.visitType(type.of, ctx);
         ctx.print(`[]`);
         return null;
     }
     visitMapType(type, ctx) {
         ctx.print(`{[key: string]:`);
-        if (isPresent(type.valueType)) {
-            type.valueType.visitType(this, ctx);
-        }
-        else {
-            ctx.print(`any`);
-        }
+        this.visitType(type.valueType, ctx);
         ctx.print(`}`);
         return null;
     }
@@ -288,12 +260,10 @@ class _TsEmitterVisitor extends AbstractEmitterVisitor {
         return name;
     }
     _visitParams(params, ctx) {
-        this.visitAllObjects((param) => {
+        this.visitAllObjects((param /** TODO #9100 */) => {
             ctx.print(param.name);
-            if (isPresent(param.type)) {
-                ctx.print(`:`);
-                param.type.visitType(this, ctx);
-            }
+            ctx.print(':');
+            this.visitType(param.type, ctx);
         }, params, ctx, ',');
     }
     _visitIdentifier(value, typeParams, ctx) {
@@ -311,7 +281,7 @@ class _TsEmitterVisitor extends AbstractEmitterVisitor {
         ctx.print(value.name);
         if (isPresent(typeParams) && typeParams.length > 0) {
             ctx.print(`<`);
-            this.visitAllObjects((type) => type.visitType(this, ctx), typeParams, ctx, ',');
+            this.visitAllObjects((type /** TODO #9100 */) => type.visitType(this, ctx), typeParams, ctx, ',');
             ctx.print(`>`);
         }
     }

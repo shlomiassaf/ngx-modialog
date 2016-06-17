@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { EventEmitter, ObservableWrapper } from '../src/facade/async';
 import { LocationStrategy } from '../index';
+import { EventEmitter, ObservableWrapper } from '../src/facade/async';
 export class MockLocationStrategy extends LocationStrategy {
     constructor() {
         super();
@@ -47,9 +47,11 @@ export class MockLocationStrategy extends LocationStrategy {
     }
     forward() { throw 'not implemented'; }
 }
+/** @nocollapse */
 MockLocationStrategy.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 MockLocationStrategy.ctorParameters = [];
 class _MockPopStateEvent {
     constructor(newUrl) {

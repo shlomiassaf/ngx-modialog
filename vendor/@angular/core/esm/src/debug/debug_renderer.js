@@ -1,5 +1,5 @@
-import { isPresent } from '../../src/facade/lang';
-import { DebugNode, DebugElement, EventListener, getDebugNode, indexDebugNode, removeDebugNodeFromIndex } from './debug_node';
+import { isPresent } from '../facade/lang';
+import { DebugElement, DebugNode, EventListener, getDebugNode, indexDebugNode, removeDebugNodeFromIndex } from './debug_node';
 export class DebugDomRootRenderer {
     constructor(_delegate) {
         this._delegate = _delegate;
@@ -99,14 +99,25 @@ export class DebugDomRenderer {
         this._delegate.setBindingDebugInfo(renderElement, propertyName, propertyValue);
     }
     setElementClass(renderElement, className, isAdd) {
+        var debugEl = getDebugNode(renderElement);
+        if (isPresent(debugEl) && debugEl instanceof DebugElement) {
+            debugEl.classes[className] = isAdd;
+        }
         this._delegate.setElementClass(renderElement, className, isAdd);
     }
     setElementStyle(renderElement, styleName, styleValue) {
+        var debugEl = getDebugNode(renderElement);
+        if (isPresent(debugEl) && debugEl instanceof DebugElement) {
+            debugEl.styles[styleName] = styleValue;
+        }
         this._delegate.setElementStyle(renderElement, styleName, styleValue);
     }
     invokeElementMethod(renderElement, methodName, args) {
         this._delegate.invokeElementMethod(renderElement, methodName, args);
     }
     setText(renderNode, text) { this._delegate.setText(renderNode, text); }
+    animate(element, startingStyles, keyframes, duration, delay, easing) {
+        return this._delegate.animate(element, startingStyles, keyframes, duration, delay, easing);
+    }
 }
 //# sourceMappingURL=debug_renderer.js.map

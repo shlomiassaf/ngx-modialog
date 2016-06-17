@@ -17,6 +17,7 @@ var EMPTY_CONTEXT = new Object();
  * To instantiate Embedded Views based on a Template, use
  * {@link ViewContainerRef#createEmbeddedView}, which will create the View and attach it to the
  * View Container.
+ * @stable
  */
 var TemplateRef = (function () {
     function TemplateRef() {

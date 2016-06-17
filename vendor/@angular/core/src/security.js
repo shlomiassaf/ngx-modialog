@@ -1,11 +1,11 @@
 "use strict";
 /**
-* A SecurityContext marks a location that has dangerous security implications, e.g. a DOM property
-* like `innerHTML` that could cause Cross Site Scripting (XSS) security bugs when improperly
-* handled.
-*
-* See DomSanitizationService for more details on security in Angular applications.
-*/
+ * A SecurityContext marks a location that has dangerous security implications, e.g. a DOM property
+ * like `innerHTML` that could cause Cross Site Scripting (XSS) security bugs when improperly
+ * handled.
+ *
+ * See DomSanitizationService for more details on security in Angular applications.
+ */
 (function (SecurityContext) {
     SecurityContext[SecurityContext["NONE"] = 0] = "NONE";
     SecurityContext[SecurityContext["HTML"] = 1] = "HTML";

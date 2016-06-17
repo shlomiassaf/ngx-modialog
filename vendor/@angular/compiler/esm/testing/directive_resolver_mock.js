@@ -1,7 +1,7 @@
+import { ComponentMetadata, DirectiveMetadata, Injectable } from '@angular/core';
+import { DirectiveResolver } from '../src/directive_resolver';
 import { Map } from '../src/facade/collection';
 import { isPresent } from '../src/facade/lang';
-import { DirectiveMetadata, ComponentMetadata, Injectable } from '@angular/core';
-import { DirectiveResolver } from '../src/directive_resolver';
 export class MockDirectiveResolver extends DirectiveResolver {
     constructor(...args) {
         super(...args);
@@ -46,18 +46,6 @@ export class MockDirectiveResolver extends DirectiveResolver {
             queries: dm.queries
         });
     }
-    /**
-     * @deprecated
-     */
-    setBindingsOverride(type, bindings) {
-        this._providerOverrides.set(type, bindings);
-    }
-    /**
-     * @deprecated
-     */
-    setViewBindingsOverride(type, viewBindings) {
-        this.viewProviderOverrides.set(type, viewBindings);
-    }
     setProvidersOverride(type, providers) {
         this._providerOverrides.set(type, providers);
     }
@@ -65,6 +53,7 @@ export class MockDirectiveResolver extends DirectiveResolver {
         this.viewProviderOverrides.set(type, viewProviders);
     }
 }
+/** @nocollapse */
 MockDirectiveResolver.decorators = [
     { type: Injectable },
 ];

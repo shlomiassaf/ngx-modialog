@@ -1,8 +1,8 @@
 "use strict";
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
-var o = require('../output/output_ast');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 var identifiers_1 = require('../identifiers');
+var o = require('../output/output_ast');
 var util_1 = require('./util');
 var ViewQueryValues = (function () {
     function ViewQueryValues(view, values) {
@@ -45,7 +45,10 @@ var CompileQuery = (function () {
             view.dirtyParentQueriesMethod.addStmt(queryListForDirtyExpr.callMethod('setDirty', []).toStmt());
         }
     };
-    CompileQuery.prototype.afterChildren = function (targetMethod) {
+    CompileQuery.prototype._isStatic = function () {
+        return !this._values.values.some(function (value) { return value instanceof ViewQueryValues; });
+    };
+    CompileQuery.prototype.afterChildren = function (targetStaticMethod /** TODO #9100 */, targetDynamicMethod) {
         var values = createQueryValues(this._values);
         var updateStmts = [this.queryList.callMethod('reset', [o.literalArr(values)]).toStmt()];
         if (lang_1.isPresent(this.ownerDirectiveExpression)) {
@@ -55,7 +58,16 @@ var CompileQuery = (function () {
         if (!this.meta.first) {
             updateStmts.push(this.queryList.callMethod('notifyOnChanges', []).toStmt());
         }
-        targetMethod.addStmt(new o.IfStmt(this.queryList.prop('dirty'), updateStmts));
+        if (this.meta.first && this._isStatic()) {
+            // for queries that don't change and the user asked for a single element,
+            // set it immediately. That is e.g. needed for querying for ViewContainerRefs, ...
+            // we don't do this for QueryLists for now as this would break the timing when
+            // we call QueryList listeners...
+            targetStaticMethod.addStmts(updateStmts);
+        }
+        else {
+            targetDynamicMethod.addStmt(new o.IfStmt(this.queryList.prop('dirty'), updateStmts));
+        }
     };
     return CompileQuery;
 }());
@@ -75,8 +87,7 @@ function mapNestedViews(declarationAppElement, view, expressions) {
         return o.replaceVarInExpression(o.THIS_EXPR.name, o.variable('nestedView'), expr);
     });
     return declarationAppElement.callMethod('mapNestedViews', [
-        o.variable(view.className),
-        o.fn([new o.FnParam('nestedView', view.classType)], [new o.ReturnStatement(o.literalArr(adjustedExpressions))])
+        o.variable(view.className), o.fn([new o.FnParam('nestedView', view.classType)], [new o.ReturnStatement(o.literalArr(adjustedExpressions))])
     ]);
 }
 function createQueryList(query, directiveInstance, propertyName, compileView) {

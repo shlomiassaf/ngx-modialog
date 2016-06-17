@@ -1,5 +1,5 @@
-import { BaseException } from '../../src/facade/exceptions';
-import { isPresent, RegExpWrapper } from '../../src/facade/lang';
+import { BaseException } from '../facade/exceptions';
+import { RegExpWrapper, isPresent } from '../facade/lang';
 // asset:<package-name>/<realm>/<path-to-module>
 var _ASSET_URL_RE = /asset:([^\/]+)\/([^\/]+)\/(.+)/g;
 /**

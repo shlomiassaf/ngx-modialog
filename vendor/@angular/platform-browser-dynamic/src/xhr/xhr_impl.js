@@ -5,8 +5,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var compiler_1 = require('@angular/compiler');
-var promise_1 = require('../../src/facade/promise');
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
+var promise_1 = require('../facade/promise');
 var XHRImpl = (function (_super) {
     __extends(XHRImpl, _super);
     function XHRImpl() {

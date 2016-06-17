@@ -1,3 +1,3 @@
 // Public API for render
-export { RootRenderer, Renderer, RenderComponentType } from './render/api';
+export { RenderComponentType, Renderer, RootRenderer } from './render/api';
 //# sourceMappingURL=render.js.map

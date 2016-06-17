@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_deprecated_1 = require('@angular/router-deprecated');
 var bootstrap_1 = require("angular2-modal/plugins/bootstrap");
 var index_1 = require('../../demo-head/index');
 var custom_modal_sample_1 = require('./custom-modal-sample');
@@ -54,9 +53,9 @@ var BootstrapDemoPage = (function () {
     BootstrapDemoPage = __decorate([
         core_1.Component({
             selector: 'bootstrap-demo-page',
-            directives: [router_deprecated_1.RouterLink, index_1.DemoHead],
+            directives: [index_1.DemoHead],
             styles: ["\n              .simple-element {\n    position: relative;\n    display:block;\n    background-color: #219161\n}\n            "],
-            template: "\n              <demo-head title=\"Bootstrap Modal plugin\"\n                         description=\"An implementation of <a href='http://getbootstrap.com/javascript/#modals' target='_blank'>Bootstrap</a>\"\n                         [modalCommands]=\"modalCommands\">\n                  <br>\n                  <div class=\"container\">\n                      <div class=\"row\">\n                          <div class=\"col-xs-12\">\n                              <a class=\"lead\" [routerLink]=\"['CustomizeModals']\">Or use the modal code Generator!</a>\n                          </div>\n                      </div>\n                  </div>\n              </demo-head>\n            "
+            template: "\n              <demo-head title=\"Bootstrap Modal plugin\"\n                         description=\"An implementation of <a href='http://getbootstrap.com/javascript/#modals' target='_blank'>Bootstrap</a>\"\n                         [modalCommands]=\"modalCommands\">\n                  <br>\n                  <div class=\"container\">\n                      <div class=\"row\">\n                          <div class=\"col-xs-12\">\n                              <a class=\"lead\" [routerLink]=\"['customizeModals']\">Or use the modal code Generator!</a>\n                          </div>\n                      </div>\n                  </div>\n              </demo-head>\n            "
         }), 
         __metadata('design:paramtypes', [bootstrap_1.Modal])
     ], BootstrapDemoPage);

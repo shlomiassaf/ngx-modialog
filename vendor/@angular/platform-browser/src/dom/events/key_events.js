@@ -5,8 +5,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var lang_1 = require('../../../src/facade/lang');
-var collection_1 = require('../../../src/facade/collection');
+var lang_1 = require('../../facade/lang');
+var collection_1 = require('../../facade/collection');
 var dom_adapter_1 = require('../dom_adapter');
 var event_manager_1 = require('./event_manager');
 var modifierKeys = ['alt', 'control', 'meta', 'shift'];
@@ -79,7 +79,7 @@ var KeyEventsPlugin = (function (_super) {
         return fullKey;
     };
     KeyEventsPlugin.eventCallback = function (element, fullKey, handler, zone) {
-        return function (event) {
+        return function (event /** TODO #9100 */) {
             if (lang_1.StringWrapper.equals(KeyEventsPlugin.getEventFullKey(event), fullKey)) {
                 zone.runGuarded(function () { return handler(event); });
             }
@@ -95,9 +95,11 @@ var KeyEventsPlugin = (function (_super) {
                 return keyName;
         }
     };
+    /** @nocollapse */
     KeyEventsPlugin.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     KeyEventsPlugin.ctorParameters = [];
     return KeyEventsPlugin;
 }(event_manager_1.EventManagerPlugin));

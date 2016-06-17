@@ -1,15 +1,15 @@
 "use strict";
+var application_tokens_1 = require('../application_tokens');
+var change_detection_1 = require('../change_detection/change_detection');
+var change_detection_util_1 = require('../change_detection/change_detection_util');
+var decorators_1 = require('../di/decorators');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
+var api_1 = require('../render/api');
 var security_1 = require('../security');
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
-var exceptions_1 = require('../../src/facade/exceptions');
 var element_1 = require('./element');
 var exceptions_2 = require('./exceptions');
-var change_detection_1 = require('../change_detection/change_detection');
-var api_1 = require('../render/api');
-var application_tokens_1 = require('../application_tokens');
-var decorators_1 = require('../di/decorators');
-var change_detection_util_1 = require("../change_detection/change_detection_util");
 var ViewUtils = (function () {
     function ViewUtils(_renderer, _appId, sanitizer) {
         this._renderer = _renderer;
@@ -27,9 +27,11 @@ var ViewUtils = (function () {
     ViewUtils.prototype.renderComponent = function (renderComponentType) {
         return this._renderer.renderComponent(renderComponentType);
     };
+    /** @nocollapse */
     ViewUtils.decorators = [
         { type: decorators_1.Injectable },
     ];
+    /** @nocollapse */
     ViewUtils.ctorParameters = [
         { type: api_1.RootRenderer, },
         { type: undefined, decorators: [{ type: decorators_1.Inject, args: [application_tokens_1.APP_ID,] },] },
@@ -97,8 +99,7 @@ function interpolate(valueCount, c0, a1, c1, a2, c2, a3, c3, a4, c4, a5, c5, a6,
                 c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5;
         case 6:
             return c0 + _toStringWithNull(a1) + c1 + _toStringWithNull(a2) + c2 + _toStringWithNull(a3) +
-                c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5 + _toStringWithNull(a6) +
-                c6;
+                c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5 + _toStringWithNull(a6) + c6;
         case 7:
             return c0 + _toStringWithNull(a1) + c1 + _toStringWithNull(a2) + c2 + _toStringWithNull(a3) +
                 c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5 + _toStringWithNull(a6) +
@@ -110,8 +111,7 @@ function interpolate(valueCount, c0, a1, c1, a2, c2, a3, c3, a4, c4, a5, c5, a6,
         case 9:
             return c0 + _toStringWithNull(a1) + c1 + _toStringWithNull(a2) + c2 + _toStringWithNull(a3) +
                 c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5 + _toStringWithNull(a6) +
-                c6 + _toStringWithNull(a7) + c7 + _toStringWithNull(a8) + c8 + _toStringWithNull(a9) +
-                c9;
+                c6 + _toStringWithNull(a7) + c7 + _toStringWithNull(a8) + c8 + _toStringWithNull(a9) + c9;
         default:
             throw new exceptions_1.BaseException("Does not support more than 9 expressions");
     }
@@ -179,7 +179,7 @@ function pureProxy1(fn) {
 exports.pureProxy1 = pureProxy1;
 function pureProxy2(fn) {
     var result;
-    var v0, v1;
+    var v0 /** TODO #9100 */, v1;
     v0 = v1 = change_detection_util_1.uninitialized;
     return function (p0, p1) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1)) {
@@ -193,7 +193,7 @@ function pureProxy2(fn) {
 exports.pureProxy2 = pureProxy2;
 function pureProxy3(fn) {
     var result;
-    var v0, v1, v2;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2;
     v0 = v1 = v2 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2)) {
@@ -208,7 +208,7 @@ function pureProxy3(fn) {
 exports.pureProxy3 = pureProxy3;
 function pureProxy4(fn) {
     var result;
-    var v0, v1, v2, v3;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3;
     v0 = v1 = v2 = v3 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -225,7 +225,7 @@ function pureProxy4(fn) {
 exports.pureProxy4 = pureProxy4;
 function pureProxy5(fn) {
     var result;
-    var v0, v1, v2, v3, v4;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4;
     v0 = v1 = v2 = v3 = v4 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3, p4) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -243,7 +243,7 @@ function pureProxy5(fn) {
 exports.pureProxy5 = pureProxy5;
 function pureProxy6(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5;
     v0 = v1 = v2 = v3 = v4 = v5 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3, p4, p5) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -262,7 +262,7 @@ function pureProxy6(fn) {
 exports.pureProxy6 = pureProxy6;
 function pureProxy7(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5, v6;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5 /** TODO #9100 */, v6;
     v0 = v1 = v2 = v3 = v4 = v5 = v6 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3, p4, p5, p6) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -283,7 +283,7 @@ function pureProxy7(fn) {
 exports.pureProxy7 = pureProxy7;
 function pureProxy8(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5, v6, v7;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5 /** TODO #9100 */, v6 /** TODO #9100 */, v7;
     v0 = v1 = v2 = v3 = v4 = v5 = v6 = v7 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3, p4, p5, p6, p7) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -305,7 +305,7 @@ function pureProxy8(fn) {
 exports.pureProxy8 = pureProxy8;
 function pureProxy9(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5, v6, v7, v8;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5 /** TODO #9100 */, v6 /** TODO #9100 */, v7 /** TODO #9100 */, v8;
     v0 = v1 = v2 = v3 = v4 = v5 = v6 = v7 = v8 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3, p4, p5, p6, p7, p8) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||
@@ -328,7 +328,7 @@ function pureProxy9(fn) {
 exports.pureProxy9 = pureProxy9;
 function pureProxy10(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5, v6, v7, v8, v9;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5 /** TODO #9100 */, v6 /** TODO #9100 */, v7 /** TODO #9100 */, v8 /** TODO #9100 */, v9;
     v0 = v1 = v2 = v3 = v4 = v5 = v6 = v7 = v8 = v9 = change_detection_util_1.uninitialized;
     return function (p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) {
         if (!lang_1.looseIdentical(v0, p0) || !lang_1.looseIdentical(v1, p1) || !lang_1.looseIdentical(v2, p2) ||

@@ -1,8 +1,8 @@
-import { isBlank } from '../facade/lang';
 import { BaseException } from '../facade/exceptions';
-import * as o from '../output/output_ast';
+import { isBlank } from '../facade/lang';
 import { Identifiers, identifierToken } from '../identifiers';
-import { injectFromViewParentInjector, createPureProxy, getPropertyInView } from './util';
+import * as o from '../output/output_ast';
+import { createPureProxy, getPropertyInView, injectFromViewParentInjector } from './util';
 class _PurePipeProxy {
     constructor(view, instance, argCount) {
         this.view = view;

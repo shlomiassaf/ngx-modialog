@@ -4,8 +4,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var o = require('./output_ast');
 var abstract_emitter_1 = require('./abstract_emitter');
 var _debugModuleUrl = 'asset://debug/lib';
@@ -331,7 +331,7 @@ var _DartEmitterVisitor = (function (_super) {
     };
     _DartEmitterVisitor.prototype._visitParams = function (params, ctx) {
         var _this = this;
-        this.visitAllObjects(function (param) {
+        this.visitAllObjects(function (param /** TODO #9100 */) {
             if (lang_1.isPresent(param.type)) {
                 param.type.visitType(_this, ctx);
                 ctx.print(' ');
@@ -355,7 +355,7 @@ var _DartEmitterVisitor = (function (_super) {
         ctx.print(value.name);
         if (lang_1.isPresent(typeParams) && typeParams.length > 0) {
             ctx.print("<");
-            this.visitAllObjects(function (type) { return type.visitType(_this, ctx); }, typeParams, ctx, ',');
+            this.visitAllObjects(function (type /** TODO #9100 */) { return type.visitType(_this, ctx); }, typeParams, ctx, ',');
             ctx.print(">");
         }
     };

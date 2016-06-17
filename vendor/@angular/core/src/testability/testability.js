@@ -1,10 +1,10 @@
 "use strict";
-var collection_1 = require('../../src/facade/collection');
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
-var ng_zone_1 = require('../zone/ng_zone');
-var async_1 = require('../../src/facade/async');
 var decorators_1 = require('../di/decorators');
+var async_1 = require('../facade/async');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
+var ng_zone_1 = require('../zone/ng_zone');
 var Testability = (function () {
     function Testability(_ngZone) {
         this._ngZone = _ngZone;
@@ -86,9 +86,11 @@ var Testability = (function () {
         // TODO(juliemr): implement.
         return [];
     };
+    /** @nocollapse */
     Testability.decorators = [
         { type: decorators_1.Injectable },
     ];
+    /** @nocollapse */
     Testability.ctorParameters = [
         { type: ng_zone_1.NgZone, },
     ];
@@ -111,9 +113,11 @@ var TestabilityRegistry = (function () {
         if (findInAncestors === void 0) { findInAncestors = true; }
         return _testabilityGetter.findTestabilityInTree(this, elem, findInAncestors);
     };
+    /** @nocollapse */
     TestabilityRegistry.decorators = [
         { type: decorators_1.Injectable },
     ];
+    /** @nocollapse */
     TestabilityRegistry.ctorParameters = [];
     return TestabilityRegistry;
 }());
@@ -130,6 +134,7 @@ var _NoopGetTestability = (function () {
 }());
 /**
  * Set the {@link GetTestability} implementation used by the Angular testing framework.
+ * @experimental
  */
 function setTestabilityGetter(getter) {
     _testabilityGetter = getter;

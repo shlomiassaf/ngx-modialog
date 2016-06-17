@@ -24,7 +24,7 @@ function fakeAsync(fn) {
     var fakeAsyncTestZoneSpec = new _FakeAsyncTestZoneSpecType();
     var fakeAsyncZone = Zone.current.fork(fakeAsyncTestZoneSpec);
     return function () {
-        var args = [];
+        var args = []; /** TODO #9100 */
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i - 0] = arguments[_i];
         }
@@ -71,13 +71,21 @@ exports.clearPendingTimers = clearPendingTimers;
  *
  * {@example testing/ts/fake_async.ts region='basic'}
  *
- * @param {number} millis Number of millisecond, defaults to 0
  */
 function tick(millis) {
     if (millis === void 0) { millis = 0; }
     _getFakeAsyncZoneSpec().tick(millis);
 }
 exports.tick = tick;
+/**
+ * Discard all remaining periodic tasks.
+ */
+function discardPeriodicTasks() {
+    var zoneSpec = _getFakeAsyncZoneSpec();
+    var pendingTimers = zoneSpec.pendingPeriodicTimers;
+    zoneSpec.pendingPeriodicTimers.length = 0;
+}
+exports.discardPeriodicTasks = discardPeriodicTasks;
 /**
  * Flush any pending microtasks.
  */

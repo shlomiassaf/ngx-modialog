@@ -1,23 +1,30 @@
 "use strict";
 var core_1 = require('@angular/core');
-var async_1 = require('../../src/facade/async');
+var async_1 = require('../facade/async');
 var location_strategy_1 = require('./location_strategy');
 var Location = (function () {
     function Location(platformStrategy) {
         var _this = this;
-        this.platformStrategy = platformStrategy;
         /** @internal */
-        this._subject = new async_1.EventEmitter();
-        var browserBaseHref = this.platformStrategy.getBaseHref();
+        this._subject = new core_1.EventEmitter();
+        this._platformStrategy = platformStrategy;
+        var browserBaseHref = this._platformStrategy.getBaseHref();
         this._baseHref = Location.stripTrailingSlash(_stripIndexHtml(browserBaseHref));
-        this.platformStrategy.onPopState(function (ev) {
+        this._platformStrategy.onPopState(function (ev) {
             async_1.ObservableWrapper.callEmit(_this._subject, { 'url': _this.path(), 'pop': true, 'type': ev.type });
         });
     }
     /**
      * Returns the normalized URL path.
      */
-    Location.prototype.path = function () { return this.normalize(this.platformStrategy.path()); };
+    Location.prototype.path = function () { return this.normalize(this._platformStrategy.path()); };
+    /**
+     * Normalizes the given path and compares to the current normalized path.
+     */
+    Location.prototype.isCurrentPathEqualTo = function (path, query) {
+        if (query === void 0) { query = ''; }
+        return this.path() == this.normalize(path + Location.normalizeQueryParams(query));
+    };
     /**
      * Given a string representing a URL, returns the normalized URL path without leading or
      * trailing slashes
@@ -35,7 +42,7 @@ var Location = (function () {
         if (url.length > 0 && !url.startsWith('/')) {
             url = '/' + url;
         }
-        return this.platformStrategy.prepareExternalUrl(url);
+        return this._platformStrategy.prepareExternalUrl(url);
     };
     // TODO: rename this method to pushState
     /**
@@ -44,7 +51,7 @@ var Location = (function () {
      */
     Location.prototype.go = function (path, query) {
         if (query === void 0) { query = ''; }
-        this.platformStrategy.pushState(null, '', path, query);
+        this._platformStrategy.pushState(null, '', path, query);
     };
     /**
      * Changes the browsers URL to the normalized version of the given URL, and replaces
@@ -52,16 +59,16 @@ var Location = (function () {
      */
     Location.prototype.replaceState = function (path, query) {
         if (query === void 0) { query = ''; }
-        this.platformStrategy.replaceState(null, '', path, query);
+        this._platformStrategy.replaceState(null, '', path, query);
     };
     /**
      * Navigates forward in the platform's history.
      */
-    Location.prototype.forward = function () { this.platformStrategy.forward(); };
+    Location.prototype.forward = function () { this._platformStrategy.forward(); };
     /**
      * Navigates back in the platform's history.
      */
-    Location.prototype.back = function () { this.platformStrategy.back(); };
+    Location.prototype.back = function () { this._platformStrategy.back(); };
     /**
      * Subscribe to the platform's `popState` events.
      */
@@ -111,9 +118,11 @@ var Location = (function () {
         }
         return url;
     };
+    /** @nocollapse */
     Location.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     Location.ctorParameters = [
         { type: location_strategy_1.LocationStrategy, },
     ];

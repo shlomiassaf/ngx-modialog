@@ -1,6 +1,6 @@
-import { isPresent } from '../../src/facade/lang';
-import { BaseException } from '../../src/facade/exceptions';
-import { Map, MapWrapper, Set, SetWrapper, StringMapWrapper } from '../../src/facade/collection';
+import { Map, MapWrapper, Set, SetWrapper, StringMapWrapper } from '../facade/collection';
+import { BaseException } from '../facade/exceptions';
+import { isPresent } from '../facade/lang';
 import { ReflectorReader } from './reflector_reader';
 /**
  * Reflective information about a symbol, including annotations, interfaces, and other metadata.
@@ -32,6 +32,7 @@ export class Reflector extends ReflectorReader {
         this._usedKeys = null;
         this.reflectionCapabilities = reflectionCapabilities;
     }
+    updateCapabilities(caps) { this.reflectionCapabilities = caps; }
     isReflectionEnabled() { return this.reflectionCapabilities.isReflectionEnabled(); }
     /**
      * Causes `this` reflector to track keys used to access
@@ -102,6 +103,15 @@ export class Reflector extends ReflectorReader {
         }
         else {
             return this.reflectionCapabilities.interfaces(type);
+        }
+    }
+    hasLifecycleHook(type, lcInterface, lcProperty) {
+        var interfaces = this.interfaces(type);
+        if (interfaces.indexOf(lcInterface) !== -1) {
+            return true;
+        }
+        else {
+            return this.reflectionCapabilities.hasLifecycleHook(type, lcInterface, lcProperty);
         }
     }
     getter(name) {

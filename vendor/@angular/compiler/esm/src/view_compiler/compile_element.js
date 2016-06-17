@@ -1,10 +1,10 @@
 import { BaseException } from '@angular/core';
-import { isPresent, isBlank } from '../../src/facade/lang';
-import { ListWrapper, StringMapWrapper } from '../../src/facade/collection';
-import * as o from '../output/output_ast';
+import { ListWrapper, StringMapWrapper } from '../facade/collection';
+import { isBlank, isPresent } from '../facade/lang';
 import { Identifiers, identifierToken } from '../identifiers';
-import { InjectMethodVars } from './constants';
+import * as o from '../output/output_ast';
 import { ProviderAst, ProviderAstType } from '../template_ast';
+import { InjectMethodVars } from './constants';
 import { CompileTokenMap, CompileTokenMetadata, CompileProviderMetadata, CompileDiDependencyMetadata, CompileIdentifierMetadata } from '../compile_metadata';
 import { getPropertyInView, createDiTokenExpression, injectFromViewParentInjector } from './util';
 import { CompileQuery, createQueryList, addQueryToTokenMap } from './compile_query';
@@ -55,12 +55,8 @@ export class CompileElement extends CompileNode {
         // private is fine here as no child view will reference an AppElement
         this.view.fields.push(new o.ClassField(fieldName, o.importType(Identifiers.AppElement), [o.StmtModifier.Private]));
         var statement = o.THIS_EXPR.prop(fieldName)
-            .set(o.importExpr(Identifiers.AppElement)
-            .instantiate([
-            o.literal(this.nodeIndex),
-            o.literal(parentNodeIndex),
-            o.THIS_EXPR,
-            this.renderNode
+            .set(o.importExpr(Identifiers.AppElement).instantiate([
+            o.literal(this.nodeIndex), o.literal(parentNodeIndex), o.THIS_EXPR, this.renderNode
         ]))
             .toStmt();
         this.view.createMethod.addStmt(statement);
@@ -78,8 +74,9 @@ export class CompileElement extends CompileNode {
     setEmbeddedView(embeddedView) {
         this.embeddedView = embeddedView;
         if (isPresent(embeddedView)) {
-            var createTemplateRefExpr = o.importExpr(Identifiers.TemplateRef_)
-                .instantiate([this.appElement, this.embeddedView.viewFactory]);
+            var createTemplateRefExpr = o.importExpr(Identifiers.TemplateRef_).instantiate([
+                this.appElement, this.embeddedView.viewFactory
+            ]);
             var provider = new CompileProviderMetadata({ token: identifierToken(Identifiers.TemplateRef), useValue: createTemplateRefExpr });
             // Add TemplateRef as first provider as it does not have deps on other providers
             this._resolvedProvidersArray.unshift(new ProviderAst(provider.token, false, true, [provider], ProviderAstType.Builtin, this.sourceAst.sourceSpan));
@@ -129,7 +126,7 @@ export class CompileElement extends CompileNode {
             var queriesForProvider = this._getQueriesFor(resolvedProvider.token);
             ListWrapper.addAll(queriesWithReads, queriesForProvider.map(query => new _QueryWithRead(query, resolvedProvider.token)));
         });
-        StringMapWrapper.forEach(this.referenceTokens, (_, varName) => {
+        StringMapWrapper.forEach(this.referenceTokens, (_ /** TODO #9100 */, varName /** TODO #9100 */) => {
             var token = this.referenceTokens[varName];
             var varValue;
             if (isPresent(token)) {
@@ -140,8 +137,7 @@ export class CompileElement extends CompileNode {
             }
             this.view.locals.set(varName, varValue);
             var varToken = new CompileTokenMetadata({ value: varName });
-            ListWrapper.addAll(queriesWithReads, this._getQueriesFor(varToken)
-                .map(query => new _QueryWithRead(query, varToken)));
+            ListWrapper.addAll(queriesWithReads, this._getQueriesFor(varToken).map(query => new _QueryWithRead(query, varToken)));
         });
         queriesWithReads.forEach((queryWithRead) => {
             var value;
@@ -164,10 +160,12 @@ export class CompileElement extends CompileNode {
             }
         });
         if (isPresent(this.component)) {
-            var componentConstructorViewQueryList = isPresent(this.component) ? o.literalArr(this._componentConstructorViewQueryLists) :
+            var componentConstructorViewQueryList = isPresent(this.component) ?
+                o.literalArr(this._componentConstructorViewQueryLists) :
                 o.NULL_EXPR;
             var compExpr = isPresent(this.getComponent()) ? this.getComponent() : o.NULL_EXPR;
-            this.view.createMethod.addStmt(this.appElement.callMethod('initComponent', [compExpr, componentConstructorViewQueryList, this._compViewExpr])
+            this.view.createMethod.addStmt(this.appElement
+                .callMethod('initComponent', [compExpr, componentConstructorViewQueryList, this._compViewExpr])
                 .toStmt());
         }
     }
@@ -184,7 +182,7 @@ export class CompileElement extends CompileNode {
             var providerChildNodeCount = resolvedProvider.providerType === ProviderAstType.PrivateService ? 0 : childNodeCount;
             this.view.injectorGetMethod.addStmt(createInjectInternalCondition(this.nodeIndex, providerChildNodeCount, resolvedProvider, providerExpr));
         });
-        this._queries.values().forEach((queries) => queries.forEach((query) => query.afterChildren(this.view.updateContentQueriesMethod)));
+        this._queries.values().forEach((queries) => queries.forEach((query) => query.afterChildren(this.view.createMethod, this.view.updateContentQueriesMethod)));
     }
     addContentNode(ngContentIndex, nodeExpr) {
         this.contentNodesByNgContentIndex[ngContentIndex].push(nodeExpr);
@@ -335,7 +333,9 @@ class _ValueOutputAstTransformer extends ValueTransformer {
     }
     visitStringMap(map, context) {
         var entries = [];
-        StringMapWrapper.forEach(map, (value, key) => { entries.push([key, visitValue(value, this, context)]); });
+        StringMapWrapper.forEach(map, (value /** TODO #9100 */, key /** TODO #9100 */) => {
+            entries.push([key, visitValue(value, this, context)]);
+        });
         return o.literalMap(entries);
     }
     visitPrimitive(value, context) { return o.literal(value); }

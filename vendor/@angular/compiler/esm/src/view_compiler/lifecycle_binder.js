@@ -1,6 +1,6 @@
 import { LifecycleHooks } from '../../core_private';
 import * as o from '../output/output_ast';
-import { DetectChangesVars, ChangeDetectorStateEnum } from './constants';
+import { ChangeDetectorStateEnum, DetectChangesVars } from './constants';
 var STATE_IS_NEVER_CHECKED = o.THIS_EXPR.prop('cdState').identical(ChangeDetectorStateEnum.NeverChecked);
 var NOT_THROW_ON_CHANGES = o.not(DetectChangesVars.throwOnChange);
 export function bindDirectiveDetectChangesLifecycleCallbacks(directiveAst, directiveInstance, compileElement) {

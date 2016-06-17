@@ -36,6 +36,7 @@ function noopScope(arg0, arg1) {
  * needs to be fixed before the app should be profiled. Add try-finally only when you expect that
  * an exception is expected during normal execution while profiling.
  *
+ * @experimental
  */
 exports.wtfCreateScope = exports.wtfEnabled ? impl.createScope : function (signature, flags) { return noopScope; };
 /**
@@ -45,6 +46,7 @@ exports.wtfCreateScope = exports.wtfEnabled ? impl.createScope : function (signa
  * - `returnValue` (optional) to be passed to the WTF.
  *
  * Returns the `returnValue for easy chaining.
+ * @experimental
  */
 exports.wtfLeave = exports.wtfEnabled ? impl.leave : function (s, r) { return r; };
 /**
@@ -58,14 +60,14 @@ exports.wtfLeave = exports.wtfEnabled ? impl.leave : function (s, r) { return r;
  *          wtfEndTimeRange(s);
  *        });
  *     }
+ * @experimental
  */
 exports.wtfStartTimeRange = exports.wtfEnabled ? impl.startTimeRange : function (rangeType, action) { return null; };
 /**
  * Ends a async time range operation.
  * [range] is the return value from [wtfStartTimeRange] Async ranges only work if WTF has been
  * enabled.
+ * @experimental
  */
-exports.wtfEndTimeRange = exports.wtfEnabled ? impl.endTimeRange : function (r) {
-    return null;
-};
+exports.wtfEndTimeRange = exports.wtfEnabled ? impl.endTimeRange : function (r) { return null; };
 //# sourceMappingURL=profile.js.map

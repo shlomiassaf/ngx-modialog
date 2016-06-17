@@ -5,10 +5,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 /**
-* A base class for the WrappedException that can be used to identify
-* a WrappedException from ExceptionHandler without adding circular
-* dependency.
-*/
+ * A base class for the WrappedException that can be used to identify
+ * a WrappedException from ExceptionHandler without adding circular
+ * dependency.
+ */
 var BaseWrappedException = (function (_super) {
     __extends(BaseWrappedException, _super);
     function BaseWrappedException(message) {

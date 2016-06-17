@@ -1,14 +1,14 @@
+import { APP_ID } from '../application_tokens';
+import { devModeEqual } from '../change_detection/change_detection';
+import { uninitialized } from '../change_detection/change_detection_util';
+import { Inject, Injectable } from '../di/decorators';
+import { ListWrapper, StringMapWrapper } from '../facade/collection';
+import { BaseException } from '../facade/exceptions';
+import { isBlank, isPresent, looseIdentical } from '../facade/lang';
+import { RenderComponentType, RootRenderer } from '../render/api';
 import { SanitizationService } from '../security';
-import { isBlank, isPresent, looseIdentical } from '../../src/facade/lang';
-import { ListWrapper, StringMapWrapper } from '../../src/facade/collection';
-import { BaseException } from '../../src/facade/exceptions';
 import { AppElement } from './element';
 import { ExpressionChangedAfterItHasBeenCheckedException } from './exceptions';
-import { devModeEqual } from '../change_detection/change_detection';
-import { RootRenderer, RenderComponentType } from '../render/api';
-import { APP_ID } from '../application_tokens';
-import { Injectable, Inject } from '../di/decorators';
-import { uninitialized } from "../change_detection/change_detection_util";
 export class ViewUtils {
     constructor(_renderer, _appId, sanitizer) {
         this._renderer = _renderer;
@@ -27,9 +27,11 @@ export class ViewUtils {
         return this._renderer.renderComponent(renderComponentType);
     }
 }
+/** @nocollapse */
 ViewUtils.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 ViewUtils.ctorParameters = [
     { type: RootRenderer, },
     { type: undefined, decorators: [{ type: Inject, args: [APP_ID,] },] },
@@ -92,8 +94,7 @@ export function interpolate(valueCount, c0, a1, c1, a2, c2, a3, c3, a4, c4, a5, 
                 c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5;
         case 6:
             return c0 + _toStringWithNull(a1) + c1 + _toStringWithNull(a2) + c2 + _toStringWithNull(a3) +
-                c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5 + _toStringWithNull(a6) +
-                c6;
+                c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5 + _toStringWithNull(a6) + c6;
         case 7:
             return c0 + _toStringWithNull(a1) + c1 + _toStringWithNull(a2) + c2 + _toStringWithNull(a3) +
                 c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5 + _toStringWithNull(a6) +
@@ -105,8 +106,7 @@ export function interpolate(valueCount, c0, a1, c1, a2, c2, a3, c3, a4, c4, a5, 
         case 9:
             return c0 + _toStringWithNull(a1) + c1 + _toStringWithNull(a2) + c2 + _toStringWithNull(a3) +
                 c3 + _toStringWithNull(a4) + c4 + _toStringWithNull(a5) + c5 + _toStringWithNull(a6) +
-                c6 + _toStringWithNull(a7) + c7 + _toStringWithNull(a8) + c8 + _toStringWithNull(a9) +
-                c9;
+                c6 + _toStringWithNull(a7) + c7 + _toStringWithNull(a8) + c8 + _toStringWithNull(a9) + c9;
         default:
             throw new BaseException(`Does not support more than 9 expressions`);
     }
@@ -168,7 +168,7 @@ export function pureProxy1(fn) {
 }
 export function pureProxy2(fn) {
     var result;
-    var v0, v1;
+    var v0 /** TODO #9100 */, v1;
     v0 = v1 = uninitialized;
     return (p0, p1) => {
         if (!looseIdentical(v0, p0) || !looseIdentical(v1, p1)) {
@@ -181,7 +181,7 @@ export function pureProxy2(fn) {
 }
 export function pureProxy3(fn) {
     var result;
-    var v0, v1, v2;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2;
     v0 = v1 = v2 = uninitialized;
     return (p0, p1, p2) => {
         if (!looseIdentical(v0, p0) || !looseIdentical(v1, p1) || !looseIdentical(v2, p2)) {
@@ -195,7 +195,7 @@ export function pureProxy3(fn) {
 }
 export function pureProxy4(fn) {
     var result;
-    var v0, v1, v2, v3;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3;
     v0 = v1 = v2 = v3 = uninitialized;
     return (p0, p1, p2, p3) => {
         if (!looseIdentical(v0, p0) || !looseIdentical(v1, p1) || !looseIdentical(v2, p2) ||
@@ -211,7 +211,7 @@ export function pureProxy4(fn) {
 }
 export function pureProxy5(fn) {
     var result;
-    var v0, v1, v2, v3, v4;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4;
     v0 = v1 = v2 = v3 = v4 = uninitialized;
     return (p0, p1, p2, p3, p4) => {
         if (!looseIdentical(v0, p0) || !looseIdentical(v1, p1) || !looseIdentical(v2, p2) ||
@@ -228,7 +228,7 @@ export function pureProxy5(fn) {
 }
 export function pureProxy6(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5;
     v0 = v1 = v2 = v3 = v4 = v5 = uninitialized;
     return (p0, p1, p2, p3, p4, p5) => {
         if (!looseIdentical(v0, p0) || !looseIdentical(v1, p1) || !looseIdentical(v2, p2) ||
@@ -246,7 +246,7 @@ export function pureProxy6(fn) {
 }
 export function pureProxy7(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5, v6;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5 /** TODO #9100 */, v6;
     v0 = v1 = v2 = v3 = v4 = v5 = v6 = uninitialized;
     return (p0, p1, p2, p3, p4, p5, p6) => {
         if (!looseIdentical(v0, p0) || !looseIdentical(v1, p1) || !looseIdentical(v2, p2) ||
@@ -266,7 +266,7 @@ export function pureProxy7(fn) {
 }
 export function pureProxy8(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5, v6, v7;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5 /** TODO #9100 */, v6 /** TODO #9100 */, v7;
     v0 = v1 = v2 = v3 = v4 = v5 = v6 = v7 = uninitialized;
     return (p0, p1, p2, p3, p4, p5, p6, p7) => {
         if (!looseIdentical(v0, p0) || !looseIdentical(v1, p1) || !looseIdentical(v2, p2) ||
@@ -287,7 +287,7 @@ export function pureProxy8(fn) {
 }
 export function pureProxy9(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5, v6, v7, v8;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5 /** TODO #9100 */, v6 /** TODO #9100 */, v7 /** TODO #9100 */, v8;
     v0 = v1 = v2 = v3 = v4 = v5 = v6 = v7 = v8 = uninitialized;
     return (p0, p1, p2, p3, p4, p5, p6, p7, p8) => {
         if (!looseIdentical(v0, p0) || !looseIdentical(v1, p1) || !looseIdentical(v2, p2) ||
@@ -309,7 +309,7 @@ export function pureProxy9(fn) {
 }
 export function pureProxy10(fn) {
     var result;
-    var v0, v1, v2, v3, v4, v5, v6, v7, v8, v9;
+    var v0 /** TODO #9100 */, v1 /** TODO #9100 */, v2 /** TODO #9100 */, v3 /** TODO #9100 */, v4 /** TODO #9100 */, v5 /** TODO #9100 */, v6 /** TODO #9100 */, v7 /** TODO #9100 */, v8 /** TODO #9100 */, v9;
     v0 = v1 = v2 = v3 = v4 = v5 = v6 = v7 = v8 = v9 = uninitialized;
     return (p0, p1, p2, p3, p4, p5, p6, p7, p8, p9) => {
         if (!looseIdentical(v0, p0) || !looseIdentical(v1, p1) || !looseIdentical(v2, p2) ||

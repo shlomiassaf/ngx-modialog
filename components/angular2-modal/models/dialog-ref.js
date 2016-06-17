@@ -53,7 +53,7 @@ var DialogRef = (function () {
     DialogRef.prototype.destroy = function () { };
     DialogRef.prototype._fireHook = function (name) {
         var instance = this.contentRef && this.contentRef.instance, fn = instance && typeof instance[name] === 'function' && instance[name];
-        return Promise.resolve(fn ? fn() : false);
+        return Promise.resolve(fn ? fn.call(instance) : false);
     };
     return DialogRef;
 }());

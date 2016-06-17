@@ -1,20 +1,19 @@
+/**
+ * @module
+ * @description
+ * The `di` module provides dependency injection container services.
+ */
 "use strict";
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
-/**
-* @module
-* @description
-* The `di` module provides dependency injection container services.
-*/
 var metadata_1 = require('./di/metadata');
-exports.InjectMetadata = metadata_1.InjectMetadata;
-exports.OptionalMetadata = metadata_1.OptionalMetadata;
-exports.InjectableMetadata = metadata_1.InjectableMetadata;
-exports.SelfMetadata = metadata_1.SelfMetadata;
 exports.HostMetadata = metadata_1.HostMetadata;
+exports.InjectMetadata = metadata_1.InjectMetadata;
+exports.InjectableMetadata = metadata_1.InjectableMetadata;
+exports.OptionalMetadata = metadata_1.OptionalMetadata;
+exports.SelfMetadata = metadata_1.SelfMetadata;
 exports.SkipSelfMetadata = metadata_1.SkipSelfMetadata;
-exports.DependencyMetadata = metadata_1.DependencyMetadata;
 // we have to reexport * because Dart and TS export two different sets of types
 __export(require('./di/decorators'));
 var forward_ref_1 = require('./di/forward_ref');
@@ -32,7 +31,6 @@ exports.Provider = provider_1.Provider;
 exports.provide = provider_1.provide;
 var reflective_provider_1 = require('./di/reflective_provider');
 exports.ResolvedReflectiveFactory = reflective_provider_1.ResolvedReflectiveFactory;
-exports.ReflectiveDependency = reflective_provider_1.ReflectiveDependency;
 var reflective_key_1 = require('./di/reflective_key');
 exports.ReflectiveKey = reflective_key_1.ReflectiveKey;
 var reflective_exceptions_1 = require('./di/reflective_exceptions');

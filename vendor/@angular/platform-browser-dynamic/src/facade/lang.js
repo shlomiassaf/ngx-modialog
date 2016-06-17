@@ -49,6 +49,7 @@ exports.lockMode = lockMode;
  * One important assertion this disables verifies that a change detection pass
  * does not result in additional changes to any bindings (also known as
  * unidirectional data flow).
+ * @stable
  */
 function enableProdMode() {
     if (_modeLocked) {
@@ -77,19 +78,19 @@ function isBlank(obj) {
 }
 exports.isBlank = isBlank;
 function isBoolean(obj) {
-    return typeof obj === "boolean";
+    return typeof obj === 'boolean';
 }
 exports.isBoolean = isBoolean;
 function isNumber(obj) {
-    return typeof obj === "number";
+    return typeof obj === 'number';
 }
 exports.isNumber = isNumber;
 function isString(obj) {
-    return typeof obj === "string";
+    return typeof obj === 'string';
 }
 exports.isString = isString;
 function isFunction(obj) {
-    return typeof obj === "function";
+    return typeof obj === 'function';
 }
 exports.isFunction = isFunction;
 function isType(obj) {
@@ -133,7 +134,7 @@ function stringify(token) {
         return token.overriddenName;
     }
     var res = token.toString();
-    var newLineIndex = res.indexOf("\n");
+    var newLineIndex = res.indexOf('\n');
     return (newLineIndex === -1) ? res : res.substring(0, newLineIndex);
 }
 exports.stringify = stringify;
@@ -226,7 +227,7 @@ var StringJoiner = (function () {
         this.parts = parts;
     }
     StringJoiner.prototype.add = function (part) { this.parts.push(part); };
-    StringJoiner.prototype.toString = function () { return this.parts.join(""); };
+    StringJoiner.prototype.toString = function () { return this.parts.join(''); };
     return StringJoiner;
 }());
 exports.StringJoiner = StringJoiner;
@@ -248,7 +249,7 @@ var NumberWrapper = (function () {
     NumberWrapper.parseIntAutoRadix = function (text) {
         var result = parseInt(text);
         if (isNaN(result)) {
-            throw new NumberParseError("Invalid integer literal when parsing " + text);
+            throw new NumberParseError('Invalid integer literal when parsing ' + text);
         }
         return result;
     };
@@ -269,8 +270,7 @@ var NumberWrapper = (function () {
                 return result;
             }
         }
-        throw new NumberParseError("Invalid integer literal when parsing " + text + " in base " +
-            radix);
+        throw new NumberParseError('Invalid integer literal when parsing ' + text + ' in base ' + radix);
     };
     // TODO: NaN is a valid literal but is returned by parseFloat to indicate an error.
     NumberWrapper.parseFloat = function (text) { return parseFloat(text); };
@@ -340,12 +340,13 @@ var FunctionWrapper = (function () {
     function FunctionWrapper() {
     }
     FunctionWrapper.apply = function (fn, posArgs) { return fn.apply(null, posArgs); };
+    FunctionWrapper.bind = function (fn, scope) { return fn.bind(scope); };
     return FunctionWrapper;
 }());
 exports.FunctionWrapper = FunctionWrapper;
 // JS has NaN !== NaN
 function looseIdentical(a, b) {
-    return a === b || typeof a === "number" && typeof b === "number" && isNaN(a) && isNaN(b);
+    return a === b || typeof a === 'number' && typeof b === 'number' && isNaN(a) && isNaN(b);
 }
 exports.looseIdentical = looseIdentical;
 // JS considers NaN is the same as NaN for map Key (while NaN !== NaN otherwise)
@@ -363,7 +364,7 @@ function normalizeBool(obj) {
 }
 exports.normalizeBool = normalizeBool;
 function isJsObject(o) {
-    return o !== null && (typeof o === "function" || typeof o === "object");
+    return o !== null && (typeof o === 'function' || typeof o === 'object');
 }
 exports.isJsObject = isJsObject;
 function print(obj) {

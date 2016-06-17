@@ -1,7 +1,7 @@
 "use strict";
 var index_1 = require('../index');
-var exceptions_1 = require('../src/facade/exceptions');
 var collection_1 = require('../src/facade/collection');
+var exceptions_1 = require('../src/facade/exceptions');
 var lang_1 = require('../src/facade/lang');
 var async_1 = require('./async');
 var async_test_completer_1 = require('./async_test_completer');
@@ -115,9 +115,6 @@ exports.resetBaseTestProviders = resetBaseTestProviders;
  * eventually
  *   becomes `it('...', @Inject (object: AClass, async: AsyncTestCompleter) => { ... });`
  *
- * @param {Array} tokens
- * @param {Function} fn
- * @return {Function}
  */
 function inject(tokens, fn) {
     var testInjector = getTestInjector();
@@ -153,7 +150,7 @@ var InjectSetupWrapper = (function () {
             return inject_impl(tokens, fn)();
         };
     };
-    /** @Deprecated {use async(withProviders().inject())} */
+    /** @deprecated {use async(withProviders().inject())} */
     InjectSetupWrapper.prototype.injectAsync = function (tokens, fn) {
         var _this = this;
         return function () {
@@ -169,7 +166,7 @@ function withProviders(providers) {
 }
 exports.withProviders = withProviders;
 /**
- * @Deprecated {use async(inject())}
+ * @deprecated {use async(inject())}
  *
  * Allows injecting dependencies in `beforeEach()` and `it()`. The test must return
  * a promise which will resolve when all asynchronous activity is complete.
@@ -184,9 +181,6 @@ exports.withProviders = withProviders;
  * })
  * ```
  *
- * @param {Array} tokens
- * @param {Function} fn
- * @return {Function}
  */
 function injectAsync(tokens, fn) {
     return async_1.async(inject(tokens, fn));

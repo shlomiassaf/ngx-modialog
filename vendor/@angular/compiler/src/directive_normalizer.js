@@ -1,20 +1,22 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../src/facade/lang');
-var exceptions_1 = require('../src/facade/exceptions');
 var async_1 = require('../src/facade/async');
+var exceptions_1 = require('../src/facade/exceptions');
+var lang_1 = require('../src/facade/lang');
 var compile_metadata_1 = require('./compile_metadata');
 var xhr_1 = require('./xhr');
 var url_resolver_1 = require('./url_resolver');
 var style_url_resolver_1 = require('./style_url_resolver');
 var html_ast_1 = require('./html_ast');
 var html_parser_1 = require('./html_parser');
+var config_1 = require('./config');
 var template_preparser_1 = require('./template_preparser');
 var DirectiveNormalizer = (function () {
-    function DirectiveNormalizer(_xhr, _urlResolver, _htmlParser) {
+    function DirectiveNormalizer(_xhr, _urlResolver, _htmlParser, _config) {
         this._xhr = _xhr;
         this._urlResolver = _urlResolver;
         this._htmlParser = _htmlParser;
+        this._config = _config;
     }
     DirectiveNormalizer.prototype.normalizeDirective = function (directive) {
         if (!directive.isComponent) {
@@ -75,6 +77,9 @@ var DirectiveNormalizer = (function () {
             return styleWithImports.style;
         });
         var encapsulation = templateMeta.encapsulation;
+        if (lang_1.isBlank(encapsulation)) {
+            encapsulation = this._config.defaultEncapsulation;
+        }
         if (encapsulation === core_1.ViewEncapsulation.Emulated && allResolvedStyles.length === 0 &&
             allStyleAbsUrls.length === 0) {
             encapsulation = core_1.ViewEncapsulation.None;
@@ -85,16 +90,20 @@ var DirectiveNormalizer = (function () {
             templateUrl: templateAbsUrl,
             styles: allResolvedStyles,
             styleUrls: allStyleAbsUrls,
-            ngContentSelectors: visitor.ngContentSelectors
+            ngContentSelectors: visitor.ngContentSelectors,
+            animations: templateMeta.animations
         });
     };
+    /** @nocollapse */
     DirectiveNormalizer.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     DirectiveNormalizer.ctorParameters = [
         { type: xhr_1.XHR, },
         { type: url_resolver_1.UrlResolver, },
         { type: html_parser_1.HtmlParser, },
+        { type: config_1.CompilerConfig, },
     ];
     return DirectiveNormalizer;
 }());

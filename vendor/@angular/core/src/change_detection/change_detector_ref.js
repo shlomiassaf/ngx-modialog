@@ -1,4 +1,7 @@
 "use strict";
+/**
+ * @stable
+ */
 var ChangeDetectorRef = (function () {
     function ChangeDetectorRef() {
     }

@@ -1,8 +1,8 @@
 /**
-* A base class for the WrappedException that can be used to identify
-* a WrappedException from ExceptionHandler without adding circular
-* dependency.
-*/
+ * A base class for the WrappedException that can be used to identify
+ * a WrappedException from ExceptionHandler without adding circular
+ * dependency.
+ */
 export class BaseWrappedException extends Error {
     constructor(message) {
         super(message);

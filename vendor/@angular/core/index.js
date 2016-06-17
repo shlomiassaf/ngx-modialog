@@ -3,10 +3,10 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 /**
-* @module
-* @description
-* Starting point to import all public core APIs.
-*/
+ * @module
+ * @description
+ * Starting point to import all public core APIs.
+ */
 __export(require('./src/metadata'));
 __export(require('./src/util'));
 __export(require('./src/di'));
@@ -38,20 +38,22 @@ __export(require('./src/change_detection'));
 __export(require('./src/platform_directives_and_pipes'));
 __export(require('./src/platform_common_providers'));
 __export(require('./src/application_common_providers'));
-__export(require('./src/reflection/reflection'));
 var profile_1 = require('./src/profile/profile');
 exports.wtfCreateScope = profile_1.wtfCreateScope;
 exports.wtfLeave = profile_1.wtfLeave;
 exports.wtfStartTimeRange = profile_1.wtfStartTimeRange;
 exports.wtfEndTimeRange = profile_1.wtfEndTimeRange;
-var lang_1 = require("./src/facade/lang");
+var lang_1 = require('./src/facade/lang');
 exports.Type = lang_1.Type;
 exports.enableProdMode = lang_1.enableProdMode;
-var async_1 = require("./src/facade/async");
+var async_1 = require('./src/facade/async');
 exports.EventEmitter = async_1.EventEmitter;
-var exceptions_1 = require("./src/facade/exceptions");
+var exceptions_1 = require('./src/facade/exceptions');
 exports.ExceptionHandler = exceptions_1.ExceptionHandler;
 exports.WrappedException = exceptions_1.WrappedException;
 exports.BaseException = exceptions_1.BaseException;
 __export(require('./private_export'));
+__export(require('./src/animation/metadata'));
+var animation_player_1 = require('./src/animation/animation_player');
+exports.AnimationPlayer = animation_player_1.AnimationPlayer;
 //# sourceMappingURL=index.js.map

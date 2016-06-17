@@ -1,5 +1,5 @@
-import { isPresent } from '../../src/facade/lang';
-import { ListWrapper, MapWrapper } from '../../src/facade/collection';
+import { ListWrapper, MapWrapper } from '../facade/collection';
+import { isPresent } from '../facade/lang';
 export class EventListener {
     constructor(name, callback) {
         this.name = name;
@@ -7,6 +7,9 @@ export class EventListener {
     }
     ;
 }
+/**
+ * @experimental
+ */
 export class DebugNode {
     constructor(nativeNode, parent, _debugInfo) {
         this._debugInfo = _debugInfo;
@@ -38,11 +41,16 @@ export class DebugNode {
      */
     inject(token) { return this.injector.get(token); }
 }
+/**
+ * @experimental
+ */
 export class DebugElement extends DebugNode {
     constructor(nativeNode, parent, _debugInfo) {
         super(nativeNode, parent, _debugInfo);
         this.properties = {};
         this.attributes = {};
+        this.classes = {};
+        this.styles = {};
         this.childNodes = [];
         this.nativeElement = nativeNode;
     }
@@ -106,6 +114,9 @@ export class DebugElement extends DebugNode {
         });
     }
 }
+/**
+ * @experimental
+ */
 export function asNativeElements(debugEls) {
     return debugEls.map((el) => el.nativeElement);
 }
@@ -133,6 +144,9 @@ function _queryNodeChildren(parentNode, predicate, matches) {
 }
 // Need to keep the nodes in a global Map so that multiple angular apps are supported.
 var _nativeNodeToDebugNode = new Map();
+/**
+ * @experimental
+ */
 export function getDebugNode(nativeNode) {
     return _nativeNodeToDebugNode.get(nativeNode);
 }

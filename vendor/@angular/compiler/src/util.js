@@ -1,6 +1,6 @@
 "use strict";
-var lang_1 = require('./facade/lang');
 var collection_1 = require('./facade/collection');
+var lang_1 = require('./facade/lang');
 exports.MODULE_SUFFIX = lang_1.IS_DART ? '.dart' : '';
 var CAMEL_CASE_REGEXP = /([A-Z])/g;
 var DASH_CASE_REGEXP = /-([a-z])/g;
@@ -51,7 +51,9 @@ var ValueTransformer = (function () {
     ValueTransformer.prototype.visitStringMap = function (map, context) {
         var _this = this;
         var result = {};
-        collection_1.StringMapWrapper.forEach(map, function (value, key) { result[key] = visitValue(value, _this, context); });
+        collection_1.StringMapWrapper.forEach(map, function (value /** TODO #9100 */, key /** TODO #9100 */) {
+            result[key] = visitValue(value, _this, context);
+        });
         return result;
     };
     ValueTransformer.prototype.visitPrimitive = function (value, context) { return value; };

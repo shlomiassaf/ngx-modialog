@@ -1,7 +1,7 @@
-import { Directive, Host, ViewContainerRef, TemplateRef } from '@angular/core';
-import { isPresent, isBlank, normalizeBlank } from '../../src/facade/lang';
-import { ListWrapper, Map } from '../../src/facade/collection';
-const _WHEN_DEFAULT = new Object();
+import { Directive, Host, TemplateRef, ViewContainerRef } from '@angular/core';
+import { ListWrapper, Map } from '../facade/collection';
+import { isBlank, isPresent, normalizeBlank } from '../facade/lang';
+const _CASE_DEFAULT = new Object();
 export class SwitchView {
     constructor(_viewContainerRef, _templateRef) {
         this._viewContainerRef = _viewContainerRef;
@@ -24,20 +24,20 @@ export class NgSwitch {
         var views = this._valueViews.get(value);
         if (isBlank(views)) {
             this._useDefault = true;
-            views = normalizeBlank(this._valueViews.get(_WHEN_DEFAULT));
+            views = normalizeBlank(this._valueViews.get(_CASE_DEFAULT));
         }
         this._activateViews(views);
         this._switchValue = value;
     }
     /** @internal */
-    _onWhenValueChanged(oldWhen, newWhen, view) {
-        this._deregisterView(oldWhen, view);
-        this._registerView(newWhen, view);
-        if (oldWhen === this._switchValue) {
+    _onCaseValueChanged(oldCase, newCase, view) {
+        this._deregisterView(oldCase, view);
+        this._registerView(newCase, view);
+        if (oldCase === this._switchValue) {
             view.destroy();
             ListWrapper.remove(this._activeViews, view);
         }
-        else if (newWhen === this._switchValue) {
+        else if (newCase === this._switchValue) {
             if (this._useDefault) {
                 this._useDefault = false;
                 this._emptyAllActiveViews();
@@ -48,7 +48,7 @@ export class NgSwitch {
         // Switch to default when there is no more active ViewContainers
         if (this._activeViews.length === 0 && !this._useDefault) {
             this._useDefault = true;
-            this._activateViews(this._valueViews.get(_WHEN_DEFAULT));
+            this._activateViews(this._valueViews.get(_CASE_DEFAULT));
         }
     }
     /** @internal */
@@ -80,8 +80,8 @@ export class NgSwitch {
     }
     /** @internal */
     _deregisterView(value, view) {
-        // `_WHEN_DEFAULT` is used a marker for non-registered whens
-        if (value === _WHEN_DEFAULT)
+        // `_CASE_DEFAULT` is used a marker for non-registered cases
+        if (value === _CASE_DEFAULT)
             return;
         var views = this._valueViews.get(value);
         if (views.length == 1) {
@@ -92,38 +92,51 @@ export class NgSwitch {
         }
     }
 }
+/** @nocollapse */
 NgSwitch.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitch]', inputs: ['ngSwitch'] },] },
 ];
-export class NgSwitchWhen {
+export class NgSwitchCase {
     constructor(viewContainer, templateRef, ngSwitch) {
-        // `_WHEN_DEFAULT` is used as a marker for a not yet initialized value
+        // `_CASE_DEFAULT` is used as a marker for a not yet initialized value
         /** @internal */
-        this._value = _WHEN_DEFAULT;
+        this._value = _CASE_DEFAULT;
         this._switch = ngSwitch;
         this._view = new SwitchView(viewContainer, templateRef);
     }
+    set ngSwitchCase(value) {
+        this._switch._onCaseValueChanged(this._value, value, this._view);
+        this._value = value;
+    }
     set ngSwitchWhen(value) {
-        this._switch._onWhenValueChanged(this._value, value, this._view);
+        if (!this._warned) {
+            this._warned = true;
+            console.warn('*ngSwitchWhen is deprecated and will be removed. Use *ngSwitchCase instead');
+        }
+        this._switch._onCaseValueChanged(this._value, value, this._view);
         this._value = value;
     }
 }
-NgSwitchWhen.decorators = [
-    { type: Directive, args: [{ selector: '[ngSwitchWhen]', inputs: ['ngSwitchWhen'] },] },
+/** @nocollapse */
+NgSwitchCase.decorators = [
+    { type: Directive, args: [{ selector: '[ngSwitchCase],[ngSwitchWhen]', inputs: ['ngSwitchCase', 'ngSwitchWhen'] },] },
 ];
-NgSwitchWhen.ctorParameters = [
+/** @nocollapse */
+NgSwitchCase.ctorParameters = [
     { type: ViewContainerRef, },
     { type: TemplateRef, },
     { type: NgSwitch, decorators: [{ type: Host },] },
 ];
 export class NgSwitchDefault {
     constructor(viewContainer, templateRef, sswitch) {
-        sswitch._registerView(_WHEN_DEFAULT, new SwitchView(viewContainer, templateRef));
+        sswitch._registerView(_CASE_DEFAULT, new SwitchView(viewContainer, templateRef));
     }
 }
+/** @nocollapse */
 NgSwitchDefault.decorators = [
     { type: Directive, args: [{ selector: '[ngSwitchDefault]' },] },
 ];
+/** @nocollapse */
 NgSwitchDefault.ctorParameters = [
     { type: ViewContainerRef, },
     { type: TemplateRef, },

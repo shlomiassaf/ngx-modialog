@@ -1,7 +1,8 @@
 "use strict";
 /**
-* Stores error information; delivered via [NgZone.onError] stream.
-*/
+ * Stores error information; delivered via [NgZone.onError] stream.
+ * @deprecated
+ */
 var NgZoneError = (function () {
     function NgZoneError(error, stackTrace) {
         this.error = error;

@@ -1,7 +1,7 @@
 "use strict";
-var collection_1 = require('../../../src/facade/collection');
-var lang_1 = require('../../../src/facade/lang');
-var exceptions_1 = require('../../../src/facade/exceptions');
+var collection_1 = require('../../facade/collection');
+var exceptions_1 = require('../../facade/exceptions');
+var lang_1 = require('../../facade/lang');
 /* @ts2dart_const */
 var DefaultKeyValueDifferFactory = (function () {
     function DefaultKeyValueDifferFactory() {
@@ -83,7 +83,7 @@ var DefaultKeyValueDiffer = (function () {
         var lastOldSeqRecord = null;
         var lastNewSeqRecord = null;
         var seqChanged = false;
-        this._forEach(map, function (value, key) {
+        this._forEach(map, function (value /** TODO #9100 */, key /** TODO #9100 */) {
             var newSeqRecord;
             if (oldSeqRecord !== null && key === oldSeqRecord.key) {
                 newSeqRecord = oldSeqRecord;
@@ -309,12 +309,14 @@ var DefaultKeyValueDiffer = (function () {
         for (record = this._removalsHead; record !== null; record = record._nextRemoved) {
             removals.push(lang_1.stringify(record));
         }
-        return "map: " + items.join(', ') + "\n" + "previous: " + previous.join(', ') + "\n" +
-            "additions: " + additions.join(', ') + "\n" + "changes: " + changes.join(', ') + "\n" +
-            "removals: " + removals.join(', ') + "\n";
+        return 'map: ' + items.join(', ') + '\n' +
+            'previous: ' + previous.join(', ') + '\n' +
+            'additions: ' + additions.join(', ') + '\n' +
+            'changes: ' + changes.join(', ') + '\n' +
+            'removals: ' + removals.join(', ') + '\n';
     };
     /** @internal */
-    DefaultKeyValueDiffer.prototype._forEach = function (obj, fn) {
+    DefaultKeyValueDiffer.prototype._forEach = function (obj /** TODO #9100 */, fn) {
         if (obj instanceof Map) {
             obj.forEach(fn);
         }
@@ -325,6 +327,9 @@ var DefaultKeyValueDiffer = (function () {
     return DefaultKeyValueDiffer;
 }());
 exports.DefaultKeyValueDiffer = DefaultKeyValueDiffer;
+/**
+ * @stable
+ */
 var KeyValueChangeRecord = (function () {
     function KeyValueChangeRecord(key) {
         this.key = key;

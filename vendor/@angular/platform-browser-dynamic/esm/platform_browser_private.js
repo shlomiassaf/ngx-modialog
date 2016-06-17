@@ -1,4 +1,3 @@
-import { __platform_browser_private__ as _ } from '@angular/platform-browser';
-export function getDOM() { return _.getDOM(); }
-;
+import { __platform_browser_private__ as r } from '@angular/platform-browser';
+export var getDOM = r.getDOM;
 //# sourceMappingURL=platform_browser_private.js.map

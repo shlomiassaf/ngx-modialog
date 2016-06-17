@@ -40,6 +40,7 @@ export function lockMode() {
  * One important assertion this disables verifies that a change detection pass
  * does not result in additional changes to any bindings (also known as
  * unidirectional data flow).
+ * @stable
  */
 export function enableProdMode() {
     if (_modeLocked) {
@@ -64,16 +65,16 @@ export function isBlank(obj) {
     return obj === undefined || obj === null;
 }
 export function isBoolean(obj) {
-    return typeof obj === "boolean";
+    return typeof obj === 'boolean';
 }
 export function isNumber(obj) {
-    return typeof obj === "number";
+    return typeof obj === 'number';
 }
 export function isString(obj) {
-    return typeof obj === "string";
+    return typeof obj === 'string';
 }
 export function isFunction(obj) {
-    return typeof obj === "function";
+    return typeof obj === 'function';
 }
 export function isType(obj) {
     return isFunction(obj);
@@ -109,7 +110,7 @@ export function stringify(token) {
         return token.overriddenName;
     }
     var res = token.toString();
-    var newLineIndex = res.indexOf("\n");
+    var newLineIndex = res.indexOf('\n');
     return (newLineIndex === -1) ? res : res.substring(0, newLineIndex);
 }
 // serialize / deserialize enum exist only for consistency with dart API
@@ -187,7 +188,7 @@ export class StringJoiner {
         this.parts = parts;
     }
     add(part) { this.parts.push(part); }
-    toString() { return this.parts.join(""); }
+    toString() { return this.parts.join(''); }
 }
 export class NumberParseError extends Error {
     constructor(message) {
@@ -202,7 +203,7 @@ export class NumberWrapper {
     static parseIntAutoRadix(text) {
         var result = parseInt(text);
         if (isNaN(result)) {
-            throw new NumberParseError("Invalid integer literal when parsing " + text);
+            throw new NumberParseError('Invalid integer literal when parsing ' + text);
         }
         return result;
     }
@@ -223,8 +224,7 @@ export class NumberWrapper {
                 return result;
             }
         }
-        throw new NumberParseError("Invalid integer literal when parsing " + text + " in base " +
-            radix);
+        throw new NumberParseError('Invalid integer literal when parsing ' + text + ' in base ' + radix);
     }
     // TODO: NaN is a valid literal but is returned by parseFloat to indicate an error.
     static parseFloat(text) { return parseFloat(text); }
@@ -277,10 +277,11 @@ export class RegExpMatcherWrapper {
 }
 export class FunctionWrapper {
     static apply(fn, posArgs) { return fn.apply(null, posArgs); }
+    static bind(fn, scope) { return fn.bind(scope); }
 }
 // JS has NaN !== NaN
 export function looseIdentical(a, b) {
-    return a === b || typeof a === "number" && typeof b === "number" && isNaN(a) && isNaN(b);
+    return a === b || typeof a === 'number' && typeof b === 'number' && isNaN(a) && isNaN(b);
 }
 // JS considers NaN is the same as NaN for map Key (while NaN !== NaN otherwise)
 // see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map
@@ -294,7 +295,7 @@ export function normalizeBool(obj) {
     return isBlank(obj) ? false : obj;
 }
 export function isJsObject(o) {
-    return o !== null && (typeof o === "function" || typeof o === "object");
+    return o !== null && (typeof o === 'function' || typeof o === 'object');
 }
 export function print(obj) {
     console.log(obj);

@@ -1,6 +1,6 @@
-import { Injectable, Pipe } from '@angular/core';
-import { isStringMap } from '../../src/facade/lang';
-import { StringMapWrapper } from '../../src/facade/collection';
+import { Pipe } from '@angular/core';
+import { StringMapWrapper } from '../facade/collection';
+import { isStringMap } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 export class I18nSelectPipe {
     transform(value, mapping) {
@@ -10,8 +10,8 @@ export class I18nSelectPipe {
         return StringMapWrapper.contains(mapping, value) ? mapping[value] : mapping['other'];
     }
 }
+/** @nocollapse */
 I18nSelectPipe.decorators = [
     { type: Pipe, args: [{ name: 'i18nSelect', pure: true },] },
-    { type: Injectable },
 ];
 //# sourceMappingURL=i18n_select_pipe.js.map

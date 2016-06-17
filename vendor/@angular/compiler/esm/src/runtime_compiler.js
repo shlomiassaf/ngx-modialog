@@ -1,6 +1,6 @@
-import { Injectable, ComponentFactory } from '@angular/core';
-import { IS_DART, isBlank } from '../src/facade/lang';
+import { ComponentFactory, Injectable } from '@angular/core';
 import { BaseException } from '../src/facade/exceptions';
+import { IS_DART, isBlank, isString } from '../src/facade/lang';
 import { ListWrapper } from '../src/facade/collection';
 import { PromiseWrapper } from '../src/facade/async';
 import { createHostComponentMeta, CompileIdentifierMetadata } from './compile_metadata';
@@ -29,7 +29,11 @@ export class RuntimeCompiler {
         this._compiledTemplateCache = new Map();
         this._compiledTemplateDone = new Map();
     }
-    resolveComponent(componentType) {
+    resolveComponent(component) {
+        if (isString(component)) {
+            return PromiseWrapper.reject(new BaseException(`Cannot resolve component using '${component}'.`), null);
+        }
+        let componentType = component;
         var compMeta = this._metadataResolver.getDirectiveMetadata(componentType);
         var hostCacheKey = this._hostCacheKeys.get(componentType);
         if (isBlank(hostCacheKey)) {
@@ -55,7 +59,8 @@ export class RuntimeCompiler {
             compiledTemplate = new CompiledTemplate();
             this._compiledTemplateCache.set(cacheKey, compiledTemplate);
             done =
-                PromiseWrapper.all([this._compileComponentStyles(compMeta)].concat(viewDirectives.map(dirMeta => this._templateNormalizer.normalizeDirective(dirMeta))))
+                PromiseWrapper
+                    .all([this._compileComponentStyles(compMeta)].concat(viewDirectives.map(dirMeta => this._templateNormalizer.normalizeDirective(dirMeta))))
                     .then((stylesAndNormalizedViewDirMetas) => {
                     var normalizedViewDirMetas = stylesAndNormalizedViewDirMetas.slice(1);
                     var styles = stylesAndNormalizedViewDirMetas[0];
@@ -135,9 +140,11 @@ export class RuntimeCompiler {
         return cssTextPromise;
     }
 }
+/** @nocollapse */
 RuntimeCompiler.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 RuntimeCompiler.ctorParameters = [
     { type: CompileMetadataResolver, },
     { type: DirectiveNormalizer, },
@@ -150,7 +157,8 @@ RuntimeCompiler.ctorParameters = [
 class CompiledTemplate {
     constructor() {
         this.viewFactory = null;
-        this.proxyViewFactory = (viewUtils, childInjector, contextEl) => this.viewFactory(viewUtils, childInjector, contextEl);
+        this.proxyViewFactory =
+                (viewUtils /** TODO #9100 */, childInjector /** TODO #9100 */, contextEl /** TODO #9100 */) => this.viewFactory(viewUtils, childInjector, contextEl);
     }
     init(viewFactory) { this.viewFactory = viewFactory; }
 }

@@ -1,5 +1,5 @@
-import { isPresent, isBlank } from '../../src/facade/lang';
-import { BaseException } from '../../src/facade/exceptions';
+import { BaseException } from '../facade/exceptions';
+import { isBlank, isPresent } from '../facade/lang';
 import * as o from '../output/output_ast';
 import { Identifiers } from '../identifiers';
 export function getPropertyInView(property, callingView, definedView) {

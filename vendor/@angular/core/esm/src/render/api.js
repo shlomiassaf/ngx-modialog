@@ -1,4 +1,7 @@
-import { unimplemented } from '../../src/facade/exceptions';
+import { unimplemented } from '../facade/exceptions';
+/**
+ * @experimental
+ */
 export class RenderComponentType {
     constructor(id, templateUrl, slotCount, encapsulation, styles) {
         this.id = id;
@@ -16,6 +19,9 @@ export class RenderDebugInfo {
     get context() { return unimplemented(); }
     get source() { return unimplemented(); }
 }
+/**
+ * @experimental
+ */
 export class Renderer {
 }
 /**
@@ -29,6 +35,7 @@ export class Renderer {
  * If you are implementing a custom renderer, you must implement this interface.
  *
  * The default Renderer implementation is `DomRenderer`. Also available is `WebWorkerRenderer`.
+ * @experimental
  */
 export class RootRenderer {
 }

@@ -1,5 +1,4 @@
-import { isPresent, isFunction, global, stringify } from '../../src/facade/lang';
-import { BaseException } from '../../src/facade/exceptions';
+import { Type, global, isFunction, isPresent, stringify } from '../facade/lang';
 export class ReflectionCapabilities {
     constructor(reflect) {
         this._reflect = isPresent(reflect) ? reflect : global.Reflect;
@@ -54,7 +53,7 @@ export class ReflectionCapabilities {
         throw new Error(`Cannot create a factory for '${stringify(t)}' because its constructor has more than 20 arguments`);
     }
     /** @internal */
-    _zipTypesAndAnnotations(paramTypes, paramAnnotations) {
+    _zipTypesAndAnnotations(paramTypes /** TODO #9100 */, paramAnnotations /** TODO #9100 */) {
         var result;
         if (typeof paramTypes === 'undefined') {
             result = new Array(paramAnnotations.length);
@@ -89,8 +88,8 @@ export class ReflectionCapabilities {
         // API of tsickle for lowering decorators to properties on the class.
         if (isPresent(typeOrFunc.ctorParameters)) {
             let ctorParameters = typeOrFunc.ctorParameters;
-            let paramTypes = ctorParameters.map(ctorParam => ctorParam && ctorParam.type);
-            let paramAnnotations = ctorParameters.map(ctorParam => ctorParam && convertTsickleDecoratorIntoMetadata(ctorParam.decorators));
+            let paramTypes = ctorParameters.map((ctorParam /** TODO #9100 */) => ctorParam && ctorParam.type);
+            let paramAnnotations = ctorParameters.map((ctorParam /** TODO #9100 */) => ctorParam && convertTsickleDecoratorIntoMetadata(ctorParam.decorators));
             return this._zipTypesAndAnnotations(paramTypes, paramAnnotations);
         }
         // API for metadata created by invoking the decorators.
@@ -140,8 +139,7 @@ export class ReflectionCapabilities {
         if (isPresent(typeOrFunc.propDecorators)) {
             let propDecorators = typeOrFunc.propDecorators;
             let propMetadata = {};
-            Object.keys(propDecorators)
-                .forEach(prop => {
+            Object.keys(propDecorators).forEach(prop => {
                 propMetadata[prop] = convertTsickleDecoratorIntoMetadata(propDecorators[prop]);
             });
             return propMetadata;
@@ -154,8 +152,15 @@ export class ReflectionCapabilities {
         }
         return {};
     }
-    interfaces(type) {
-        throw new BaseException("JavaScript does not support interfaces");
+    // Note: JavaScript does not support to query for interfaces during runtime.
+    // However, we can't throw here as the reflector will always call this method
+    // when asked for a lifecycle interface as this is what we check in Dart.
+    interfaces(type) { return []; }
+    hasLifecycleHook(type, lcInterface, lcProperty) {
+        if (!(type instanceof Type))
+            return false;
+        var proto = type.prototype;
+        return !!proto[lcProperty];
     }
     getter(name) { return new Function('o', 'return o.' + name + ';'); }
     setter(name) {
@@ -167,7 +172,14 @@ export class ReflectionCapabilities {
         return new Function('o', 'args', functionBody);
     }
     // There is not a concept of import uri in Js, but this is useful in developing Dart applications.
-    importUri(type) { return `./${stringify(type)}`; }
+    importUri(type) {
+        // StaticSymbol
+        if (typeof type === 'object' && type['filePath']) {
+            return type['filePath'];
+        }
+        // Runtime type
+        return `./${stringify(type)}`;
+    }
 }
 function convertTsickleDecoratorIntoMetadata(decoratorInvocations) {
     if (!decoratorInvocations) {

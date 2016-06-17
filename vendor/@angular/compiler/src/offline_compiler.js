@@ -1,8 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
 var compile_metadata_1 = require('./compile_metadata');
-var exceptions_1 = require('../src/facade/exceptions');
-var collection_1 = require('../src/facade/collection');
+var collection_1 = require('./facade/collection');
+var exceptions_1 = require('./facade/exceptions');
 var o = require('./output/output_ast');
 var util_1 = require('./util');
 var _COMPONENT_FACTORY_IDENTIFIER = new compile_metadata_1.CompileIdentifierMetadata({
@@ -66,8 +66,7 @@ var OfflineCompiler = (function () {
             statements.push(o.variable(compFactoryVar)
                 .set(o.importExpr(_COMPONENT_FACTORY_IDENTIFIER, [o.importType(compMeta.type)])
                 .instantiate([
-                o.literal(compMeta.selector),
-                o.variable(hostViewFactoryVar),
+                o.literal(compMeta.selector), o.variable(hostViewFactoryVar),
                 o.importExpr(compMeta.type)
             ], o.importType(_COMPONENT_FACTORY_IDENTIFIER, [o.importType(compMeta.type)], [o.TypeModifier.Const])))
                 .toDeclStmt(null, [o.StmtModifier.Final]));
@@ -77,8 +76,7 @@ var OfflineCompiler = (function () {
     };
     OfflineCompiler.prototype.loadAndCompileStylesheet = function (stylesheetUrl, shim, suffix) {
         var _this = this;
-        return this._xhr.get(stylesheetUrl)
-            .then(function (cssText) {
+        return this._xhr.get(stylesheetUrl).then(function (cssText) {
             var compileResult = _this._styleCompiler.compileStylesheet(stylesheetUrl, cssText, shim);
             var importedUrls = [];
             compileResult.dependencies.forEach(function (dep) {

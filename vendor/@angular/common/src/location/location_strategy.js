@@ -15,6 +15,8 @@ var core_1 = require('@angular/core');
  * `http://example.com/foo` as an equivalent URL.
  *
  * See these two classes for more.
+ *
+ * @stable
  */
 var LocationStrategy = (function () {
     function LocationStrategy() {
@@ -47,9 +49,10 @@ exports.LocationStrategy = LocationStrategy;
  *
  * bootstrap(AppCmp, [
  *   ROUTER_PROVIDERS,
- *   provide(APP_BASE_HREF, {useValue: '/my/app'})
+ *   {provide: APP_BASE_HREF, useValue: '/my/app'}
  * ]);
  * ```
+ * @stable
  */
 exports.APP_BASE_HREF = new core_1.OpaqueToken('appBaseHref');
 //# sourceMappingURL=location_strategy.js.map

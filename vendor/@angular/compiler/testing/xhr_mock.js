@@ -4,11 +4,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+var core_1 = require('@angular/core');
 var index_1 = require('../index');
+var async_1 = require('../src/facade/async');
 var collection_1 = require('../src/facade/collection');
 var lang_1 = require('../src/facade/lang');
-var core_1 = require('@angular/core');
-var async_1 = require('../src/facade/async');
 /**
  * A mock implementation of {@link XHR} that allows outgoing requests to be mocked
  * and responded to within a single test, without going to the network.

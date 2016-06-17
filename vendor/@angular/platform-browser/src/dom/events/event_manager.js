@@ -1,9 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
-var exceptions_1 = require('../../../src/facade/exceptions');
-var collection_1 = require('../../../src/facade/collection');
-exports.EVENT_MANAGER_PLUGINS = 
-/*@ts2dart_const*/ new core_1.OpaqueToken("EventManagerPlugins");
+var collection_1 = require('../../facade/collection');
+var exceptions_1 = require('../../facade/exceptions');
+exports.EVENT_MANAGER_PLUGINS = new core_1.OpaqueToken('EventManagerPlugins');
 var EventManager = (function () {
     function EventManager(plugins, _zone) {
         var _this = this;
@@ -31,11 +30,13 @@ var EventManager = (function () {
         }
         throw new exceptions_1.BaseException("No event manager plugin found for event " + eventName);
     };
+    /** @nocollapse */
     EventManager.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     EventManager.ctorParameters = [
-        { type: undefined, decorators: [{ type: core_1.Inject, args: [exports.EVENT_MANAGER_PLUGINS,] },] },
+        { type: Array, decorators: [{ type: core_1.Inject, args: [exports.EVENT_MANAGER_PLUGINS,] },] },
         { type: core_1.NgZone, },
     ];
     return EventManager;
@@ -47,10 +48,10 @@ var EventManagerPlugin = (function () {
     // That is equivalent to having supporting $event.target
     EventManagerPlugin.prototype.supports = function (eventName) { return false; };
     EventManagerPlugin.prototype.addEventListener = function (element, eventName, handler) {
-        throw "not implemented";
+        throw 'not implemented';
     };
     EventManagerPlugin.prototype.addGlobalEventListener = function (element, eventName, handler) {
-        throw "not implemented";
+        throw 'not implemented';
     };
     return EventManagerPlugin;
 }());

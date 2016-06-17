@@ -4,10 +4,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var collection_1 = require('../src/facade/collection');
-var lang_1 = require('../src/facade/lang');
 var core_1 = require('@angular/core');
 var directive_resolver_1 = require('../src/directive_resolver');
+var collection_1 = require('../src/facade/collection');
+var lang_1 = require('../src/facade/lang');
 var MockDirectiveResolver = (function (_super) {
     __extends(MockDirectiveResolver, _super);
     function MockDirectiveResolver() {
@@ -53,24 +53,13 @@ var MockDirectiveResolver = (function (_super) {
             queries: dm.queries
         });
     };
-    /**
-     * @deprecated
-     */
-    MockDirectiveResolver.prototype.setBindingsOverride = function (type, bindings) {
-        this._providerOverrides.set(type, bindings);
-    };
-    /**
-     * @deprecated
-     */
-    MockDirectiveResolver.prototype.setViewBindingsOverride = function (type, viewBindings) {
-        this.viewProviderOverrides.set(type, viewBindings);
-    };
     MockDirectiveResolver.prototype.setProvidersOverride = function (type, providers) {
         this._providerOverrides.set(type, providers);
     };
     MockDirectiveResolver.prototype.setViewProvidersOverride = function (type, viewProviders) {
         this.viewProviderOverrides.set(type, viewProviders);
     };
+    /** @nocollapse */
     MockDirectiveResolver.decorators = [
         { type: core_1.Injectable },
     ];

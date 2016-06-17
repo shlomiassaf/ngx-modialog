@@ -1,9 +1,9 @@
-import { isPresent } from '../../src/facade/lang';
-import { ListWrapper } from '../../src/facade/collection';
-import { BaseException } from '../../src/facade/exceptions';
-import { ViewType } from './view_type';
+import { ListWrapper } from '../facade/collection';
+import { BaseException } from '../facade/exceptions';
+import { isPresent } from '../facade/lang';
 import { ElementRef } from './element_ref';
 import { ViewContainerRef_ } from './view_container_ref';
+import { ViewType } from './view_type';
 /**
  * An AppElement is created for elements that have a ViewContainerRef,
  * a nested component or a <template> element to keep data around
@@ -66,7 +66,7 @@ export class AppElement {
         if (view.type === ViewType.COMPONENT) {
             throw new BaseException(`Component views can't be moved!`);
         }
-        view.renderer.detachView(view.flatRootNodes);
+        view.detach();
         view.removeFromContentChildren(this);
         return view;
     }

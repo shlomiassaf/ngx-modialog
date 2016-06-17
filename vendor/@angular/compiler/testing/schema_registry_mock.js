@@ -1,6 +1,6 @@
 "use strict";
-var lang_1 = require('../src/facade/lang');
 var core_private_1 = require('../core_private');
+var lang_1 = require('../src/facade/lang');
 var MockSchemaRegistry = (function () {
     function MockSchemaRegistry(existingProperties, attrPropMapping) {
         this.existingProperties = existingProperties;

@@ -1,4 +1,4 @@
-import { isPresent, evalExpression } from '../../src/facade/lang';
+import { isPresent, evalExpression } from '../facade/lang';
 import { EmitterVisitorContext } from './abstract_emitter';
 import { AbstractJsEmitterVisitor } from './abstract_js_emitter';
 import { sanitizeIdentifier } from '../util';

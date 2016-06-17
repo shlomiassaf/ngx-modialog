@@ -1,8 +1,8 @@
 "use strict";
-var lang_1 = require('../facade/lang');
 var exceptions_1 = require('../facade/exceptions');
-var o = require('../output/output_ast');
+var lang_1 = require('../facade/lang');
 var identifiers_1 = require('../identifiers');
+var o = require('../output/output_ast');
 var util_1 = require('./util');
 var _PurePipeProxy = (function () {
     function _PurePipeProxy(view, instance, argCount) {

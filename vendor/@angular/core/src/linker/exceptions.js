@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
 /**
  * An error thrown if application changes model breaking the top-down data flow.
  *
@@ -37,6 +37,7 @@ var exceptions_1 = require('../../src/facade/exceptions');
  *   }
  * }
  * ```
+ * @stable
  */
 var ExpressionChangedAfterItHasBeenCheckedException = (function (_super) {
     __extends(ExpressionChangedAfterItHasBeenCheckedException, _super);
@@ -52,6 +53,7 @@ exports.ExpressionChangedAfterItHasBeenCheckedException = ExpressionChangedAfter
  *
  * This error wraps the original exception to attach additional contextual information that can
  * be useful for debugging.
+ * @stable
  */
 var ViewWrappedException = (function (_super) {
     __extends(ViewWrappedException, _super);
@@ -67,6 +69,7 @@ exports.ViewWrappedException = ViewWrappedException;
  * This error indicates a bug in the framework.
  *
  * This is an internal Angular error.
+ * @stable
  */
 var ViewDestroyedException = (function (_super) {
     __extends(ViewDestroyedException, _super);

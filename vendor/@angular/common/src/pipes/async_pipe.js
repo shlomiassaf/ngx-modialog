@@ -1,7 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var async_1 = require('../../src/facade/async');
+var async_1 = require('../facade/async');
+var lang_1 = require('../facade/lang');
 var invalid_pipe_argument_exception_1 = require('./invalid_pipe_argument_exception');
 var ObservableStrategy = (function () {
     function ObservableStrategy() {
@@ -17,7 +17,7 @@ var PromiseStrategy = (function () {
     function PromiseStrategy() {
     }
     PromiseStrategy.prototype.createSubscription = function (async, updateLatestValue) {
-        return async.then(updateLatestValue);
+        return async.then(updateLatestValue, function (e) { throw e; });
     };
     PromiseStrategy.prototype.dispose = function (subscription) { };
     PromiseStrategy.prototype.onDestroy = function (subscription) { };
@@ -98,10 +98,12 @@ var AsyncPipe = (function () {
             this._ref.markForCheck();
         }
     };
+    /** @nocollapse */
     AsyncPipe.decorators = [
         { type: core_1.Pipe, args: [{ name: 'async', pure: false },] },
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     AsyncPipe.ctorParameters = [
         { type: core_1.ChangeDetectorRef, },
     ];

@@ -4,12 +4,12 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var lang_1 = require('../src/facade/lang');
 var collection_1 = require('../src/facade/collection');
-var template_ast_1 = require('./template_ast');
+var lang_1 = require('../src/facade/lang');
 var compile_metadata_1 = require('./compile_metadata');
 var identifiers_1 = require('./identifiers');
 var parse_util_1 = require('./parse_util');
+var template_ast_1 = require('./template_ast');
 var ProviderError = (function (_super) {
     __extends(ProviderError, _super);
     function ProviderError(message, span) {
@@ -26,8 +26,7 @@ var ProviderViewContext = (function () {
         this.errors = [];
         this.viewQueries = _getViewQueries(component);
         this.viewProviders = new compile_metadata_1.CompileTokenMap();
-        _normalizeProviders(component.viewProviders, sourceSpan, this.errors)
-            .forEach(function (provider) {
+        _normalizeProviders(component.viewProviders, sourceSpan, this.errors).forEach(function (provider) {
             if (lang_1.isBlank(_this.viewProviders.get(provider.token))) {
                 _this.viewProviders.add(provider.token, true);
             }

@@ -1,5 +1,5 @@
-import { Injectable, Inject, OpaqueToken, Optional } from '@angular/core';
-import { MAX_INTERPOLATION_VALUES, Console, SecurityContext } from '../core_private';
+import { Inject, Injectable, OpaqueToken, Optional } from '@angular/core';
+import { Console, MAX_INTERPOLATION_VALUES, SecurityContext } from '../core_private';
 import { ListWrapper, StringMapWrapper, SetWrapper } from '../src/facade/collection';
 import { RegExpWrapper, isPresent, StringWrapper, isBlank } from '../src/facade/lang';
 import { BaseException } from '../src/facade/exceptions';
@@ -23,11 +23,12 @@ import { ProviderElementContext, ProviderViewContext } from './provider_parser';
 // Group 4 = "ref-/#"
 // Group 5 = "on-"
 // Group 6 = "bindon-"
-// Group 7 = the identifier after "bind-", "var-/#", or "on-"
-// Group 8 = identifier inside [()]
-// Group 9 = identifier inside []
-// Group 10 = identifier inside ()
-var BIND_NAME_REGEXP = /^(?:(?:(?:(bind-)|(var-)|(let-)|(ref-|#)|(on-)|(bindon-))(.+))|\[\(([^\)]+)\)\]|\[([^\]]+)\]|\(([^\)]+)\))$/g;
+// Group 7 = "animate-/@"
+// Group 8 = the identifier after "bind-", "var-/#", or "on-"
+// Group 9 = identifier inside [()]
+// Group 10 = identifier inside []
+// Group 11 = identifier inside ()
+var BIND_NAME_REGEXP = /^(?:(?:(?:(bind-)|(var-)|(let-)|(ref-|#)|(on-)|(bindon-)|(animate-|@))(.+))|\[\(([^\)]+)\)\]|\[([^\]]+)\]|\(([^\)]+)\))$/g;
 const TEMPLATE_ELEMENT = 'template';
 const TEMPLATE_ATTR = 'template';
 const TEMPLATE_ATTR_PREFIX = '*';
@@ -92,6 +93,7 @@ export class TemplateParser {
         else {
             result = [];
         }
+        this._assertNoReferenceDuplicationOnTemplate(result, errors);
         if (errors.length > 0) {
             return new TemplateParseResult(result, errors);
         }
@@ -100,16 +102,33 @@ export class TemplateParser {
         }
         return new TemplateParseResult(result, errors);
     }
+    /** @internal */
+    _assertNoReferenceDuplicationOnTemplate(result, errors) {
+        const existingReferences = [];
+        result.filter(element => !!element.references)
+            .forEach(element => element.references.forEach((reference /** TODO #???? */) => {
+            const name = reference.name;
+            if (existingReferences.indexOf(name) < 0) {
+                existingReferences.push(name);
+            }
+            else {
+                const error = new TemplateParseError(`Reference "#${name}" is defined several times`, reference.sourceSpan, ParseErrorLevel.FATAL);
+                errors.push(error);
+            }
+        }));
+    }
 }
+/** @nocollapse */
 TemplateParser.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 TemplateParser.ctorParameters = [
     { type: Parser, },
     { type: ElementSchemaRegistry, },
     { type: HtmlParser, },
     { type: Console, },
-    { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [TEMPLATE_TRANSFORMS,] },] },
+    { type: Array, decorators: [{ type: Optional }, { type: Inject, args: [TEMPLATE_TRANSFORMS,] },] },
 ];
 class TemplateParseVisitor {
     constructor(providerViewContext, directives, pipes, _exprParser, _schemaRegistry) {
@@ -235,6 +254,7 @@ class TemplateParseVisitor {
         var elementOrDirectiveProps = [];
         var elementOrDirectiveRefs = [];
         var elementVars = [];
+        var animationProps = [];
         var events = [];
         var templateElementOrDirectiveProps = [];
         var templateMatchableAttrs = [];
@@ -244,7 +264,7 @@ class TemplateParseVisitor {
         var lcElName = splitNsName(nodeName.toLowerCase())[1];
         var isTemplateElement = lcElName == TEMPLATE_ELEMENT;
         element.attrs.forEach(attr => {
-            var hasBinding = this._parseAttr(isTemplateElement, attr, matchableAttrs, elementOrDirectiveProps, events, elementOrDirectiveRefs, elementVars);
+            var hasBinding = this._parseAttr(isTemplateElement, attr, matchableAttrs, elementOrDirectiveProps, animationProps, events, elementOrDirectiveRefs, elementVars);
             var hasTemplateBinding = this._parseInlineTemplateBinding(attr, templateMatchableAttrs, templateElementOrDirectiveProps, templateElementVars);
             if (!hasBinding && !hasTemplateBinding) {
                 // don't include the bindings as attributes as well in the AST
@@ -259,7 +279,8 @@ class TemplateParseVisitor {
         var directiveMetas = this._parseDirectives(this.selectorMatcher, elementCssSelector);
         var references = [];
         var directiveAsts = this._createDirectiveAsts(isTemplateElement, element.name, directiveMetas, elementOrDirectiveProps, elementOrDirectiveRefs, element.sourceSpan, references);
-        var elementProps = this._createElementPropertyAsts(element.name, elementOrDirectiveProps, directiveAsts);
+        var elementProps = this._createElementPropertyAsts(element.name, elementOrDirectiveProps, directiveAsts)
+            .concat(animationProps);
         var isViewRoot = parent.isTemplateElement || hasInlineTemplates;
         var providerContext = new ProviderElementContext(this.providerViewContext, parent.providerContext, isViewRoot, directiveAsts, attrs, references, element.sourceSpan);
         var children = htmlVisitAll(preparsedElement.nonBindable ? NON_BINDABLE_VISITOR : this, element.children, ElementContext.create(isTemplateElement, directiveAsts, isTemplateElement ? parent.providerContext : providerContext));
@@ -326,7 +347,7 @@ class TemplateParseVisitor {
         }
         return false;
     }
-    _parseAttr(isTemplateElement, attr, targetMatchableAttrs, targetProps, targetEvents, targetRefs, targetVars) {
+    _parseAttr(isTemplateElement, attr, targetMatchableAttrs, targetProps, targetAnimationProps, targetEvents, targetRefs, targetVars) {
         var attrName = this._normalizeAttributeName(attr.name);
         var attrValue = attr.value;
         var bindParts = RegExpWrapper.firstMatch(BIND_NAME_REGEXP, attrName);
@@ -334,10 +355,10 @@ class TemplateParseVisitor {
         if (isPresent(bindParts)) {
             hasBinding = true;
             if (isPresent(bindParts[1])) {
-                this._parseProperty(bindParts[7], attrValue, attr.sourceSpan, targetMatchableAttrs, targetProps);
+                this._parseProperty(bindParts[8], attrValue, attr.sourceSpan, targetMatchableAttrs, targetProps);
             }
             else if (isPresent(bindParts[2])) {
-                var identifier = bindParts[7];
+                var identifier = bindParts[8];
                 if (isTemplateElement) {
                     this._reportError(`"var-" on <template> elements is deprecated. Use "let-" instead!`, attr.sourceSpan, ParseErrorLevel.WARNING);
                     this._parseVariable(identifier, attrValue, attr.sourceSpan, targetVars);
@@ -349,7 +370,7 @@ class TemplateParseVisitor {
             }
             else if (isPresent(bindParts[3])) {
                 if (isTemplateElement) {
-                    var identifier = bindParts[7];
+                    var identifier = bindParts[8];
                     this._parseVariable(identifier, attrValue, attr.sourceSpan, targetVars);
                 }
                 else {
@@ -357,25 +378,28 @@ class TemplateParseVisitor {
                 }
             }
             else if (isPresent(bindParts[4])) {
-                var identifier = bindParts[7];
+                var identifier = bindParts[8];
                 this._parseReference(identifier, attrValue, attr.sourceSpan, targetRefs);
             }
             else if (isPresent(bindParts[5])) {
-                this._parseEvent(bindParts[7], attrValue, attr.sourceSpan, targetMatchableAttrs, targetEvents);
+                this._parseEvent(bindParts[8], attrValue, attr.sourceSpan, targetMatchableAttrs, targetEvents);
             }
             else if (isPresent(bindParts[6])) {
-                this._parseProperty(bindParts[7], attrValue, attr.sourceSpan, targetMatchableAttrs, targetProps);
-                this._parseAssignmentEvent(bindParts[7], attrValue, attr.sourceSpan, targetMatchableAttrs, targetEvents);
-            }
-            else if (isPresent(bindParts[8])) {
                 this._parseProperty(bindParts[8], attrValue, attr.sourceSpan, targetMatchableAttrs, targetProps);
                 this._parseAssignmentEvent(bindParts[8], attrValue, attr.sourceSpan, targetMatchableAttrs, targetEvents);
             }
+            else if (isPresent(bindParts[7])) {
+                this._parseAnimation(bindParts[8], attrValue, attr.sourceSpan, targetMatchableAttrs, targetAnimationProps);
+            }
             else if (isPresent(bindParts[9])) {
                 this._parseProperty(bindParts[9], attrValue, attr.sourceSpan, targetMatchableAttrs, targetProps);
+                this._parseAssignmentEvent(bindParts[9], attrValue, attr.sourceSpan, targetMatchableAttrs, targetEvents);
             }
             else if (isPresent(bindParts[10])) {
-                this._parseEvent(bindParts[10], attrValue, attr.sourceSpan, targetMatchableAttrs, targetEvents);
+                this._parseProperty(bindParts[10], attrValue, attr.sourceSpan, targetMatchableAttrs, targetProps);
+            }
+            else if (isPresent(bindParts[11])) {
+                this._parseEvent(bindParts[11], attrValue, attr.sourceSpan, targetMatchableAttrs, targetEvents);
             }
         }
         else {
@@ -403,6 +427,11 @@ class TemplateParseVisitor {
     }
     _parseProperty(name, expression, sourceSpan, targetMatchableAttrs, targetProps) {
         this._parsePropertyAst(name, this._parseBinding(expression, sourceSpan), sourceSpan, targetMatchableAttrs, targetProps);
+    }
+    _parseAnimation(name, expression, sourceSpan, targetMatchableAttrs, targetAnimationProps) {
+        var ast = this._parseBinding(expression, sourceSpan);
+        targetMatchableAttrs.push([name, ast.source]);
+        targetAnimationProps.push(new BoundElementPropertyAst(name, PropertyBindingType.Animation, SecurityContext.NONE, ast, null, sourceSpan));
     }
     _parsePropertyInterpolation(name, value, sourceSpan, targetMatchableAttrs, targetProps) {
         var expr = this._parseInterpolation(value, sourceSpan);
@@ -609,7 +638,7 @@ class TemplateParseVisitor {
     _assertAllEventsPublishedByDirectives(directives, events) {
         var allDirectiveEvents = new Set();
         directives.forEach(directive => {
-            StringMapWrapper.forEach(directive.directive.outputs, (eventName, _) => { allDirectiveEvents.add(eventName); });
+            StringMapWrapper.forEach(directive.directive.outputs, (eventName, _ /** TODO #???? */) => { allDirectiveEvents.add(eventName); });
         });
         events.forEach(event => {
             if (isPresent(event.target) || !SetWrapper.has(allDirectiveEvents, event.name)) {

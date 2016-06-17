@@ -1,7 +1,7 @@
-import { Injectable, Inject, Optional } from '@angular/core';
-import { isPresent } from '../../src/facade/lang';
-import { LocationStrategy, APP_BASE_HREF } from './location_strategy';
+import { Inject, Injectable, Optional } from '@angular/core';
+import { isPresent } from '../facade/lang';
 import { Location } from './location';
+import { APP_BASE_HREF, LocationStrategy } from './location_strategy';
 import { PlatformLocation } from './platform_location';
 export class HashLocationStrategy extends LocationStrategy {
     constructor(_platformLocation, _baseHref) {
@@ -49,9 +49,11 @@ export class HashLocationStrategy extends LocationStrategy {
     forward() { this._platformLocation.forward(); }
     back() { this._platformLocation.back(); }
 }
+/** @nocollapse */
 HashLocationStrategy.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 HashLocationStrategy.ctorParameters = [
     { type: PlatformLocation, },
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [APP_BASE_HREF,] },] },

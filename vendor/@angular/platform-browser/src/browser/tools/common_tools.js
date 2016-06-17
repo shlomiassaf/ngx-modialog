@@ -1,8 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../../src/facade/lang');
-var browser_1 = require('../../../src/facade/browser');
 var dom_adapter_1 = require('../../dom/dom_adapter');
+var browser_1 = require('../../facade/browser');
+var lang_1 = require('../../facade/lang');
 var ChangeDetectionPerfRecord = (function () {
     function ChangeDetectionPerfRecord(msPerTick, numTicks) {
         this.msPerTick = msPerTick;

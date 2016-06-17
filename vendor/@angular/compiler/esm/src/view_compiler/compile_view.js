@@ -1,16 +1,16 @@
 import { ViewType } from '../../core_private';
-import { isPresent, isBlank } from '../../src/facade/lang';
-import { ListWrapper } from '../../src/facade/collection';
+import { CompileIdentifierMetadata, CompileTokenMap } from '../compile_metadata';
+import { ListWrapper } from '../facade/collection';
+import { isBlank, isPresent } from '../facade/lang';
+import { Identifiers } from '../identifiers';
 import * as o from '../output/output_ast';
-import { EventHandlerVars } from './constants';
-import { CompileQuery, createQueryList, addQueryToTokenMap } from './compile_query';
 import { CompileMethod } from './compile_method';
 import { CompilePipe } from './compile_pipe';
-import { CompileIdentifierMetadata, CompileTokenMap } from '../compile_metadata';
-import { getViewFactoryName, getPropertyInView, createPureProxy } from './util';
-import { Identifiers } from '../identifiers';
+import { CompileQuery, addQueryToTokenMap, createQueryList } from './compile_query';
+import { EventHandlerVars } from './constants';
+import { createPureProxy, getPropertyInView, getViewFactoryName } from './util';
 export class CompileView {
-    constructor(component, genConfig, pipeMetas, styles, viewIndex, declarationElement, templateVariableBindings) {
+    constructor(component, genConfig, pipeMetas, styles, animations, viewIndex, declarationElement, templateVariableBindings) {
         this.component = component;
         this.genConfig = genConfig;
         this.pipeMetas = pipeMetas;
@@ -34,6 +34,8 @@ export class CompileView {
         this.literalArrayCount = 0;
         this.literalMapCount = 0;
         this.pipeCount = 0;
+        this.animations = new Map();
+        animations.forEach(entry => this.animations.set(entry.name, entry));
         this.createMethod = new CompileMethod(this);
         this.injectorGetMethod = new CompileMethod(this);
         this.updateContentQueriesMethod = new CompileMethod(this);
@@ -44,6 +46,7 @@ export class CompileView {
         this.afterContentLifecycleCallbacksMethod = new CompileMethod(this);
         this.afterViewLifecycleCallbacksMethod = new CompileMethod(this);
         this.destroyMethod = new CompileMethod(this);
+        this.detachMethod = new CompileMethod(this);
         this.viewType = getViewType(component, viewIndex);
         this.className = `_View_${component.type.name}${viewIndex}`;
         this.classType = o.importType(new CompileIdentifierMetadata({ name: this.className }));
@@ -114,7 +117,7 @@ export class CompileView {
             proxyParams.push(new o.FnParam(paramName));
             proxyReturnEntries.push(o.variable(paramName));
         }
-        createPureProxy(o.fn(proxyParams, [new o.ReturnStatement(o.literalArr(proxyReturnEntries))]), values.length, proxyExpr, this);
+        createPureProxy(o.fn(proxyParams, [new o.ReturnStatement(o.literalArr(proxyReturnEntries))], new o.ArrayType(o.DYNAMIC_TYPE)), values.length, proxyExpr, this);
         return proxyExpr.callFn(values);
     }
     createLiteralMap(entries) {
@@ -131,12 +134,12 @@ export class CompileView {
             proxyReturnEntries.push([entries[i][0], o.variable(paramName)]);
             values.push(entries[i][1]);
         }
-        createPureProxy(o.fn(proxyParams, [new o.ReturnStatement(o.literalMap(proxyReturnEntries))]), entries.length, proxyExpr, this);
+        createPureProxy(o.fn(proxyParams, [new o.ReturnStatement(o.literalMap(proxyReturnEntries))], new o.MapType(o.DYNAMIC_TYPE)), entries.length, proxyExpr, this);
         return proxyExpr.callFn(values);
     }
     afterNodes() {
         this.pipes.forEach((pipe) => pipe.create());
-        this.viewQueries.values().forEach((queries) => queries.forEach((query) => query.afterChildren(this.updateViewQueriesMethod)));
+        this.viewQueries.values().forEach((queries) => queries.forEach((query) => query.afterChildren(this.createMethod, this.updateViewQueriesMethod)));
     }
 }
 function getViewType(component, embeddedTemplateIndex) {

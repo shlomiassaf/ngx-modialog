@@ -1,25 +1,34 @@
 "use strict";
+var animation_constants_1 = require('./src/animation/animation_constants');
+var animation_driver_1 = require('./src/animation/animation_driver');
+var animation_group_player_1 = require('./src/animation/animation_group_player');
+var animation_keyframe_1 = require('./src/animation/animation_keyframe');
+var animation_player_1 = require('./src/animation/animation_player');
+var animation_sequence_player_1 = require('./src/animation/animation_sequence_player');
+var animationUtils = require('./src/animation/animation_style_util');
+var animation_styles_1 = require('./src/animation/animation_styles');
+var change_detection_util = require('./src/change_detection/change_detection_util');
 var constants = require('./src/change_detection/constants');
-var security = require('./src/security');
+var console = require('./src/console');
+var debug = require('./src/debug/debug_renderer');
+var provider_util = require('./src/di/provider_util');
 var reflective_provider = require('./src/di/reflective_provider');
-var lifecycle_hooks = require('./src/metadata/lifecycle_hooks');
-var reflector_reader = require('./src/reflection/reflector_reader');
 var component_resolver = require('./src/linker/component_resolver');
+var debug_context = require('./src/linker/debug_context');
 var element = require('./src/linker/element');
+var template_ref = require('./src/linker/template_ref');
 var view = require('./src/linker/view');
 var view_type = require('./src/linker/view_type');
 var view_utils = require('./src/linker/view_utils');
+var lifecycle_hooks = require('./src/metadata/lifecycle_hooks');
 var metadata_view = require('./src/metadata/view');
-var debug_context = require('./src/linker/debug_context');
-var change_detection_util = require('./src/change_detection/change_detection_util');
-var api = require('./src/render/api');
-var template_ref = require('./src/linker/template_ref');
 var wtf_init = require('./src/profile/wtf_init');
+var reflection = require('./src/reflection/reflection');
 var reflection_capabilities = require('./src/reflection/reflection_capabilities');
+var reflector_reader = require('./src/reflection/reflector_reader');
+var api = require('./src/render/api');
+var security = require('./src/security');
 var decorators = require('./src/util/decorators');
-var debug = require('./src/debug/debug_renderer');
-var provider_util = require('./src/di/provider_util');
-var console = require('./src/console');
 exports.__core_private__ = {
     isDefaultChangeDetectionStrategy: constants.isDefaultChangeDetectionStrategy,
     ChangeDetectorState: constants.ChangeDetectorState,
@@ -68,5 +77,25 @@ exports.__core_private__ = {
     pureProxy10: view_utils.pureProxy10,
     castByValue: view_utils.castByValue,
     Console: console.Console,
+    reflector: reflection.reflector,
+    Reflector: reflection.Reflector,
+    NoOpAnimationPlayer: animation_player_1.NoOpAnimationPlayer,
+    AnimationPlayer: animation_player_1.AnimationPlayer,
+    NoOpAnimationDriver: animation_driver_1.NoOpAnimationDriver,
+    AnimationDriver: animation_driver_1.AnimationDriver,
+    AnimationSequencePlayer: animation_sequence_player_1.AnimationSequencePlayer,
+    AnimationGroupPlayer: animation_group_player_1.AnimationGroupPlayer,
+    AnimationKeyframe: animation_keyframe_1.AnimationKeyframe,
+    prepareFinalAnimationStyles: animationUtils.prepareFinalAnimationStyles,
+    balanceAnimationKeyframes: animationUtils.balanceAnimationKeyframes,
+    flattenStyles: animationUtils.flattenStyles,
+    clearStyles: animationUtils.clearStyles,
+    renderStyles: animationUtils.renderStyles,
+    collectAndResolveStyles: animationUtils.collectAndResolveStyles,
+    AnimationStyles: animation_styles_1.AnimationStyles,
+    ANY_STATE: animation_constants_1.ANY_STATE,
+    DEFAULT_STATE: animation_constants_1.DEFAULT_STATE,
+    EMPTY_STATE: animation_constants_1.EMPTY_STATE,
+    FILL_STYLE_FLAG: animation_constants_1.FILL_STYLE_FLAG
 };
 //# sourceMappingURL=private_export.js.map

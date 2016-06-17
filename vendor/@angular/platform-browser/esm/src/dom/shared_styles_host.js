@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { SetWrapper } from '../../src/facade/collection';
+import { SetWrapper } from '../facade/collection';
 import { getDOM } from './dom_adapter';
 import { DOCUMENT } from './dom_tokens';
 export class SharedStylesHost {
@@ -23,9 +23,11 @@ export class SharedStylesHost {
     onStylesAdded(additions) { }
     getAllStyles() { return this._styles; }
 }
+/** @nocollapse */
 SharedStylesHost.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 SharedStylesHost.ctorParameters = [];
 export class DomSharedStylesHost extends SharedStylesHost {
     constructor(doc) {
@@ -49,9 +51,11 @@ export class DomSharedStylesHost extends SharedStylesHost {
         this._hostNodes.forEach((hostNode) => { this._addStylesToHost(additions, hostNode); });
     }
 }
+/** @nocollapse */
 DomSharedStylesHost.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 DomSharedStylesHost.ctorParameters = [
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] },] },
 ];

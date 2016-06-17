@@ -1,7 +1,7 @@
 "use strict";
 var collection_1 = require('../src/facade/collection');
-var lang_1 = require('../src/facade/lang');
 var exceptions_1 = require('../src/facade/exceptions');
+var lang_1 = require('../src/facade/lang');
 var _EMPTY_ATTR_VALUE = '';
 // TODO: Can't use `const` here as
 // in Dart this is not transpiled into `final` yet...
@@ -28,7 +28,7 @@ var CssSelector = (function () {
         var _addResult = function (res, cssSel) {
             if (cssSel.notSelectors.length > 0 && lang_1.isBlank(cssSel.element) &&
                 collection_1.ListWrapper.isEmpty(cssSel.classNames) && collection_1.ListWrapper.isEmpty(cssSel.attrs)) {
-                cssSel.element = "*";
+                cssSel.element = '*';
             }
             res.push(cssSel);
         };
@@ -288,7 +288,7 @@ var SelectorMatcher = (function () {
             return false;
         }
         var selectables = map.get(name);
-        var starSelectables = map.get("*");
+        var starSelectables = map.get('*');
         if (lang_1.isPresent(starSelectables)) {
             selectables = selectables.concat(starSelectables);
         }
@@ -304,7 +304,7 @@ var SelectorMatcher = (function () {
         return result;
     };
     /** @internal */
-    SelectorMatcher.prototype._matchPartial = function (map, name, cssSelector, matchedCallback /*: (c: CssSelector, a: any) => void*/) {
+    SelectorMatcher.prototype._matchPartial = function (map, name, cssSelector, matchedCallback) {
         if (lang_1.isBlank(map) || lang_1.isBlank(name)) {
             return false;
         }

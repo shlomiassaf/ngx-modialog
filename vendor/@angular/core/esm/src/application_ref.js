@@ -1,16 +1,17 @@
-import { NgZone } from './zone/ng_zone';
-import { isBlank, isPresent, assertionsEnabled, lockMode, isPromise } from '../src/facade/lang';
-import { Injector, Injectable } from './di';
-import { PLATFORM_INITIALIZER, APP_INITIALIZER } from './application_tokens';
-import { PromiseWrapper, ObservableWrapper } from '../src/facade/async';
+import { ObservableWrapper, PromiseWrapper } from '../src/facade/async';
 import { ListWrapper } from '../src/facade/collection';
-import { TestabilityRegistry, Testability } from './testability/testability';
-import { ComponentResolver } from './linker/component_resolver';
 import { BaseException, ExceptionHandler, unimplemented } from '../src/facade/exceptions';
+import { IS_DART, assertionsEnabled, isBlank, isPresent, isPromise, lockMode } from '../src/facade/lang';
+import { APP_INITIALIZER, PLATFORM_INITIALIZER } from './application_tokens';
 import { Console } from './console';
-import { wtfLeave, wtfCreateScope } from './profile/profile';
+import { Injectable, Injector } from './di';
+import { ComponentResolver } from './linker/component_resolver';
+import { wtfCreateScope, wtfLeave } from './profile/profile';
+import { Testability, TestabilityRegistry } from './testability/testability';
+import { NgZone } from './zone/ng_zone';
 /**
  * Create an Angular zone.
+ * @experimental
  */
 export function createNgZone() {
     return new NgZone({ enableLongStackTrace: assertionsEnabled() });
@@ -20,13 +21,14 @@ var _inPlatformCreate = false;
 /**
  * Creates a platform.
  * Platforms have to be eagerly created via this function.
+ * @experimental
  */
 export function createPlatform(injector) {
     if (_inPlatformCreate) {
         throw new BaseException('Already creating a platform...');
     }
     if (isPresent(_platform) && !_platform.disposed) {
-        throw new BaseException("There can be only one platform. Destroy the previous one to create a new one.");
+        throw new BaseException('There can be only one platform. Destroy the previous one to create a new one.');
     }
     lockMode();
     _inPlatformCreate = true;
@@ -41,11 +43,12 @@ export function createPlatform(injector) {
 /**
  * Checks that there currently is a platform
  * which contains the given token as a provider.
+ * @experimental
  */
 export function assertPlatform(requiredToken) {
     var platform = getPlatform();
     if (isBlank(platform)) {
-        throw new BaseException('Not platform exists!');
+        throw new BaseException('No platform exists!');
     }
     if (isPresent(platform) && isBlank(platform.injector.get(requiredToken, null))) {
         throw new BaseException('A platform with a different configuration has been created. Please destroy it first.');
@@ -54,6 +57,7 @@ export function assertPlatform(requiredToken) {
 }
 /**
  * Dispose the existing platform.
+ * @experimental
  */
 export function disposePlatform() {
     if (isPresent(_platform) && !_platform.disposed) {
@@ -62,24 +66,27 @@ export function disposePlatform() {
 }
 /**
  * Returns the current platform.
+ * @experimental
  */
 export function getPlatform() {
     return isPresent(_platform) && !_platform.disposed ? _platform : null;
 }
 /**
  * Shortcut for ApplicationRef.bootstrap.
- * Requires a platform the be created first.
+ * Requires a platform to be created first.
+ * @experimental
  */
-export function coreBootstrap(injector, componentFactory) {
+export function coreBootstrap(componentFactory, injector) {
     var appRef = injector.get(ApplicationRef);
     return appRef.bootstrap(componentFactory);
 }
 /**
  * Resolves the componentFactory for the given component,
  * waits for asynchronous initializers and bootstraps the component.
- * Requires a platform the be created first.
+ * Requires a platform to be created first.
+ * @experimental
  */
-export function coreLoadAndBootstrap(injector, componentType) {
+export function coreLoadAndBootstrap(componentType, injector) {
     var appRef = injector.get(ApplicationRef);
     return appRef.run(() => {
         var componentResolver = injector.get(ComponentResolver);
@@ -95,6 +102,7 @@ export function coreLoadAndBootstrap(injector, componentType) {
  *
  * A page's platform is initialized implicitly when {@link bootstrap}() is called, or
  * explicitly by calling {@link createPlatform}().
+ * @stable
  */
 export class PlatformRef {
     /**
@@ -133,9 +141,11 @@ export class PlatformRef_ extends PlatformRef {
     /** @internal */
     _applicationDisposed(app) { ListWrapper.remove(this._applications, app); }
 }
+/** @nocollapse */
 PlatformRef_.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 PlatformRef_.ctorParameters = [
     { type: Injector, },
 ];
@@ -143,6 +153,7 @@ PlatformRef_.ctorParameters = [
  * A reference to an Angular application running on a page.
  *
  * For more about Angular applications, see the documentation for {@link bootstrap}.
+ * @stable
  */
 export class ApplicationRef {
     /**
@@ -265,7 +276,9 @@ export class ApplicationRef_ extends ApplicationRef {
             this._loadComponent(compRef);
             let c = this._injector.get(Console);
             if (assertionsEnabled()) {
-                c.log("Angular 2 is running in the development mode. Call enableProdMode() to enable the production mode.");
+                let prodDescription = IS_DART ? 'Production mode is disabled in Dart.' :
+                    'Call enableProdMode() to enable the production mode.';
+                c.log(`Angular 2 is running in the development mode. ${prodDescription}`);
             }
             return compRef;
         });
@@ -289,7 +302,7 @@ export class ApplicationRef_ extends ApplicationRef {
     get zone() { return this._zone; }
     tick() {
         if (this._runningTick) {
-            throw new BaseException("ApplicationRef.tick is called recursively");
+            throw new BaseException('ApplicationRef.tick is called recursively');
         }
         var s = ApplicationRef_._tickScope();
         try {
@@ -314,29 +327,25 @@ export class ApplicationRef_ extends ApplicationRef {
 }
 /** @internal */
 ApplicationRef_._tickScope = wtfCreateScope('ApplicationRef#tick()');
+/** @nocollapse */
 ApplicationRef_.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 ApplicationRef_.ctorParameters = [
     { type: PlatformRef_, },
     { type: NgZone, },
     { type: Injector, },
 ];
-/**
- * @internal
- */
 export const PLATFORM_CORE_PROVIDERS = 
 /*@ts2dart_const*/ [
     PlatformRef_,
     /*@ts2dart_const*/ (
     /* @ts2dart_Provider */ { provide: PlatformRef, useExisting: PlatformRef_ })
 ];
-/**
- * @internal
- */
 export const APPLICATION_CORE_PROVIDERS = [
     /* @ts2dart_Provider */ { provide: NgZone, useFactory: createNgZone, deps: [] },
     ApplicationRef_,
-    /* @ts2dart_Provider */ { provide: ApplicationRef, useExisting: ApplicationRef_ }
+    /* @ts2dart_Provider */ { provide: ApplicationRef, useExisting: ApplicationRef_ },
 ];
 //# sourceMappingURL=application_ref.js.map

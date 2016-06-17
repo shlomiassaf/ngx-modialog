@@ -1,11 +1,11 @@
 "use strict";
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
-var constants_1 = require('./constants');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 var o = require('../output/output_ast');
-var compile_method_1 = require('./compile_method');
-var expression_converter_1 = require('./expression_converter');
 var compile_binding_1 = require('./compile_binding');
+var compile_method_1 = require('./compile_method');
+var constants_1 = require('./constants');
+var expression_converter_1 = require('./expression_converter');
 var CompileEventListener = (function () {
     function CompileEventListener(compileElement, eventTarget, eventName, listenerIndex) {
         this.compileElement = compileElement;
@@ -16,12 +16,10 @@ var CompileEventListener = (function () {
         this._method = new compile_method_1.CompileMethod(compileElement.view);
         this._methodName =
             "_handle_" + santitizeEventName(eventName) + "_" + compileElement.nodeIndex + "_" + listenerIndex;
-        this._eventParam =
-            new o.FnParam(constants_1.EventHandlerVars.event.name, o.importType(this.compileElement.view.genConfig.renderTypes.renderEvent));
+        this._eventParam = new o.FnParam(constants_1.EventHandlerVars.event.name, o.importType(this.compileElement.view.genConfig.renderTypes.renderEvent));
     }
     CompileEventListener.getOrCreate = function (compileElement, eventTarget, eventName, targetEventListeners) {
-        var listener = targetEventListeners.find(function (listener) { return listener.eventTarget == eventTarget &&
-            listener.eventName == eventName; });
+        var listener = targetEventListeners.find(function (listener) { return listener.eventTarget == eventTarget && listener.eventName == eventName; });
         if (lang_1.isBlank(listener)) {
             listener = new CompileEventListener(compileElement, eventTarget, eventName, targetEventListeners.length);
             targetEventListeners.push(listener);
@@ -82,7 +80,8 @@ var CompileEventListener = (function () {
         var subscription = o.variable("subscription_" + this.compileElement.view.subscriptions.length);
         this.compileElement.view.subscriptions.push(subscription);
         var eventListener = o.THIS_EXPR.callMethod('eventHandler', [o.THIS_EXPR.prop(this._methodName).callMethod(o.BuiltinMethod.bind, [o.THIS_EXPR])]);
-        this.compileElement.view.createMethod.addStmt(subscription.set(directiveInstance.prop(observablePropName)
+        this.compileElement.view.createMethod.addStmt(subscription
+            .set(directiveInstance.prop(observablePropName)
             .callMethod(o.BuiltinMethod.SubscribeObservable, [eventListener]))
             .toDeclStmt(null, [o.StmtModifier.Final]));
     };
@@ -109,9 +108,10 @@ function collectEventListeners(hostEvents, dirs, compileElement) {
 }
 exports.collectEventListeners = collectEventListeners;
 function bindDirectiveOutputs(directiveAst, directiveInstance, eventListeners) {
-    collection_1.StringMapWrapper.forEach(directiveAst.directive.outputs, function (eventName, observablePropName) {
-        eventListeners.filter(function (listener) { return listener.eventName == eventName; })
-            .forEach(function (listener) { listener.listenToDirective(directiveInstance, observablePropName); });
+    collection_1.StringMapWrapper.forEach(directiveAst.directive.outputs, function (eventName /** TODO #9100 */, observablePropName /** TODO #9100 */) {
+        eventListeners.filter(function (listener) { return listener.eventName == eventName; }).forEach(function (listener) {
+            listener.listenToDirective(directiveInstance, observablePropName);
+        });
     });
 }
 exports.bindDirectiveOutputs = bindDirectiveOutputs;

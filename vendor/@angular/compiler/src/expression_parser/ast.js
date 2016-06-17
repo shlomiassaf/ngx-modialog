@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var collection_1 = require('../../src/facade/collection');
+var collection_1 = require('../facade/collection');
 var AST = (function () {
     function AST() {
     }
@@ -12,7 +12,7 @@ var AST = (function () {
         if (context === void 0) { context = null; }
         return null;
     };
-    AST.prototype.toString = function () { return "AST"; };
+    AST.prototype.toString = function () { return 'AST'; };
     return AST;
 }());
 exports.AST = AST;
@@ -41,7 +41,7 @@ var Quote = (function (_super) {
         if (context === void 0) { context = null; }
         return visitor.visitQuote(this, context);
     };
-    Quote.prototype.toString = function () { return "Quote"; };
+    Quote.prototype.toString = function () { return 'Quote'; };
     return Quote;
 }(AST));
 exports.Quote = Quote;

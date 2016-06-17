@@ -18,7 +18,7 @@ exports.createOfflineCompileUrlResolver = createOfflineCompileUrlResolver;
  */
 exports.DEFAULT_PACKAGE_URL_PROVIDER = {
     provide: core_1.PACKAGE_ROOT_URL,
-    useValue: "/"
+    useValue: '/'
 };
 var UrlResolver = (function () {
     function UrlResolver(_packagePrefix) {
@@ -32,10 +32,6 @@ var UrlResolver = (function () {
      * `baseUrl` and `url`,
      * - if `url` is absolute (it has a scheme: 'http://', 'https://' or start with '/'), the `url` is
      * returned as is (ignoring the `baseUrl`)
-     *
-     * @param {string} baseUrl
-     * @param {string} url
-     * @returns {string} the resolved URL
      */
     UrlResolver.prototype.resolve = function (baseUrl, url) {
         var resolvedUrl = url;
@@ -45,7 +41,7 @@ var UrlResolver = (function () {
         var resolvedParts = _split(resolvedUrl);
         var prefix = this._packagePrefix;
         if (lang_1.isPresent(prefix) && lang_1.isPresent(resolvedParts) &&
-            resolvedParts[_ComponentIndex.Scheme] == "package") {
+            resolvedParts[_ComponentIndex.Scheme] == 'package') {
             var path = resolvedParts[_ComponentIndex.Path];
             if (this._packagePrefix === _ASSET_SCHEME) {
                 var pathSegements = path.split(/\//);
@@ -59,9 +55,11 @@ var UrlResolver = (function () {
         }
         return resolvedUrl;
     };
+    /** @nocollapse */
     UrlResolver.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     UrlResolver.ctorParameters = [
         { type: undefined, decorators: [{ type: core_1.Inject, args: [core_1.PACKAGE_ROOT_URL,] },] },
     ];
@@ -73,7 +71,7 @@ exports.UrlResolver = UrlResolver;
  */
 function getUrlScheme(url) {
     var match = _split(url);
-    return (match && match[_ComponentIndex.Scheme]) || "";
+    return (match && match[_ComponentIndex.Scheme]) || '';
 }
 exports.getUrlScheme = getUrlScheme;
 // The code below is adapted from Traceur:
@@ -84,16 +82,16 @@ exports.getUrlScheme = getUrlScheme;
  * No encoding is performed.  Any component may be omitted as either null or
  * undefined.
  *
- * @param {?string=} opt_scheme The scheme such as 'http'.
- * @param {?string=} opt_userInfo The user name before the '@'.
- * @param {?string=} opt_domain The domain such as 'www.google.com', already
+ * @param opt_scheme The scheme such as 'http'.
+ * @param opt_userInfo The user name before the '@'.
+ * @param opt_domain The domain such as 'www.google.com', already
  *     URI-encoded.
- * @param {(string|null)=} opt_port The port number.
- * @param {?string=} opt_path The path, already URI-encoded.  If it is not
+ * @param opt_port The port number.
+ * @param opt_path The path, already URI-encoded.  If it is not
  *     empty, it must begin with a slash.
- * @param {?string=} opt_queryData The URI-encoded query data.
- * @param {?string=} opt_fragment The URI-encoded fragment identifier.
- * @return {string} The fully combined URI.
+ * @param opt_queryData The URI-encoded query data.
+ * @param opt_fragment The URI-encoded fragment identifier.
+ * @return The fully combined URI.
  */
 function _buildFromEncodedParts(opt_scheme, opt_userInfo, opt_domain, opt_port, opt_path, opt_queryData, opt_fragment) {
     var out = [];
@@ -222,8 +220,8 @@ var _ComponentIndex;
  * goog.uri.utils.split(someStr)[goog.uri.utils.CompontentIndex.QUERY_DATA];
  * </pre>
  *
- * @param {string} uri The URI string to examine.
- * @return {!Array.<string|undefined>} Each component still URI-encoded.
+ * @param uri The URI string to examine.
+ * @return Each component still URI-encoded.
  *     Each component that is present will contain the encoded value, whereas
  *     components that are not present will be undefined or empty, depending
  *     on the browser's regular expression implementation.  Never null, since
@@ -236,8 +234,8 @@ function _split(uri) {
   * Removes dot segments in given path component, as described in
   * RFC 3986, section 5.2.4.
   *
-  * @param {string} path A non-empty path component.
-  * @return {string} Path component with removed dot segments.
+  * @param path A non-empty path component.
+  * @return Path component with removed dot segments.
   */
 function _removeDotSegments(path) {
     if (path == '/')
@@ -277,8 +275,6 @@ function _removeDotSegments(path) {
 /**
  * Takes an array of the parts from split and canonicalizes the path part
  * and then joins all the parts.
- * @param {Array.<string?>} parts
- * @return {string}
  */
 function _joinAndCanonicalizePath(parts) {
     var path = parts[_ComponentIndex.Path];
@@ -288,9 +284,8 @@ function _joinAndCanonicalizePath(parts) {
 }
 /**
  * Resolves a URL.
- * @param {string} base The URL acting as the base URL.
- * @param {string} to The URL to resolve.
- * @return {string}
+ * @param base The URL acting as the base URL.
+ * @param to The URL to resolve.
  */
 function _resolveUrl(base, url) {
     var parts = _split(encodeURI(url));

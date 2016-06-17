@@ -1,6 +1,6 @@
-import { MapWrapper, StringMapWrapper } from '../../../src/facade/collection';
-import { stringify, looseIdentical, isJsObject, isBlank } from '../../../src/facade/lang';
-import { BaseException } from '../../../src/facade/exceptions';
+import { MapWrapper, StringMapWrapper } from '../../facade/collection';
+import { BaseException } from '../../facade/exceptions';
+import { isBlank, isJsObject, looseIdentical, stringify } from '../../facade/lang';
 /* @ts2dart_const */
 export class DefaultKeyValueDifferFactory {
     constructor() {
@@ -75,7 +75,7 @@ export class DefaultKeyValueDiffer {
         var lastOldSeqRecord = null;
         var lastNewSeqRecord = null;
         var seqChanged = false;
-        this._forEach(map, (value, key) => {
+        this._forEach(map, (value /** TODO #9100 */, key /** TODO #9100 */) => {
             var newSeqRecord;
             if (oldSeqRecord !== null && key === oldSeqRecord.key) {
                 newSeqRecord = oldSeqRecord;
@@ -301,12 +301,14 @@ export class DefaultKeyValueDiffer {
         for (record = this._removalsHead; record !== null; record = record._nextRemoved) {
             removals.push(stringify(record));
         }
-        return "map: " + items.join(', ') + "\n" + "previous: " + previous.join(', ') + "\n" +
-            "additions: " + additions.join(', ') + "\n" + "changes: " + changes.join(', ') + "\n" +
-            "removals: " + removals.join(', ') + "\n";
+        return 'map: ' + items.join(', ') + '\n' +
+            'previous: ' + previous.join(', ') + '\n' +
+            'additions: ' + additions.join(', ') + '\n' +
+            'changes: ' + changes.join(', ') + '\n' +
+            'removals: ' + removals.join(', ') + '\n';
     }
     /** @internal */
-    _forEach(obj, fn) {
+    _forEach(obj /** TODO #9100 */, fn) {
         if (obj instanceof Map) {
             obj.forEach(fn);
         }
@@ -315,6 +317,9 @@ export class DefaultKeyValueDiffer {
         }
     }
 }
+/**
+ * @stable
+ */
 export class KeyValueChangeRecord {
     constructor(key) {
         this.key = key;

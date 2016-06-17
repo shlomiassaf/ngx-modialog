@@ -7,6 +7,8 @@ var dom_adapter_1 = require('../dom/dom_adapter');
  * it is not possible to bind to the `text` property of the `HTMLTitleElement` elements
  * (representing the `<title>` tag). Instead, this service can be used to set and get the current
  * title value.
+ *
+ * @experimental
  */
 var Title = (function () {
     function Title() {

@@ -1,6 +1,6 @@
-import { Pipe, Injectable, ChangeDetectorRef, WrappedValue } from '@angular/core';
-import { isBlank, isPresent, isPromise } from '../../src/facade/lang';
-import { ObservableWrapper } from '../../src/facade/async';
+import { ChangeDetectorRef, Injectable, Pipe, WrappedValue } from '@angular/core';
+import { ObservableWrapper } from '../facade/async';
+import { isBlank, isPresent, isPromise } from '../facade/lang';
 import { InvalidPipeArgumentException } from './invalid_pipe_argument_exception';
 class ObservableStrategy {
     createSubscription(async, updateLatestValue) {
@@ -11,7 +11,7 @@ class ObservableStrategy {
 }
 class PromiseStrategy {
     createSubscription(async, updateLatestValue) {
-        return async.then(updateLatestValue);
+        return async.then(updateLatestValue, e => { throw e; });
     }
     dispose(subscription) { }
     onDestroy(subscription) { }
@@ -91,10 +91,12 @@ export class AsyncPipe {
         }
     }
 }
+/** @nocollapse */
 AsyncPipe.decorators = [
     { type: Pipe, args: [{ name: 'async', pure: false },] },
     { type: Injectable },
 ];
+/** @nocollapse */
 AsyncPipe.ctorParameters = [
     { type: ChangeDetectorRef, },
 ];

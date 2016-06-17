@@ -1,5 +1,5 @@
 "use strict";
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 /**
  * A parameter metadata that specifies a dependency.
  *
@@ -17,7 +17,7 @@ var lang_1 = require('../../src/facade/lang');
  * }
  *
  * var injector = Injector.resolveAndCreate([
- *  provide("MyEngine", {useClass: Engine}),
+ *  {provide: "MyEngine", useClass: Engine},
  *  Car
  * ]);
  *
@@ -40,9 +40,10 @@ var lang_1 = require('../../src/facade/lang');
  * expect(injector.get(Car).engine instanceof Engine).toBe(true);
  * ```
  * @ts2dart_const
+ * @stable
  */
 var InjectMetadata = (function () {
-    function InjectMetadata(token) {
+    function InjectMetadata(token /** TODO #9100 */) {
         this.token = token;
     }
     InjectMetadata.prototype.toString = function () { return "@Inject(" + lang_1.stringify(this.token) + ")"; };
@@ -70,6 +71,7 @@ exports.InjectMetadata = InjectMetadata;
  * expect(injector.get(Car).engine).toBeNull();
  * ```
  * @ts2dart_const
+ * @stable
  */
 var OptionalMetadata = (function () {
     function OptionalMetadata() {
@@ -82,6 +84,7 @@ exports.OptionalMetadata = OptionalMetadata;
  * `DependencyMetadata` is used by the framework to extend DI.
  * This is internal to Angular and should not be used directly.
  * @ts2dart_const
+ * @stable
  */
 var DependencyMetadata = (function () {
     function DependencyMetadata() {
@@ -125,6 +128,7 @@ exports.DependencyMetadata = DependencyMetadata;
  * expect(() => injector.get(NeedsService)).toThrowError();
  * ```
  * @ts2dart_const
+ * @stable
  */
 var InjectableMetadata = (function () {
     function InjectableMetadata() {
@@ -159,6 +163,7 @@ exports.InjectableMetadata = InjectableMetadata;
  * expect(() => child.get(NeedsDependency)).toThrowError();
  * ```
  * @ts2dart_const
+ * @stable
  */
 var SelfMetadata = (function () {
     function SelfMetadata() {
@@ -192,6 +197,7 @@ exports.SelfMetadata = SelfMetadata;
  * expect(() => inj.get(NeedsDependency)).toThrowError();
  * ```
  * @ts2dart_const
+ * @stable
  */
 var SkipSelfMetadata = (function () {
     function SkipSelfMetadata() {
@@ -254,6 +260,7 @@ exports.SkipSelfMetadata = SkipSelfMetadata;
  * bootstrap(App);
  *```
  * @ts2dart_const
+ * @stable
  */
 var HostMetadata = (function () {
     function HostMetadata() {

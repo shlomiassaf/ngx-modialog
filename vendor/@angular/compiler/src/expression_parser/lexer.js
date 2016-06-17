@@ -5,9 +5,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var collection_1 = require('../../src/facade/collection');
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 (function (TokenType) {
     TokenType[TokenType["Character"] = 0] = "Character";
     TokenType[TokenType["Identifier"] = 1] = "Identifier";
@@ -30,6 +30,7 @@ var Lexer = (function () {
         }
         return tokens;
     };
+    /** @nocollapse */
     Lexer.decorators = [
         { type: core_1.Injectable },
     ];
@@ -54,15 +55,15 @@ var Token = (function () {
     Token.prototype.isIdentifier = function () { return (this.type == TokenType.Identifier); };
     Token.prototype.isKeyword = function () { return (this.type == TokenType.Keyword); };
     Token.prototype.isKeywordDeprecatedVar = function () {
-        return (this.type == TokenType.Keyword && this.strValue == "var");
+        return (this.type == TokenType.Keyword && this.strValue == 'var');
     };
-    Token.prototype.isKeywordLet = function () { return (this.type == TokenType.Keyword && this.strValue == "let"); };
-    Token.prototype.isKeywordNull = function () { return (this.type == TokenType.Keyword && this.strValue == "null"); };
+    Token.prototype.isKeywordLet = function () { return (this.type == TokenType.Keyword && this.strValue == 'let'); };
+    Token.prototype.isKeywordNull = function () { return (this.type == TokenType.Keyword && this.strValue == 'null'); };
     Token.prototype.isKeywordUndefined = function () {
-        return (this.type == TokenType.Keyword && this.strValue == "undefined");
+        return (this.type == TokenType.Keyword && this.strValue == 'undefined');
     };
-    Token.prototype.isKeywordTrue = function () { return (this.type == TokenType.Keyword && this.strValue == "true"); };
-    Token.prototype.isKeywordFalse = function () { return (this.type == TokenType.Keyword && this.strValue == "false"); };
+    Token.prototype.isKeywordTrue = function () { return (this.type == TokenType.Keyword && this.strValue == 'true'); };
+    Token.prototype.isKeywordFalse = function () { return (this.type == TokenType.Keyword && this.strValue == 'false'); };
     Token.prototype.toNumber = function () {
         // -1 instead of NULL ok?
         return (this.type == TokenType.Number) ? this.numValue : -1;
@@ -100,9 +101,9 @@ function newStringToken(index, text) {
     return new Token(index, TokenType.String, 0, text);
 }
 function newNumberToken(index, n) {
-    return new Token(index, TokenType.Number, n, "");
+    return new Token(index, TokenType.Number, n, '');
 }
-exports.EOF = new Token(-1, TokenType.Character, 0, "");
+exports.EOF = new Token(-1, TokenType.Character, 0, '');
 exports.$EOF = 0;
 exports.$TAB = 9;
 exports.$LF = 10;
@@ -420,29 +421,8 @@ function unescape(code) {
     }
 }
 var OPERATORS = collection_1.SetWrapper.createFromList([
-    '+',
-    '-',
-    '*',
-    '/',
-    '%',
-    '^',
-    '=',
-    '==',
-    '!=',
-    '===',
-    '!==',
-    '<',
-    '>',
-    '<=',
-    '>=',
-    '&&',
-    '||',
-    '&',
-    '|',
-    '!',
-    '?',
-    '#',
-    '?.'
+    '+', '-', '*', '/', '%', '^', '=', '==', '!=', '===', '!==', '<',
+    '>', '<=', '>=', '&&', '||', '&', '|', '!', '?', '#', '?.'
 ]);
 var KEYWORDS = collection_1.SetWrapper.createFromList(['var', 'let', 'null', 'undefined', 'true', 'false', 'if', 'else']);
 //# sourceMappingURL=lexer.js.map

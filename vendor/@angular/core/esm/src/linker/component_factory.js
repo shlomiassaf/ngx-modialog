@@ -1,5 +1,5 @@
-import { isBlank } from '../../src/facade/lang';
-import { unimplemented } from '../../src/facade/exceptions';
+import { unimplemented } from '../facade/exceptions';
+import { isBlank } from '../facade/lang';
 import { ViewUtils } from './view_utils';
 /**
  * Represents an instance of a Component created via a {@link ComponentFactory}.
@@ -7,6 +7,7 @@ import { ViewUtils } from './view_utils';
  * `ComponentRef` provides access to the Component Instance as well other objects related to this
  * Component Instance and allows you to destroy the Component Instance via the {@link #destroy}
  * method.
+ * @stable
  */
 export class ComponentRef {
     /**
@@ -54,8 +55,11 @@ export class ComponentRef_ extends ComponentRef {
     destroy() { this._hostElement.parentView.destroy(); }
     onDestroy(callback) { this.hostView.onDestroy(callback); }
 }
+/**
+ * @experimental
+ * @ts2dart_const
+ */
 const EMPTY_CONTEXT = new Object();
-/*@ts2dart_const*/
 export class ComponentFactory {
     constructor(selector, _viewFactory, _componentType) {
         this.selector = selector;

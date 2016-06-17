@@ -1,7 +1,7 @@
-import { isPresent } from '../../src/facade/lang';
-import { BaseException } from '../../src/facade/exceptions';
-import * as o from './output_ast';
+import { BaseException } from '../facade/exceptions';
+import { isPresent } from '../facade/lang';
 import { AbstractEmitterVisitor, CATCH_ERROR_VAR, CATCH_STACK_VAR } from './abstract_emitter';
+import * as o from './output_ast';
 export class AbstractJsEmitterVisitor extends AbstractEmitterVisitor {
     constructor() {
         super(false);
@@ -122,17 +122,16 @@ export class AbstractJsEmitterVisitor extends AbstractEmitterVisitor {
         ctx.decIndent();
         ctx.println(`} catch (${CATCH_ERROR_VAR.name}) {`);
         ctx.incIndent();
-        var catchStmts = [
-            CATCH_STACK_VAR.set(CATCH_ERROR_VAR.prop('stack'))
-                .toDeclStmt(null, [o.StmtModifier.Final])
-        ].concat(stmt.catchStmts);
+        var catchStmts = [CATCH_STACK_VAR.set(CATCH_ERROR_VAR.prop('stack')).toDeclStmt(null, [
+                o.StmtModifier.Final
+            ])].concat(stmt.catchStmts);
         this.visitAllStatements(catchStmts, ctx);
         ctx.decIndent();
         ctx.println(`}`);
         return null;
     }
     _visitParams(params, ctx) {
-        this.visitAllObjects((param) => ctx.print(param.name), params, ctx, ',');
+        this.visitAllObjects((param /** TODO #9100 */) => ctx.print(param.name), params, ctx, ',');
     }
     getBuiltinMethodName(method) {
         var name;

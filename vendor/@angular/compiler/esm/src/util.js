@@ -1,5 +1,5 @@
-import { IS_DART, StringWrapper, isBlank, isArray, isStrictStringMap, isPrimitive } from './facade/lang';
 import { StringMapWrapper } from './facade/collection';
+import { IS_DART, StringWrapper, isArray, isBlank, isPrimitive, isStrictStringMap } from './facade/lang';
 export var MODULE_SUFFIX = IS_DART ? '.dart' : '';
 var CAMEL_CASE_REGEXP = /([A-Z])/g;
 var DASH_CASE_REGEXP = /-([a-z])/g;
@@ -41,7 +41,9 @@ export class ValueTransformer {
     }
     visitStringMap(map, context) {
         var result = {};
-        StringMapWrapper.forEach(map, (value, key) => { result[key] = visitValue(value, this, context); });
+        StringMapWrapper.forEach(map, (value /** TODO #9100 */, key /** TODO #9100 */) => {
+            result[key] = visitValue(value, this, context);
+        });
         return result;
     }
     visitPrimitive(value, context) { return value; }

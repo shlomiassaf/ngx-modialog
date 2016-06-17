@@ -1,15 +1,17 @@
-import { ListWrapper } from '../../src/facade/collection';
+import { ObservableWrapper } from '../facade/async';
+import { ListWrapper } from '../facade/collection';
+import { isPresent } from '../facade/lang';
 import { AppElement } from './element';
-import { isPresent } from '../../src/facade/lang';
-import { ObservableWrapper } from '../../src/facade/async';
 import { ViewRef_ } from './view_ref';
 import { ViewType } from './view_type';
-import { flattenNestedViewRenderNodes, ensureSlotCount } from './view_utils';
+import { ensureSlotCount, flattenNestedViewRenderNodes } from './view_utils';
 import { ChangeDetectionStrategy, ChangeDetectorState } from '../change_detection/change_detection';
 import { wtfCreateScope, wtfLeave } from '../profile/profile';
 import { ExpressionChangedAfterItHasBeenCheckedException, ViewDestroyedException, ViewWrappedException } from './exceptions';
 import { DebugContext } from './debug_context';
 import { ElementInjector } from './element_injector';
+import { AnimationGroupPlayer } from '../animation/animation_group_player';
+import { ActiveAnimationPlayersMap } from '../animation/active_animation_players_map';
 var _scope_check = wtfCreateScope(`AppView#check(ascii id)`);
 /**
  * Cost of making objects: http://jsperf.com/instantiate-size-of-object
@@ -31,6 +33,7 @@ export class AppView {
         // change detection will fail.
         this.cdState = ChangeDetectorState.NeverChecked;
         this.destroyed = false;
+        this.activeAnimationPlayers = new ActiveAnimationPlayersMap();
         this.ref = new ViewRef_(this);
         if (type === ViewType.COMPONENT || type === ViewType.HOST) {
             this.renderer = viewUtils.renderComponent(componentType);
@@ -38,6 +41,22 @@ export class AppView {
         else {
             this.renderer = declarationAppElement.parentView.renderer;
         }
+    }
+    cancelActiveAnimation(element, animationName, removeAllAnimations = false) {
+        if (removeAllAnimations) {
+            this.activeAnimationPlayers.findAllPlayersByElement(element).forEach(player => player.destroy());
+        }
+        else {
+            var player = this.activeAnimationPlayers.find(element, animationName);
+            if (isPresent(player)) {
+                player.destroy();
+            }
+        }
+    }
+    registerAndStartAnimation(element, animationName, player) {
+        this.activeAnimationPlayers.set(element, animationName, player);
+        player.onDone(() => { this.activeAnimationPlayers.remove(element, animationName); });
+        player.play();
     }
     create(context, givenProjectableNodes, rootSelectorOrNode) {
         this.context = context;
@@ -136,21 +155,33 @@ export class AppView {
             ObservableWrapper.dispose(this.subscriptions[i]);
         }
         this.destroyInternal();
-        if (this._hasExternalHostElement) {
-            this.renderer.detachView(this.flatRootNodes);
-        }
-        else if (isPresent(this.viewContainerElement)) {
-            this.viewContainerElement.detachView(this.viewContainerElement.nestedViews.indexOf(this));
+        this.dirtyParentQueriesInternal();
+        if (this.activeAnimationPlayers.length == 0) {
+            this.renderer.destroyView(hostElement, this.allNodes);
         }
         else {
-            this.dirtyParentQueriesInternal();
+            var player = new AnimationGroupPlayer(this.activeAnimationPlayers.getAllPlayers());
+            player.onDone(() => { this.renderer.destroyView(hostElement, this.allNodes); });
         }
-        this.renderer.destroyView(hostElement, this.allNodes);
     }
     /**
      * Overwritten by implementations
      */
     destroyInternal() { }
+    /**
+     * Overwritten by implementations
+     */
+    detachInternal() { }
+    detach() {
+        this.detachInternal();
+        if (this.activeAnimationPlayers.length == 0) {
+            this.renderer.detachView(this.flatRootNodes);
+        }
+        else {
+            var player = new AnimationGroupPlayer(this.activeAnimationPlayers.getAllPlayers());
+            player.onDone(() => { this.renderer.detachView(this.flatRootNodes); });
+        }
+    }
     get changeDetectorRef() { return this.ref; }
     get parent() {
         return isPresent(this.declarationAppElement) ? this.declarationAppElement.parentView : null;
@@ -168,8 +199,7 @@ export class AppView {
     dirtyParentQueriesInternal() { }
     detectChanges(throwOnChange) {
         var s = _scope_check(this.clazz);
-        if (this.cdMode === ChangeDetectionStrategy.Detached ||
-            this.cdMode === ChangeDetectionStrategy.Checked ||
+        if (this.cdMode === ChangeDetectionStrategy.Checked ||
             this.cdState === ChangeDetectorState.Errored)
             return;
         if (this.destroyed) {
@@ -190,12 +220,18 @@ export class AppView {
     }
     detectContentChildrenChanges(throwOnChange) {
         for (var i = 0; i < this.contentChildren.length; ++i) {
-            this.contentChildren[i].detectChanges(throwOnChange);
+            var child = this.contentChildren[i];
+            if (child.cdMode === ChangeDetectionStrategy.Detached)
+                continue;
+            child.detectChanges(throwOnChange);
         }
     }
     detectViewChildrenChanges(throwOnChange) {
         for (var i = 0; i < this.viewChildren.length; ++i) {
-            this.viewChildren[i].detectChanges(throwOnChange);
+            var child = this.viewChildren[i];
+            if (child.cdMode === ChangeDetectionStrategy.Detached)
+                continue;
+            child.detectChanges(throwOnChange);
         }
     }
     addToContentChildren(renderAppElement) {
@@ -248,6 +284,16 @@ export class DebugAppView extends AppView {
             throw e;
         }
     }
+    detach() {
+        this._resetDebug();
+        try {
+            super.detach();
+        }
+        catch (e) {
+            this._rethrowWithContext(e, e.stack);
+            throw e;
+        }
+    }
     destroyLocal() {
         this._resetDebug();
         try {
@@ -284,7 +330,7 @@ export class DebugAppView extends AppView {
     }
     eventHandler(cb) {
         var superHandler = super.eventHandler(cb);
-        return (event) => {
+        return (event /** TODO #9100 */) => {
             this._resetDebug();
             try {
                 return superHandler(event);

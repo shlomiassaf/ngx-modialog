@@ -1,4 +1,6 @@
-import { RegExpWrapper, StringWrapper, isPresent, isBlank } from '../src/facade/lang';
+// Some of the code comes from WebComponents.JS
+// https://github.com/webcomponents/webcomponentsjs/blob/master/src/HTMLImports/path.js
+import { RegExpWrapper, StringWrapper, isBlank, isPresent } from '../src/facade/lang';
 export class StyleWithImports {
     constructor(style, styleUrls) {
         this.style = style;

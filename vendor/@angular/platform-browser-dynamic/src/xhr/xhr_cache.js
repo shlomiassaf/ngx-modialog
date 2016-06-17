@@ -5,9 +5,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var compiler_1 = require('@angular/compiler');
-var exceptions_1 = require('../../src/facade/exceptions');
-var lang_1 = require('../../src/facade/lang');
-var promise_1 = require('../../src/facade/promise');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
+var promise_1 = require('../facade/promise');
 /**
  * An implementation of XHR that uses a template cache to avoid doing an actual
  * XHR.

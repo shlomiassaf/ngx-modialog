@@ -5,12 +5,12 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
-var o = require('../output/output_ast');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 var identifiers_1 = require('../identifiers');
-var constants_1 = require('./constants');
+var o = require('../output/output_ast');
 var template_ast_1 = require('../template_ast');
+var constants_1 = require('./constants');
 var compile_metadata_1 = require('../compile_metadata');
 var util_1 = require('./util');
 var compile_query_1 = require('./compile_query');
@@ -65,12 +65,8 @@ var CompileElement = (function (_super) {
         // private is fine here as no child view will reference an AppElement
         this.view.fields.push(new o.ClassField(fieldName, o.importType(identifiers_1.Identifiers.AppElement), [o.StmtModifier.Private]));
         var statement = o.THIS_EXPR.prop(fieldName)
-            .set(o.importExpr(identifiers_1.Identifiers.AppElement)
-            .instantiate([
-            o.literal(this.nodeIndex),
-            o.literal(parentNodeIndex),
-            o.THIS_EXPR,
-            this.renderNode
+            .set(o.importExpr(identifiers_1.Identifiers.AppElement).instantiate([
+            o.literal(this.nodeIndex), o.literal(parentNodeIndex), o.THIS_EXPR, this.renderNode
         ]))
             .toStmt();
         this.view.createMethod.addStmt(statement);
@@ -88,8 +84,9 @@ var CompileElement = (function (_super) {
     CompileElement.prototype.setEmbeddedView = function (embeddedView) {
         this.embeddedView = embeddedView;
         if (lang_1.isPresent(embeddedView)) {
-            var createTemplateRefExpr = o.importExpr(identifiers_1.Identifiers.TemplateRef_)
-                .instantiate([this.appElement, this.embeddedView.viewFactory]);
+            var createTemplateRefExpr = o.importExpr(identifiers_1.Identifiers.TemplateRef_).instantiate([
+                this.appElement, this.embeddedView.viewFactory
+            ]);
             var provider = new compile_metadata_1.CompileProviderMetadata({ token: identifiers_1.identifierToken(identifiers_1.Identifiers.TemplateRef), useValue: createTemplateRefExpr });
             // Add TemplateRef as first provider as it does not have deps on other providers
             this._resolvedProvidersArray.unshift(new template_ast_1.ProviderAst(provider.token, false, true, [provider], template_ast_1.ProviderAstType.Builtin, this.sourceAst.sourceSpan));
@@ -101,9 +98,7 @@ var CompileElement = (function (_super) {
             this._instances.add(identifiers_1.identifierToken(identifiers_1.Identifiers.ViewContainerRef), this.appElement.prop('vcRef'));
         }
         this._resolvedProviders = new compile_metadata_1.CompileTokenMap();
-        this._resolvedProvidersArray.forEach(function (provider) {
-            return _this._resolvedProviders.add(provider.token, provider);
-        });
+        this._resolvedProvidersArray.forEach(function (provider) { return _this._resolvedProviders.add(provider.token, provider); });
         // create all the provider instances, some in the view constructor,
         // some as getters. We rely on the fact that they are already sorted topologically.
         this._resolvedProviders.values().forEach(function (resolvedProvider) {
@@ -142,7 +137,7 @@ var CompileElement = (function (_super) {
             var queriesForProvider = _this._getQueriesFor(resolvedProvider.token);
             collection_1.ListWrapper.addAll(queriesWithReads, queriesForProvider.map(function (query) { return new _QueryWithRead(query, resolvedProvider.token); }));
         });
-        collection_1.StringMapWrapper.forEach(this.referenceTokens, function (_, varName) {
+        collection_1.StringMapWrapper.forEach(this.referenceTokens, function (_ /** TODO #9100 */, varName /** TODO #9100 */) {
             var token = _this.referenceTokens[varName];
             var varValue;
             if (lang_1.isPresent(token)) {
@@ -153,8 +148,7 @@ var CompileElement = (function (_super) {
             }
             _this.view.locals.set(varName, varValue);
             var varToken = new compile_metadata_1.CompileTokenMetadata({ value: varName });
-            collection_1.ListWrapper.addAll(queriesWithReads, _this._getQueriesFor(varToken)
-                .map(function (query) { return new _QueryWithRead(query, varToken); }));
+            collection_1.ListWrapper.addAll(queriesWithReads, _this._getQueriesFor(varToken).map(function (query) { return new _QueryWithRead(query, varToken); }));
         });
         queriesWithReads.forEach(function (queryWithRead) {
             var value;
@@ -177,10 +171,12 @@ var CompileElement = (function (_super) {
             }
         });
         if (lang_1.isPresent(this.component)) {
-            var componentConstructorViewQueryList = lang_1.isPresent(this.component) ? o.literalArr(this._componentConstructorViewQueryLists) :
+            var componentConstructorViewQueryList = lang_1.isPresent(this.component) ?
+                o.literalArr(this._componentConstructorViewQueryLists) :
                 o.NULL_EXPR;
             var compExpr = lang_1.isPresent(this.getComponent()) ? this.getComponent() : o.NULL_EXPR;
-            this.view.createMethod.addStmt(this.appElement.callMethod('initComponent', [compExpr, componentConstructorViewQueryList, this._compViewExpr])
+            this.view.createMethod.addStmt(this.appElement
+                .callMethod('initComponent', [compExpr, componentConstructorViewQueryList, this._compViewExpr])
                 .toStmt());
         }
     };
@@ -198,9 +194,9 @@ var CompileElement = (function (_super) {
             var providerChildNodeCount = resolvedProvider.providerType === template_ast_1.ProviderAstType.PrivateService ? 0 : childNodeCount;
             _this.view.injectorGetMethod.addStmt(createInjectInternalCondition(_this.nodeIndex, providerChildNodeCount, resolvedProvider, providerExpr));
         });
-        this._queries.values().forEach(function (queries) {
-            return queries.forEach(function (query) { return query.afterChildren(_this.view.updateContentQueriesMethod); });
-        });
+        this._queries.values().forEach(function (queries) { return queries.forEach(function (query) {
+            return query.afterChildren(_this.view.createMethod, _this.view.updateContentQueriesMethod);
+        }); });
     };
     CompileElement.prototype.addContentNode = function (ngContentIndex, nodeExpr) {
         this.contentNodesByNgContentIndex[ngContentIndex].push(nodeExpr);
@@ -360,7 +356,9 @@ var _ValueOutputAstTransformer = (function (_super) {
     _ValueOutputAstTransformer.prototype.visitStringMap = function (map, context) {
         var _this = this;
         var entries = [];
-        collection_1.StringMapWrapper.forEach(map, function (value, key) { entries.push([key, util_2.visitValue(value, _this, context)]); });
+        collection_1.StringMapWrapper.forEach(map, function (value /** TODO #9100 */, key /** TODO #9100 */) {
+            entries.push([key, util_2.visitValue(value, _this, context)]);
+        });
         return o.literalMap(entries);
     };
     _ValueOutputAstTransformer.prototype.visitPrimitive = function (value, context) { return o.literal(value); };

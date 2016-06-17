@@ -1,4 +1,4 @@
-import { isJsObject, global, isPresent, isBlank, isArray, getSymbolIterator } from './lang';
+import { getSymbolIterator, global, isArray, isBlank, isJsObject, isPresent } from './lang';
 export var Map = global.Map;
 export var Set = global.Set;
 // Safari and Internet Explorer do not support the iterable parameter to the

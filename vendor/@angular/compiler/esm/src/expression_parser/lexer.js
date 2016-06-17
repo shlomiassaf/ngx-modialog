@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { SetWrapper } from '../../src/facade/collection';
-import { NumberWrapper, StringJoiner, StringWrapper, isPresent } from '../../src/facade/lang';
-import { BaseException } from '../../src/facade/exceptions';
+import { SetWrapper } from '../facade/collection';
+import { BaseException } from '../facade/exceptions';
+import { NumberWrapper, StringJoiner, StringWrapper, isPresent } from '../facade/lang';
 export var TokenType;
 (function (TokenType) {
     TokenType[TokenType["Character"] = 0] = "Character";
@@ -23,6 +23,7 @@ export class Lexer {
         return tokens;
     }
 }
+/** @nocollapse */
 Lexer.decorators = [
     { type: Injectable },
 ];
@@ -44,15 +45,15 @@ export class Token {
     isIdentifier() { return (this.type == TokenType.Identifier); }
     isKeyword() { return (this.type == TokenType.Keyword); }
     isKeywordDeprecatedVar() {
-        return (this.type == TokenType.Keyword && this.strValue == "var");
+        return (this.type == TokenType.Keyword && this.strValue == 'var');
     }
-    isKeywordLet() { return (this.type == TokenType.Keyword && this.strValue == "let"); }
-    isKeywordNull() { return (this.type == TokenType.Keyword && this.strValue == "null"); }
+    isKeywordLet() { return (this.type == TokenType.Keyword && this.strValue == 'let'); }
+    isKeywordNull() { return (this.type == TokenType.Keyword && this.strValue == 'null'); }
     isKeywordUndefined() {
-        return (this.type == TokenType.Keyword && this.strValue == "undefined");
+        return (this.type == TokenType.Keyword && this.strValue == 'undefined');
     }
-    isKeywordTrue() { return (this.type == TokenType.Keyword && this.strValue == "true"); }
-    isKeywordFalse() { return (this.type == TokenType.Keyword && this.strValue == "false"); }
+    isKeywordTrue() { return (this.type == TokenType.Keyword && this.strValue == 'true'); }
+    isKeywordFalse() { return (this.type == TokenType.Keyword && this.strValue == 'false'); }
     toNumber() {
         // -1 instead of NULL ok?
         return (this.type == TokenType.Number) ? this.numValue : -1;
@@ -88,9 +89,9 @@ function newStringToken(index, text) {
     return new Token(index, TokenType.String, 0, text);
 }
 function newNumberToken(index, n) {
-    return new Token(index, TokenType.Number, n, "");
+    return new Token(index, TokenType.Number, n, '');
 }
-export var EOF = new Token(-1, TokenType.Character, 0, "");
+export var EOF = new Token(-1, TokenType.Character, 0, '');
 export const $EOF = 0;
 export const $TAB = 9;
 export const $LF = 10;
@@ -402,29 +403,8 @@ function unescape(code) {
     }
 }
 var OPERATORS = SetWrapper.createFromList([
-    '+',
-    '-',
-    '*',
-    '/',
-    '%',
-    '^',
-    '=',
-    '==',
-    '!=',
-    '===',
-    '!==',
-    '<',
-    '>',
-    '<=',
-    '>=',
-    '&&',
-    '||',
-    '&',
-    '|',
-    '!',
-    '?',
-    '#',
-    '?.'
+    '+', '-', '*', '/', '%', '^', '=', '==', '!=', '===', '!==', '<',
+    '>', '<=', '>=', '&&', '||', '&', '|', '!', '?', '#', '?.'
 ]);
 var KEYWORDS = SetWrapper.createFromList(['var', 'let', 'null', 'undefined', 'true', 'false', 'if', 'else']);
 //# sourceMappingURL=lexer.js.map

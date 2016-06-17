@@ -1,11 +1,11 @@
 "use strict";
-var collection_1 = require('../../src/facade/collection');
-var reflective_provider_1 = require('./reflective_provider');
-var reflective_exceptions_1 = require('./reflective_exceptions');
-var exceptions_1 = require('../../src/facade/exceptions');
-var reflective_key_1 = require('./reflective_key');
-var metadata_1 = require('./metadata');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
 var injector_1 = require('./injector');
+var metadata_1 = require('./metadata');
+var reflective_exceptions_1 = require('./reflective_exceptions');
+var reflective_key_1 = require('./reflective_key');
+var reflective_provider_1 = require('./reflective_provider');
 var __unused; // avoid unused import when Type union types are erased
 // Threshold for the dynamic version
 var _MAX_CONSTRUCTION_COUNTER = 10;
@@ -408,6 +408,7 @@ var ReflectiveInjector = (function () {
      * var injector = ReflectiveInjector.fromResolvedProviders(providers);
      * expect(injector.get(Car) instanceof Car).toBe(true);
      * ```
+     * @experimental
      */
     ReflectiveInjector.fromResolvedProviders = function (providers, parent) {
         if (parent === void 0) { parent = null; }
@@ -806,7 +807,9 @@ var ReflectiveInjector_ = (function () {
     };
     Object.defineProperty(ReflectiveInjector_.prototype, "displayName", {
         get: function () {
-            return "ReflectiveInjector(providers: [" + _mapProviders(this, function (b) { return (" \"" + b.key.displayName + "\" "); }).join(", ") + "])";
+            var providers = _mapProviders(this, function (b) { return ' "' + b.key.displayName + '" '; })
+                .join(', ');
+            return "ReflectiveInjector(providers: [" + providers + "])";
         },
         enumerable: true,
         configurable: true

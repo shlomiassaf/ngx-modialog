@@ -1,6 +1,5 @@
 "use strict";
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
+var lang_1 = require('../facade/lang');
 var ReflectionCapabilities = (function () {
     function ReflectionCapabilities(reflect) {
         this._reflect = lang_1.isPresent(reflect) ? reflect : lang_1.global.Reflect;
@@ -85,7 +84,7 @@ var ReflectionCapabilities = (function () {
         throw new Error("Cannot create a factory for '" + lang_1.stringify(t) + "' because its constructor has more than 20 arguments");
     };
     /** @internal */
-    ReflectionCapabilities.prototype._zipTypesAndAnnotations = function (paramTypes, paramAnnotations) {
+    ReflectionCapabilities.prototype._zipTypesAndAnnotations = function (paramTypes /** TODO #9100 */, paramAnnotations /** TODO #9100 */) {
         var result;
         if (typeof paramTypes === 'undefined') {
             result = new Array(paramAnnotations.length);
@@ -120,8 +119,10 @@ var ReflectionCapabilities = (function () {
         // API of tsickle for lowering decorators to properties on the class.
         if (lang_1.isPresent(typeOrFunc.ctorParameters)) {
             var ctorParameters = typeOrFunc.ctorParameters;
-            var paramTypes_1 = ctorParameters.map(function (ctorParam) { return ctorParam && ctorParam.type; });
-            var paramAnnotations_1 = ctorParameters.map(function (ctorParam) { return ctorParam && convertTsickleDecoratorIntoMetadata(ctorParam.decorators); });
+            var paramTypes_1 = ctorParameters.map(function (ctorParam /** TODO #9100 */) { return ctorParam && ctorParam.type; });
+            var paramAnnotations_1 = ctorParameters.map(function (ctorParam /** TODO #9100 */) {
+                return ctorParam && convertTsickleDecoratorIntoMetadata(ctorParam.decorators);
+            });
             return this._zipTypesAndAnnotations(paramTypes_1, paramAnnotations_1);
         }
         // API for metadata created by invoking the decorators.
@@ -171,8 +172,7 @@ var ReflectionCapabilities = (function () {
         if (lang_1.isPresent(typeOrFunc.propDecorators)) {
             var propDecorators_1 = typeOrFunc.propDecorators;
             var propMetadata_1 = {};
-            Object.keys(propDecorators_1)
-                .forEach(function (prop) {
+            Object.keys(propDecorators_1).forEach(function (prop) {
                 propMetadata_1[prop] = convertTsickleDecoratorIntoMetadata(propDecorators_1[prop]);
             });
             return propMetadata_1;
@@ -185,8 +185,15 @@ var ReflectionCapabilities = (function () {
         }
         return {};
     };
-    ReflectionCapabilities.prototype.interfaces = function (type) {
-        throw new exceptions_1.BaseException("JavaScript does not support interfaces");
+    // Note: JavaScript does not support to query for interfaces during runtime.
+    // However, we can't throw here as the reflector will always call this method
+    // when asked for a lifecycle interface as this is what we check in Dart.
+    ReflectionCapabilities.prototype.interfaces = function (type) { return []; };
+    ReflectionCapabilities.prototype.hasLifecycleHook = function (type, lcInterface, lcProperty) {
+        if (!(type instanceof lang_1.Type))
+            return false;
+        var proto = type.prototype;
+        return !!proto[lcProperty];
     };
     ReflectionCapabilities.prototype.getter = function (name) { return new Function('o', 'return o.' + name + ';'); };
     ReflectionCapabilities.prototype.setter = function (name) {
@@ -197,7 +204,14 @@ var ReflectionCapabilities = (function () {
         return new Function('o', 'args', functionBody);
     };
     // There is not a concept of import uri in Js, but this is useful in developing Dart applications.
-    ReflectionCapabilities.prototype.importUri = function (type) { return "./" + lang_1.stringify(type); };
+    ReflectionCapabilities.prototype.importUri = function (type) {
+        // StaticSymbol
+        if (typeof type === 'object' && type['filePath']) {
+            return type['filePath'];
+        }
+        // Runtime type
+        return "./" + lang_1.stringify(type);
+    };
     return ReflectionCapabilities;
 }());
 exports.ReflectionCapabilities = ReflectionCapabilities;

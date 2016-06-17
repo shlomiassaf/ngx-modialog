@@ -1,22 +1,27 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { ObservableWrapper } from '../src/facade/async';
 export class SpyLocation {
     constructor() {
         this.urlChanges = [];
         /** @internal */
-        this._path = '';
+        this._history = [new LocationState('', '')];
         /** @internal */
-        this._query = '';
+        this._historyIndex = 0;
         /** @internal */
         this._subject = new EventEmitter();
         /** @internal */
         this._baseHref = '';
-        // TODO: remove these once Location is an interface, and can be implemented cleanly
-        this.platformStrategy = null;
+        /** @internal */
+        this._platformStrategy = null;
     }
-    setInitialPath(url) { this._path = url; }
+    setInitialPath(url) { this._history[this._historyIndex].path = url; }
     setBaseHref(url) { this._baseHref = url; }
-    path() { return this._path; }
+    path() { return this._history[this._historyIndex].path; }
+    isCurrentPathEqualTo(path, query = '') {
+        var givenPath = path.endsWith('/') ? path.substring(0, path.length - 1) : path;
+        var currPath = this.path().endsWith('/') ? this.path().substring(0, this.path().length - 1) : this.path();
+        return currPath == givenPath + (query.length > 0 ? ('?' + query) : '');
+    }
     simulateUrlPop(pathname) {
         ObservableWrapper.callEmit(this._subject, { 'url': pathname, 'pop': true });
     }
@@ -34,33 +39,54 @@ export class SpyLocation {
     }
     go(path, query = '') {
         path = this.prepareExternalUrl(path);
-        if (this._path == path && this._query == query) {
+        if (this._historyIndex > 0) {
+            this._history.splice(this._historyIndex + 1);
+        }
+        this._history.push(new LocationState(path, query));
+        this._historyIndex = this._history.length - 1;
+        var locationState = this._history[this._historyIndex - 1];
+        if (locationState.path == path && locationState.query == query) {
             return;
         }
-        this._path = path;
-        this._query = query;
         var url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push(url);
     }
     replaceState(path, query = '') {
         path = this.prepareExternalUrl(path);
-        this._path = path;
-        this._query = query;
+        var history = this._history[this._historyIndex];
+        if (history.path == path && history.query == query) {
+            return;
+        }
+        history.path = path;
+        history.query = query;
         var url = path + (query.length > 0 ? ('?' + query) : '');
         this.urlChanges.push('replace: ' + url);
     }
     forward() {
-        // TODO
+        if (this._historyIndex < (this._history.length - 1)) {
+            this._historyIndex++;
+            ObservableWrapper.callEmit(this._subject, { 'url': this.path(), 'pop': true });
+        }
     }
     back() {
-        // TODO
+        if (this._historyIndex > 0) {
+            this._historyIndex--;
+            ObservableWrapper.callEmit(this._subject, { 'url': this.path(), 'pop': true });
+        }
     }
     subscribe(onNext, onThrow = null, onReturn = null) {
         return ObservableWrapper.subscribe(this._subject, onNext, onThrow, onReturn);
     }
     normalize(url) { return null; }
 }
+/** @nocollapse */
 SpyLocation.decorators = [
     { type: Injectable },
 ];
+class LocationState {
+    constructor(path, query) {
+        this.path = path;
+        this.query = query;
+    }
+}
 //# sourceMappingURL=location_mock.js.map

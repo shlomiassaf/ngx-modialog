@@ -24,10 +24,10 @@ export class HtmlParser {
     parse(sourceContent, sourceUrl, parseExpansionForms = false) {
         var tokensAndErrors = tokenizeHtml(sourceContent, sourceUrl, parseExpansionForms);
         var treeAndErrors = new TreeBuilder(tokensAndErrors.tokens).build();
-        return new HtmlParseTreeResult(treeAndErrors.rootNodes, tokensAndErrors.errors
-            .concat(treeAndErrors.errors));
+        return new HtmlParseTreeResult(treeAndErrors.rootNodes, tokensAndErrors.errors.concat(treeAndErrors.errors));
     }
 }
+/** @nocollapse */
 HtmlParser.decorators = [
     { type: Injectable },
 ];
@@ -56,8 +56,7 @@ class TreeBuilder {
                 this._closeVoidElement();
                 this._consumeComment(this._advance());
             }
-            else if (this.peek.type === HtmlTokenType.TEXT ||
-                this.peek.type === HtmlTokenType.RAW_TEXT ||
+            else if (this.peek.type === HtmlTokenType.TEXT || this.peek.type === HtmlTokenType.RAW_TEXT ||
                 this.peek.type === HtmlTokenType.ESCAPABLE_RAW_TEXT) {
                 this._closeVoidElement();
                 this._consumeText(this._advance());
@@ -250,7 +249,9 @@ class TreeBuilder {
     }
     _consumeEndTag(endTagToken) {
         var fullName = getElementFullName(endTagToken.parts[0], endTagToken.parts[1], this._getParentElement());
-        this._getParentElement().endSourceSpan = endTagToken.sourceSpan;
+        if (this._getParentElement()) {
+            this._getParentElement().endSourceSpan = endTagToken.sourceSpan;
+        }
         if (getHtmlTagDefinition(fullName).isVoid) {
             this.errors.push(HtmlTreeError.create(fullName, endTagToken.sourceSpan, `Void elements do not have end tags "${endTagToken.parts[1]}"`));
         }

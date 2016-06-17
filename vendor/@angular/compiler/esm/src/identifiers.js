@@ -1,6 +1,5 @@
-import { SimpleChange, ChangeDetectorRef, ChangeDetectionStrategy, ElementRef, ViewContainerRef, Renderer, RenderComponentType, Injector, QueryList, ViewEncapsulation, TemplateRef } from '@angular/core';
-import { SecurityContext } from '../core_private';
-import { AppElement, AppView, DebugAppView, ChangeDetectorState, checkBinding, DebugContext, devModeEqual, flattenNestedViewRenderNodes, interpolate, StaticNodeDebugInfo, TemplateRef_, uninitialized, ValueUnwrapper, ViewType, ViewUtils, castByValue, EMPTY_ARRAY, EMPTY_MAP, pureProxy1, pureProxy2, pureProxy3, pureProxy4, pureProxy5, pureProxy6, pureProxy7, pureProxy8, pureProxy9, pureProxy10 } from '../core_private';
+import { ChangeDetectionStrategy, ChangeDetectorRef, ElementRef, Injector, QueryList, RenderComponentType, Renderer, SimpleChange, TemplateRef, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { AnimationGroupPlayer as AnimationGroupPlayer_, AnimationKeyframe as AnimationKeyframe_, AnimationSequencePlayer as AnimationSequencePlayer_, AnimationStyles as AnimationStyles_, AppElement, AppView, ChangeDetectorState, DebugAppView, DebugContext, EMPTY_ARRAY, EMPTY_MAP, NoOpAnimationPlayer as NoOpAnimationPlayer_, SecurityContext, StaticNodeDebugInfo, TemplateRef_, ValueUnwrapper, ViewType, ViewUtils, balanceAnimationKeyframes as impBalanceAnimationKeyframes, castByValue, checkBinding, clearStyles as impClearStyles, collectAndResolveStyles as impCollectAndResolveStyles, devModeEqual, flattenNestedViewRenderNodes, interpolate, prepareFinalAnimationStyles as impBalanceAnimationStyles, pureProxy1, pureProxy10, pureProxy2, pureProxy3, pureProxy4, pureProxy5, pureProxy6, pureProxy7, pureProxy8, pureProxy9, renderStyles as impRenderStyles, uninitialized } from '../core_private';
 import { CompileIdentifierMetadata, CompileTokenMetadata } from './compile_metadata';
 import { assetUrl } from './util';
 var APP_VIEW_MODULE_URL = assetUrl('core', 'linker/view');
@@ -38,6 +37,12 @@ var impCheckBinding = checkBinding;
 var impCastByValue = castByValue;
 var impEMPTY_ARRAY = EMPTY_ARRAY;
 var impEMPTY_MAP = EMPTY_MAP;
+var impAnimationGroupPlayer = AnimationGroupPlayer_;
+var impAnimationSequencePlayer = AnimationSequencePlayer_;
+var impAnimationKeyframe = AnimationKeyframe_;
+var impAnimationStyles = AnimationStyles_;
+var impNoOpAnimationPlayer = NoOpAnimationPlayer_;
+var ANIMATION_STYLE_UTIL_ASSET_URL = assetUrl('core', 'animation/animation_style_util');
 export class Identifiers {
 }
 Identifiers.ViewUtils = new CompileIdentifierMetadata({ name: 'ViewUtils', moduleUrl: assetUrl('core', 'linker/view_utils'), runtime: impViewUtils });
@@ -130,6 +135,48 @@ Identifiers.SecurityContext = new CompileIdentifierMetadata({
     name: 'SecurityContext',
     moduleUrl: assetUrl('core', 'security'),
     runtime: SecurityContext,
+});
+Identifiers.AnimationKeyframe = new CompileIdentifierMetadata({
+    name: 'AnimationKeyframe',
+    moduleUrl: assetUrl('core', 'animation/animation_keyframe'),
+    runtime: impAnimationKeyframe
+});
+Identifiers.AnimationStyles = new CompileIdentifierMetadata({
+    name: 'AnimationStyles',
+    moduleUrl: assetUrl('core', 'animation/animation_styles'),
+    runtime: impAnimationStyles
+});
+Identifiers.NoOpAnimationPlayer = new CompileIdentifierMetadata({
+    name: 'NoOpAnimationPlayer',
+    moduleUrl: assetUrl('core', 'animation/animation_player'),
+    runtime: impNoOpAnimationPlayer
+});
+Identifiers.AnimationGroupPlayer = new CompileIdentifierMetadata({
+    name: 'AnimationGroupPlayer',
+    moduleUrl: assetUrl('core', 'animation/animation_group_player'),
+    runtime: impAnimationGroupPlayer
+});
+Identifiers.AnimationSequencePlayer = new CompileIdentifierMetadata({
+    name: 'AnimationSequencePlayer',
+    moduleUrl: assetUrl('core', 'animation/animation_sequence_player'),
+    runtime: impAnimationSequencePlayer
+});
+Identifiers.prepareFinalAnimationStyles = new CompileIdentifierMetadata({
+    name: 'prepareFinalAnimationStyles',
+    moduleUrl: ANIMATION_STYLE_UTIL_ASSET_URL,
+    runtime: impBalanceAnimationStyles
+});
+Identifiers.balanceAnimationKeyframes = new CompileIdentifierMetadata({
+    name: 'balanceAnimationKeyframes',
+    moduleUrl: ANIMATION_STYLE_UTIL_ASSET_URL,
+    runtime: impBalanceAnimationKeyframes
+});
+Identifiers.clearStyles = new CompileIdentifierMetadata({ name: 'clearStyles', moduleUrl: ANIMATION_STYLE_UTIL_ASSET_URL, runtime: impClearStyles });
+Identifiers.renderStyles = new CompileIdentifierMetadata({ name: 'renderStyles', moduleUrl: ANIMATION_STYLE_UTIL_ASSET_URL, runtime: impRenderStyles });
+Identifiers.collectAndResolveStyles = new CompileIdentifierMetadata({
+    name: 'collectAndResolveStyles',
+    moduleUrl: ANIMATION_STYLE_UTIL_ASSET_URL,
+    runtime: impCollectAndResolveStyles
 });
 export function identifierToken(identifier) {
     return new CompileTokenMetadata({ identifier: identifier });

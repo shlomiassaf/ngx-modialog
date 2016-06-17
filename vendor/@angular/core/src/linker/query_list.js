@@ -1,7 +1,7 @@
 "use strict";
-var collection_1 = require('../../src/facade/collection');
-var lang_1 = require('../../src/facade/lang');
-var async_1 = require('../../src/facade/async');
+var async_1 = require('../facade/async');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 /**
  * An unmodifiable list of items that Angular keeps up to date when the state
  * of the application changes.
@@ -20,11 +20,10 @@ var async_1 = require('../../src/facade/async');
  * ```typescript
  * @Component({...})
  * class Container {
- *   constructor(@Query(Item) items: QueryList<Item>) {
- *     items.changes.subscribe(_ => console.log(items.length));
- *   }
+ *   @ViewChildren(Item) items:QueryList<Item>;
  * }
  * ```
+ * @stable
  */
 var QueryList = (function () {
     function QueryList() {
@@ -72,7 +71,9 @@ var QueryList = (function () {
      * converts QueryList into an array
      */
     QueryList.prototype.toArray = function () { return collection_1.ListWrapper.clone(this._results); };
-    QueryList.prototype[lang_1.getSymbolIterator()] = function () { return this._results[lang_1.getSymbolIterator()](); };
+    QueryList.prototype[lang_1.getSymbolIterator()] = function () {
+        return this._results[lang_1.getSymbolIterator()]();
+    };
     QueryList.prototype.toString = function () { return this._results.toString(); };
     /**
      * @internal

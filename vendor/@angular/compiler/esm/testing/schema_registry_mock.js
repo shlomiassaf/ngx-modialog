@@ -1,5 +1,5 @@
-import { isPresent } from '../src/facade/lang';
 import { SecurityContext } from '../core_private';
+import { isPresent } from '../src/facade/lang';
 export class MockSchemaRegistry {
     constructor(existingProperties, attrPropMapping) {
         this.existingProperties = existingProperties;

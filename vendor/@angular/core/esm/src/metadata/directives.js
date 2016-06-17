@@ -1,6 +1,6 @@
-import { isPresent } from '../../src/facade/lang';
-import { InjectableMetadata } from '../di/metadata';
 import { ChangeDetectionStrategy } from '../change_detection/constants';
+import { InjectableMetadata } from '../di/metadata';
+import { isPresent } from '../facade/lang';
 /**
  * Directives allow you to attach behavior to elements in the DOM.
  *
@@ -379,9 +379,10 @@ import { ChangeDetectionStrategy } from '../change_detection/constants';
  * the instantiated
  * view occurs on the second `<li></li>` which is a sibling to the `<template>` element.
  * @ts2dart_const
+ * @stable
  */
 export class DirectiveMetadata extends InjectableMetadata {
-    constructor({ selector, inputs, outputs, properties, events, host, bindings, providers, exportAs, queries } = {}) {
+    constructor({ selector, inputs, outputs, properties, events, host, providers, exportAs, queries } = {}) {
         super();
         this.selector = selector;
         this._inputs = inputs;
@@ -392,7 +393,6 @@ export class DirectiveMetadata extends InjectableMetadata {
         this.exportAs = exportAs;
         this.queries = queries;
         this._providers = providers;
-        this._bindings = bindings;
     }
     /**
      * Enumerates the set of data-bound input properties for a directive
@@ -445,6 +445,11 @@ export class DirectiveMetadata extends InjectableMetadata {
         return isPresent(this._properties) && this._properties.length > 0 ? this._properties :
             this._inputs;
     }
+    /**
+     * Use `inputs` instead
+     *
+     * @deprecated
+     */
     get properties() { return this.inputs; }
     /**
      * Enumerates the set of event-bound output properties.
@@ -494,6 +499,11 @@ export class DirectiveMetadata extends InjectableMetadata {
     get outputs() {
         return isPresent(this._events) && this._events.length > 0 ? this._events : this._outputs;
     }
+    /**
+     * Use `outputs` instead
+     *
+     * @deprecated
+     */
     get events() { return this.outputs; }
     /**
      * Defines the set of injectable objects that are visible to a Directive and its light DOM
@@ -512,7 +522,7 @@ export class DirectiveMetadata extends InjectableMetadata {
      *
      * @Directive({
      *   selector: 'greet',
-     *   bindings: [
+     *   providers: [
      *     Greeter
      *   ]
      * })
@@ -525,12 +535,7 @@ export class DirectiveMetadata extends InjectableMetadata {
      * }
      * ```
      */
-    get providers() {
-        return isPresent(this._bindings) && this._bindings.length > 0 ? this._bindings :
-            this._providers;
-    }
-    /** @deprecated */
-    get bindings() { return this.providers; }
+    get providers() { return this._providers; }
 }
 /**
  * Declare reusable UI building blocks for an application.
@@ -558,9 +563,10 @@ export class DirectiveMetadata extends InjectableMetadata {
  *
  * {@example core/ts/metadata/metadata.ts region='component'}
  * @ts2dart_const
+ * @stable
  */
 export class ComponentMetadata extends DirectiveMetadata {
-    constructor({ selector, inputs, outputs, properties, events, host, exportAs, moduleId, bindings, providers, viewBindings, viewProviders, changeDetection = ChangeDetectionStrategy.Default, queries, templateUrl, template, styleUrls, styles, directives, pipes, encapsulation } = {}) {
+    constructor({ selector, inputs, outputs, properties, events, host, exportAs, moduleId, providers, viewProviders, changeDetection = ChangeDetectionStrategy.Default, queries, templateUrl, template, styleUrls, styles, animations, directives, pipes, encapsulation } = {}) {
         super({
             selector: selector,
             inputs: inputs,
@@ -569,13 +575,11 @@ export class ComponentMetadata extends DirectiveMetadata {
             events: events,
             host: host,
             exportAs: exportAs,
-            bindings: bindings,
             providers: providers,
             queries: queries
         });
         this.changeDetection = changeDetection;
         this._viewProviders = viewProviders;
-        this._viewBindings = viewBindings;
         this.templateUrl = templateUrl;
         this.template = template;
         this.styleUrls = styleUrls;
@@ -584,6 +588,7 @@ export class ComponentMetadata extends DirectiveMetadata {
         this.pipes = pipes;
         this.encapsulation = encapsulation;
         this.moduleId = moduleId;
+        this.animations = animations;
     }
     /**
      * Defines the set of injectable objects that are visible to its view DOM children.
@@ -623,11 +628,7 @@ export class ComponentMetadata extends DirectiveMetadata {
      *
      * ```
      */
-    get viewProviders() {
-        return isPresent(this._viewBindings) && this._viewBindings.length > 0 ? this._viewBindings :
-            this._viewProviders;
-    }
-    get viewBindings() { return this.viewProviders; }
+    get viewProviders() { return this._viewProviders; }
 }
 /**
  * Declare reusable pipe function.
@@ -640,6 +641,7 @@ export class ComponentMetadata extends DirectiveMetadata {
  *
  * {@example core/ts/metadata/metadata.ts region='pipe'}
  * @ts2dart_const
+ * @stable
  */
 export class PipeMetadata extends InjectableMetadata {
     constructor({ name, pure }) {
@@ -690,6 +692,7 @@ export class PipeMetadata extends InjectableMetadata {
  * bootstrap(App);
  * ```
  * @ts2dart_const
+ * @stable
  */
 export class InputMetadata {
     constructor(
@@ -741,6 +744,7 @@ export class InputMetadata {
  * bootstrap(App);
  * ```
  * @ts2dart_const
+ * @stable
  */
 export class OutputMetadata {
     constructor(bindingPropertyName) {
@@ -782,6 +786,7 @@ export class OutputMetadata {
  * bootstrap(App);
  * ```
  * @ts2dart_const
+ * @stable
  */
 export class HostBindingMetadata {
     constructor(hostPropertyName) {
@@ -822,6 +827,7 @@ export class HostBindingMetadata {
  * bootstrap(App);
  * ```
  * @ts2dart_const
+ * @stable
  */
 export class HostListenerMetadata {
     constructor(eventName, args) {

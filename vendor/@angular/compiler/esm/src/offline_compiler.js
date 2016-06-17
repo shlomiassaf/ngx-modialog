@@ -1,7 +1,7 @@
 import { ComponentFactory } from '@angular/core';
 import { CompileIdentifierMetadata, createHostComponentMeta } from './compile_metadata';
-import { BaseException } from '../src/facade/exceptions';
-import { ListWrapper } from '../src/facade/collection';
+import { ListWrapper } from './facade/collection';
+import { BaseException } from './facade/exceptions';
 import * as o from './output/output_ast';
 import { assetUrl } from './util';
 var _COMPONENT_FACTORY_IDENTIFIER = new CompileIdentifierMetadata({
@@ -58,8 +58,7 @@ export class OfflineCompiler {
             statements.push(o.variable(compFactoryVar)
                 .set(o.importExpr(_COMPONENT_FACTORY_IDENTIFIER, [o.importType(compMeta.type)])
                 .instantiate([
-                o.literal(compMeta.selector),
-                o.variable(hostViewFactoryVar),
+                o.literal(compMeta.selector), o.variable(hostViewFactoryVar),
                 o.importExpr(compMeta.type)
             ], o.importType(_COMPONENT_FACTORY_IDENTIFIER, [o.importType(compMeta.type)], [o.TypeModifier.Const])))
                 .toDeclStmt(null, [o.StmtModifier.Final]));
@@ -68,8 +67,7 @@ export class OfflineCompiler {
         return this._codegenSourceModule(moduleUrl, statements, exportedVars);
     }
     loadAndCompileStylesheet(stylesheetUrl, shim, suffix) {
-        return this._xhr.get(stylesheetUrl)
-            .then((cssText) => {
+        return this._xhr.get(stylesheetUrl).then((cssText) => {
             var compileResult = this._styleCompiler.compileStylesheet(stylesheetUrl, cssText, shim);
             var importedUrls = [];
             compileResult.dependencies.forEach((dep) => {

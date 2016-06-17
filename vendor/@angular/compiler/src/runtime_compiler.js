@@ -1,7 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../src/facade/lang');
 var exceptions_1 = require('../src/facade/exceptions');
+var lang_1 = require('../src/facade/lang');
 var collection_1 = require('../src/facade/collection');
 var async_1 = require('../src/facade/async');
 var compile_metadata_1 = require('./compile_metadata');
@@ -30,7 +30,11 @@ var RuntimeCompiler = (function () {
         this._compiledTemplateCache = new Map();
         this._compiledTemplateDone = new Map();
     }
-    RuntimeCompiler.prototype.resolveComponent = function (componentType) {
+    RuntimeCompiler.prototype.resolveComponent = function (component) {
+        if (lang_1.isString(component)) {
+            return async_1.PromiseWrapper.reject(new exceptions_1.BaseException("Cannot resolve component using '" + component + "'."), null);
+        }
+        var componentType = component;
         var compMeta = this._metadataResolver.getDirectiveMetadata(componentType);
         var hostCacheKey = this._hostCacheKeys.get(componentType);
         if (lang_1.isBlank(hostCacheKey)) {
@@ -57,7 +61,8 @@ var RuntimeCompiler = (function () {
             compiledTemplate = new CompiledTemplate();
             this._compiledTemplateCache.set(cacheKey, compiledTemplate);
             done =
-                async_1.PromiseWrapper.all([this._compileComponentStyles(compMeta)].concat(viewDirectives.map(function (dirMeta) { return _this._templateNormalizer.normalizeDirective(dirMeta); })))
+                async_1.PromiseWrapper
+                    .all([this._compileComponentStyles(compMeta)].concat(viewDirectives.map(function (dirMeta) { return _this._templateNormalizer.normalizeDirective(dirMeta); })))
                     .then(function (stylesAndNormalizedViewDirMetas) {
                     var normalizedViewDirMetas = stylesAndNormalizedViewDirMetas.slice(1);
                     var styles = stylesAndNormalizedViewDirMetas[0];
@@ -138,9 +143,11 @@ var RuntimeCompiler = (function () {
         }
         return cssTextPromise;
     };
+    /** @nocollapse */
     RuntimeCompiler.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     RuntimeCompiler.ctorParameters = [
         { type: metadata_resolver_1.CompileMetadataResolver, },
         { type: directive_normalizer_1.DirectiveNormalizer, },
@@ -157,9 +164,10 @@ var CompiledTemplate = (function () {
     function CompiledTemplate() {
         var _this = this;
         this.viewFactory = null;
-        this.proxyViewFactory = function (viewUtils, childInjector, contextEl) {
-            return _this.viewFactory(viewUtils, childInjector, contextEl);
-        };
+        this.proxyViewFactory =
+            function (viewUtils /** TODO #9100 */, childInjector /** TODO #9100 */, contextEl /** TODO #9100 */) {
+                return _this.viewFactory(viewUtils, childInjector, contextEl);
+            };
     }
     CompiledTemplate.prototype.init = function (viewFactory) { this.viewFactory = viewFactory; };
     return CompiledTemplate;

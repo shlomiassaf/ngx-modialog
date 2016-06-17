@@ -1,15 +1,14 @@
 "use strict";
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
-var lang_2 = require('../../src/facade/lang');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
+var lang_2 = require('../facade/lang');
 exports.looseIdentical = lang_2.looseIdentical;
 exports.uninitialized = new Object();
 function devModeEqual(a, b) {
     if (collection_1.isListLikeIterable(a) && collection_1.isListLikeIterable(b)) {
         return collection_1.areIterablesEqual(a, b, devModeEqual);
     }
-    else if (!collection_1.isListLikeIterable(a) && !lang_1.isPrimitive(a) && !collection_1.isListLikeIterable(b) &&
-        !lang_1.isPrimitive(b)) {
+    else if (!collection_1.isListLikeIterable(a) && !lang_1.isPrimitive(a) && !collection_1.isListLikeIterable(b) && !lang_1.isPrimitive(b)) {
         return true;
     }
     else {
@@ -34,6 +33,7 @@ exports.devModeEqual = devModeEqual;
  *    return WrappedValue.wrap(this._latestValue); // this will force update
  *  }
  * ```
+ * @stable
  */
 var WrappedValue = (function () {
     function WrappedValue(wrapped) {
@@ -63,6 +63,7 @@ var ValueUnwrapper = (function () {
 exports.ValueUnwrapper = ValueUnwrapper;
 /**
  * Represents a basic change from a previous to a new value.
+ * @stable
  */
 var SimpleChange = (function () {
     function SimpleChange(previousValue, currentValue) {

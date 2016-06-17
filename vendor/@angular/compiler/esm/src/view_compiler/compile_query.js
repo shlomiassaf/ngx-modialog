@@ -1,7 +1,7 @@
-import { isPresent, isBlank } from '../../src/facade/lang';
-import { ListWrapper } from '../../src/facade/collection';
-import * as o from '../output/output_ast';
+import { ListWrapper } from '../facade/collection';
+import { isBlank, isPresent } from '../facade/lang';
 import { Identifiers } from '../identifiers';
+import * as o from '../output/output_ast';
 import { getPropertyInView } from './util';
 class ViewQueryValues {
     constructor(view, values) {
@@ -43,7 +43,10 @@ export class CompileQuery {
             view.dirtyParentQueriesMethod.addStmt(queryListForDirtyExpr.callMethod('setDirty', []).toStmt());
         }
     }
-    afterChildren(targetMethod) {
+    _isStatic() {
+        return !this._values.values.some(value => value instanceof ViewQueryValues);
+    }
+    afterChildren(targetStaticMethod /** TODO #9100 */, targetDynamicMethod) {
         var values = createQueryValues(this._values);
         var updateStmts = [this.queryList.callMethod('reset', [o.literalArr(values)]).toStmt()];
         if (isPresent(this.ownerDirectiveExpression)) {
@@ -53,7 +56,16 @@ export class CompileQuery {
         if (!this.meta.first) {
             updateStmts.push(this.queryList.callMethod('notifyOnChanges', []).toStmt());
         }
-        targetMethod.addStmt(new o.IfStmt(this.queryList.prop('dirty'), updateStmts));
+        if (this.meta.first && this._isStatic()) {
+            // for queries that don't change and the user asked for a single element,
+            // set it immediately. That is e.g. needed for querying for ViewContainerRefs, ...
+            // we don't do this for QueryLists for now as this would break the timing when
+            // we call QueryList listeners...
+            targetStaticMethod.addStmts(updateStmts);
+        }
+        else {
+            targetDynamicMethod.addStmt(new o.IfStmt(this.queryList.prop('dirty'), updateStmts));
+        }
     }
 }
 function createQueryValues(viewValues) {
@@ -71,8 +83,7 @@ function mapNestedViews(declarationAppElement, view, expressions) {
         return o.replaceVarInExpression(o.THIS_EXPR.name, o.variable('nestedView'), expr);
     });
     return declarationAppElement.callMethod('mapNestedViews', [
-        o.variable(view.className),
-        o.fn([new o.FnParam('nestedView', view.classType)], [new o.ReturnStatement(o.literalArr(adjustedExpressions))])
+        o.variable(view.className), o.fn([new o.FnParam('nestedView', view.classType)], [new o.ReturnStatement(o.literalArr(adjustedExpressions))])
     ]);
 }
 export function createQueryList(query, directiveInstance, propertyName, compileView) {

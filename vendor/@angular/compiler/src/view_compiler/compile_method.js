@@ -1,6 +1,6 @@
 "use strict";
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 var o = require('../output/output_ast');
 var _DebugState = (function () {
     function _DebugState(nodeIndex, sourceAst) {

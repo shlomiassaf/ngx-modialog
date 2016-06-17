@@ -1,6 +1,6 @@
-import { ListWrapper } from '../../src/facade/collection';
-import { getSymbolIterator } from '../../src/facade/lang';
-import { EventEmitter } from '../../src/facade/async';
+import { EventEmitter } from '../facade/async';
+import { ListWrapper } from '../facade/collection';
+import { getSymbolIterator } from '../facade/lang';
 /**
  * An unmodifiable list of items that Angular keeps up to date when the state
  * of the application changes.
@@ -19,11 +19,10 @@ import { EventEmitter } from '../../src/facade/async';
  * ```typescript
  * @Component({...})
  * class Container {
- *   constructor(@Query(Item) items: QueryList<Item>) {
- *     items.changes.subscribe(_ => console.log(items.length));
- *   }
+ *   @ViewChildren(Item) items:QueryList<Item>;
  * }
  * ```
+ * @stable
  */
 export class QueryList {
     constructor() {
@@ -55,7 +54,9 @@ export class QueryList {
      * converts QueryList into an array
      */
     toArray() { return ListWrapper.clone(this._results); }
-    [getSymbolIterator()]() { return this._results[getSymbolIterator()](); }
+    [getSymbolIterator()]() {
+        return this._results[getSymbolIterator()]();
+    }
     toString() { return this._results.toString(); }
     /**
      * @internal

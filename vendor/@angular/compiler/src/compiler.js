@@ -3,7 +3,6 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 var core_1 = require('@angular/core');
-var lang_1 = require('../src/facade/lang');
 __export(require('./template_ast'));
 var template_parser_1 = require('./template_parser');
 exports.TEMPLATE_TRANSFORMS = template_parser_1.TEMPLATE_TRANSFORMS;
@@ -38,32 +37,19 @@ var lexer_1 = require('./expression_parser/lexer');
 var view_resolver_2 = require('./view_resolver');
 var directive_resolver_2 = require('./directive_resolver');
 var pipe_resolver_2 = require('./pipe_resolver');
-function _createCompilerConfig() {
-    return new config_2.CompilerConfig(lang_1.assertionsEnabled(), false, true);
-}
 /**
  * A set of providers that provide `RuntimeCompiler` and its dependencies to use for
  * template compilation.
  */
 exports.COMPILER_PROVIDERS = 
 /*@ts2dart_const*/ [
-    lexer_1.Lexer,
-    parser_1.Parser,
-    html_parser_1.HtmlParser,
-    template_parser_2.TemplateParser,
-    directive_normalizer_1.DirectiveNormalizer,
-    metadata_resolver_1.CompileMetadataResolver,
-    url_resolver_2.DEFAULT_PACKAGE_URL_PROVIDER,
-    style_compiler_1.StyleCompiler,
-    view_compiler_1.ViewCompiler,
-    /*@ts2dart_Provider*/ { provide: config_2.CompilerConfig, useFactory: _createCompilerConfig, deps: [] },
+    lexer_1.Lexer, parser_1.Parser, html_parser_1.HtmlParser, template_parser_2.TemplateParser, directive_normalizer_1.DirectiveNormalizer, metadata_resolver_1.CompileMetadataResolver,
+    url_resolver_2.DEFAULT_PACKAGE_URL_PROVIDER, style_compiler_1.StyleCompiler, view_compiler_1.ViewCompiler,
+    /*@ts2dart_Provider*/ { provide: config_2.CompilerConfig, useValue: new config_2.CompilerConfig() },
     runtime_compiler_2.RuntimeCompiler,
     /*@ts2dart_Provider*/ { provide: core_1.ComponentResolver, useExisting: runtime_compiler_2.RuntimeCompiler },
     dom_element_schema_registry_1.DomElementSchemaRegistry,
     /*@ts2dart_Provider*/ { provide: element_schema_registry_1.ElementSchemaRegistry, useExisting: dom_element_schema_registry_1.DomElementSchemaRegistry },
-    url_resolver_2.UrlResolver,
-    view_resolver_2.ViewResolver,
-    directive_resolver_2.DirectiveResolver,
-    pipe_resolver_2.PipeResolver
+    url_resolver_2.UrlResolver, view_resolver_2.ViewResolver, directive_resolver_2.DirectiveResolver, pipe_resolver_2.PipeResolver
 ];
 //# sourceMappingURL=compiler.js.map

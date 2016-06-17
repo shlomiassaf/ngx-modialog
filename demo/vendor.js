@@ -7,8 +7,6 @@ require('ts-helpers');
 require('@angular/platform-browser');
 require('@angular/platform-browser-dynamic');
 require('@angular/core');
-require('@angular/router-deprecated');
-// require('../assets/prism');
-// require('!!style!css!../assets/prism.css');
+require('@angular/router');
 require('!!style!css!bootstrap/dist/css/bootstrap.css');
 //# sourceMappingURL=vendor.js.map

@@ -1,5 +1,5 @@
-import { isPresent, isBlank, isString, StringWrapper } from '../../src/facade/lang';
-import { BaseException } from '../../src/facade/exceptions';
+import { BaseException } from '../facade/exceptions';
+import { StringWrapper, isBlank, isPresent, isString } from '../facade/lang';
 import * as o from './output_ast';
 var _SINGLE_QUOTE_ESCAPE_STRING_RE = /'|\\|\n|\r|\$/g;
 export var CATCH_ERROR_VAR = o.variable('error');
@@ -57,7 +57,8 @@ export class EmitterVisitorContext {
         if (lines[lines.length - 1].parts.length === 0) {
             lines = lines.slice(0, lines.length - 1);
         }
-        return lines.map((line) => {
+        return lines
+            .map((line) => {
             if (line.parts.length > 0) {
                 return _createIndent(line.indent) + line.parts.join('');
             }
@@ -326,7 +327,7 @@ export class AbstractEmitterVisitor {
         var useNewLine = ast.entries.length > 1;
         ctx.print(`{`, useNewLine);
         ctx.incIndent();
-        this.visitAllObjects((entry) => {
+        this.visitAllObjects((entry /** TODO #9100 */) => {
             ctx.print(`${escapeSingleQuoteString(entry[0], this._escapeDollarInStrings)}: `);
             entry[1].visitExpression(this, ctx);
         }, ast.entries, ctx, ',', useNewLine);
@@ -335,7 +336,7 @@ export class AbstractEmitterVisitor {
         return null;
     }
     visitAllExpressions(expressions, ctx, separator, newLine = false) {
-        this.visitAllObjects((expr) => expr.visitExpression(this, ctx), expressions, ctx, separator, newLine);
+        this.visitAllObjects((expr /** TODO #9100 */) => expr.visitExpression(this, ctx), expressions, ctx, separator, newLine);
     }
     visitAllObjects(handler, expressions, ctx, separator, newLine = false) {
         for (var i = 0; i < expressions.length; i++) {
@@ -356,7 +357,7 @@ export function escapeSingleQuoteString(input, escapeDollar) {
     if (isBlank(input)) {
         return null;
     }
-    var body = StringWrapper.replaceAllMapped(input, _SINGLE_QUOTE_ESCAPE_STRING_RE, (match) => {
+    var body = StringWrapper.replaceAllMapped(input, _SINGLE_QUOTE_ESCAPE_STRING_RE, (match /** TODO #9100 */) => {
         if (match[0] == '$') {
             return escapeDollar ? '\\$' : '$';
         }

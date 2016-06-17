@@ -1,6 +1,6 @@
-import { Directive, ChangeDetectorRef, IterableDiffers, ViewContainerRef, TemplateRef } from '@angular/core';
-import { isPresent, isBlank, getTypeNameForDebugging } from '../../src/facade/lang';
-import { BaseException } from '../../src/facade/exceptions';
+import { ChangeDetectorRef, Directive, IterableDiffers, TemplateRef, ViewContainerRef } from '@angular/core';
+import { BaseException } from '../facade/exceptions';
+import { getTypeNameForDebugging, isBlank, isPresent } from '../facade/lang';
 export class NgForRow {
     constructor($implicit, index, count) {
         this.$implicit = $implicit;
@@ -60,7 +60,7 @@ export class NgFor {
             viewRef.context.index = i;
             viewRef.context.count = ilen;
         }
-        changes.forEachIdentityChange((record) => {
+        changes.forEachIdentityChange((record /** TODO #9100 */) => {
             var viewRef = this._viewContainer.get(record.currentIndex);
             viewRef.context.$implicit = record.item;
         });
@@ -99,9 +99,11 @@ export class NgFor {
         return tuples;
     }
 }
+/** @nocollapse */
 NgFor.decorators = [
     { type: Directive, args: [{ selector: '[ngFor][ngForOf]', inputs: ['ngForTrackBy', 'ngForOf', 'ngForTemplate'] },] },
 ];
+/** @nocollapse */
 NgFor.ctorParameters = [
     { type: ViewContainerRef, },
     { type: TemplateRef, },

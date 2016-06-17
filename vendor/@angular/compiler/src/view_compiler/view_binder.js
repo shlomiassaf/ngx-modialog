@@ -1,5 +1,5 @@
 "use strict";
-var collection_1 = require('../../src/facade/collection');
+var collection_1 = require('../facade/collection');
 var template_ast_1 = require('../template_ast');
 var property_binder_1 = require('./property_binder');
 var event_binder_1 = require('./event_binder');

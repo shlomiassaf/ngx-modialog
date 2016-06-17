@@ -1,11 +1,11 @@
 "use strict";
 var core_1 = require('@angular/core');
+var lang_1 = require('../src/facade/lang');
 var compile_metadata_1 = require('./compile_metadata');
 var o = require('./output/output_ast');
 var shadow_css_1 = require('./shadow_css');
-var url_resolver_1 = require('./url_resolver');
 var style_url_resolver_1 = require('./style_url_resolver');
-var lang_1 = require('../src/facade/lang');
+var url_resolver_1 = require('./url_resolver');
 var COMPONENT_VARIABLE = '%COMP%';
 var HOST_ATTR = "_nghost-" + COMPONENT_VARIABLE;
 var CONTENT_ATTR = "_ngcontent-" + COMPONENT_VARIABLE;
@@ -59,9 +59,11 @@ var StyleCompiler = (function () {
     StyleCompiler.prototype._shimIfNeeded = function (style, shim) {
         return shim ? this._shadowCss.shimCssText(style, CONTENT_ATTR, HOST_ATTR) : style;
     };
+    /** @nocollapse */
     StyleCompiler.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     StyleCompiler.ctorParameters = [
         { type: url_resolver_1.UrlResolver, },
     ];

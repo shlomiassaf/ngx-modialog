@@ -17,15 +17,16 @@ var DomEventsPlugin = (function (_super) {
     DomEventsPlugin.prototype.supports = function (eventName) { return true; };
     DomEventsPlugin.prototype.addEventListener = function (element, eventName, handler) {
         var zone = this.manager.getZone();
-        var outsideHandler = function (event) { return zone.runGuarded(function () { return handler(event); }); };
+        var outsideHandler = function (event /** TODO #9100 */) { return zone.runGuarded(function () { return handler(event); }); };
         return this.manager.getZone().runOutsideAngular(function () { return dom_adapter_1.getDOM().onAndCancel(element, eventName, outsideHandler); });
     };
     DomEventsPlugin.prototype.addGlobalEventListener = function (target, eventName, handler) {
         var element = dom_adapter_1.getDOM().getGlobalEventTarget(target);
         var zone = this.manager.getZone();
-        var outsideHandler = function (event) { return zone.runGuarded(function () { return handler(event); }); };
+        var outsideHandler = function (event /** TODO #9100 */) { return zone.runGuarded(function () { return handler(event); }); };
         return this.manager.getZone().runOutsideAngular(function () { return dom_adapter_1.getDOM().onAndCancel(element, eventName, outsideHandler); });
     };
+    /** @nocollapse */
     DomEventsPlugin.decorators = [
         { type: core_1.Injectable },
     ];

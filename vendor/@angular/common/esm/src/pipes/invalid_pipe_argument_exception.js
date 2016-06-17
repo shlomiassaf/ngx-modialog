@@ -1,5 +1,5 @@
-import { stringify } from '../../src/facade/lang';
-import { BaseException } from '../../src/facade/exceptions';
+import { BaseException } from '../facade/exceptions';
+import { stringify } from '../facade/lang';
 export class InvalidPipeArgumentException extends BaseException {
     constructor(type, value) {
         super(`Invalid argument '${value}' for pipe '${stringify(type)}'`);

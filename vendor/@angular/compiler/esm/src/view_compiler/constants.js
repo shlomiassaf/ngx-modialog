@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { ChangeDetectorState, ViewType } from '../../core_private';
-import { isBlank, resolveEnumToken } from '../../src/facade/lang';
 import { CompileIdentifierMetadata } from '../compile_metadata';
-import * as o from '../output/output_ast';
+import { isBlank, resolveEnumToken } from '../facade/lang';
 import { Identifiers } from '../identifiers';
+import * as o from '../output/output_ast';
 function _enumExpression(classIdentifier, value) {
     if (isBlank(value))
         return o.NULL_EXPR;

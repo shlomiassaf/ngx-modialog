@@ -1,9 +1,9 @@
 "use strict";
+var reflection_capabilities_1 = require('./reflection_capabilities');
 var reflector_1 = require('./reflector');
 var reflector_2 = require('./reflector');
-exports.Reflector = reflector_2.Reflector;
 exports.ReflectionInfo = reflector_2.ReflectionInfo;
-var reflection_capabilities_1 = require('./reflection_capabilities');
+exports.Reflector = reflector_2.Reflector;
 /**
  * The {@link Reflector} used internally in Angular to access metadata
  * about symbols.

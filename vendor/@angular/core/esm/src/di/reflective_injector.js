@@ -1,10 +1,10 @@
-import { ListWrapper } from '../../src/facade/collection';
-import { resolveReflectiveProviders } from './reflective_provider';
-import { AbstractProviderError, NoProviderError, CyclicDependencyError, InstantiationError, OutOfBoundsError } from './reflective_exceptions';
-import { BaseException, unimplemented } from '../../src/facade/exceptions';
-import { ReflectiveKey } from './reflective_key';
-import { SelfMetadata, SkipSelfMetadata } from './metadata';
+import { ListWrapper } from '../facade/collection';
+import { BaseException, unimplemented } from '../facade/exceptions';
 import { Injector, THROW_IF_NOT_FOUND } from './injector';
+import { SelfMetadata, SkipSelfMetadata } from './metadata';
+import { AbstractProviderError, CyclicDependencyError, InstantiationError, NoProviderError, OutOfBoundsError } from './reflective_exceptions';
+import { ReflectiveKey } from './reflective_key';
+import { resolveReflectiveProviders } from './reflective_provider';
 var __unused; // avoid unused import when Type union types are erased
 // Threshold for the dynamic version
 const _MAX_CONSTRUCTION_COUNTER = 10;
@@ -394,6 +394,7 @@ export class ReflectiveInjector {
      * var injector = ReflectiveInjector.fromResolvedProviders(providers);
      * expect(injector.get(Car) instanceof Car).toBe(true);
      * ```
+     * @experimental
      */
     static fromResolvedProviders(providers, parent = null) {
         return new ReflectiveInjector_(ReflectiveProtoInjector.fromResolvedProviders(providers), parent);
@@ -773,7 +774,9 @@ export class ReflectiveInjector_ {
         }
     }
     get displayName() {
-        return `ReflectiveInjector(providers: [${_mapProviders(this, (b) => ` "${b.key.displayName}" `).join(", ")}])`;
+        const providers = _mapProviders(this, (b) => ' "' + b.key.displayName + '" ')
+            .join(', ');
+        return `ReflectiveInjector(providers: [${providers}])`;
     }
     toString() { return this.displayName; }
 }

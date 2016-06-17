@@ -1,4 +1,4 @@
-import { ListWrapper } from '../../src/facade/collection';
+import { ListWrapper } from '../facade/collection';
 import { templateVisitAll } from '../template_ast';
 import { bindRenderText, bindRenderInputs, bindDirectiveInputs, bindDirectiveHostProps } from './property_binder';
 import { bindRenderOutputs, collectEventListeners, bindDirectiveOutputs } from './event_binder';

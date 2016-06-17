@@ -1,6 +1,7 @@
 /**
-* Stores error information; delivered via [NgZone.onError] stream.
-*/
+ * Stores error information; delivered via [NgZone.onError] stream.
+ * @deprecated
+ */
 export class NgZoneError {
     constructor(error, stackTrace) {
         this.error = error;

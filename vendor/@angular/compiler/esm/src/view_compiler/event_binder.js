@@ -1,10 +1,10 @@
-import { isBlank, isPresent, StringWrapper } from '../../src/facade/lang';
-import { ListWrapper, StringMapWrapper } from '../../src/facade/collection';
-import { EventHandlerVars, ViewProperties } from './constants';
+import { ListWrapper, StringMapWrapper } from '../facade/collection';
+import { StringWrapper, isBlank, isPresent } from '../facade/lang';
 import * as o from '../output/output_ast';
-import { CompileMethod } from './compile_method';
-import { convertCdStatementToIr } from './expression_converter';
 import { CompileBinding } from './compile_binding';
+import { CompileMethod } from './compile_method';
+import { EventHandlerVars, ViewProperties } from './constants';
+import { convertCdStatementToIr } from './expression_converter';
 export class CompileEventListener {
     constructor(compileElement, eventTarget, eventName, listenerIndex) {
         this.compileElement = compileElement;
@@ -15,12 +15,10 @@ export class CompileEventListener {
         this._method = new CompileMethod(compileElement.view);
         this._methodName =
             `_handle_${santitizeEventName(eventName)}_${compileElement.nodeIndex}_${listenerIndex}`;
-        this._eventParam =
-            new o.FnParam(EventHandlerVars.event.name, o.importType(this.compileElement.view.genConfig.renderTypes.renderEvent));
+        this._eventParam = new o.FnParam(EventHandlerVars.event.name, o.importType(this.compileElement.view.genConfig.renderTypes.renderEvent));
     }
     static getOrCreate(compileElement, eventTarget, eventName, targetEventListeners) {
-        var listener = targetEventListeners.find(listener => listener.eventTarget == eventTarget &&
-            listener.eventName == eventName);
+        var listener = targetEventListeners.find(listener => listener.eventTarget == eventTarget && listener.eventName == eventName);
         if (isBlank(listener)) {
             listener = new CompileEventListener(compileElement, eventTarget, eventName, targetEventListeners.length);
             targetEventListeners.push(listener);
@@ -81,7 +79,8 @@ export class CompileEventListener {
         var subscription = o.variable(`subscription_${this.compileElement.view.subscriptions.length}`);
         this.compileElement.view.subscriptions.push(subscription);
         var eventListener = o.THIS_EXPR.callMethod('eventHandler', [o.THIS_EXPR.prop(this._methodName).callMethod(o.BuiltinMethod.bind, [o.THIS_EXPR])]);
-        this.compileElement.view.createMethod.addStmt(subscription.set(directiveInstance.prop(observablePropName)
+        this.compileElement.view.createMethod.addStmt(subscription
+            .set(directiveInstance.prop(observablePropName)
             .callMethod(o.BuiltinMethod.SubscribeObservable, [eventListener]))
             .toDeclStmt(null, [o.StmtModifier.Final]));
     }
@@ -105,9 +104,10 @@ export function collectEventListeners(hostEvents, dirs, compileElement) {
     return eventListeners;
 }
 export function bindDirectiveOutputs(directiveAst, directiveInstance, eventListeners) {
-    StringMapWrapper.forEach(directiveAst.directive.outputs, (eventName, observablePropName) => {
-        eventListeners.filter(listener => listener.eventName == eventName)
-            .forEach((listener) => { listener.listenToDirective(directiveInstance, observablePropName); });
+    StringMapWrapper.forEach(directiveAst.directive.outputs, (eventName /** TODO #9100 */, observablePropName /** TODO #9100 */) => {
+        eventListeners.filter(listener => listener.eventName == eventName).forEach((listener) => {
+            listener.listenToDirective(directiveInstance, observablePropName);
+        });
     });
 }
 export function bindRenderOutputs(eventListeners) {

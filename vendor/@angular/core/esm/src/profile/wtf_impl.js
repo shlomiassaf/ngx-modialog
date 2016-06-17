@@ -1,4 +1,4 @@
-import { global } from '../../src/facade/lang';
+import { global } from '../facade/lang';
 var trace;
 var events;
 export function detectWTF() {

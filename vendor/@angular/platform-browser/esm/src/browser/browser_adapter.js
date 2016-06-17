@@ -1,7 +1,7 @@
-import { ListWrapper } from '../../src/facade/collection';
-import { isBlank, isPresent, global, setValueOnPath, DateWrapper } from '../../src/facade/lang';
-import { GenericBrowserDomAdapter } from './generic_browser_adapter';
 import { setRootDomAdapter } from '../dom/dom_adapter';
+import { ListWrapper } from '../facade/collection';
+import { DateWrapper, global, isBlank, isFunction, isPresent, setValueOnPath } from '../facade/lang';
+import { GenericBrowserDomAdapter } from './generic_browser_adapter';
 var _attrToPropMap = {
     'class': 'className',
     'innerHtml': 'innerHTML',
@@ -53,16 +53,16 @@ var _chromeNumKeyPadMap = {
  */
 /* tslint:disable:requireParameterType */
 export class BrowserDomAdapter extends GenericBrowserDomAdapter {
-    parse(templateHtml) { throw new Error("parse not implemented"); }
+    parse(templateHtml) { throw new Error('parse not implemented'); }
     static makeCurrent() { setRootDomAdapter(new BrowserDomAdapter()); }
-    hasProperty(element, name) { return name in element; }
+    hasProperty(element /** TODO #9100 */, name) { return name in element; }
     setProperty(el, name, value) { el[name] = value; }
     getProperty(el, name) { return el[name]; }
     invoke(el, methodName, args) {
         el[methodName].apply(el, args);
     }
     // TODO(tbosch): move this into a separate environment class once we have it
-    logError(error) {
+    logError(error /** TODO #9100 */) {
         if (window.console.error) {
             window.console.error(error);
         }
@@ -70,8 +70,8 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
             window.console.log(error);
         }
     }
-    log(error) { window.console.log(error); }
-    logGroup(error) {
+    log(error /** TODO #9100 */) { window.console.log(error); }
+    logGroup(error /** TODO #9100 */) {
         if (window.console.group) {
             window.console.group(error);
             this.logError(error);
@@ -87,22 +87,28 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
     }
     get attrToPropMap() { return _attrToPropMap; }
     query(selector) { return document.querySelector(selector); }
-    querySelector(el, selector) { return el.querySelector(selector); }
-    querySelectorAll(el, selector) { return el.querySelectorAll(selector); }
-    on(el, evt, listener) { el.addEventListener(evt, listener, false); }
-    onAndCancel(el, evt, listener) {
+    querySelector(el /** TODO #9100 */, selector) {
+        return el.querySelector(selector);
+    }
+    querySelectorAll(el /** TODO #9100 */, selector) {
+        return el.querySelectorAll(selector);
+    }
+    on(el /** TODO #9100 */, evt /** TODO #9100 */, listener /** TODO #9100 */) {
+        el.addEventListener(evt, listener, false);
+    }
+    onAndCancel(el /** TODO #9100 */, evt /** TODO #9100 */, listener /** TODO #9100 */) {
         el.addEventListener(evt, listener, false);
         // Needed to follow Dart's subscription semantic, until fix of
         // https://code.google.com/p/dart/issues/detail?id=17406
         return () => { el.removeEventListener(evt, listener, false); };
     }
-    dispatchEvent(el, evt) { el.dispatchEvent(evt); }
+    dispatchEvent(el /** TODO #9100 */, evt /** TODO #9100 */) { el.dispatchEvent(evt); }
     createMouseEvent(eventType) {
         var evt = document.createEvent('MouseEvent');
         evt.initEvent(eventType, true, true);
         return evt;
     }
-    createEvent(eventType) {
+    createEvent(eventType /** TODO #9100 */) {
         var evt = document.createEvent('Event');
         evt.initEvent(eventType, true, true);
         return evt;
@@ -114,24 +120,27 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
     isPrevented(evt) {
         return evt.defaultPrevented || isPresent(evt.returnValue) && !evt.returnValue;
     }
-    getInnerHTML(el) { return el.innerHTML; }
-    getOuterHTML(el) { return el.outerHTML; }
+    getInnerHTML(el /** TODO #9100 */) { return el.innerHTML; }
+    getTemplateContent(el /** TODO #9100 */) {
+        return 'content' in el && el instanceof HTMLTemplateElement ? el.content : null;
+    }
+    getOuterHTML(el /** TODO #9100 */) { return el.outerHTML; }
     nodeName(node) { return node.nodeName; }
     nodeValue(node) { return node.nodeValue; }
     type(node) { return node.type; }
     content(node) {
-        if (this.hasProperty(node, "content")) {
+        if (this.hasProperty(node, 'content')) {
             return node.content;
         }
         else {
             return node;
         }
     }
-    firstChild(el) { return el.firstChild; }
-    nextSibling(el) { return el.nextSibling; }
-    parentElement(el) { return el.parentNode; }
-    childNodes(el) { return el.childNodes; }
-    childNodesAsList(el) {
+    firstChild(el /** TODO #9100 */) { return el.firstChild; }
+    nextSibling(el /** TODO #9100 */) { return el.nextSibling; }
+    parentElement(el /** TODO #9100 */) { return el.parentNode; }
+    childNodes(el /** TODO #9100 */) { return el.childNodes; }
+    childNodesAsList(el /** TODO #9100 */) {
         var childNodes = el.childNodes;
         var res = ListWrapper.createFixedSize(childNodes.length);
         for (var i = 0; i < childNodes.length; i++) {
@@ -139,39 +148,51 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
         }
         return res;
     }
-    clearNodes(el) {
+    clearNodes(el /** TODO #9100 */) {
         while (el.firstChild) {
             el.removeChild(el.firstChild);
         }
     }
-    appendChild(el, node) { el.appendChild(node); }
-    removeChild(el, node) { el.removeChild(node); }
-    replaceChild(el, newChild, oldChild) { el.replaceChild(newChild, oldChild); }
-    remove(node) {
+    appendChild(el /** TODO #9100 */, node /** TODO #9100 */) { el.appendChild(node); }
+    removeChild(el /** TODO #9100 */, node /** TODO #9100 */) { el.removeChild(node); }
+    replaceChild(el, newChild /** TODO #9100 */, oldChild /** TODO #9100 */) {
+        el.replaceChild(newChild, oldChild);
+    }
+    remove(node /** TODO #9100 */) {
         if (node.parentNode) {
             node.parentNode.removeChild(node);
         }
         return node;
     }
-    insertBefore(el, node) { el.parentNode.insertBefore(node, el); }
-    insertAllBefore(el, nodes) { nodes.forEach(n => el.parentNode.insertBefore(n, el)); }
-    insertAfter(el, node) { el.parentNode.insertBefore(node, el.nextSibling); }
-    setInnerHTML(el, value) { el.innerHTML = value; }
-    getText(el) { return el.textContent; }
+    insertBefore(el /** TODO #9100 */, node /** TODO #9100 */) {
+        el.parentNode.insertBefore(node, el);
+    }
+    insertAllBefore(el /** TODO #9100 */, nodes /** TODO #9100 */) {
+        nodes.forEach((n /** TODO #9100 */) => el.parentNode.insertBefore(n, el));
+    }
+    insertAfter(el /** TODO #9100 */, node /** TODO #9100 */) {
+        el.parentNode.insertBefore(node, el.nextSibling);
+    }
+    setInnerHTML(el /** TODO #9100 */, value /** TODO #9100 */) { el.innerHTML = value; }
+    getText(el /** TODO #9100 */) { return el.textContent; }
     // TODO(vicb): removed Element type because it does not support StyleElement
-    setText(el, value) { el.textContent = value; }
-    getValue(el) { return el.value; }
-    setValue(el, value) { el.value = value; }
-    getChecked(el) { return el.checked; }
-    setChecked(el, value) { el.checked = value; }
+    setText(el /** TODO #9100 */, value) { el.textContent = value; }
+    getValue(el /** TODO #9100 */) { return el.value; }
+    setValue(el /** TODO #9100 */, value) { el.value = value; }
+    getChecked(el /** TODO #9100 */) { return el.checked; }
+    setChecked(el /** TODO #9100 */, value) { el.checked = value; }
     createComment(text) { return document.createComment(text); }
-    createTemplate(html) {
+    createTemplate(html /** TODO #9100 */) {
         var t = document.createElement('template');
         t.innerHTML = html;
         return t;
     }
-    createElement(tagName, doc = document) { return doc.createElement(tagName); }
-    createElementNS(ns, tagName, doc = document) { return doc.createElementNS(ns, tagName); }
+    createElement(tagName /* TODO #9100 */, doc = document) {
+        return doc.createElement(tagName);
+    }
+    createElementNS(ns /* TODO #9100 */, tagName /* TODO #9100 */, doc = document) {
+        return doc.createElementNS(ns, tagName);
+    }
     createTextNode(text, doc = document) { return doc.createTextNode(text); }
     createScriptTag(attrName, attrValue, doc = document) {
         var el = doc.createElement('SCRIPT');
@@ -187,27 +208,37 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
     getShadowRoot(el) { return el.shadowRoot; }
     getHost(el) { return el.host; }
     clone(node) { return node.cloneNode(true); }
-    getElementsByClassName(element, name) {
+    getElementsByClassName(element /** TODO #9100 */, name) {
         return element.getElementsByClassName(name);
     }
-    getElementsByTagName(element, name) {
+    getElementsByTagName(element /** TODO #9100 */, name) {
         return element.getElementsByTagName(name);
     }
-    classList(element) { return Array.prototype.slice.call(element.classList, 0); }
-    addClass(element, className) { element.classList.add(className); }
-    removeClass(element, className) { element.classList.remove(className); }
-    hasClass(element, className) { return element.classList.contains(className); }
-    setStyle(element, styleName, styleValue) {
+    classList(element /** TODO #9100 */) {
+        return Array.prototype.slice.call(element.classList, 0);
+    }
+    addClass(element /** TODO #9100 */, className) { element.classList.add(className); }
+    removeClass(element /** TODO #9100 */, className) {
+        element.classList.remove(className);
+    }
+    hasClass(element /** TODO #9100 */, className) {
+        return element.classList.contains(className);
+    }
+    setStyle(element /** TODO #9100 */, styleName, styleValue) {
         element.style[styleName] = styleValue;
     }
-    removeStyle(element, stylename) { element.style[stylename] = null; }
-    getStyle(element, stylename) { return element.style[stylename]; }
-    hasStyle(element, styleName, styleValue = null) {
+    removeStyle(element /** TODO #9100 */, stylename) {
+        element.style[stylename] = null;
+    }
+    getStyle(element /** TODO #9100 */, stylename) {
+        return element.style[stylename];
+    }
+    hasStyle(element /** TODO #9100 */, styleName, styleValue = null) {
         var value = this.getStyle(element, styleName) || '';
         return styleValue ? value == styleValue : value.length > 0;
     }
-    tagName(element) { return element.tagName; }
-    attributeMap(element) {
+    tagName(element /** TODO #9100 */) { return element.tagName; }
+    attributeMap(element /** TODO #9100 */) {
         var res = new Map();
         var elAttrs = element.attributes;
         for (var i = 0; i < elAttrs.length; i++) {
@@ -216,26 +247,38 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
         }
         return res;
     }
-    hasAttribute(element, attribute) { return element.hasAttribute(attribute); }
-    hasAttributeNS(element, ns, attribute) {
+    hasAttribute(element /** TODO #9100 */, attribute) {
+        return element.hasAttribute(attribute);
+    }
+    hasAttributeNS(element /** TODO #9100 */, ns, attribute) {
         return element.hasAttributeNS(ns, attribute);
     }
-    getAttribute(element, attribute) { return element.getAttribute(attribute); }
-    getAttributeNS(element, ns, name) {
+    getAttribute(element /** TODO #9100 */, attribute) {
+        return element.getAttribute(attribute);
+    }
+    getAttributeNS(element /** TODO #9100 */, ns, name) {
         return element.getAttributeNS(ns, name);
     }
-    setAttribute(element, name, value) { element.setAttribute(name, value); }
-    setAttributeNS(element, ns, name, value) {
+    setAttribute(element /** TODO #9100 */, name, value) {
+        element.setAttribute(name, value);
+    }
+    setAttributeNS(element /** TODO #9100 */, ns, name, value) {
         element.setAttributeNS(ns, name, value);
     }
-    removeAttribute(element, attribute) { element.removeAttribute(attribute); }
-    removeAttributeNS(element, ns, name) { element.removeAttributeNS(ns, name); }
-    templateAwareRoot(el) { return this.isTemplateElement(el) ? this.content(el) : el; }
+    removeAttribute(element /** TODO #9100 */, attribute) {
+        element.removeAttribute(attribute);
+    }
+    removeAttributeNS(element /** TODO #9100 */, ns, name) {
+        element.removeAttributeNS(ns, name);
+    }
+    templateAwareRoot(el /** TODO #9100 */) {
+        return this.isTemplateElement(el) ? this.content(el) : el;
+    }
     createHtmlDocument() {
         return document.implementation.createHTMLDocument('fakeTitle');
     }
     defaultDoc() { return document; }
-    getBoundingClientRect(el) {
+    getBoundingClientRect(el /** TODO #9100 */) {
         try {
             return el.getBoundingClientRect();
         }
@@ -245,7 +288,7 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
     }
     getTitle() { return document.title; }
     setTitle(newTitle) { document.title = newTitle || ''; }
-    elementMatches(n, selector) {
+    elementMatches(n /** TODO #9100 */, selector) {
         var matches = false;
         if (n instanceof HTMLElement) {
             if (n.matches) {
@@ -261,13 +304,15 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
         return matches;
     }
     isTemplateElement(el) {
-        return el instanceof HTMLElement && el.nodeName == "TEMPLATE";
+        return el instanceof HTMLElement && el.nodeName == 'TEMPLATE';
     }
     isTextNode(node) { return node.nodeType === Node.TEXT_NODE; }
     isCommentNode(node) { return node.nodeType === Node.COMMENT_NODE; }
     isElementNode(node) { return node.nodeType === Node.ELEMENT_NODE; }
-    hasShadowRoot(node) { return node instanceof HTMLElement && isPresent(node.shadowRoot); }
-    isShadowRoot(node) { return node instanceof DocumentFragment; }
+    hasShadowRoot(node /** TODO #9100 */) {
+        return node instanceof HTMLElement && isPresent(node.shadowRoot);
+    }
+    isShadowRoot(node /** TODO #9100 */) { return node instanceof DocumentFragment; }
     importIntoDoc(node) {
         var toImport = node;
         if (this.isTemplateElement(node)) {
@@ -277,7 +322,7 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
     }
     adoptNode(node) { return document.adoptNode(node); }
     getHref(el) { return el.href; }
-    getEventKey(event) {
+    getEventKey(event /** TODO #9100 */) {
         var key = event.key;
         if (isBlank(key)) {
             key = event.keyIdentifier;
@@ -304,13 +349,13 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
         return key;
     }
     getGlobalEventTarget(target) {
-        if (target == "window") {
+        if (target == 'window') {
             return window;
         }
-        else if (target == "document") {
+        else if (target == 'document') {
             return document;
         }
-        else if (target == "body") {
+        else if (target == 'body') {
             return document.body;
         }
     }
@@ -325,15 +370,22 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
     }
     resetBaseElement() { baseElement = null; }
     getUserAgent() { return window.navigator.userAgent; }
-    setData(element, name, value) {
+    setData(element /** TODO #9100 */, name, value) {
         this.setAttribute(element, 'data-' + name, value);
     }
-    getData(element, name) { return this.getAttribute(element, 'data-' + name); }
-    getComputedStyle(element) { return getComputedStyle(element); }
+    getData(element /** TODO #9100 */, name) {
+        return this.getAttribute(element, 'data-' + name);
+    }
+    getComputedStyle(element /** TODO #9100 */) { return getComputedStyle(element); }
     // TODO(tbosch): move this into a separate environment class once we have it
     setGlobalVar(path, value) { setValueOnPath(global, path, value); }
-    requestAnimationFrame(callback) { return window.requestAnimationFrame(callback); }
+    requestAnimationFrame(callback /** TODO #9100 */) {
+        return window.requestAnimationFrame(callback);
+    }
     cancelAnimationFrame(id) { window.cancelAnimationFrame(id); }
+    supportsWebAnimation() {
+        return isFunction(document.body['animate']);
+    }
     performanceNow() {
         // performance.now() is not available in all browsers, see
         // http://caniuse.com/#search=performance.now
@@ -343,6 +395,13 @@ export class BrowserDomAdapter extends GenericBrowserDomAdapter {
         else {
             return DateWrapper.toMillis(DateWrapper.now());
         }
+    }
+    supportsCookies() { return true; }
+    getCookie(name) { return parseCookieValue(document.cookie, name); }
+    setCookie(name, value) {
+        // document.cookie is magical, assigning into it assigns/overrides one cookie value, but does
+        // not clear other cookies.
+        document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value);
     }
 }
 var baseElement = null;
@@ -357,12 +416,23 @@ function getBaseElementHref() {
 }
 // based on urlUtils.js in AngularJS 1
 var urlParsingNode = null;
-function relativePath(url) {
+function relativePath(url /** TODO #9100 */) {
     if (isBlank(urlParsingNode)) {
-        urlParsingNode = document.createElement("a");
+        urlParsingNode = document.createElement('a');
     }
     urlParsingNode.setAttribute('href', url);
     return (urlParsingNode.pathname.charAt(0) === '/') ? urlParsingNode.pathname :
         '/' + urlParsingNode.pathname;
+}
+export function parseCookieValue(cookie, name) {
+    name = encodeURIComponent(name);
+    let cookies = cookie.split(';');
+    for (let cookie of cookies) {
+        let [key, value] = cookie.split('=', 2);
+        if (key.trim() === name) {
+            return decodeURIComponent(value);
+        }
+    }
+    return null;
 }
 //# sourceMappingURL=browser_adapter.js.map

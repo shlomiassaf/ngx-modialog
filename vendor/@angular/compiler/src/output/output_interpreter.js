@@ -1,11 +1,11 @@
 "use strict";
-var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var async_1 = require('../../src/facade/async');
-var exceptions_1 = require('../../src/facade/exceptions');
-var collection_1 = require('../../src/facade/collection');
-var o = require('./output_ast');
+var core_private_1 = require('../../core_private');
+var async_1 = require('../facade/async');
+var collection_1 = require('../facade/collection');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var dart_emitter_1 = require('./dart_emitter');
+var o = require('./output_ast');
 var ts_emitter_1 = require('./ts_emitter');
 function interpretStatements(statements, resultVar, instanceFactory) {
     var stmtsWithReturn = statements.concat([new o.ReturnStatement(o.variable(resultVar))]);
@@ -173,11 +173,11 @@ var StatementInterpreter = (function () {
                 di.props.set(expr.name, value);
             }
             else {
-                core_1.reflector.setter(expr.name)(receiver, value);
+                core_private_1.reflector.setter(expr.name)(receiver, value);
             }
         }
         else {
-            core_1.reflector.setter(expr.name)(receiver, value);
+            core_private_1.reflector.setter(expr.name)(receiver, value);
         }
         return value;
     };
@@ -211,11 +211,11 @@ var StatementInterpreter = (function () {
                 result = lang_1.FunctionWrapper.apply(di.methods.get(expr.name), args);
             }
             else {
-                result = core_1.reflector.method(expr.name)(receiver, args);
+                result = core_private_1.reflector.method(expr.name)(receiver, args);
             }
         }
         else {
-            result = core_1.reflector.method(expr.name)(receiver, args);
+            result = core_private_1.reflector.method(expr.name)(receiver, args);
         }
         return result;
     };
@@ -275,7 +275,7 @@ var StatementInterpreter = (function () {
             return clazz.instantiate(args);
         }
         else {
-            return lang_1.FunctionWrapper.apply(core_1.reflector.factory(clazz), args);
+            return lang_1.FunctionWrapper.apply(core_private_1.reflector.factory(clazz), args);
         }
     };
     StatementInterpreter.prototype.visitLiteralExpr = function (ast, ctx) { return ast.value; };
@@ -358,11 +358,11 @@ var StatementInterpreter = (function () {
                 result = di.methods.get(ast.name);
             }
             else {
-                result = core_1.reflector.getter(ast.name)(receiver);
+                result = core_private_1.reflector.getter(ast.name)(receiver);
             }
         }
         else {
-            result = core_1.reflector.getter(ast.name)(receiver);
+            result = core_private_1.reflector.getter(ast.name)(receiver);
         }
         return result;
     };
@@ -402,29 +402,45 @@ function _declareFn(varNames, statements, ctx, visitor) {
         case 0:
             return function () { return _executeFunctionStatements(varNames, [], statements, ctx, visitor); };
         case 1:
-            return function (d0) { return _executeFunctionStatements(varNames, [d0], statements, ctx, visitor); };
+            return function (d0 /** TODO #9100 */) {
+                return _executeFunctionStatements(varNames, [d0], statements, ctx, visitor);
+            };
         case 2:
-            return function (d0, d1) { return _executeFunctionStatements(varNames, [d0, d1], statements, ctx, visitor); };
+            return function (d0 /** TODO #9100 */, d1 /** TODO #9100 */) {
+                return _executeFunctionStatements(varNames, [d0, d1], statements, ctx, visitor);
+            };
         case 3:
-            return function (d0, d1, d2) {
+            return function (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */) {
                 return _executeFunctionStatements(varNames, [d0, d1, d2], statements, ctx, visitor);
             };
         case 4:
-            return function (d0, d1, d2, d3) {
+            return function (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */) {
                 return _executeFunctionStatements(varNames, [d0, d1, d2, d3], statements, ctx, visitor);
             };
         case 5:
-            return function (d0, d1, d2, d3, d4) { return _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4], statements, ctx, visitor); };
+            return function (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */, d4 /** TODO #9100 */) {
+                return _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4], statements, ctx, visitor);
+            };
         case 6:
-            return function (d0, d1, d2, d3, d4, d5) { return _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5], statements, ctx, visitor); };
+            return function (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */, d4 /** TODO #9100 */, d5 /** TODO #9100 */) {
+                return _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5], statements, ctx, visitor);
+            };
         case 7:
-            return function (d0, d1, d2, d3, d4, d5, d6) { return _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6], statements, ctx, visitor); };
+            return function (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */, d4 /** TODO #9100 */, d5 /** TODO #9100 */, d6 /** TODO #9100 */) {
+                return _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6], statements, ctx, visitor);
+            };
         case 8:
-            return function (d0, d1, d2, d3, d4, d5, d6, d7) { return _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6, d7], statements, ctx, visitor); };
+            return function (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */, d4 /** TODO #9100 */, d5 /** TODO #9100 */, d6 /** TODO #9100 */, d7 /** TODO #9100 */) {
+                return _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6, d7], statements, ctx, visitor);
+            };
         case 9:
-            return function (d0, d1, d2, d3, d4, d5, d6, d7, d8) { return _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6, d7, d8], statements, ctx, visitor); };
+            return function (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */, d4 /** TODO #9100 */, d5 /** TODO #9100 */, d6 /** TODO #9100 */, d7 /** TODO #9100 */, d8 /** TODO #9100 */) {
+                return _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6, d7, d8], statements, ctx, visitor);
+            };
         case 10:
-            return function (d0, d1, d2, d3, d4, d5, d6, d7, d8, d9) { return _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6, d7, d8, d9], statements, ctx, visitor); };
+            return function (d0 /** TODO #9100 */, d1 /** TODO #9100 */, d2 /** TODO #9100 */, d3 /** TODO #9100 */, d4 /** TODO #9100 */, d5 /** TODO #9100 */, d6 /** TODO #9100 */, d7 /** TODO #9100 */, d8 /** TODO #9100 */, d9 /** TODO #9100 */) {
+                return _executeFunctionStatements(varNames, [d0, d1, d2, d3, d4, d5, d6, d7, d8, d9], statements, ctx, visitor);
+            };
         default:
             throw new exceptions_1.BaseException('Declaring functions with more than 10 arguments is not supported right now');
     }

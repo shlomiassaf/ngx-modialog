@@ -1,5 +1,5 @@
-import { KeyValueDiffers, ElementRef, Directive, Renderer } from '@angular/core';
-import { isPresent, isBlank } from '../../src/facade/lang';
+import { Directive, ElementRef, KeyValueDiffers, Renderer } from '@angular/core';
+import { isBlank, isPresent } from '../facade/lang';
 export class NgStyle {
     constructor(_differs, _ngEl, _renderer) {
         this._differs = _differs;
@@ -29,9 +29,11 @@ export class NgStyle {
         this._renderer.setElementStyle(this._ngEl.nativeElement, name, val);
     }
 }
+/** @nocollapse */
 NgStyle.decorators = [
     { type: Directive, args: [{ selector: '[ngStyle]', inputs: ['rawStyle: ngStyle'] },] },
 ];
+/** @nocollapse */
 NgStyle.ctorParameters = [
     { type: KeyValueDiffers, },
     { type: ElementRef, },

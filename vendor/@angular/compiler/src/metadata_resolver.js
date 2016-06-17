@@ -6,25 +6,24 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var core_1 = require('@angular/core');
 var core_private_1 = require('../core_private');
-var lang_1 = require('../src/facade/lang');
 var collection_1 = require('../src/facade/collection');
 var exceptions_1 = require('../src/facade/exceptions');
+var lang_1 = require('../src/facade/lang');
+var assertions_1 = require('./assertions');
 var cpl = require('./compile_metadata');
+var config_1 = require('./config');
+var directive_lifecycle_reflector_1 = require('./directive_lifecycle_reflector');
 var directive_resolver_1 = require('./directive_resolver');
 var pipe_resolver_1 = require('./pipe_resolver');
-var view_resolver_1 = require('./view_resolver');
-var directive_lifecycle_reflector_1 = require('./directive_lifecycle_reflector');
-var util_1 = require('./util');
-var assertions_1 = require('./assertions');
 var url_resolver_1 = require('./url_resolver');
-var core_private_2 = require("../core_private");
+var util_1 = require('./util');
+var view_resolver_1 = require('./view_resolver');
 var CompileMetadataResolver = (function () {
-    function CompileMetadataResolver(_directiveResolver, _pipeResolver, _viewResolver, _platformDirectives, _platformPipes, _reflector) {
+    function CompileMetadataResolver(_directiveResolver, _pipeResolver, _viewResolver, _config, _reflector) {
         this._directiveResolver = _directiveResolver;
         this._pipeResolver = _pipeResolver;
         this._viewResolver = _viewResolver;
-        this._platformDirectives = _platformDirectives;
-        this._platformPipes = _platformPipes;
+        this._config = _config;
         this._directiveCache = new Map();
         this._pipeCache = new Map();
         this._anonymousTypes = new Map();
@@ -33,7 +32,7 @@ var CompileMetadataResolver = (function () {
             this._reflector = _reflector;
         }
         else {
-            this._reflector = core_1.reflector;
+            this._reflector = core_private_1.reflector;
         }
     }
     CompileMetadataResolver.prototype.sanitizeTokenName = function (token) {
@@ -49,7 +48,50 @@ var CompileMetadataResolver = (function () {
         }
         return util_1.sanitizeIdentifier(identifier);
     };
+    CompileMetadataResolver.prototype.getAnimationEntryMetadata = function (entry) {
+        var _this = this;
+        var defs = entry.definitions.map(function (def) { return _this.getAnimationStateMetadata(def); });
+        return new cpl.CompileAnimationEntryMetadata(entry.name, defs);
+    };
+    CompileMetadataResolver.prototype.getAnimationStateMetadata = function (value) {
+        if (value instanceof core_1.AnimationStateDeclarationMetadata) {
+            var styles = this.getAnimationStyleMetadata(value.styles);
+            return new cpl.CompileAnimationStateDeclarationMetadata(value.stateNameExpr, styles);
+        }
+        else if (value instanceof core_1.AnimationStateTransitionMetadata) {
+            return new cpl.CompileAnimationStateTransitionMetadata(value.stateChangeExpr, this.getAnimationMetadata(value.steps));
+        }
+        return null;
+    };
+    CompileMetadataResolver.prototype.getAnimationStyleMetadata = function (value) {
+        return new cpl.CompileAnimationStyleMetadata(value.offset, value.styles);
+    };
+    CompileMetadataResolver.prototype.getAnimationMetadata = function (value) {
+        var _this = this;
+        if (value instanceof core_1.AnimationStyleMetadata) {
+            return this.getAnimationStyleMetadata(value);
+        }
+        else if (value instanceof core_1.AnimationKeyframesSequenceMetadata) {
+            return new cpl.CompileAnimationKeyframesSequenceMetadata(value.steps.map(function (entry) { return _this.getAnimationStyleMetadata(entry); }));
+        }
+        else if (value instanceof core_1.AnimationAnimateMetadata) {
+            var animateData = this
+                .getAnimationMetadata(value.styles);
+            return new cpl.CompileAnimationAnimateMetadata(value.timings, animateData);
+        }
+        else if (value instanceof core_1.AnimationWithStepsMetadata) {
+            var steps = value.steps.map(function (step) { return _this.getAnimationMetadata(step); });
+            if (value instanceof core_1.AnimationGroupMetadata) {
+                return new cpl.CompileAnimationGroupMetadata(steps);
+            }
+            else {
+                return new cpl.CompileAnimationSequenceMetadata(steps);
+            }
+        }
+        return null;
+    };
     CompileMetadataResolver.prototype.getDirectiveMetadata = function (directiveType) {
+        var _this = this;
         var meta = this._directiveCache.get(directiveType);
         if (lang_1.isBlank(meta)) {
             var dirMeta = this._directiveResolver.resolve(directiveType);
@@ -62,12 +104,16 @@ var CompileMetadataResolver = (function () {
                 var cmpMeta = dirMeta;
                 var viewMeta = this._viewResolver.resolve(directiveType);
                 assertions_1.assertArrayOfStrings('styles', viewMeta.styles);
+                var animations = lang_1.isPresent(viewMeta.animations) ?
+                    viewMeta.animations.map(function (e) { return _this.getAnimationEntryMetadata(e); }) :
+                    null;
                 templateMeta = new cpl.CompileTemplateMetadata({
                     encapsulation: viewMeta.encapsulation,
                     template: viewMeta.template,
                     templateUrl: viewMeta.templateUrl,
                     styles: viewMeta.styles,
-                    styleUrls: viewMeta.styleUrls
+                    styleUrls: viewMeta.styleUrls,
+                    animations: animations
                 });
                 changeDetectionStrategy = cmpMeta.changeDetection;
                 if (lang_1.isPresent(dirMeta.viewProviders)) {
@@ -82,8 +128,8 @@ var CompileMetadataResolver = (function () {
             var queries = [];
             var viewQueries = [];
             if (lang_1.isPresent(dirMeta.queries)) {
-                queries = this.getQueriesMetadata(dirMeta.queries, false);
-                viewQueries = this.getQueriesMetadata(dirMeta.queries, true);
+                queries = this.getQueriesMetadata(dirMeta.queries, false, directiveType);
+                viewQueries = this.getQueriesMetadata(dirMeta.queries, true, directiveType);
             }
             meta = cpl.CompileDirectiveMetadata.create({
                 selector: dirMeta.selector,
@@ -153,7 +199,7 @@ var CompileMetadataResolver = (function () {
     CompileMetadataResolver.prototype.getViewDirectivesMetadata = function (component) {
         var _this = this;
         var view = this._viewResolver.resolve(component);
-        var directives = flattenDirectives(view, this._platformDirectives);
+        var directives = flattenDirectives(view, this._config.platformDirectives);
         for (var i = 0; i < directives.length; i++) {
             if (!isValidType(directives[i])) {
                 throw new exceptions_1.BaseException("Unexpected directive value '" + lang_1.stringify(directives[i]) + "' on the View of component '" + lang_1.stringify(component) + "'");
@@ -164,7 +210,7 @@ var CompileMetadataResolver = (function () {
     CompileMetadataResolver.prototype.getViewPipesMetadata = function (component) {
         var _this = this;
         var view = this._viewResolver.resolve(component);
-        var pipes = flattenPipes(view, this._platformPipes);
+        var pipes = flattenPipes(view, this._config.platformPipes);
         for (var i = 0; i < pipes.length; i++) {
             if (!isValidType(pipes[i])) {
                 throw new exceptions_1.BaseException("Unexpected piped value '" + lang_1.stringify(pipes[i]) + "' on the View of component '" + lang_1.stringify(component) + "'");
@@ -174,11 +220,12 @@ var CompileMetadataResolver = (function () {
     };
     CompileMetadataResolver.prototype.getDependenciesMetadata = function (typeOrFunc, dependencies) {
         var _this = this;
+        var hasUnknownDeps = false;
         var params = lang_1.isPresent(dependencies) ? dependencies : this._reflector.parameters(typeOrFunc);
         if (lang_1.isBlank(params)) {
             params = [];
         }
-        return params.map(function (param) {
+        var dependenciesMetadata = params.map(function (param) {
             if (lang_1.isBlank(param)) {
                 return null;
             }
@@ -191,8 +238,7 @@ var CompileMetadataResolver = (function () {
             var viewQuery = null;
             var token = null;
             if (lang_1.isArray(param)) {
-                param
-                    .forEach(function (paramEntry) {
+                param.forEach(function (paramEntry) {
                     if (paramEntry instanceof core_1.HostMetadata) {
                         isHost = true;
                     }
@@ -229,6 +275,7 @@ var CompileMetadataResolver = (function () {
                 token = param;
             }
             if (lang_1.isBlank(token)) {
+                hasUnknownDeps = true;
                 return null;
             }
             return new cpl.CompileDiDependencyMetadata({
@@ -237,11 +284,17 @@ var CompileMetadataResolver = (function () {
                 isSelf: isSelf,
                 isSkipSelf: isSkipSelf,
                 isOptional: isOptional,
-                query: lang_1.isPresent(query) ? _this.getQueryMetadata(query, null) : null,
-                viewQuery: lang_1.isPresent(viewQuery) ? _this.getQueryMetadata(viewQuery, null) : null,
+                query: lang_1.isPresent(query) ? _this.getQueryMetadata(query, null, typeOrFunc) : null,
+                viewQuery: lang_1.isPresent(viewQuery) ? _this.getQueryMetadata(viewQuery, null, typeOrFunc) : null,
                 token: _this.getTokenMetadata(token)
             });
         });
+        if (hasUnknownDeps) {
+            var depsTokens = dependenciesMetadata.map(function (dep) { return dep ? lang_1.stringify(dep.token) : '?'; })
+                .join(', ');
+            throw new exceptions_1.BaseException("Can't resolve all parameters for " + lang_1.stringify(typeOrFunc) + ": (" + depsTokens + ").");
+        }
+        return dependenciesMetadata;
     };
     CompileMetadataResolver.prototype.getTokenMetadata = function (token) {
         token = core_1.resolveForwardRef(token);
@@ -270,8 +323,8 @@ var CompileMetadataResolver = (function () {
             else if (provider instanceof core_1.Provider) {
                 return _this.getProviderMetadata(provider);
             }
-            else if (core_private_2.isProviderLiteral(provider)) {
-                return _this.getProviderMetadata(core_private_2.createProvider(provider));
+            else if (core_private_1.isProviderLiteral(provider)) {
+                return _this.getProviderMetadata(core_private_1.createProvider(provider));
             }
             else {
                 return _this.getTypeMetadata(provider, staticTypeModuleUrl(provider));
@@ -301,23 +354,26 @@ var CompileMetadataResolver = (function () {
             multi: provider.multi
         });
     };
-    CompileMetadataResolver.prototype.getQueriesMetadata = function (queries, isViewQuery) {
+    CompileMetadataResolver.prototype.getQueriesMetadata = function (queries, isViewQuery, directiveType) {
         var _this = this;
         var compileQueries = [];
-        collection_1.StringMapWrapper.forEach(queries, function (query, propertyName) {
+        collection_1.StringMapWrapper.forEach(queries, function (query /** TODO #9100 */, propertyName /** TODO #9100 */) {
             if (query.isViewQuery === isViewQuery) {
-                compileQueries.push(_this.getQueryMetadata(query, propertyName));
+                compileQueries.push(_this.getQueryMetadata(query, propertyName, directiveType));
             }
         });
         return compileQueries;
     };
-    CompileMetadataResolver.prototype.getQueryMetadata = function (q, propertyName) {
+    CompileMetadataResolver.prototype.getQueryMetadata = function (q, propertyName, typeOrFunc) {
         var _this = this;
         var selectors;
         if (q.isVarBindingQuery) {
             selectors = q.varBindings.map(function (varName) { return _this.getTokenMetadata(varName); });
         }
         else {
+            if (!lang_1.isPresent(q.selector)) {
+                throw new exceptions_1.BaseException("Can't construct a query for the property \"" + propertyName + "\" of \"" + lang_1.stringify(typeOrFunc) + "\" since the query selector wasn't defined.");
+            }
             selectors = [this.getTokenMetadata(q.selector)];
         }
         return new cpl.CompileQueryMetadata({
@@ -328,15 +384,16 @@ var CompileMetadataResolver = (function () {
             read: lang_1.isPresent(q.read) ? this.getTokenMetadata(q.read) : null
         });
     };
+    /** @nocollapse */
     CompileMetadataResolver.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     CompileMetadataResolver.ctorParameters = [
         { type: directive_resolver_1.DirectiveResolver, },
         { type: pipe_resolver_1.PipeResolver, },
         { type: view_resolver_1.ViewResolver, },
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [core_1.PLATFORM_DIRECTIVES,] },] },
-        { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [core_1.PLATFORM_PIPES,] },] },
+        { type: config_1.CompilerConfig, },
         { type: core_private_1.ReflectorReader, },
     ];
     return CompileMetadataResolver;

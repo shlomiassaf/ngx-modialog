@@ -1,8 +1,8 @@
 "use strict";
 var core_1 = require('@angular/core');
 var core_private_1 = require('../core_private');
-var lang_1 = require('../src/facade/lang');
 var exceptions_1 = require('../src/facade/exceptions');
+var lang_1 = require('../src/facade/lang');
 function _isPipeMetadata(type) {
     return type instanceof core_1.PipeMetadata;
 }
@@ -12,7 +12,7 @@ var PipeResolver = (function () {
             this._reflector = _reflector;
         }
         else {
-            this._reflector = core_1.reflector;
+            this._reflector = core_private_1.reflector;
         }
     }
     /**
@@ -28,14 +28,16 @@ var PipeResolver = (function () {
         }
         throw new exceptions_1.BaseException("No Pipe decorator found on " + lang_1.stringify(type));
     };
+    /** @nocollapse */
     PipeResolver.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     PipeResolver.ctorParameters = [
         { type: core_private_1.ReflectorReader, },
     ];
     return PipeResolver;
 }());
 exports.PipeResolver = PipeResolver;
-exports.CODEGEN_PIPE_RESOLVER = new PipeResolver(core_1.reflector);
+exports.CODEGEN_PIPE_RESOLVER = new PipeResolver(core_private_1.reflector);
 //# sourceMappingURL=pipe_resolver.js.map

@@ -1,6 +1,6 @@
 /**
-* JS version of browser APIs. This library can only run in the browser.
-*/
+ * JS version of browser APIs. This library can only run in the browser.
+ */
 var win = typeof window !== 'undefined' && window || {};
 export { win as window };
 export var document = win.document;

@@ -1,6 +1,6 @@
 "use strict";
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var forward_ref_1 = require('./forward_ref');
 /**
  * A unique object used for retrieving items from the {@link ReflectiveInjector}.
@@ -16,6 +16,7 @@ var forward_ref_1 = require('./forward_ref');
  * `Key` should not be created directly. {@link ReflectiveInjector} creates keys automatically when
  * resolving
  * providers.
+ * @experimental
  */
 var ReflectiveKey = (function () {
     /**

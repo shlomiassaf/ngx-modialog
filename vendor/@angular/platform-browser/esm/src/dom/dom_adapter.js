@@ -1,4 +1,4 @@
-import { isBlank } from '../../src/facade/lang';
+import { isBlank } from '../facade/lang';
 var _DOM = null;
 export function getDOM() {
     return _DOM;

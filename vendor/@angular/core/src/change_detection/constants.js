@@ -1,5 +1,5 @@
 "use strict";
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 /**
  * Describes the current state of the change detector.
  */
@@ -25,6 +25,7 @@ var ChangeDetectorState = exports.ChangeDetectorState;
 /**
  * Describes within the change detector which strategy will be used the next time change
  * detection is triggered.
+ * @stable
  */
 (function (ChangeDetectionStrategy) {
     /**
@@ -66,7 +67,7 @@ exports.CHANGE_DETECTION_STRATEGY_VALUES = [
     ChangeDetectionStrategy.CheckAlways,
     ChangeDetectionStrategy.Detached,
     ChangeDetectionStrategy.OnPush,
-    ChangeDetectionStrategy.Default
+    ChangeDetectionStrategy.Default,
 ];
 /**
  * List of possible {@link ChangeDetectorState} values.
@@ -74,7 +75,7 @@ exports.CHANGE_DETECTION_STRATEGY_VALUES = [
 exports.CHANGE_DETECTOR_STATE_VALUES = [
     ChangeDetectorState.NeverChecked,
     ChangeDetectorState.CheckedBefore,
-    ChangeDetectorState.Errored
+    ChangeDetectorState.Errored,
 ];
 function isDefaultChangeDetectionStrategy(changeDetectionStrategy) {
     return lang_1.isBlank(changeDetectionStrategy) ||

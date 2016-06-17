@@ -4,11 +4,12 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var url_sanitizer_1 = require('./url_sanitizer');
-var style_sanitizer_1 = require('./style_sanitizer');
+var core_1 = require('@angular/core');
 var core_private_1 = require('../../core_private');
 exports.SecurityContext = core_private_1.SecurityContext;
-var core_1 = require('@angular/core');
+var html_sanitizer_1 = require('./html_sanitizer');
+var style_sanitizer_1 = require('./style_sanitizer');
+var url_sanitizer_1 = require('./url_sanitizer');
 /**
  * DomSanitizationService helps preventing Cross Site Scripting Security bugs (XSS) by sanitizing
  * values to be safe to use in the different DOM contexts.
@@ -54,7 +55,7 @@ var DomSanitizationServiceImpl = (function (_super) {
                 if (value instanceof SafeHtmlImpl)
                     return value.changingThisBreaksApplicationSecurity;
                 this.checkNotSafeValue(value, 'HTML');
-                return this.sanitizeHtml(String(value));
+                return html_sanitizer_1.sanitizeHtml(String(value));
             case core_private_1.SecurityContext.STYLE:
                 if (value instanceof SafeStyleImpl)
                     return value.changingThisBreaksApplicationSecurity;
@@ -82,12 +83,8 @@ var DomSanitizationServiceImpl = (function (_super) {
     };
     DomSanitizationServiceImpl.prototype.checkNotSafeValue = function (value, expectedType) {
         if (value instanceof SafeValueImpl) {
-            throw new Error('Required a safe ' + expectedType + ', got a ' + value.getTypeName());
+            throw new Error("Required a safe " + expectedType + ", got a " + value.getTypeName());
         }
-    };
-    DomSanitizationServiceImpl.prototype.sanitizeHtml = function (value) {
-        // TODO(martinprobst): implement.
-        return value;
     };
     DomSanitizationServiceImpl.prototype.bypassSecurityTrustHtml = function (value) { return new SafeHtmlImpl(value); };
     DomSanitizationServiceImpl.prototype.bypassSecurityTrustStyle = function (value) { return new SafeStyleImpl(value); };
@@ -96,6 +93,7 @@ var DomSanitizationServiceImpl = (function (_super) {
     DomSanitizationServiceImpl.prototype.bypassSecurityTrustResourceUrl = function (value) {
         return new SafeResourceUrlImpl(value);
     };
+    /** @nocollapse */
     DomSanitizationServiceImpl.decorators = [
         { type: core_1.Injectable },
     ];

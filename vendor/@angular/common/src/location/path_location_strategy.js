@@ -5,11 +5,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
-var platform_location_1 = require('./platform_location');
-var location_strategy_1 = require('./location_strategy');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var location_1 = require('./location');
+var location_strategy_1 = require('./location_strategy');
+var platform_location_1 = require('./platform_location');
 var PathLocationStrategy = (function (_super) {
     __extends(PathLocationStrategy, _super);
     function PathLocationStrategy(_platformLocation, href) {
@@ -45,9 +45,11 @@ var PathLocationStrategy = (function (_super) {
     };
     PathLocationStrategy.prototype.forward = function () { this._platformLocation.forward(); };
     PathLocationStrategy.prototype.back = function () { this._platformLocation.back(); };
+    /** @nocollapse */
     PathLocationStrategy.decorators = [
         { type: core_1.Injectable },
     ];
+    /** @nocollapse */
     PathLocationStrategy.ctorParameters = [
         { type: platform_location_1.PlatformLocation, },
         { type: undefined, decorators: [{ type: core_1.Optional }, { type: core_1.Inject, args: [location_strategy_1.APP_BASE_HREF,] },] },

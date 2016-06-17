@@ -1,7 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
+var lang_1 = require('../facade/lang');
 var NgForRow = (function () {
     function NgForRow($implicit, index, count) {
         this.$implicit = $implicit;
@@ -98,7 +98,7 @@ var NgFor = (function () {
             viewRef.context.index = i;
             viewRef.context.count = ilen;
         }
-        changes.forEachIdentityChange(function (record) {
+        changes.forEachIdentityChange(function (record /** TODO #9100 */) {
             var viewRef = _this._viewContainer.get(record.currentIndex);
             viewRef.context.$implicit = record.item;
         });
@@ -138,9 +138,11 @@ var NgFor = (function () {
         }
         return tuples;
     };
+    /** @nocollapse */
     NgFor.decorators = [
         { type: core_1.Directive, args: [{ selector: '[ngFor][ngForOf]', inputs: ['ngForTrackBy', 'ngForOf', 'ngForTemplate'] },] },
     ];
+    /** @nocollapse */
     NgFor.ctorParameters = [
         { type: core_1.ViewContainerRef, },
         { type: core_1.TemplateRef, },

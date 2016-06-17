@@ -1,4 +1,4 @@
-import { isBlank } from '../../src/facade/lang';
+import { isBlank } from '../facade/lang';
 /**
  * Describes the current state of the change detector.
  */
@@ -24,6 +24,7 @@ export var ChangeDetectorState;
 /**
  * Describes within the change detector which strategy will be used the next time change
  * detection is triggered.
+ * @stable
  */
 export var ChangeDetectionStrategy;
 (function (ChangeDetectionStrategy) {
@@ -65,7 +66,7 @@ export var CHANGE_DETECTION_STRATEGY_VALUES = [
     ChangeDetectionStrategy.CheckAlways,
     ChangeDetectionStrategy.Detached,
     ChangeDetectionStrategy.OnPush,
-    ChangeDetectionStrategy.Default
+    ChangeDetectionStrategy.Default,
 ];
 /**
  * List of possible {@link ChangeDetectorState} values.
@@ -73,7 +74,7 @@ export var CHANGE_DETECTION_STRATEGY_VALUES = [
 export var CHANGE_DETECTOR_STATE_VALUES = [
     ChangeDetectorState.NeverChecked,
     ChangeDetectorState.CheckedBefore,
-    ChangeDetectorState.Errored
+    ChangeDetectorState.Errored,
 ];
 export function isDefaultChangeDetectionStrategy(changeDetectionStrategy) {
     return isBlank(changeDetectionStrategy) ||

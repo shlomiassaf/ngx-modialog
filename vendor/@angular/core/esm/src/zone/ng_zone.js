@@ -1,6 +1,6 @@
-import { EventEmitter } from '../../src/facade/async';
+import { EventEmitter } from '../facade/async';
+import { BaseException } from '../facade/exceptions';
 import { NgZoneImpl } from './ng_zone_impl';
-import { BaseException } from '../../src/facade/exceptions';
 export { NgZoneError } from './ng_zone_impl';
 /**
  * An injectable service for executing work inside or outside of the Angular zone.
@@ -72,12 +72,9 @@ export { NgZoneError } from './ng_zone_impl';
  *   }
  * }
  * ```
+ * @experimental
  */
 export class NgZone {
-    /**
-     * @param {bool} enableLongStackTrace whether to enable long stack trace. They should only be
-     *               enabled in development mode as they significantly impact perf.
-     */
     constructor({ enableLongStackTrace = false }) {
         this._hasPendingMicrotasks = false;
         this._hasPendingMacrotasks = false;
@@ -171,6 +168,10 @@ export class NgZone {
      * Notify that an error has been delivered.
      */
     get onError() { return this._onErrorEvents; }
+    /**
+     * Whether there are no outstanding microtasks or microtasks.
+     */
+    get isStable() { return this._isStable; }
     /**
      * Whether there are any outstanding microtasks.
      */

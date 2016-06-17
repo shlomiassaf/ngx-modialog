@@ -1,5 +1,5 @@
-import { Directive, ViewContainerRef, TemplateRef } from '@angular/core';
-import { isBlank } from '../../src/facade/lang';
+import { Directive, TemplateRef, ViewContainerRef } from '@angular/core';
+import { isBlank } from '../facade/lang';
 export class NgIf {
     constructor(_viewContainer, _templateRef) {
         this._viewContainer = _viewContainer;
@@ -17,9 +17,11 @@ export class NgIf {
         }
     }
 }
+/** @nocollapse */
 NgIf.decorators = [
     { type: Directive, args: [{ selector: '[ngIf]', inputs: ['ngIf'] },] },
 ];
+/** @nocollapse */
 NgIf.ctorParameters = [
     { type: ViewContainerRef, },
     { type: TemplateRef, },

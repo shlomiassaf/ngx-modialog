@@ -1,6 +1,6 @@
 import { AppView, DebugAppView } from '../../core_private';
-import { isPresent } from '../../src/facade/lang';
-import { BaseException } from '../../src/facade/exceptions';
+import { BaseException } from '../facade/exceptions';
+import { isPresent } from '../facade/lang';
 export class InterpretiveAppViewInstanceFactory {
     createInstance(superClass, clazz, args, props, getters, methods) {
         if (superClass === AppView) {
@@ -39,6 +39,15 @@ class _InterpretiveAppView extends DebugAppView {
         }
         else {
             return super.injectorGet(token, nodeIndex, notFoundResult);
+        }
+    }
+    detachInternal() {
+        var m = this.methods.get('detachInternal');
+        if (isPresent(m)) {
+            return m();
+        }
+        else {
+            return super.detachInternal();
         }
     }
     destroyInternal() {

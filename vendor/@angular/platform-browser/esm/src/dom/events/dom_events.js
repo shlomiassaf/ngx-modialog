@@ -7,16 +7,17 @@ export class DomEventsPlugin extends EventManagerPlugin {
     supports(eventName) { return true; }
     addEventListener(element, eventName, handler) {
         var zone = this.manager.getZone();
-        var outsideHandler = (event) => zone.runGuarded(() => handler(event));
+        var outsideHandler = (event /** TODO #9100 */) => zone.runGuarded(() => handler(event));
         return this.manager.getZone().runOutsideAngular(() => getDOM().onAndCancel(element, eventName, outsideHandler));
     }
     addGlobalEventListener(target, eventName, handler) {
         var element = getDOM().getGlobalEventTarget(target);
         var zone = this.manager.getZone();
-        var outsideHandler = (event) => zone.runGuarded(() => handler(event));
+        var outsideHandler = (event /** TODO #9100 */) => zone.runGuarded(() => handler(event));
         return this.manager.getZone().runOutsideAngular(() => getDOM().onAndCancel(element, eventName, outsideHandler));
     }
 }
+/** @nocollapse */
 DomEventsPlugin.decorators = [
     { type: Injectable },
 ];

@@ -1,7 +1,7 @@
-import { ComponentResolver } from './component_resolver';
-import { isPresent } from '../../src/facade/lang';
-import { ReflectiveInjector } from '../di/reflective_injector';
 import { Injectable } from '../di/decorators';
+import { ReflectiveInjector } from '../di/reflective_injector';
+import { isPresent } from '../facade/lang';
+import { ComponentResolver } from './component_resolver';
 /**
  * Use ComponentResolver and ViewContainerRef directly.
  *
@@ -33,9 +33,11 @@ export class DynamicComponentLoader_ extends DynamicComponentLoader {
         });
     }
 }
+/** @nocollapse */
 DynamicComponentLoader_.decorators = [
     { type: Injectable },
 ];
+/** @nocollapse */
 DynamicComponentLoader_.ctorParameters = [
     { type: ComponentResolver, },
 ];

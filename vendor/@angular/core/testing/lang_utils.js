@@ -1,5 +1,5 @@
 "use strict";
-function getTypeOf(instance) {
+function getTypeOf(instance /** TODO #9100 */) {
     return instance.constructor;
 }
 exports.getTypeOf = getTypeOf;

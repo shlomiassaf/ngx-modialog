@@ -4,9 +4,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var collection_1 = require('../../src/facade/collection');
-var lang_1 = require('../../src/facade/lang');
 var dom_adapter_1 = require('../dom/dom_adapter');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 /**
  * Provides DOM operations in any browser environment.
  */
@@ -57,9 +57,9 @@ var GenericBrowserDomAdapter = (function (_super) {
         return lang_1.isFunction(this.defaultDoc().body.createShadowRoot);
     };
     GenericBrowserDomAdapter.prototype.getAnimationPrefix = function () {
-        return lang_1.isPresent(this._animationPrefix) ? this._animationPrefix : "";
+        return lang_1.isPresent(this._animationPrefix) ? this._animationPrefix : '';
     };
-    GenericBrowserDomAdapter.prototype.getTransitionEnd = function () { return lang_1.isPresent(this._transitionEnd) ? this._transitionEnd : ""; };
+    GenericBrowserDomAdapter.prototype.getTransitionEnd = function () { return lang_1.isPresent(this._transitionEnd) ? this._transitionEnd : ''; };
     GenericBrowserDomAdapter.prototype.supportsAnimation = function () {
         return lang_1.isPresent(this._animationPrefix) && lang_1.isPresent(this._transitionEnd);
     };

@@ -1,6 +1,6 @@
-import { Map, ListWrapper } from '../src/facade/collection';
-import { isPresent, isBlank, RegExpWrapper, RegExpMatcherWrapper, StringWrapper } from '../src/facade/lang';
+import { ListWrapper, Map } from '../src/facade/collection';
 import { BaseException } from '../src/facade/exceptions';
+import { RegExpMatcherWrapper, RegExpWrapper, StringWrapper, isBlank, isPresent } from '../src/facade/lang';
 const _EMPTY_ATTR_VALUE = '';
 // TODO: Can't use `const` here as
 // in Dart this is not transpiled into `final` yet...
@@ -27,7 +27,7 @@ export class CssSelector {
         var _addResult = (res, cssSel) => {
             if (cssSel.notSelectors.length > 0 && isBlank(cssSel.element) &&
                 ListWrapper.isEmpty(cssSel.classNames) && ListWrapper.isEmpty(cssSel.attrs)) {
-                cssSel.element = "*";
+                cssSel.element = '*';
             }
             res.push(cssSel);
         };
@@ -281,7 +281,7 @@ export class SelectorMatcher {
             return false;
         }
         var selectables = map.get(name);
-        var starSelectables = map.get("*");
+        var starSelectables = map.get('*');
         if (isPresent(starSelectables)) {
             selectables = selectables.concat(starSelectables);
         }
@@ -297,7 +297,7 @@ export class SelectorMatcher {
         return result;
     }
     /** @internal */
-    _matchPartial(map, name, cssSelector, matchedCallback /*: (c: CssSelector, a: any) => void*/) {
+    _matchPartial(map, name, cssSelector, matchedCallback) {
         if (isBlank(map) || isBlank(name)) {
             return false;
         }

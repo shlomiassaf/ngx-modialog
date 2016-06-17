@@ -1,15 +1,16 @@
-import { isBlank } from '../src/facade/lang';
+import { ViewEncapsulation } from '@angular/core';
 import { unimplemented } from '../src/facade/exceptions';
+import { assertionsEnabled } from '../src/facade/lang';
 import { Identifiers } from './identifiers';
 export class CompilerConfig {
-    constructor(genDebugInfo, logBindingUpdate, useJit, renderTypes = null) {
+    constructor({ renderTypes = new DefaultRenderTypes(), defaultEncapsulation = ViewEncapsulation.Emulated, genDebugInfo = assertionsEnabled(), logBindingUpdate = assertionsEnabled(), useJit = true, platformDirectives = [], platformPipes = [] } = {}) {
+        this.renderTypes = renderTypes;
+        this.defaultEncapsulation = defaultEncapsulation;
         this.genDebugInfo = genDebugInfo;
         this.logBindingUpdate = logBindingUpdate;
         this.useJit = useJit;
-        if (isBlank(renderTypes)) {
-            renderTypes = new DefaultRenderTypes();
-        }
-        this.renderTypes = renderTypes;
+        this.platformDirectives = platformDirectives;
+        this.platformPipes = platformPipes;
     }
 }
 /**

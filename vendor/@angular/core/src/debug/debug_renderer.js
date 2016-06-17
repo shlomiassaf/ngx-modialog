@@ -1,5 +1,5 @@
 "use strict";
-var lang_1 = require('../../src/facade/lang');
+var lang_1 = require('../facade/lang');
 var debug_node_1 = require('./debug_node');
 var DebugDomRootRenderer = (function () {
     function DebugDomRootRenderer(_delegate) {
@@ -102,15 +102,26 @@ var DebugDomRenderer = (function () {
         this._delegate.setBindingDebugInfo(renderElement, propertyName, propertyValue);
     };
     DebugDomRenderer.prototype.setElementClass = function (renderElement, className, isAdd) {
+        var debugEl = debug_node_1.getDebugNode(renderElement);
+        if (lang_1.isPresent(debugEl) && debugEl instanceof debug_node_1.DebugElement) {
+            debugEl.classes[className] = isAdd;
+        }
         this._delegate.setElementClass(renderElement, className, isAdd);
     };
     DebugDomRenderer.prototype.setElementStyle = function (renderElement, styleName, styleValue) {
+        var debugEl = debug_node_1.getDebugNode(renderElement);
+        if (lang_1.isPresent(debugEl) && debugEl instanceof debug_node_1.DebugElement) {
+            debugEl.styles[styleName] = styleValue;
+        }
         this._delegate.setElementStyle(renderElement, styleName, styleValue);
     };
     DebugDomRenderer.prototype.invokeElementMethod = function (renderElement, methodName, args) {
         this._delegate.invokeElementMethod(renderElement, methodName, args);
     };
     DebugDomRenderer.prototype.setText = function (renderNode, text) { this._delegate.setText(renderNode, text); };
+    DebugDomRenderer.prototype.animate = function (element, startingStyles, keyframes, duration, delay, easing) {
+        return this._delegate.animate(element, startingStyles, keyframes, duration, delay, easing);
+    };
     return DebugDomRenderer;
 }());
 exports.DebugDomRenderer = DebugDomRenderer;

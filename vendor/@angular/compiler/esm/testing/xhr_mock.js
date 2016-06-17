@@ -1,8 +1,8 @@
+import { BaseException } from '@angular/core';
 import { XHR } from '../index';
+import { PromiseWrapper } from '../src/facade/async';
 import { ListWrapper, Map } from '../src/facade/collection';
 import { isBlank, normalizeBlank } from '../src/facade/lang';
-import { BaseException } from '@angular/core';
-import { PromiseWrapper } from '../src/facade/async';
 /**
  * A mock implementation of {@link XHR} that allows outgoing requests to be mocked
  * and responded to within a single test, without going to the network.

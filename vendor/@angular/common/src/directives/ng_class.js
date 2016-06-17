@@ -1,7 +1,7 @@
 "use strict";
 var core_1 = require('@angular/core');
-var lang_1 = require('../../src/facade/lang');
-var collection_1 = require('../../src/facade/collection');
+var collection_1 = require('../facade/collection');
+var lang_1 = require('../facade/lang');
 var NgClass = (function () {
     function NgClass(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer) {
         this._iterableDiffers = _iterableDiffers;
@@ -110,9 +110,11 @@ var NgClass = (function () {
             }
         }
     };
+    /** @nocollapse */
     NgClass.decorators = [
         { type: core_1.Directive, args: [{ selector: '[ngClass]', inputs: ['rawClass: ngClass', 'initialClasses: class'] },] },
     ];
+    /** @nocollapse */
     NgClass.ctorParameters = [
         { type: core_1.IterableDiffers, },
         { type: core_1.KeyValueDiffers, },

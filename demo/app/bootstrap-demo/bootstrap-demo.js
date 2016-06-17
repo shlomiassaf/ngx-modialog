@@ -9,10 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_deprecated_1 = require('@angular/router-deprecated');
 var index_1 = require("angular2-modal/plugins/bootstrap/index");
-var bootstrap_demo_page_1 = require('./bootstrap-demo-page/bootstrap-demo-page');
-var modal_customisation_wizard_1 = require('./modal-customisation-wizard/modal-customisation-wizard');
 var BootstrapDemo = (function () {
     function BootstrapDemo(modal, viewContainer) {
         this.modal = modal;
@@ -27,13 +24,9 @@ var BootstrapDemo = (function () {
             selector: 'bootstrap-demo',
             viewProviders: index_1.BS_MODAL_PROVIDERS.slice(),
             template: "<router-outlet></router-outlet>",
-            directives: [router_deprecated_1.RouterOutlet],
+            directives: [],
             encapsulation: core_1.ViewEncapsulation.None
-        }),
-        router_deprecated_1.RouteConfig([
-            { path: '/', component: bootstrap_demo_page_1.BootstrapDemoPage, name: 'BootstrapDemo', useAsDefault: true },
-            { path: '/customizeModals', component: modal_customisation_wizard_1.ModalCustomisationWizard, name: 'CustomizeModals' },
-        ]), 
+        }), 
         __metadata('design:paramtypes', [index_1.Modal, core_1.ViewContainerRef])
     ], BootstrapDemo);
     return BootstrapDemo;

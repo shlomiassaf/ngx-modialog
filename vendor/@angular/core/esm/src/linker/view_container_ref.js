@@ -1,6 +1,6 @@
-import { ListWrapper } from '../../src/facade/collection';
-import { unimplemented } from '../../src/facade/exceptions';
-import { isPresent } from '../../src/facade/lang';
+import { ListWrapper } from '../facade/collection';
+import { unimplemented } from '../facade/exceptions';
+import { isPresent } from '../facade/lang';
 import { wtfCreateScope, wtfLeave } from '../profile/profile';
 /**
  * Represents a container where one or more Views can be attached.
@@ -18,6 +18,7 @@ import { wtfCreateScope, wtfLeave } from '../profile/profile';
  *
  * To access a `ViewContainerRef` of an Element, you can either place a {@link Directive} injected
  * with `ViewContainerRef` on the Element, or you obtain it via a {@link ViewChild} query.
+ * @stable
  */
 export class ViewContainerRef {
     /**

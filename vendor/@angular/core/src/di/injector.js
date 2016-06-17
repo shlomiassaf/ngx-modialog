@@ -1,7 +1,10 @@
 "use strict";
-var exceptions_1 = require('../../src/facade/exceptions');
+var exceptions_1 = require('../facade/exceptions');
 var _THROW_IF_NOT_FOUND = new Object();
 exports.THROW_IF_NOT_FOUND = _THROW_IF_NOT_FOUND;
+/**
+ * @stable
+ */
 var Injector = (function () {
     function Injector() {
     }
@@ -16,7 +19,7 @@ var Injector = (function () {
      *
      * ```typescript
      * var injector = ReflectiveInjector.resolveAndCreate([
-     *   provide("validToken", {useValue: "Value"})
+     *   {provide: "validToken", useValue: "Value"}
      * ]);
      * expect(injector.get("validToken")).toEqual("Value");
      * expect(() => injector.get("invalidToken")).toThrowError();

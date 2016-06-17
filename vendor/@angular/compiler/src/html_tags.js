@@ -318,32 +318,9 @@ var TAG_DEFINITIONS = {
     'wbr': new HtmlTagDefinition({ isVoid: true }),
     'p': new HtmlTagDefinition({
         closedByChildren: [
-            'address',
-            'article',
-            'aside',
-            'blockquote',
-            'div',
-            'dl',
-            'fieldset',
-            'footer',
-            'form',
-            'h1',
-            'h2',
-            'h3',
-            'h4',
-            'h5',
-            'h6',
-            'header',
-            'hgroup',
-            'hr',
-            'main',
-            'nav',
-            'ol',
-            'p',
-            'pre',
-            'section',
-            'table',
-            'ul'
+            'address', 'article', 'aside', 'blockquote', 'div', 'dl', 'fieldset', 'footer', 'form',
+            'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr',
+            'main', 'nav', 'ol', 'p', 'pre', 'section', 'table', 'ul'
         ],
         closedByParent: true
     }),
@@ -382,9 +359,9 @@ function getHtmlTagDefinition(tagName) {
     return lang_1.isPresent(result) ? result : DEFAULT_TAG_DEFINITION;
 }
 exports.getHtmlTagDefinition = getHtmlTagDefinition;
-var NS_PREFIX_RE = /^@([^:]+):(.+)/g;
+var NS_PREFIX_RE = /^:([^:]+):(.+)/g;
 function splitNsName(elementName) {
-    if (elementName[0] != '@') {
+    if (elementName[0] != ':') {
         return [null, elementName];
     }
     var match = lang_1.RegExpWrapper.firstMatch(NS_PREFIX_RE, elementName);
@@ -396,7 +373,7 @@ function getNsPrefix(elementName) {
 }
 exports.getNsPrefix = getNsPrefix;
 function mergeNsAndName(prefix, localName) {
-    return lang_1.isPresent(prefix) ? "@" + prefix + ":" + localName : localName;
+    return lang_1.isPresent(prefix) ? ":" + prefix + ":" + localName : localName;
 }
 exports.mergeNsAndName = mergeNsAndName;
 //# sourceMappingURL=html_tags.js.map

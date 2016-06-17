@@ -2,10 +2,10 @@
 var ng_class_1 = require('./ng_class');
 var ng_for_1 = require('./ng_for');
 var ng_if_1 = require('./ng_if');
-var ng_template_outlet_1 = require('./ng_template_outlet');
+var ng_plural_1 = require('./ng_plural');
 var ng_style_1 = require('./ng_style');
 var ng_switch_1 = require('./ng_switch');
-var ng_plural_1 = require('./ng_plural');
+var ng_template_outlet_1 = require('./ng_template_outlet');
 /**
  * A collection of Angular core directives that are likely to be used in each and every Angular
  * application.
@@ -45,6 +45,8 @@ var ng_plural_1 = require('./ng_plural');
  *   ...
  * }
  * ```
+ *
+ * @stable
  */
 exports.CORE_DIRECTIVES = [
     ng_class_1.NgClass,
@@ -53,9 +55,9 @@ exports.CORE_DIRECTIVES = [
     ng_template_outlet_1.NgTemplateOutlet,
     ng_style_1.NgStyle,
     ng_switch_1.NgSwitch,
-    ng_switch_1.NgSwitchWhen,
+    ng_switch_1.NgSwitchCase,
     ng_switch_1.NgSwitchDefault,
     ng_plural_1.NgPlural,
-    ng_plural_1.NgPluralCase
+    ng_plural_1.NgPluralCase,
 ];
 //# sourceMappingURL=core_directives.js.map
