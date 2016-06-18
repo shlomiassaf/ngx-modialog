@@ -39,6 +39,7 @@ export class BSModalFooter {
     constructor() {}
 
     onClick(btn: any, $event: MouseEvent) {
+        $event.stopPropagation();
         this.onButtonClick.emit({btn, $event});
     }
 }

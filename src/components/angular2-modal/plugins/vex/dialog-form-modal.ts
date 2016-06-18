@@ -62,6 +62,7 @@ export class VEXDialogButtons {
     @Output() public onButtonClick = new EventEmitter<VEXButtonClickEvent>();
 
     onClick(btn: any, $event: MouseEvent) {
+        $event.stopPropagation();
         this.onButtonClick.emit({btn, $event});
     }
 }
