@@ -19,12 +19,6 @@ export class DialogRefStack<T> {
      */
     pushManaged(dialogRef: DialogRef<T>): void {
         this.push(dialogRef);
-        dialogRef.result
-            .then(() => this.remove(dialogRef))
-            .catch(() => this.remove(dialogRef));
-        // we don't "pop" because we can't know for sure that our instance is the last.
-        // In a user event world it will be the last, but since modals can close programmatically
-        // we can't tell.
     }
 
     pop(): void {
