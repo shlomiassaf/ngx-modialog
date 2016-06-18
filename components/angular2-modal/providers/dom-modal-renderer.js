@@ -23,12 +23,19 @@ var DOMModalRenderer = (function () {
         })
             .then(function (cmpRef) {
             if (dialog.inElement) {
-                viewContainer.element.nativeElement.appendChild(cmpRef.hostView.rootNodes[0]);
+                viewContainer.element.nativeElement.appendChild(cmpRef.location.nativeElement);
             }
             else {
-                document.body.appendChild(cmpRef.hostView.rootNodes[0]);
+                document.body.appendChild(cmpRef.location.nativeElement);
             }
-            dialog.destroy = function () { return cmpRef.destroy(); };
+            dialog.onDestroy.subscribe(function () {
+                if (typeof cmpRef.instance.canDestroy === 'function') {
+                    cmpRef.instance.canDestroy().then(function () { return cmpRef.destroy(); });
+                }
+                else {
+                    cmpRef.destroy();
+                }
+            });
             return dialog;
         });
     };

@@ -17,17 +17,20 @@ var utils_1 = require('../../framework/utils');
  */
 var BSModalContainer = (function () {
     function BSModalContainer(dialog, el, _compileConfig, _modal, _cr) {
+        var _this = this;
         this.dialog = dialog;
         this.el = el;
         this._compileConfig = _compileConfig;
         this._modal = _modal;
         this._cr = _cr;
+        this.fadeState = 'in';
         if (!dialog.inElement) {
             this.position = null;
         }
         else {
             this.position = 'absolute';
         }
+        dialog.onDestroy.subscribe(function () { return _this.fadeState = 'out'; });
     }
     BSModalContainer.prototype.ngAfterViewInit = function () {
         var _this = this;
@@ -43,8 +46,7 @@ var BSModalContainer = (function () {
         });
     };
     BSModalContainer.prototype.onClickOutside = function () {
-        return this._modal.isTopMost(this.dialog) &&
-            !this.dialog.context.isBlocking &&
+        return this._modal.isTopMost(this.dialog) && !this.dialog.context.isBlocking &&
             this.dialog.dismiss();
     };
     BSModalContainer.prototype.documentKeypress = function (event) {
@@ -65,14 +67,36 @@ var BSModalContainer = (function () {
             host: {
                 'tabindex': '-1',
                 'role': 'dialog',
-                'class': 'in modal',
+                'class': 'modal',
                 'style': 'display: block',
                 '[style.position]': 'position',
                 '(body:keydown)': 'documentKeypress($event)'
             },
+            animations: [
+                core_1.trigger('fade', [
+                    core_1.transition('void => in', [
+                        core_1.animate('100ms, linear', core_1.keyframes([
+                            core_1.style({ opacity: 0, transform: 'translate(0, -25%)' }),
+                            core_1.style({ opacity: 0, transform: 'translate(0, -25%)' })
+                        ])),
+                        core_1.animate('300ms linear', core_1.keyframes([
+                            core_1.style({ opacity: 0, transform: 'translate(0, -25%)', offset: 0 }),
+                            core_1.style({ opacity: 1, transform: 'translate(0, -12.5%)', offset: 0.5 }),
+                            core_1.style({ opacity: 1, transform: 'translate(0, 0)', offset: 1 })
+                        ]))
+                    ]),
+                    core_1.state('out', core_1.style({ opacity: 0, transform: 'translate(0, -25%)' })),
+                    core_1.transition('in => out', [
+                        core_1.animate('150ms linear', core_1.keyframes([
+                            core_1.style({ opacity: 1, transform: 'translate(0, 0)' }),
+                            core_1.style({ opacity: 0, transform: 'translate(0, -12.5%)' }),
+                        ]))
+                    ])
+                ])
+            ],
             encapsulation: core_1.ViewEncapsulation.None,
             /* tslint:disable */
-            template: "<div [ngClass]=\"dialog.context.dialogClass\"\n          [class.modal-lg]=\"dialog.context.size == 'lg'\"\n          [class.modal-sm]=\"dialog.context.size == 'sm'\">\n         <div class=\"modal-content\"              \n              style=\"display:block\"              \n              role=\"document\"\n              (clickOutside)=\"onClickOutside()\">\n            <div style=\"display: none\" #modalDialog></div>\n         </div>\n    </div>"
+            template: "<div [ngClass]=\"dialog.context.dialogClass\" \n          [class.modal-lg]=\"dialog.context.size == 'lg'\"\n          [class.modal-sm]=\"dialog.context.size == 'sm'\"\n          @fade=\"fadeState\">\n         <div class=\"modal-content\"              \n              style=\"display:block\"              \n              role=\"document\"\n              (clickOutside)=\"onClickOutside()\">\n            <div style=\"display: none\" #modalDialog></div>\n         </div>\n    </div>"
         }), 
         __metadata('design:paramtypes', [angular2_modal_1.DialogRef, core_1.ElementRef, angular2_modal_1.ModalCompileConfig, modal_1.Modal, core_1.ComponentResolver])
     ], BSModalContainer);

@@ -17,6 +17,8 @@ var dialogRefCount = 0;
  */
 var BSModalBackdrop = (function () {
     function BSModalBackdrop(dialog) {
+        var _this = this;
+        this.fadeState = 'in';
         this.hs = { ps: null, sz: null, pt: null };
         dialogRefCount++;
         document.body.classList.add('modal-open');
@@ -25,7 +27,19 @@ var BSModalBackdrop = (function () {
             this.hs.sz = '100%';
             this.hs.pt = '0';
         }
+        dialog.onDestroy.subscribe(function () { return _this.fadeState = 'out'; });
     }
+    /**
+     * Temp workaround for animation where destruction of the top level component does not
+     * trigger child animations. Solution should be found either in animation module or in design
+     * of the modal component tree.
+     * @returns {Promise<void>}
+     */
+    BSModalBackdrop.prototype.canDestroy = function () {
+        return new Promise(function (resolve) {
+            setTimeout(function () { return resolve(); }, 310);
+        });
+    };
     BSModalBackdrop.prototype.ngOnDestroy = function () {
         if (--dialogRefCount === 0) {
             document.body.classList.remove('modal-open');
@@ -44,8 +58,29 @@ var BSModalBackdrop = (function () {
                 '[style.bottom]': 'hs.pt'
             },
             directives: [modal_container_1.BSModalContainer],
+            animations: [
+                core_1.trigger('fade', [
+                    core_1.transition('void => in', [
+                        core_1.animate('150ms linear', core_1.keyframes([
+                            core_1.style({ opacity: 0 }),
+                            core_1.style({ opacity: 0.5 })
+                        ]))
+                    ]),
+                    core_1.state('out', core_1.style({ opacity: 0 })),
+                    core_1.transition('* => out', [
+                        core_1.animate('150ms, linear', core_1.keyframes([
+                            core_1.style({ opacity: 0.5 }),
+                            core_1.style({ opacity: 0.5 })
+                        ])),
+                        core_1.animate('150ms linear', core_1.keyframes([
+                            core_1.style({ opacity: 0.5 }),
+                            core_1.style({ opacity: 0 }),
+                        ]))
+                    ])
+                ])
+            ],
             encapsulation: core_1.ViewEncapsulation.None,
-            template: "<div [style.position]=\"hs.ps\" class=\"modal-backdrop fade in\"></div>\n<modal-container></modal-container>"
+            template: "<div [style.position]=\"hs.ps\" class=\"modal-backdrop in\" @fade=\"fadeState\"></div>\n<modal-container></modal-container>"
         }), 
         __metadata('design:paramtypes', [angular2_modal_1.DialogRef])
     ], BSModalBackdrop);

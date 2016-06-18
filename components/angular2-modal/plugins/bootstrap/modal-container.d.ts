@@ -12,6 +12,7 @@ export declare class BSModalContainer implements AfterViewInit {
     private _modal;
     private _cr;
     position: string;
+    fadeState: 'in' | 'out';
     private _viewContainer;
     constructor(dialog: DialogRef<BSModalContext>, el: ElementRef, _compileConfig: ModalCompileConfig, _modal: Modal, _cr: ComponentResolver);
     ngAfterViewInit(): void;

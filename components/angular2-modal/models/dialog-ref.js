@@ -1,5 +1,6 @@
 "use strict";
 var promise_1 = require('@angular/core/src/facade/promise');
+var Subject_1 = require('rxjs/Subject');
 /**
  * API to an open modal window.
  */
@@ -7,6 +8,8 @@ var DialogRef = (function () {
     function DialogRef(context) {
         this.context = context;
         this._resultDeferred = new promise_1.PromiseCompleter();
+        this._onDestroy = new Subject_1.Subject();
+        this.onDestroy = this._onDestroy.asObservable();
     }
     Object.defineProperty(DialogRef.prototype, "result", {
         /**
@@ -50,7 +53,10 @@ var DialogRef = (function () {
             .then(function (value) { return value !== true && _dismiss(); })
             .catch(_dismiss);
     };
-    DialogRef.prototype.destroy = function () { };
+    DialogRef.prototype.destroy = function () {
+        this._onDestroy.next(null);
+        this._onDestroy.complete();
+    };
     DialogRef.prototype._fireHook = function (name) {
         var instance = this.contentRef && this.contentRef.instance, fn = instance && typeof instance[name] === 'function' && instance[name];
         return Promise.resolve(fn ? fn.call(instance) : false);

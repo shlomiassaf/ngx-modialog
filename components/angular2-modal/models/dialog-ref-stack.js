@@ -17,14 +17,7 @@ var DialogRefStack = (function () {
      * @param dialogRef
      */
     DialogRefStack.prototype.pushManaged = function (dialogRef) {
-        var _this = this;
         this.push(dialogRef);
-        dialogRef.result
-            .then(function () { return _this.remove(dialogRef); })
-            .catch(function () { return _this.remove(dialogRef); });
-        // we don't "pop" because we can't know for sure that our instance is the last.
-        // In a user event world it will be the last, but since modals can close programmatically
-        // we can't tell.
     };
     DialogRefStack.prototype.pop = function () {
         this._stack.pop();

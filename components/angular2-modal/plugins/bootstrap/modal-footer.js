@@ -21,6 +21,7 @@ var BSModalFooter = (function () {
         this.onButtonClick = new core_1.EventEmitter();
     }
     BSModalFooter.prototype.onClick = function (btn, $event) {
+        $event.stopPropagation();
         this.onButtonClick.emit({ btn: btn, $event: $event });
     };
     __decorate([

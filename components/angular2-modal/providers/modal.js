@@ -16,7 +16,9 @@ var tokens_1 = require('../models/tokens');
 var dialog_ref_stack_1 = require('../models/dialog-ref-stack');
 var angular2_modal_1 = require('../angular2-modal');
 var _stack = new dialog_ref_stack_1.DialogRefStack();
-var unsupportedDropIn = function () { throw new Error('Unsupported Drop-in.'); };
+var unsupportedDropIn = function () {
+    throw new Error('Unsupported Drop-in.');
+};
 var UnsupportedDropInFactory = {
     alert: unsupportedDropIn,
     prompt: unsupportedDropIn,
@@ -79,14 +81,15 @@ var Modal = (function () {
         dialog.inElement = inside;
         var compileConfig = new tokens_1.ModalCompileConfig(componentType, bindings || []);
         var b = core_1.ReflectiveInjector.resolve([
-            core_1.provide(Modal, { useValue: this }),
-            core_1.provide(tokens_1.ModalRenderer, { useValue: this._modalRenderer }),
-            core_1.provide(angular2_modal_1.DialogRef, { useValue: dialog }),
-            core_1.provide(tokens_1.ModalCompileConfig, { useValue: compileConfig })
+            { provide: Modal, useValue: this },
+            { provide: tokens_1.ModalRenderer, useValue: this._modalRenderer },
+            { provide: angular2_modal_1.DialogRef, useValue: dialog },
+            { provide: tokens_1.ModalCompileConfig, useValue: compileConfig }
         ]);
         return this._modalRenderer.render(this._backdrop, viewContainer, b, dialog)
             .then(function (dialog) {
             _stack.pushManaged(dialog);
+            dialog.onDestroy.subscribe(function () { return _stack.remove(dialog); });
             return dialog;
         });
     };

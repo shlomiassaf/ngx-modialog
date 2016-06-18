@@ -1,4 +1,5 @@
 import { ComponentRef } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 /**
  * API to an open modal window.
  */
@@ -14,7 +15,13 @@ export declare class DialogRef<T> {
      * States if the modal is inside a specific element.
      */
     inElement: boolean;
+    /**
+     * Fired before dialog is destroyed.
+     * No need to unsubscribe, done automatically.
+     */
+    onDestroy: Observable<void>;
     private _resultDeferred;
+    private _onDestroy;
     constructor(context?: T);
     /**
      * A Promise that is resolved on a close event and rejected on a dismiss event.
