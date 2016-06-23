@@ -100,10 +100,10 @@ export class App {
 This is a demonstration of opening a modal using a drop in.
 There are 3 drop in's: 
   * Alert
-  * Propmt
+  * Prompt
   * Confirm
   
-This is true for every plugin, however some might not implemented all of them, the built in plugins support all 3 drop ins.
+This is true for every plugin, however some might not implement all of them, the built in plugins support all 3 drop ins.
 Plugins will probably implement different API for drop in's, here is an example for VEX:
 
 ```ts
