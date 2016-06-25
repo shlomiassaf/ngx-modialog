@@ -110,4 +110,4 @@ Support `OnPush` with an observable api model (fluent observables)
 ### The dialog closes when removing the target DOM element in a click event
 ref [issue#111](https://github.com/shlomiassaf/angular2-modal/issues/111)
 
-To avoild this problem use `event.stopPropagation();` or put the element removal inside a `setTimeout` call
+To avoid this problem use `event.stopPropagation();` or put the element removal inside a `setTimeout` call

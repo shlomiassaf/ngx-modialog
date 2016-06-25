@@ -5,20 +5,20 @@
  * @returns {{}}
  */
 export function extend<T>(m1: any, m2: any): T {
-    var m: T = <T>{};
-    for (var attr in m1) {
-        if (m1.hasOwnProperty(attr)) {
-            (<any>m)[attr] = (<any>m1)[attr];
-        }
+  var m: T = <T>{};
+  for (var attr in m1) {
+    if (m1.hasOwnProperty(attr)) {
+      (<any>m)[attr] = (<any>m1)[attr];
     }
+  }
 
-    for (var attr in m2) {
-        if (m2.hasOwnProperty(attr)) {
-            (<any>m)[attr] = (<any>m2)[attr];
-        }
+  for (var attr in m2) {
+    if (m2.hasOwnProperty(attr)) {
+      (<any>m)[attr] = (<any>m2)[attr];
     }
+  }
 
-    return m;
+  return m;
 }
 
 /**
@@ -28,8 +28,8 @@ export function extend<T>(m1: any, m2: any): T {
  * @returns {T[]|any[]|any[][]|any[]}
  */
 export function arrayUnion<T>(arr1: any[], arr2: any[]): T[] {
-    return arr1
-        .concat(arr2.filter(v => arr1.indexOf(v) === -1));
+  return arr1
+    .concat(arr2.filter(v => arr1.indexOf(v) === -1));
 
 }
 
@@ -39,8 +39,8 @@ export function arrayUnion<T>(arr1: any[], arr2: any[]): T[] {
  * @returns {boolean}
  */
 export function supportsKey(keyCode: number, config: Array<number>): boolean {
-    if (!Array.isArray(config)) return config === null ? false : true;
-    return config.indexOf(keyCode) > -1;
+  if (!Array.isArray(config)) return config === null ? false : true;
+  return config.indexOf(keyCode) > -1;
 }
 
 /**
@@ -61,12 +61,14 @@ export function supportsKey(keyCode: number, config: Array<number>): boolean {
  * @returns {string}
  */
 export function toStyleString(obj: any | CSSStyleDeclaration): string {
-    return Object.getOwnPropertyNames(obj)
-        .map(k => `${k}:${obj[k]}`)
-        .join(';');
+  return Object.getOwnPropertyNames(obj)
+    .map(k => `${k}:${obj[k]}`)
+    .join(';');
 
-    // let objStr = JSON.stringify(obj);
-    // return objStr.substr(1, objStr.length - 2)
-    //     .replace(/,/g, ';')
-    //     .replace(/"/g, '');
+  // let objStr = JSON.stringify(obj);
+  // return objStr.substr(1, objStr.length - 2)
+  //     .replace(/,/g, ';')
+  //     .replace(/"/g, '');
 }
+
+export function noop() { }
