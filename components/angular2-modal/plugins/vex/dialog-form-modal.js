@@ -96,7 +96,7 @@ var FormDropIn = (function () {
             selector: 'drop-in-dialog',
             directives: [VEXDialogButtons],
             encapsulation: core_1.ViewEncapsulation.None,
-            template: "<div class=\"vex-dialog-message\">{{context.message}}</div>\n    <div *ngIf=\"context.showInput\" class=\"vex-dialog-input\">\n        <input name=\"vex\" \n               type=\"text\" \n               class=\"vex-dialog-prompt-input\"\n               [(ngModel)]=\"context.defaultResult\" \n               placeholder=\"{{context.placeholder}}\">\n    </div>"
+            template: "<div class=\"vex-dialog-message\">{{context.message}}</div>\n    <div *ngIf=\"context.showInput\" class=\"vex-dialog-input\">\n        <input autofocus \n               name=\"vex\" \n               type=\"text\" \n               class=\"vex-dialog-prompt-input\"\n               [(ngModel)]=\"context.defaultResult\" \n               placeholder=\"{{context.placeholder}}\">\n    </div>"
         }), 
         __metadata('design:paramtypes', [dialog_ref_1.DialogRef])
     ], FormDropIn);
