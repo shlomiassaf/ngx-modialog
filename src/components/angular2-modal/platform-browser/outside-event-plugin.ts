@@ -2,7 +2,7 @@
 // http://www.bennadel.com/blog/3025-creating-custom-dom-and-host-event-bindings-in-angular-2-beta-6.htm
 
 import {Injectable} from '@angular/core';
-import {DomEventsPlugin} from '@angular/platform-browser';
+import {DomEventsPlugin} from '@angular/platform-browser/src/dom/events/dom_events';
 import {getDOM, DomAdapter} from '@angular/platform-browser/src/dom/dom_adapter';
 import {noop} from '@angular/core/src/facade/lang';
 

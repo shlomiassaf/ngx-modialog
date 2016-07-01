@@ -1,7 +1,6 @@
 import { ComponentRef, PLATFORM_DIRECTIVES } from '@angular/core';
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { ELEMENT_PROBE_PROVIDERS } from '@angular/platform-browser';
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
 import { MODAL_BROWSER_PROVIDERS } from './components/angular2-modal/platform-browser';
@@ -23,7 +22,6 @@ export function main(): Promise<ComponentRef<App>> {
       {provide: PLATFORM_DIRECTIVES, multi: true, useValue: ROUTER_DIRECTIVES},
       APP_ROUTER_PROVIDERS,
       {provide: LocationStrategy, useClass: HashLocationStrategy},
-      ELEMENT_PROBE_PROVIDERS // remove in production
     ])
       .catch(err => console.error(err));
   }
