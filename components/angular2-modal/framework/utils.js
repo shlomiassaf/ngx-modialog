@@ -69,4 +69,6 @@ function toStyleString(obj) {
     //     .replace(/"/g, '');
 }
 exports.toStyleString = toStyleString;
+function noop() { }
+exports.noop = noop;
 //# sourceMappingURL=utils.js.map

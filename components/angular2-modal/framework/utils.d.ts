@@ -36,3 +36,4 @@ export declare function supportsKey(keyCode: number, config: Array<number>): boo
  * @returns {string}
  */
 export declare function toStyleString(obj: any | CSSStyleDeclaration): string;
+export declare function noop(): void;

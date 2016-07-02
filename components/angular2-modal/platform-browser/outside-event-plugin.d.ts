@@ -1,6 +1,6 @@
-import { DomEventsPlugin } from '@angular/platform-browser';
-export declare class DOMOutsideEventPlugin extends DomEventsPlugin {
-    private _DOM;
+import { EventManager } from '@angular/platform-browser';
+export declare class DOMOutsideEventPlugin {
+    manager: EventManager;
     constructor();
     supports(eventName: string): boolean;
     addEventListener(element: HTMLElement, eventName: string, handler: Function): Function;
