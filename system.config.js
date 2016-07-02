@@ -42,7 +42,6 @@ getScripts(prefix, scripts, function () {
             '@angular/platform-browser': 'vendor/@angular/platform-browser/bundles/platform-browser.umd.js',
             '@angular/platform-browser-dynamic': 'vendor/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
             '@angular/router': 'vendor/@angular/router/bundles/router.umd.js',
-            
             'angular2-modal': 'components/angular2-modal',
             'angular2-modal/platform-browser': 'components/angular2-modal/platform-browser'
         },
