@@ -26,7 +26,7 @@ if (isGithub)
     document.querySelector('head base').setAttribute('href', '/angular2-modal');
 var prefix = isGithub ? 'angular2-modal/vendor/' : 'vendor/';
 var scripts = [
-    'es6-shim/es6-shim.js',
+    'core-js/client/shim.min.js',
     'zone.js/dist/zone.js',
     'zone.js/dist/long-stack-trace-zone.js',
     'reflect-metadata/Reflect.js',
