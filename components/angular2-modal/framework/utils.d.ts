@@ -36,4 +36,10 @@ export declare function supportsKey(keyCode: number, config: Array<number>): boo
  * @returns {string}
  */
 export declare function toStyleString(obj: any | CSSStyleDeclaration): string;
+export declare class PromiseCompleter<R> {
+    promise: Promise<R>;
+    resolve: (value?: R | PromiseLike<R>) => void;
+    reject: (error?: any, stackTrace?: string) => void;
+    constructor();
+}
 export declare function noop(): void;

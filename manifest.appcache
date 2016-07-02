@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # sw.bundle: ng-cli
-# sw.version: 2d28315ba18467da6b975899e4d2c4d4b96e3e45
+# sw.version: 473200fb77a8c1b8dde728d360b65a07aa6f9849
 # sw.file.hash: 48049bbffc8abcebc3c48ec13b999894c4b49983
 /bootstrap.js
 # sw.file.hash: 15473b56cb95b5e8ccf260219f68eb4bfc53fd22
@@ -23,11 +23,11 @@ CACHE MANIFEST
 /components/angular2-modal/framework/fluent-assign.js
 # sw.file.hash: 68404a97ea65cd2985cb351ffff3e4c5d5dd57a7
 /components/angular2-modal/framework/fluent-assign.js.map
-# sw.file.hash: c6a927720b19b9805ee9daca922e1a69074b3fdc
+# sw.file.hash: c973d40129adee55046304b078f5a89b3f4144a8
 /components/angular2-modal/framework/utils.d.ts
-# sw.file.hash: 53b898e2fe8375460729dd4283c6d774d952a081
+# sw.file.hash: 75332b76decce2e1e58a8c2bcde374f947964abe
 /components/angular2-modal/framework/utils.js
-# sw.file.hash: 9c96bc5bc1e6dcbe2f7f406cc80ba958931344b4
+# sw.file.hash: 4bd237f8879056f2921534c398b1145c0a5bd310
 /components/angular2-modal/framework/utils.js.map
 # sw.file.hash: 510096c0bb5d3ef757a08fa18c952445d064c818
 /components/angular2-modal/index.d.ts
@@ -43,9 +43,9 @@ CACHE MANIFEST
 /components/angular2-modal/models/dialog-ref-stack.js.map
 # sw.file.hash: 371154778eebeb0eaae053c9e375749e83465dde
 /components/angular2-modal/models/dialog-ref.d.ts
-# sw.file.hash: 468bca9d6cd45b69ac2b648eca855fa8611332b4
+# sw.file.hash: 8d0e20ffc6ef61e91606fa9719376a8ebfc5af37
 /components/angular2-modal/models/dialog-ref.js
-# sw.file.hash: 764fbfdf741b8936b52746d063585e11fcf45860
+# sw.file.hash: 931d1fe3a3f3d8d7c1dfafaf6d208ae832e9a419
 /components/angular2-modal/models/dialog-ref.js.map
 # sw.file.hash: 6debb0c9c1cdf50744b6f3eb8b5a9f63c6d97ca8
 /components/angular2-modal/models/modal-context.d.ts
@@ -421,9 +421,9 @@ CACHE MANIFEST
 /index.ghpages.html
 # sw.file.hash: 65c55184544a724e126c2aac66942b20aac45414
 /index.html
-# sw.file.hash: 9c681e639de0cff3ab7c614d9aafec838899d936
+# sw.file.hash: aabc345d5c7cbcb85f85370c79bb828d08ef005a
 /system.config.js
-# sw.file.hash: 2412b694bda62ca65f9341ccf62e8f7eba51f55b
+# sw.file.hash: b0adfbae7f96fcc658483ac729e9a3abc58aaa95
 /system.config.js.map
 # sw.file.hash: 55fd9f4a8098e21ef8bd1ae425cc612b17e332d8
 /tsconfig.json

@@ -1,13 +1,13 @@
 "use strict";
-var promise_1 = require('@angular/core/src/facade/promise');
 var Subject_1 = require('rxjs/Subject');
+var utils_1 = require('../framework/utils');
 /**
  * API to an open modal window.
  */
 var DialogRef = (function () {
     function DialogRef(context) {
         this.context = context;
-        this._resultDeferred = new promise_1.PromiseCompleter();
+        this._resultDeferred = new utils_1.PromiseCompleter();
         this._onDestroy = new Subject_1.Subject();
         this.onDestroy = this._onDestroy.asObservable();
     }

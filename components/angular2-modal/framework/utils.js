@@ -69,6 +69,17 @@ function toStyleString(obj) {
     //     .replace(/"/g, '');
 }
 exports.toStyleString = toStyleString;
+var PromiseCompleter = (function () {
+    function PromiseCompleter() {
+        var _this = this;
+        this.promise = new Promise(function (res, rej) {
+            _this.resolve = res;
+            _this.reject = rej;
+        });
+    }
+    return PromiseCompleter;
+}());
+exports.PromiseCompleter = PromiseCompleter;
 function noop() { }
 exports.noop = noop;
 //# sourceMappingURL=utils.js.map
