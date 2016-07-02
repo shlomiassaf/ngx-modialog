@@ -29,7 +29,6 @@ var scripts = [
     'core-js/client/shim.min.js',
     'zone.js/dist/zone.js',
     'zone.js/dist/long-stack-trace-zone.js',
-    'reflect-metadata/Reflect.js',
     'systemjs/dist/system.src.js'
 ];
 getScripts(prefix, scripts, function () {
