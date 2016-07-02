@@ -47,7 +47,6 @@ getScripts(prefix, scripts, function () {
         },
         packages: {
             'rxjs': { main: 'index' },
-            '@angular/platform-browser': { main: 'index.js', defaultExtension: 'js' },
             'demo': { defaultExtension: 'js' },
             'components/angular2-modal': { main: 'index.js', defaultExtension: 'js' },
             'components/angular2-modal/platform-browser': { main: 'index.js', defaultExtension: 'js' },
