@@ -1,5 +1,5 @@
 const exec = require('child_process').exec;
-const ANGULAR_VERSION = '2.0.0-rc.3';
+const ANGULAR_VERSION = '2.0.0-rc.4';
 
 const ANGULAR_PACKAGES = [
   "core",
@@ -10,7 +10,7 @@ const ANGULAR_PACKAGES = [
 ];
 
 const POST_PACKAGES = [
-  "@angular/router@3.0.0-alpha.8"
+  "@angular/router@3.0.0-beta.2"
 ];
 
 
@@ -75,12 +75,11 @@ if (process.argv.indexOf('--preinstall') > -1) {
   print('INSTALL ANGULAR SCRIPT: Installing angular packages.');
   deleteAngularModules()
     .then(printStd)
-    .then( () => installAngular() )
+    .then(installAngular)
     .then(printStd);
 } else if (process.argv.indexOf('--postinstall') > -1) {
   print('INSTALL ANGULAR SCRIPT: Installing post angular packages.');
   installPost().then(printStd);
-}
-else {
+} else {
   print('INSTALL ANGULAR SCRIPT: Invalid arguments.');
 }
