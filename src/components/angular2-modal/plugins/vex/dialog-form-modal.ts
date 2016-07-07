@@ -118,7 +118,8 @@ export class DialogFormModal implements AfterViewInit, ModalComponent<DialogPres
     template: 
 `<div class="vex-dialog-message">{{context.message}}</div>
     <div *ngIf="context.showInput" class="vex-dialog-input">
-        <input name="vex" 
+        <input autofocus 
+               name="vex" 
                type="text" 
                class="vex-dialog-prompt-input"
                [(ngModel)]="context.defaultResult" 

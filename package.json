@@ -1,7 +1,7 @@
 {
   "name": "angular2-modal",
   "description": "Angular2 Modal (dialog) window.",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "repository": {
     "type": "git",
     "url": "https://github.com/shlomiassaf/angular2-modal.git"
@@ -27,20 +27,15 @@
     "server": "npm run server:dev",
     "server:dev": "webpack-dev-server --config webpack.config.js --hot --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
     "build": "exec ./scripts/build_release.sh",
-    "prepublish": "npm run build",
+    "preinstall": "node install_angular.js --preinstall",
+    "postinstall": "node install_angular.js --postinstall",
     "start": "npm run server:dev"
   },
   "peerDependencies": {
-    "@angular/core": "^2.0.0-rc.2",
-    "@angular/compiler": "^2.0.0-rc.2",
-    "@angular/common": "^2.0.0-rc.2",
-    "@angular/platform-browser": "^2.0.0-rc.2",
-    "@angular/platform-browser-dynamic": "^2.0.0-rc.2",
     "rxjs": "5.0.0-beta.6",
     "zone.js": "^0.6.12"
   },
   "devDependencies": {
-    "@angular/router": "^3.0.0-alpha.7",
     "angular-cli": "0.0.31",
     "async": "^1.5.2",
     "bootstrap": "^3.3.6",

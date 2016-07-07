@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Import the require hook. Enables us to require TS files natively.
-require('ts-node/register');
+// require('ts-node/register');
 
 
 const Angular2App = require('angular-cli/lib/broccoli/angular2-app');

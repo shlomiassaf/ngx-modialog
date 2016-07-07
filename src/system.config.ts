@@ -33,10 +33,9 @@ if (isGithub)
 
 var prefix = isGithub ? 'angular2-modal/vendor/' : 'vendor/';
 var scripts = [
-  'es6-shim/es6-shim.js',
+  'core-js/client/shim.min.js',
   'zone.js/dist/zone.js',
   'zone.js/dist/long-stack-trace-zone.js',
-  'reflect-metadata/Reflect.js',
   'systemjs/dist/system.src.js'
 ];
 
@@ -49,29 +48,15 @@ getScripts(prefix, scripts, function () {
       '@angular/core': 'vendor/@angular/core/bundles/core.umd.js',
       '@angular/common': 'vendor/@angular/common/bundles/common.umd.js',
       '@angular/compiler': 'vendor/@angular/compiler/bundles/compiler.umd.js',
+      '@angular/platform-browser': 'vendor/@angular/platform-browser/bundles/platform-browser.umd.js',
       '@angular/platform-browser-dynamic': 'vendor/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
-
-      // '@angular/router': 'vendor/@angular/router/bundles/router.umd.js',
-      '@angular/router': 'vendor/@angular/router',
-
-      //'@angular/platform-browser': '/vendor/@angular/platform-browser/platform-browser.umd.js',
-      '@angular/platform-browser': 'vendor/@angular/platform-browser',
-
-      '@angular/core/src/facade': 'vendor/@angular/core/src/facade',
-      //'@angular/platform-browser/src/dom': '/vendor/@angular/platform-browser/src/dom',
+      '@angular/router': 'vendor/@angular/router/bundles/router.umd.js',
 
       'angular2-modal': 'components/angular2-modal',
       'angular2-modal/platform-browser': 'components/angular2-modal/platform-browser'
     },
     packages: {
       'rxjs': {main: 'index'},
-
-      '@angular/router': {main: 'index.js', defaultExtension: 'js'},
-
-      '@angular/platform-browser': {main: 'index.js', defaultExtension: 'js'},
-
-      '@angular/core/src/facade': {defaultExtension: 'js'},
-
       'demo': {defaultExtension: 'js'},
 
       'components/angular2-modal': {main: 'index.js', defaultExtension: 'js'},

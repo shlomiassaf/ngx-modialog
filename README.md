@@ -1,6 +1,6 @@
 # UPDATE: Angular 2 Modal version 1 is out.
 
-# Angular 2 (rc.2): AIO Modal / Dialog window 
+# Angular 2 (rc.4): AIO Modal / Dialog window
 
 A fully generic, customizable and fluent modal window implementation for Angular.
 `angular2-modal` is UI platform/framework agnostic, **plugins**** are used to describe a UI implementation (e.g: Bootstrap)  
@@ -16,15 +16,15 @@ Take 5 minutes to read a [quick walk through](https://github.com/shlomiassaf/ang
   * [Bootstrap]()
   * [Vex](http://github.hubspot.com/vex/docs/welcome/)
   * POC implementation of JS Native modal (window.alert/prompt/confirm) to demonstrate a hostile takeover :)
-  
-  
-## Built with angular 2 RC.2
+
+
+## Built with angular 2 RC.4
 
 ## Features  
 
   - Easy to use API via Fluent API Presets (alert, propmt, confirm)
   - Extendable via plugins.  
-  
+
 #### Bootstrap / VEX
   - Customizable with components, Presets and more...  
   - Select cancel/quit key.
@@ -107,7 +107,7 @@ Test against `universal-starter` to enable universal support.
 Support `OnPush` with an observable api model (fluent observables)
 
 # Known bugs
-### The dialog closes when removing the target DOM element in a click event 
+### The dialog closes when removing the target DOM element in a click event
 ref [issue#111](https://github.com/shlomiassaf/angular2-modal/issues/111)
 
-To avoild this problem use `event.stopPropagation();` or put the element removal inside a `setTimeout` call
+To avoid this problem use `event.stopPropagation();` or put the element removal inside a `setTimeout` call
