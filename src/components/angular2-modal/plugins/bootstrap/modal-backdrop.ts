@@ -42,7 +42,7 @@ let dialogRefCount = 0;
       ]),
       state('out',  style({ opacity: 0 } )),
       transition('* => out', [
-        animate('150ms, linear', keyframes([
+        animate('150ms linear', keyframes([
           style({opacity: 0.5}),
           style({opacity: 0.5})
         ])),

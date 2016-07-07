@@ -37,7 +37,7 @@ import { BSModalContext } from './modal-context';
   animations: [
     trigger('fade', [
       transition('void => in', [
-        animate('100ms, linear', keyframes([
+        animate('100ms linear', keyframes([
           style({ opacity: 0, transform: 'translate(0, -25%)' }),
           style({ opacity: 0, transform: 'translate(0, -25%)' })
         ])),
