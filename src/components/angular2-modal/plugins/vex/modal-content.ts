@@ -61,7 +61,7 @@ export class VexModalContent implements AfterViewInit {
 
   onClickOutside() {
     // check that this modal is the last in the stack.
-    return this._modal.isTopMost(this.dialog) && !this.dialog.context.isBlocking &&
+    if (this._modal.isTopMost(this.dialog) && !this.dialog.context.isBlocking)
       this.dialog.dismiss();
   }
 }
