@@ -46,7 +46,7 @@ var BSModalContainer = (function () {
         });
     };
     BSModalContainer.prototype.onClickOutside = function () {
-        return this._modal.isTopMost(this.dialog) && !this.dialog.context.isBlocking &&
+        if (this._modal.isTopMost(this.dialog) && !this.dialog.context.isBlocking)
             this.dialog.dismiss();
     };
     BSModalContainer.prototype.documentKeypress = function (event) {
@@ -75,7 +75,7 @@ var BSModalContainer = (function () {
             animations: [
                 core_1.trigger('fade', [
                     core_1.transition('void => in', [
-                        core_1.animate('100ms, linear', core_1.keyframes([
+                        core_1.animate('100ms linear', core_1.keyframes([
                             core_1.style({ opacity: 0, transform: 'translate(0, -25%)' }),
                             core_1.style({ opacity: 0, transform: 'translate(0, -25%)' })
                         ])),

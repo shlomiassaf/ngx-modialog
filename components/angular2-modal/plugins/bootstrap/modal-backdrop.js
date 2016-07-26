@@ -68,7 +68,7 @@ var BSModalBackdrop = (function () {
                     ]),
                     core_1.state('out', core_1.style({ opacity: 0 })),
                     core_1.transition('* => out', [
-                        core_1.animate('150ms, linear', core_1.keyframes([
+                        core_1.animate('150ms linear', core_1.keyframes([
                             core_1.style({ opacity: 0.5 }),
                             core_1.style({ opacity: 0.5 })
                         ])),
