@@ -110,7 +110,7 @@ export class BSModalContainer implements AfterViewInit {
   }
 
   onClickOutside() {
-    return this._modal.isTopMost(this.dialog) && !this.dialog.context.isBlocking &&
+    if (this._modal.isTopMost(this.dialog) && !this.dialog.context.isBlocking)
       this.dialog.dismiss();
   }
 
