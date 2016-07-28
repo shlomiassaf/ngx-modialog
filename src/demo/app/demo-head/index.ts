@@ -1,1 +1,1 @@
-export * from './deam-head';
+export * from './demo-head';
