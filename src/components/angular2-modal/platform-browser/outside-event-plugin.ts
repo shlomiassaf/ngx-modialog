@@ -26,7 +26,7 @@ function bubbleNonAncestorHandlerFactory(element: HTMLElement, handler: (event) 
             if (current === element) {
                 return;
             }
-        } while (current.parentNode && ( current = current.parentNode ));
+        } while (current.parentNode && (current = current.parentNode));
 
         handler(event);
     };
@@ -37,8 +37,13 @@ export class DOMOutsideEventPlugin { // extends EventManagerPlugin
     manager: EventManager;
 
     constructor() {
-        // TODO: use DI factory for this.
-        if (!document || typeof document.addEventListener !== 'function') {
+        try {
+            // TODO: use DI factory for this.
+            if (!document || typeof document.addEventListener !== 'function') {
+                this.addEventListener = noop as any;
+            }
+        } catch (error) {
+            // Node's `document is not defined` error in angular-universal can be handled temporary with this
             this.addEventListener = noop as any;
         }
     }
@@ -57,7 +62,7 @@ export class DOMOutsideEventPlugin { // extends EventManagerPlugin
         // The event is fired inside the angular zone so change detection can kick into action.
         const onceOnOutside = () => {
             const listener =
-              bubbleNonAncestorHandlerFactory(element, evt => zone.runGuarded(() => handler(evt)));
+                bubbleNonAncestorHandlerFactory(element, evt => zone.runGuarded(() => handler(evt)));
 
             // mimic BrowserDomAdapter.onAndCancel
             document.addEventListener(eventMap[eventName], listener, false);
