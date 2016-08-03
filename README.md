@@ -67,6 +67,65 @@ Demo application is built with `Webpack` and `SystemJS`.
 The only difference is the `index.html` file.  
 The deployed demo site is in `SystemJS`, development is done with `Webpack`
 
+In src/system.config.ts, add the property
+```
+  'angular2-modal': 'vendor/angular2-modal',
+```
+to one of the System.config() arguments.
+
+Optionally, you may call System.config() with an object of the form:
+```
+  {
+    'packages': {
+      angular2-modal': { ... main: 'index.js', ... },
+      ...
+    },
+    ...
+  };
+```
+.
+
+Otherwise, you will need to append 'index' to the path when you import names, as in: 
+```
+import {MODAL_BROWSER_PROVIDERS} from "angular2-modal/platform-browser/index";
+```
+
+## Angular-cli   
+ 
+In ./angular-cli.build.js, and an entry for 'angular2-modal', as in:
+```
+module.exports = function(defaults) {
+  return new Angular2App(defaults, {
+    vendorNpmFiles: [
+      [ ... other file globs ...],
+      'angular2-modal/**/*.+(ts|js|js.map)',
+    ]
+  });
+```
+
+In src/system.config.ts,
+you will satisfy the first requirement in the [SystemJS](#systemjs) section
+by adding the property *angular2-modal* to the *map* array near the beginning of the file, as in:
+```
+/** Map relative paths to URLs. */
+  const map: any = {
+    'angular2-modal': 'vendor/angular2-modal',
+    ...
+  };
+```
+
+You may configure the *packages* property from [SystemJS](#systemjs)
+by adding the 'angular2-modal' property the *packages* array
+near the beginning of system.config.ts as in:
+```
+  const packages: any = {
+    'angular2-modal': {
+      main: 'index.js',
+      ...
+    }
+  }
+```
+
 ## Plugins
 Plugins serve as a concrete UI implementation for a modal. It can be an implementation for a known library (e.g: bootstrap) or something unique.  
 While `angular2-modal` has some built in plugins it is also possible to use external plugins from NPM, if someone decide to build one.
