@@ -37,8 +37,13 @@ export class DOMOutsideEventPlugin { // extends EventManagerPlugin
     manager: EventManager;
 
     constructor() {
-        // TODO: use DI factory for this.
-        if (!document || typeof document.addEventListener !== 'function') {
+        try {
+            // TODO: use DI factory for this.
+            if (!document || typeof document.addEventListener !== 'function') {
+                this.addEventListener = noop as any;
+            }
+        } catch (error) {
+            // Node's `document is not defined` error in angular-universal can be handled temporary with this
             this.addEventListener = noop as any;
         }
     }
