@@ -26,7 +26,7 @@ function bubbleNonAncestorHandlerFactory(element: HTMLElement, handler: (event) 
             if (current === element) {
                 return;
             }
-        } while (current.parentNode && ( current = current.parentNode ));
+        } while (current.parentNode && (current = current.parentNode));
 
         handler(event);
     };
@@ -62,7 +62,7 @@ export class DOMOutsideEventPlugin { // extends EventManagerPlugin
         // The event is fired inside the angular zone so change detection can kick into action.
         const onceOnOutside = () => {
             const listener =
-              bubbleNonAncestorHandlerFactory(element, evt => zone.runGuarded(() => handler(evt)));
+                bubbleNonAncestorHandlerFactory(element, evt => zone.runGuarded(() => handler(evt)));
 
             // mimic BrowserDomAdapter.onAndCancel
             document.addEventListener(eventMap[eventName], listener, false);
