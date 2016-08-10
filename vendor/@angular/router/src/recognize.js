@@ -14,15 +14,14 @@ var url_tree_1 = require('./url_tree');
 var collection_1 = require('./utils/collection');
 var tree_1 = require('./utils/tree');
 var NoMatch = (function () {
-    function NoMatch(segment) {
-        if (segment === void 0) { segment = null; }
-        this.segment = segment;
+    function NoMatch() {
     }
     return NoMatch;
 }());
 var InheritedFromParent = (function () {
-    function InheritedFromParent(parent, params, data, resolve) {
+    function InheritedFromParent(parent, snapshot, params, data, resolve) {
         this.parent = parent;
+        this.snapshot = snapshot;
         this.params = params;
         this.data = data;
         this.resolve = resolve;
@@ -39,48 +38,95 @@ var InheritedFromParent = (function () {
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(InheritedFromParent, "empty", {
-        get: function () {
-            return new InheritedFromParent(null, {}, {}, new router_state_1.InheritedResolve(null, {}));
-        },
-        enumerable: true,
-        configurable: true
-    });
+    InheritedFromParent.empty = function (snapshot) {
+        return new InheritedFromParent(null, snapshot, {}, {}, new router_state_1.InheritedResolve(null, {}));
+    };
     return InheritedFromParent;
 }());
 function recognize(rootComponentType, config, urlTree, url) {
-    try {
-        var children = processSegment(config, urlTree.root, InheritedFromParent.empty, shared_1.PRIMARY_OUTLET);
-        var root = new router_state_1.ActivatedRouteSnapshot([], {}, {}, shared_1.PRIMARY_OUTLET, rootComponentType, null, urlTree.root, -1, router_state_1.InheritedResolve.empty);
-        var rootNode = new tree_1.TreeNode(root, children);
-        return of_1.of(new router_state_1.RouterStateSnapshot(url, rootNode, urlTree.queryParams, urlTree.fragment));
-    }
-    catch (e) {
-        if (e instanceof NoMatch) {
-            return new Observable_1.Observable(function (obs) {
-                return obs.error(new Error("Cannot match any routes: '" + e.segment + "'"));
-            });
-        }
-        else {
-            return new Observable_1.Observable(function (obs) { return obs.error(e); });
-        }
-    }
+    return new Recognizer(rootComponentType, config, urlTree, url).recognize();
 }
 exports.recognize = recognize;
-function processSegment(config, segment, inherited, outlet) {
-    if (segment.pathsWithParams.length === 0 && segment.hasChildren()) {
-        return processSegmentChildren(config, segment, inherited);
+var Recognizer = (function () {
+    function Recognizer(rootComponentType, config, urlTree, url) {
+        this.rootComponentType = rootComponentType;
+        this.config = config;
+        this.urlTree = urlTree;
+        this.url = url;
     }
-    else {
-        return processPathsWithParams(config, segment, 0, segment.pathsWithParams, inherited, outlet);
-    }
-}
-function processSegmentChildren(config, segment, inherited) {
-    var children = url_tree_1.mapChildrenIntoArray(segment, function (child, childOutlet) { return processSegment(config, child, inherited, childOutlet); });
-    checkOutletNameUniqueness(children);
-    sortActivatedRouteSnapshots(children);
-    return children;
-}
+    Recognizer.prototype.recognize = function () {
+        try {
+            var rootSegmentGroup = split(this.urlTree.root, [], [], this.config).segmentGroup;
+            var children = this.processSegmentGroup(this.config, rootSegmentGroup, InheritedFromParent.empty(null), shared_1.PRIMARY_OUTLET);
+            var root = new router_state_1.ActivatedRouteSnapshot([], Object.freeze({}), Object.freeze(this.urlTree.queryParams), this.urlTree.fragment, {}, shared_1.PRIMARY_OUTLET, this.rootComponentType, null, this.urlTree.root, -1, router_state_1.InheritedResolve.empty);
+            var rootNode = new tree_1.TreeNode(root, children);
+            return of_1.of(new router_state_1.RouterStateSnapshot(this.url, rootNode));
+        }
+        catch (e) {
+            return new Observable_1.Observable(function (obs) { return obs.error(e); });
+        }
+    };
+    Recognizer.prototype.processSegmentGroup = function (config, segmentGroup, inherited, outlet) {
+        if (segmentGroup.segments.length === 0 && segmentGroup.hasChildren()) {
+            return this.processChildren(config, segmentGroup, inherited);
+        }
+        else {
+            return this.processSegment(config, segmentGroup, 0, segmentGroup.segments, inherited, outlet);
+        }
+    };
+    Recognizer.prototype.processChildren = function (config, segmentGroup, inherited) {
+        var _this = this;
+        var children = url_tree_1.mapChildrenIntoArray(segmentGroup, function (child, childOutlet) { return _this.processSegmentGroup(config, child, inherited, childOutlet); });
+        checkOutletNameUniqueness(children);
+        sortActivatedRouteSnapshots(children);
+        return children;
+    };
+    Recognizer.prototype.processSegment = function (config, segmentGroup, pathIndex, segments, inherited, outlet) {
+        for (var _i = 0, config_1 = config; _i < config_1.length; _i++) {
+            var r = config_1[_i];
+            try {
+                return this.processSegmentAgainstRoute(r, segmentGroup, pathIndex, segments, inherited, outlet);
+            }
+            catch (e) {
+                if (!(e instanceof NoMatch))
+                    throw e;
+            }
+        }
+        throw new NoMatch();
+    };
+    Recognizer.prototype.processSegmentAgainstRoute = function (route, rawSegment, pathIndex, segments, inherited, outlet) {
+        if (route.redirectTo)
+            throw new NoMatch();
+        if ((route.outlet ? route.outlet : shared_1.PRIMARY_OUTLET) !== outlet)
+            throw new NoMatch();
+        var newInheritedResolve = new router_state_1.InheritedResolve(inherited.resolve, getResolve(route));
+        if (route.path === '**') {
+            var params = segments.length > 0 ? collection_1.last(segments).parameters : {};
+            var snapshot_1 = new router_state_1.ActivatedRouteSnapshot(segments, Object.freeze(collection_1.merge(inherited.allParams, params)), Object.freeze(this.urlTree.queryParams), this.urlTree.fragment, collection_1.merge(inherited.allData, getData(route)), outlet, route.component, route, getSourceSegmentGroup(rawSegment), getPathIndexShift(rawSegment) + segments.length, newInheritedResolve);
+            return [new tree_1.TreeNode(snapshot_1, [])];
+        }
+        var _a = match(rawSegment, route, segments, inherited.snapshot), consumedSegments = _a.consumedSegments, parameters = _a.parameters, lastChild = _a.lastChild;
+        var rawSlicedSegments = segments.slice(lastChild);
+        var childConfig = getChildConfig(route);
+        var _b = split(rawSegment, consumedSegments, rawSlicedSegments, childConfig), segmentGroup = _b.segmentGroup, slicedSegments = _b.slicedSegments;
+        var snapshot = new router_state_1.ActivatedRouteSnapshot(consumedSegments, Object.freeze(collection_1.merge(inherited.allParams, parameters)), Object.freeze(this.urlTree.queryParams), this.urlTree.fragment, collection_1.merge(inherited.allData, getData(route)), outlet, route.component, route, getSourceSegmentGroup(rawSegment), getPathIndexShift(rawSegment) + consumedSegments.length, newInheritedResolve);
+        var newInherited = route.component ?
+            InheritedFromParent.empty(snapshot) :
+            new InheritedFromParent(inherited, snapshot, parameters, getData(route), newInheritedResolve);
+        if (slicedSegments.length === 0 && segmentGroup.hasChildren()) {
+            var children = this.processChildren(childConfig, segmentGroup, newInherited);
+            return [new tree_1.TreeNode(snapshot, children)];
+        }
+        else if (childConfig.length === 0 && slicedSegments.length === 0) {
+            return [new tree_1.TreeNode(snapshot, [])];
+        }
+        else {
+            var children = this.processSegment(childConfig, segmentGroup, pathIndex + lastChild, slicedSegments, newInherited, shared_1.PRIMARY_OUTLET);
+            return [new tree_1.TreeNode(snapshot, children)];
+        }
+    };
+    return Recognizer;
+}());
 function sortActivatedRouteSnapshots(nodes) {
     nodes.sort(function (a, b) {
         if (a.value.outlet === shared_1.PRIMARY_OUTLET)
@@ -90,69 +136,37 @@ function sortActivatedRouteSnapshots(nodes) {
         return a.value.outlet.localeCompare(b.value.outlet);
     });
 }
-function processPathsWithParams(config, segment, pathIndex, paths, inherited, outlet) {
-    for (var _i = 0, config_1 = config; _i < config_1.length; _i++) {
-        var r = config_1[_i];
-        try {
-            return processPathsWithParamsAgainstRoute(r, segment, pathIndex, paths, inherited, outlet);
-        }
-        catch (e) {
-            if (!(e instanceof NoMatch))
-                throw e;
-        }
+function getChildConfig(route) {
+    if (route.children) {
+        return route.children;
     }
-    throw new NoMatch(segment);
-}
-function processPathsWithParamsAgainstRoute(route, rawSegment, pathIndex, paths, inherited, outlet) {
-    if (route.redirectTo)
-        throw new NoMatch();
-    if ((route.outlet ? route.outlet : shared_1.PRIMARY_OUTLET) !== outlet)
-        throw new NoMatch();
-    var newInheritedResolve = new router_state_1.InheritedResolve(inherited.resolve, getResolve(route));
-    if (route.path === '**') {
-        var params = paths.length > 0 ? collection_1.last(paths).parameters : {};
-        var snapshot_1 = new router_state_1.ActivatedRouteSnapshot(paths, collection_1.merge(inherited.allParams, params), collection_1.merge(inherited.allData, getData(route)), outlet, route.component, route, getSourceSegment(rawSegment), getPathIndexShift(rawSegment) - 1, newInheritedResolve);
-        return [new tree_1.TreeNode(snapshot_1, [])];
-    }
-    var _a = match(rawSegment, route, paths), consumedPaths = _a.consumedPaths, parameters = _a.parameters, lastChild = _a.lastChild;
-    var rawSlicedPath = paths.slice(lastChild);
-    var childConfig = route.children ? route.children : [];
-    var newInherited = route.component ?
-        InheritedFromParent.empty :
-        new InheritedFromParent(inherited, parameters, getData(route), newInheritedResolve);
-    var _b = split(rawSegment, consumedPaths, rawSlicedPath, childConfig), segment = _b.segment, slicedPath = _b.slicedPath;
-    var snapshot = new router_state_1.ActivatedRouteSnapshot(consumedPaths, collection_1.merge(inherited.allParams, parameters), collection_1.merge(inherited.allData, getData(route)), outlet, route.component, route, getSourceSegment(rawSegment), getPathIndexShift(rawSegment) + pathIndex + lastChild - 1, newInheritedResolve);
-    if (slicedPath.length === 0 && segment.hasChildren()) {
-        var children = processSegmentChildren(childConfig, segment, newInherited);
-        return [new tree_1.TreeNode(snapshot, children)];
-    }
-    else if (childConfig.length === 0 && slicedPath.length === 0) {
-        return [new tree_1.TreeNode(snapshot, [])];
+    else if (route.loadChildren) {
+        return route._loadedConfig.routes;
     }
     else {
-        var children = processPathsWithParams(childConfig, segment, pathIndex + lastChild, slicedPath, newInherited, shared_1.PRIMARY_OUTLET);
-        return [new tree_1.TreeNode(snapshot, children)];
+        return [];
     }
 }
-function match(segment, route, paths) {
+function match(segmentGroup, route, segments, parent) {
     if (route.path === '') {
         if ((route.terminal || route.pathMatch === 'full') &&
-            (segment.hasChildren() || paths.length > 0)) {
+            (segmentGroup.hasChildren() || segments.length > 0)) {
             throw new NoMatch();
         }
         else {
-            return { consumedPaths: [], lastChild: 0, parameters: {} };
+            var params = parent ? parent.params : {};
+            return { consumedSegments: [], lastChild: 0, parameters: params };
         }
     }
     var path = route.path;
     var parts = path.split('/');
     var posParameters = {};
-    var consumedPaths = [];
+    var consumedSegments = [];
     var currentIndex = 0;
     for (var i = 0; i < parts.length; ++i) {
-        if (currentIndex >= paths.length)
+        if (currentIndex >= segments.length)
             throw new NoMatch();
-        var current = paths[currentIndex];
+        var current = segments[currentIndex];
         var p = parts[i];
         var isPosParam = p.startsWith(':');
         if (!isPosParam && p !== current.path)
@@ -160,15 +174,15 @@ function match(segment, route, paths) {
         if (isPosParam) {
             posParameters[p.substring(1)] = current.path;
         }
-        consumedPaths.push(current);
+        consumedSegments.push(current);
         currentIndex++;
     }
     if ((route.terminal || route.pathMatch === 'full') &&
-        (segment.hasChildren() || currentIndex < paths.length)) {
+        (segmentGroup.hasChildren() || currentIndex < segments.length)) {
         throw new NoMatch();
     }
-    var parameters = collection_1.merge(posParameters, consumedPaths[consumedPaths.length - 1].parameters);
-    return { consumedPaths: consumedPaths, lastChild: currentIndex, parameters: parameters };
+    var parameters = collection_1.merge(posParameters, consumedSegments[consumedSegments.length - 1].parameters);
+    return { consumedSegments: consumedSegments, lastChild: currentIndex, parameters: parameters };
 }
 function checkOutletNameUniqueness(nodes) {
     var names = {};
@@ -182,79 +196,85 @@ function checkOutletNameUniqueness(nodes) {
         names[n.value.outlet] = n.value;
     });
 }
-function getSourceSegment(segment) {
-    var s = segment;
+function getSourceSegmentGroup(segmentGroup) {
+    var s = segmentGroup;
     while (s._sourceSegment) {
         s = s._sourceSegment;
     }
     return s;
 }
-function getPathIndexShift(segment) {
-    var s = segment;
-    var res = 0;
+function getPathIndexShift(segmentGroup) {
+    var s = segmentGroup;
+    var res = (s._segmentIndexShift ? s._segmentIndexShift : 0);
     while (s._sourceSegment) {
         s = s._sourceSegment;
-        res += segment._pathIndexShift;
+        res += (s._segmentIndexShift ? s._segmentIndexShift : 0);
     }
-    return res;
+    return res - 1;
 }
-function split(segment, consumedPaths, slicedPath, config) {
-    if (slicedPath.length > 0 &&
-        containsEmptyPathMatchesWithNamedOutlets(segment, slicedPath, config)) {
-        var s = new url_tree_1.UrlSegment(consumedPaths, createChildrenForEmptyPaths(segment, consumedPaths, config, new url_tree_1.UrlSegment(slicedPath, segment.children)));
-        s._sourceSegment = segment;
-        s._pathIndexShift = 0;
-        return { segment: s, slicedPath: [] };
+function split(segmentGroup, consumedSegments, slicedSegments, config) {
+    if (slicedSegments.length > 0 &&
+        containsEmptyPathMatchesWithNamedOutlets(segmentGroup, slicedSegments, config)) {
+        var s = new url_tree_1.UrlSegmentGroup(consumedSegments, createChildrenForEmptyPaths(segmentGroup, consumedSegments, config, new url_tree_1.UrlSegmentGroup(slicedSegments, segmentGroup.children)));
+        s._sourceSegment = segmentGroup;
+        s._segmentIndexShift = consumedSegments.length;
+        return { segmentGroup: s, slicedSegments: [] };
     }
-    else if (slicedPath.length === 0 && containsEmptyPathMatches(segment, slicedPath, config)) {
-        var s = new url_tree_1.UrlSegment(segment.pathsWithParams, addEmptyPathsToChildrenIfNeeded(segment, slicedPath, config, segment.children));
-        s._sourceSegment = segment;
-        s._pathIndexShift = 0;
-        return { segment: s, slicedPath: slicedPath };
+    else if (slicedSegments.length === 0 &&
+        containsEmptyPathMatches(segmentGroup, slicedSegments, config)) {
+        var s = new url_tree_1.UrlSegmentGroup(segmentGroup.segments, addEmptyPathsToChildrenIfNeeded(segmentGroup, slicedSegments, config, segmentGroup.children));
+        s._sourceSegment = segmentGroup;
+        s._segmentIndexShift = consumedSegments.length;
+        return { segmentGroup: s, slicedSegments: slicedSegments };
     }
     else {
-        return { segment: segment, slicedPath: slicedPath };
+        var s = new url_tree_1.UrlSegmentGroup(segmentGroup.segments, segmentGroup.children);
+        s._sourceSegment = segmentGroup;
+        s._segmentIndexShift = consumedSegments.length;
+        return { segmentGroup: s, slicedSegments: slicedSegments };
     }
 }
-function addEmptyPathsToChildrenIfNeeded(segment, slicedPath, routes, children) {
+function addEmptyPathsToChildrenIfNeeded(segmentGroup, slicedSegments, routes, children) {
     var res = {};
     for (var _i = 0, routes_1 = routes; _i < routes_1.length; _i++) {
         var r = routes_1[_i];
-        if (emptyPathMatch(segment, slicedPath, r) && !children[getOutlet(r)]) {
-            var s = new url_tree_1.UrlSegment([], {});
-            s._sourceSegment = segment;
-            s._pathIndexShift = segment.pathsWithParams.length;
+        if (emptyPathMatch(segmentGroup, slicedSegments, r) && !children[getOutlet(r)]) {
+            var s = new url_tree_1.UrlSegmentGroup([], {});
+            s._sourceSegment = segmentGroup;
+            s._segmentIndexShift = segmentGroup.segments.length;
             res[getOutlet(r)] = s;
         }
     }
     return collection_1.merge(children, res);
 }
-function createChildrenForEmptyPaths(segment, consumedPaths, routes, primarySegment) {
+function createChildrenForEmptyPaths(segmentGroup, consumedSegments, routes, primarySegment) {
     var res = {};
     res[shared_1.PRIMARY_OUTLET] = primarySegment;
-    primarySegment._sourceSegment = segment;
-    primarySegment._pathIndexShift = consumedPaths.length;
+    primarySegment._sourceSegment = segmentGroup;
+    primarySegment._segmentIndexShift = consumedSegments.length;
     for (var _i = 0, routes_2 = routes; _i < routes_2.length; _i++) {
         var r = routes_2[_i];
-        if (r.path === '') {
-            var s = new url_tree_1.UrlSegment([], {});
-            s._sourceSegment = segment;
-            s._pathIndexShift = consumedPaths.length;
+        if (r.path === '' && getOutlet(r) !== shared_1.PRIMARY_OUTLET) {
+            var s = new url_tree_1.UrlSegmentGroup([], {});
+            s._sourceSegment = segmentGroup;
+            s._segmentIndexShift = consumedSegments.length;
             res[getOutlet(r)] = s;
         }
     }
     return res;
 }
-function containsEmptyPathMatchesWithNamedOutlets(segment, slicedPath, routes) {
+function containsEmptyPathMatchesWithNamedOutlets(segmentGroup, slicedSegments, routes) {
     return routes
-        .filter(function (r) { return emptyPathMatch(segment, slicedPath, r) && getOutlet(r) !== shared_1.PRIMARY_OUTLET; })
+        .filter(function (r) { return emptyPathMatch(segmentGroup, slicedSegments, r) &&
+        getOutlet(r) !== shared_1.PRIMARY_OUTLET; })
         .length > 0;
 }
-function containsEmptyPathMatches(segment, slicedPath, routes) {
-    return routes.filter(function (r) { return emptyPathMatch(segment, slicedPath, r); }).length > 0;
+function containsEmptyPathMatches(segmentGroup, slicedSegments, routes) {
+    return routes.filter(function (r) { return emptyPathMatch(segmentGroup, slicedSegments, r); }).length > 0;
 }
-function emptyPathMatch(segment, slicedPath, r) {
-    if ((segment.hasChildren() || slicedPath.length > 0) && (r.terminal || r.pathMatch === 'full'))
+function emptyPathMatch(segmentGroup, slicedSegments, r) {
+    if ((segmentGroup.hasChildren() || slicedSegments.length > 0) &&
+        (r.terminal || r.pathMatch === 'full'))
         return false;
     return r.path === '' && r.redirectTo === undefined;
 }

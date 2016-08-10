@@ -1,4 +1,4 @@
-import { ComponentResolver, AfterViewInit } from '@angular/core';
+import { ComponentFactoryResolver, AfterViewInit } from '@angular/core';
 import { Modal } from './modal';
 import { ModalCompileConfig } from '../../models/tokens';
 import { DialogRef } from '../../models/dialog-ref';
@@ -14,7 +14,7 @@ export declare class VexModalContent implements AfterViewInit {
     private context;
     private dlgContainer;
     private _viewContainer;
-    constructor(dialog: DialogRef<VEXModalContext>, _modal: Modal, _compileConfig: ModalCompileConfig, _cr: ComponentResolver);
+    constructor(dialog: DialogRef<VEXModalContext>, _modal: Modal, _compileConfig: ModalCompileConfig, _cr: ComponentFactoryResolver);
     ngAfterViewInit(): void;
     onClickOutside(): void;
 }

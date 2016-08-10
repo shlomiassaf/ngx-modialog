@@ -30,8 +30,7 @@ function resolveNode(resolver, node) {
     }
 }
 function resolveComponent(resolver, snapshot) {
-    // TODO: vsavkin change to typeof snapshot.component === 'string' in beta2
-    if (snapshot.component && snapshot._routeConfig) {
+    if (snapshot.component && snapshot._routeConfig && typeof snapshot.component === 'string') {
         return resolver.resolveComponent(snapshot.component);
     }
     else {

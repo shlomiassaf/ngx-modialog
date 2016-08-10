@@ -1,4 +1,4 @@
-import { ComponentResolver, AfterViewInit, EventEmitter } from '@angular/core';
+import { ComponentFactoryResolver, AfterViewInit, EventEmitter } from '@angular/core';
 import { ModalComponent, ModalCompileConfig } from '../../models/tokens';
 import { DialogRef } from '../../models/dialog-ref';
 import { DialogPreset } from './presets/dialog-preset';
@@ -43,7 +43,7 @@ export declare class DialogFormModal implements AfterViewInit, ModalComponent<Di
     private _cr;
     private context;
     private _viewContainer;
-    constructor(dialog: DialogRef<DialogPreset>, _compileConfig: ModalCompileConfig, _cr: ComponentResolver);
+    constructor(dialog: DialogRef<DialogPreset>, _compileConfig: ModalCompileConfig, _cr: ComponentFactoryResolver);
     ngAfterViewInit(): void;
     onButtonClick($event: VEXButtonClickEvent): void;
 }

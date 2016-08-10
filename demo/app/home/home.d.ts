@@ -1,4 +1,4 @@
-import { Modal } from './in-app-plugin/index';
+import { Modal } from './in-app-plugin';
 export declare class Home {
     private modal;
     private injectVC;

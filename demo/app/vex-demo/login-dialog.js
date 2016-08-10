@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var angular2_modal_1 = require("angular2-modal");
-var index_1 = require("angular2-modal/plugins/vex/index");
 var LoginDialog = (function () {
     function LoginDialog(dialog) {
         this.dialog = dialog;
@@ -19,7 +18,6 @@ var LoginDialog = (function () {
     LoginDialog = __decorate([
         core_1.Component({
             selector: 'login-dialog',
-            directives: [index_1.VEXDialogButtons],
             encapsulation: core_1.ViewEncapsulation.None,
             template: "<div class=\"vex-dialog-message\">{{context.message}}</div>\n    <div *ngIf=\"context.showInput\" class=\"vex-dialog-input\">\n        <input name=\"vex\" \n               type=\"text\" \n               class=\"vex-dialog-prompt-input\"\n               [(ngModel)]=\"context.defaultResult\" \n               placeholder=\"{{context.placeholder}}\">\n    </div>"
         }), 

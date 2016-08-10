@@ -8,7 +8,6 @@
 "use strict";
 var core_1 = require('@angular/core');
 var router_1 = require('../router');
-var url_tree_1 = require('../url_tree');
 var router_link_1 = require('./router_link');
 var RouterLinkActive = (function () {
     function RouterLinkActive(router, element, renderer) {
@@ -46,17 +45,16 @@ var RouterLinkActive = (function () {
     RouterLinkActive.prototype.ngOnDestroy = function () { this.subscription.unsubscribe(); };
     RouterLinkActive.prototype.update = function () {
         var _this = this;
-        if (!this.links || !this.linksWithHrefs)
+        if (!this.links || !this.linksWithHrefs || !this.router.navigated)
             return;
-        var currentUrlTree = this.router.parseUrl(this.router.url);
-        var isActiveLinks = this.reduceList(currentUrlTree, this.links);
-        var isActiveLinksWithHrefs = this.reduceList(currentUrlTree, this.linksWithHrefs);
+        var isActiveLinks = this.reduceList(this.links);
+        var isActiveLinksWithHrefs = this.reduceList(this.linksWithHrefs);
         this.classes.forEach(function (c) { return _this.renderer.setElementClass(_this.element.nativeElement, c, isActiveLinks || isActiveLinksWithHrefs); });
     };
-    RouterLinkActive.prototype.reduceList = function (currentUrlTree, q) {
+    RouterLinkActive.prototype.reduceList = function (q) {
         var _this = this;
         return q.reduce(function (res, link) {
-            return res || url_tree_1.containsTree(currentUrlTree, link.urlTree, _this.routerLinkActiveOptions.exact);
+            return res || _this.router.isActive(link.urlTree, _this.routerLinkActiveOptions.exact);
         }, false);
     };
     /** @nocollapse */
@@ -71,8 +69,8 @@ var RouterLinkActive = (function () {
     ];
     /** @nocollapse */
     RouterLinkActive.propDecorators = {
-        'links': [{ type: core_1.ContentChildren, args: [router_link_1.RouterLink,] },],
-        'linksWithHrefs': [{ type: core_1.ContentChildren, args: [router_link_1.RouterLinkWithHref,] },],
+        'links': [{ type: core_1.ContentChildren, args: [router_link_1.RouterLink, { descendants: true },] },],
+        'linksWithHrefs': [{ type: core_1.ContentChildren, args: [router_link_1.RouterLinkWithHref, { descendants: true },] },],
         'routerLinkActiveOptions': [{ type: core_1.Input },],
         'routerLinkActive': [{ type: core_1.Input },],
     };

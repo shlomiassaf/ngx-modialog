@@ -26,7 +26,7 @@ export declare class ModalCompileConfig {
     constructor(component: Type, bindings: ResolvedReflectiveProvider[]);
 }
 export declare abstract class ModalRenderer {
-    abstract render(type: Type, viewContainer: ViewContainerRef, bindings: ResolvedReflectiveProvider[], dialog: DialogRef<any>): Promise<DialogRef<any>>;
+    abstract render(type: Type, viewContainer: ViewContainerRef, bindings: ResolvedReflectiveProvider[], dialog: DialogRef<any>): DialogRef<any>;
 }
 export declare abstract class ModalBackdropComponent extends Type {
 }

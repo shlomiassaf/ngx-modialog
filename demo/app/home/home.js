@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var index_1 = require('./in-app-plugin/index');
+var in_app_plugin_1 = require('./in-app-plugin');
 var Home = (function () {
     function Home(modal) {
         this.modal = modal;
@@ -31,11 +31,11 @@ var Home = (function () {
     Home = __decorate([
         core_1.Component({
             selector: 'home',
-            viewProviders: index_1.IN_APP_MODAL_PROVIDERS.slice(),
+            providers: in_app_plugin_1.InAppModalModule.getProviders(),
             template: "\n              <section id=\"intro\" class=\"text-intro\">\n                  <div class=\"container\">\n                      <div class=\"row\">\n                          <div class=\"col-md-12\" #injectPoint>\n                          </div>\n                      </div>\n                  </div>\n              </section>\n\n              <template #myTemplate>\n                  <span>UI agnostic, Plugin oriented, easy to use.</span>\n                  <div style=\"padding: 15px 20%;\"><pre class=\"text-left\"><p>modal.alert()<br>  .message('Angular 2 Modal')<br>  .open();</p></pre>\n                  </div>\n                  <div class=\"text-gray\">\n                      <sub>* This window ia a ad-hoc plugin built within the demo application.</sub>\n                      <br>\n                      <sub>It is a simple OSX style modal plugin that display's a title and a <b>TemplateRef</b> provided to it.</sub>\n                      <br>\n                      <sub>Check it out in the demo application. (home component)</sub>\n                  </div>\n              </template>\n\n              <section class=\"section no-padding-bottom\">\n                  <div class=\"container\">\n                      <div class=\"row\">\n                          <div class=\"col-md-offset-2 col-md-8\">\n                              A generic, customizable and fluent modal/dialog window implementation for Angular 2.\n                              UI platform/framework agnostic, plugins are used to describe a UI implementation (e.g: Bootstrap)\n                              This means virtually any modal implementation out there can be ported into the library.\n                              Comes with some built in UI platforms, external UI platform can be added in the future or externally used using NPM modules.\n                          </div>\n                      </div>\n                  </div>\n              </section>\n            ",
             encapsulation: core_1.ViewEncapsulation.None
         }), 
-        __metadata('design:paramtypes', [index_1.Modal])
+        __metadata('design:paramtypes', [in_app_plugin_1.Modal])
     ], Home);
     return Home;
 }());

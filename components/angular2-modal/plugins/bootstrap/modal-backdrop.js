@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var angular2_modal_1 = require('../../angular2-modal');
-var modal_container_1 = require('./modal-container');
 var dialogRefCount = 0;
 /**
  * Represents the modal backdrop.
@@ -57,7 +56,6 @@ var BSModalBackdrop = (function () {
                 '[style.right]': 'hs.pt',
                 '[style.bottom]': 'hs.pt'
             },
-            directives: [modal_container_1.BSModalContainer],
             animations: [
                 core_1.trigger('fade', [
                     core_1.transition('void => in', [
@@ -80,7 +78,7 @@ var BSModalBackdrop = (function () {
                 ])
             ],
             encapsulation: core_1.ViewEncapsulation.None,
-            template: "<div [style.position]=\"hs.ps\" class=\"modal-backdrop in\" @fade=\"fadeState\"></div>\n<modal-container></modal-container>"
+            template: "<div [style.position]=\"hs.ps\" class=\"modal-backdrop in\" [@fade]=\"fadeState\"></div>\n<modal-container></modal-container>"
         }), 
         __metadata('design:paramtypes', [angular2_modal_1.DialogRef])
     ], BSModalBackdrop);

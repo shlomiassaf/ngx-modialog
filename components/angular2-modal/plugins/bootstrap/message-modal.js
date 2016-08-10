@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var angular2_modal_1 = require('../../angular2-modal');
-var modal_footer_1 = require('./modal-footer');
 /**
  * A Component representing a generic bootstrap modal content element.
  *
@@ -47,7 +46,6 @@ var BSMessageModal = (function () {
     BSMessageModal = __decorate([
         core_1.Component({
             selector: 'modal-content',
-            directives: [modal_footer_1.BSModalFooter],
             encapsulation: core_1.ViewEncapsulation.None,
             template: "<div [ngClass]=\"context.headerClass\" [ngSwitch]=\"titleHtml\">\n        <button *ngIf=\"context.showClose\" type=\"button\" class=\"close\" \n                aria-label=\"Close\" (click)=\"dialog.dismiss()\">\n            <span aria-hidden=\"true\">\u00D7</span>\n        </button>\n        <div *ngSwitchCase=\"1\" [innerHtml]=\"context.titleHtml\"></div>\n        <h3 *ngSwitchDefault class=\"modal-title\">{{context.title}}</h3>\n    </div>\n    <div [ngClass]=\"context.bodyClass\" [innerHtml]=\"context.message\"></div>\n    <modal-footer [footerClass]=\"context.footerClass\" \n                  [buttons]=\"context.buttons\"\n                  (onButtonClick)=\"onFooterButtonClick($event)\"></modal-footer>"
         }), 

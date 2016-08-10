@@ -14,5 +14,6 @@ export class RouterOutletMap {
         this._outlets = {};
     }
     registerOutlet(name, outlet) { this._outlets[name] = outlet; }
+    removeOutlet(name) { this._outlets[name] = undefined; }
 }
 //# sourceMappingURL=router_outlet_map.js.map

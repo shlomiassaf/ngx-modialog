@@ -1,0 +1,59 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var common_1 = require('@angular/common');
+var modal_1 = require('./modal');
+var angular2_modal_1 = require('../../angular2-modal');
+var dropin_preset_1 = require('./presets/dropin-preset');
+var modal_backdrop_1 = require('./modal-backdrop');
+var modal_content_1 = require('./modal-content');
+var dialog_form_modal_1 = require('./dialog-form-modal');
+function getProviders() {
+    return [
+        { provide: angular2_modal_1.Modal, useClass: modal_1.Modal },
+        { provide: modal_1.Modal, useClass: modal_1.Modal },
+        { provide: angular2_modal_1.ModalBackdropComponent, useValue: modal_backdrop_1.VexModalBackdrop },
+        { provide: angular2_modal_1.ModalDropInFactory, useValue: {
+                alert: function (modal) { return new dropin_preset_1.DropInPresetBuilder(modal, angular2_modal_1.DROP_IN_TYPE.alert, { isBlocking: false }); },
+                prompt: function (modal) { return new dropin_preset_1.DropInPresetBuilder(modal, angular2_modal_1.DROP_IN_TYPE.prompt, { isBlocking: true, keyboard: null }); },
+                confirm: function (modal) { return new dropin_preset_1.DropInPresetBuilder(modal, angular2_modal_1.DROP_IN_TYPE.confirm, { isBlocking: true, keyboard: null }); }
+            } }
+    ];
+}
+var VexModalModule = (function () {
+    function VexModalModule() {
+    }
+    VexModalModule.getProviders = function () {
+        return getProviders();
+    };
+    VexModalModule = __decorate([
+        core_1.NgModule({
+            imports: [common_1.CommonModule],
+            declarations: [
+                modal_backdrop_1.VexModalBackdrop,
+                modal_content_1.VexModalContent,
+                dialog_form_modal_1.DialogFormModal,
+                dialog_form_modal_1.FormDropIn,
+                dialog_form_modal_1.VEXDialogButtons
+            ],
+            providers: getProviders(),
+            entryComponents: [
+                modal_backdrop_1.VexModalBackdrop,
+                dialog_form_modal_1.DialogFormModal,
+                dialog_form_modal_1.FormDropIn
+            ]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], VexModalModule);
+    return VexModalModule;
+}());
+exports.VexModalModule = VexModalModule;
+//# sourceMappingURL=vex.module.js.map

@@ -11,11 +11,9 @@ require('rxjs/add/operator/mergeMap');
 require('rxjs/add/operator/mergeAll');
 require('rxjs/add/operator/reduce');
 require('rxjs/add/operator/every');
-require('rxjs/add/observable/from');
-require('rxjs/add/observable/forkJoin');
 var core_1 = require('@angular/core');
-var Observable_1 = require('rxjs/Observable');
 var Subject_1 = require('rxjs/Subject');
+var from_1 = require('rxjs/observable/from');
 var of_1 = require('rxjs/observable/of');
 var apply_redirects_1 = require('./apply_redirects');
 var config_1 = require('./config');
@@ -23,6 +21,7 @@ var create_router_state_1 = require('./create_router_state');
 var create_url_tree_1 = require('./create_url_tree');
 var recognize_1 = require('./recognize');
 var resolve_1 = require('./resolve');
+var router_config_loader_1 = require('./router_config_loader');
 var router_outlet_map_1 = require('./router_outlet_map');
 var router_state_1 = require('./router_state');
 var shared_1 = require('./shared');
@@ -111,7 +110,7 @@ exports.RoutesRecognized = RoutesRecognized;
 /**
  * The `Router` is responsible for mapping URLs to components.
  *
- * See {@link RouterConfig) for more details and examples.
+ * See {@link Routes} for more details and examples.
  *
  * @stable
  */
@@ -119,7 +118,7 @@ var Router = (function () {
     /**
      * Creates the router service.
      */
-    function Router(rootComponentType, resolver, urlSerializer, outletMap, location, injector, config) {
+    function Router(rootComponentType, resolver, urlSerializer, outletMap, location, injector, loader, config) {
         this.rootComponentType = rootComponentType;
         this.resolver = resolver;
         this.urlSerializer = urlSerializer;
@@ -127,13 +126,20 @@ var Router = (function () {
         this.location = location;
         this.injector = injector;
         this.navigationId = 0;
+        /**
+         * Indicates if at least one navigation happened.
+         *
+         * @experimental
+         */
+        this.navigated = false;
         this.resetConfig(config);
         this.routerEvents = new Subject_1.Subject();
         this.currentUrlTree = url_tree_1.createEmptyUrlTree();
+        this.configLoader = new router_config_loader_1.RouterConfigLoader(loader);
         this.currentRouterState = router_state_1.createEmptyState(this.currentUrlTree, this.rootComponentType);
     }
     /**
-     * @internal
+     * Sets up the location change listener and performs the inital navigation
      */
     Router.prototype.initialNavigation = function () {
         this.setUpLocationChangeListener();
@@ -181,8 +187,9 @@ var Router = (function () {
         config_1.validateConfig(config);
         this.config = config;
     };
+    Router.prototype.ngOnDestroy = function () { this.dispose(); };
     /**
-     * @internal
+     * Disposes of the router.
      */
     Router.prototype.dispose = function () { this.locationSubscription.unsubscribe(); };
     /**
@@ -201,8 +208,19 @@ var Router = (function () {
      * // create /team/33;expand=true/user/11
      * router.createUrlTree(['/team', 33, {expand: true}, 'user', 11]);
      *
-     * // you can collapse static fragments like this
+     * // you can collapse static segments like this (this works only with the first passed-in value):
      * router.createUrlTree(['/team/33/user', userId]);
+     *
+     * If the first segment can contain slashes, and you do not want the router to split it, you
+     * can do the following:
+     *
+     * router.createUrlTree([{segmentPath: '/one/two'}]);
+     *
+     * // create /team/33/(user/11//aux:chat)
+     * router.createUrlTree(['/team', 33, {outlets: {primary: 'user/11', right: 'chat'}}]);
+     *
+     * // remove the right secondary node
+     * router.createUrlTree(['/team', 33, {outlets: {primary: 'user/11', right: null}}]);
      *
      * // assuming the current url is `/team/33/user/11` and the route points to `user/11`
      *
@@ -217,9 +235,11 @@ var Router = (function () {
      * ```
      */
     Router.prototype.createUrlTree = function (commands, _a) {
-        var _b = _a === void 0 ? {} : _a, relativeTo = _b.relativeTo, queryParams = _b.queryParams, fragment = _b.fragment;
+        var _b = _a === void 0 ? {} : _a, relativeTo = _b.relativeTo, queryParams = _b.queryParams, fragment = _b.fragment, preserveQueryParams = _b.preserveQueryParams, preserveFragment = _b.preserveFragment;
         var a = relativeTo ? relativeTo : this.routerState.root;
-        return create_url_tree_1.createUrlTree(a, this.currentUrlTree, commands, queryParams, fragment);
+        var q = preserveQueryParams ? this.currentUrlTree.queryParams : queryParams;
+        var f = preserveFragment ? this.currentUrlTree.fragment : fragment;
+        return create_url_tree_1.createUrlTree(a, this.currentUrlTree, commands, q, f);
     };
     /**
      * Navigate based on the provided url. This navigation is always absolute.
@@ -233,15 +253,22 @@ var Router = (function () {
      *
      * ```
      * router.navigateByUrl("/team/33/user/11");
+     *
+     * // Navigate without updating the URL
+     * router.navigateByUrl("/team/33/user/11", { skipLocationChange: true });
      * ```
+     *
+     * In opposite to `navigate`, `navigateByUrl` takes a whole URL
+     * and does not apply any delta to the current one.
      */
-    Router.prototype.navigateByUrl = function (url) {
+    Router.prototype.navigateByUrl = function (url, extras) {
+        if (extras === void 0) { extras = { skipLocationChange: false }; }
         if (url instanceof url_tree_1.UrlTree) {
-            return this.scheduleNavigation(url, false);
+            return this.scheduleNavigation(url, extras);
         }
         else {
             var urlTree = this.urlSerializer.parse(url);
-            return this.scheduleNavigation(urlTree, false);
+            return this.scheduleNavigation(urlTree, extras);
         }
     };
     /**
@@ -257,11 +284,17 @@ var Router = (function () {
      *
      * ```
      * router.navigate(['team', 33, 'team', '11], {relativeTo: route});
+     *
+     * // Navigate without updating the URL
+     * router.navigate(['team', 33, 'team', '11], {relativeTo: route, skipLocationChange: true });
      * ```
+     *
+     * In opposite to `navigateByUrl`, `navigate` always takes a delta
+     * that is applied to the current URL.
      */
     Router.prototype.navigate = function (commands, extras) {
-        if (extras === void 0) { extras = {}; }
-        return this.scheduleNavigation(this.createUrlTree(commands, extras), false);
+        if (extras === void 0) { extras = { skipLocationChange: false }; }
+        return this.scheduleNavigation(this.createUrlTree(commands, extras), extras);
     };
     /**
      * Serializes a {@link UrlTree} into a string.
@@ -271,17 +304,36 @@ var Router = (function () {
      * Parse a string into a {@link UrlTree}.
      */
     Router.prototype.parseUrl = function (url) { return this.urlSerializer.parse(url); };
-    Router.prototype.scheduleNavigation = function (url, preventPushState) {
+    /**
+     * Returns if the url is activated or not.
+     */
+    Router.prototype.isActive = function (url, exact) {
+        if (url instanceof url_tree_1.UrlTree) {
+            return url_tree_1.containsTree(this.currentUrlTree, url, exact);
+        }
+        else {
+            var urlTree = this.urlSerializer.parse(url);
+            return url_tree_1.containsTree(this.currentUrlTree, urlTree, exact);
+        }
+    };
+    Router.prototype.scheduleNavigation = function (url, extras) {
         var _this = this;
         var id = ++this.navigationId;
         this.routerEvents.next(new NavigationStart(id, this.serializeUrl(url)));
-        return Promise.resolve().then(function (_) { return _this.runNavigate(url, preventPushState, id); });
+        return Promise.resolve().then(function (_) { return _this.runNavigate(url, extras.skipLocationChange, id); });
     };
     Router.prototype.setUpLocationChangeListener = function () {
         var _this = this;
-        this.locationSubscription = this.location.subscribe(function (change) {
-            return _this.scheduleNavigation(_this.urlSerializer.parse(change['url']), change['pop']);
-        });
+        // Zone.current.wrap is needed because of the issue with RxJS scheduler,
+        // which does not work properly with zone.js in IE and Safari
+        this.locationSubscription = this.location.subscribe(Zone.current.wrap(function (change) {
+            var tree = _this.urlSerializer.parse(change['url']);
+            // we fire multiple events for a single URL change
+            // we should navigate only once
+            return _this.currentUrlTree.toString() !== tree.toString() ?
+                _this.scheduleNavigation(tree, change['pop']) :
+                null;
+        }));
     };
     Router.prototype.runNavigate = function (url, preventPushState, id) {
         var _this = this;
@@ -291,17 +343,19 @@ var Router = (function () {
             return Promise.resolve(false);
         }
         return new Promise(function (resolvePromise, rejectPromise) {
-            var updatedUrl;
             var state;
             var navigationIsSuccessful;
             var preActivation;
-            apply_redirects_1.applyRedirects(url, _this.config)
+            var appliedUrl;
+            var storedState = _this.currentRouterState;
+            var storedUrl = _this.currentUrlTree;
+            apply_redirects_1.applyRedirects(_this.injector, _this.configLoader, url, _this.config)
                 .mergeMap(function (u) {
-                updatedUrl = u;
-                return recognize_1.recognize(_this.rootComponentType, _this.config, updatedUrl, _this.serializeUrl(updatedUrl));
+                appliedUrl = u;
+                return recognize_1.recognize(_this.rootComponentType, _this.config, appliedUrl, _this.serializeUrl(appliedUrl));
             })
                 .mergeMap(function (newRouterStateSnapshot) {
-                _this.routerEvents.next(new RoutesRecognized(id, _this.serializeUrl(url), _this.serializeUrl(updatedUrl), newRouterStateSnapshot));
+                _this.routerEvents.next(new RoutesRecognized(id, _this.serializeUrl(url), _this.serializeUrl(appliedUrl), newRouterStateSnapshot));
                 return resolve_1.resolve(_this.resolver, newRouterStateSnapshot);
             })
                 .map(function (routerStateSnapshot) {
@@ -330,11 +384,11 @@ var Router = (function () {
                     navigationIsSuccessful = false;
                     return;
                 }
-                new ActivateRoutes(state, _this.currentRouterState).activate(_this.outletMap);
-                _this.currentUrlTree = updatedUrl;
+                _this.currentUrlTree = appliedUrl;
                 _this.currentRouterState = state;
+                new ActivateRoutes(state, storedState).activate(_this.outletMap);
                 if (!preventPushState) {
-                    var path = _this.urlSerializer.serialize(updatedUrl);
+                    var path = _this.urlSerializer.serialize(appliedUrl);
                     if (_this.location.isCurrentPathEqualTo(path)) {
                         _this.location.replaceState(path);
                     }
@@ -345,9 +399,12 @@ var Router = (function () {
                 navigationIsSuccessful = true;
             })
                 .then(function () {
-                _this.routerEvents.next(new NavigationEnd(id, _this.serializeUrl(url), _this.serializeUrl(updatedUrl)));
+                _this.navigated = true;
+                _this.routerEvents.next(new NavigationEnd(id, _this.serializeUrl(url), _this.serializeUrl(appliedUrl)));
                 resolvePromise(navigationIsSuccessful);
             }, function (e) {
+                _this.currentRouterState = storedState;
+                _this.currentUrlTree = storedUrl;
                 _this.routerEvents.next(new NavigationError(id, _this.serializeUrl(url), e));
                 rejectPromise(e);
             });
@@ -356,18 +413,17 @@ var Router = (function () {
     return Router;
 }());
 exports.Router = Router;
-/**
- * @experimental
- */
 var CanActivate = (function () {
-    function CanActivate(route) {
-        this.route = route;
+    function CanActivate(path) {
+        this.path = path;
     }
+    Object.defineProperty(CanActivate.prototype, "route", {
+        get: function () { return this.path[this.path.length - 1]; },
+        enumerable: true,
+        configurable: true
+    });
     return CanActivate;
 }());
-/**
- * @experimental
- */
 var CanDeactivate = (function () {
     function CanDeactivate(component, route) {
         this.component = component;
@@ -385,16 +441,16 @@ var PreActivation = (function () {
     PreActivation.prototype.traverse = function (parentOutletMap) {
         var futureRoot = this.future._root;
         var currRoot = this.curr ? this.curr._root : null;
-        this.traverseChildRoutes(futureRoot, currRoot, parentOutletMap);
+        this.traverseChildRoutes(futureRoot, currRoot, parentOutletMap, [futureRoot.value]);
     };
     PreActivation.prototype.checkGuards = function () {
         var _this = this;
         if (this.checks.length === 0)
             return of_1.of(true);
-        return Observable_1.Observable.from(this.checks)
+        return from_1.from(this.checks)
             .map(function (s) {
             if (s instanceof CanActivate) {
-                return _this.runCanActivate(s.route);
+                return collection_1.andObservables(from_1.from([_this.runCanActivate(s.route), _this.runCanActivateChild(s.path)]));
             }
             else if (s instanceof CanDeactivate) {
                 // workaround https://github.com/Microsoft/TypeScript/issues/7271
@@ -412,7 +468,7 @@ var PreActivation = (function () {
         var _this = this;
         if (this.checks.length === 0)
             return of_1.of(null);
-        return Observable_1.Observable.from(this.checks)
+        return from_1.from(this.checks)
             .mergeMap(function (s) {
             if (s instanceof CanActivate) {
                 return _this.runResolve(s.route);
@@ -423,30 +479,30 @@ var PreActivation = (function () {
         })
             .reduce(function (_, __) { return _; });
     };
-    PreActivation.prototype.traverseChildRoutes = function (futureNode, currNode, outletMap) {
+    PreActivation.prototype.traverseChildRoutes = function (futureNode, currNode, outletMap, futurePath) {
         var _this = this;
         var prevChildren = nodeChildrenAsMap(currNode);
         futureNode.children.forEach(function (c) {
-            _this.traverseRoutes(c, prevChildren[c.value.outlet], outletMap);
+            _this.traverseRoutes(c, prevChildren[c.value.outlet], outletMap, futurePath.concat([c.value]));
             delete prevChildren[c.value.outlet];
         });
         collection_1.forEach(prevChildren, function (v, k) { return _this.deactivateOutletAndItChildren(v, outletMap._outlets[k]); });
     };
-    PreActivation.prototype.traverseRoutes = function (futureNode, currNode, parentOutletMap) {
+    PreActivation.prototype.traverseRoutes = function (futureNode, currNode, parentOutletMap, futurePath) {
         var future = futureNode.value;
         var curr = currNode ? currNode.value : null;
         var outlet = parentOutletMap ? parentOutletMap._outlets[futureNode.value.outlet] : null;
         // reusing the node
         if (curr && future._routeConfig === curr._routeConfig) {
             if (!collection_1.shallowEqual(future.params, curr.params)) {
-                this.checks.push(new CanDeactivate(outlet.component, curr), new CanActivate(future));
+                this.checks.push(new CanDeactivate(outlet.component, curr), new CanActivate(futurePath));
             }
             // If we have a component, we need to go through an outlet.
             if (future.component) {
-                this.traverseChildRoutes(futureNode, currNode, outlet ? outlet.outletMap : null);
+                this.traverseChildRoutes(futureNode, currNode, outlet ? outlet.outletMap : null, futurePath);
             }
             else {
-                this.traverseChildRoutes(futureNode, currNode, parentOutletMap);
+                this.traverseChildRoutes(futureNode, currNode, parentOutletMap, futurePath);
             }
         }
         else {
@@ -459,13 +515,13 @@ var PreActivation = (function () {
                     this.deactivateOutletMap(parentOutletMap);
                 }
             }
-            this.checks.push(new CanActivate(future));
+            this.checks.push(new CanActivate(futurePath));
             // If we have a component, we need to go through an outlet.
             if (future.component) {
-                this.traverseChildRoutes(futureNode, null, outlet ? outlet.outletMap : null);
+                this.traverseChildRoutes(futureNode, null, outlet ? outlet.outletMap : null, futurePath);
             }
             else {
-                this.traverseChildRoutes(futureNode, null, parentOutletMap);
+                this.traverseChildRoutes(futureNode, null, parentOutletMap, futurePath);
             }
         }
     };
@@ -488,32 +544,56 @@ var PreActivation = (function () {
         var canActivate = future._routeConfig ? future._routeConfig.canActivate : null;
         if (!canActivate || canActivate.length === 0)
             return of_1.of(true);
-        return Observable_1.Observable.from(canActivate)
-            .map(function (c) {
-            var guard = _this.injector.get(c);
+        var obs = from_1.from(canActivate).map(function (c) {
+            var guard = _this.getToken(c, future, _this.future);
             if (guard.canActivate) {
-                return wrapIntoObservable(guard.canActivate(future, _this.future));
+                return collection_1.wrapIntoObservable(guard.canActivate(future, _this.future));
             }
             else {
-                return wrapIntoObservable(guard(future, _this.future));
+                return collection_1.wrapIntoObservable(guard(future, _this.future));
             }
-        })
-            .mergeAll()
-            .every(function (result) { return result === true; });
+        });
+        return collection_1.andObservables(obs);
+    };
+    PreActivation.prototype.runCanActivateChild = function (path) {
+        var _this = this;
+        var future = path[path.length - 1];
+        var canActivateChildGuards = path.slice(0, path.length - 1)
+            .reverse()
+            .map(function (p) { return _this.extractCanActivateChild(p); })
+            .filter(function (_) { return _ !== null; });
+        return collection_1.andObservables(from_1.from(canActivateChildGuards).map(function (d) {
+            var obs = from_1.from(d.guards).map(function (c) {
+                var guard = _this.getToken(c, c.node, _this.future);
+                if (guard.canActivateChild) {
+                    return collection_1.wrapIntoObservable(guard.canActivateChild(future, _this.future));
+                }
+                else {
+                    return collection_1.wrapIntoObservable(guard(future, _this.future));
+                }
+            });
+            return collection_1.andObservables(obs);
+        }));
+    };
+    PreActivation.prototype.extractCanActivateChild = function (p) {
+        var canActivateChild = p._routeConfig ? p._routeConfig.canActivateChild : null;
+        if (!canActivateChild || canActivateChild.length === 0)
+            return null;
+        return { node: p, guards: canActivateChild };
     };
     PreActivation.prototype.runCanDeactivate = function (component, curr) {
         var _this = this;
         var canDeactivate = curr && curr._routeConfig ? curr._routeConfig.canDeactivate : null;
         if (!canDeactivate || canDeactivate.length === 0)
             return of_1.of(true);
-        return Observable_1.Observable.from(canDeactivate)
+        return from_1.from(canDeactivate)
             .map(function (c) {
-            var guard = _this.injector.get(c);
+            var guard = _this.getToken(c, curr, _this.curr);
             if (guard.canDeactivate) {
-                return wrapIntoObservable(guard.canDeactivate(component, curr, _this.curr));
+                return collection_1.wrapIntoObservable(guard.canDeactivate(component, curr, _this.curr));
             }
             else {
-                return wrapIntoObservable(guard(component, curr, _this.curr));
+                return collection_1.wrapIntoObservable(guard(component, curr, _this.curr));
             }
         })
             .mergeAll()
@@ -529,31 +609,19 @@ var PreActivation = (function () {
     };
     PreActivation.prototype.resolveNode = function (resolve, future) {
         var _this = this;
-        var resolvingObs = [];
-        var resolvedData = {};
-        collection_1.forEach(resolve, function (v, k) {
-            var resolver = _this.injector.get(v);
-            var obs = resolver.resolve ? wrapIntoObservable(resolver.resolve(future, _this.future)) :
-                wrapIntoObservable(resolver(future, _this.future));
-            resolvingObs.push(obs.map(function (_) { resolvedData[k] = _; }));
+        return collection_1.waitForMap(resolve, function (k, v) {
+            var resolver = _this.getToken(v, future, _this.future);
+            return resolver.resolve ? collection_1.wrapIntoObservable(resolver.resolve(future, _this.future)) :
+                collection_1.wrapIntoObservable(resolver(future, _this.future));
         });
-        if (resolvingObs.length > 0) {
-            return Observable_1.Observable.forkJoin(resolvingObs).map(function (r) { return resolvedData; });
-        }
-        else {
-            return of_1.of(resolvedData);
-        }
+    };
+    PreActivation.prototype.getToken = function (token, snapshot, state) {
+        var config = closestLoadedConfig(state, snapshot);
+        var injector = config ? config.injector : this.injector;
+        return injector.get(token);
     };
     return PreActivation;
 }());
-function wrapIntoObservable(value) {
-    if (value instanceof Observable_1.Observable) {
-        return value;
-    }
-    else {
-        return of_1.of(value);
-    }
-}
 var ActivateRoutes = (function () {
     function ActivateRoutes(futureState, currState) {
         this.futureState = futureState;
@@ -562,7 +630,6 @@ var ActivateRoutes = (function () {
     ActivateRoutes.prototype.activate = function (parentOutletMap) {
         var futureRoot = this.futureState._root;
         var currRoot = this.currState ? this.currState._root : null;
-        pushQueryParamsAndFragment(this.futureState);
         router_state_1.advanceActivatedRoute(this.futureState.root);
         this.activateChildRoutes(futureRoot, currRoot, parentOutletMap);
     };
@@ -618,11 +685,20 @@ var ActivateRoutes = (function () {
         }
     };
     ActivateRoutes.prototype.placeComponentIntoOutlet = function (outletMap, future, outlet) {
-        var resolved = core_1.ReflectiveInjector.resolve([
-            { provide: router_state_1.ActivatedRoute, useValue: future },
-            { provide: router_outlet_map_1.RouterOutletMap, useValue: outletMap }
-        ]);
-        outlet.activate(future, resolved, outletMap);
+        var resolved = [{ provide: router_state_1.ActivatedRoute, useValue: future }, {
+                provide: router_outlet_map_1.RouterOutletMap,
+                useValue: outletMap
+            }];
+        var config = closestLoadedConfig(this.futureState.snapshot, future.snapshot);
+        var loadedFactoryResolver = null;
+        var loadedInjector = null;
+        if (config) {
+            loadedFactoryResolver = config.factoryResolver;
+            loadedInjector = config.injector;
+            resolved.push({ provide: core_1.ComponentFactoryResolver, useValue: loadedFactoryResolver });
+        }
+        ;
+        outlet.activate(future, loadedFactoryResolver, loadedInjector, core_1.ReflectiveInjector.resolve(resolved), outletMap);
     };
     ActivateRoutes.prototype.deactivateOutletAndItChildren = function (outlet) {
         if (outlet && outlet.isActivated) {
@@ -636,13 +712,12 @@ var ActivateRoutes = (function () {
     };
     return ActivateRoutes;
 }());
-function pushQueryParamsAndFragment(state) {
-    if (!collection_1.shallowEqual(state.snapshot.queryParams, state.queryParams.value)) {
-        state.queryParams.next(state.snapshot.queryParams);
-    }
-    if (state.snapshot.fragment !== state.fragment.value) {
-        state.fragment.next(state.snapshot.fragment);
-    }
+function closestLoadedConfig(state, snapshot) {
+    var b = state.pathFromRoot(snapshot).filter(function (s) {
+        var config = s._routeConfig;
+        return config && config._loadedConfig && s !== snapshot;
+    });
+    return b.length > 0 ? b[b.length - 1]._routeConfig._loadedConfig : null;
 }
 function nodeChildrenAsMap(node) {
     return node ? node.children.reduce(function (m, c) {

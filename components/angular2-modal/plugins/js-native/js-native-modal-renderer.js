@@ -34,7 +34,7 @@ var JSNativeModalRenderer = (function () {
         else {
             dialog.close(result);
         }
-        return Promise.resolve(dialog);
+        return dialog;
     };
     JSNativeModalRenderer = __decorate([
         core_1.Injectable(), 

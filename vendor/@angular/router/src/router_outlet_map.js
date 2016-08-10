@@ -15,6 +15,7 @@ var RouterOutletMap = (function () {
         this._outlets = {};
     }
     RouterOutletMap.prototype.registerOutlet = function (name, outlet) { this._outlets[name] = outlet; };
+    RouterOutletMap.prototype.removeOutlet = function (name) { this._outlets[name] = undefined; };
     return RouterOutletMap;
 }());
 exports.RouterOutletMap = RouterOutletMap;

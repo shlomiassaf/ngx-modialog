@@ -1,4 +1,4 @@
-import { ComponentResolver, AfterViewInit, ElementRef } from '@angular/core';
+import { ComponentFactoryResolver, AfterViewInit, ElementRef } from '@angular/core';
 import { DialogRef, ModalCompileConfig } from '../../angular2-modal';
 import { Modal } from './modal';
 import { BSModalContext } from './modal-context';
@@ -14,7 +14,7 @@ export declare class BSModalContainer implements AfterViewInit {
     position: string;
     fadeState: 'in' | 'out';
     private _viewContainer;
-    constructor(dialog: DialogRef<BSModalContext>, el: ElementRef, _compileConfig: ModalCompileConfig, _modal: Modal, _cr: ComponentResolver);
+    constructor(dialog: DialogRef<BSModalContext>, el: ElementRef, _compileConfig: ModalCompileConfig, _modal: Modal, _cr: ComponentFactoryResolver);
     ngAfterViewInit(): void;
     onClickOutside(): void;
     documentKeypress(event: KeyboardEvent): void;

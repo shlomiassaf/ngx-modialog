@@ -34,15 +34,17 @@ var BSModalContainer = (function () {
     }
     BSModalContainer.prototype.ngAfterViewInit = function () {
         var _this = this;
-        this._cr.resolveComponent(this._compileConfig.component)
-            .then(function (cmpFactory) {
-            var vcr = _this._viewContainer, bindings = _this._compileConfig.bindings, ctxInjector = vcr.parentInjector;
-            var childInjector = Array.isArray(bindings) && bindings.length > 0 ?
-                core_1.ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
-            if (_this.el.nativeElement) {
-                _this.el.nativeElement.focus();
-            }
-            _this.dialog.contentRef = vcr.createComponent(cmpFactory, vcr.length, childInjector);
+        if (this.el.nativeElement) {
+            this.el.nativeElement.focus();
+        }
+        /*  TODO:
+            In RC5 dynamic component creation is no longer async.
+            Somewhere down the pipe of the created component a value change happens that fires
+            a CD exception. setTimeout is a workaround that mimics the async behavior.
+            Find out the error and remove setTimeout.
+         */
+        setTimeout(function () {
+            _this.dialog.contentRef = angular2_modal_1.createComponent(_this._cr, _this._compileConfig.component, _this._viewContainer, _this._compileConfig.bindings);
         });
     };
     BSModalContainer.prototype.onClickOutside = function () {
@@ -96,9 +98,9 @@ var BSModalContainer = (function () {
             ],
             encapsulation: core_1.ViewEncapsulation.None,
             /* tslint:disable */
-            template: "<div [ngClass]=\"dialog.context.dialogClass\" \n          [class.modal-lg]=\"dialog.context.size == 'lg'\"\n          [class.modal-sm]=\"dialog.context.size == 'sm'\"\n          @fade=\"fadeState\">\n         <div class=\"modal-content\"              \n              style=\"display:block\"              \n              role=\"document\"\n              (clickOutside)=\"onClickOutside()\">\n            <div style=\"display: none\" #modalDialog></div>\n         </div>\n    </div>"
+            template: "<div [ngClass]=\"dialog.context.dialogClass\" \n          [class.modal-lg]=\"dialog.context.size == 'lg'\"\n          [class.modal-sm]=\"dialog.context.size == 'sm'\"\n          [@fade]=\"fadeState\">\n         <div class=\"modal-content\"              \n              style=\"display:block\"              \n              role=\"document\"\n              (clickOutside)=\"onClickOutside()\">\n            <div style=\"display: none\" #modalDialog></div>\n         </div>\n    </div>"
         }), 
-        __metadata('design:paramtypes', [angular2_modal_1.DialogRef, core_1.ElementRef, angular2_modal_1.ModalCompileConfig, modal_1.Modal, core_1.ComponentResolver])
+        __metadata('design:paramtypes', [angular2_modal_1.DialogRef, core_1.ElementRef, angular2_modal_1.ModalCompileConfig, modal_1.Modal, core_1.ComponentFactoryResolver])
     ], BSModalContainer);
     return BSModalContainer;
 }());

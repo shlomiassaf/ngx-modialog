@@ -9,39 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var createComponent_1 = require('../framework/createComponent');
 var DOMModalRenderer = (function () {
     function DOMModalRenderer(_cr) {
         this._cr = _cr;
     }
     DOMModalRenderer.prototype.render = function (type, viewContainer, bindings, dialog) {
-        return this._cr.resolveComponent(type)
-            .then(function (cmpFactory) {
-            var ctxInjector = viewContainer.parentInjector;
-            var childInjector = Array.isArray(bindings) && bindings.length > 0 ?
-                core_1.ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
-            return viewContainer.createComponent(cmpFactory, viewContainer.length, childInjector);
-        })
-            .then(function (cmpRef) {
-            if (dialog.inElement) {
-                viewContainer.element.nativeElement.appendChild(cmpRef.location.nativeElement);
+        var cmpRef = createComponent_1.default(this._cr, type, viewContainer, bindings);
+        if (dialog.inElement) {
+            viewContainer.element.nativeElement.appendChild(cmpRef.location.nativeElement);
+        }
+        else {
+            document.body.appendChild(cmpRef.location.nativeElement);
+        }
+        dialog.onDestroy.subscribe(function () {
+            if (typeof cmpRef.instance.canDestroy === 'function') {
+                cmpRef.instance.canDestroy().then(function () { return cmpRef.destroy(); });
             }
             else {
-                document.body.appendChild(cmpRef.location.nativeElement);
+                cmpRef.destroy();
             }
-            dialog.onDestroy.subscribe(function () {
-                if (typeof cmpRef.instance.canDestroy === 'function') {
-                    cmpRef.instance.canDestroy().then(function () { return cmpRef.destroy(); });
-                }
-                else {
-                    cmpRef.destroy();
-                }
-            });
-            return dialog;
         });
+        return dialog;
     };
     DOMModalRenderer = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [core_1.ComponentResolver])
+        __metadata('design:paramtypes', [core_1.ComponentFactoryResolver])
     ], DOMModalRenderer);
     return DOMModalRenderer;
 }());

@@ -7,7 +7,7 @@
  */
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { PRIMARY_OUTLET } from './shared';
-import { UrlPathWithParams } from './url_tree';
+import { UrlSegment } from './url_tree';
 import { merge, shallowEqual, shallowEqualArrays } from './utils/collection';
 import { Tree, TreeNode } from './utils/tree';
 /**
@@ -31,32 +31,39 @@ export class RouterState extends Tree {
     /**
      * @internal
      */
-    constructor(root, queryParams, fragment, snapshot) {
+    constructor(root, snapshot) {
         super(root);
-        this.queryParams = queryParams;
-        this.fragment = fragment;
         this.snapshot = snapshot;
+        setRouterStateSnapshot(this, root);
     }
+    /**
+      * @deprecated (Use root.queryParams)
+      */
+    get queryParams() { return this.root.queryParams; }
+    /**
+     * @deprecated (Use root.fragment)
+     */
+    get fragment() { return this.root.fragment; }
     toString() { return this.snapshot.toString(); }
 }
 export function createEmptyState(urlTree, rootComponent) {
     const snapshot = createEmptyStateSnapshot(urlTree, rootComponent);
-    const emptyUrl = new BehaviorSubject([new UrlPathWithParams('', {})]);
+    const emptyUrl = new BehaviorSubject([new UrlSegment('', {})]);
     const emptyParams = new BehaviorSubject({});
     const emptyData = new BehaviorSubject({});
     const emptyQueryParams = new BehaviorSubject({});
     const fragment = new BehaviorSubject('');
-    const activated = new ActivatedRoute(emptyUrl, emptyParams, emptyData, PRIMARY_OUTLET, rootComponent, snapshot.root);
+    const activated = new ActivatedRoute(emptyUrl, emptyParams, emptyQueryParams, fragment, emptyData, PRIMARY_OUTLET, rootComponent, snapshot.root);
     activated.snapshot = snapshot.root;
-    return new RouterState(new TreeNode(activated, []), emptyQueryParams, fragment, snapshot);
+    return new RouterState(new TreeNode(activated, []), snapshot);
 }
 function createEmptyStateSnapshot(urlTree, rootComponent) {
     const emptyParams = {};
     const emptyData = {};
     const emptyQueryParams = {};
     const fragment = '';
-    const activated = new ActivatedRouteSnapshot([], emptyParams, emptyData, PRIMARY_OUTLET, rootComponent, null, urlTree.root, -1, InheritedResolve.empty);
-    return new RouterStateSnapshot('', new TreeNode(activated, []), emptyQueryParams, fragment);
+    const activated = new ActivatedRouteSnapshot([], emptyParams, emptyQueryParams, fragment, emptyData, PRIMARY_OUTLET, rootComponent, null, urlTree.root, -1, InheritedResolve.empty);
+    return new RouterStateSnapshot('', new TreeNode(activated, []));
 }
 /**
  * Contains the information about a component loaded in an outlet. The information is provided
@@ -79,14 +86,22 @@ export class ActivatedRoute {
     /**
      * @internal
      */
-    constructor(url, params, data, outlet, component, futureSnapshot) {
+    constructor(url, params, queryParams, fragment, data, outlet, component, futureSnapshot) {
         this.url = url;
         this.params = params;
+        this.queryParams = queryParams;
+        this.fragment = fragment;
         this.data = data;
         this.outlet = outlet;
         this.component = component;
         this._futureSnapshot = futureSnapshot;
     }
+    get routeConfig() { return this._futureSnapshot.routeConfig; }
+    get root() { return this._routerState.root; }
+    get parent() { return this._routerState.parent(this); }
+    get firstChild() { return this._routerState.firstChild(this); }
+    get children() { return this._routerState.children(this); }
+    get pathFromRoot() { return this._routerState.pathFromRoot(this); }
     toString() {
         return this.snapshot ? this.snapshot.toString() : `Future(${this._futureSnapshot})`;
     }
@@ -132,9 +147,11 @@ export class ActivatedRouteSnapshot {
     /**
      * @internal
      */
-    constructor(url, params, data, outlet, component, routeConfig, urlSegment, lastPathIndex, resolve) {
+    constructor(url, params, queryParams, fragment, data, outlet, component, routeConfig, urlSegment, lastPathIndex, resolve) {
         this.url = url;
         this.params = params;
+        this.queryParams = queryParams;
+        this.fragment = fragment;
         this.data = data;
         this.outlet = outlet;
         this.component = component;
@@ -143,6 +160,12 @@ export class ActivatedRouteSnapshot {
         this._lastPathIndex = lastPathIndex;
         this._resolve = resolve;
     }
+    get routeConfig() { return this._routeConfig; }
+    get root() { return this._routerState.root; }
+    get parent() { return this._routerState.parent(this); }
+    get firstChild() { return this._routerState.firstChild(this); }
+    get children() { return this._routerState.children(this); }
+    get pathFromRoot() { return this._routerState.pathFromRoot(this); }
     toString() {
         const url = this.url.map(s => s.toString()).join('/');
         const matched = this._routeConfig ? this._routeConfig.path : '';
@@ -168,13 +191,24 @@ export class RouterStateSnapshot extends Tree {
     /**
      * @internal
      */
-    constructor(url, root, queryParams, fragment) {
+    constructor(url, root) {
         super(root);
         this.url = url;
-        this.queryParams = queryParams;
-        this.fragment = fragment;
+        setRouterStateSnapshot(this, root);
     }
+    /**
+     * @deprecated (Use root.queryParams)
+     */
+    get queryParams() { return this.root.queryParams; }
+    /**
+     * @deprecated (Use root.fragment)
+     */
+    get fragment() { return this.root.fragment; }
     toString() { return serializeNode(this._root); }
+}
+function setRouterStateSnapshot(state, node) {
+    node.value._routerState = state;
+    node.children.forEach(c => setRouterStateSnapshot(state, c));
 }
 function serializeNode(node) {
     const c = node.children.length > 0 ? ` { ${node.children.map(serializeNode).join(", ")} } ` : '';
@@ -187,6 +221,12 @@ function serializeNode(node) {
  */
 export function advanceActivatedRoute(route) {
     if (route.snapshot) {
+        if (!shallowEqual(route.snapshot.queryParams, route._futureSnapshot.queryParams)) {
+            route.queryParams.next(route._futureSnapshot.queryParams);
+        }
+        if (route.snapshot.fragment !== route._futureSnapshot.fragment) {
+            route.fragment.next(route._futureSnapshot.fragment);
+        }
         if (!shallowEqual(route.snapshot.params, route._futureSnapshot.params)) {
             route.params.next(route._futureSnapshot.params);
             route.data.next(route._futureSnapshot.data);
@@ -198,6 +238,7 @@ export function advanceActivatedRoute(route) {
     }
     else {
         route.snapshot = route._futureSnapshot;
+        // this is for resolved data
         route.data.next(route._futureSnapshot.data);
     }
 }

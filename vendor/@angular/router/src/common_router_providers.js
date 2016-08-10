@@ -9,18 +9,19 @@
 var common_1 = require('@angular/common');
 var core_1 = require('@angular/core');
 var router_1 = require('./router');
+var router_config_loader_1 = require('./router_config_loader');
 var router_outlet_map_1 = require('./router_outlet_map');
 var router_state_1 = require('./router_state');
 var url_tree_1 = require('./url_tree');
-exports.ROUTER_CONFIG = new core_1.OpaqueToken('ROUTER_CONFIG');
-exports.ROUTER_OPTIONS = new core_1.OpaqueToken('ROUTER_OPTIONS');
-function setupRouter(ref, resolver, urlSerializer, outletMap, location, injector, config, opts) {
+var collection_1 = require('./utils/collection');
+exports.ROUTER_CONFIGURATION = new core_1.OpaqueToken('ROUTER_CONFIGURATION');
+function setupRouter(ref, resolver, urlSerializer, outletMap, location, injector, loader, config, opts) {
+    if (opts === void 0) { opts = {}; }
     if (ref.componentTypes.length == 0) {
         throw new Error('Bootstrap at least one component before injecting Router.');
     }
     var componentType = ref.componentTypes[0];
-    var r = new router_1.Router(componentType, resolver, urlSerializer, outletMap, location, injector, config);
-    ref.registerDisposeListener(function () { return r.dispose(); });
+    var r = new router_1.Router(componentType, resolver, urlSerializer, outletMap, location, injector, loader, collection_1.flatten(config));
     if (opts.enableTracing) {
         r.events.subscribe(function (e) {
             console.group("Router Event: " + e.constructor.name);
@@ -32,22 +33,14 @@ function setupRouter(ref, resolver, urlSerializer, outletMap, location, injector
     return r;
 }
 exports.setupRouter = setupRouter;
-function setupRouterInitializer(injector) {
-    // https://github.com/angular/angular/issues/9101
-    // Delay the router instantiation to avoid circular dependency (ApplicationRef ->
-    // APP_INITIALIZER -> Router)
-    setTimeout(function () {
-        var appRef = injector.get(core_1.ApplicationRef);
-        if (appRef.componentTypes.length == 0) {
-            appRef.registerBootstrapListener(function () { injector.get(router_1.Router).initialNavigation(); });
-        }
-        else {
-            injector.get(router_1.Router).initialNavigation();
-        }
-    }, 0);
-    return function () { return null; };
+function rootRoute(router) {
+    return router.routerState.root;
 }
-exports.setupRouterInitializer = setupRouterInitializer;
+exports.rootRoute = rootRoute;
+function initialRouterNavigation(router) {
+    return function () { router.initialNavigation(); };
+}
+exports.initialRouterNavigation = initialRouterNavigation;
 /**
  * An array of {@link Provider}s. To use the router, you must add this to your application.
  *
@@ -66,26 +59,79 @@ exports.setupRouterInitializer = setupRouterInitializer;
  * bootstrap(AppCmp, [provideRouter(config)]);
  * ```
  *
- * @stable
+ * @deprecated use RouterModule instead
  */
-function provideRouter(_config, _opts) {
+function provideRouter(routes, config) {
+    if (config === void 0) { config = {}; }
     return [
-        { provide: exports.ROUTER_CONFIG, useValue: _config }, { provide: exports.ROUTER_OPTIONS, useValue: _opts },
-        common_1.Location, { provide: common_1.LocationStrategy, useClass: common_1.PathLocationStrategy },
+        provideRoutes(routes),
+        { provide: exports.ROUTER_CONFIGURATION, useValue: config }, common_1.Location,
+        { provide: common_1.LocationStrategy, useClass: common_1.PathLocationStrategy },
         { provide: url_tree_1.UrlSerializer, useClass: url_tree_1.DefaultUrlSerializer },
         {
             provide: router_1.Router,
             useFactory: setupRouter,
             deps: [
                 core_1.ApplicationRef, core_1.ComponentResolver, url_tree_1.UrlSerializer, router_outlet_map_1.RouterOutletMap, common_1.Location, core_1.Injector,
-                exports.ROUTER_CONFIG, exports.ROUTER_OPTIONS
+                core_1.NgModuleFactoryLoader, router_config_loader_1.ROUTES, exports.ROUTER_CONFIGURATION
             ]
         },
-        router_outlet_map_1.RouterOutletMap,
-        { provide: router_state_1.ActivatedRoute, useFactory: function (r) { return r.routerState.root; }, deps: [router_1.Router] },
+        router_outlet_map_1.RouterOutletMap, { provide: router_state_1.ActivatedRoute, useFactory: rootRoute, deps: [router_1.Router] },
         // Trigger initial navigation
-        { provide: core_1.APP_INITIALIZER, multi: true, useFactory: setupRouterInitializer, deps: [core_1.Injector] }
+        provideRouterInitializer(), { provide: core_1.NgModuleFactoryLoader, useClass: core_1.SystemJsNgModuleLoader }
     ];
 }
 exports.provideRouter = provideRouter;
+function provideRouterInitializer() {
+    return {
+        provide: core_1.APP_BOOTSTRAP_LISTENER,
+        multi: true,
+        useFactory: initialRouterNavigation,
+        deps: [router_1.Router]
+    };
+}
+exports.provideRouterInitializer = provideRouterInitializer;
+/**
+ * Router configuration.
+ *
+ * ### Example
+ *
+ * ```
+ * @NgModule({providers: [
+ *   provideRoutes([{path: 'home', component: Home}])
+ * ]})
+ * class LazyLoadedModule {
+ *   // ...
+ * }
+ * ```
+ *
+ * @deprecated
+ */
+function provideRoutes(routes) {
+    return [
+        { provide: core_1.ANALYZE_FOR_ENTRY_COMPONENTS, multi: true, useValue: routes },
+        { provide: router_config_loader_1.ROUTES, multi: true, useValue: routes }
+    ];
+}
+exports.provideRoutes = provideRoutes;
+/**
+ * Router configuration.
+ *
+ * ### Example
+ *
+ * ```
+ * @NgModule({providers: [
+ *   provideRouterOptions({enableTracing: true})
+ * ]})
+ * class LazyLoadedModule {
+ *   // ...
+ * }
+ * ```
+ *
+ * @deprecated
+ */
+function provideRouterConfig(config) {
+    return { provide: exports.ROUTER_CONFIGURATION, useValue: config };
+}
+exports.provideRouterConfig = provideRouterConfig;
 //# sourceMappingURL=common_router_providers.js.map

@@ -86,12 +86,10 @@ var Modal = (function () {
             { provide: angular2_modal_1.DialogRef, useValue: dialog },
             { provide: tokens_1.ModalCompileConfig, useValue: compileConfig }
         ]);
-        return this._modalRenderer.render(this._backdrop, viewContainer, b, dialog)
-            .then(function (dialog) {
-            _stack.pushManaged(dialog);
-            dialog.onDestroy.subscribe(function () { return _stack.remove(dialog); });
-            return dialog;
-        });
+        this._modalRenderer.render(this._backdrop, viewContainer, b, dialog);
+        _stack.pushManaged(dialog);
+        dialog.onDestroy.subscribe(function () { return _stack.remove(dialog); });
+        return Promise.resolve(dialog);
     };
     /**
      * Check if a given DialogRef is the top most ref in the stack.

@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var angular2_modal_1 = require('../../angular2-modal');
 var tokens_1 = require('../../models/tokens');
 var dialog_ref_1 = require('../../models/dialog-ref');
 /**
@@ -58,13 +59,14 @@ var DialogFormModal = (function () {
     }
     DialogFormModal.prototype.ngAfterViewInit = function () {
         var _this = this;
-        this._cr.resolveComponent(this.context.content)
-            .then(function (cmpFactory) {
-            var vcr = _this._viewContainer, bindings = _this._compileConfig.bindings, ctxInjector = vcr.parentInjector;
-            var childInjector = Array.isArray(bindings) && bindings.length > 0 ?
-                core_1.ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
-            return _this.dialog.contentRef =
-                vcr.createComponent(cmpFactory, vcr.length, childInjector);
+        /*  TODO:
+         In RC5 dynamic component creation is no longer async.
+         Somewhere down the pipe of the created component a value change happens that fires
+         a CD exception. setTimeout is a workaround that mimics the async behavior.
+         Find out the error and remove setTimeout.
+         */
+        setTimeout(function () {
+            _this.dialog.contentRef = angular2_modal_1.createComponent(_this._cr, _this.context.content, _this._viewContainer, _this._compileConfig.bindings);
         });
     };
     DialogFormModal.prototype.onButtonClick = function ($event) {
@@ -77,11 +79,10 @@ var DialogFormModal = (function () {
     DialogFormModal = __decorate([
         core_1.Component({
             selector: 'modal-dialog',
-            directives: [VEXDialogButtons],
             encapsulation: core_1.ViewEncapsulation.None,
             template: "<form class=\"vex-dialog-form\">\n    <div style=\"display: none\" #modalDialog></div> \n    <vex-dialog-buttons [buttons]=\"context.buttons\"\n                        (onButtonClick)=\"onButtonClick($event)\"></vex-dialog-buttons>\n</form>"
         }), 
-        __metadata('design:paramtypes', [dialog_ref_1.DialogRef, tokens_1.ModalCompileConfig, core_1.ComponentResolver])
+        __metadata('design:paramtypes', [dialog_ref_1.DialogRef, tokens_1.ModalCompileConfig, core_1.ComponentFactoryResolver])
     ], DialogFormModal);
     return DialogFormModal;
 }());
@@ -94,9 +95,8 @@ var FormDropIn = (function () {
     FormDropIn = __decorate([
         core_1.Component({
             selector: 'drop-in-dialog',
-            directives: [VEXDialogButtons],
             encapsulation: core_1.ViewEncapsulation.None,
-            template: "<div class=\"vex-dialog-message\">{{context.message}}</div>\n    <div *ngIf=\"context.showInput\" class=\"vex-dialog-input\">\n        <input autofocus \n               name=\"vex\" \n               type=\"text\" \n               class=\"vex-dialog-prompt-input\"\n               [(ngModel)]=\"context.defaultResult\" \n               placeholder=\"{{context.placeholder}}\">\n    </div>"
+            template: "<div class=\"vex-dialog-message\">{{context.message}}</div>\n    <div *ngIf=\"context.showInput\" class=\"vex-dialog-input\">\n        <input autofocus #input\n               name=\"vex\" \n               type=\"text\" \n               class=\"vex-dialog-prompt-input\"\n               (change)=\"context.defaultResult = input.value\"               \n               placeholder=\"{{context.placeholder}}\">\n    </div>"
         }), 
         __metadata('design:paramtypes', [dialog_ref_1.DialogRef])
     ], FormDropIn);

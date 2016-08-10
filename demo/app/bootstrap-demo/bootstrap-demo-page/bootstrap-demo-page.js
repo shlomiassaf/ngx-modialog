@@ -53,7 +53,6 @@ var BootstrapDemoPage = (function () {
     BootstrapDemoPage = __decorate([
         core_1.Component({
             selector: 'bootstrap-demo-page',
-            directives: [index_1.DemoHead],
             styles: ["\n              .simple-element {\n    position: relative;\n    display:block;\n    background-color: #219161\n}\n            "],
             template: "\n              <demo-head title=\"Bootstrap Modal plugin\"\n                         description=\"An implementation of <a href='http://getbootstrap.com/javascript/#modals' target='_blank'>Bootstrap</a>\"\n                         [modalCommands]=\"modalCommands\">\n                  <br>\n                  <div class=\"container\">\n                      <div class=\"row\">\n                          <div class=\"col-xs-12\">\n                              <a class=\"lead\" [routerLink]=\"['customizeModals']\">Or use the modal code Generator!</a>\n                          </div>\n                      </div>\n                  </div>\n              </demo-head>\n            "
         }), 

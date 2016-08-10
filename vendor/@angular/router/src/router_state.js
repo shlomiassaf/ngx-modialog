@@ -38,26 +38,41 @@ var RouterState = (function (_super) {
     /**
      * @internal
      */
-    function RouterState(root, queryParams, fragment, snapshot) {
+    function RouterState(root, snapshot) {
         _super.call(this, root);
-        this.queryParams = queryParams;
-        this.fragment = fragment;
         this.snapshot = snapshot;
+        setRouterStateSnapshot(this, root);
     }
+    Object.defineProperty(RouterState.prototype, "queryParams", {
+        /**
+          * @deprecated (Use root.queryParams)
+          */
+        get: function () { return this.root.queryParams; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RouterState.prototype, "fragment", {
+        /**
+         * @deprecated (Use root.fragment)
+         */
+        get: function () { return this.root.fragment; },
+        enumerable: true,
+        configurable: true
+    });
     RouterState.prototype.toString = function () { return this.snapshot.toString(); };
     return RouterState;
 }(tree_1.Tree));
 exports.RouterState = RouterState;
 function createEmptyState(urlTree, rootComponent) {
     var snapshot = createEmptyStateSnapshot(urlTree, rootComponent);
-    var emptyUrl = new BehaviorSubject_1.BehaviorSubject([new url_tree_1.UrlPathWithParams('', {})]);
+    var emptyUrl = new BehaviorSubject_1.BehaviorSubject([new url_tree_1.UrlSegment('', {})]);
     var emptyParams = new BehaviorSubject_1.BehaviorSubject({});
     var emptyData = new BehaviorSubject_1.BehaviorSubject({});
     var emptyQueryParams = new BehaviorSubject_1.BehaviorSubject({});
     var fragment = new BehaviorSubject_1.BehaviorSubject('');
-    var activated = new ActivatedRoute(emptyUrl, emptyParams, emptyData, shared_1.PRIMARY_OUTLET, rootComponent, snapshot.root);
+    var activated = new ActivatedRoute(emptyUrl, emptyParams, emptyQueryParams, fragment, emptyData, shared_1.PRIMARY_OUTLET, rootComponent, snapshot.root);
     activated.snapshot = snapshot.root;
-    return new RouterState(new tree_1.TreeNode(activated, []), emptyQueryParams, fragment, snapshot);
+    return new RouterState(new tree_1.TreeNode(activated, []), snapshot);
 }
 exports.createEmptyState = createEmptyState;
 function createEmptyStateSnapshot(urlTree, rootComponent) {
@@ -65,8 +80,8 @@ function createEmptyStateSnapshot(urlTree, rootComponent) {
     var emptyData = {};
     var emptyQueryParams = {};
     var fragment = '';
-    var activated = new ActivatedRouteSnapshot([], emptyParams, emptyData, shared_1.PRIMARY_OUTLET, rootComponent, null, urlTree.root, -1, InheritedResolve.empty);
-    return new RouterStateSnapshot('', new tree_1.TreeNode(activated, []), emptyQueryParams, fragment);
+    var activated = new ActivatedRouteSnapshot([], emptyParams, emptyQueryParams, fragment, emptyData, shared_1.PRIMARY_OUTLET, rootComponent, null, urlTree.root, -1, InheritedResolve.empty);
+    return new RouterStateSnapshot('', new tree_1.TreeNode(activated, []));
 }
 /**
  * Contains the information about a component loaded in an outlet. The information is provided
@@ -89,14 +104,46 @@ var ActivatedRoute = (function () {
     /**
      * @internal
      */
-    function ActivatedRoute(url, params, data, outlet, component, futureSnapshot) {
+    function ActivatedRoute(url, params, queryParams, fragment, data, outlet, component, futureSnapshot) {
         this.url = url;
         this.params = params;
+        this.queryParams = queryParams;
+        this.fragment = fragment;
         this.data = data;
         this.outlet = outlet;
         this.component = component;
         this._futureSnapshot = futureSnapshot;
     }
+    Object.defineProperty(ActivatedRoute.prototype, "routeConfig", {
+        get: function () { return this._futureSnapshot.routeConfig; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActivatedRoute.prototype, "root", {
+        get: function () { return this._routerState.root; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActivatedRoute.prototype, "parent", {
+        get: function () { return this._routerState.parent(this); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActivatedRoute.prototype, "firstChild", {
+        get: function () { return this._routerState.firstChild(this); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActivatedRoute.prototype, "children", {
+        get: function () { return this._routerState.children(this); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActivatedRoute.prototype, "pathFromRoot", {
+        get: function () { return this._routerState.pathFromRoot(this); },
+        enumerable: true,
+        configurable: true
+    });
     ActivatedRoute.prototype.toString = function () {
         return this.snapshot ? this.snapshot.toString() : "Future(" + this._futureSnapshot + ")";
     };
@@ -154,9 +201,11 @@ var ActivatedRouteSnapshot = (function () {
     /**
      * @internal
      */
-    function ActivatedRouteSnapshot(url, params, data, outlet, component, routeConfig, urlSegment, lastPathIndex, resolve) {
+    function ActivatedRouteSnapshot(url, params, queryParams, fragment, data, outlet, component, routeConfig, urlSegment, lastPathIndex, resolve) {
         this.url = url;
         this.params = params;
+        this.queryParams = queryParams;
+        this.fragment = fragment;
         this.data = data;
         this.outlet = outlet;
         this.component = component;
@@ -165,6 +214,36 @@ var ActivatedRouteSnapshot = (function () {
         this._lastPathIndex = lastPathIndex;
         this._resolve = resolve;
     }
+    Object.defineProperty(ActivatedRouteSnapshot.prototype, "routeConfig", {
+        get: function () { return this._routeConfig; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActivatedRouteSnapshot.prototype, "root", {
+        get: function () { return this._routerState.root; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActivatedRouteSnapshot.prototype, "parent", {
+        get: function () { return this._routerState.parent(this); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActivatedRouteSnapshot.prototype, "firstChild", {
+        get: function () { return this._routerState.firstChild(this); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActivatedRouteSnapshot.prototype, "children", {
+        get: function () { return this._routerState.children(this); },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(ActivatedRouteSnapshot.prototype, "pathFromRoot", {
+        get: function () { return this._routerState.pathFromRoot(this); },
+        enumerable: true,
+        configurable: true
+    });
     ActivatedRouteSnapshot.prototype.toString = function () {
         var url = this.url.map(function (s) { return s.toString(); }).join('/');
         var matched = this._routeConfig ? this._routeConfig.path : '';
@@ -193,16 +272,35 @@ var RouterStateSnapshot = (function (_super) {
     /**
      * @internal
      */
-    function RouterStateSnapshot(url, root, queryParams, fragment) {
+    function RouterStateSnapshot(url, root) {
         _super.call(this, root);
         this.url = url;
-        this.queryParams = queryParams;
-        this.fragment = fragment;
+        setRouterStateSnapshot(this, root);
     }
+    Object.defineProperty(RouterStateSnapshot.prototype, "queryParams", {
+        /**
+         * @deprecated (Use root.queryParams)
+         */
+        get: function () { return this.root.queryParams; },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(RouterStateSnapshot.prototype, "fragment", {
+        /**
+         * @deprecated (Use root.fragment)
+         */
+        get: function () { return this.root.fragment; },
+        enumerable: true,
+        configurable: true
+    });
     RouterStateSnapshot.prototype.toString = function () { return serializeNode(this._root); };
     return RouterStateSnapshot;
 }(tree_1.Tree));
 exports.RouterStateSnapshot = RouterStateSnapshot;
+function setRouterStateSnapshot(state, node) {
+    node.value._routerState = state;
+    node.children.forEach(function (c) { return setRouterStateSnapshot(state, c); });
+}
 function serializeNode(node) {
     var c = node.children.length > 0 ? " { " + node.children.map(serializeNode).join(", ") + " } " : '';
     return "" + node.value + c;
@@ -214,6 +312,12 @@ function serializeNode(node) {
  */
 function advanceActivatedRoute(route) {
     if (route.snapshot) {
+        if (!collection_1.shallowEqual(route.snapshot.queryParams, route._futureSnapshot.queryParams)) {
+            route.queryParams.next(route._futureSnapshot.queryParams);
+        }
+        if (route.snapshot.fragment !== route._futureSnapshot.fragment) {
+            route.fragment.next(route._futureSnapshot.fragment);
+        }
         if (!collection_1.shallowEqual(route.snapshot.params, route._futureSnapshot.params)) {
             route.params.next(route._futureSnapshot.params);
             route.data.next(route._futureSnapshot.data);
@@ -225,6 +329,7 @@ function advanceActivatedRoute(route) {
     }
     else {
         route.snapshot = route._futureSnapshot;
+        // this is for resolved data
         route.data.next(route._futureSnapshot.data);
     }
 }

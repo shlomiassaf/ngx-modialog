@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var index_1 = require("angular2-modal/plugins/bootstrap/index");
+var bootstrap_1 = require("angular2-modal/plugins/bootstrap");
 var BootstrapDemo = (function () {
     function BootstrapDemo(modal, viewContainer) {
         this.modal = modal;
@@ -22,12 +22,14 @@ var BootstrapDemo = (function () {
     BootstrapDemo = __decorate([
         core_1.Component({
             selector: 'bootstrap-demo',
-            viewProviders: index_1.BS_MODAL_PROVIDERS.slice(),
             template: "<router-outlet></router-outlet>",
-            directives: [],
+            // We override providers set by the Module since this app is using multiple module plugins
+            // (js-native, vex, bootstrap) which messes up the provider tree (last plugin wins)
+            // usually an app will use one plugin and this line is not needed.
+            providers: bootstrap_1.BootstrapModalModule.getProviders(),
             encapsulation: core_1.ViewEncapsulation.None
         }), 
-        __metadata('design:paramtypes', [index_1.Modal, core_1.ViewContainerRef])
+        __metadata('design:paramtypes', [bootstrap_1.Modal, core_1.ViewContainerRef])
     ], BootstrapDemo);
     return BootstrapDemo;
 }());

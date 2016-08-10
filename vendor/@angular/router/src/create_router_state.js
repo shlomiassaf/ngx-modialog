@@ -11,9 +11,7 @@ var router_state_1 = require('./router_state');
 var tree_1 = require('./utils/tree');
 function createRouterState(curr, prevState) {
     var root = createNode(curr._root, prevState ? prevState._root : undefined);
-    var queryParams = prevState ? prevState.queryParams : new BehaviorSubject_1.BehaviorSubject(curr.queryParams);
-    var fragment = prevState ? prevState.fragment : new BehaviorSubject_1.BehaviorSubject(curr.fragment);
-    return new router_state_1.RouterState(root, queryParams, fragment, curr);
+    return new router_state_1.RouterState(root, curr);
 }
 exports.createRouterState = createRouterState;
 function createNode(curr, prevState) {
@@ -41,7 +39,7 @@ function createOrReuseChildren(curr, prevState) {
     });
 }
 function createActivatedRoute(c) {
-    return new router_state_1.ActivatedRoute(new BehaviorSubject_1.BehaviorSubject(c.url), new BehaviorSubject_1.BehaviorSubject(c.params), new BehaviorSubject_1.BehaviorSubject(c.data), c.outlet, c.component, c);
+    return new router_state_1.ActivatedRoute(new BehaviorSubject_1.BehaviorSubject(c.url), new BehaviorSubject_1.BehaviorSubject(c.params), new BehaviorSubject_1.BehaviorSubject(c.queryParams), new BehaviorSubject_1.BehaviorSubject(c.fragment), new BehaviorSubject_1.BehaviorSubject(c.data), c.outlet, c.component, c);
 }
 function equalRouteSnapshots(a, b) {
     return a._routeConfig === b._routeConfig;

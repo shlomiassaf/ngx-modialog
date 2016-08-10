@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var angular2_modal_1 = require('../../angular2-modal');
 var modal_1 = require('./modal');
 var tokens_1 = require('../../models/tokens');
 var dialog_ref_1 = require('../../models/dialog-ref');
@@ -25,16 +26,17 @@ var VexModalContent = (function () {
     }
     VexModalContent.prototype.ngAfterViewInit = function () {
         var _this = this;
-        this._cr.resolveComponent(this._compileConfig.component)
-            .then(function (cmpFactory) {
-            var vcr = _this._viewContainer, bindings = _this._compileConfig.bindings, ctxInjector = vcr.parentInjector;
-            var childInjector = Array.isArray(bindings) && bindings.length > 0 ?
-                core_1.ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
-            if (_this.dlgContainer.nativeElement) {
-                _this.dlgContainer.nativeElement.focus();
-            }
-            return _this.dialog.contentRef =
-                vcr.createComponent(cmpFactory, vcr.length, childInjector);
+        if (this.dlgContainer.nativeElement) {
+            this.dlgContainer.nativeElement.focus();
+        }
+        /*  TODO:
+         In RC5 dynamic component creation is no longer async.
+         Somewhere down the pipe of the created component a value change happens that fires
+         a CD exception. setTimeout is a workaround that mimics the async behavior.
+         Find out the error and remove setTimeout.
+         */
+        setTimeout(function () {
+            _this.dialog.contentRef = angular2_modal_1.createComponent(_this._cr, _this._compileConfig.component, _this._viewContainer, _this._compileConfig.bindings);
         });
     };
     VexModalContent.prototype.onClickOutside = function () {
@@ -56,7 +58,7 @@ var VexModalContent = (function () {
             template: "<div tabindex=\"-1\" role=\"dialog\"\n      [class]=\"context.contentClassName\" (clickOutside)=\"onClickOutside()\" #dlgContainer>\n    <div style=\"display: none\" #modalDialog></div>    \n    <div *ngIf=\"context.showCloseButton\" \n         [class]=\"context.closeClassName\" \n         (click)=\"dialog.dismiss()\"></div>\n</div>",
             encapsulation: core_1.ViewEncapsulation.None,
         }), 
-        __metadata('design:paramtypes', [dialog_ref_1.DialogRef, modal_1.Modal, tokens_1.ModalCompileConfig, core_1.ComponentResolver])
+        __metadata('design:paramtypes', [dialog_ref_1.DialogRef, modal_1.Modal, tokens_1.ModalCompileConfig, core_1.ComponentFactoryResolver])
     ], VexModalContent);
     return VexModalContent;
 }());

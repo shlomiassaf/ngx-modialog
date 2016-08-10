@@ -8,4 +8,4 @@ export { ModalOpenContext, ModalOpenContextBuilder } from './../../models/modal-
 export { OneButtonPreset, OneButtonPresetBuilder } from './presets/one-button-preset';
 export { TwoButtonPreset, TwoButtonPresetBuilder } from './presets/two-button-preset';
 export { BSModal, Modal } from './modal';
-export declare const BS_MODAL_PROVIDERS: any[];
+export { BootstrapModalModule } from './bootstrap.module';

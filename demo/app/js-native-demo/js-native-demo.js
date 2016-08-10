@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var js_native_1 = require("angular2-modal/plugins/js-native");
-var index_1 = require('../demo-head/index');
 var presets = require('./presets');
 var JSNativeDemo = (function () {
     function JSNativeDemo(modal) {
@@ -26,9 +25,11 @@ var JSNativeDemo = (function () {
     JSNativeDemo = __decorate([
         core_1.Component({
             selector: 'js-native-demo',
-            viewProviders: js_native_1.JS_NATIVE_MODAL_PROVIDERS.slice(),
             template: "\n              <demo-head title=\"JS Native Dialog\"\n                         description=\"A (useless?) proof of concept how to apply a different renderer, ain't angular 2 great?\"\n                         [modalCommands]=\"modalCommands\">\n              </demo-head>\n            ",
-            directives: [index_1.DemoHead],
+            // We override providers set by the Module since this app is using multiple module plugins
+            // (js-native, vex, bootstrap) which messes up the provider tree (last plugin wins)
+            // usually an app will use one plugin and this line is not needed.
+            providers: js_native_1.JSNativeModalModule.getProviders(),
             encapsulation: core_1.ViewEncapsulation.None
         }), 
         __metadata('design:paramtypes', [js_native_1.Modal])

@@ -6,6 +6,12 @@
  * found in the LICENSE file at https://angular.io/license
  */
 "use strict";
+require('rxjs/add/operator/concatAll');
+require('rxjs/add/operator/last');
+var Observable_1 = require('rxjs/Observable');
+var fromPromise_1 = require('rxjs/observable/fromPromise');
+var of_1 = require('rxjs/observable/of');
+var shared_1 = require('../shared');
 function shallowEqualArrays(a, b) {
     if (a.length !== b.length)
         return false;
@@ -77,4 +83,47 @@ function forEach(map, callback) {
     }
 }
 exports.forEach = forEach;
+function waitForMap(obj, fn) {
+    var waitFor = [];
+    var res = {};
+    forEach(obj, function (a, k) {
+        if (k === shared_1.PRIMARY_OUTLET) {
+            waitFor.push(fn(k, a).map(function (_) {
+                res[k] = _;
+                return _;
+            }));
+        }
+    });
+    forEach(obj, function (a, k) {
+        if (k !== shared_1.PRIMARY_OUTLET) {
+            waitFor.push(fn(k, a).map(function (_) {
+                res[k] = _;
+                return _;
+            }));
+        }
+    });
+    if (waitFor.length > 0) {
+        return of_1.of.apply(void 0, waitFor).concatAll().last().map(function (last) { return res; });
+    }
+    else {
+        return of_1.of(res);
+    }
+}
+exports.waitForMap = waitForMap;
+function andObservables(observables) {
+    return observables.mergeAll().every(function (result) { return result === true; });
+}
+exports.andObservables = andObservables;
+function wrapIntoObservable(value) {
+    if (value instanceof Observable_1.Observable) {
+        return value;
+    }
+    else if (value instanceof Promise) {
+        return fromPromise_1.fromPromise(value);
+    }
+    else {
+        return of_1.of(value);
+    }
+}
+exports.wrapIntoObservable = wrapIntoObservable;
 //# sourceMappingURL=collection.js.map

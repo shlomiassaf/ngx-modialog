@@ -3,6 +3,8 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 __export(require('./framework/fluent-assign'));
+var createComponent_1 = require('./framework/createComponent');
+exports.createComponent = createComponent_1.createComponent;
 var dialog_ref_1 = require('./models/dialog-ref');
 exports.DialogRef = dialog_ref_1.DialogRef;
 var tokens_1 = require('./models/tokens');
@@ -22,9 +24,6 @@ exports.ModalContextBuilder = modal_context_1.ModalContextBuilder;
 var modal_open_context_1 = require('./models/modal-open-context');
 exports.ModalOpenContext = modal_open_context_1.ModalOpenContext;
 exports.ModalOpenContextBuilder = modal_open_context_1.ModalOpenContextBuilder;
-/**
- * Deprecated, use platform based providers.
- * @type {Array}
- */
-exports.MODAL_PROVIDERS = [];
+var angular2_modal_module_1 = require('./angular2-modal.module');
+exports.ModalModule = angular2_modal_module_1.ModalModule;
 //# sourceMappingURL=angular2-modal.js.map

@@ -15,18 +15,30 @@ var Tree = (function () {
         enumerable: true,
         configurable: true
     });
+    /**
+     * @deprecated (use ActivatedRoute.parent instead)
+     */
     Tree.prototype.parent = function (t) {
         var p = this.pathFromRoot(t);
         return p.length > 1 ? p[p.length - 2] : null;
     };
+    /**
+     * @deprecated (use ActivatedRoute.children instead)
+     */
     Tree.prototype.children = function (t) {
         var n = findNode(t, this._root);
         return n ? n.children.map(function (t) { return t.value; }) : [];
     };
+    /**
+     * @deprecated (use ActivatedRoute.firstChild instead)
+     */
     Tree.prototype.firstChild = function (t) {
         var n = findNode(t, this._root);
         return n && n.children.length > 0 ? n.children[0].value : null;
     };
+    /**
+     * @deprecated
+     */
     Tree.prototype.siblings = function (t) {
         var p = findPath(t, this._root, []);
         if (p.length < 2)
@@ -34,8 +46,10 @@ var Tree = (function () {
         var c = p[p.length - 2].children.map(function (c) { return c.value; });
         return c.filter(function (cc) { return cc !== t; });
     };
+    /**
+     * @deprecated (use ActivatedRoute.pathFromRoot instead)
+     */
     Tree.prototype.pathFromRoot = function (t) { return findPath(t, this._root, []).map(function (s) { return s.value; }); };
-    Tree.prototype.contains = function (tree) { return contains(this._root, tree._root); };
     return Tree;
 }());
 exports.Tree = Tree;
@@ -58,27 +72,10 @@ function findPath(expected, c, collected) {
         var cc = _a[_i];
         var cloned = collected.slice(0);
         var r = findPath(expected, cc, cloned);
-        if (r)
+        if (r.length > 0)
             return r;
     }
     return [];
-}
-function contains(tree, subtree) {
-    if (tree.value !== subtree.value)
-        return false;
-    var _loop_1 = function(subtreeNode) {
-        var s = tree.children.filter(function (child) { return child.value === subtreeNode.value; });
-        if (s.length === 0)
-            return { value: false };
-        if (!contains(s[0], subtreeNode))
-            return { value: false };
-    };
-    for (var _i = 0, _a = subtree.children; _i < _a.length; _i++) {
-        var subtreeNode = _a[_i];
-        var state_1 = _loop_1(subtreeNode);
-        if (typeof state_1 === "object") return state_1.value;
-    }
-    return true;
 }
 var TreeNode = (function () {
     function TreeNode(value, children) {

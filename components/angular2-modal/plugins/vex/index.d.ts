@@ -5,4 +5,4 @@ export { VEXBuiltInThemes, VEXModalContext, VEXModalContextBuilder } from './mod
 export { DropInPreset, DropInPresetBuilder } from './presets/dropin-preset';
 export { DialogFormModal, FormDropIn, VEXButtonClickEvent, VEXButtonConfig, VEXButtonHandler, VEXDialogButtons } from './dialog-form-modal';
 export { DialogPreset, DialogPresetBuilder } from './presets/dialog-preset';
-export declare const VEX_MODAL_PROVIDERS: any[];
+export { VexModalModule } from './vex.module';

@@ -12,5 +12,5 @@
  *
  * @experimental
  */
-exports.PRIMARY_OUTLET = 'PRIMARY_OUTLET';
+exports.PRIMARY_OUTLET = 'primary';
 //# sourceMappingURL=shared.js.map

@@ -5,6 +5,12 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+import 'rxjs/add/operator/concatAll';
+import 'rxjs/add/operator/last';
+import { Observable } from 'rxjs/Observable';
+import { fromPromise } from 'rxjs/observable/fromPromise';
+import { of } from 'rxjs/observable/of';
+import { PRIMARY_OUTLET } from '../shared';
 export function shallowEqualArrays(a, b) {
     if (a.length !== b.length)
         return false;
@@ -66,6 +72,46 @@ export function forEach(map, callback) {
         if (map.hasOwnProperty(prop)) {
             callback(map[prop], prop);
         }
+    }
+}
+export function waitForMap(obj, fn) {
+    const waitFor = [];
+    const res = {};
+    forEach(obj, (a, k) => {
+        if (k === PRIMARY_OUTLET) {
+            waitFor.push(fn(k, a).map((_) => {
+                res[k] = _;
+                return _;
+            }));
+        }
+    });
+    forEach(obj, (a, k) => {
+        if (k !== PRIMARY_OUTLET) {
+            waitFor.push(fn(k, a).map((_) => {
+                res[k] = _;
+                return _;
+            }));
+        }
+    });
+    if (waitFor.length > 0) {
+        return of(...waitFor).concatAll().last().map((last) => res);
+    }
+    else {
+        return of(res);
+    }
+}
+export function andObservables(observables) {
+    return observables.mergeAll().every(result => result === true);
+}
+export function wrapIntoObservable(value) {
+    if (value instanceof Observable) {
+        return value;
+    }
+    else if (value instanceof Promise) {
+        return fromPromise(value);
+    }
+    else {
+        return of(value);
     }
 }
 //# sourceMappingURL=collection.js.map

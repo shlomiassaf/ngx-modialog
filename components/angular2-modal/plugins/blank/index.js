@@ -14,9 +14,9 @@ exports.Modal = modal_2.Modal;
 var modal_context_2 = require('./modal-context');
 exports.BlankModalContext = modal_context_2.BlankModalContext;
 exports.BlankModalContextBuilder = modal_context_2.BlankModalContextBuilder;
-exports.BLANK_MODAL_PROVIDERS = angular2_modal_1.MODAL_PROVIDERS.concat([
+exports.BLANK_MODAL_PROVIDERS = [
     new core_1.Provider(modal_1.Modal, { useClass: modal_1.Modal }),
     new core_1.Provider(angular2_modal_1.ModalBackdropComponent, { useValue: modal_backdrop_1.BlankModalBackdrop }),
     new core_1.Provider(angular2_modal_1.ModalDropInFactory, { useValue: dropInFactory })
-]);
+];
 //# sourceMappingURL=index.js.map
