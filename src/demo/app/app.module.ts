@@ -12,6 +12,7 @@ import { JSNativeDemoModule } from './js-native-demo/js-native-demo.module';
 import { App }  from './app';
 import { Home } from './home/home';
 import { routing } from './app.routes';
+import { InAppModalModule } from './home/in-app-plugin';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { routing } from './app.routes';
     ModalModule.forRoot(),
     BootstrapDemoModule,
     VexDemoModule,
-    JSNativeDemoModule
+    JSNativeDemoModule,
+    InAppModalModule
   ],
   declarations: [ App, Home ],
   bootstrap:    [ App ],

@@ -1,6 +1,5 @@
 import { Provider } from '@angular/core';
 import {
-    MODAL_PROVIDERS,
     ModalBackdropComponent,
     ModalDropInFactory
 } from '../../../../components/angular2-modal';
@@ -17,7 +16,6 @@ const dropInFactory: ModalDropInFactory = {
 export { Modal } from './modal';
 export { BlankModalContext, BlankModalContextBuilder } from './modal-context';
 export const BLANK_MODAL_PROVIDERS: any[] = [
-    ...MODAL_PROVIDERS,
     new Provider(Modal, {useClass: Modal}),
     new Provider(ModalBackdropComponent, {useValue: BlankModalBackdrop}),
     new Provider(ModalDropInFactory, {useValue: dropInFactory})

@@ -1,24 +1,45 @@
-import { Provider } from '@angular/core';
-import {
-    MODAL_PROVIDERS,
-    ModalBackdropComponent,
-    ModalDropInFactory
-} from '../../../../components/angular2-modal';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { Modal } from './modal';
 import { InAppModalBackdrop } from './modal-backdrop';
 import { InAppModalContextBuilder } from './modal-context';
-const dropInFactory: ModalDropInFactory = {
-    alert: modal => new InAppModalContextBuilder(modal),
-    prompt: undefined,
-    confirm: undefined
-};
+
+import {
+  Modal as BaseModal,
+  ModalBackdropComponent,
+  ModalDropInFactory
+} from '../../../../components/angular2-modal';
+
 
 export { Modal } from './modal';
 export { InAppModalContext, InAppModalContextBuilder } from './modal-context';
-export const IN_APP_MODAL_PROVIDERS: any[] = [
-    ...MODAL_PROVIDERS,
-    new Provider(Modal, {useClass: Modal}),
-    new Provider(ModalBackdropComponent, {useValue: InAppModalBackdrop}),
-    new Provider(ModalDropInFactory, {useValue: dropInFactory})
-];
+
+function getProviders(): any[] {
+  return [
+    { provide: BaseModal, useClass: Modal },
+    { provide: Modal, useClass: Modal },
+    { provide: ModalBackdropComponent, useValue: InAppModalBackdrop },
+    { provide: ModalDropInFactory, useValue: {
+      alert: modal => new InAppModalContextBuilder(modal),
+      prompt: undefined,
+      confirm: undefined
+    }}
+  ];
+}
+
+@NgModule({
+  imports: [CommonModule],
+  declarations: [
+    InAppModalBackdrop
+  ],
+  providers: getProviders(),
+  entryComponents: [
+    InAppModalBackdrop
+  ]
+})
+export class InAppModalModule {
+  static getProviders(): any[] {
+    return getProviders();
+  }
+}
