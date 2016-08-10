@@ -24,8 +24,5 @@ export {
 
 export { ModalOpenContext, ModalOpenContextBuilder } from './models/modal-open-context';
 
-/**
- * Deprecated, use platform based providers.
- * @type {Array}
- */
-export const MODAL_PROVIDERS: any[] = [];
+
+export { ModalModule } from './angular2-modal.module';

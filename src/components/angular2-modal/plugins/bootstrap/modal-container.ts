@@ -1,6 +1,6 @@
 import {
   Component,
-  ComponentResolver,
+  ComponentFactoryResolver,
   ViewContainerRef,
   ReflectiveInjector,
   ViewChild,
@@ -61,7 +61,7 @@ import { BSModalContext } from './modal-context';
   template: `<div [ngClass]="dialog.context.dialogClass" 
           [class.modal-lg]="dialog.context.size == \'lg\'"
           [class.modal-sm]="dialog.context.size == \'sm\'"
-          @fade="fadeState">
+          [@fade]="fadeState">
          <div class="modal-content"              
               style="display:block"              
               role="document"
@@ -82,7 +82,7 @@ export class BSModalContainer implements AfterViewInit {
               private el: ElementRef,
               private _compileConfig: ModalCompileConfig,
               private _modal: Modal,
-              private _cr: ComponentResolver) {
+              private _cr: ComponentFactoryResolver) {
     if (!dialog.inElement) {
       this.position = null;
     } else {
@@ -92,21 +92,26 @@ export class BSModalContainer implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this._cr.resolveComponent(this._compileConfig.component)
-      .then(cmpFactory => {
-        const vcr = this._viewContainer,
+    const cmpFactory = this._cr.resolveComponentFactory(this._compileConfig.component as any),
+          vcr = this._viewContainer,
           bindings = this._compileConfig.bindings,
-          ctxInjector = vcr.parentInjector;
+          ctxInjector = vcr.parentInjector,
+          childInjector = Array.isArray(bindings) && bindings.length > 0 ?
+                      ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
 
-        const childInjector = Array.isArray(bindings) && bindings.length > 0 ?
-          ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
+    if (this.el.nativeElement) {
+      this.el.nativeElement.focus();
+    }
 
-        if (this.el.nativeElement) {
-          this.el.nativeElement.focus();
-        }
-
-        this.dialog.contentRef = vcr.createComponent(cmpFactory, vcr.length, childInjector);
-      });
+    /*  TODO:
+        In RC5 dynamic component creation is no longer async.
+        Somewhere down the pipe of the created component a value change happens that fires
+        a CD exception. setTimeout is a workaround that mimics the async behavior.
+        Find out the error and remove setTimeout.
+     */
+    setTimeout(
+      () => this.dialog.contentRef = vcr.createComponent(cmpFactory, vcr.length, childInjector)
+    );
   }
 
   onClickOutside() {

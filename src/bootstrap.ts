@@ -1,28 +1,18 @@
-import { ComponentRef, PLATFORM_DIRECTIVES } from '@angular/core';
-import { bootstrap } from '@angular/platform-browser-dynamic';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { NgModuleRef } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
-import { MODAL_BROWSER_PROVIDERS } from './components/angular2-modal/platform-browser';
+// The app module
+import { AppModule } from './demo/app/app.module';
 
-// Register providers for browser, this is mandatory.
-
-import { App } from './demo/app/app';
-import { APP_ROUTER_PROVIDERS } from './demo/app/app.routes';
 
 let _bootstrapped = false;
 
-export function main(): Promise<ComponentRef<App>> {
+export function main(): Promise<NgModuleRef<AppModule>> {
   if (_bootstrapped) {
     return <any>Promise.reject(null);
   } else {
     _bootstrapped = true;
-    return bootstrap(App, [
-      ...MODAL_BROWSER_PROVIDERS,
-      {provide: PLATFORM_DIRECTIVES, multi: true, useValue: ROUTER_DIRECTIVES},
-      APP_ROUTER_PROVIDERS,
-      {provide: LocationStrategy, useClass: HashLocationStrategy},
-    ])
+    return platformBrowserDynamic().bootstrapModule(AppModule)
       .catch(err => console.error(err));
   }
 }

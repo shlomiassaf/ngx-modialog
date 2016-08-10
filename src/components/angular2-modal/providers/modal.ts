@@ -113,12 +113,11 @@ export class Modal {
       {provide: ModalCompileConfig, useValue: compileConfig}
     ]);
 
-    return this._modalRenderer.render(this._backdrop, viewContainer, b, dialog)
-      .then(dialog => {
-        _stack.pushManaged(dialog);
-        dialog.onDestroy.subscribe( () => _stack.remove(dialog) );
-        return dialog;
-      });
+    this._modalRenderer.render(this._backdrop, viewContainer, b, dialog);
+    _stack.pushManaged(dialog);
+    dialog.onDestroy.subscribe( () => _stack.remove(dialog) );
+
+    return Promise.resolve(dialog);
   }
 
   /**

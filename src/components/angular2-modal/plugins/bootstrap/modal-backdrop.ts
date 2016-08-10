@@ -11,8 +11,6 @@ import {
 } from '@angular/core';
 
 import { DialogRef } from '../../angular2-modal';
-
-import { BSModalContainer } from './modal-container';
 import { BSModalContext } from './modal-context';
 
 let dialogRefCount = 0;
@@ -31,7 +29,6 @@ let dialogRefCount = 0;
     '[style.right]': 'hs.pt',
     '[style.bottom]': 'hs.pt'
   },
-  directives: [BSModalContainer],
   animations: [
     trigger('fade', [
       transition('void => in', [
@@ -54,7 +51,7 @@ let dialogRefCount = 0;
     ])
   ],
   encapsulation: ViewEncapsulation.None,
-  template: `<div [style.position]="hs.ps" class="modal-backdrop in" @fade="fadeState"></div>
+  template: `<div [style.position]="hs.ps" class="modal-backdrop in" [@fade]="fadeState"></div>
 <modal-container></modal-container>`
 })
 export class BSModalBackdrop implements OnDestroy {

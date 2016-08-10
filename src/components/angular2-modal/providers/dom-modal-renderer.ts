@@ -1,6 +1,6 @@
 import {
   ViewContainerRef,
-  ComponentResolver,
+  ComponentFactoryResolver,
   ComponentRef,
   ResolvedReflectiveProvider,
   ReflectiveInjector,
@@ -14,38 +14,49 @@ import { ModalRenderer } from '../models/tokens';
 
 @Injectable()
 export class DOMModalRenderer implements ModalRenderer {
-  constructor(private _cr: ComponentResolver) {
+  constructor(private _cr: ComponentFactoryResolver) {
   }
 
-  render(type: Type,
+  render(type: any,
          viewContainer: ViewContainerRef,
          bindings: ResolvedReflectiveProvider[],
-         dialog: DialogRef<any>): Promise<DialogRef<any>> {
+         dialog: DialogRef<any>): DialogRef<any> {
 
-    return this._cr.resolveComponent(type)
-      .then(cmpFactory => {
-        const ctxInjector = viewContainer.parentInjector;
-        const childInjector = Array.isArray(bindings) && bindings.length > 0 ?
-          ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
-        return viewContainer.createComponent(cmpFactory, viewContainer.length, childInjector);
-      })
-      .then((cmpRef: ComponentRef<any>) => {
-        if (dialog.inElement) {
-          viewContainer.element.nativeElement.appendChild(cmpRef.location.nativeElement);
-        } else {
-          document.body.appendChild(cmpRef.location.nativeElement);
-        }
 
-        dialog.onDestroy.subscribe( () => {
-          if (typeof cmpRef.instance.canDestroy === 'function') {
-            cmpRef.instance.canDestroy().then ( () => cmpRef.destroy() );
-          } else {
-            cmpRef.destroy();
-          }
-        });
+    const cmpRef = this.createComponent(type, viewContainer, bindings);
 
-        return dialog;
-      });
+    if (dialog.inElement) {
+      viewContainer.element.nativeElement.appendChild(cmpRef.location.nativeElement);
+    } else {
+      document.body.appendChild(cmpRef.location.nativeElement);
+    }
+
+    dialog.onDestroy.subscribe( () => {
+      if (typeof cmpRef.instance.canDestroy === 'function') {
+        cmpRef.instance.canDestroy().then ( () => cmpRef.destroy() );
+      } else {
+        cmpRef.destroy();
+      }
+    });
+
+    return dialog;
+  }
+
+  private createComponent(type: any,
+                          viewContainer: ViewContainerRef,
+                          bindings: ResolvedReflectiveProvider[]): ComponentRef<any> {
+    return viewContainer.createComponent(
+      this._cr.resolveComponentFactory(type),
+      viewContainer.length,
+      this.getInjector(viewContainer, bindings)
+    );
+  }
+
+  private getInjector(viewContainer: ViewContainerRef, bindings: ResolvedReflectiveProvider[]) {
+    const ctxInjector = viewContainer.parentInjector;
+    return Array.isArray(bindings) && bindings.length > 0 ?
+      ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
+
   }
 }
 
