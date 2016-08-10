@@ -2,7 +2,6 @@ import {
   Component,
   ComponentFactoryResolver,
   ViewContainerRef,
-  ReflectiveInjector,
   ViewChild,
   ViewEncapsulation,
   AfterViewInit,
@@ -15,7 +14,7 @@ import {
   transition
 } from '@angular/core';
 
-import { DialogRef, ModalCompileConfig } from '../../angular2-modal';
+import { createComponent, DialogRef, ModalCompileConfig } from '../../angular2-modal';
 
 import { Modal } from './modal';
 import { supportsKey } from '../../framework/utils';
@@ -92,13 +91,6 @@ export class BSModalContainer implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const cmpFactory = this._cr.resolveComponentFactory(this._compileConfig.component as any),
-          vcr = this._viewContainer,
-          bindings = this._compileConfig.bindings,
-          ctxInjector = vcr.parentInjector,
-          childInjector = Array.isArray(bindings) && bindings.length > 0 ?
-                      ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
-
     if (this.el.nativeElement) {
       this.el.nativeElement.focus();
     }
@@ -109,9 +101,13 @@ export class BSModalContainer implements AfterViewInit {
         a CD exception. setTimeout is a workaround that mimics the async behavior.
         Find out the error and remove setTimeout.
      */
-    setTimeout(
-      () => this.dialog.contentRef = vcr.createComponent(cmpFactory, vcr.length, childInjector)
-    );
+    setTimeout( () => {
+      this.dialog.contentRef = createComponent(
+        this._cr,
+        this._compileConfig.component,
+        this._viewContainer,
+        this._compileConfig.bindings);
+    });
   }
 
   onClickOutside() {

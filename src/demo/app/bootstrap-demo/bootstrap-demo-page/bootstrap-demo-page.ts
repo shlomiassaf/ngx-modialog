@@ -15,7 +15,6 @@ import * as presets from '../presets';
 
 @Component({
   selector: 'bootstrap-demo-page',
-  directives: [DemoHead],
   styleUrls: ['demo/app/bootstrap-demo/bootstrap-demo-page/bootstrap-demo-page.css'],
   templateUrl: 'demo/app/bootstrap-demo/bootstrap-demo-page/bootstrap-demo-page.tpl.html'
 })

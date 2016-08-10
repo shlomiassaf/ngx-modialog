@@ -1,20 +1,20 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {DialogRef, ModalComponent} from '../../../../components/angular2-modal';
-import {BSModalContext} from '../../../../components/angular2-modal/plugins/bootstrap/index';
+import { DialogRef, ModalComponent } from '../../../../components/angular2-modal';
+import { BSModalContext } from '../../../../components/angular2-modal/plugins/bootstrap/index';
 
 export class AdditionCalculateWindowData extends BSModalContext {
-    constructor(public num1: number, public num2: number) {
-        super();
-    }
+  constructor(public num1: number, public num2: number) {
+    super();
+  }
 }
 
 /**
  * A Sample of how simple it is to create a new window, with its own injects.
  */
 @Component({
-    selector: 'modal-content',
-    styles: [`
+  selector: 'modal-content',
+  styles: [`
         .custom-modal-container {
             padding: 15px;
         }
@@ -29,9 +29,9 @@ export class AdditionCalculateWindowData extends BSModalContext {
             margin-bottom: 40px;
         }
     `],
-    //TODO: [ngClass] here on purpose, no real use, just to show how to workaround ng2 issue #4330.
-    // Remove when solved.
-    /* tslint:disable */ template: `
+  //TODO: [ngClass] here on purpose, no real use, just to show how to workaround ng2 issue #4330.
+  // Remove when solved.
+  /* tslint:disable */ template: `
         <div class="container-fluid custom-modal-container">
             <div class="row custom-modal-header">
                 <div class="col-sm-12">
@@ -51,26 +51,26 @@ export class AdditionCalculateWindowData extends BSModalContext {
         </div>`
 })
 export class AdditionCalculateWindow implements ModalComponent<AdditionCalculateWindowData> {
-    context: AdditionCalculateWindowData;
+  context: AdditionCalculateWindowData;
 
-    public wrongAnswer: boolean;
+  public wrongAnswer: boolean;
 
-    constructor(public dialog: DialogRef<AdditionCalculateWindowData>) {
-        this.context = dialog.context;
-        this.wrongAnswer = true;
-    }
+  constructor(public dialog: DialogRef<AdditionCalculateWindowData>) {
+    this.context = dialog.context;
+    this.wrongAnswer = true;
+  }
 
-    onKeyUp(value) {
-        this.wrongAnswer = value != 5;
-        this.dialog.close();
-    }
+  onKeyUp(value) {
+    this.wrongAnswer = value != 5;
+    this.dialog.close();
+  }
 
 
-    beforeDismiss(): boolean {
-        return true;
-    }
+  beforeDismiss(): boolean {
+    return true;
+  }
 
-    beforeClose(): boolean {
-        return this.wrongAnswer;
-    }
+  beforeClose(): boolean {
+    return this.wrongAnswer;
+  }
 }

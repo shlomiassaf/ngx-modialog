@@ -1,6 +1,8 @@
 import { Modal } from './providers/modal';
 
 export * from './framework/fluent-assign';
+export { createComponent } from './framework/createComponent';
+
 export { DialogRef } from './models/dialog-ref';
 
 export {

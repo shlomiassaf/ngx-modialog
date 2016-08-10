@@ -4,7 +4,7 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 module.exports = {
     // for faster builds use 'eval'
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
     debug: true, // remove in production
 
     entry: {

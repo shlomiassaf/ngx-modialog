@@ -17,15 +17,8 @@ import {
   ModalDropInFactory
 } from '../../angular2-modal';
 
-@NgModule({
-  imports: [ CommonModule ],
-  declarations: [
-    BSModalBackdrop,
-    BSMessageModal,
-    BSModalContainer,
-    BSModalFooter
-  ],
-  providers: [
+function getProviders(): any[] {
+  return [
     { provide: BaseModal, useClass: Modal },
     { provide: Modal, useClass: Modal },
     { provide: ModalBackdropComponent, useValue: BSModalBackdrop },
@@ -34,11 +27,26 @@ import {
       prompt: modal => new OneButtonPresetBuilder(modal, <any>{isBlocking: true, keyboard: null}),
       confirm: modal => new TwoButtonPresetBuilder(modal, <any>{isBlocking: true, keyboard: null})
     }}
+  ];
+}
+
+@NgModule({
+  imports: [ CommonModule ],
+  declarations: [
+    BSModalBackdrop,
+    BSMessageModal,
+    BSModalContainer,
+    BSModalFooter
   ],
+  providers: getProviders(),
   entryComponents: [
     BSModalBackdrop,
     BSMessageModal
   ]
 })
-export class BootstrapModalModule {}
+export class BootstrapModalModule {
+  static getProviders(): any[] {
+    return getProviders();
+  }
+}
 

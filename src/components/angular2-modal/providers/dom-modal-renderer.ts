@@ -1,14 +1,11 @@
 import {
   ViewContainerRef,
   ComponentFactoryResolver,
-  ComponentRef,
   ResolvedReflectiveProvider,
-  ReflectiveInjector,
-  Injectable,
-  Type
+  Injectable
 } from '@angular/core';
 
-
+import createComponent from '../framework/createComponent';
 import { DialogRef } from '../models/dialog-ref';
 import { ModalRenderer } from '../models/tokens';
 
@@ -23,7 +20,7 @@ export class DOMModalRenderer implements ModalRenderer {
          dialog: DialogRef<any>): DialogRef<any> {
 
 
-    const cmpRef = this.createComponent(type, viewContainer, bindings);
+    const cmpRef = createComponent(this._cr, type, viewContainer, bindings);
 
     if (dialog.inElement) {
       viewContainer.element.nativeElement.appendChild(cmpRef.location.nativeElement);
@@ -40,23 +37,6 @@ export class DOMModalRenderer implements ModalRenderer {
     });
 
     return dialog;
-  }
-
-  private createComponent(type: any,
-                          viewContainer: ViewContainerRef,
-                          bindings: ResolvedReflectiveProvider[]): ComponentRef<any> {
-    return viewContainer.createComponent(
-      this._cr.resolveComponentFactory(type),
-      viewContainer.length,
-      this.getInjector(viewContainer, bindings)
-    );
-  }
-
-  private getInjector(viewContainer: ViewContainerRef, bindings: ResolvedReflectiveProvider[]) {
-    const ctxInjector = viewContainer.parentInjector;
-    return Array.isArray(bindings) && bindings.length > 0 ?
-      ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
-
   }
 }
 

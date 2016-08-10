@@ -5,7 +5,6 @@ import { DOMOutsideEventPlugin } from './providers/outside-event-plugin';
 import { ModalRenderer, DOMModalRenderer } from '../angular2-modal';
 
 @NgModule({
-
 })
 export class ModalModule {
   static forRoot(): ModuleWithProviders {

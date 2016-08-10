@@ -86,7 +86,6 @@ export class Modal {
               bindings: ResolvedReflectiveProvider[] = undefined,
               viewContainer: ViewContainerRef = undefined,
               inside?: boolean): Promise<DialogRef<any>> {
-
     inside = inside === undefined ? !!viewContainer : !!inside;
 
     if (!viewContainer) {
