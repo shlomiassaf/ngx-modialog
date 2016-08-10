@@ -1,6 +1,8 @@
 import { Modal } from './providers/modal';
 
 export * from './framework/fluent-assign';
+export { createComponent } from './framework/createComponent';
+
 export { DialogRef } from './models/dialog-ref';
 
 export {
@@ -24,8 +26,5 @@ export {
 
 export { ModalOpenContext, ModalOpenContextBuilder } from './models/modal-open-context';
 
-/**
- * Deprecated, use platform based providers.
- * @type {Array}
- */
-export const MODAL_PROVIDERS: any[] = [];
+
+export { ModalModule } from './angular2-modal.module';

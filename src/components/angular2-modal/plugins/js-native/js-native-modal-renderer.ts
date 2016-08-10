@@ -15,7 +15,7 @@ export class JSNativeModalRenderer implements ModalRenderer {
     render(type: Type,
            viewContainer: ViewContainerRef,
            bindings: ResolvedReflectiveProvider[],
-           dialog: DialogRef<JSNativeModalContext>): Promise<DialogRef<any>> {
+           dialog: DialogRef<JSNativeModalContext>): DialogRef<any> {
 
         let result: string | boolean;
         switch (dialog.context.dialogType) {
@@ -39,7 +39,7 @@ export class JSNativeModalRenderer implements ModalRenderer {
             dialog.close(result);
         }
 
-        return Promise.resolve(dialog);
+        return dialog;
     }
 }
 

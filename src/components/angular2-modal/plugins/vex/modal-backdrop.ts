@@ -6,8 +6,7 @@ import {
 import { DialogRef } from '../../models/dialog-ref';
 import { Modal } from './modal';
 import { VEXModalContext } from './modal-context';
-import { VexModalContent } from './modal-content';
-import { supportsKey, toStyleString } from '../../framework/utils';
+import { supportsKey } from '../../framework/utils';
 
 let dialogRefCount = 0;
 
@@ -30,7 +29,6 @@ let dialogRefCount = 0;
     styleUrls: [
         'components/angular2-modal/plugins/vex/modal-backdrop.css'
     ],
-    directives: [ VexModalContent ],
     encapsulation: ViewEncapsulation.None,
     template:
 `<div [class]="cssClass">

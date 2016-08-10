@@ -39,7 +39,7 @@ export abstract class ModalRenderer {
            viewContainer: ViewContainerRef,
            bindings: ResolvedReflectiveProvider[],
            dialog: DialogRef<any>
-    ): Promise<DialogRef<any>>;
+    ): DialogRef<any>;
 }
 
 export abstract class ModalBackdropComponent extends Type {}

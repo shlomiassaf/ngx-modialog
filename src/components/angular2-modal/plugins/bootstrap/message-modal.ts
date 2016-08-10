@@ -37,7 +37,6 @@ export interface BSMessageModalButtonConfig {
  */
 @Component({
     selector: 'modal-content',
-    directives: [BSModalFooter],
     encapsulation: ViewEncapsulation.None,
     template:
     `<div [ngClass]="context.headerClass" [ngSwitch]="titleHtml">
