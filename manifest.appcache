@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # sw.bundle: ng-cli
-# sw.version: f7db083dc2c5bbeee2e6a33b25ddbded4ae3c2d1
+# sw.version: 288d029a5489236534133ca559a938f50b90a606
 # sw.file.hash: 9cd2c02727720bb374ea1b1d699702c3c1333ba3
 /bootstrap.js
 # sw.file.hash: d952f5a7db5283990f2172f5ec11149c5ae6418e
@@ -291,9 +291,9 @@ CACHE MANIFEST
 /demo/app/app.js.map
 # sw.file.hash: af4f291d417a780ff1db18e07ad352e4777a518f
 /demo/app/app.module.d.ts
-# sw.file.hash: 967d4f54a722ad02539b99a3c2727c5bef83e494
+# sw.file.hash: a0d69932c0a06aa1551210a0a18c317319db5e6e
 /demo/app/app.module.js
-# sw.file.hash: b9e32a74ff97ca6c81f3977506fbb1fcc3e65c87
+# sw.file.hash: cf0d1e6aba99bc93d8f5bc3226ff724f769fc054
 /demo/app/app.module.js.map
 # sw.file.hash: 6c4dbdda8877317e911b384db82aef40b1f70e00
 /demo/app/app.routes.d.ts
@@ -363,11 +363,11 @@ CACHE MANIFEST
 /demo/app/demo-head/index.js
 # sw.file.hash: 77e3e52cf2cec4075acc39b68c02eef00744b092
 /demo/app/demo-head/index.js.map
-# sw.file.hash: e058d0f0976571a04f46273a915769c5ad46ba38
+# sw.file.hash: 98bec3854cb3fc8a65f3b5a7dc54d80b2ee3738d
 /demo/app/home/home.d.ts
-# sw.file.hash: 954623a8b52151e0ca9e4465c3b8a9811f3f6d63
+# sw.file.hash: bce851f7444316ba5601c36441a3c553db07c3f2
 /demo/app/home/home.js
-# sw.file.hash: afc8ad71d4a90c0870d9102fdd458e4f897f53a7
+# sw.file.hash: 36029a577233cbb1b20720fbe5d6a5977b7b62af
 /demo/app/home/home.js.map
 # sw.file.hash: 3fe8b340739d4a82254d1bb9a5b6f03c07ae155c
 /demo/app/home/home.tpl.html
@@ -423,9 +423,9 @@ CACHE MANIFEST
 /demo/app/js-native-demo/presets.js.map
 # sw.file.hash: d3d22aa513da8597d04069465eeff2909af45e6b
 /demo/app/shared.module.d.ts
-# sw.file.hash: b34771b21f6fd42813dbb60ae6670c575eca1fb2
+# sw.file.hash: 37b507737f5bc46c83b73a4a57a9fa802c8d7b6e
 /demo/app/shared.module.js
-# sw.file.hash: 91579d2ec1d66c9bc511b489669b71d1319be100
+# sw.file.hash: 0be0f242fa4bb6d8af71f47656de101ec2f75d82
 /demo/app/shared.module.js.map
 # sw.file.hash: 222b01248948c5c95c1b8e4e89952b9059e0af44
 /demo/app/vex-demo/css/vex-theme-bottom-right-corner.css

@@ -19,7 +19,7 @@ var js_native_demo_module_1 = require('./js-native-demo/js-native-demo.module');
 var app_1 = require('./app');
 var home_1 = require('./home/home');
 var app_routes_1 = require('./app.routes');
-var in_app_plugin_1 = require('./home/in-app-plugin');
+var index_1 = require('./home/in-app-plugin/index');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -33,7 +33,7 @@ var AppModule = (function () {
                 bootstrap_demo_module_1.BootstrapDemoModule,
                 vex_demo_module_1.VexDemoModule,
                 js_native_demo_module_1.JSNativeDemoModule,
-                in_app_plugin_1.InAppModalModule
+                index_1.InAppModalModule
             ],
             declarations: [app_1.App, home_1.Home],
             bootstrap: [app_1.App],
