@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # sw.bundle: ng-cli
-# sw.version: d0d6aefdcc7ca6990fcba5e3eb6ea4c3f3b105b0
+# sw.version: f7db083dc2c5bbeee2e6a33b25ddbded4ae3c2d1
 # sw.file.hash: 9cd2c02727720bb374ea1b1d699702c3c1333ba3
 /bootstrap.js
 # sw.file.hash: d952f5a7db5283990f2172f5ec11149c5ae6418e
@@ -277,7 +277,7 @@ CACHE MANIFEST
 /components/angular2-modal/providers/outside-event-plugin.d.ts
 # sw.file.hash: 48a8739ae79c665dbf5544f90b45d6c13b7639c5
 /components/angular2-modal/providers/outside-event-plugin.js
-# sw.file.hash: 4a4199e00289e41523df10a4cc1bba683f819d2c
+# sw.file.hash: 262e1e870d838ceadfde0f2bdeaada697c5d06cb
 /components/angular2-modal/providers/outside-event-plugin.js.map
 # sw.file.hash: 7a7a10ece53ad278482a114b4bbeb5264a27a53d
 /demo/app/app.css
