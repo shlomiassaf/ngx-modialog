@@ -29,11 +29,7 @@
     "build": "exec ./scripts/build_release.sh",
     "start": "npm run server:dev"
   },
-  "peerDependencies": {
-    "rxjs": "5.0.0-beta.6",
-    "zone.js": "^0.6.12"
-  },
-  "devDependencies": {
+  "dependencies": {
     "@angular/common": "2.0.0-rc.5",
     "@angular/compiler": "2.0.0-rc.5",
     "@angular/core": "2.0.0-rc.5",
@@ -41,8 +37,19 @@
     "@angular/platform-browser": "2.0.0-rc.5",
     "@angular/platform-browser-dynamic": "2.0.0-rc.5",
     "@angular/router": "3.0.0-rc.1",
+    "rxjs": "5.0.0-beta.6",
+    "zone.js": "^0.6.12"
+  },
+  "devDependencies": {
+    "@types/core-js": "^0.9.28",
+    "@types/hammerjs": "^2.0.28",
+    "@types/node": "^4.0.29",
+    "@types/source-map": "^0.1.26",
+    "@types/uglify-js": "^2.0.27",
+    "@types/webpack": "^1.12.29",
     "angular-cli": "0.0.31",
     "async": "^1.5.2",
+    "awesome-typescript-loader": "^2.1.1",
     "bootstrap": "^3.3.6",
     "broccoli-autoprefixer": "^4.1.0",
     "broccoli-funnel": "^1.0.1",
@@ -70,7 +77,7 @@
     "tsconfig-lint": "^0.6.0",
     "tslint": "^3.5.0 ",
     "tslint-loader": "^2.1.1",
-    "typescript": "^1.8.7",
+    "typescript": "^2.0.0",
     "typings": "^0.3.1",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.9",
