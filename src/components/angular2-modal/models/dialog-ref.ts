@@ -3,35 +3,39 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { PromiseCompleter } from '../framework/utils';
-import { ModalComponent } from '../models/tokens';
-
+import { Overlay, ModalOverlay } from '../overlay';
+import { CloseGuard } from '../models/tokens';
 
 /**
  * API to an open modal window.
  */
 export class DialogRef<T> {
   /**
-   * The reference to the component ref.
-   * @internal
-   * @return {ComponentRef<any>}
+   * Reference to the overlay component ref.
+   * @return {ComponentRef<ModalOverlay>}
    */
-  contentRef: ComponentRef<any>;
+  overlayRef: ComponentRef<ModalOverlay>;
 
   /**
    * States if the modal is inside a specific element.
    */
   public inElement: boolean;
 
+  public destroyed: boolean;
+
   /**
    * Fired before dialog is destroyed.
    * No need to unsubscribe, done automatically.
+   * Note: Always called.
+   * When called, overlayRef might or might not be destroyed.
    */
   public onDestroy: Observable<void>;
 
   private _resultDeferred: PromiseCompleter<any> = new PromiseCompleter<any>();
   private _onDestroy: Subject<void> = new Subject<void>();
+  private closeGuard: CloseGuard;
 
-  constructor(public context?: T) {
+  constructor(public overlay: Overlay, public context?: T) {
     this.onDestroy = this._onDestroy.asObservable();
   }
 
@@ -41,6 +45,14 @@ export class DialogRef<T> {
    */
   get result(): Promise<any> {
     return this._resultDeferred.promise;
+  }
+
+  /**
+   * Set a close/dismiss guard
+   * @param g
+   */
+  setCloseGuard(guard: CloseGuard): void {
+    this.closeGuard = guard;
   }
 
   /**
@@ -73,15 +85,42 @@ export class DialogRef<T> {
       .catch(_dismiss);
   }
 
+  /**
+   * Gracefully close the overlay/dialog with a rejected result.
+   * Does not trigger canDestroy on the overlay.
+   */
+  bailOut() {
+    if (this.destroyed !== true) {
+      this.destroyed = true;
+      this._onDestroy.next(null);
+      this._onDestroy.complete();
+      this._resultDeferred.reject();
+    }
+  }
+
   destroy() {
-    this._onDestroy.next(null);
-    this._onDestroy.complete();
+    if (this.destroyed !== true) {
+      this.destroyed = true;
+      this._onDestroy.next(null);
+
+      this._onDestroy.complete();
+
+      if (typeof this.overlayRef.instance.canDestroy === 'function') {
+        this.overlayRef.instance.canDestroy()
+          .catch( () => {})
+          .then ( () => this.overlayRef.destroy() );
+      } else {
+        this.overlayRef.destroy();
+      }
+    }
   }
 
   private _fireHook<T>(name: 'beforeClose' | 'beforeDismiss'): Promise<T> {
-    const instance: ModalComponent<this> = this.contentRef && this.contentRef.instance,
-      fn: Function = instance && typeof instance[name] === 'function' && instance[name];
+    const gurad = this.closeGuard,
+          fn: Function = gurad && typeof gurad[name] === 'function' && gurad[name];
 
-    return Promise.resolve(fn ? fn.call(instance) : false);
+    return Promise.resolve(fn ? fn.call(gurad) : false);
   }
 }
+
+export type MaybeDialogRef<T> = DialogRef<T> | Promise<DialogRef<T>>;

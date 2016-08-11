@@ -8,7 +8,7 @@ import {
   Modal as BaseModal,
   ModalBackdropComponent,
   ModalDropInFactory,
-  ModalRenderer,
+  OverlayRenderer,
   DROP_IN_TYPE
 } from '../../../../components/angular2-modal';
 
@@ -16,7 +16,7 @@ function getProviders(): any[] {
   return [
     { provide: BaseModal, useClass: Modal },
     { provide: Modal, useClass: Modal },
-    { provide: ModalRenderer, useClass: JSNativeModalRenderer },
+    { provide: OverlayRenderer, useClass: JSNativeModalRenderer },
     { provide: ModalBackdropComponent, useValue: {} },
     { provide: ModalDropInFactory, useValue: {
       alert: modal => new JSNativePresetBuilder(modal, DROP_IN_TYPE.alert),

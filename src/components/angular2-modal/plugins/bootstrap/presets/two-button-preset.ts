@@ -1,10 +1,6 @@
 import { ResolvedReflectiveProvider } from '@angular/core';
-import {
-  FluentAssignMethod,
-    extend
-} from '../../../../../components/angular2-modal';
-import { Modal } from '../../../../../components/angular2-modal';
-import { BSMessageModal } from '../message-modal';
+import { Modalת FluentAssignMethodת extend } from '../../../../../components/angular2-modal';
+import { BSMessageModal } from '../message-modal.component';
 import { MessageModalPresetBuilder } from './message-modal-preset';
 import { OneButtonPreset } from './one-button-preset';
 
