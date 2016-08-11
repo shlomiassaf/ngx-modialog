@@ -1,12 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 
-import {
-  Modal,
-  // Not used but if not set, TS build errors:
-  // Return type of exported function has or is using name 'X'from external module 'Y'
-  // but cannot be named.
-  BSModal
-} from '../../../../components/angular2-modal/plugins/bootstrap';
+import { Modal } from '../../../../components/angular2-modal/plugins/bootstrap';
 
 import { DemoHead, ModalCommandDescriptor } from '../../demo-head/index';
 import { AdditionCalculateWindowData, AdditionCalculateWindow } from './custom-modal-sample';
