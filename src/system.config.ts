@@ -50,6 +50,7 @@ getScripts(prefix, scripts, function () {
       '@angular/compiler': 'vendor/@angular/compiler/bundles/compiler.umd.js',
       '@angular/platform-browser': 'vendor/@angular/platform-browser/bundles/platform-browser.umd.js',
       '@angular/platform-browser-dynamic': 'vendor/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
+      '@angular/forms': 'vendor/@angular/forms/bundles/forms.umd.js',
       '@angular/router': 'vendor/@angular/router/bundles/router.umd.js',
 
       'angular2-modal': 'components/angular2-modal',

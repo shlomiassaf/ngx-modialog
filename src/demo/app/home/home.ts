@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, ViewContainerRef, ViewChild, TemplateRef} from '@angular/core';
 
-import { InAppModalModule, Modal } from './in-app-plugin';
+import { InAppModalModule, Modal } from './in-app-plugin/index';
 
 @Component({
     selector: 'home',
