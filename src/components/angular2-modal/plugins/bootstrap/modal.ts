@@ -1,4 +1,4 @@
-import {Modal as BaseModal} from '../../providers/modal';
+import {Modal as BaseModal} from '../../providers';
 import {OneButtonPresetBuilder} from './../bootstrap/presets/one-button-preset';
 import {TwoButtonPresetBuilder} from './../bootstrap/presets/two-button-preset';
 

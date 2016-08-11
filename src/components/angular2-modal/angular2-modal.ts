@@ -1,4 +1,4 @@
-import { Modal } from './providers/modal';
+import { Modal } from './providers';
 
 export * from './framework/fluent-assign';
 export { createComponent } from './framework/createComponent';
@@ -14,8 +14,7 @@ export {
     ModalRenderer
 } from './models/tokens';
 
-export { Modal } from './providers/modal';
-export { DOMModalRenderer } from './providers/dom-modal-renderer';
+export { Modal, DOMModalRenderer } from './providers';
 
 export {
     DEFAULT_VALUES,

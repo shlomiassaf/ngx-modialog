@@ -4,7 +4,7 @@ import {
     Type
 } from '@angular/core';
 
-import { Modal } from '../providers/modal';
+import { Modal } from '../providers';
 import { DialogRef } from './dialog-ref';
 import { ModalControllingContextBuilder } from '../models/modal-context';
 
