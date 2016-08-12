@@ -1,9 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { Modal } from '../../../../components/angular2-modal/plugins/bootstrap';
+import { OverlayConfig } from '../../../../components/angular2-modal';
+import { Modal, BSModalContextBuilder } from '../../../../components/angular2-modal/plugins/bootstrap';
 
-import { DemoHead, ModalCommandDescriptor } from '../../demo-head/index';
-import { AdditionCalculateWindowData, AdditionCalculateWindow } from './custom-modal-sample';
+import { ModalCommandDescriptor } from '../../demo-head/index';
+import { CustomModalContext, CustomModal } from './custom-modal-sample';
 import * as presets from '../presets';
 
 
@@ -14,8 +15,6 @@ import * as presets from '../presets';
 })
 export class BootstrapDemoPage {
   public modalCommands: ModalCommandDescriptor[];
-
-  @ViewChild(DemoHead) private demoHead: DemoHead;
 
   constructor(public modal: Modal) {
     this.modalCommands = [
@@ -37,12 +36,24 @@ export class BootstrapDemoPage {
       },
       {
         text: 'In Element example',
-        factory: () => presets.inElement(this.modal).open(this.demoHead.vcCommands)
+        factory: () => presets.inElement(this.modal).open('demo-head')
       },
       {
         text: 'Custom Modal example',
-        factory: () =>
-          this.modal.open(AdditionCalculateWindow, new AdditionCalculateWindowData(2, 3))
+        factory: () => {
+          const builder = new BSModalContextBuilder<CustomModalContext>(
+            { num1: 2, num2: 3 } as any,
+            undefined,
+            CustomModalContext
+          );
+
+          let overlayConfig: OverlayConfig = {
+            context: builder.toJSON()
+          };
+
+          return this.modal.open(CustomModal, overlayConfig);
+        }
+
       }
     ];
   }

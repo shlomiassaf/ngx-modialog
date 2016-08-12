@@ -1,13 +1,13 @@
 import {
   ComponentRef,
   ViewContainerRef,
-  ResolvedReflectiveProvider,
-  Type
+  ResolvedReflectiveProvider
 } from '@angular/core';
 
 import { ModalOverlay } from '../overlay';
 import { DialogRef } from './dialog-ref';
 import { OverlayContext } from '../models/overlay-context';
+import { Maybe } from '../framework/utils';
 
 export enum DROP_IN_TYPE {
   alert,
@@ -18,7 +18,7 @@ export enum DROP_IN_TYPE {
 export type WideVCRef = ViewContainerRef | string;
 
 export interface OverlayPlugin extends Function {
-  <T>(component: any, dialogRef: DialogRef<T>, config: OverlayConfig): DialogRef<T> | Promise<DialogRef<T>>;
+  <T>(component: any, dialogRef: DialogRef<T>, config: OverlayConfig): Maybe<DialogRef<any>>;
 }
 
 export interface OverlayConfig {
@@ -26,7 +26,7 @@ export interface OverlayConfig {
    * The context for the modal, attached to the dialog instance, DialogRef.context.
    * Default: {}
    */
-  context?: OverlayContext
+  context?: OverlayContext;
 
   /**
    * Resolved providers that will inject into the component provided.
@@ -46,7 +46,12 @@ export interface OverlayConfig {
    */
   inside?: boolean;
 
-  overlayPlugins?: OverlayPlugin | Array<OverlayPlugin>
+  renderer?: OverlayRenderer;
+
+  /**
+   * Not used yet.
+   */
+  overlayPlugins?: OverlayPlugin | Array<OverlayPlugin>;
 }
 
 export interface ModalComponent<T> {
@@ -67,15 +72,7 @@ export interface CloseGuard {
   beforeClose?(): boolean | Promise<boolean>;
 }
 
-
-export class ModalCompileConfig {
-  constructor(public component: Type, public bindings: ResolvedReflectiveProvider[]) {
-  }
-}
-
 export abstract class OverlayRenderer {
   public abstract render(dialogRef: DialogRef<any>,
                          vcRef: ViewContainerRef): ComponentRef<ModalOverlay>;
 }
-
-export abstract class ModalBackdropComponent extends Type { }

@@ -1,13 +1,15 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ModalModule } from '../../components/angular2-modal';
+
 import { DemoHead } from './demo-head/index';
 
 
 @NgModule({
-  imports: [ CommonModule ],
+  imports: [ CommonModule, ModalModule ], // we need ModalModule since DemoHead uses directives from it
   declarations: [ DemoHead ],
-  exports: [ DemoHead ]
+  exports: [ DemoHead, ModalModule ]
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

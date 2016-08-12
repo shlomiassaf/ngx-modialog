@@ -11,7 +11,7 @@ import {
 } from './message-modal.component';
 
 
-import { Modal as BaseModal } from '../../../angular2-modal';
+import { ModalModule, Modal as BaseModal } from '../../../angular2-modal';
 
 function getProviders(): any[] {
   return [
@@ -21,7 +21,7 @@ function getProviders(): any[] {
 }
 
 @NgModule({
-  imports: [ CommonModule ],
+  imports: [ ModalModule, CommonModule ],
   declarations: [
     BSModalFooter
     BSMessageModalTitle,

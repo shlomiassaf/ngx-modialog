@@ -11,6 +11,7 @@ import { DomSanitizationService } from '@angular/platform-browser';
 
 import { BaseDynamicComponent } from './base-dynamic-component';
 import { DialogRef } from '../../angular2-modal';
+import { Class } from '../framework/utils';
 
 /**
  * A component that acts as a top level container for an open modal window.
@@ -38,7 +39,7 @@ export class CSSDialogContainer extends BaseDynamicComponent {
     this.activateAnimationListener();
   }
 
-  addComponent<T>(type: new(...args: any[]) => T, bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {
+  addComponent<T>(type: Class<T>, bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {
     return super._addComponent<T>(type, this.vcRef, bindings);
   }
 

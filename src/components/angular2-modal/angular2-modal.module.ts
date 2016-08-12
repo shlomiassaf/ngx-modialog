@@ -21,6 +21,12 @@ import { Overlay, ModalOverlay } from './overlay';
     OverlayDialogBoundary,
     OverlayTarget
   ],
+  exports: [
+    CSSBackdrop,
+    CSSDialogContainer,
+    OverlayDialogBoundary,
+    OverlayTarget
+  ],
   entryComponents: [
     ModalOverlay,
     CSSBackdrop,
@@ -32,7 +38,7 @@ export class ModalModule {
     return {
       ngModule: ModalModule,
       providers: [
-        { provide: Overlay, useClass: Overlay },
+        Overlay,
         { provide: OverlayRenderer, useClass: DOMOverlayRenderer },
         { provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true },
       ]

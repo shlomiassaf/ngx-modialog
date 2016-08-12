@@ -1,17 +1,19 @@
 import { Modal } from './providers';
 
 export * from './framework/fluent-assign';
-export { extend, arrayUnion, PromiseCompleter } from './framework/utils';
+export { extend, arrayUnion, PromiseCompleter, Maybe } from './framework/utils';
 export { createComponent } from './framework/createComponent';
 
-export { DialogRef, MaybeDialogRef } from './models/dialog-ref';
+export * from './models/errors';
+
+export { DialogRef } from './models/dialog-ref';
 
 export {
   DROP_IN_TYPE,
-  ModalBackdropComponent,
   ModalComponent,
-  ModalCompileConfig,
-  OverlayRenderer
+  OverlayRenderer,
+  OverlayConfig,
+  CloseGuard
 } from './models/tokens';
 
 export { Modal, DOMOverlayRenderer } from './providers';

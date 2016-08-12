@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 
 import {
+  Maybe,
   Overlay,
   DialogRef,
   Modal as Modal_,
@@ -38,9 +39,9 @@ export class Modal extends Modal_ {
     return new TwoButtonPresetBuilder(this, <any>{isBlocking: true, keyboard: null});
   }
 
-  protected beforeOpen(dialogRef: DialogRef<any>,
-                       type: any,
-                       bindings?: RRP[]): DialogRef<any> | Promise<DialogRef<any>> {
+  protected create(dialogRef: DialogRef<any>,
+                   type: any,
+                   bindings?: RRP[]): Maybe<DialogRef<any>> {
 
     let refs = this.createModal(dialogRef, CSSBackdrop, CSSDialogContainer);
 

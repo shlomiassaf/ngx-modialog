@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 
-import { DialogRef, ModalComponent } from '../../../../components/angular2-modal';
+import { DialogRef, ModalComponent, CloseGuard } from '../../../../components/angular2-modal';
 import { BSModalContext } from '../../../../components/angular2-modal/plugins/bootstrap/index';
 
-export class AdditionCalculateWindowData extends BSModalContext {
-  constructor(public num1: number, public num2: number) {
-    super();
-  }
+export class CustomModalContext extends BSModalContext {
+  public num1: number;
+  public num2: number;
 }
 
 /**
@@ -50,14 +49,15 @@ export class AdditionCalculateWindowData extends BSModalContext {
             </div>
         </div>`
 })
-export class AdditionCalculateWindow implements ModalComponent<AdditionCalculateWindowData> {
-  context: AdditionCalculateWindowData;
+export class CustomModal implements CloseGuard, ModalComponent<CustomModalContext> {
+  context: CustomModalContext;
 
   public wrongAnswer: boolean;
 
-  constructor(public dialog: DialogRef<AdditionCalculateWindowData>) {
+  constructor(public dialog: DialogRef<CustomModalContext>) {
     this.context = dialog.context;
     this.wrongAnswer = true;
+    dialog.setCloseGuard(this);
   }
 
   onKeyUp(value) {
