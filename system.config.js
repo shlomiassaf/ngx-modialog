@@ -51,6 +51,8 @@ getScripts(prefix, scripts, function () {
             'demo': { defaultExtension: 'js' },
             'components/angular2-modal': { main: 'index.js', defaultExtension: 'js' },
             'components/angular2-modal/providers': { main: 'index.js', defaultExtension: 'js' },
+            'components/angular2-modal/overlay': { main: 'index.js', defaultExtension: 'js' },
+            'components/angular2-modal/components': { main: 'index.js', defaultExtension: 'js' },
             'components/angular2-modal/platform-browser': { main: 'index.js', defaultExtension: 'js' },
             'components/angular2-modal/plugins/bootstrap': { main: 'index.js', defaultExtension: 'js' },
             'components/angular2-modal/plugins/vex': { main: 'index.js', defaultExtension: 'js' },
