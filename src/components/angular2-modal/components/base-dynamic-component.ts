@@ -11,7 +11,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { DomSanitizationService, SafeStyle } from '@angular/platform-browser';
-import { createComponent } from "../framework/createComponent";
+import { createComponent } from '../framework/createComponent';
 
 const BROWSER_PREFIX = ['webkit', 'moz', 'MS', 'o', ''];
 

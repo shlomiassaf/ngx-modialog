@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 import { PromiseCompleter } from '../framework/utils';
 import { Overlay, ModalOverlay } from '../overlay';
 import { CloseGuard } from '../models/tokens';
+import { DialogBailOutError } from '../models/errors';
 
 /**
  * API to an open modal window.
@@ -94,7 +95,7 @@ export class DialogRef<T> {
       this.destroyed = true;
       this._onDestroy.next(null);
       this._onDestroy.complete();
-      this._resultDeferred.reject();
+      this._resultDeferred.reject(new DialogBailOutError());
     }
   }
 
@@ -122,5 +123,3 @@ export class DialogRef<T> {
     return Promise.resolve(fn ? fn.call(gurad) : false);
   }
 }
-
-export type MaybeDialogRef<T> = DialogRef<T> | Promise<DialogRef<T>>;

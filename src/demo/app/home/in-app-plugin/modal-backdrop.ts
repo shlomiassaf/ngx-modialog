@@ -48,9 +48,18 @@ article .content {
     background: rgba(255, 255, 255, 0.66);
 }`
   ],
-  templateUrl: './modal-backdrop.html'
+  template: `<div class="in-app-modal-backdrop">
+    <article>
+        <div class="title">
+            <span>{{dialog.context.title}}</span>
+        </div>
+        <div class="content">
+            <template [ngTemplateOutlet]="dialog.context.templateRef"></template>
+        </div>
+    </article>    
+</div>`
 })
 export class InAppModalBackdrop {
-
-  constructor(private dialog: DialogRef<InAppModalContext>) { }
+  constructor(private dialog: DialogRef<InAppModalContext>) {
+  }
 }

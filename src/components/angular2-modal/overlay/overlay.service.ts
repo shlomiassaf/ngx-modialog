@@ -43,7 +43,7 @@ export abstract class Overlay {
   /**
    * Opens a modal window inside an existing component.
    */
-  open<T extends OverlayContext>(context: T, config?: OverlayConfig): DialogRef<T>[] {
+  open<T extends OverlayContext>(config: OverlayConfig): DialogRef<T>[] {
     let viewContainer = config.viewContainer,
         containers: Array<ViewContainerRef> = [];
 
@@ -62,18 +62,20 @@ export abstract class Overlay {
       containers = [this.defaultViewContainer];
     }
 
-    return containers.map( vc => this.createOverlay(context, vc, config.inside));
+    return containers.map( vc => this.createOverlay(config.renderer || this._modalRenderer, vc, config));
   }
 
-  private createOverlay(context: any, vcRef: ViewContainerRef, inside: boolean): DialogRef<any> {
-    if (context) {
-      context.normalize();
+  private createOverlay(renderer: OverlayRenderer,
+                        vcRef: ViewContainerRef,
+                        config: OverlayConfig): DialogRef<any> {
+    if (config.context) {
+      config.context.normalize();
     }
 
-    let dialog = new DialogRef<any>(this, context || {});
-    dialog.inElement = inside === undefined ? !!vcRef : !!inside;
+    let dialog = new DialogRef<any>(this, config.context || {});
+    dialog.inElement = config.inside === undefined ? !!vcRef : !!config.inside;
 
-    let cmpRef = this._modalRenderer.render(dialog, vcRef);
+    let cmpRef = renderer.render(dialog, vcRef);
 
     Object.defineProperty(dialog, 'overlayRef', {value: cmpRef});
     _stack.pushManaged(dialog);

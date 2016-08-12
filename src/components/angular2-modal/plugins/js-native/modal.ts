@@ -1,11 +1,40 @@
-import {Modal as BaseModal} from '../../../../components/angular2-modal';
-import {JSNativePresetBuilder} from './presets/js-native-preset';
+import { Injectable,   ResolvedReflectiveProvider as RRP } from '@angular/core';
 
-export interface JSNativeModal extends BaseModal {
-    alert(): JSNativePresetBuilder;
-    prompt(): JSNativePresetBuilder;
-    confirm(): JSNativePresetBuilder;
+import {
+  DialogRef,
+  Maybe,
+  Overlay,
+  DROP_IN_TYPE,
+  Modal as Modal_
+} from '../../../../components/angular2-modal';
+
+import { JSNativePresetBuilder } from './presets/js-native-preset';
+
+@Injectable()
+export class Modal extends Modal_ {
+  constructor(overlay: Overlay) {
+    super(overlay);
+  }
+
+  alert(): JSNativePresetBuilder {
+    return new JSNativePresetBuilder(this, DROP_IN_TYPE.alert);
+  }
+
+  prompt(): JSNativePresetBuilder {
+    return new JSNativePresetBuilder(this, DROP_IN_TYPE.prompt);
+  }
+
+  confirm(): JSNativePresetBuilder {
+    return new JSNativePresetBuilder(this, DROP_IN_TYPE.confirm);
+  }
+
+  protected create(dialogRef: DialogRef<any>,
+                   type: any,
+                   bindings?: RRP[]): Maybe<DialogRef<any>> {
+    return dialogRef;
+  }
+
 }
 
-export const Modal = BaseModal;
-export type Modal = JSNativeModal;
+
+

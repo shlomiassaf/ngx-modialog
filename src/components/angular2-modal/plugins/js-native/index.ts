@@ -1,6 +1,6 @@
 import { Modal } from './modal';
 
-export { Modal, JSNativeModal } from './modal';
+export { Modal } from './modal';
 export {
     JSNativeModalContext,
     JSNativeModalContextBuilder

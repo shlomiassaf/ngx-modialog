@@ -5,8 +5,9 @@ import {
 } from '@angular/core';
 
 import { Overlay } from '../overlay';
+import { Class, Maybe } from '../framework/utils';
 import { OverlayConfig } from '../models/tokens';
-import { DialogRef, MaybeDialogRef } from '../angular2-modal';
+import { DialogRef } from '../angular2-modal';
 import { ModalControllingContextBuilder } from '../models/overlay-context';
 
 export class UnsupportedDropInError extends Error {
@@ -41,7 +42,7 @@ export abstract class Modal {
   open(componentType: any, config?: OverlayConfig): Promise<DialogRef<any>> {
     config = config || {} as any;
     try {
-      let dialogs = this.overlay.open(config.context, config);
+      let dialogs = this.overlay.open(config);
 
       if (dialogs.length > 1) {
         console.warn(`Attempt to open more then 1 overlay detected.
@@ -51,7 +52,7 @@ export abstract class Modal {
       // TODO:  Currently supporting 1 view container, hence working on dialogs[0].
       //        upgrade to multiple containers.
       return Promise.resolve(
-        this.beforeOpen(dialogs[0], componentType, config.bindings)
+        this.create(dialogs[0], componentType, config.bindings)
       );
 
     } catch (e) {
@@ -65,13 +66,12 @@ export abstract class Modal {
    * @param dialogRef
    * @param type
    * @param bindings
-   * @returns {DialogRef<any>}
+   * @returns {MaybeDialogRef<any>}
    */
-  protected beforeOpen(dialogRef: DialogRef<any>,
-                       type: any,
-                       bindings?: ResolvedReflectiveProvider[]): MaybeDialogRef<any> {
-    return dialogRef;
-  }
+  protected abstract create(dialogRef: DialogRef<any>,
+                            type: any,
+                            bindings?: ResolvedReflectiveProvider[]): Maybe<DialogRef<any>>;
+
 
   /**
    * A helper function for derived classes to create backdrop & container
@@ -80,7 +80,7 @@ export abstract class Modal {
    * @param container
    * @returns { backdropRef: ComponentRef<B>, containerRef: ComponentRef<C> }
    */
-  protected createModal<B, C>(dialogRef: DialogRef<any>, backdrop: new(...args: any[]) => B, container: new(...args: any[]) => C)
+  protected createModal<B, C>(dialogRef: DialogRef<any>, backdrop: Class<B>, container: Class<C>)
                                 : { backdropRef: ComponentRef<B>, containerRef: ComponentRef<C> } {
     const b = ReflectiveInjector.resolve([{provide: DialogRef, useValue: dialogRef}]);
 
@@ -89,4 +89,5 @@ export abstract class Modal {
       containerRef: dialogRef.overlayRef.instance.addComponent<C>(container, b)
     };
   }
+
 }

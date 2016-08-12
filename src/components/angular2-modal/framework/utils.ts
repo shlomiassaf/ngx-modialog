@@ -84,4 +84,10 @@ export class PromiseCompleter<R> {
   }
 }
 
+export interface Class<T> {
+  new(...args: any[]): T;
+}
+
+export type Maybe<T> = T | Promise<T>;
+
 export function noop() { }
