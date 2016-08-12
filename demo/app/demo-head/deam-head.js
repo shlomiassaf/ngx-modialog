@@ -44,17 +44,13 @@ var DemoHead = (function () {
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
     ], DemoHead.prototype, "dropInClick", void 0);
-    __decorate([
-        core_1.ViewChild('commands', { read: core_1.ViewContainerRef }), 
-        __metadata('design:type', core_1.ViewContainerRef)
-    ], DemoHead.prototype, "vcCommands", void 0);
     DemoHead = __decorate([
         core_1.Component({
             selector: 'demo-head',
             styles: [
                 "\n      .btn-dropin {\n          text-transform: uppercase;\n          margin: 15px;\n          background-color: #219161;\n          border: none;\n          box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);\n          border-radius: 0;\n      }\n      "
             ],
-            template: "\n              <section class=\"section  padding--small\">\n                  <div class=\"container\">\n                      <h2>{{title}}</h2>\n                      <p class=\"lead\" [innerHtml]=\"description\"></p>\n                      <br>\n                      <ng-content select=\"[extra-desc-content]\"></ng-content>\n                  </div>\n                  <section #commands class=\"section background-gray-lighter padding--small\" style=\"text-align: center\">\n                      <button class=\"btn btn-white btn-dropin\" *ngFor=\"let btn of modalCommands\" (click)=\"onClick($event, btn)\">{{btn.text}}</button>\n                      <h5>Last modal result: {{result}}</h5>\n                  </section>\n\n\n                  <ng-content></ng-content>\n              </section>\n            ",
+            template: "\n              <section class=\"section  padding--small\">\n                  <div class=\"container\">\n                      <h2>{{title}}</h2>\n                      <p class=\"lead\" [innerHtml]=\"description\"></p>\n                      <br>\n                      <ng-content select=\"[extra-desc-content]\"></ng-content>\n                  </div>\n                  <section overlayTarget=\"demo-head\" class=\"section background-gray-lighter padding--small\" style=\"text-align: center\">\n                      <button class=\"btn btn-white btn-dropin\" *ngFor=\"let btn of modalCommands\" (click)=\"onClick($event, btn)\">{{btn.text}}</button>\n                      <h5>Last modal result: {{result}}</h5>\n                  </section>\n\n\n                  <ng-content></ng-content>\n              </section>\n            ",
             encapsulation: core_1.ViewEncapsulation.Emulated
         }), 
         __metadata('design:paramtypes', [])

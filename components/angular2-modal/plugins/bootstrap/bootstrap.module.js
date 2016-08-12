@@ -11,23 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var modal_1 = require('./modal');
-var modal_backdrop_1 = require('./modal-backdrop');
-var message_modal_1 = require('./message-modal');
-var modal_container_1 = require('./modal-container');
-var modal_footer_1 = require('./modal-footer');
-var one_button_preset_1 = require('./presets/one-button-preset');
-var two_button_preset_1 = require('./presets/two-button-preset');
-var angular2_modal_1 = require('../../angular2-modal');
+var modal_container_component_1 = require('./modal-container.component');
+var message_modal_component_1 = require('./message-modal.component');
+var angular2_modal_1 = require('../../../angular2-modal');
 function getProviders() {
     return [
         { provide: angular2_modal_1.Modal, useClass: modal_1.Modal },
-        { provide: modal_1.Modal, useClass: modal_1.Modal },
-        { provide: angular2_modal_1.ModalBackdropComponent, useValue: modal_backdrop_1.BSModalBackdrop },
-        { provide: angular2_modal_1.ModalDropInFactory, useValue: {
-                alert: function (modal) { return new one_button_preset_1.OneButtonPresetBuilder(modal, { isBlocking: false }); },
-                prompt: function (modal) { return new one_button_preset_1.OneButtonPresetBuilder(modal, { isBlocking: true, keyboard: null }); },
-                confirm: function (modal) { return new two_button_preset_1.TwoButtonPresetBuilder(modal, { isBlocking: true, keyboard: null }); }
-            } }
+        { provide: modal_1.Modal, useClass: modal_1.Modal }
     ];
 }
 var BootstrapModalModule = (function () {
@@ -38,17 +28,18 @@ var BootstrapModalModule = (function () {
     };
     BootstrapModalModule = __decorate([
         core_1.NgModule({
-            imports: [common_1.CommonModule],
+            imports: [angular2_modal_1.ModalModule, common_1.CommonModule],
             declarations: [
-                modal_backdrop_1.BSModalBackdrop,
-                message_modal_1.BSMessageModal,
-                modal_container_1.BSModalContainer,
-                modal_footer_1.BSModalFooter
+                modal_container_component_1.BSModalContainer,
+                message_modal_component_1.BSMessageModal,
+                message_modal_component_1.BSMessageModalTitle,
+                message_modal_component_1.BSMessageModalBody,
+                message_modal_component_1.BSModalFooter
             ],
             providers: getProviders(),
             entryComponents: [
-                modal_backdrop_1.BSModalBackdrop,
-                message_modal_1.BSMessageModal
+                modal_container_component_1.BSModalContainer,
+                message_modal_component_1.BSMessageModal
             ]
         }), 
         __metadata('design:paramtypes', [])

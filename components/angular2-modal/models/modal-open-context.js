@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var modal_1 = require('../providers/modal');
+var providers_1 = require('../providers');
 var modal_context_1 = require('./modal-context');
 var utils_1 = require('../framework/utils');
 var DEFAULT_SETTERS = [
@@ -44,12 +44,16 @@ var ModalOpenContextBuilder = (function (_super) {
      * @returns Promise<DialogRef>
      */
     ModalOpenContextBuilder.prototype.open = function (viewContainer) {
-        var config = this.toJSON();
-        if (!(config.modal instanceof modal_1.Modal)) {
+        var context = this.toJSON();
+        if (!(context.modal instanceof providers_1.Modal)) {
             return Promise.reject(new Error('Configuration Error: modal service not set.'));
         }
-        var bindings = typeof this.$$beforeOpen === 'function' && this.$$beforeOpen(config);
-        return config.modal.open(config.component, config, bindings, viewContainer);
+        var overlayConfig = {
+            context: context,
+            viewContainer: viewContainer,
+            bindings: typeof this.$$beforeOpen === 'function' && this.$$beforeOpen(context)
+        };
+        return context.modal.open(context.component, overlayConfig);
     };
     return ModalOpenContextBuilder;
 }(modal_context_1.ModalContextBuilder));

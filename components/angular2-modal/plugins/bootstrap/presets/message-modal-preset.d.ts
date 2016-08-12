@@ -1,5 +1,5 @@
 import { FluentAssignMethod } from '../../../framework/fluent-assign';
-import { BSMessageModalButtonConfig, BSMessageModalButtonHandler } from '../message-modal';
+import { BSMessageModalButtonConfig, BSMessageModalButtonHandler } from '../message-modal.component';
 import { BSModalContext, BSModalContextBuilder } from '../modal-context';
 /**
  * Data definition

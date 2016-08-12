@@ -1,14 +1,48 @@
-import { ViewContainerRef, ResolvedReflectiveProvider, Type } from '@angular/core';
-import { Modal } from '../providers/modal';
+import { ComponentRef, ViewContainerRef, ResolvedReflectiveProvider } from '@angular/core';
+import { ModalOverlay } from '../overlay';
 import { DialogRef } from './dialog-ref';
-import { ModalControllingContextBuilder } from '../models/modal-context';
+import { OverlayContext } from '../models/overlay-context';
+import { Maybe } from '../framework/utils';
 export declare enum DROP_IN_TYPE {
     alert = 0,
     prompt = 1,
     confirm = 2,
 }
+export declare type WideVCRef = ViewContainerRef | string;
+export interface OverlayPlugin extends Function {
+    <T>(component: any, dialogRef: DialogRef<T>, config: OverlayConfig): Maybe<DialogRef<any>>;
+}
+export interface OverlayConfig {
+    /**
+     * The context for the modal, attached to the dialog instance, DialogRef.context.
+     * Default: {}
+     */
+    context?: OverlayContext;
+    /**
+     * Resolved providers that will inject into the component provided.
+     */
+    bindings?: ResolvedReflectiveProvider[];
+    /**
+     *  The element to block using the modal.
+     *  Default: The value set in defaultViewContainer.
+     */
+    viewContainer?: WideVCRef;
+    /**
+     * If true, render's the component inside the ViewContainerRef,
+     * otherwise render's the component in the root element (body in DOM)
+     * Default: true if ViewContainer supplied, false if not supplied.
+     */
+    inside?: boolean;
+    renderer?: OverlayRenderer;
+    /**
+     * Not used yet.
+     */
+    overlayPlugins?: OverlayPlugin | Array<OverlayPlugin>;
+}
 export interface ModalComponent<T> {
     dialog: DialogRef<T>;
+}
+export interface CloseGuard {
     /**
      * Invoked before a modal is dismissed.
      * @return true or a promise that resolves to true to cancel dismissal.
@@ -20,18 +54,6 @@ export interface ModalComponent<T> {
      */
     beforeClose?(): boolean | Promise<boolean>;
 }
-export declare class ModalCompileConfig {
-    component: Type;
-    bindings: ResolvedReflectiveProvider[];
-    constructor(component: Type, bindings: ResolvedReflectiveProvider[]);
-}
-export declare abstract class ModalRenderer {
-    abstract render(type: Type, viewContainer: ViewContainerRef, bindings: ResolvedReflectiveProvider[], dialog: DialogRef<any>): DialogRef<any>;
-}
-export declare abstract class ModalBackdropComponent extends Type {
-}
-export declare class ModalDropInFactory {
-    alert: <T>(modal: Modal) => ModalControllingContextBuilder<T>;
-    prompt: <T>(modal: Modal) => ModalControllingContextBuilder<T>;
-    confirm: <T>(modal: Modal) => ModalControllingContextBuilder<T>;
+export declare abstract class OverlayRenderer {
+    abstract render(dialogRef: DialogRef<any>, vcRef: ViewContainerRef): ComponentRef<ModalOverlay>;
 }

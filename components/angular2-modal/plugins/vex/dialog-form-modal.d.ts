@@ -1,5 +1,5 @@
 import { ComponentFactoryResolver, AfterViewInit, EventEmitter } from '@angular/core';
-import { ModalComponent, ModalCompileConfig } from '../../models/tokens';
+import { ModalComponent } from '../../models/tokens';
 import { DialogRef } from '../../models/dialog-ref';
 import { DialogPreset } from './presets/dialog-preset';
 import { DropInPreset } from './presets/dropin-preset';
@@ -39,11 +39,10 @@ export declare class VEXDialogButtons {
  */
 export declare class DialogFormModal implements AfterViewInit, ModalComponent<DialogPreset> {
     dialog: DialogRef<DialogPreset>;
-    private _compileConfig;
     private _cr;
     private context;
     private _viewContainer;
-    constructor(dialog: DialogRef<DialogPreset>, _compileConfig: ModalCompileConfig, _cr: ComponentFactoryResolver);
+    constructor(dialog: DialogRef<DialogPreset>, _cr: ComponentFactoryResolver);
     ngAfterViewInit(): void;
     onButtonClick($event: VEXButtonClickEvent): void;
 }

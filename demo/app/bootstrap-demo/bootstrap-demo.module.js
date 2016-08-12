@@ -25,9 +25,9 @@ var BootstrapDemoModule = (function () {
             declarations: [
                 bootstrap_demo_1.BootstrapDemo,
                 bootstrap_demo_page_1.BootstrapDemoPage,
-                custom_modal_sample_1.AdditionCalculateWindow
+                custom_modal_sample_1.CustomModal
             ],
-            entryComponents: [custom_modal_sample_1.AdditionCalculateWindow]
+            entryComponents: [custom_modal_sample_1.CustomModal]
         }), 
         __metadata('design:paramtypes', [])
     ], BootstrapDemoModule);

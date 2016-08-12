@@ -42,4 +42,8 @@ export declare class PromiseCompleter<R> {
     reject: (error?: any, stackTrace?: string) => void;
     constructor();
 }
+export interface Class<T> {
+    new (...args: any[]): T;
+}
+export declare type Maybe<T> = T | Promise<T>;
 export declare function noop(): void;

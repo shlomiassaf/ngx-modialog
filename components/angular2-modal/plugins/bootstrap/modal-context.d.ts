@@ -37,5 +37,5 @@ export declare class BSModalContextBuilder<T extends BSModalContext> extends Mod
      * When true, show a close button on the top right corner.
      */
     showClose: FluentAssignMethod<boolean, this>;
-    constructor(defaultValues?: T, initialSetters?: string[], baseType?: new () => T);
+    constructor(defaultValues?: T, initialSetters?: string[], baseType?: any);
 }

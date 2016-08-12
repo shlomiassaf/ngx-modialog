@@ -1,11 +1,13 @@
 "use strict";
 var Subject_1 = require('rxjs/Subject');
 var utils_1 = require('../framework/utils');
+var errors_1 = require('../models/errors');
 /**
  * API to an open modal window.
  */
 var DialogRef = (function () {
-    function DialogRef(context) {
+    function DialogRef(overlay, context) {
+        this.overlay = overlay;
         this.context = context;
         this._resultDeferred = new utils_1.PromiseCompleter();
         this._onDestroy = new Subject_1.Subject();
@@ -22,6 +24,13 @@ var DialogRef = (function () {
         enumerable: true,
         configurable: true
     });
+    /**
+     * Set a close/dismiss guard
+     * @param g
+     */
+    DialogRef.prototype.setCloseGuard = function (guard) {
+        this.closeGuard = guard;
+    };
     /**
      *  Close the modal with a return value, i.e: result.
      */
@@ -53,13 +62,37 @@ var DialogRef = (function () {
             .then(function (value) { return value !== true && _dismiss(); })
             .catch(_dismiss);
     };
+    /**
+     * Gracefully close the overlay/dialog with a rejected result.
+     * Does not trigger canDestroy on the overlay.
+     */
+    DialogRef.prototype.bailOut = function () {
+        if (this.destroyed !== true) {
+            this.destroyed = true;
+            this._onDestroy.next(null);
+            this._onDestroy.complete();
+            this._resultDeferred.reject(new errors_1.DialogBailOutError());
+        }
+    };
     DialogRef.prototype.destroy = function () {
-        this._onDestroy.next(null);
-        this._onDestroy.complete();
+        var _this = this;
+        if (this.destroyed !== true) {
+            this.destroyed = true;
+            this._onDestroy.next(null);
+            this._onDestroy.complete();
+            if (typeof this.overlayRef.instance.canDestroy === 'function') {
+                this.overlayRef.instance.canDestroy()
+                    .catch(function () { })
+                    .then(function () { return _this.overlayRef.destroy(); });
+            }
+            else {
+                this.overlayRef.destroy();
+            }
+        }
     };
     DialogRef.prototype._fireHook = function (name) {
-        var instance = this.contentRef && this.contentRef.instance, fn = instance && typeof instance[name] === 'function' && instance[name];
-        return Promise.resolve(fn ? fn.call(instance) : false);
+        var gurad = this.closeGuard, fn = gurad && typeof gurad[name] === 'function' && gurad[name];
+        return Promise.resolve(fn ? fn.call(gurad) : false);
     };
     return DialogRef;
 }());

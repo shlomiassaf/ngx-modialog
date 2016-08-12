@@ -1,120 +1,68 @@
 "use strict";
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var tokens_1 = require('../models/tokens');
-var dialog_ref_stack_1 = require('../models/dialog-ref-stack');
 var angular2_modal_1 = require('../angular2-modal');
-var _stack = new dialog_ref_stack_1.DialogRefStack();
-var unsupportedDropIn = function () {
-    throw new Error('Unsupported Drop-in.');
-};
-var UnsupportedDropInFactory = {
-    alert: unsupportedDropIn,
-    prompt: unsupportedDropIn,
-    confirm: unsupportedDropIn
-};
-function normalizeDropInFactory(dropInFactory) {
-    if (!dropInFactory)
-        return UnsupportedDropInFactory;
-    return ['alert', 'prompt', 'confirm']
-        .reduce(function (dif, key) {
-        if (typeof dif[key] !== 'function')
-            dif[key] = unsupportedDropIn;
-        return dif;
-    }, dropInFactory);
-}
+var UnsupportedDropInError = (function (_super) {
+    __extends(UnsupportedDropInError, _super);
+    function UnsupportedDropInError(dropInName) {
+        _super.call(this);
+        this.message = "Unsupported Drop-In " + dropInName;
+    }
+    return UnsupportedDropInError;
+}(Error));
+exports.UnsupportedDropInError = UnsupportedDropInError;
 var Modal = (function () {
-    function Modal(_modalRenderer, _backdrop, _dropIn) {
-        this._modalRenderer = _modalRenderer;
-        this._backdrop = _backdrop;
-        this._dropIn = normalizeDropInFactory(_dropIn);
+    function Modal(overlay) {
+        this.overlay = overlay;
     }
     Modal.prototype.alert = function () {
-        return this._dropIn.alert(this);
+        throw new UnsupportedDropInError('alert');
     };
     Modal.prototype.prompt = function () {
-        return this._dropIn.prompt(this);
+        throw new UnsupportedDropInError('prompt');
     };
     Modal.prototype.confirm = function () {
-        return this._dropIn.confirm(this);
+        throw new UnsupportedDropInError('confirm');
     };
     /**
      * Opens a modal window inside an existing component.
-     * If
      * @param componentType The angular Component to render as the modal content.
-     * @param bindings Resolved providers that will inject into the component provided.
-     * @param context The context for the modal, attached to the dialog instance, DialogRef.context.
-     *        Default: {}
-     * @param viewContainer The element to block using the modal.
-     *        Default: The value set in defaultViewContainer.
-     * @param inside If true, render's the component inside the ViewContainerRef,
-     *        otherwise render's the component in the root element (body in DOM)
-     *        Default: true if ViewContainer supplied, false if not supplied.
+     * @param config Additional settings.
      * @returns {Promise<DialogRef>}
      */
-    Modal.prototype.open = function (componentType, context, bindings, viewContainer, inside) {
-        if (context === void 0) { context = undefined; }
-        if (bindings === void 0) { bindings = undefined; }
-        if (viewContainer === void 0) { viewContainer = undefined; }
-        inside = inside === undefined ? !!viewContainer : !!inside;
-        if (!viewContainer) {
-            if (!this.defaultViewContainer) {
-                throw new Error('defaultViewContainer not set.');
+    Modal.prototype.open = function (componentType, config) {
+        config = config || {};
+        try {
+            var dialogs = this.overlay.open(config);
+            if (dialogs.length > 1) {
+                console.warn("Attempt to open more then 1 overlay detected.\n        Multiple modal copies are not supported at the moment, \n        only the first viewContainer will display.");
             }
-            viewContainer = this.defaultViewContainer;
+            // TODO:  Currently supporting 1 view container, hence working on dialogs[0].
+            //        upgrade to multiple containers.
+            return Promise.resolve(this.create(dialogs[0], componentType, config.bindings));
         }
-        if (context) {
-            context.normalize();
+        catch (e) {
+            return Promise.reject(e);
         }
-        var dialog = new angular2_modal_1.DialogRef(context || {});
-        dialog.inElement = inside;
-        var compileConfig = new tokens_1.ModalCompileConfig(componentType, bindings || []);
-        var b = core_1.ReflectiveInjector.resolve([
-            { provide: Modal, useValue: this },
-            { provide: tokens_1.ModalRenderer, useValue: this._modalRenderer },
-            { provide: angular2_modal_1.DialogRef, useValue: dialog },
-            { provide: tokens_1.ModalCompileConfig, useValue: compileConfig }
-        ]);
-        this._modalRenderer.render(this._backdrop, viewContainer, b, dialog);
-        _stack.pushManaged(dialog);
-        dialog.onDestroy.subscribe(function () { return _stack.remove(dialog); });
-        return Promise.resolve(dialog);
     };
     /**
-     * Check if a given DialogRef is the top most ref in the stack.
-     * TODO: distinguish between body modal vs in element modal.
+     * A helper function for derived classes to create backdrop & container
      * @param dialogRef
-     * @returns {boolean}
+     * @param backdrop
+     * @param container
+     * @returns { backdropRef: ComponentRef<B>, containerRef: ComponentRef<C> }
      */
-    Modal.prototype.isTopMost = function (dialogRef) {
-        return _stack.indexOf(dialogRef) === _stack.length - 1;
+    Modal.prototype.createModal = function (dialogRef, backdrop, container) {
+        var b = core_1.ReflectiveInjector.resolve([{ provide: angular2_modal_1.DialogRef, useValue: dialogRef }]);
+        return {
+            backdropRef: dialogRef.overlayRef.instance.addComponent(backdrop, b),
+            containerRef: dialogRef.overlayRef.instance.addComponent(container, b)
+        };
     };
-    Modal.prototype.stackPosition = function (dialogRef) {
-        return _stack.indexOf(dialogRef);
-    };
-    Object.defineProperty(Modal.prototype, "stackLength", {
-        get: function () {
-            return _stack.length;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Modal = __decorate([
-        core_1.Injectable(),
-        __param(2, core_1.Optional()), 
-        __metadata('design:paramtypes', [tokens_1.ModalRenderer, tokens_1.ModalBackdropComponent, tokens_1.ModalDropInFactory])
-    ], Modal);
     return Modal;
 }());
 exports.Modal = Modal;

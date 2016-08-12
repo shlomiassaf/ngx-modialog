@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
+var angular2_modal_1 = require("angular2-modal");
 var index_1 = require('./demo-head/index');
 var SharedModule = (function () {
     function SharedModule() {
@@ -22,9 +23,9 @@ var SharedModule = (function () {
     };
     SharedModule = __decorate([
         core_1.NgModule({
-            imports: [common_1.CommonModule],
+            imports: [common_1.CommonModule, angular2_modal_1.ModalModule],
             declarations: [index_1.DemoHead],
-            exports: [index_1.DemoHead]
+            exports: [index_1.DemoHead, angular2_modal_1.ModalModule]
         }), 
         __metadata('design:paramtypes', [])
     ], SharedModule);

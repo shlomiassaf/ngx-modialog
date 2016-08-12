@@ -1,7 +1,8 @@
-import { Modal as BaseModal } from '../../../../components/angular2-modal';
+import { ResolvedReflectiveProvider as RRP } from '@angular/core';
+import { Maybe, Overlay, DialogRef, Modal as Modal_ } from '../../../../components/angular2-modal';
 import { InAppModalContextBuilder } from './modal-context';
-export interface InAppModal extends BaseModal {
+export declare class Modal extends Modal_ {
+    constructor(base: Overlay);
     alert(): InAppModalContextBuilder;
+    protected create(dialogRef: DialogRef<any>, type: any, bindings?: RRP[]): Maybe<DialogRef<any>>;
 }
-export declare const Modal: typeof BaseModal;
-export declare type Modal = InAppModal;

@@ -1,6 +1,6 @@
 import { ResolvedReflectiveProvider } from '@angular/core';
 import { FluentAssignMethod } from '../../../framework/fluent-assign';
-import { Modal } from '../../../providers/modal';
+import { Modal } from '../../../providers';
 import { MessageModalPresetBuilder } from './message-modal-preset';
 import { OneButtonPreset } from './one-button-preset';
 export interface TwoButtonPreset extends OneButtonPreset {

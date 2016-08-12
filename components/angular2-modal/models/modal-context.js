@@ -14,38 +14,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var fluent_assign_1 = require('./../framework/fluent-assign');
 var utils_1 = require('./../framework/utils');
-exports.DEFAULT_VALUES = {
-    isBlocking: true,
-    keyboard: [27],
-    supportsKey: function supportsKey(keyCode) {
-        return this.keyboard.indexOf(keyCode) > -1;
-    }
-};
+var overlay_context_1 = require('./overlay-context');
+exports.DEFAULT_VALUES = {};
 var DEFAULT_SETTERS = [
-    'isBlocking',
-    'keyboard',
     'message'
 ];
-var ModalContext = (function () {
+var ModalContext = (function (_super) {
+    __extends(ModalContext, _super);
     function ModalContext() {
+        _super.apply(this, arguments);
     }
-    ModalContext.prototype.normalize = function () {
-        if (this.isBlocking !== false)
-            this.isBlocking = true;
-        if (this.keyboard === null) {
-            this.keyboard = [];
-        }
-        else if (typeof this.keyboard === 'number') {
-            this.keyboard = [this.keyboard];
-        }
-        else if (!Array.isArray(this.keyboard)) {
-            this.keyboard = exports.DEFAULT_VALUES.keyboard;
-        }
-    };
     return ModalContext;
-}());
+}(overlay_context_1.OverlayContext));
 exports.ModalContext = ModalContext;
 /**
  * A core context builder for a modal window instance, used to define the context upon
@@ -64,6 +45,6 @@ var ModalContextBuilder = (function (_super) {
         __metadata('design:paramtypes', [Object, Array, Function])
     ], ModalContextBuilder);
     return ModalContextBuilder;
-}(fluent_assign_1.FluentAssign));
+}(overlay_context_1.OverlayContextBuilder));
 exports.ModalContextBuilder = ModalContextBuilder;
 //# sourceMappingURL=modal-context.js.map

@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var angular2_modal_1 = require('../../angular2-modal');
-var tokens_1 = require('../../models/tokens');
 var dialog_ref_1 = require('../../models/dialog-ref');
 /**
  * A Dialog is a
@@ -51,9 +50,8 @@ exports.VEXDialogButtons = VEXDialogButtons;
  *
  */
 var DialogFormModal = (function () {
-    function DialogFormModal(dialog, _compileConfig, _cr) {
+    function DialogFormModal(dialog, _cr) {
         this.dialog = dialog;
-        this._compileConfig = _compileConfig;
         this._cr = _cr;
         this.context = dialog.context;
     }
@@ -66,7 +64,7 @@ var DialogFormModal = (function () {
          Find out the error and remove setTimeout.
          */
         setTimeout(function () {
-            _this.dialog.contentRef = angular2_modal_1.createComponent(_this._cr, _this.context.content, _this._viewContainer, _this._compileConfig.bindings);
+            angular2_modal_1.createComponent(_this._cr, _this.context.content, _this._viewContainer, []);
         });
     };
     DialogFormModal.prototype.onButtonClick = function ($event) {
@@ -82,7 +80,7 @@ var DialogFormModal = (function () {
             encapsulation: core_1.ViewEncapsulation.None,
             template: "<form class=\"vex-dialog-form\">\n    <div style=\"display: none\" #modalDialog></div> \n    <vex-dialog-buttons [buttons]=\"context.buttons\"\n                        (onButtonClick)=\"onButtonClick($event)\"></vex-dialog-buttons>\n</form>"
         }), 
-        __metadata('design:paramtypes', [dialog_ref_1.DialogRef, tokens_1.ModalCompileConfig, core_1.ComponentFactoryResolver])
+        __metadata('design:paramtypes', [dialog_ref_1.DialogRef, core_1.ComponentFactoryResolver])
     ], DialogFormModal);
     return DialogFormModal;
 }());
@@ -96,7 +94,7 @@ var FormDropIn = (function () {
         core_1.Component({
             selector: 'drop-in-dialog',
             encapsulation: core_1.ViewEncapsulation.None,
-            template: "<div class=\"vex-dialog-message\">{{context.message}}</div>\n    <div *ngIf=\"context.showInput\" class=\"vex-dialog-input\">\n        <input autofocus #input\n               name=\"vex\" \n               type=\"text\" \n               class=\"vex-dialog-prompt-input\"\n               (change)=\"context.defaultResult = input.value\"               \n               placeholder=\"{{context.placeholder}}\">\n    </div>"
+            template: "<div class=\"vex-dialog-message\">{{context.message}}</div>\n <div *ngIf=\"context.showInput\" class=\"vex-dialog-input\">\n   <input #input\n          autofocus\n          name=\"vex\" \n          type=\"text\" \n          class=\"vex-dialog-prompt-input\"\n           (change)=\"context.defaultResult = input.value\" \n          placeholder=\"{{context.placeholder}}\">\n </div>\n <div *ngIf=\"context.showCloseButton\" \n      [class]=\"context.closeClassName\"\n      (click)=\"dialog.dismiss()\"></div>"
         }), 
         __metadata('design:paramtypes', [dialog_ref_1.DialogRef])
     ], FormDropIn);

@@ -11,21 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var modal_1 = require('./modal');
-var angular2_modal_1 = require('../../angular2-modal');
-var dropin_preset_1 = require('./presets/dropin-preset');
-var modal_backdrop_1 = require('./modal-backdrop');
-var modal_content_1 = require('./modal-content');
+var angular2_modal_1 = require('../../../angular2-modal');
 var dialog_form_modal_1 = require('./dialog-form-modal');
 function getProviders() {
     return [
         { provide: angular2_modal_1.Modal, useClass: modal_1.Modal },
-        { provide: modal_1.Modal, useClass: modal_1.Modal },
-        { provide: angular2_modal_1.ModalBackdropComponent, useValue: modal_backdrop_1.VexModalBackdrop },
-        { provide: angular2_modal_1.ModalDropInFactory, useValue: {
-                alert: function (modal) { return new dropin_preset_1.DropInPresetBuilder(modal, angular2_modal_1.DROP_IN_TYPE.alert, { isBlocking: false }); },
-                prompt: function (modal) { return new dropin_preset_1.DropInPresetBuilder(modal, angular2_modal_1.DROP_IN_TYPE.prompt, { isBlocking: true, keyboard: null }); },
-                confirm: function (modal) { return new dropin_preset_1.DropInPresetBuilder(modal, angular2_modal_1.DROP_IN_TYPE.confirm, { isBlocking: true, keyboard: null }); }
-            } }
+        { provide: modal_1.Modal, useClass: modal_1.Modal }
     ];
 }
 var VexModalModule = (function () {
@@ -36,17 +27,14 @@ var VexModalModule = (function () {
     };
     VexModalModule = __decorate([
         core_1.NgModule({
-            imports: [common_1.CommonModule],
+            imports: [angular2_modal_1.ModalModule, common_1.CommonModule],
             declarations: [
-                modal_backdrop_1.VexModalBackdrop,
-                modal_content_1.VexModalContent,
                 dialog_form_modal_1.DialogFormModal,
                 dialog_form_modal_1.FormDropIn,
                 dialog_form_modal_1.VEXDialogButtons
             ],
             providers: getProviders(),
             entryComponents: [
-                modal_backdrop_1.VexModalBackdrop,
                 dialog_form_modal_1.DialogFormModal,
                 dialog_form_modal_1.FormDropIn
             ]

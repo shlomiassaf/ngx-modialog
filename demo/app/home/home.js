@@ -18,12 +18,16 @@ var Home = (function () {
         this.modal.alert()
             .title('Angular 2 Modal')
             .templateRef(this.myTemplate)
-            .open(this.injectVC);
+            .open('home-overlay-container')
+            .then(function (d) { return d.result; })
+            .catch(function (e) {
+            console.log('This message should appear if you navigate away from the home page.');
+            console.log('If a modal is opened in a view container within a component that is the page or' +
+                'part of the page, navigation will destroy the page thus destroy the modal. To prevent ' +
+                'memory leaks and unexpected behavior a "DialogBailOutError" error is thrown.');
+            console.log(e);
+        });
     };
-    __decorate([
-        core_1.ViewChild('injectPoint', { read: core_1.ViewContainerRef }), 
-        __metadata('design:type', core_1.ViewContainerRef)
-    ], Home.prototype, "injectVC", void 0);
     __decorate([
         core_1.ViewChild('myTemplate', { read: core_1.TemplateRef }), 
         __metadata('design:type', core_1.TemplateRef)
@@ -32,7 +36,7 @@ var Home = (function () {
         core_1.Component({
             selector: 'home',
             providers: index_1.InAppModalModule.getProviders(),
-            template: "\n              <section id=\"intro\" class=\"text-intro\">\n                  <div class=\"container\">\n                      <div class=\"row\">\n                          <div class=\"col-md-12\" #injectPoint>\n                          </div>\n                      </div>\n                  </div>\n              </section>\n\n              <template #myTemplate>\n                  <span>UI agnostic, Plugin oriented, easy to use.</span>\n                  <div style=\"padding: 15px 20%;\"><pre class=\"text-left\"><p>modal.alert()<br>  .message('Angular 2 Modal')<br>  .open();</p></pre>\n                  </div>\n                  <div class=\"text-gray\">\n                      <sub>* This window ia a ad-hoc plugin built within the demo application.</sub>\n                      <br>\n                      <sub>It is a simple OSX style modal plugin that display's a title and a <b>TemplateRef</b> provided to it.</sub>\n                      <br>\n                      <sub>Check it out in the demo application. (home component)</sub>\n                  </div>\n              </template>\n\n              <section class=\"section no-padding-bottom\">\n                  <div class=\"container\">\n                      <div class=\"row\">\n                          <div class=\"col-md-offset-2 col-md-8\">\n                              A generic, customizable and fluent modal/dialog window implementation for Angular 2.\n                              UI platform/framework agnostic, plugins are used to describe a UI implementation (e.g: Bootstrap)\n                              This means virtually any modal implementation out there can be ported into the library.\n                              Comes with some built in UI platforms, external UI platform can be added in the future or externally used using NPM modules.\n                          </div>\n                      </div>\n                  </div>\n              </section>\n            ",
+            template: "\n              <section id=\"intro\" class=\"text-intro\">\n                  <div class=\"container\">\n                      <div class=\"row\">\n                          <div class=\"col-md-12\"  overlayTarget=\"home-overlay-container\">\n                          </div>\n                      </div>\n                  </div>\n              </section>\n\n              <template #myTemplate>\n                  <span>UI agnostic, Plugin oriented, easy to use.</span>\n                  <div style=\"padding: 15px 20%;\"><pre class=\"text-left\"><p>modal.alert()<br>  .message('Angular 2 Modal')<br>  .open();</p></pre>\n                  </div>\n                  <div class=\"text-gray\">\n                      <sub>* This window ia a ad-hoc plugin built within the demo application.</sub>\n                      <br>\n                      <sub>It is a simple OSX style modal plugin that display's a title and a <b>TemplateRef</b> provided to it.</sub>\n                      <br>\n                      <sub>Check it out in the demo application. (home component)</sub>\n                  </div>\n              </template>\n\n              <section class=\"section no-padding-bottom\">\n                  <div class=\"container\">\n                      <div class=\"row\">\n                          <div class=\"col-md-offset-2 col-md-8\">\n                              A generic, customizable and fluent modal/dialog window implementation for Angular 2.\n                              UI platform/framework agnostic, plugins are used to describe a UI implementation (e.g: Bootstrap)\n                              This means virtually any modal implementation out there can be ported into the library.\n                              Comes with some built in UI platforms, external UI platform can be added in the future or externally used using NPM modules.\n                          </div>\n                      </div>\n                  </div>\n              </section>\n            ",
             encapsulation: core_1.ViewEncapsulation.None
         }), 
         __metadata('design:paramtypes', [index_1.Modal])

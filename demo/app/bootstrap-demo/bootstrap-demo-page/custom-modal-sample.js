@@ -16,36 +16,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var angular2_modal_1 = require("angular2-modal");
 var index_1 = require("angular2-modal/plugins/bootstrap/index");
-var AdditionCalculateWindowData = (function (_super) {
-    __extends(AdditionCalculateWindowData, _super);
-    function AdditionCalculateWindowData(num1, num2) {
-        _super.call(this);
-        this.num1 = num1;
-        this.num2 = num2;
+var CustomModalContext = (function (_super) {
+    __extends(CustomModalContext, _super);
+    function CustomModalContext() {
+        _super.apply(this, arguments);
     }
-    return AdditionCalculateWindowData;
+    return CustomModalContext;
 }(index_1.BSModalContext));
-exports.AdditionCalculateWindowData = AdditionCalculateWindowData;
+exports.CustomModalContext = CustomModalContext;
 /**
  * A Sample of how simple it is to create a new window, with its own injects.
  */
-var AdditionCalculateWindow = (function () {
-    function AdditionCalculateWindow(dialog) {
+var CustomModal = (function () {
+    function CustomModal(dialog) {
         this.dialog = dialog;
         this.context = dialog.context;
         this.wrongAnswer = true;
+        dialog.setCloseGuard(this);
     }
-    AdditionCalculateWindow.prototype.onKeyUp = function (value) {
+    CustomModal.prototype.onKeyUp = function (value) {
         this.wrongAnswer = value != 5;
         this.dialog.close();
     };
-    AdditionCalculateWindow.prototype.beforeDismiss = function () {
+    CustomModal.prototype.beforeDismiss = function () {
         return true;
     };
-    AdditionCalculateWindow.prototype.beforeClose = function () {
+    CustomModal.prototype.beforeClose = function () {
         return this.wrongAnswer;
     };
-    AdditionCalculateWindow = __decorate([
+    CustomModal = __decorate([
         core_1.Component({
             selector: 'modal-content',
             styles: ["\n        .custom-modal-container {\n            padding: 15px;\n        }\n\n        .custom-modal-header {\n            background-color: #219161;\n            color: #fff;\n            -webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);\n            -moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);\n            box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.75);\n            margin-top: -15px;\n            margin-bottom: 40px;\n        }\n    "],
@@ -54,8 +53,8 @@ var AdditionCalculateWindow = (function () {
             /* tslint:disable */ template: "\n        <div class=\"container-fluid custom-modal-container\">\n            <div class=\"row custom-modal-header\">\n                <div class=\"col-sm-12\">\n                    <h1>A Custom modal design</h1>\n                </div>\n            </div>\n            <div class=\"row\" [ngClass]=\"{'myclass' : shouldUseMyClass}\">\n                <div class=\"col-xs-12\">\n                    <div class=\"jumbotron\">\n                        <h1>Do the math to quit:</h1>\n                        <p class=\"lead\">I received an injection of the number <strong>{{context.num1}}</strong> and the number <strong>{{context.num2}}</strong></p>\n                        <span>What is the sum?</span>\n                         <input class=\"form-control\" type=\"text\" #answer (keyup)=\"onKeyUp(answer.value)\" autofocus>\n                    </div>\n                </div>\n            </div>\n        </div>"
         }), 
         __metadata('design:paramtypes', [angular2_modal_1.DialogRef])
-    ], AdditionCalculateWindow);
-    return AdditionCalculateWindow;
+    ], CustomModal);
+    return CustomModal;
 }());
-exports.AdditionCalculateWindow = AdditionCalculateWindow;
+exports.CustomModal = CustomModal;
 //# sourceMappingURL=custom-modal-sample.js.map

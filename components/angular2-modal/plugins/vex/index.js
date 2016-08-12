@@ -1,10 +1,6 @@
 "use strict";
 var modal_1 = require('./modal');
 exports.Modal = modal_1.Modal;
-var modal_backdrop_1 = require('./modal-backdrop');
-exports.VexModalBackdrop = modal_backdrop_1.VexModalBackdrop;
-var modal_content_1 = require('./modal-content');
-exports.VexModalContent = modal_content_1.VexModalContent;
 var modal_context_1 = require('./modal-context');
 exports.VEXModalContext = modal_context_1.VEXModalContext;
 exports.VEXModalContextBuilder = modal_context_1.VEXModalContextBuilder;

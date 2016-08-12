@@ -12,11 +12,25 @@
     "rootDir": ".",
     "sourceMap": true,
     "target": "es5",
-    "inlineSources": true
+    "inlineSources": true,
+    "types": [
+      "core-js",
+      "hammerjs",
+      "node",
+      "source-map",
+      "uglify-js",
+      "webpack"
+    ]
   },
   "files": [
     "./system.config.ts",
-    "./bootstrap.ts",
-    "typings.d.ts"
+    "./bootstrap.ts"
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

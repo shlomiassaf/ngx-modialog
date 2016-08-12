@@ -1,28 +1,52 @@
 CACHE MANIFEST
 # sw.bundle: ng-cli
-# sw.version: 7d04cdb2c8fb9ec8b1019703e603c97e7daa4aa2
+# sw.version: 703afbdd97ffd894d4771ac2de843af08e1801b6
 # sw.file.hash: 9cd2c02727720bb374ea1b1d699702c3c1333ba3
 /bootstrap.js
 # sw.file.hash: d952f5a7db5283990f2172f5ec11149c5ae6418e
 /bootstrap.js.map
-# sw.file.hash: 65df73d8b6038cecda1ae823b3797a7ae1609d3a
+# sw.file.hash: b135f76fbb932e5beb1721c32972db9a6f559696
 /components/angular2-modal/angular2-modal.all.d.ts
-# sw.file.hash: 318398961149f0228f18343aeb267b689ac3e45c
+# sw.file.hash: b8712ce827206b57dbc40c78511a6c5e0686af9b
 /components/angular2-modal/angular2-modal.all.js
-# sw.file.hash: 3472c69a5e0fa47c8cad59f1eec7dbd90241a90e
+# sw.file.hash: c0743df71806f8663c41e4f88d36ac2e32fe6658
 /components/angular2-modal/angular2-modal.all.js.map
-# sw.file.hash: 7cb346e534cb5bc0cdf12f41bda02b930a7c7f4c
+# sw.file.hash: 348a7adecf88a40061015fe4c494ccc7c4cc21e8
 /components/angular2-modal/angular2-modal.d.ts
-# sw.file.hash: 084baf65a9ef1cba602105fef25076fb779094c5
+# sw.file.hash: d0aec24e6912abd8d8ed42c9c025273d6de0eda7
 /components/angular2-modal/angular2-modal.js
-# sw.file.hash: d9bc52e8ea8a96e084e4ae6c0ad8d48038557e68
+# sw.file.hash: 7461bb94fb31048c152cce5dfefdb0ad9a665b2b
 /components/angular2-modal/angular2-modal.js.map
 # sw.file.hash: 7a9f57a1b110ae86b10ccbf021c6afd9558d6a24
 /components/angular2-modal/angular2-modal.module.d.ts
-# sw.file.hash: ff6dd229fa8337cf3402be6320a6d97245f98d05
+# sw.file.hash: b4c32a486be0c0bb88a523518e9e9eef30e0d293
 /components/angular2-modal/angular2-modal.module.js
-# sw.file.hash: f330e824c6123e76666a950207881bee07e14d96
+# sw.file.hash: 4e3ab863f282e72fab418d48720bbf82f75da0e5
 /components/angular2-modal/angular2-modal.module.js.map
+# sw.file.hash: 05f1a9ca59f817dee7dc24823f60ae5a27ddeb6b
+/components/angular2-modal/components/base-dynamic-component.d.ts
+# sw.file.hash: ea9c147733364d09cf69d6522fb54a13e1b46321
+/components/angular2-modal/components/base-dynamic-component.js
+# sw.file.hash: 2a9834b13df7876aba252d25102aa9bba5d72cba
+/components/angular2-modal/components/base-dynamic-component.js.map
+# sw.file.hash: bfa48353ed24b9a13b80196819318d5fbe7672f4
+/components/angular2-modal/components/css-backdrop.d.ts
+# sw.file.hash: e35f925307e03d63407fab60a9fdc6898b1a197e
+/components/angular2-modal/components/css-backdrop.js
+# sw.file.hash: fe513b5344214733d765ce864aaab526c22206fb
+/components/angular2-modal/components/css-backdrop.js.map
+# sw.file.hash: 560ec5d02f04b6f05419b54473ed9bce2c16c95f
+/components/angular2-modal/components/css-dialog-container.d.ts
+# sw.file.hash: 79567ca67e11a4094d99a1e6c17917a8b4127d15
+/components/angular2-modal/components/css-dialog-container.js
+# sw.file.hash: 259d09a09cccd68ca621ffe1bfb8ff087433414f
+/components/angular2-modal/components/css-dialog-container.js.map
+# sw.file.hash: f292d2a1a886e1946e01935038f3284bac0edceb
+/components/angular2-modal/components/index.d.ts
+# sw.file.hash: 341053f3ce1359057074f1400ad7baac66453fff
+/components/angular2-modal/components/index.js
+# sw.file.hash: 49834e680419747827821bb025b6ccf1e79ac661
+/components/angular2-modal/components/index.js.map
 # sw.file.hash: bb730748b26348c0104e15987625a8446f29e231
 /components/angular2-modal/framework/createComponent.d.ts
 # sw.file.hash: 6e41b2004311036c3aff9676ac813782f31d9e45
@@ -33,19 +57,19 @@ CACHE MANIFEST
 /components/angular2-modal/framework/fluent-assign.d.ts
 # sw.file.hash: c349ae8d894a1bd3906bd2716c726ebfdfbf2197
 /components/angular2-modal/framework/fluent-assign.js
-# sw.file.hash: 68404a97ea65cd2985cb351ffff3e4c5d5dd57a7
+# sw.file.hash: dc7d083bec7a22b9f6b76fef0dea9a0a3930df68
 /components/angular2-modal/framework/fluent-assign.js.map
-# sw.file.hash: c973d40129adee55046304b078f5a89b3f4144a8
+# sw.file.hash: 85e1234b1ddc15582cda4651dde832472c761b45
 /components/angular2-modal/framework/utils.d.ts
 # sw.file.hash: 75332b76decce2e1e58a8c2bcde374f947964abe
 /components/angular2-modal/framework/utils.js
-# sw.file.hash: 4bd237f8879056f2921534c398b1145c0a5bd310
+# sw.file.hash: 4eca0ce8da775eabbc02b72b60373d0ea67dea96
 /components/angular2-modal/framework/utils.js.map
-# sw.file.hash: 510096c0bb5d3ef757a08fa18c952445d064c818
+# sw.file.hash: 832adb963460a015cd6dd039c91d08498a0e8103
 /components/angular2-modal/index.d.ts
-# sw.file.hash: 923a264795ad483dee66c6dc8ab63756e8ea0418
+# sw.file.hash: 233ed4f4387174d00ad995932814099ba1b32f5b
 /components/angular2-modal/index.js
-# sw.file.hash: e41f3d0b8990029a8fb877465edbaf517cba7936
+# sw.file.hash: 6fda82590fbd6668c84052460475313ddda95568
 /components/angular2-modal/index.js.map
 # sw.file.hash: 865c97d6878901253c65af9c3b9c9f63ff2dcf85
 /components/angular2-modal/models/dialog-ref-stack.d.ts
@@ -53,139 +77,145 @@ CACHE MANIFEST
 /components/angular2-modal/models/dialog-ref-stack.js
 # sw.file.hash: 0c876093f6b7f07fa8f5507817b6c16dc900aa34
 /components/angular2-modal/models/dialog-ref-stack.js.map
-# sw.file.hash: 371154778eebeb0eaae053c9e375749e83465dde
+# sw.file.hash: 6a425a0bd97adba43a6e58ee2664ce796163254a
 /components/angular2-modal/models/dialog-ref.d.ts
-# sw.file.hash: 8d0e20ffc6ef61e91606fa9719376a8ebfc5af37
+# sw.file.hash: 851387e71f015641078b4a5c1af442c04a970efe
 /components/angular2-modal/models/dialog-ref.js
-# sw.file.hash: 931d1fe3a3f3d8d7c1dfafaf6d208ae832e9a419
+# sw.file.hash: e3ded0aae9e2023785e03de3044263c0b294175a
 /components/angular2-modal/models/dialog-ref.js.map
-# sw.file.hash: 6debb0c9c1cdf50744b6f3eb8b5a9f63c6d97ca8
+# sw.file.hash: 189a44e2b34395e09a2b1ac039a756621098f5ec
+/components/angular2-modal/models/errors.d.ts
+# sw.file.hash: 9801865488366fb6e4c191c712c713a5f9fc0625
+/components/angular2-modal/models/errors.js
+# sw.file.hash: 92d898e163a297516d99b9ea0e0dd6eb224d17f9
+/components/angular2-modal/models/errors.js.map
+# sw.file.hash: 365b6805b581a20cb02bc2012bb56aaf9dee9e3a
 /components/angular2-modal/models/modal-context.d.ts
-# sw.file.hash: 3087c6f9056fdb2fdb3f1414dae21816a44c05f8
+# sw.file.hash: ff5fb7e9fde428fa040b4447d4bcb45b25024db1
 /components/angular2-modal/models/modal-context.js
-# sw.file.hash: 9300ea4511bfeaa4f94cd4409b5112f46e3124cf
+# sw.file.hash: ce17527d198171d6ddcb338eb9fe6776874d3e63
 /components/angular2-modal/models/modal-context.js.map
-# sw.file.hash: 120ae41184a951f9b821f7c78482f6df16de1a84
+# sw.file.hash: 8a731dbfa936a6c1da57c8fc03dc7e02b8d7f23e
 /components/angular2-modal/models/modal-open-context.d.ts
-# sw.file.hash: c08301d8a65e7bee1402482583043ab96189ec59
+# sw.file.hash: db5da48a670fa36f8c8500926e4ef7fb326adfa5
 /components/angular2-modal/models/modal-open-context.js
-# sw.file.hash: fd8e234b7e1cf9dbb6c0a7c83f0fc7a0040aef6e
+# sw.file.hash: 14477decdbf12f332e3fee2c2e4ae744211e3ab6
 /components/angular2-modal/models/modal-open-context.js.map
-# sw.file.hash: f6fb2b13232660ae2e24265d1956c403b4b10733
+# sw.file.hash: 1d2a5636e95bc593568b342ed05693db0ef7480b
+/components/angular2-modal/models/overlay-context.d.ts
+# sw.file.hash: 6134d9b5f2c085170cfd4ae01aee5e7eba47f8f9
+/components/angular2-modal/models/overlay-context.js
+# sw.file.hash: 12bf6af5fadee63fc1e409ee12ccb4e12bc14e4d
+/components/angular2-modal/models/overlay-context.js.map
+# sw.file.hash: 0dc4a12786c4054954ade3e37b31ae81d415c8f7
 /components/angular2-modal/models/tokens.d.ts
-# sw.file.hash: 75f263ec81cd1004e0e43b9ba686b9ab0cd71f5a
+# sw.file.hash: fecf3616daf837a112eb6b38df0716defe9d14e0
 /components/angular2-modal/models/tokens.js
-# sw.file.hash: f2a09b1bc42db98d7fad6a02bd20ecd223859ba8
+# sw.file.hash: 9234af9fba144edd57533bc044df9c518b660226
 /components/angular2-modal/models/tokens.js.map
-# sw.file.hash: 845cc0f1a558f67c56554a3eceaf9fb14dd72af0
+# sw.file.hash: 673d2af54f32054eeb0622bd4757b4a299d6040b
+/components/angular2-modal/models/vc-ref-store.d.ts
+# sw.file.hash: 3900ba651cf15056de906e04ff27f89aa67d5ad2
+/components/angular2-modal/models/vc-ref-store.js
+# sw.file.hash: fe0bdd067fce3a341fd18b0ea70893573874e0cd
+/components/angular2-modal/models/vc-ref-store.js.map
+# sw.file.hash: c43018e66a03bb5948cc754755750fc3850ab301
+/components/angular2-modal/overlay/index.d.ts
+# sw.file.hash: 473f8cadd2bc0a7fb2f9dbf9a6575bb96db5f050
+/components/angular2-modal/overlay/index.js
+# sw.file.hash: 9ac5b584e09cb5286d61912494559eeee1ba78c3
+/components/angular2-modal/overlay/index.js.map
+# sw.file.hash: 6bf4de0243fcea053bec42e347b2c138e1e84af2
+/components/angular2-modal/overlay/overlay.component.d.ts
+# sw.file.hash: 9bbb0fadb2a73a746a5ef93cb323a3ac282b135f
+/components/angular2-modal/overlay/overlay.component.js
+# sw.file.hash: bba715f371700bfd44d55a1423f83f1b23024a21
+/components/angular2-modal/overlay/overlay.component.js.map
+# sw.file.hash: 5d7a8c3c285596d8ee8567764ce3627593e7971b
+/components/angular2-modal/overlay/overlay.directives.d.ts
+# sw.file.hash: 0a6ba788898f04fbedb7be4fd397fab23d9d8178
+/components/angular2-modal/overlay/overlay.directives.js
+# sw.file.hash: 223f8244ea6640c2935cb46866cbd20d4d275fc5
+/components/angular2-modal/overlay/overlay.directives.js.map
+# sw.file.hash: adc068052a649a7eeaad764e33af73f1d905a4d7
+/components/angular2-modal/overlay/overlay.service.d.ts
+# sw.file.hash: ac6da08127a8cd1fc0dd3776d7da0df513acb7fb
+/components/angular2-modal/overlay/overlay.service.js
+# sw.file.hash: 5f44e06800a1710b6a288be3a690db7ecf18ca50
+/components/angular2-modal/overlay/overlay.service.js.map
+# sw.file.hash: 30b6386a8a6d1be2be07febecbf9f4eb769e5693
 /components/angular2-modal/package.json
-# sw.file.hash: 1155bbcec2385242e9c1f7d6e664fe3cbbe6929d
-/components/angular2-modal/plugins/blank/index.d.ts
-# sw.file.hash: dd4d9dd9e14185980306c0173786d31ad9f84fb0
-/components/angular2-modal/plugins/blank/index.js
-# sw.file.hash: 17f33235c1bf6a3f33a15e7ef926da0cb0eadbdb
-/components/angular2-modal/plugins/blank/index.js.map
-# sw.file.hash: cd3c2315cd2be496269d83c8a3c008c0087fc08a
-/components/angular2-modal/plugins/blank/modal-backdrop.d.ts
-# sw.file.hash: 6f5a8f98a984d9800568b663c17f35680020e4dc
-/components/angular2-modal/plugins/blank/modal-backdrop.js
-# sw.file.hash: 165ae40dbeee9b744b2bafd832656848894d2680
-/components/angular2-modal/plugins/blank/modal-backdrop.js.map
-# sw.file.hash: 4cf13abf79012810d247a559c86d6e9a2015dea0
-/components/angular2-modal/plugins/blank/modal-context.d.ts
-# sw.file.hash: e934df77867a7397acab8826440ba59b6a33a33e
-/components/angular2-modal/plugins/blank/modal-context.js
-# sw.file.hash: c6c81d63955e4f2c56def1ea578a10d15cac3e80
-/components/angular2-modal/plugins/blank/modal-context.js.map
-# sw.file.hash: 3d6a217a12ed29a6ac8744898c9e9876729b12a7
-/components/angular2-modal/plugins/blank/modal.d.ts
-# sw.file.hash: dbd4049ab2732245d251c3451593bd2abaeb2c51
-/components/angular2-modal/plugins/blank/modal.js
-# sw.file.hash: d2606bbb1ee7b9496a88c3689d25c440e79699c2
-/components/angular2-modal/plugins/blank/modal.js.map
 # sw.file.hash: 4fa2cf1c0a5fe40d4e3f5c9d0f7907694767bc05
 /components/angular2-modal/plugins/bootstrap/bootstrap.module.d.ts
-# sw.file.hash: 2b2a4a929b20e8e0e4574860ac83e7804230718a
+# sw.file.hash: ffc9d852e02bdbaa92ff5ee9989942bf28995c8c
 /components/angular2-modal/plugins/bootstrap/bootstrap.module.js
-# sw.file.hash: 3941db0fe49ec3c8c67372c5b316b86d6d1aa1b1
+# sw.file.hash: 219ee1f5a9dae083744258a965f821b0ea9d17da
 /components/angular2-modal/plugins/bootstrap/bootstrap.module.js.map
-# sw.file.hash: 37408c63ae24f29a1c5cc911c116ef85cf7e673b
+# sw.file.hash: 03d8dc894bc40cd15319e20b2fd61e18a74ef1c8
 /components/angular2-modal/plugins/bootstrap/index.d.ts
-# sw.file.hash: d2072e7e68dc7044ac331256e7fdd324aeb9cbb9
+# sw.file.hash: f08c9e2aa15e436d52b24ae69aa23d0a6acb62f1
 /components/angular2-modal/plugins/bootstrap/index.js
-# sw.file.hash: 413b1157999d4e8e5f2f36c9901a0e27afdbffb6
+# sw.file.hash: 6f8da8c8792eefe8fd014afa0e2c72e90d01b774
 /components/angular2-modal/plugins/bootstrap/index.js.map
-# sw.file.hash: c81a2c46980e8425d5dd8188189fffc0cb8221e0
-/components/angular2-modal/plugins/bootstrap/message-modal.d.ts
-# sw.file.hash: 5bd7dfdda67011b96c3bdcb01fed69fddb5445a0
-/components/angular2-modal/plugins/bootstrap/message-modal.js
-# sw.file.hash: fe1da08dedf90edbf4991e7cfec73afbf64397db
-/components/angular2-modal/plugins/bootstrap/message-modal.js.map
-# sw.file.hash: fe76fb6424c40ce6ceb28741da124a0a2a5c023d
-/components/angular2-modal/plugins/bootstrap/modal-backdrop.d.ts
-# sw.file.hash: 8a61511be6d625624e4718c7003573a92ff477f1
-/components/angular2-modal/plugins/bootstrap/modal-backdrop.js
-# sw.file.hash: cd8a68e324c6342bb9b2085f4f9b7c6c21f2d37d
-/components/angular2-modal/plugins/bootstrap/modal-backdrop.js.map
-# sw.file.hash: 03f1f626ff8290a57ffde51bada536bdb1df3615
-/components/angular2-modal/plugins/bootstrap/modal-container.d.ts
-# sw.file.hash: 6ee765d852430202ec4b1b8dc1bd7a758c6f5d84
-/components/angular2-modal/plugins/bootstrap/modal-container.js
-# sw.file.hash: 313ffcd84168691d61f9792deec5816e5faee2c6
-/components/angular2-modal/plugins/bootstrap/modal-container.js.map
-# sw.file.hash: 3d421b9b5ef85894899d9c506a281d9daca29f3a
+# sw.file.hash: 3bd445ab0ce8dd000d3876edf925a9fc09ab4fa7
+/components/angular2-modal/plugins/bootstrap/message-modal.component.d.ts
+# sw.file.hash: a330829ac21f208d8935d0b26f13da2a9b53c7ec
+/components/angular2-modal/plugins/bootstrap/message-modal.component.js
+# sw.file.hash: 3ba16d5559112ddd89c6a187845b03a59cbed329
+/components/angular2-modal/plugins/bootstrap/message-modal.component.js.map
+# sw.file.hash: 6f2153844ce50d36fc284d1a0f3cea42e34d8ba4
+/components/angular2-modal/plugins/bootstrap/modal-container.component.d.ts
+# sw.file.hash: 171eee26bd413d9bd4f185590566c41a9ad72875
+/components/angular2-modal/plugins/bootstrap/modal-container.component.js
+# sw.file.hash: 9d876f07fdc6c81dbbc6e96272ed541fbc6ff431
+/components/angular2-modal/plugins/bootstrap/modal-container.component.js.map
+# sw.file.hash: 32d1d27fa91089d915e3cf0f741da2d9f990effc
 /components/angular2-modal/plugins/bootstrap/modal-context.d.ts
 # sw.file.hash: e55b2bfae32fb5c80720cba6bcdb12e10766f74e
 /components/angular2-modal/plugins/bootstrap/modal-context.js
-# sw.file.hash: 010181be6fd7698ecbd650e07500be0ab6bad650
+# sw.file.hash: 3978e63ea9c62b3d87d46d9797bc54ebdb77e2da
 /components/angular2-modal/plugins/bootstrap/modal-context.js.map
-# sw.file.hash: ae0ed3c9d2deb84663b6b6a8604f7e991e2ee668
-/components/angular2-modal/plugins/bootstrap/modal-footer.d.ts
-# sw.file.hash: 2fd0e2f7757123c036e8236bce43b45dfec381c4
-/components/angular2-modal/plugins/bootstrap/modal-footer.js
-# sw.file.hash: 84cbe65553c8a64f3241d22ec5023259e0ea3965
-/components/angular2-modal/plugins/bootstrap/modal-footer.js.map
-# sw.file.hash: 7e15cee75587dc25b357471a94458e6a2d1864ca
+# sw.file.hash: 3c427c4f31e9bb4f7854c523af74a268571f3bb4
 /components/angular2-modal/plugins/bootstrap/modal.d.ts
-# sw.file.hash: b5d3c331181686069978074c87db4c4207d9e4c1
+# sw.file.hash: 6283212ee906e784ad9ad286e0c2fc90a4bb3f17
 /components/angular2-modal/plugins/bootstrap/modal.js
-# sw.file.hash: d248c7fa8a1fc0a1f0a9812482107d29575346d9
+# sw.file.hash: c6b49a8861ca6a6d155f53c2be27cc4600a8ca6e
 /components/angular2-modal/plugins/bootstrap/modal.js.map
-# sw.file.hash: 770d5836d14e79c02eec9a9804889d17c23e39d0
+# sw.file.hash: 7eb69875c758e2722959e9540d4ed2c4484da3e3
 /components/angular2-modal/plugins/bootstrap/presets/message-modal-preset.d.ts
-# sw.file.hash: b61c33659ee9ff58ad4d2a6824353da49e6c23f8
+# sw.file.hash: c08f76663702b1e344e31b9a3de7035006d48427
 /components/angular2-modal/plugins/bootstrap/presets/message-modal-preset.js
-# sw.file.hash: 17c79758ed85aa33026a72d84f18a0f10be72412
+# sw.file.hash: 2c23503ac1ec02fe770d575ff1ad95a6fc80053a
 /components/angular2-modal/plugins/bootstrap/presets/message-modal-preset.js.map
-# sw.file.hash: 499f4ca4bbc3e1a08685be259b74fab10a0ecb0a
+# sw.file.hash: fa090b55f2fdaa1bbbd93722aeee4191db5f5412
 /components/angular2-modal/plugins/bootstrap/presets/one-button-preset.d.ts
 # sw.file.hash: 851a17b65399d59de6d80e1a85628f5d4bd18fcf
 /components/angular2-modal/plugins/bootstrap/presets/one-button-preset.js
-# sw.file.hash: d7a1e501dca2b5782d2dd9364a9f9765ec916b62
+# sw.file.hash: 30253b572a67c70e5df5e4898a2f4d78ba7626fb
 /components/angular2-modal/plugins/bootstrap/presets/one-button-preset.js.map
-# sw.file.hash: a695c3c690dd5cbc6e888e226897a1e6be9c1974
+# sw.file.hash: 9d1b7c0601b882217ca456d43714880cb152dde6
 /components/angular2-modal/plugins/bootstrap/presets/two-button-preset.d.ts
 # sw.file.hash: 150a0ca8525adde51103ddf0b53c212392f9444f
 /components/angular2-modal/plugins/bootstrap/presets/two-button-preset.js
-# sw.file.hash: 53e6bdf07afcd3e8283d57f0a9a8b95e3ac222f3
+# sw.file.hash: f3ad4402c9299e67f2bff8119e84862daa617ea7
 /components/angular2-modal/plugins/bootstrap/presets/two-button-preset.js.map
-# sw.file.hash: a86c9cf85dc113170c49842b195d0ae136507f68
+# sw.file.hash: f11626009c28ff27cba326d41d8aed3d80c9a3b7
 /components/angular2-modal/plugins/js-native/index.d.ts
 # sw.file.hash: 9b30b37b7a95667bad1176daf73298b7c02c3400
 /components/angular2-modal/plugins/js-native/index.js
-# sw.file.hash: c75a6f310a3a7434d699a5081669faee9ea25324
+# sw.file.hash: 47d01384b18942a4a6ede816b1439c83fba015a6
 /components/angular2-modal/plugins/js-native/index.js.map
-# sw.file.hash: f7f43f2c06460c703470de8579025787e70a5775
+# sw.file.hash: 7787ed2f48b9fb2b88131034206a797e8bcb9860
 /components/angular2-modal/plugins/js-native/js-native-modal-renderer.d.ts
-# sw.file.hash: 2b3d04ec8f0254975ad5007a0a32779a7b2e0cf7
+# sw.file.hash: 00c2732f8bd16476ab3f7aef7c1a4f8ed13f60ed
 /components/angular2-modal/plugins/js-native/js-native-modal-renderer.js
-# sw.file.hash: 5443d86bc789351fc8957e65fc27998805f3a796
+# sw.file.hash: 6464ce47e615445b5da04ed544a44bd3e350bf27
 /components/angular2-modal/plugins/js-native/js-native-modal-renderer.js.map
 # sw.file.hash: e24496dda16c962911d7ceb695a1a62acebb5e75
 /components/angular2-modal/plugins/js-native/js-native.module.d.ts
-# sw.file.hash: d2fca046cac15d07dc836f991320a60502bcd8ef
+# sw.file.hash: c56eb81cc68599038179cac4bde5b9867658d413
 /components/angular2-modal/plugins/js-native/js-native.module.js
-# sw.file.hash: eebef5a02ea45c6b9db802b6efa9a58d9614fd62
+# sw.file.hash: f8b84634b5f0145bdb272fe431b4c6acd09cf32e
 /components/angular2-modal/plugins/js-native/js-native.module.js.map
 # sw.file.hash: 5833c4ba252c4c667ccb1d02b45fd0fca986d515
 /components/angular2-modal/plugins/js-native/modal-context.d.ts
@@ -193,55 +223,41 @@ CACHE MANIFEST
 /components/angular2-modal/plugins/js-native/modal-context.js
 # sw.file.hash: e1da743182a69a838717c870c80c2cd7ee6a51bf
 /components/angular2-modal/plugins/js-native/modal-context.js.map
-# sw.file.hash: 64526394c5e00266bb68af16530ab76e2f03b2fc
+# sw.file.hash: 16e5eb7d988f97e3f21203dfb0bc5dd11528e819
 /components/angular2-modal/plugins/js-native/modal.d.ts
-# sw.file.hash: b5d3c331181686069978074c87db4c4207d9e4c1
+# sw.file.hash: 65a941bced6c56030f6a3efd6128d41af83fd8a7
 /components/angular2-modal/plugins/js-native/modal.js
-# sw.file.hash: 28d03b6ea127ae1f8adcef7fe1ccc4a749f3d356
+# sw.file.hash: 24dad9b7878598b36f1d5648d5ef1a8998fad8cd
 /components/angular2-modal/plugins/js-native/modal.js.map
 # sw.file.hash: 32cf7045d3c284d654717706ad8bea34902fa2d1
 /components/angular2-modal/plugins/js-native/presets/js-native-preset.d.ts
-# sw.file.hash: 7f661fedfc6677645e7982805a3a2eefedb9d6d5
+# sw.file.hash: 934170c687409f15d8951bb9488557fb9e8f8b80
 /components/angular2-modal/plugins/js-native/presets/js-native-preset.js
-# sw.file.hash: 8242bf2f0729aac461422c922fc5dc8811cfb631
+# sw.file.hash: 37cbdfd708547b407fe3c2801b88c2cd5bfce9a7
 /components/angular2-modal/plugins/js-native/presets/js-native-preset.js.map
-# sw.file.hash: 940555c30889cbf5129f364155b43febeea63229
+# sw.file.hash: 2a512dfdeaed7a97d9a6eb04998fc105cdeeb7cb
 /components/angular2-modal/plugins/vex/dialog-form-modal.d.ts
-# sw.file.hash: d5469787f67c6c50787848c70328a034c2a9e61b
+# sw.file.hash: d3378c4e7b74401878ac6baae4cf35eea797c377
 /components/angular2-modal/plugins/vex/dialog-form-modal.js
-# sw.file.hash: 3f69bbf9253eb5b72ec37c657d48064a78c1c01b
+# sw.file.hash: a58420a46b4de04e74f21dc38a536c06813de4e7
 /components/angular2-modal/plugins/vex/dialog-form-modal.js.map
-# sw.file.hash: 4f01f68a91c86f804000e71649f5b4b2e3c90053
+# sw.file.hash: 49fb1aba8832bc39160bb51c01b4bf018729632f
 /components/angular2-modal/plugins/vex/index.d.ts
-# sw.file.hash: 4750510503757af6193a4288047991e1435d5d10
+# sw.file.hash: 0da9559ed9f52052f9682c261264286e36bce964
 /components/angular2-modal/plugins/vex/index.js
-# sw.file.hash: fc16376523b18d20cf4e4f6464135d280edd6c3c
+# sw.file.hash: 4647884e45eb7de629219a9d0dedb77834f18e78
 /components/angular2-modal/plugins/vex/index.js.map
-# sw.file.hash: 79c12926232c175e5a99a7ad0b9835cec695cfba
-/components/angular2-modal/plugins/vex/modal-backdrop.css
-# sw.file.hash: 60c64bd0a33c4f4b66f40c338c03edcc626d0670
-/components/angular2-modal/plugins/vex/modal-backdrop.d.ts
-# sw.file.hash: b8861c167d1ec5e900a33f7018af86d584b07a66
-/components/angular2-modal/plugins/vex/modal-backdrop.js
-# sw.file.hash: 635fd57b670ca78483e0005360fc6d197ca87708
-/components/angular2-modal/plugins/vex/modal-backdrop.js.map
-# sw.file.hash: 296ee64305e0902ecd3230529ed14c747172324e
-/components/angular2-modal/plugins/vex/modal-content.d.ts
-# sw.file.hash: cab55fcfea86ed8c92b21411fd81baa25870f958
-/components/angular2-modal/plugins/vex/modal-content.js
-# sw.file.hash: e965ca4191b2fe6c77e80da6a4429b05586d90ac
-/components/angular2-modal/plugins/vex/modal-content.js.map
 # sw.file.hash: c4a2a50e16f53a8d2cd1e31bd492360ac116fd86
 /components/angular2-modal/plugins/vex/modal-context.d.ts
 # sw.file.hash: ab58003742464077cac146067d65daa5e8dbd2c4
 /components/angular2-modal/plugins/vex/modal-context.js
 # sw.file.hash: 4a05b09fd300c2268bf4d95409f0740bf5aa07f1
 /components/angular2-modal/plugins/vex/modal-context.js.map
-# sw.file.hash: 135bd1c92c43c3943f15ae89b6163b213497ab44
+# sw.file.hash: a483422b894057fcffb5e4630a5f344a9bba4b2f
 /components/angular2-modal/plugins/vex/modal.d.ts
-# sw.file.hash: b5d3c331181686069978074c87db4c4207d9e4c1
+# sw.file.hash: e2be05e5e7b67d5c32ca1891337482b6e1a18983
 /components/angular2-modal/plugins/vex/modal.js
-# sw.file.hash: b61c400b853761b31083f5a12283d36b2cc522e4
+# sw.file.hash: acb0f42e90c58391e5dd37f6db73afa549d3e38c
 /components/angular2-modal/plugins/vex/modal.js.map
 # sw.file.hash: d3f9c70b757332dcc53bef6349526f6589b6905b
 /components/angular2-modal/plugins/vex/presets/dialog-preset.d.ts
@@ -257,21 +273,27 @@ CACHE MANIFEST
 /components/angular2-modal/plugins/vex/presets/dropin-preset.js.map
 # sw.file.hash: 29a4ff90589c361d1f2219fedd6b65aa9058ef01
 /components/angular2-modal/plugins/vex/vex.module.d.ts
-# sw.file.hash: 3a416b721094e218b25f55e6a05ce00ff1cb1c44
+# sw.file.hash: 04be530792670318cf25b6dc879a19d7f86d2f48
 /components/angular2-modal/plugins/vex/vex.module.js
-# sw.file.hash: 411b7c1ffcfae80df360aaeab3e5701acccbc287
+# sw.file.hash: dd242940bb3bfd65c71da2e65a8ea8d6f6d781a2
 /components/angular2-modal/plugins/vex/vex.module.js.map
-# sw.file.hash: 06443cf6c6a5e4bcc1109ac0734d57e80ff4e33a
+# sw.file.hash: 87686e3ed00e0b5aab8736270af10785a6def528
 /components/angular2-modal/providers/dom-modal-renderer.d.ts
-# sw.file.hash: ead52c91e0c3172a752e784de19a76bc973fa3d7
+# sw.file.hash: 5b44d5191f44ffddf1ce7c0ca6724c5db1168203
 /components/angular2-modal/providers/dom-modal-renderer.js
-# sw.file.hash: e43d374050d45ec0d67a6fe85600fac360a86e4a
+# sw.file.hash: 7d5468da14b4eb565c64c9565c66427aea3218da
 /components/angular2-modal/providers/dom-modal-renderer.js.map
-# sw.file.hash: cd1d92796b97fc1b7163427d99afc857bb171efb
+# sw.file.hash: f474aa741839343d2c2be5085fa2e0cc084ad38d
+/components/angular2-modal/providers/index.d.ts
+# sw.file.hash: 7e66380de9c93851a53d5343fcb3fa459d60a226
+/components/angular2-modal/providers/index.js
+# sw.file.hash: b1919c0610f3d5294dd47be6696aaa9f73de6185
+/components/angular2-modal/providers/index.js.map
+# sw.file.hash: 4e0f69125cb3ac7efa01c252e2aa245380fe91a1
 /components/angular2-modal/providers/modal.d.ts
-# sw.file.hash: 8484326835847b0ff86bd970a35f2fdba296c7f8
+# sw.file.hash: 566f675c36ccb206e06f75105a3a8b9eac1413a2
 /components/angular2-modal/providers/modal.js
-# sw.file.hash: 48b2b9229c5b54165c45b65490afd18706c3c877
+# sw.file.hash: 13e17b85c65ca4b51f1cafe8795f52e06e84d034
 /components/angular2-modal/providers/modal.js.map
 # sw.file.hash: e4a3b4a1bd33565e6650952b539526abb7247224
 /components/angular2-modal/providers/outside-event-plugin.d.ts
@@ -281,13 +303,13 @@ CACHE MANIFEST
 /components/angular2-modal/providers/outside-event-plugin.js.map
 # sw.file.hash: 7a7a10ece53ad278482a114b4bbeb5264a27a53d
 /demo/app/app.css
-# sw.file.hash: 98325a7cba474f20807656735ef7a73ca9cc151b
+# sw.file.hash: 3eca8b2a0ee91fffaab4848cfedb3f36c0cc3574
 /demo/app/app.d.ts
 # sw.file.hash: 9274dde6f0417c8bd811debb34e1ebd54978b6b8
 /demo/app/app.html
-# sw.file.hash: 4bfc721031195e9b6dcccbc3bf754eead07132c2
+# sw.file.hash: 1cc160070974676ec4c668c612cb821411c5915a
 /demo/app/app.js
-# sw.file.hash: 321dbfc1db38a21aaec618c2dea2951363b08132
+# sw.file.hash: b445f32f45eb2ea3668497623ab738b50721e2c2
 /demo/app/app.js.map
 # sw.file.hash: af4f291d417a780ff1db18e07ad352e4777a518f
 /demo/app/app.module.d.ts
@@ -303,31 +325,31 @@ CACHE MANIFEST
 /demo/app/app.routes.js.map
 # sw.file.hash: 1d8c7d638c57f4f5e25fe7ad8f6f62350a2f73b5
 /demo/app/bootstrap-demo/bootstrap-demo-page/bootstrap-demo-page.css
-# sw.file.hash: e1570be7930d2f79426d9655206129f6daff4cf0
+# sw.file.hash: 3a1c784461ac8a5dc43f863e4388396d6b1b104f
 /demo/app/bootstrap-demo/bootstrap-demo-page/bootstrap-demo-page.d.ts
-# sw.file.hash: 4b484816cd88ef18b6157f46b8a89b95bc68e67e
+# sw.file.hash: 1ffebb01ddc90a79d4b1764c93d23a9b94205a1e
 /demo/app/bootstrap-demo/bootstrap-demo-page/bootstrap-demo-page.js
-# sw.file.hash: 6688aa798b8466d37b4c3cc490ff09e7439f01f3
+# sw.file.hash: 24983e1240325cb457cc0bb69c9fd332f7acea2d
 /demo/app/bootstrap-demo/bootstrap-demo-page/bootstrap-demo-page.js.map
 # sw.file.hash: c702048f12a12230eb8224d996e1fc3072649502
 /demo/app/bootstrap-demo/bootstrap-demo-page/bootstrap-demo-page.tpl.html
-# sw.file.hash: 148520bf20cce899e1307501fc306cd5462aaf50
+# sw.file.hash: 4a32a413ee1beff820426188ebb6b118111ca188
 /demo/app/bootstrap-demo/bootstrap-demo-page/custom-modal-sample.d.ts
-# sw.file.hash: 99d958ece6cdfd2c70388417b01787b2f59715fc
+# sw.file.hash: 34b484f289e6d4cb693bf7bdbb5666e97d636778
 /demo/app/bootstrap-demo/bootstrap-demo-page/custom-modal-sample.js
-# sw.file.hash: 0b7ae4d9d44d0c0b1f1968fe6fad03cd0e4082e1
+# sw.file.hash: 0f6ecc275c39f013c4f92051ed289a17dc13a56f
 /demo/app/bootstrap-demo/bootstrap-demo-page/custom-modal-sample.js.map
-# sw.file.hash: 4b712ac27a0058015aca8ddda4f19d442851e0b6
+# sw.file.hash: 6645b5325800b244d4c41c8883f73b32f1fe849b
 /demo/app/bootstrap-demo/bootstrap-demo.d.ts
-# sw.file.hash: ffb8c326ac2847653e9acd8470913fa7f5d28d22
+# sw.file.hash: 0f17a23e3bad1553fa4465e705759bd9af5b17a4
 /demo/app/bootstrap-demo/bootstrap-demo.js
-# sw.file.hash: 95401874527bf2fe7e47ef726647a92b04ce3188
+# sw.file.hash: 43a54fa51c52b2870e1ed6d8b50f3db4462f0bd3
 /demo/app/bootstrap-demo/bootstrap-demo.js.map
 # sw.file.hash: 298586d10e23ad6736b17fcc70ea6bbc21c01b41
 /demo/app/bootstrap-demo/bootstrap-demo.module.d.ts
-# sw.file.hash: 38b04cfb66d30bf021877bb649a73217d83eeabb
+# sw.file.hash: fd47cb1301ead216616533b5be6c481e8be40aed
 /demo/app/bootstrap-demo/bootstrap-demo.module.js
-# sw.file.hash: 462bf8067ca74fd02694ea3ffca6fdfd90122fa3
+# sw.file.hash: 55fd51aedadd4ce2d46500dd2a8c2b89e5de1bc5
 /demo/app/bootstrap-demo/bootstrap-demo.module.js.map
 # sw.file.hash: 6fb6c82f62f21d5f39852324a72a4c421944382a
 /demo/app/bootstrap-demo/bootstrap-demo.routes.d.ts
@@ -347,15 +369,15 @@ CACHE MANIFEST
 /demo/app/bootstrap-demo/presets.d.ts
 # sw.file.hash: f59ee54b3174239bd5803133d0595db4e3d51f6b
 /demo/app/bootstrap-demo/presets.js
-# sw.file.hash: 05862172b48515cc2264a99e76f680d70da7f03e
+# sw.file.hash: e76cf10a13965088186c56efcee18ddb61e8f566
 /demo/app/bootstrap-demo/presets.js.map
-# sw.file.hash: 6bb1c2e05bc2d7bfcdde13ea0d4926fed2da5012
+# sw.file.hash: 1c2141c371fa1987182609507cdaa35df065b233
 /demo/app/demo-head/deam-head.d.ts
-# sw.file.hash: 5c3cd684fa60d0481abc92076b8bd8a2b5e32b05
+# sw.file.hash: d920220135970355032f40d08b10361a7319ac94
 /demo/app/demo-head/deam-head.js
-# sw.file.hash: 1416eaa30d7813749087f49bca2b99bbda0a9039
+# sw.file.hash: aa4406b60d1a9190b4a6dc7663f8206e0c1cf6d2
 /demo/app/demo-head/deam-head.js.map
-# sw.file.hash: 746bff024b02618f09d7cf0272642de933625191
+# sw.file.hash: 04544376c615879b547428c6d67e2e4c0e4f8ae1
 /demo/app/demo-head/demo-head.html
 # sw.file.hash: faa35441567c9d422b7131dfc43cac51d174d9f3
 /demo/app/demo-head/index.d.ts
@@ -363,25 +385,25 @@ CACHE MANIFEST
 /demo/app/demo-head/index.js
 # sw.file.hash: 77e3e52cf2cec4075acc39b68c02eef00744b092
 /demo/app/demo-head/index.js.map
-# sw.file.hash: 98bec3854cb3fc8a65f3b5a7dc54d80b2ee3738d
+# sw.file.hash: ea0aeaef2bf4731fc70fef0cacc0e187113762ab
 /demo/app/home/home.d.ts
-# sw.file.hash: bce851f7444316ba5601c36441a3c553db07c3f2
+# sw.file.hash: ed9325fba0c66eb37ee03081e2198dcac73c3502
 /demo/app/home/home.js
-# sw.file.hash: 36029a577233cbb1b20720fbe5d6a5977b7b62af
+# sw.file.hash: 776df3b72a8d184dfad734911de81be639a0b9c4
 /demo/app/home/home.js.map
-# sw.file.hash: 3fe8b340739d4a82254d1bb9a5b6f03c07ae155c
+# sw.file.hash: c6aa85c249dad7d950fc33a1540319b0797873ad
 /demo/app/home/home.tpl.html
 # sw.file.hash: 584b9ffbebc047d2d59a957d10034ba28dfeb2d3
 /demo/app/home/in-app-plugin/index.d.ts
-# sw.file.hash: 789400940c92cbfc9b7482174a1787fcf692a99e
+# sw.file.hash: 6fdd68b58bed3ac31acba3583684cbb8ab613108
 /demo/app/home/in-app-plugin/index.js
-# sw.file.hash: 4575f626e1ff8e47cab4b91112d17821e27ed46f
+# sw.file.hash: 20a65bbd34a26d52d4b12f681af86dec336f8a24
 /demo/app/home/in-app-plugin/index.js.map
-# sw.file.hash: 28ae302ae00d760049c1ef02b546eb4ffca84e96
+# sw.file.hash: d3d10d33ec71b89f2fd9c02bdb55054f81795635
 /demo/app/home/in-app-plugin/modal-backdrop.d.ts
-# sw.file.hash: 20ee621bf17ea3e20eefab78c8215b18a1cb24d1
+# sw.file.hash: 06dba52e573206d802d04d8cc8a70c5dbbfacb4a
 /demo/app/home/in-app-plugin/modal-backdrop.js
-# sw.file.hash: 68cb92ccf6964ff6a6b6b1985765c72c908ab37d
+# sw.file.hash: de87e3ec22d3458c7dbc2b25f67da8c54fb32d97
 /demo/app/home/in-app-plugin/modal-backdrop.js.map
 # sw.file.hash: 1e0fc14eb593c9ea04842a771e0865e58571d572
 /demo/app/home/in-app-plugin/modal-context.d.ts
@@ -389,11 +411,11 @@ CACHE MANIFEST
 /demo/app/home/in-app-plugin/modal-context.js
 # sw.file.hash: a7d78aecc2962f0cd90ad88827355b14b29dea50
 /demo/app/home/in-app-plugin/modal-context.js.map
-# sw.file.hash: a2e472703e2bc136cdc7cc564abc7dfaaa81ce60
+# sw.file.hash: c5ce56e5f9b6633d2e53e4f88668c42064a3ed2f
 /demo/app/home/in-app-plugin/modal.d.ts
-# sw.file.hash: dbd4049ab2732245d251c3451593bd2abaeb2c51
+# sw.file.hash: 98187cfb9d4f4eb29a7fd573d5e668e1e07fe2f1
 /demo/app/home/in-app-plugin/modal.js
-# sw.file.hash: 5a2805f462a1ab7846ec777b6c9f8e9e68c7f6d0
+# sw.file.hash: 71fd4295122ff8699a245f699c3326eb99cd3855
 /demo/app/home/in-app-plugin/modal.js.map
 # sw.file.hash: 9cddcf37767a50c8e9bc1967aa5838dbeb621233
 /demo/app/js-native-demo/js-native-demo.d.ts
@@ -415,17 +437,17 @@ CACHE MANIFEST
 /demo/app/js-native-demo/js-native-demo.routes.js.map
 # sw.file.hash: 9da3dc6b8a30935d43177d326cfe9acc3ac8a591
 /demo/app/js-native-demo/js-native-demo.tpl.html
-# sw.file.hash: eba50db485cf606b0bba5836f671e1706a6136dd
+# sw.file.hash: 2d5b75299609b319d12193c95fa9115e3362a06d
 /demo/app/js-native-demo/presets.d.ts
 # sw.file.hash: d9218b54afaa8ac121335d2ba9983c9485a876dd
 /demo/app/js-native-demo/presets.js
-# sw.file.hash: 25cdaba6e498f4c83987372e9b7148e1e6af14f6
+# sw.file.hash: 572d7113366d59e7b8cd4655b4852a0263eae6e0
 /demo/app/js-native-demo/presets.js.map
 # sw.file.hash: d3d22aa513da8597d04069465eeff2909af45e6b
 /demo/app/shared.module.d.ts
-# sw.file.hash: 37b507737f5bc46c83b73a4a57a9fa802c8d7b6e
+# sw.file.hash: 845a8d17841c164eaf25d28864f07d023b75bc48
 /demo/app/shared.module.js
-# sw.file.hash: 0be0f242fa4bb6d8af71f47656de101ec2f75d82
+# sw.file.hash: e1557464c6ce58803f47cb68958f94e2bf20999a
 /demo/app/shared.module.js.map
 # sw.file.hash: 222b01248948c5c95c1b8e4e89952b9059e0af44
 /demo/app/vex-demo/css/vex-theme-bottom-right-corner.css
@@ -455,11 +477,11 @@ CACHE MANIFEST
 /demo/app/vex-demo/presets.js
 # sw.file.hash: db25a8a94b32deb947a5f3f37135c534bb1448ca
 /demo/app/vex-demo/presets.js.map
-# sw.file.hash: 661515c248a05d03a29ae3bbec151b58f5218364
+# sw.file.hash: 1e002caaff71fe7a16693ea9c914b2243dc4a78c
 /demo/app/vex-demo/vex-demo.d.ts
-# sw.file.hash: 0d8eb10be61c06820232fc8c54ad5d5bd6e8a399
+# sw.file.hash: 6727ddbe803d75fde033f5e27dca5f4b8bd364c1
 /demo/app/vex-demo/vex-demo.js
-# sw.file.hash: cb822f3ea68be9c18a875a92648e700306b1c20b
+# sw.file.hash: d3b93be57298ce6b61c171a1f3b3c101744cf603
 /demo/app/vex-demo/vex-demo.js.map
 # sw.file.hash: 28f0b21b629cbf12172a35ec5b017492d3c199f3
 /demo/app/vex-demo/vex-demo.module.d.ts
@@ -475,11 +497,11 @@ CACHE MANIFEST
 /demo/app/vex-demo/vex-demo.routes.js.map
 # sw.file.hash: c327a52248de41a4b5fc4887215c1dbeee2ab2da
 /demo/app/vex-demo/vex-demo.tpl.html
-# sw.file.hash: e5e5a2f1cc6170f11caf887b583df0dfb0d5619b
+# sw.file.hash: 16837c958b8a796ad09ca8d296415fd0e445fb10
 /demo/vendor.d.ts
-# sw.file.hash: 8d1c58f8a47c96050f0d04a421ad519f7424974f
+# sw.file.hash: ad03e23f9d5d0b97d52bf60b4c947bf1b3f5924d
 /demo/vendor.js
-# sw.file.hash: b722c0faa52c6a6b40c6985bb1f7885f8e48d9d9
+# sw.file.hash: 43c001f739b42af44de9a55ab2ccd47c4828fac3
 /demo/vendor.js.map
 # sw.file.hash: 4d2efda8e1ee55b4ea33ba4783b0265553ff8d63
 /index.SystemJS.html
@@ -491,7 +513,7 @@ CACHE MANIFEST
 /system.config.js
 # sw.file.hash: 4ce090217b7d0f54ab0132afac404d9b2f17a8c2
 /system.config.js.map
-# sw.file.hash: 55fd9f4a8098e21ef8bd1ae425cc612b17e332d8
+# sw.file.hash: b2b8c2f31fdc2bcd4ac5598555cb35ee50bbb351
 /tsconfig.json
 # sw.file.hash: 19f4d47da408a8a4741f27f582d4d004e3092fe2
 /vendor/@angular/common/bundles/common.umd.js

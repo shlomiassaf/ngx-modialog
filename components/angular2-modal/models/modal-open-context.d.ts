@@ -1,9 +1,10 @@
-import { ResolvedReflectiveProvider, ViewContainerRef } from '@angular/core';
+import { ResolvedReflectiveProvider } from '@angular/core';
 import { FluentAssignMethod } from '../framework/fluent-assign';
-import { ModalComponent } from './tokens';
-import { Modal } from '../providers/modal';
+import { ModalComponent, WideVCRef } from './tokens';
+import { Modal } from '../providers';
 import { DialogRef } from './dialog-ref';
-import { ModalContext, ModalContextBuilder, ModalControllingContextBuilder } from './modal-context';
+import { ModalContext, ModalContextBuilder } from './modal-context';
+import { ModalControllingContextBuilder } from './overlay-context';
 export declare class ModalOpenContext extends ModalContext {
     component: any;
     modal: Modal;
@@ -30,5 +31,5 @@ export declare abstract class ModalOpenContextBuilder<T extends ModalOpenContext
      * @param viewContainer If set opens the modal inside the supplied viewContainer
      * @returns Promise<DialogRef>
      */
-    open(viewContainer?: ViewContainerRef): Promise<DialogRef<T>>;
+    open(viewContainer?: WideVCRef): Promise<DialogRef<T>>;
 }

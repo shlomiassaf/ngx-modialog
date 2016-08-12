@@ -5,11 +5,11 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var fluent_assign_1 = require('../../../framework/fluent-assign');
+var message_modal_component_1 = require('../message-modal.component');
 var modal_context_1 = require('../modal-context');
-var message_modal_1 = require('../message-modal');
 var utils_1 = require('../../../framework/utils');
 var DEFAULT_VALUES = {
-    component: message_modal_1.BSMessageModal,
+    component: message_modal_component_1.BSMessageModal,
     headerClass: 'modal-header',
     bodyClass: 'modal-body',
     footerClass: 'modal-footer'

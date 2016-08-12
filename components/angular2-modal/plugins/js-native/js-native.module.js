@@ -10,20 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var modal_1 = require('./modal');
-var js_native_modal_renderer_1 = require('./js-native-modal-renderer');
-var js_native_preset_1 = require('./presets/js-native-preset');
-var angular2_modal_1 = require('../../angular2-modal');
+var angular2_modal_1 = require('../../../angular2-modal');
 function getProviders() {
     return [
         { provide: angular2_modal_1.Modal, useClass: modal_1.Modal },
-        { provide: modal_1.Modal, useClass: modal_1.Modal },
-        { provide: angular2_modal_1.ModalRenderer, useClass: js_native_modal_renderer_1.JSNativeModalRenderer },
-        { provide: angular2_modal_1.ModalBackdropComponent, useValue: {} },
-        { provide: angular2_modal_1.ModalDropInFactory, useValue: {
-                alert: function (modal) { return new js_native_preset_1.JSNativePresetBuilder(modal, angular2_modal_1.DROP_IN_TYPE.alert); },
-                prompt: function (modal) { return new js_native_preset_1.JSNativePresetBuilder(modal, angular2_modal_1.DROP_IN_TYPE.prompt); },
-                confirm: function (modal) { return new js_native_preset_1.JSNativePresetBuilder(modal, angular2_modal_1.DROP_IN_TYPE.confirm); }
-            } }
+        { provide: modal_1.Modal, useClass: modal_1.Modal }
     ];
 }
 var JSNativeModalModule = (function () {

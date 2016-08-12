@@ -14,15 +14,10 @@ var index_1 = require('../demo-head/index');
 var presets = require('./presets');
 var login_dialog_1 = require('./login-dialog');
 var VexDemo = (function () {
-    function VexDemo(modal, viewContainer) {
+    function VexDemo(modal) {
         var _this = this;
         this.modal = modal;
         this.theme = 'default';
-        /**
-         * A Default view container ref, usually the app root container ref.
-         * Has to be set manually until we can find a way to get it automatically.
-         */
-        this.modal.defaultViewContainer = viewContainer;
         this.modalCommands = [
             {
                 text: 'alert drop in',
@@ -42,7 +37,7 @@ var VexDemo = (function () {
             },
             {
                 text: 'In Element example',
-                factory: function () { return presets.alert.call(_this, _this.modal).open(_this.demoHead.vcCommands); }
+                factory: function () { return presets.alert.call(_this, _this.modal).open('demo-head'); }
             },
             {
                 text: 'Custom Modal example',
@@ -82,7 +77,7 @@ var VexDemo = (function () {
             providers: vex_1.VexModalModule.getProviders(),
             encapsulation: core_1.ViewEncapsulation.None
         }), 
-        __metadata('design:paramtypes', [vex_1.Modal, core_1.ViewContainerRef])
+        __metadata('design:paramtypes', [vex_1.Modal])
     ], VexDemo);
     return VexDemo;
 }());

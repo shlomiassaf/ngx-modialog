@@ -13,7 +13,7 @@ var tokens_1 = require('../../models/tokens');
 var JSNativeModalRenderer = (function () {
     function JSNativeModalRenderer() {
     }
-    JSNativeModalRenderer.prototype.render = function (type, viewContainer, bindings, dialog) {
+    JSNativeModalRenderer.prototype.render = function (dialog, vcRef) {
         var result;
         switch (dialog.context.dialogType) {
             case tokens_1.DROP_IN_TYPE.alert:
@@ -27,14 +27,17 @@ var JSNativeModalRenderer = (function () {
                 result = window.confirm(dialog.context.message);
                 break;
         }
-        dialog.destroy = function () { };
+        dialog.destroy = function () {
+        };
         if (result === false) {
             dialog.dismiss();
         }
         else {
             dialog.close(result);
         }
-        return dialog;
+        // we need to return ComponentRef<ModalOverlay> but a native dialog does'nt have that
+        // so we resolve an empty promise, the user of this renderer should expect that.
+        return {};
     };
     JSNativeModalRenderer = __decorate([
         core_1.Injectable(), 

@@ -1,8 +1,9 @@
-import { ViewContainerRef, ComponentFactoryResolver, ResolvedReflectiveProvider } from '@angular/core';
+import { ViewContainerRef, ComponentFactoryResolver, ComponentRef } from '@angular/core';
 import { DialogRef } from '../models/dialog-ref';
-import { ModalRenderer } from '../models/tokens';
-export declare class DOMModalRenderer implements ModalRenderer {
+import { OverlayRenderer } from '../models/tokens';
+import { ModalOverlay } from '../overlay';
+export declare class DOMOverlayRenderer implements OverlayRenderer {
     private _cr;
     constructor(_cr: ComponentFactoryResolver);
-    render(type: any, viewContainer: ViewContainerRef, bindings: ResolvedReflectiveProvider[], dialog: DialogRef<any>): DialogRef<any>;
+    render(dialog: DialogRef<any>, vcRef: ViewContainerRef): ComponentRef<ModalOverlay>;
 }

@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var bootstrap_1 = require("angular2-modal/plugins/bootstrap");
-var index_1 = require('../../demo-head/index');
 var custom_modal_sample_1 = require('./custom-modal-sample');
 var presets = require('../presets');
 var BootstrapDemoPage = (function () {
@@ -36,20 +35,20 @@ var BootstrapDemoPage = (function () {
             },
             {
                 text: 'In Element example',
-                factory: function () { return presets.inElement(_this.modal).open(_this.demoHead.vcCommands); }
+                factory: function () { return presets.inElement(_this.modal).open('demo-head'); }
             },
             {
                 text: 'Custom Modal example',
                 factory: function () {
-                    return _this.modal.open(custom_modal_sample_1.AdditionCalculateWindow, new custom_modal_sample_1.AdditionCalculateWindowData(2, 3));
+                    var builder = new bootstrap_1.BSModalContextBuilder({ num1: 2, num2: 3 }, undefined, custom_modal_sample_1.CustomModalContext);
+                    var overlayConfig = {
+                        context: builder.toJSON()
+                    };
+                    return _this.modal.open(custom_modal_sample_1.CustomModal, overlayConfig);
                 }
             }
         ];
     }
-    __decorate([
-        core_1.ViewChild(index_1.DemoHead), 
-        __metadata('design:type', index_1.DemoHead)
-    ], BootstrapDemoPage.prototype, "demoHead", void 0);
     BootstrapDemoPage = __decorate([
         core_1.Component({
             selector: 'bootstrap-demo-page',

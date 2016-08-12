@@ -10,8 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
-var outside_event_plugin_1 = require('./providers/outside-event-plugin');
+var providers_1 = require('./providers');
 var angular2_modal_1 = require('../angular2-modal');
+var overlay_1 = require('./overlay');
 var ModalModule = (function () {
     function ModalModule() {
     }
@@ -19,13 +20,33 @@ var ModalModule = (function () {
         return {
             ngModule: ModalModule,
             providers: [
-                { provide: angular2_modal_1.ModalRenderer, useClass: angular2_modal_1.DOMModalRenderer },
-                { provide: platform_browser_1.EVENT_MANAGER_PLUGINS, useClass: outside_event_plugin_1.DOMOutsideEventPlugin, multi: true },
+                overlay_1.Overlay,
+                { provide: angular2_modal_1.OverlayRenderer, useClass: angular2_modal_1.DOMOverlayRenderer },
+                { provide: platform_browser_1.EVENT_MANAGER_PLUGINS, useClass: providers_1.DOMOutsideEventPlugin, multi: true },
             ]
         };
     };
     ModalModule = __decorate([
-        core_1.NgModule({}), 
+        core_1.NgModule({
+            declarations: [
+                overlay_1.ModalOverlay,
+                angular2_modal_1.CSSBackdrop,
+                angular2_modal_1.CSSDialogContainer,
+                angular2_modal_1.OverlayDialogBoundary,
+                angular2_modal_1.OverlayTarget
+            ],
+            exports: [
+                angular2_modal_1.CSSBackdrop,
+                angular2_modal_1.CSSDialogContainer,
+                angular2_modal_1.OverlayDialogBoundary,
+                angular2_modal_1.OverlayTarget
+            ],
+            entryComponents: [
+                overlay_1.ModalOverlay,
+                angular2_modal_1.CSSBackdrop,
+                angular2_modal_1.CSSDialogContainer
+            ]
+        }), 
         __metadata('design:paramtypes', [])
     ], ModalModule);
     return ModalModule;

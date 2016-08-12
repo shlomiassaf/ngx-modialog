@@ -10,25 +10,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
+var angular2_modal_1 = require("angular2-modal");
 var modal_1 = require('./modal');
 var modal_backdrop_1 = require('./modal-backdrop');
-var modal_context_1 = require('./modal-context');
-var angular2_modal_1 = require("angular2-modal");
 var modal_2 = require('./modal');
 exports.Modal = modal_2.Modal;
-var modal_context_2 = require('./modal-context');
-exports.InAppModalContext = modal_context_2.InAppModalContext;
-exports.InAppModalContextBuilder = modal_context_2.InAppModalContextBuilder;
+var modal_context_1 = require('./modal-context');
+exports.InAppModalContext = modal_context_1.InAppModalContext;
+exports.InAppModalContextBuilder = modal_context_1.InAppModalContextBuilder;
 function getProviders() {
     return [
         { provide: angular2_modal_1.Modal, useClass: modal_1.Modal },
-        { provide: modal_1.Modal, useClass: modal_1.Modal },
-        { provide: angular2_modal_1.ModalBackdropComponent, useValue: modal_backdrop_1.InAppModalBackdrop },
-        { provide: angular2_modal_1.ModalDropInFactory, useValue: {
-                alert: function (modal) { return new modal_context_1.InAppModalContextBuilder(modal); },
-                prompt: undefined,
-                confirm: undefined
-            } }
+        modal_1.Modal
     ];
 }
 var InAppModalModule = (function () {

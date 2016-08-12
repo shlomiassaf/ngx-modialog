@@ -10,33 +10,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var createComponent_1 = require('../framework/createComponent');
-var DOMModalRenderer = (function () {
-    function DOMModalRenderer(_cr) {
+var dialog_ref_1 = require('../models/dialog-ref');
+var overlay_1 = require('../overlay');
+var DOMOverlayRenderer = (function () {
+    function DOMOverlayRenderer(_cr) {
         this._cr = _cr;
     }
-    DOMModalRenderer.prototype.render = function (type, viewContainer, bindings, dialog) {
-        var cmpRef = createComponent_1.default(this._cr, type, viewContainer, bindings);
+    DOMOverlayRenderer.prototype.render = function (dialog, vcRef) {
+        var b = core_1.ReflectiveInjector.resolve([
+            { provide: dialog_ref_1.DialogRef, useValue: dialog }
+        ]);
+        var cmpRef = createComponent_1.default(this._cr, overlay_1.ModalOverlay, vcRef, b);
         if (dialog.inElement) {
-            viewContainer.element.nativeElement.appendChild(cmpRef.location.nativeElement);
+            vcRef.element.nativeElement.appendChild(cmpRef.location.nativeElement);
         }
         else {
             document.body.appendChild(cmpRef.location.nativeElement);
         }
-        dialog.onDestroy.subscribe(function () {
-            if (typeof cmpRef.instance.canDestroy === 'function') {
-                cmpRef.instance.canDestroy().then(function () { return cmpRef.destroy(); });
-            }
-            else {
-                cmpRef.destroy();
-            }
-        });
-        return dialog;
+        return cmpRef;
     };
-    DOMModalRenderer = __decorate([
+    DOMOverlayRenderer = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [core_1.ComponentFactoryResolver])
-    ], DOMModalRenderer);
-    return DOMModalRenderer;
+    ], DOMOverlayRenderer);
+    return DOMOverlayRenderer;
 }());
-exports.DOMModalRenderer = DOMModalRenderer;
+exports.DOMOverlayRenderer = DOMOverlayRenderer;
 //# sourceMappingURL=dom-modal-renderer.js.map

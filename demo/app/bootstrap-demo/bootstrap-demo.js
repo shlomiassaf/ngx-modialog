@@ -11,13 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var bootstrap_1 = require("angular2-modal/plugins/bootstrap");
 var BootstrapDemo = (function () {
-    function BootstrapDemo(modal, viewContainer) {
-        this.modal = modal;
-        /**
-         * A Default view container ref, usually the app root container ref.
-         * Has to be set manually until we can find a way to get it automatically.
-         */
-        modal.defaultViewContainer = viewContainer;
+    function BootstrapDemo() {
     }
     BootstrapDemo = __decorate([
         core_1.Component({
@@ -29,7 +23,7 @@ var BootstrapDemo = (function () {
             providers: bootstrap_1.BootstrapModalModule.getProviders(),
             encapsulation: core_1.ViewEncapsulation.None
         }), 
-        __metadata('design:paramtypes', [bootstrap_1.Modal, core_1.ViewContainerRef])
+        __metadata('design:paramtypes', [])
     ], BootstrapDemo);
     return BootstrapDemo;
 }());
