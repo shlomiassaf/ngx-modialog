@@ -1,29 +1,26 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import {
-  DialogRef,
-  ModalComponent
-} from '../../../angular2-modal';
+import { DialogRef, ModalComponent } from '../../../../components/angular2-modal';
+
 import { MessageModalPreset } from'./presets/message-modal-preset';
 
 export interface BSMessageModalButtonHandler {
-    (cmp: ModalComponent<MessageModalPreset>, $event: MouseEvent): void;
+  (cmp: ModalComponent<MessageModalPreset>, $event: MouseEvent): void;
 }
 
 /**
  * Interface for button definition
  */
 export interface BSMessageModalButtonConfig {
-    cssClass: string;
-    caption: string;
-    onClick: BSMessageModalButtonHandler;
+  cssClass: string;
+  caption: string;
+  onClick: BSMessageModalButtonHandler;
 }
 
 @Component({
-    selector: 'modal-title',
-    encapsulation: ViewEncapsulation.None,
-    template:
-      `<div [ngClass]="context.headerClass" [ngSwitch]="titleHtml">
+  selector: 'modal-title',
+  encapsulation: ViewEncapsulation.None,
+  template: `<div [ngClass]="context.headerClass" [ngSwitch]="titleHtml">
       <button *ngIf="context.showClose" type="button" class="close" 
               aria-label="Close" (click)="dialog.dismiss()">
           <span aria-hidden="true">×</span>
@@ -33,23 +30,25 @@ export interface BSMessageModalButtonConfig {
  </div>`
 })
 export class BSMessageModalTitle {
-    public context: MessageModalPreset;
+  public context: MessageModalPreset;
 
-    constructor(public dialog: DialogRef<MessageModalPreset>) {
-        this.context = dialog.context;
-    }
-    get titleHtml(): number {
-        return this.context.titleHtml ? 1 : 0;
-    }
+  constructor(public dialog: DialogRef<MessageModalPreset>) {
+    this.context = dialog.context;
+  }
+
+  get titleHtml(): number {
+    return this.context.titleHtml ? 1 : 0;
+  }
 }
 
 @Component({
-    selector: 'modal-body',
-    encapsulation: ViewEncapsulation.None,
-    template: `<div [ngClass]="dialog.context.bodyClass" [innerHtml]="dialog.context.message"></div>`
+  selector: 'modal-body',
+  encapsulation: ViewEncapsulation.None,
+  template: `<div [ngClass]="dialog.context.bodyClass" [innerHtml]="dialog.context.message"></div>`
 })
 export class BSMessageModalBody {
-    constructor(public dialog: DialogRef<MessageModalPreset>) {}
+  constructor(public dialog: DialogRef<MessageModalPreset>) {
+  }
 }
 
 
@@ -57,21 +56,22 @@ export class BSMessageModalBody {
  * Represents the modal footer for storing buttons.
  */
 @Component({
-    selector: 'modal-footer',
-    encapsulation: ViewEncapsulation.None,
-    template: `<div [ngClass]="dialog.context.footerClass">
+  selector: 'modal-footer',
+  encapsulation: ViewEncapsulation.None,
+  template: `<div [ngClass]="dialog.context.footerClass">
     <button *ngFor="let btn of dialog.context.buttons;"
             [ngClass]="btn.cssClass"
             (click)="onClick(btn, $event)">{{btn.caption}}</button>
 </div>`
 })
 export class BSModalFooter {
-    constructor(public dialog: DialogRef<MessageModalPreset>) {}
+  constructor(public dialog: DialogRef<MessageModalPreset>) {
+  }
 
-    onClick(btn: BSMessageModalButtonConfig, $event: MouseEvent) {
-        $event.stopPropagation();
-        btn.onClick(this, $event);
-    }
+  onClick(btn: BSMessageModalButtonConfig, $event: MouseEvent) {
+    $event.stopPropagation();
+    btn.onClick(this, $event);
+  }
 }
 
 /**
@@ -93,10 +93,11 @@ export class BSModalFooter {
  *      - Set button configuration (from 0 to n)
  */
 @Component({
-    selector: 'modal-content',
-    encapsulation: ViewEncapsulation.None,
-    template: `<modal-title></modal-title><modal-body></modal-body><modal-footer></modal-footer>`
+  selector: 'modal-content',
+  encapsulation: ViewEncapsulation.None,
+  template: `<modal-title></modal-title><modal-body></modal-body><modal-footer></modal-footer>`
 })
 export class BSMessageModal implements ModalComponent<MessageModalPreset> {
-    constructor(public dialog: DialogRef<MessageModalPreset>) { }
+  constructor(public dialog: DialogRef<MessageModalPreset>) {
+  }
 }
