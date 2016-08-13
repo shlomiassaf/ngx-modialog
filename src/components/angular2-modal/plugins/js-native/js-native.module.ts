@@ -10,7 +10,7 @@ import {
   ModalDropInFactory,
   ModalRenderer,
   DROP_IN_TYPE
-} from '../../angular2-modal';
+} from '../../../../components/angular2-modal';
 
 function getProviders(): any[] {
   return [

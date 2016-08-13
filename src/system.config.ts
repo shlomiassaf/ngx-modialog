@@ -61,7 +61,12 @@ getScripts(prefix, scripts, function () {
       'demo': {defaultExtension: 'js'},
 
       'components/angular2-modal': {main: 'index.js', defaultExtension: 'js'},
-      'components/angular2-modal/platform-browser': {main: 'index.js', defaultExtension: 'js'},
+
+      // Some internal directories in angular2-modal are barrel like (having index.ts)
+      // this works great with webpack, with systemJS it needs mapping.
+      'components/angular2-modal/providers': {main: 'index.js', defaultExtension: 'js'},
+
+      // Plugins also need mappings.
       'components/angular2-modal/plugins/bootstrap': {main: 'index.js', defaultExtension: 'js'},
       'components/angular2-modal/plugins/vex': {main: 'index.js', defaultExtension: 'js'},
       'components/angular2-modal/plugins/js-native': {main: 'index.js', defaultExtension: 'js'}
