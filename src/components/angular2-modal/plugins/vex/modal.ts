@@ -1,9 +1,6 @@
-import {
-  Injectable,
-  ResolvedReflectiveProvider as RRP
-} from '@angular/core';
-
 import 'rxjs/add/operator/first';
+
+import { Injectable, ResolvedReflectiveProvider as RRP } from '@angular/core';
 
 import {
   Maybe,

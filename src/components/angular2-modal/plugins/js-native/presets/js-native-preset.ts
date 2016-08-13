@@ -1,12 +1,11 @@
 import { ViewContainerRef, ResolvedReflectiveProvider } from '@angular/core';
-import { DialogRef, DROP_IN_TYPE } from '../../../../../components/angular2-modal';
+import { DialogRef, DROP_IN_TYPE, OverlayConfig } from '../../../../../components/angular2-modal';
 import { Modal } from '../modal';
 
 import {
   JSNativeModalContext,
   JSNativeModalContextBuilder
 } from '../modal-context';
-import { OverlayConfig } from '../../../models/tokens';
 import { JSNativeModalRenderer } from '../js-native-modal-renderer';
 
 export class JSNativePresetBuilder extends JSNativeModalContextBuilder<JSNativeModalContext> {
