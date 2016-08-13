@@ -10,7 +10,7 @@ import {
 import { DomSanitizationService } from '@angular/platform-browser';
 
 import { BaseDynamicComponent } from './base-dynamic-component';
-import { DialogRef } from '../../angular2-modal';
+import { DialogRef } from '../models/dialog-ref';
 import { Class } from '../framework/utils';
 
 /**

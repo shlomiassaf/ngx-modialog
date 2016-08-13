@@ -3,7 +3,7 @@ import { ViewContainerRef, Injectable } from '@angular/core';
 import { OverlayRenderer, OverlayConfig } from '../models/tokens';
 import { DialogRefStack } from '../models/dialog-ref-stack';
 import { vcRefStore } from '../models/vc-ref-store';
-import { DialogRef } from '../angular2-modal';
+import { DialogRef } from '../models/dialog-ref';
 import { OverlayContext } from '../models/overlay-context';
 
 const _stack = new DialogRefStack<any>();
