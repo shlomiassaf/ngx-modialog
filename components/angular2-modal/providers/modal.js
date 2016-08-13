@@ -5,7 +5,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var angular2_modal_1 = require('../angular2-modal');
+var dialog_ref_1 = require('../models/dialog-ref');
 var UnsupportedDropInError = (function (_super) {
     __extends(UnsupportedDropInError, _super);
     function UnsupportedDropInError(dropInName) {
@@ -57,7 +57,7 @@ var Modal = (function () {
      * @returns { backdropRef: ComponentRef<B>, containerRef: ComponentRef<C> }
      */
     Modal.prototype.createModal = function (dialogRef, backdrop, container) {
-        var b = core_1.ReflectiveInjector.resolve([{ provide: angular2_modal_1.DialogRef, useValue: dialogRef }]);
+        var b = core_1.ReflectiveInjector.resolve([{ provide: dialog_ref_1.DialogRef, useValue: dialogRef }]);
         return {
             backdropRef: dialogRef.overlayRef.instance.addComponent(backdrop, b),
             containerRef: dialogRef.overlayRef.instance.addComponent(container, b)

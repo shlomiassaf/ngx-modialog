@@ -1,4 +1,4 @@
-import { DialogRef, ModalComponent } from '../../../angular2-modal';
+import { DialogRef, ModalComponent } from '../../../../components/angular2-modal';
 import { MessageModalPreset } from './presets/message-modal-preset';
 export interface BSMessageModalButtonHandler {
     (cmp: ModalComponent<MessageModalPreset>, $event: MouseEvent): void;

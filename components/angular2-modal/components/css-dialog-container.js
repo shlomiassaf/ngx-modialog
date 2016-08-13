@@ -16,7 +16,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var base_dynamic_component_1 = require('./base-dynamic-component');
-var angular2_modal_1 = require('../../angular2-modal');
+var dialog_ref_1 = require('../models/dialog-ref');
 /**
  * A component that acts as a top level container for an open modal window.
  */
@@ -48,7 +48,7 @@ var CSSDialogContainer = (function (_super) {
             encapsulation: core_1.ViewEncapsulation.None,
             template: "<span #modalDialog></span>"
         }), 
-        __metadata('design:paramtypes', [angular2_modal_1.DialogRef, core_1.ElementRef, platform_browser_1.DomSanitizationService])
+        __metadata('design:paramtypes', [dialog_ref_1.DialogRef, core_1.ElementRef, platform_browser_1.DomSanitizationService])
     ], CSSDialogContainer);
     return CSSDialogContainer;
 }(base_dynamic_component_1.BaseDynamicComponent));

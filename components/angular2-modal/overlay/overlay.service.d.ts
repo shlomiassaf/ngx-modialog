@@ -1,6 +1,6 @@
 import { ViewContainerRef } from '@angular/core';
 import { OverlayRenderer, OverlayConfig } from '../models/tokens';
-import { DialogRef } from '../angular2-modal';
+import { DialogRef } from '../models/dialog-ref';
 import { OverlayContext } from '../models/overlay-context';
 export declare abstract class Overlay {
     private _modalRenderer;

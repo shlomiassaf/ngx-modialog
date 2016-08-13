@@ -11,7 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var providers_1 = require('./providers');
-var angular2_modal_1 = require('../angular2-modal');
+var tokens_1 = require('./models/tokens');
+var components_1 = require('./components');
 var overlay_1 = require('./overlay');
 var ModalModule = (function () {
     function ModalModule() {
@@ -21,7 +22,7 @@ var ModalModule = (function () {
             ngModule: ModalModule,
             providers: [
                 overlay_1.Overlay,
-                { provide: angular2_modal_1.OverlayRenderer, useClass: angular2_modal_1.DOMOverlayRenderer },
+                { provide: tokens_1.OverlayRenderer, useClass: providers_1.DOMOverlayRenderer },
                 { provide: platform_browser_1.EVENT_MANAGER_PLUGINS, useClass: providers_1.DOMOutsideEventPlugin, multi: true },
             ]
         };
@@ -30,21 +31,21 @@ var ModalModule = (function () {
         core_1.NgModule({
             declarations: [
                 overlay_1.ModalOverlay,
-                angular2_modal_1.CSSBackdrop,
-                angular2_modal_1.CSSDialogContainer,
-                angular2_modal_1.OverlayDialogBoundary,
-                angular2_modal_1.OverlayTarget
+                components_1.CSSBackdrop,
+                components_1.CSSDialogContainer,
+                overlay_1.OverlayDialogBoundary,
+                overlay_1.OverlayTarget
             ],
             exports: [
-                angular2_modal_1.CSSBackdrop,
-                angular2_modal_1.CSSDialogContainer,
-                angular2_modal_1.OverlayDialogBoundary,
-                angular2_modal_1.OverlayTarget
+                components_1.CSSBackdrop,
+                components_1.CSSDialogContainer,
+                overlay_1.OverlayDialogBoundary,
+                overlay_1.OverlayTarget
             ],
             entryComponents: [
                 overlay_1.ModalOverlay,
-                angular2_modal_1.CSSBackdrop,
-                angular2_modal_1.CSSDialogContainer
+                components_1.CSSBackdrop,
+                components_1.CSSDialogContainer
             ]
         }), 
         __metadata('design:paramtypes', [])

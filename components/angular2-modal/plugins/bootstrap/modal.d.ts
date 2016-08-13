@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/first';
 import { ResolvedReflectiveProvider as RRP } from '@angular/core';
-import { Maybe, Overlay, DialogRef, Modal as Modal_ } from '../../../angular2-modal';
+import { Maybe, Overlay, DialogRef, Modal as Modal_ } from '../../../../components/angular2-modal';
 import { OneButtonPresetBuilder } from './../bootstrap/presets/one-button-preset';
 import { TwoButtonPresetBuilder } from './../bootstrap/presets/two-button-preset';
 export declare class Modal extends Modal_ {

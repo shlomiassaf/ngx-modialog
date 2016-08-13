@@ -12,7 +12,7 @@ var core_1 = require('@angular/core');
 var tokens_1 = require('../models/tokens');
 var dialog_ref_stack_1 = require('../models/dialog-ref-stack');
 var vc_ref_store_1 = require('../models/vc-ref-store');
-var angular2_modal_1 = require('../angular2-modal');
+var dialog_ref_1 = require('../models/dialog-ref');
 var _stack = new dialog_ref_stack_1.DialogRefStack();
 var Overlay = (function () {
     function Overlay(_modalRenderer) {
@@ -64,7 +64,7 @@ var Overlay = (function () {
         if (config.context) {
             config.context.normalize();
         }
-        var dialog = new angular2_modal_1.DialogRef(this, config.context || {});
+        var dialog = new dialog_ref_1.DialogRef(this, config.context || {});
         dialog.inElement = config.inside === undefined ? !!vcRef : !!config.inside;
         var cmpRef = renderer.render(dialog, vcRef);
         Object.defineProperty(dialog, 'overlayRef', { value: cmpRef });

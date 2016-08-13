@@ -2,7 +2,7 @@ import { ComponentRef, ResolvedReflectiveProvider } from '@angular/core';
 import { Overlay } from '../overlay';
 import { Class, Maybe } from '../framework/utils';
 import { OverlayConfig } from '../models/tokens';
-import { DialogRef } from '../angular2-modal';
+import { DialogRef } from '../models/dialog-ref';
 import { ModalControllingContextBuilder } from '../models/overlay-context';
 export declare class UnsupportedDropInError extends Error {
     constructor(dropInName: string);

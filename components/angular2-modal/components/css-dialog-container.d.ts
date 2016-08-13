@@ -1,7 +1,7 @@
 import { ComponentRef, ResolvedReflectiveProvider, ElementRef } from '@angular/core';
 import { DomSanitizationService } from '@angular/platform-browser';
 import { BaseDynamicComponent } from './base-dynamic-component';
-import { DialogRef } from '../../angular2-modal';
+import { DialogRef } from '../models/dialog-ref';
 import { Class } from '../framework/utils';
 /**
  * A component that acts as a top level container for an open modal window.
