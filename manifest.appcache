@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # sw.bundle: ng-cli
-# sw.version: f0a6b72c32f821df104e2576e4f0b25e6cf963a0
+# sw.version: e48f587333aac113f45b975fbd089f679232450e
 # sw.file.hash: 9cd2c02727720bb374ea1b1d699702c3c1333ba3
 /bootstrap.js
 # sw.file.hash: d952f5a7db5283990f2172f5ec11149c5ae6418e
@@ -399,11 +399,11 @@ CACHE MANIFEST
 /demo/app/home/in-app-plugin/index.js
 # sw.file.hash: 20a65bbd34a26d52d4b12f681af86dec336f8a24
 /demo/app/home/in-app-plugin/index.js.map
-# sw.file.hash: d3d10d33ec71b89f2fd9c02bdb55054f81795635
+# sw.file.hash: ceebbff5667f3f7c186a703598378e98ebd1846f
 /demo/app/home/in-app-plugin/modal-backdrop.d.ts
-# sw.file.hash: 06dba52e573206d802d04d8cc8a70c5dbbfacb4a
+# sw.file.hash: 7cbe44543251b013e1247dd397e551a986af44c8
 /demo/app/home/in-app-plugin/modal-backdrop.js
-# sw.file.hash: de87e3ec22d3458c7dbc2b25f67da8c54fb32d97
+# sw.file.hash: d519ec909749a44fb14710876d4135969ee55779
 /demo/app/home/in-app-plugin/modal-backdrop.js.map
 # sw.file.hash: 1e0fc14eb593c9ea04842a771e0865e58571d572
 /demo/app/home/in-app-plugin/modal-context.d.ts
@@ -509,9 +509,9 @@ CACHE MANIFEST
 /index.ghpages.html
 # sw.file.hash: 65c55184544a724e126c2aac66942b20aac45414
 /index.html
-# sw.file.hash: 39917e52483a742f31a64b641dc2af9f65f05974
+# sw.file.hash: 91038eaea2235019f7ac5df4073aec117cc80a6c
 /system.config.js
-# sw.file.hash: 4c2ce8d1649aebf01b7739e10641228f9f9b93d5
+# sw.file.hash: 1690e1bbb9abc8385e3a3c82f2267a589be176cd
 /system.config.js.map
 # sw.file.hash: 7e156283a5dfa9669d622b993bed5d5b05f091c2
 /tsconfig.json

@@ -13,13 +13,25 @@ var angular2_modal_1 = require("angular2-modal");
 var InAppModalBackdrop = (function () {
     function InAppModalBackdrop(dialog) {
         this.dialog = dialog;
+        this.zoomState = 'in';
     }
     InAppModalBackdrop = __decorate([
         core_1.Component({
             selector: 'modal-backdrop',
-            styles: ["\n.in-app-modal-backdrop {\n    \n    width: 100%;\n    height: 100%;\n    top: 0;\n    left: 0;\n    bottom: 0;\n    right: 0;\n}", "\narticle {\n    margin: auto;\n    width: 600px;\n    background: inherit;\n    border: 1px solid rgba(0, 0, 0, 0.1);\n    border-radius: 6px;\n    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);\n    overflow: hidden;\n}\narticle:before {\n    content: '';\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    background: inherit;\n    -webkit-filter: blur(10px) saturate(2);\n    filter: blur(10px) saturate(2);\n}\narticle .title {\n    padding: 8px;    \n    background: rgba(235, 235, 235, 0.85);\n    border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n    font-size:24px;\n    text-align: center;\n}\narticle .content {\n    padding: 8px;\n    background: rgba(255, 255, 255, 0.66);\n}"
+            animations: [
+                core_1.trigger('zoomin', [
+                    core_1.transition('void => in', [
+                        core_1.animate('500ms ease-in', core_1.keyframes([
+                            core_1.style({ transform: 'scale(0.1, 0.1)', offset: 0 }),
+                            core_1.style({ transform: 'scale(1.2, 1.2)', offset: 0.5 }),
+                            core_1.style({ transform: 'scale(1, 1)', offset: 1 })
+                        ]))
+                    ])
+                ])
             ],
-            template: "<div class=\"in-app-modal-backdrop\">\n    <article>\n        <div class=\"title\">\n            <span>{{dialog.context.title}}</span>\n        </div>\n        <div class=\"content\">\n            <template [ngTemplateOutlet]=\"dialog.context.templateRef\"></template>\n        </div>\n    </article>    \n</div>"
+            styles: ["\n:host {        \n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  bottom: 0;\n  right: 0;\n\n}\n.in-app-modal-backdrop {\n  margin: 25px 0;\n}\n", "\narticle {\n  margin: auto;\n  width: 600px;\n  background: inherit;\n  border: 1px solid rgba(0, 0, 0, 0.1);\n  border-radius: 6px;\n  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);\n  overflow: hidden;\n}\narticle:before {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  background: inherit;\n  -webkit-filter: blur(10px) saturate(2);\n  filter: blur(10px) saturate(2);\n}\narticle .title {\n  padding: 8px;    \n  background: rgba(235, 235, 235, 0.85);\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  font-size:24px;\n  text-align: center;\n}\narticle .content {\n  padding: 8px;\n  background: rgba(255, 255, 255, 0.66);\n}"
+            ],
+            template: "<div class=\"in-app-modal-backdrop\">\n    <article [@zoomin]=\"zoomState\">\n        <div class=\"title\">\n            <span>{{dialog.context.title}}</span>\n        </div>\n        <div class=\"content\">\n            <template [ngTemplateOutlet]=\"dialog.context.templateRef\"></template>\n        </div>\n    </article>    \n</div>"
         }), 
         __metadata('design:paramtypes', [angular2_modal_1.DialogRef])
     ], InAppModalBackdrop);
