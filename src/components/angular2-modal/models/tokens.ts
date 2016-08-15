@@ -4,7 +4,7 @@ import {
     Type
 } from '@angular/core';
 
-import { Modal } from '../providers/modal';
+import { Modal } from '../providers';
 import { DialogRef } from './dialog-ref';
 import { ModalControllingContextBuilder } from '../models/modal-context';
 
@@ -39,7 +39,7 @@ export abstract class ModalRenderer {
            viewContainer: ViewContainerRef,
            bindings: ResolvedReflectiveProvider[],
            dialog: DialogRef<any>
-    ): Promise<DialogRef<any>>;
+    ): DialogRef<any>;
 }
 
 export abstract class ModalBackdropComponent extends Type {}

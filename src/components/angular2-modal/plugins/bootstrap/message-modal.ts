@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { DialogRef, ModalComponent } from '../../angular2-modal';
+import { DialogRef, ModalComponent } from '../../../../components/angular2-modal';
 import { BSModalFooter, FooterButtonClickEvent } from './modal-footer';
 import { MessageModalPreset } from'./presets/message-modal-preset';
 
@@ -37,7 +37,6 @@ export interface BSMessageModalButtonConfig {
  */
 @Component({
     selector: 'modal-content',
-    directives: [BSModalFooter],
     encapsulation: ViewEncapsulation.None,
     template:
     `<div [ngClass]="context.headerClass" [ngSwitch]="titleHtml">

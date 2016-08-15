@@ -1,13 +1,14 @@
 import {
   Component,
-  ComponentResolver,
+  ComponentFactoryResolver,
   ElementRef,
   ViewContainerRef,
-  ReflectiveInjector,
   ViewChild,
   ViewEncapsulation,
   AfterViewInit
 } from '@angular/core';
+
+import { createComponent } from '../../../../components/angular2-modal';
 
 import { Modal } from './modal';
 import { ModalCompileConfig } from '../../models/tokens';
@@ -36,27 +37,28 @@ export class VexModalContent implements AfterViewInit {
   constructor(public dialog: DialogRef<VEXModalContext>,
               private _modal: Modal,
               private _compileConfig: ModalCompileConfig,
-              private _cr: ComponentResolver) {
+              private _cr: ComponentFactoryResolver) {
     this.context = dialog.context;
   }
 
   ngAfterViewInit() {
-    this._cr.resolveComponent(this._compileConfig.component)
-      .then(cmpFactory => {
-        const vcr = this._viewContainer,
-          bindings = this._compileConfig.bindings,
-          ctxInjector = vcr.parentInjector;
+    if (this.dlgContainer.nativeElement) {
+      this.dlgContainer.nativeElement.focus();
+    }
 
-        const childInjector = Array.isArray(bindings) && bindings.length > 0 ?
-          ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
-
-        if (this.dlgContainer.nativeElement) {
-          this.dlgContainer.nativeElement.focus();
-        }
-
-        return this.dialog.contentRef =
-          vcr.createComponent(cmpFactory, vcr.length, childInjector);
-      });
+    /*  TODO:
+     In RC5 dynamic component creation is no longer async.
+     Somewhere down the pipe of the created component a value change happens that fires
+     a CD exception. setTimeout is a workaround that mimics the async behavior.
+     Find out the error and remove setTimeout.
+     */
+    setTimeout( () => {
+      this.dialog.contentRef = createComponent(
+        this._cr,
+        this._compileConfig.component,
+        this._viewContainer,
+        this._compileConfig.bindings);
+    });
   }
 
   onClickOutside() {

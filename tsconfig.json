@@ -1,15 +1,27 @@
 {
-  "version": "1.5.0",
   "compilerOptions": {
-    "target": "ES5",
+    "target": "es5",
     "module": "commonjs",
-    "removeComments": true,
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noEmitHelpers": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "types": [
+      "core-js",
+      "hammerjs",
+      "node",
+      "source-map",
+      "uglify-js",
+      "webpack"
+    ]
   },
-  "files": [
-    "typings/browser.d.ts"
+  "awesomeTypescriptLoaderOptions": {
+    "forkChecker": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "typings"
   ]
 }

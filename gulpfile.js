@@ -58,4 +58,8 @@ gulp.task('replace-core-relative-imports', function(){
     gulp.src(['./dist/build/demo/**/*.js'])
         .pipe(transform( { visitCallExpression: visitCallExpression } ))
         .pipe(gulp.dest('./dist/build/demo'));
+
+    gulp.src(['./dist/build/components/angular2-modal/plugins/**/*.js'])
+      .pipe(transform( { visitCallExpression: visitCallExpression } ))
+      .pipe(gulp.dest('./dist/build/components/angular2-modal/plugins'));
 });

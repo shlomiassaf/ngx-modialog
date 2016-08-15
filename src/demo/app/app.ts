@@ -7,9 +7,6 @@ import { FORM_PROVIDERS } from '@angular/common';
  */
 @Component({
   selector: 'app',
-  providers: [...FORM_PROVIDERS],
-  directives: [],
-  pipes: [],
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
     'demo/app/app.css'

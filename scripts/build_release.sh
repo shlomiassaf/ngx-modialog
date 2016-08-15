@@ -42,24 +42,12 @@ mv ./dist/build/index.SystemJS.html ./dist/build/index.html
 # Inline the css and html into the component ts files.
 ./node_modules/gulp/bin/gulp.js inline-resources
 
+./node_modules/gulp/bin/gulp.js replace-core-relative-imports
+
 # ./dist/commonjs will hold ES5 compiled artifacts from the TypeScript compilation.
 mkdir ./dist/commonjs
 
 # Copy all components/ to ./dist/commonjs/
 cp -R ./dist/build/components/angular2-modal/* ./dist/commonjs/
-
-./node_modules/gulp/bin/gulp.js replace-core-relative-imports
-
-# Create a SystemJS bundle for all components and core.
-mkdir ./dist/commonjs_all
-cp -R ./dist/commonjs/* ./dist/commonjs_all/
-rm ./dist/commonjs_all/angular2-modal.js
-rm ./dist/commonjs_all/angular2-modal.js.map
-rm ./dist/commonjs_all/angular2-modal.d.ts
-mv ./dist/commonjs_all/angular2-modal.all.js ./dist/commonjs_all/angular2-modal.js
-mv ./dist/commonjs_all/angular2-modal.all.js.map ./dist/commonjs_all/angular2-modal.js.map
-mv ./dist/commonjs_all/angular2-modal.all.d.ts ./dist/commonjs_all/angular2-modal.d.ts
-node make.js
-rm -rf ./dist/commonjs_all
 
 cp ./README.md ./dist/commonjs

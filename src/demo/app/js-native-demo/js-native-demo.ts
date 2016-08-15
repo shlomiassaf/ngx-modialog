@@ -1,20 +1,16 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import {
-    Modal,
-    JS_NATIVE_MODAL_PROVIDERS
-} from '../../../components/angular2-modal/plugins/js-native';
-
-
-import { DemoHead, ModalCommandDescriptor } from '../demo-head/index';
+import { Modal, JSNativeModalModule } from '../../../components/angular2-modal/plugins/js-native';
+import { ModalCommandDescriptor } from '../demo-head/index';
 import * as presets from './presets';
-
 
 @Component({
     selector: 'js-native-demo',
-    viewProviders: [ ...JS_NATIVE_MODAL_PROVIDERS ],
     templateUrl: 'demo/app/js-native-demo/js-native-demo.tpl.html',
-    directives: [ DemoHead ],
+    // We override providers set by the Module since this app is using multiple module plugins
+    // (js-native, vex, bootstrap) which messes up the provider tree (last plugin wins)
+    // usually an app will use one plugin and this line is not needed.
+    providers: JSNativeModalModule.getProviders(),
     encapsulation: ViewEncapsulation.None
 })
 export class JSNativeDemo {
