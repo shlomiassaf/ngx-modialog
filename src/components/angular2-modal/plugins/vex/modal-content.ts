@@ -8,7 +8,7 @@ import {
   AfterViewInit
 } from '@angular/core';
 
-import { createComponent } from '../../../../components/angular2-modal';
+import { createComponent } from '../../index';
 
 import { Modal } from './modal';
 import { ModalCompileConfig } from '../../models/tokens';

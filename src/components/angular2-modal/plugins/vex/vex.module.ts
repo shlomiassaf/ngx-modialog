@@ -8,7 +8,7 @@ import {
   ModalBackdropComponent,
   ModalDropInFactory,
   DROP_IN_TYPE as DIType
-} from '../../../../components/angular2-modal';
+} from '../../index';
 
 
 import { DropInPresetBuilder as Builder } from './presets/dropin-preset';

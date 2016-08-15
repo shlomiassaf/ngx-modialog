@@ -10,7 +10,7 @@ import {
   transition
 } from '@angular/core';
 
-import { DialogRef } from '../../../../components/angular2-modal';
+import { DialogRef } from '../../index';
 import { BSModalContext } from './modal-context';
 
 let dialogRefCount = 0;
