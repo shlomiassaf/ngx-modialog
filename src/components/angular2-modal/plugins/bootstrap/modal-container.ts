@@ -14,7 +14,7 @@ import {
   transition
 } from '@angular/core';
 
-import { createComponent, DialogRef, ModalCompileConfig } from '../../../../components/angular2-modal';
+import { createComponent, DialogRef, ModalCompileConfig } from '../../index';
 
 import { Modal } from './modal';
 import { supportsKey } from '../../framework/utils';

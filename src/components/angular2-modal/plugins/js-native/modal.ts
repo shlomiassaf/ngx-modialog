@@ -1,4 +1,4 @@
-import {Modal as BaseModal} from '../../providers';
+import {Modal as BaseModal} from '../../providers/index';
 import {JSNativePresetBuilder} from './presets/js-native-preset';
 
 export interface JSNativeModal extends BaseModal {

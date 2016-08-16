@@ -9,7 +9,7 @@ export {
     MessageModalPresetBuilder
 } from './presets/message-modal-preset';
 
-export { ModalOpenContext, ModalOpenContextBuilder } from './../../models/modal-open-context';
+export { ModalOpenContext, ModalOpenContextBuilder } from '../../models/modal-open-context';
 export { OneButtonPreset, OneButtonPresetBuilder } from './presets/one-button-preset';
 export { TwoButtonPreset, TwoButtonPresetBuilder } from './presets/two-button-preset';
 export { BSModal, Modal } from './modal';

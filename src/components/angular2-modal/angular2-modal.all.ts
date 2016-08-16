@@ -1,13 +1,13 @@
 import {Provider} from '@angular/core';
 import {ModalRenderer} from './models/tokens';
-import { DOMModalRenderer, Modal } from './providers';
+import { DOMModalRenderer, Modal } from './providers/index';
 
 export * from './framework/fluent-assign';
 export * from './models/tokens';
 export * from './models/dialog-ref';
 export * from './models/modal-context';
 export * from './models/modal-open-context';
-export { DOMModalRenderer, Modal } from './providers';
+export { DOMModalRenderer, Modal } from './providers/index';
 
 export const MODAL_PROVIDERS: any[] = [
     new Provider(Modal, {useClass: Modal}),

@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 
-import { DOMOutsideEventPlugin } from './providers';
+import { DOMOutsideEventPlugin } from './providers/index';
 import { ModalRenderer } from './models/tokens';
 import { DOMModalRenderer } from './providers/dom-modal-renderer';
 

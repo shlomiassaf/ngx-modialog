@@ -10,7 +10,7 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { createComponent } from '../../../../components/angular2-modal';
+import { createComponent } from '../../index';
 
 import { ModalComponent, ModalCompileConfig } from '../../models/tokens';
 import { DialogRef } from '../../models/dialog-ref';

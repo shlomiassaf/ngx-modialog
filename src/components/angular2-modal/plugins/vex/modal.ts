@@ -1,4 +1,4 @@
-import {Modal as BaseModal} from '../../providers';
+import {Modal as BaseModal} from '../../providers/index';
 import {DropInPresetBuilder} from './presets/dropin-preset';
 
 export interface VEXModal extends BaseModal {
