@@ -48,8 +48,7 @@ Use [this plunker](http://plnkr.co/edit/iiQett?p=preview) for quick showcasing a
 
 
 ## Sample code: Custom plugin that accepts TemplateRef as dialogs.
-http://plnkr.co/edit/9HYPPK?p=preview
-
+http://embed.plnkr.co/7c0pGE/
 
 ![Code Generator!](/preview.png)
 
@@ -83,10 +82,6 @@ Optionally, you may call System.config() with an object of the form:
 ```
 .
 
-Otherwise, you will need to append 'index' to the path when you import names, as in: 
-```
-import {MODAL_BROWSER_PROVIDERS} from "angular2-modal/platform-browser/index";
-```
 
 ## Angular-cli   
  
