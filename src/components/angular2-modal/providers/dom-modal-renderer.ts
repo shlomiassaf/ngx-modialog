@@ -9,7 +9,7 @@ import {
 import createComponent from '../framework/createComponent';
 import { DialogRef } from '../models/dialog-ref';
 import { OverlayRenderer } from '../models/tokens';
-import { ModalOverlay } from '../overlay';
+import { ModalOverlay } from '../overlay/index';
 
 @Injectable()
 export class DOMOverlayRenderer implements OverlayRenderer {

@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { PromiseCompleter } from '../framework/utils';
-import { Overlay, ModalOverlay } from '../overlay';
+import { Overlay, ModalOverlay } from '../overlay/index';
 import { CloseGuard } from '../models/tokens';
 import { DialogBailOutError } from '../models/errors';
 

@@ -1,10 +1,10 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 
-import { DOMOutsideEventPlugin, DOMOverlayRenderer } from './providers';
+import { DOMOutsideEventPlugin, DOMOverlayRenderer } from './providers/index';
 import { OverlayRenderer } from './models/tokens';
-import { CSSBackdrop, CSSDialogContainer } from './components';
-import { Overlay, ModalOverlay, OverlayDialogBoundary, OverlayTarget } from './overlay';
+import { CSSBackdrop, CSSDialogContainer } from './components/index';
+import { Overlay, ModalOverlay, OverlayDialogBoundary, OverlayTarget } from './overlay/index';
 
 @NgModule({
   declarations: [

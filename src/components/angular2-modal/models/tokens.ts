@@ -4,7 +4,7 @@ import {
   ResolvedReflectiveProvider
 } from '@angular/core';
 
-import { ModalOverlay } from '../overlay';
+import { ModalOverlay } from '../overlay/index';
 import { DialogRef } from './dialog-ref';
 import { OverlayContext } from '../models/overlay-context';
 import { Maybe } from '../framework/utils';

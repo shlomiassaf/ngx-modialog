@@ -62,7 +62,7 @@ export class Modal extends Modal_ {
       .subscribe(() => this.overlay.stackLength === 0 && document.body.classList.remove('vex-open'));
 
     overlay.addClass(`vex vex-theme-${dialogRef.context.className}`);
-    backdrop.addClass('vex-overlay');
+    backdrop.addClass('vex-overlay/index');
     container.addClass(dialogRef.context.contentClassName);
     container.setStyle('display', 'block');
     if (dialogRef.inElement) {

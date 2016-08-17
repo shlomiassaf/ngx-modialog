@@ -2,7 +2,7 @@ import { ResolvedReflectiveProvider } from '@angular/core';
 
 import { FluentAssignMethod } from '../framework/fluent-assign';
 import { ModalComponent, OverlayConfig, WideVCRef } from './tokens';
-import { Modal } from '../providers';
+import { Modal } from '../providers/index';
 import { DialogRef } from './dialog-ref';
 import { ModalContext, ModalContextBuilder } from './modal-context';
 import { ModalControllingContextBuilder } from './overlay-context';
