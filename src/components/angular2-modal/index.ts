@@ -1,4 +1,4 @@
-import { Modal } from './providers';
+import { Modal } from './providers/index';
 
 export * from './framework/fluent-assign';
 export { extend, arrayUnion, PromiseCompleter, Maybe } from './framework/utils';
@@ -16,7 +16,7 @@ export {
   CloseGuard
 } from './models/tokens';
 
-export { Modal, DOMOverlayRenderer } from './providers';
+export { Modal, DOMOverlayRenderer } from './providers/index';
 
 export {
   OverlayContext,
@@ -29,7 +29,7 @@ export {
   ModalOverlay,
   OverlayDialogBoundary,
   OverlayTarget
-} from './overlay';
+} from './overlay/index';
 
 export {
   DEFAULT_VALUES,
@@ -39,7 +39,7 @@ export {
 
 export { ModalOpenContext, ModalOpenContextBuilder } from './models/modal-open-context';
 
-export * from './components';
+export * from './components/index';
 
 export { ModalModule } from './angular2-modal.module';
 

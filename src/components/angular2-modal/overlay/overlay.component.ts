@@ -14,14 +14,14 @@ import { DomSanitizationService } from '@angular/platform-browser';
 
 import { PromiseCompleter, supportsKey } from '../framework/utils';
 import { DialogRef } from '../models/dialog-ref';
-import { BaseDynamicComponent } from '../components';
+import { BaseDynamicComponent } from '../components/index';
 
 
 /**
  * Represents the modal overlay.
  */
 @Component({
-  selector: 'modal-overlay',
+  selector: 'modal-overlay/index',
   host: {
     '[attr.style]': 'styleStr',
     '[attr.class]': 'cssClass',

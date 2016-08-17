@@ -4,7 +4,7 @@ import {
   ResolvedReflectiveProvider
 } from '@angular/core';
 
-import { Overlay } from '../overlay';
+import { Overlay } from '../overlay/index';
 import { Class, Maybe } from '../framework/utils';
 import { OverlayConfig } from '../models/tokens';
 import { DialogRef } from '../models/dialog-ref';
