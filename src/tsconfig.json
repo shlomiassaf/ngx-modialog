@@ -27,7 +27,8 @@
     "./bootstrap.ts"
   ],
   "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true
+    "forkChecker": true,
+    "useWebpackText": true
   },
   "exclude": [
     "node_modules",

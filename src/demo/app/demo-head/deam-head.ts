@@ -33,7 +33,7 @@ export interface DropInClickEvent {
       }
       `
   ],
-  templateUrl: 'demo/app/demo-head/demo-head.html',
+  templateUrl: './demo-head.html',
   encapsulation: ViewEncapsulation.Emulated
 })
 export class DemoHead {

@@ -26,7 +26,7 @@ let dialogRefCount = 0;
         '(body:keydown)': 'documentKeypress($event)'
     },
     styleUrls: [
-        'components/angular2-modal/plugins/vex/modal-backdrop.css'
+        './modal-backdrop.css'
     ],
     encapsulation: ViewEncapsulation.None,
     template:

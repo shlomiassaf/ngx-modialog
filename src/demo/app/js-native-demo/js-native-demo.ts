@@ -6,7 +6,7 @@ import * as presets from './presets';
 
 @Component({
     selector: 'js-native-demo',
-    templateUrl: 'demo/app/js-native-demo/js-native-demo.tpl.html',
+    templateUrl: './js-native-demo.tpl.html',
     // We override providers set by the Module since this app is using multiple module plugins
     // (js-native, vex, bootstrap) which messes up the provider tree (last plugin wins)
     // usually an app will use one plugin and this line is not needed.

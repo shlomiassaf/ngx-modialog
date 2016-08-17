@@ -15,8 +15,8 @@ import * as presets from '../presets';
 
 @Component({
   selector: 'bootstrap-demo-page',
-  styleUrls: ['demo/app/bootstrap-demo/bootstrap-demo-page/bootstrap-demo-page.css'],
-  templateUrl: 'demo/app/bootstrap-demo/bootstrap-demo-page/bootstrap-demo-page.tpl.html'
+  styleUrls: ['./bootstrap-demo-page.css'],
+  templateUrl: './bootstrap-demo-page.tpl.html'
 })
 export class BootstrapDemoPage {
   public modalCommands: ModalCommandDescriptor[];

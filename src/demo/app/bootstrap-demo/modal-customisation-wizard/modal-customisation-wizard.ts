@@ -9,7 +9,7 @@ import {
 @Component({
     selector: 'customize-wizard',
     templateUrl:
-        'demo/app/bootstrap-demo/modal-customisation-wizard/modal-customisation-wizard.tpl.html'
+        './modal-customisation-wizard.tpl.html'
 })
 export class ModalCustomisationWizard {
     type: 'alert' | 'prompt' | 'confirm' = 'alert';

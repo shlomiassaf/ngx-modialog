@@ -23,11 +23,16 @@
   },
   "scripts": {
     "rimraf": "rimraf",
+    "webpack": "webpack",
     "webpack-dev-server": "webpack-dev-server",
-    "ngServer": "ng serve",
     "server": "npm run server:dev",
-    "server:dev": "webpack-dev-server --config webpack.config.js --hot --inline --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
-    "build": "exec ./scripts/build_release.sh",
+    "server:dev": "webpack-dev-server --config config/webpack.dev.js --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
+    "build": "npm run build:prod",
+    "build:prod": "webpack --config config/webpack.prod.js  --progress --profile --colors --display-error-details --display-cached --bail",
+
+    "github-deploy": "npm run github-deploy:prod",
+    "github-deploy:prod": "webpack --config config/webpack.github-deploy.js --progress --profile --colors --display-error-details --display-cached --github-prod",
+
     "start": "npm run server:dev"
   },
   "dependencies": {
@@ -49,14 +54,16 @@
     "@types/uglify-js": "^2.0.27",
     "@types/webpack": "^1.12.29",
     "angular-cli": "0.0.31",
+    "angular2-template-loader": "^0.4.0",
     "async": "^1.5.2",
     "awesome-typescript-loader": "^2.1.1",
     "bootstrap": "^3.3.6",
     "broccoli-autoprefixer": "^4.1.0",
     "broccoli-funnel": "^1.0.1",
     "broccoli-merge-trees": "^1.1.1",
+    "copy-webpack-plugin": "^3.0.1",
     "core-js": "^2.3.0",
-    "css-loader": "^0.23.0",
+    "css-loader": "^0.23.1",
     "del": "^2.2.0",
     "es6-imports-renamer": "^0.1.6",
     "exports-loader": "0.6.2",
@@ -74,6 +81,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-transform-js-ast": "^1.0.2",
     "gulp-typescript": "^2.13.6",
+    "html-webpack-plugin": "^2.22.0",
     "imports-loader": "^0.6.4",
     "js-string-escape": "^1.0.1",
     "json-loader": "^0.5.3",
@@ -84,6 +92,7 @@
     "source-map-loader": "^0.1.5",
     "style-loader": "^0.13.0",
     "systemjs-builder": "^0.15.10",
+    "to-string-loader": "^1.1.4",
     "ts-helpers": "^1.1.1",
     "ts-loader": "^0.8.1",
     "tsconfig-lint": "^0.6.0",
@@ -94,6 +103,8 @@
     "url-loader": "^0.5.6",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.12.1",
+    "webpack-md5-hash": "0.0.5",
+    "webpack-merge": "^0.14.1",
     "zone.js": "^0.6.12"
   }
 }

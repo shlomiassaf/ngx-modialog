@@ -16,16 +16,16 @@ import { LoginDialog } from './login-dialog';
 @Component({
   selector: 'vex-demo',
   styleUrls: [
-    'demo/app/vex-demo//css/vex.css',
-    'demo/app/vex-demo//css/vex-theme-default.css',
-    'demo/app/vex-demo//css/vex-theme-os.css',
-    'demo/app/vex-demo//css/vex-theme-plain.css',
-    'demo/app/vex-demo//css/vex-theme-wireframe.css',
-    'demo/app/vex-demo//css/vex-theme-flat-attack.css',
-    'demo/app/vex-demo//css/vex-theme-top.css',
-    'demo/app/vex-demo//css/vex-theme-bottom-right-corner.css'
+    './css/vex.css',
+    './css/vex-theme-default.css',
+    './css/vex-theme-os.css',
+    './css/vex-theme-plain.css',
+    './css/vex-theme-wireframe.css',
+    './css/vex-theme-flat-attack.css',
+    './css/vex-theme-top.css',
+    './css/vex-theme-bottom-right-corner.css'
   ],
-  templateUrl: 'demo/app/vex-demo/vex-demo.tpl.html',
+  templateUrl: './vex-demo.tpl.html',
   // We override providers set by the Module since this app is using multiple module plugins
   // (js-native, vex, bootstrap) which messes up the provider tree (last plugin wins)
   // usually an app will use one plugin and this line is not needed.

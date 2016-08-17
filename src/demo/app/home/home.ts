@@ -5,7 +5,7 @@ import { InAppModalModule, Modal } from './in-app-plugin/index';
 @Component({
     selector: 'home',
     providers: InAppModalModule.getProviders(),
-    templateUrl: 'demo/app/home/home.tpl.html',
+    templateUrl: './home.tpl.html',
     encapsulation: ViewEncapsulation.None
 })
 export class Home {

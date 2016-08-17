@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { FORM_PROVIDERS } from '@angular/common';
 
 /*
  * App Component
@@ -9,9 +8,9 @@ import { FORM_PROVIDERS } from '@angular/common';
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
-    'demo/app/app.css'
+    './app.css'
   ],
-  templateUrl: 'demo/app/app.html'
+  templateUrl: './app.html'
 })
 export class App {
   constructor() {
