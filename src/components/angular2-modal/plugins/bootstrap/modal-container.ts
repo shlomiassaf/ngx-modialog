@@ -19,7 +19,7 @@ import {
   DialogRef,
   ModalCompileConfig,
   supportsKey
-} from '../../../../components/angular2-modal';
+} from '../../../angular2-modal';
 
 import { Modal } from './modal';
 import { BSModalContext } from './modal-context';
