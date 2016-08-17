@@ -53,7 +53,6 @@
     "@types/source-map": "^0.1.26",
     "@types/uglify-js": "^2.0.27",
     "@types/webpack": "^1.12.29",
-    "angular-cli": "0.0.31",
     "angular2-template-loader": "^0.4.0",
     "async": "^1.5.2",
     "awesome-typescript-loader": "^2.1.1",
