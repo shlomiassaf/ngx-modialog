@@ -20,7 +20,7 @@ import {App} from './app/app';
 function main() {
     return bootstrap(App, [
         ...MODAL_BROWSER_PROVIDERS
-        // you'r app providers here...
+        // your app providers here...
     ])
         .catch(err => console.error(err));
 }
@@ -98,13 +98,13 @@ export class App {
 ```
 
 This is a demonstration of opening a modal using a drop in.
-There are 3 drop in's: 
+There are 3 drop ins: 
   * Alert
   * Prompt
   * Confirm
   
 This is true for every plugin, however some might not implement all of them, the built in plugins support all 3 drop ins.
-Plugins will probably implement different API for drop in's, here is an example for VEX:
+Plugins will probably implement different API for drop ins, here is an example for VEX:
 
 ```ts
 import {Component, ViewContainerRef} from '@angular/core';
@@ -139,7 +139,7 @@ export class App {
 ```
 
 #### Opening a modal using the open() method
-Drop in's are nice for quick interaction with modals, however in some cases we need more control.  
-For this we can use the `open()` method, which is used by all drop in's internally.
+Drop ins are nice for quick interaction with modals, however in some cases we need more control.  
+For this we can use the `open()` method, which is used by all drop ins internally.
 
 
