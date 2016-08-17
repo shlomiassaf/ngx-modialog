@@ -15,7 +15,7 @@ import {
   Modal as BaseModal,
   ModalBackdropComponent,
   ModalDropInFactory
-} from '../../../../components/angular2-modal';
+} from '../../../angular2-modal';
 
 function getProviders(): any[] {
   return [
