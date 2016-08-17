@@ -16,7 +16,7 @@ fi
 set -ex
 
 
-npm publish --access public ./dist/commonjs
+npm publish --access public ./dist
 
 
 # Always log out of npm when publish is complete.
