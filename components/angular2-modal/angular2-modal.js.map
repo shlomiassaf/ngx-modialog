@@ -1,1 +1,0 @@
-{"version":3,"file":"angular2-modal.js","sourceRoot":"","sources":["angular2-modal.ts"],"names":[],"mappings":";;;;AAAA,sCAAsC;AACtC,iBAAc,SAAS,CAAC,EAAA","sourcesContent":["// WEBPACK development runtime helper.\nexport * from './index';\n"]}
