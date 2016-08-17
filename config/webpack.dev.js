@@ -41,6 +41,14 @@ module.exports = webpackMerge(commonConfig, {
     sourceMapFilename: '[name].map',
     chunkFilename: '[id].chunk.js'
   },
+
+  preLoaders: [
+    {
+      test: /\.ts$/,
+      loader: 'tslint-loader',
+      exclude: [/node_modules/]
+    }
+  ],
   plugins: [
     new DefinePlugin({
       'ENV': JSON.stringify(METADATA.ENV),
