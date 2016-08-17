@@ -8,11 +8,9 @@ import {
   AfterViewInit
 } from '@angular/core';
 
-import { createComponent } from '../../../../components/angular2-modal';
+import { createComponent, ModalCompileConfig, DialogRef } from '../../../../components/angular2-modal';
 
 import { Modal } from './modal';
-import { ModalCompileConfig } from '../../models/tokens';
-import { DialogRef } from '../../models/dialog-ref';
 import { VEXModalContext } from './modal-context';
 
 /**

@@ -1,8 +1,9 @@
 
-import { Modal } from './providers';
+import { Modal } from './providers/index';
 
 export * from './framework/fluent-assign';
 export { createComponent } from './framework/createComponent';
+export { extend, arrayUnion, supportsKey } from './framework/utils';
 
 export { DialogRef } from './models/dialog-ref';
 
@@ -15,7 +16,7 @@ export {
   ModalRenderer
 } from './models/tokens';
 
-export { Modal, DOMModalRenderer } from './providers';
+export { Modal, DOMModalRenderer } from './providers/index';
 
 export {
   DEFAULT_VALUES,

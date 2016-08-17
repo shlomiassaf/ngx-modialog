@@ -3,10 +3,9 @@ import {
     ViewEncapsulation,
     OnDestroy
 } from '@angular/core';
-import { DialogRef } from '../../models/dialog-ref';
+import { DialogRef, supportsKey } from '../../../../components/angular2-modal';
 import { Modal } from './modal';
 import { VEXModalContext } from './modal-context';
-import { supportsKey } from '../../framework/utils';
 
 let dialogRefCount = 0;
 

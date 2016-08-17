@@ -1,4 +1,4 @@
-import {Modal as BaseModal} from '../../providers';
+import {Modal as BaseModal} from '../../../../components/angular2-modal';
 import {OneButtonPresetBuilder} from './../bootstrap/presets/one-button-preset';
 import {TwoButtonPresetBuilder} from './../bootstrap/presets/two-button-preset';
 

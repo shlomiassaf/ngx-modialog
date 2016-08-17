@@ -10,10 +10,13 @@ import {
   EventEmitter
 } from '@angular/core';
 
-import { createComponent } from '../../../../components/angular2-modal';
+import {
+  createComponent,
+  ModalComponent,
+  ModalCompileConfig,
+  DialogRef
+} from '../../../../components/angular2-modal';
 
-import { ModalComponent, ModalCompileConfig } from '../../models/tokens';
-import { DialogRef } from '../../models/dialog-ref';
 import { DialogPreset } from './presets/dialog-preset';
 import { DropInPreset } from './presets/dropin-preset';
 

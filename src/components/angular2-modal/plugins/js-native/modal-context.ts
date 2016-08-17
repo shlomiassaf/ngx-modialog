@@ -1,41 +1,42 @@
-import { DROP_IN_TYPE } from '../../models/tokens';
-import { ModalOpenContextBuilder, ModalOpenContext } from '../../models/modal-open-context';
-import { FluentAssignMethod } from './../../framework/fluent-assign';
-import { arrayUnion } from './../../framework/utils';
+import {
+  DROP_IN_TYPE,
+  ModalOpenContextBuilder,
+  ModalOpenContext,
+  FluentAssignMethod,
+  arrayUnion
+} from '../../../../components/angular2-modal';
 
 const DEFAULT_SETTERS = [
-    'promptDefault'
+  'promptDefault'
 ];
 
 export class JSNativeModalContext extends ModalOpenContext {
-    promptDefault: string;
-    dialogType: DROP_IN_TYPE;
+  promptDefault: string;
+  dialogType: DROP_IN_TYPE;
 
-    normalize(): void {
-        if (!this.message) this.message = '';
-        if (this.dialogType === undefined) this.dialogType = DROP_IN_TYPE.alert;
-    }
+  normalize(): void {
+    if (!this.message) this.message = '';
+    if (this.dialogType === undefined) this.dialogType = DROP_IN_TYPE.alert;
+  }
 }
 
 
 export class JSNativeModalContextBuilder<T extends JSNativeModalContext>
-                                                                extends ModalOpenContextBuilder<T> {
+extends ModalOpenContextBuilder<T> {
 
-    /**
-     * The default value for the prompt input
-     */
-    promptDefault: FluentAssignMethod<string, this>;
+  /**
+   * The default value for the prompt input
+   */
+  promptDefault: FluentAssignMethod<string, this>;
 
-    constructor(
-        defaultValues: T = undefined,
-        initialSetters: string[] = undefined,
-        baseType: new () => T = undefined
-    ) {
-        super(
-            defaultValues || <any>{},
-            arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
-            baseType || <any>JSNativeModalContext
-            // https://github.com/Microsoft/TypeScript/issues/7234
-        );
-    }
+  constructor(defaultValues: T = undefined,
+              initialSetters: string[] = undefined,
+              baseType: new () => T = undefined) {
+    super(
+      defaultValues || <any>{},
+      arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
+      baseType || <any>JSNativeModalContext
+      // https://github.com/Microsoft/TypeScript/issues/7234
+    );
+  }
 }
