@@ -1,3 +1,13 @@
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/shlomiassaf/angular2-modal/compare/1.1.3...v1.1.4) (2016-08-21)
+
+
+### Bug Fixes
+
+* be greedy when replacing d.ts imports ([2347cf2](https://github.com/shlomiassaf/angular2-modal/commit/2347cf2))
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/shlomiassaf/angular2-modal/compare/1.0.0...1.1.3) (2016-08-21)
 
