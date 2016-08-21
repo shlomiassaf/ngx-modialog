@@ -1,46 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ModalModule, Modal as BaseModal } from '../../../../components/angular2-modal';
+
 import { Modal } from './modal';
-import { BSModalBackdrop } from './modal-backdrop';
-import { BSMessageModal } from './message-modal';
-import { BSModalContainer } from './modal-container';
-import { BSModalFooter } from './modal-footer';
-
-
-import { OneButtonPresetBuilder } from './presets/one-button-preset';
-import { TwoButtonPresetBuilder } from './presets/two-button-preset';
-
+import { BSModalContainer } from './modal-container.component';
 import {
-  Modal as BaseModal,
-  ModalBackdropComponent,
-  ModalDropInFactory
-} from '../../../../components/angular2-modal';
+  BSMessageModal,
+  BSMessageModalTitle,
+  BSMessageModalBody,
+  BSModalFooter
+} from './message-modal.component';
 
 function getProviders(): any[] {
   return [
     { provide: BaseModal, useClass: Modal },
-    { provide: Modal, useClass: Modal },
-    { provide: ModalBackdropComponent, useValue: BSModalBackdrop },
-    { provide: ModalDropInFactory, useValue: {
-      alert: modal => new OneButtonPresetBuilder(modal, <any>{isBlocking: false}),
-      prompt: modal => new OneButtonPresetBuilder(modal, <any>{isBlocking: true, keyboard: null}),
-      confirm: modal => new TwoButtonPresetBuilder(modal, <any>{isBlocking: true, keyboard: null})
-    }}
+    { provide: Modal, useClass: Modal }
   ];
 }
 
 @NgModule({
-  imports: [ CommonModule ],
+  imports: [ ModalModule, CommonModule ],
   declarations: [
     BSModalFooter,
-    BSMessageModal,
-    BSModalBackdrop,
-    BSModalContainer
+    BSMessageModalTitle,
+    BSMessageModalBody,
+    BSMessageModal
   ],
   providers: getProviders(),
   entryComponents: [
-    BSModalBackdrop,
+    BSModalContainer,
     BSMessageModal
   ]
 })

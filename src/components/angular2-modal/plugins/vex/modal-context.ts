@@ -10,7 +10,7 @@ import {
 
 const DEFAULT_VALUES = {
   className: <VEXBuiltInThemes>'default',
-  overlayClassName: 'vex-overlay',
+  overlayClassName: 'vex-overlay/index',
   contentClassName: 'vex-content',
   closeClassName: 'vex-close'
 };

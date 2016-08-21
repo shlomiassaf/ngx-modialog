@@ -5,9 +5,12 @@ import {
   extend,
   arrayUnion
 } from '../../../../../components/angular2-modal';
-import { BSMessageModalButtonConfig, BSMessageModalButtonHandler } from '../message-modal';
+import {
+  BSMessageModal,
+  BSMessageModalButtonConfig,
+  BSMessageModalButtonHandler
+} from '../message-modal.component';
 import { BSModalContext, BSModalContextBuilder }  from '../modal-context';
-import { BSMessageModal } from '../message-modal';
 
 
 const DEFAULT_VALUES = {
@@ -88,7 +91,7 @@ export interface MessageModalPreset extends BSModalContext {
  * Use derived implementation.
  */
 export abstract class MessageModalPresetBuilder<T extends MessageModalPreset>
-extends BSModalContextBuilder<T> {
+                                                extends BSModalContextBuilder<T> {
 
   /**
    * A Class for the header (title) container.

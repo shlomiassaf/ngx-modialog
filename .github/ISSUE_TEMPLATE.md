@@ -1,4 +1,7 @@
-IMPORTANT: Please provide a sample using http://plnkr.co/edit/iiQett?p=preview 
+IMPORTANT: Please provide a sample using:  
+
+  * V1: http://plnkr.co/edit/hwbmF9?p=preview 
+  * V2: http://plnkr.co/edit/7c0pGE?p=preview
 
 * **I'm submitting a ...**
 [ ] bug report
@@ -14,7 +17,7 @@ IMPORTANT: Please provide a sample using http://plnkr.co/edit/iiQett?p=preview
 
 
 * **If the current behavior is a bug, please provide the steps to reproduce and if possible a minimal demo of the problem** via
-https://plnkr.co or similar (you can use this template as a starting point: http://plnkr.co/edit/iiQett?p=preview).
+https://plnkr.co or similar (you can use one of the templates above as a starting point).
 
 
 

@@ -1,25 +1,20 @@
 import {
   ViewContainerRef,
-  ResolvedReflectiveProvider,
-  Injectable,
-  Type
+  ComponentRef,
+  Injectable
 } from '@angular/core';
 
 import {
+  DROP_IN_TYPE,
   DialogRef,
-  ModalRenderer,
-  DROP_IN_TYPE
+  OverlayRenderer,
+  ModalOverlay
 } from '../../../../components/angular2-modal';
 
-import { JSNativeModalContext } from './modal-context';
-
 @Injectable()
-export class JSNativeModalRenderer implements ModalRenderer {
+export class JSNativeModalRenderer implements OverlayRenderer {
 
-  render(type: Type,
-         viewContainer: ViewContainerRef,
-         bindings: ResolvedReflectiveProvider[],
-         dialog: DialogRef<JSNativeModalContext>): DialogRef<any> {
+  render(dialog: DialogRef<any>, vcRef: ViewContainerRef): ComponentRef<ModalOverlay> {
 
     let result: string | boolean;
     switch (dialog.context.dialogType) {
@@ -44,7 +39,9 @@ export class JSNativeModalRenderer implements ModalRenderer {
       dialog.close(result);
     }
 
-    return dialog;
+    // we need to return ComponentRef<ModalOverlay> but a native dialog does'nt have that
+    // so we resolve an empty promise, the user of this renderer should expect that.
+    return {} as any;
   }
 }
 

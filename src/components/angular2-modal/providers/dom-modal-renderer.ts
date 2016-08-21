@@ -1,42 +1,35 @@
 import {
   ViewContainerRef,
   ComponentFactoryResolver,
-  ResolvedReflectiveProvider,
-  Injectable
+  ComponentRef,
+  Injectable,
+  ReflectiveInjector
 } from '@angular/core';
 
 import createComponent from '../framework/createComponent';
 import { DialogRef } from '../models/dialog-ref';
-import { ModalRenderer } from '../models/tokens';
+import { OverlayRenderer } from '../models/tokens';
+import { ModalOverlay } from '../overlay/index';
 
 @Injectable()
-export class DOMModalRenderer implements ModalRenderer {
+export class DOMOverlayRenderer implements OverlayRenderer {
   constructor(private _cr: ComponentFactoryResolver) {
   }
 
-  render(type: any,
-         viewContainer: ViewContainerRef,
-         bindings: ResolvedReflectiveProvider[],
-         dialog: DialogRef<any>): DialogRef<any> {
+  render(dialog: DialogRef<any>, vcRef: ViewContainerRef): ComponentRef<ModalOverlay> {
+    const b = ReflectiveInjector.resolve([
+      { provide: DialogRef, useValue: dialog }
+    ]);
 
-
-    const cmpRef = createComponent(this._cr, type, viewContainer, bindings);
+    const cmpRef = createComponent(this._cr, ModalOverlay, vcRef, b);
 
     if (dialog.inElement) {
-      viewContainer.element.nativeElement.appendChild(cmpRef.location.nativeElement);
+      vcRef.element.nativeElement.appendChild(cmpRef.location.nativeElement);
     } else {
       document.body.appendChild(cmpRef.location.nativeElement);
     }
 
-    dialog.onDestroy.subscribe( () => {
-      if (typeof cmpRef.instance.canDestroy === 'function') {
-        cmpRef.instance.canDestroy().then ( () => cmpRef.destroy() );
-      } else {
-        cmpRef.destroy();
-      }
-    });
-
-    return dialog;
+    return cmpRef;
   }
 }
 

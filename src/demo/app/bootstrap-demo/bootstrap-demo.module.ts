@@ -8,15 +8,15 @@ import { SharedModule } from '../shared.module';
 import { routing } from './bootstrap-demo.routes';
 import { BootstrapDemo } from './bootstrap-demo';
 import { BootstrapDemoPage } from './bootstrap-demo-page/bootstrap-demo-page';
-import { AdditionCalculateWindow } from './bootstrap-demo-page/custom-modal-sample';
+import { CustomModal } from './bootstrap-demo-page/custom-modal-sample';
 
 @NgModule({
   imports: [ CommonModule, BootstrapModalModule, routing, SharedModule ],
   declarations: [
     BootstrapDemo,
     BootstrapDemoPage,
-    AdditionCalculateWindow
+    CustomModal
   ],
-  entryComponents: [ AdditionCalculateWindow ]
+  entryComponents: [ CustomModal ]
 })
 export class BootstrapDemoModule { }

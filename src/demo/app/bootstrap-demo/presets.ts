@@ -1,6 +1,5 @@
 import {
     Modal,
-    BSModal,
     OneButtonPresetBuilder,
     TwoButtonPresetBuilder
 } from '../../../components/angular2-modal/plugins/bootstrap/index';

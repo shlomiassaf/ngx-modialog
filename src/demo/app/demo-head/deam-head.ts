@@ -43,7 +43,6 @@ export class DemoHead {
   @Input() modalCommands: ModalCommandDescriptor[];
 
   @Output() dropInClick: EventEmitter<DropInClickEvent> = new EventEmitter<DropInClickEvent>();
-  @ViewChild('commands', {read: ViewContainerRef}) public vcCommands: ViewContainerRef;
 
 
   onClick(event: Event, btn: ModalCommandDescriptor) {

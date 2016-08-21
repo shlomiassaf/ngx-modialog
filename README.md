@@ -1,3 +1,7 @@
+# Update
+Version 1.1.2 & 2.0.0-beta.3 now support UMD bundles.
+
+
 # Angular 2 (rc.5): AIO Modal / Dialog window
 
 A fully generic, customizable and fluent modal window implementation for Angular.

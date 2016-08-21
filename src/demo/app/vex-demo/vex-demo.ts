@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewContainerRef, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 
 import {
   VEXBuiltInThemes,
@@ -37,12 +37,7 @@ export class VexDemo {
   theme: VEXBuiltInThemes = <VEXBuiltInThemes>'default';
   @ViewChild(DemoHead) private demoHead: DemoHead;
 
-  constructor(public modal: Modal, viewContainer: ViewContainerRef) {
-    /**
-     * A Default view container ref, usually the app root container ref.
-     * Has to be set manually until we can find a way to get it automatically.
-     */
-    this.modal.defaultViewContainer = viewContainer;
+  constructor(public modal: Modal) {
 
     this.modalCommands = [
       {
@@ -63,7 +58,7 @@ export class VexDemo {
       },
       {
         text: 'In Element example',
-        factory: () => presets.alert.call(this, this.modal).open(this.demoHead.vcCommands)
+        factory: () => presets.alert.call(this, this.modal).open('demo-head')
       },
       {
         text: 'Custom Modal example',
