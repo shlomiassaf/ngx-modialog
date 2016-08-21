@@ -50,7 +50,7 @@ const visitCallExpression = (function() {
 
 
 function tsDefinitionImportRename() {
-  const CORE_IMPORT_REGEX = /^(import {.+} from ['"])(.*\/components\/angular2-modal)(['"];?)$/m;
+  const CORE_IMPORT_REGEX = /^(import {.+} from ['"])(.*\/components\/angular2-modal)(['"];?)$/mg;
   return replace(CORE_IMPORT_REGEX, `$1${CORE_PACKAGE_NAME}$3`);
 }
 
