@@ -21,7 +21,7 @@ import { BaseDynamicComponent } from '../components/index';
  * Represents the modal overlay.
  */
 @Component({
-  selector: 'modal-overlay/index',
+  selector: 'modal-overlay',
   host: {
     '[attr.style]': 'styleStr',
     '[attr.class]': 'cssClass',
