@@ -1,66 +1,30 @@
-# Breaking changing from 0.1.4 to 0.1.5 (angular2 beta 15 to beta 17)
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/shlomiassaf/angular2-modal/compare/1.0.0...1.1.3) (2016-08-21)
 
-## Design
-  * Angular 2s component interaction is now centered around `ViewContainerRef` which are logical units of view's, `angular2-modal` followed.
-  * A default `ViewContainerRef` is needed for `angular2-modal`. This is done once (in 99%) and from there on you can forget about `ViewContainerRef`.
-    This is 1 new code line, the other option was to force a mandatory element in the root template.
-  * The way **dependency injection** is used is now very important.
-    Since a Modal instance is paired with a default view container, every new instance of the modal requires setting a new default view container.
-    This can be handy for advanced scenarios but for most cases setting the default view container once is what you should do. 
-    If you set it once from in the top level component don’t request the Modal in the providers property of a component meta, if you do so you will get a new instance of `Modal`.
-    **This is how a setting it once looks:**
-```ts
-    @Component({
-        selector: 'app', 
-        providers: [ ...MODAL_PROVIDERS], // list of angular2-modal tokens, Modal included.
-        template: `
-        <main>
-          <router-outlet></router-outlet>
-        </main>
-      `
-    })
-    export class App {
-        constructor(public modal: Modal, viewContainer: ViewContainerRef) {
-            /**
-             * A Default view container ref, usually the app root container ref.
-             * Has to be set manually until we can find a way to get it automatically.
-             */
-            modal.defaultViewContainer = viewContainer;
-        }
-    }
-```
-From here on, there's no need to require a new provider for `Modal`      
-So **don't** do this:
-```ts
-        @Component({
-            selector: 'myComponent', 
-            providers: [Modal], // results in a brand new instance of Modal
-            template: `<h1>My Component></h1>`
-        })
-        export class MyComponent {}
-```
 
-## Generic type changes from angular2@2.0.0-beta.16
-  * Every `ResolveProvider` is now `ResolvedReflectiveProviders`
-  * Every `Injector` is now `ReflectiveInjector`
+### Bug Fixes
 
-## Class changes:
-#### BootstrapModalContainer: 
-  * Change selector from `bootstrap-modal` to `modal-container`
+* github publishing ([7e1f343](https://github.com/shlomiassaf/angular2-modal/commit/7e1f343))
+* **demo-vex:** remove button from noButtons example ([0418ecf](https://github.com/shlomiassaf/angular2-modal/commit/0418ecf))
+* **vex:** missing setter in the api ([2699bf5](https://github.com/shlomiassaf/angular2-modal/commit/2699bf5))
+* set context on function call ([bab38c0](https://github.com/shlomiassaf/angular2-modal/commit/bab38c0))
+* set focus trap for VEX and set focus on container ([c1f33a8](https://github.com/shlomiassaf/angular2-modal/commit/c1f33a8))
+* **vex:** set focus on internal element to workaround bug with css animation and focus outline ([22bfcab](https://github.com/shlomiassaf/angular2-modal/commit/22bfcab)), closes [#121](https://github.com/shlomiassaf/angular2-modal/issues/121)
+* systemJS not working due to barrel imports and relative paths ([2f72ebe](https://github.com/shlomiassaf/angular2-modal/commit/2f72ebe))
+* trap focus inside bootstrap container - fixes [#113](https://github.com/shlomiassaf/angular2-modal/issues/113) ([c7113b4](https://github.com/shlomiassaf/angular2-modal/commit/c7113b4))
+* us workaround to allow uglify/minify, see angular/angular[#10618](https://github.com/shlomiassaf/angular2-modal/issues/10618) ([bcd4525](https://github.com/shlomiassaf/angular2-modal/commit/bcd4525)), closes [#157](https://github.com/shlomiassaf/angular2-modal/issues/157)
 
-#### Modal:
-  * open() and openInside() now get ViewContainerRef instead of ElementRef
-  * openInside() anchor parameter was removed
-  * Added property defaultViewContainer, to be set on initial root app element load.
 
-#### ModalDialogInstance: 
-  * Change method dispose() to destroy()
-  * Does not store a reference to Backdrop and BootstrapContainer ComponentRef
-  * Destroy is now set by the Modal service, DialogRef starts with a noop destroy functionality
+### Features
 
-#### ModalAwarePreset: 
-  * open method now get 1 optional parameter ViewContainerRef instead of the inside object.
-    If supplied it modal will render inside that view, otherwise use the defaultViewContainer
+* **animation:** in / out animation in bootstrap plugin ([63ad352](https://github.com/shlomiassaf/angular2-modal/commit/63ad352))
+* **core:** support Angular RC5 ([e4bbcc4](https://github.com/shlomiassaf/angular2-modal/commit/e4bbcc4))
+* **vex:** support Angular RC5 ([2783d51](https://github.com/shlomiassaf/angular2-modal/commit/2783d51))
 
-## Demo:
-Sample element is now modal agnostic, use parent component to get ViewContainerRef
+
+
+<a name="1.0.0"></a>
+# [1.0.0](https://github.com/shlomiassaf/angular2-modal/compare/f5a4135...1.0.0) (2016-05-10)
+
+
+
