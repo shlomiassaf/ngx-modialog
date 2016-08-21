@@ -32,11 +32,11 @@ function getProviders(): any[] {
 @NgModule({
   imports: [ CommonModule ],
   declarations: [
-    VexModalBackdrop,
-    VexModalContent,
-    DialogFormModal,
+    VEXDialogButtons,
     FormDropIn,
-    VEXDialogButtons
+    DialogFormModal,
+    VexModalBackdrop,
+    VexModalContent
   ],
   providers: getProviders(),
   entryComponents: [

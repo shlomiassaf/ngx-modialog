@@ -33,10 +33,10 @@ function getProviders(): any[] {
 @NgModule({
   imports: [ CommonModule ],
   declarations: [
-    BSModalBackdrop,
+    BSModalFooter,
     BSMessageModal,
-    BSModalContainer,
-    BSModalFooter
+    BSModalBackdrop,
+    BSModalContainer
   ],
   providers: getProviders(),
   entryComponents: [
