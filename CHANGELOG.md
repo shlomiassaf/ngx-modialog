@@ -1,3 +1,13 @@
+<a name="1.1.5"></a>
+## [1.1.5](https://github.com/shlomiassaf/angular2-modal/compare/1.1.4...v1.1.5) (2016-08-21)
+
+
+### Bug Fixes
+
+* rename relative exports ([5e77188](https://github.com/shlomiassaf/angular2-modal/commit/5e77188))
+
+
+
 <a name="1.1.4"></a>
 ## [1.1.4](https://github.com/shlomiassaf/angular2-modal/compare/1.1.3...v1.1.4) (2016-08-21)
 
