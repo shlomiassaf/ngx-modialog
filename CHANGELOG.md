@@ -1,3 +1,15 @@
+<a name="2.0.0-beta.7"></a>
+# [2.0.0-beta.7](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.6...v2.0.0-beta.7) (2016-08-21)
+
+
+### Bug Fixes
+
+* typo in overlay selector ([f091153](https://github.com/shlomiassaf/angular2-modal/commit/f091153))
+* **bootstrap:** modal wont animate when closing via clicking outside of modal bounds ([7b73461](https://github.com/shlomiassaf/angular2-modal/commit/7b73461))
+* **vex:** modal wont animate on close/dismiss ([7b73461](https://github.com/shlomiassaf/angular2-modal/commit/7b73461))
+
+
+
 <a name="2.0.0-beta.6"></a>
 # [2.0.0-beta.6](https://github.com/shlomiassaf/angular2-modal/compare/1.1.4...v2.0.0-beta.6) (2016-08-21)
 
