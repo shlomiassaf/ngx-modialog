@@ -77,6 +77,15 @@ export class Modal extends Modal_ {
     overlay.beforeDestroy(() => {
       overlay.addClass('vex-closing');
 
+      // TODO:
+      // Change detection doesn't run after removing these classes, not even in 'nextTurn'
+      // e.g: backdrop.removeClass('in', true);
+      // the only solution is to change immediately and tick the change detection.
+      // This happen for every click (unlike bootstrap plugin).
+      // oddly using ChangeDetectorRef.detectChanges() doesn't work... ???
+      // running inside zone didn't help.
+      overlay.tick();
+
       const completer = new PromiseCompleter<void>();
       container.animationEnd$.first().subscribe(type => completer.resolve());
       return completer.promise;

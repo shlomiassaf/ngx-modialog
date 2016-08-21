@@ -81,6 +81,14 @@ export class Modal extends Modal_ {
 
       backdrop.removeClass('in');
       container.removeClass('in');
+      // TODO:
+      // Change detection doesn't run after removing these classes, not even in 'nextTurn'
+      // e.g: backdrop.removeClass('in', true);
+      // the only solution is to change immediately and tick the change detection.
+      // this only happen when clicking outside of the bounds (overlayDialogBoundary).
+      // oddly using ChangeDetectorRef.detectChanges() doesn't work... ???
+      // running inside zone didn't help.
+      overlay.tick();
 
       backdrop.animationEnd$.first().subscribe(type => completer.resolve());
 

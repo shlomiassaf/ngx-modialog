@@ -1,6 +1,7 @@
 declare const clearTimeout: any;
 
 import {
+  ApplicationRef,
   Component,
   ComponentRef,
   ElementRef,
@@ -35,10 +36,27 @@ export class ModalOverlay extends BaseDynamicComponent {
   @ViewChild('vcRef', {read: ViewContainerRef}) private vcRef: ViewContainerRef;
   
   constructor(private dialogRef: DialogRef<any>,
+              private appRef: ApplicationRef,
               el: ElementRef,
               sanitizer: DomSanitizationService) {
     super(sanitizer, el);
     this.activateAnimationListener();
+  }
+
+  /**
+   * Performs an ApplicationRef.tick
+   *
+   */
+  tick(): void {
+    // this.cdr.markForCheck();
+    // this.cdr.detectChanges();
+    this.appRef.tick();
+
+    // TODO:
+    // Change detection doesn't run after doing some operations in plugins.
+    // this function is a workaround for those situations. (see bootstrap/vex modal implementations)
+    // strange enough, only ApplicationRef.tick() works, the CDR does not... probably due to
+    // the need to trigger from a higher change detector, needs investigation.
   }
 
   addComponent<T>(type: any, bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {

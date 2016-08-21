@@ -9,7 +9,7 @@ import { OverlayContext } from '../models/overlay-context';
 const _stack = new DialogRefStack<any>();
 
 @Injectable()
-export abstract class Overlay {
+export class Overlay {
   /**
    * A Default view container ref, usually the app root container ref.
    * Make sure not to provide something that might get destroyed, it will destroy the modals too.
