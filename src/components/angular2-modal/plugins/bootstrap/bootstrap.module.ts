@@ -22,7 +22,7 @@ function getProviders(): any[] {
 @NgModule({
   imports: [ ModalModule, CommonModule ],
   declarations: [
-    BSModalFooter
+    BSModalFooter,
     BSMessageModalTitle,
     BSMessageModalBody,
     BSMessageModal
