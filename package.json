@@ -25,14 +25,14 @@
     "rimraf": "rimraf",
     "webpack": "webpack",
     "webpack-dev-server": "webpack-dev-server",
+    "gulp": "gulp",
     "server": "npm run server:dev",
     "server:dev": "webpack-dev-server --config config/webpack.dev.js --progress --profile --colors --watch --display-error-details --display-cached --content-base src/",
-    "build": "npm run build:prod",
-    "build:prod": "webpack --config config/webpack.prod.js  --progress --profile --colors --display-error-details --display-cached --bail",
-
+    "build": "gulp build",
+    "build-site": "npm run build-site:prod",
+    "build-site:prod": "webpack --config config/webpack.prod.js  --progress --profile --colors --display-error-details --display-cached --bail",
     "github-deploy": "npm run github-deploy:prod",
     "github-deploy:prod": "webpack --config config/webpack.github-deploy.js --progress --profile --colors --display-error-details --display-cached --github-prod",
-
     "start": "npm run server:dev"
   },
   "dependencies": {
@@ -76,6 +76,7 @@
     "gulp-inline-ng2-template": "^1.1.3",
     "gulp-load-plugins": "^1.2.4",
     "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
     "gulp-shell": "^0.5.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-transform-js-ast": "^1.0.2",

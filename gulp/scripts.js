@@ -43,9 +43,11 @@ gulp.task('scripts:cjs', () => {
     .pipe($.typescript(config.tscConfigCjs));
 
   return merge([
-    tsResult.dts.pipe($.header(config.banner, {
-      pkg: config.pkg,
-    }))
+    tsResult.dts
+      .pipe(relativeImports.tsDefinitionImportRename)
+      .pipe($.header(config.banner, {
+        pkg: config.pkg,
+      }))
       .pipe($.rename(replaceSrcDir))
       .pipe(gulp.dest(config.PATHS.dist.cjs)),
 

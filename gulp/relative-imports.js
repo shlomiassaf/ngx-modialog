@@ -1,8 +1,9 @@
 const transform = require('gulp-transform-js-ast');
 const rename = require('gulp-es6-imports-renamer');
+const replace = require('gulp-replace');
 
-var CORE_PACKAGE_NAME = 'angular2-modal';
-var CORE_IMPORT_REGEX = /^(.*\.\.?\/components\/angular2-modal)(.*)$/;
+const CORE_PACKAGE_NAME = 'angular2-modal';
+const CORE_IMPORT_REGEX = /^(.*\.\.?\/components\/angular2-modal)(.*)$/;
 
 
 function renameFn(originalPath, parentPath, callback) {
@@ -15,9 +16,6 @@ function renameFn(originalPath, parentPath, callback) {
 }
 
 const visitCallExpression = (function() {
-  var CORE_PACKAGE_NAME = 'angular2-modal';
-  var CORE_IMPORT_REGEX = /^(.*\.\.?\/components\/angular2-modal)(.*)$/;
-
   function isRequireMethod (path) {
     var node = path.value;
 
@@ -50,5 +48,12 @@ const visitCallExpression = (function() {
   }
 })();
 
+
+function tsDefinitionImportRename() {
+  const CORE_IMPORT_REGEX = /^(import {.+} from ['"])(.*\/components\/angular2-modal)(['"];?)$/m;
+  return replace(CORE_IMPORT_REGEX, `$1${CORE_PACKAGE_NAME}$3`);
+}
+
+module.exports.tsDefinitionImportRename = tsDefinitionImportRename();
 module.exports.es6ImportRename = rename({renameFn: renameFn});
 module.exports.es5RequireVisitor = transform( { visitCallExpression: visitCallExpression } );
