@@ -1,20 +1,25 @@
-<a name="2.0.0-beta.5"></a>
-# [2.0.0-beta.5](https://github.com/shlomiassaf/angular2-modal/compare/1.1.4...v2.0.0-beta.5) (2016-08-21)
+<a name="2.0.0-beta.6"></a>
+# [2.0.0-beta.6](https://github.com/shlomiassaf/angular2-modal/compare/1.1.4...v2.0.0-beta.6) (2016-08-21)
 
-### Features
-* use overlay DOM structure
-* use CSS animation for plugins based on CSS libraries (e.g: bootstrap, vex)
 
 ### Bug Fixes
 
 * import paths for systemjs ([c6fff42](https://github.com/shlomiassaf/angular2-modal/commit/c6fff42))
 * import paths for systemjs ([987e21b](https://github.com/shlomiassaf/angular2-modal/commit/987e21b))
 * reference directory with index.ts to the index file directly ([18a3ba8](https://github.com/shlomiassaf/angular2-modal/commit/18a3ba8))
+* rename relative exports ([ee66675](https://github.com/shlomiassaf/angular2-modal/commit/ee66675))
+
+
+### Features
+* use overlay DOM structure
+* use CSS animation for plugins based on CSS libraries (e.g: bootstrap, vex)
 
 
 ### BREAKING CHANGES
 * The modal `open()` command now accepts different variables.
 * plugin structure change (affects plugin development only)
+
+
 
 <a name="1.1.4"></a>
 ## [1.1.4](https://github.com/shlomiassaf/angular2-modal/compare/1.1.3...v1.1.4) (2016-08-21)
