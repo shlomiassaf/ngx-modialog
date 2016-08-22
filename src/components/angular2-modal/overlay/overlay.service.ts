@@ -73,7 +73,7 @@ export class Overlay {
     }
 
     let dialog = new DialogRef<any>(this, config.context || {});
-    dialog.inElement = config.inside === undefined ? !!vcRef : !!config.inside;
+    dialog.inElement = !!config.inside;
 
     let cmpRef = renderer.render(dialog, vcRef);
 
