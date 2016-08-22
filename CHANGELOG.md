@@ -1,3 +1,19 @@
+<a name="2.0.0-beta.9"></a>
+# [2.0.0-beta.9](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.8...v2.0.0-beta.9) (2016-08-22)
+
+
+### Code Refactoring
+
+* **overlay:** add `inElement` as a base context property (overlay-context) ([8ec342c](https://github.com/shlomiassaf/angular2-modal/commit/8ec342c))
+* **overlay:** add remove `inside` property from `OverlayConfig` ([8ec342c](https://github.com/shlomiassaf/angular2-modal/commit/8ec342c))
+
+
+### BREAKING CHANGES
+
+* overlay: `OverlayConfig` no longer sets the bounds area of the overlay, instead the context is used which means it is now user configurable
+
+
+
 <a name="2.0.0-beta.8"></a>
 # [2.0.0-beta.8](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.7...v2.0.0-beta.8) (2016-08-22)
 
