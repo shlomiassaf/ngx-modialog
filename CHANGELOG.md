@@ -1,3 +1,18 @@
+<a name="2.0.0-beta.8"></a>
+# [2.0.0-beta.8](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.7...v2.0.0-beta.8) (2016-08-22)
+
+
+### Bug Fixes
+
+* fixed incorrect `inside element` resolution logic ([69895b6](https://github.com/shlomiassaf/angular2-modal/commit/69895b6))
+
+
+### BREAKING CHANGES
+
+* previously if `inside` config property was not set (undefined) and viewContainerRef was supplied `inElement` resolved to true, now only if `inside` is explicitly true the modal is considered to be inside an element (i.e: inside the view container)
+
+
+
 <a name="2.0.0-beta.7"></a>
 # [2.0.0-beta.7](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.6...v2.0.0-beta.7) (2016-08-21)
 
