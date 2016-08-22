@@ -18,6 +18,7 @@ export class Home {
     this.modal.alert()
       .title('Angular 2 Modal')
       .templateRef(this.myTemplate)
+      .inElement(true)
       .open('home-overlay-container')
       .then(d => d.result)
       .catch((e) => {

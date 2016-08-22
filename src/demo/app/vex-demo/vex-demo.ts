@@ -58,7 +58,7 @@ export class VexDemo {
       },
       {
         text: 'In Element example',
-        factory: () => presets.alert.call(this, this.modal).open('demo-head')
+        factory: () => presets.alert.call(this, this.modal).inElement(true).open('demo-head')
       },
       {
         text: 'Custom Modal example',

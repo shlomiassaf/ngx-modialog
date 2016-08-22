@@ -39,13 +39,6 @@ export interface OverlayConfig {
    */
   viewContainer?: WideVCRef;
 
-  /**
-   * If true, render's the component inside the ViewContainerRef,
-   * otherwise render's the component in the root element (body in DOM)
-   * Default: true if ViewContainer supplied, false if not supplied.
-   */
-  inside?: boolean;
-
   renderer?: OverlayRenderer;
 
   /**
