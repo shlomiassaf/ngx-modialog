@@ -42,7 +42,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var platform_browser_1 = __webpack_require__(46);
+	var platform_browser_1 = __webpack_require__(98);
 	var index_1 = __webpack_require__(253);
 	var tokens_1 = __webpack_require__(246);
 	var index_2 = __webpack_require__(244);
@@ -50,13 +50,34 @@ webpackJsonp([2],{
 	var ModalModule = (function () {
 	    function ModalModule() {
 	    }
-	    ModalModule.forRoot = function () {
+	    /**
+	     * Returns a ModalModule pre-loaded with a list of dynamically inserted components.
+	     * Since dynamic components are not analysed by the angular compiler they must register manually
+	     * using entryComponents, this is an easy way to do it.
+	     * @param entryComponents A list of dynamically inserted components (dialog's).
+	     * @returns {{ngModule: ModalModule, providers: {provide: OpaqueToken, useValue: Array<Type|any[]>, multi: boolean}[]}}
+	     */
+	    ModalModule.withComponents = function (entryComponents) {
+	        return {
+	            ngModule: ModalModule,
+	            providers: [
+	                { provide: core_1.ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true }
+	            ]
+	        };
+	    };
+	    /**
+	     * Returns a NgModule for use in the root Module.
+	     * @param entryComponents A list of dynamically inserted components (dialog's).
+	     * @returns ModuleWithProviders
+	     */
+	    ModalModule.forRoot = function (entryComponents) {
 	        return {
 	            ngModule: ModalModule,
 	            providers: [
 	                index_3.Overlay,
 	                { provide: tokens_1.OverlayRenderer, useClass: index_1.DOMOverlayRenderer },
 	                { provide: platform_browser_1.EVENT_MANAGER_PLUGINS, useClass: index_1.DOMOutsideEventPlugin, multi: true },
+	                { provide: core_1.ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true }
 	            ]
 	        };
 	    };
@@ -104,18 +125,26 @@ webpackJsonp([2],{
 	    });
 	}
 	/**
-	 * A base class that expose customisation methods in derived components.
+	 * A base class for supporting dynamic components.
+	 * There are 3 main support areas:
+	 * 1 - Easy wrapper for dynamic styling via CSS classes and inline styles.
+	 * 2 - Easy wrapper for interception of transition/animation end events.
+	 * 3 - Easy wrapper for component creation and injection.
+	 *
+	 * Dynamic css is done via direct element manipulation (via renderer), it does not use change detection
+	 * or binding. This is to allow better control over animation.
+	 *
+	 * Animation support is limited, only transition/keyframes END even are notified.
+	 * The animation support is needed since currently the angular animation module is limited as well and
+	 * does not support CSS animation that are not pre-parsed and are not in the styles metadata of a component.
+	 *
 	 * Capabilities: Add/Remove styls, Add/Remove classes, listen to animation/transition end event,
 	 * add components
 	 */
 	var BaseDynamicComponent = (function () {
-	    function BaseDynamicComponent(sanitizer, el) {
-	        this.sanitizer = sanitizer;
+	    function BaseDynamicComponent(el, renderer) {
 	        this.el = el;
-	        this.style = {};
-	        this.styleStr = '';
-	        this.cssClass = '';
-	        this.classArray = [];
+	        this.renderer = renderer;
 	    }
 	    BaseDynamicComponent.prototype.activateAnimationListener = function () {
 	        if (this.animationEnd)
@@ -132,63 +161,31 @@ webpackJsonp([2],{
 	     * @returns {ModalOverlay}
 	     */
 	    BaseDynamicComponent.prototype.setStyle = function (prop, value) {
-	        if (this.style[prop] !== value) {
-	            if (value === undefined) {
-	                delete this.style[prop];
-	            }
-	            else {
-	                this.style[prop] = value;
-	            }
-	            this.applyStyle();
-	        }
+	        this.renderer.setElementStyle(this.el.nativeElement, prop, value);
 	        return this;
 	    };
-	    /**
-	     * Remove's all inline styles from the overlay host element.
-	     */
-	    BaseDynamicComponent.prototype.clearStyles = function () {
-	        this.style = {};
-	        this.applyStyle();
+	    BaseDynamicComponent.prototype.forceReflow = function () {
+	        this.el.nativeElement.offsetWidth;
 	    };
-	    BaseDynamicComponent.prototype.addClass = function (css, nextTurn) {
+	    BaseDynamicComponent.prototype.addClass = function (css, forceReflow) {
 	        var _this = this;
-	        if (nextTurn === void 0) { nextTurn = false; }
-	        if (typeof css === 'string') {
-	            css.split(' ').forEach(function (c) { return _this._addClass(c, nextTurn); });
-	        }
+	        if (forceReflow === void 0) { forceReflow = false; }
+	        css.split(' ')
+	            .forEach(function (c) { return _this.renderer.setElementClass(_this.el.nativeElement, c, true); });
+	        if (forceReflow)
+	            this.forceReflow();
 	    };
-	    BaseDynamicComponent.prototype.removeClass = function (css, nextTurn) {
+	    BaseDynamicComponent.prototype.removeClass = function (css, forceReflow) {
 	        var _this = this;
-	        if (nextTurn === void 0) { nextTurn = false; }
-	        if (typeof css === 'string') {
-	            css.split(' ').forEach(function (c) { return _this._removeClass(c, nextTurn); });
-	        }
+	        if (forceReflow === void 0) { forceReflow = false; }
+	        css.split(' ')
+	            .forEach(function (c) { return _this.renderer.setElementClass(_this.el.nativeElement, c, false); });
+	        if (forceReflow)
+	            this.forceReflow();
 	    };
 	    BaseDynamicComponent.prototype.ngOnDestroy = function () {
 	        if (this.animationEnd && !this.animationEnd.isUnsubscribed) {
 	            this.animationEnd.complete();
-	        }
-	    };
-	    BaseDynamicComponent.prototype.applyStyle = function () {
-	        this.styleStr = this.sanitizer.bypassSecurityTrustStyle(JSON.stringify(this.style)
-	            .replace('{', '')
-	            .replace('}', '')
-	            .replace(/,/g, ';')
-	            .replace(/"/g, ''));
-	    };
-	    BaseDynamicComponent.prototype.applyClasses = function (nextTurn) {
-	        var _this = this;
-	        if (nextTurn === true) {
-	            if (!this.applyOnNextTurn) {
-	                this.applyOnNextTurn = true;
-	                setTimeout(function () {
-	                    _this.applyOnNextTurn = false;
-	                    _this.applyClasses(false);
-	                });
-	            }
-	        }
-	        else {
-	            this.cssClass = this.classArray.join(' ');
 	        }
 	    };
 	    /**
@@ -212,21 +209,6 @@ webpackJsonp([2],{
 	    BaseDynamicComponent.prototype.onEndAnimation = function () {
 	        if (!this.animationEnd.isUnsubscribed) {
 	            this.animationEnd.next('animation');
-	        }
-	    };
-	    BaseDynamicComponent.prototype._addClass = function (css, nextTurn) {
-	        if (nextTurn === void 0) { nextTurn = false; }
-	        if (this.classArray.indexOf(css) > -1)
-	            return;
-	        this.classArray.push(css);
-	        this.applyClasses(nextTurn);
-	    };
-	    BaseDynamicComponent.prototype._removeClass = function (css, nextTurn) {
-	        if (nextTurn === void 0) { nextTurn = false; }
-	        var idx = this.classArray.indexOf(css);
-	        if (idx > -1) {
-	            this.classArray.splice(idx, 1);
-	            this.applyClasses(nextTurn);
 	        }
 	    };
 	    return BaseDynamicComponent;
@@ -255,24 +237,24 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var platform_browser_1 = __webpack_require__(46);
 	var base_dynamic_component_1 = __webpack_require__(243);
 	/**
 	 * Represents the modal backdrop shaped by CSS.
 	 */
 	var CSSBackdrop = (function (_super) {
 	    __extends(CSSBackdrop, _super);
-	    function CSSBackdrop(el, sanitizer) {
-	        _super.call(this, sanitizer, el);
+	    function CSSBackdrop(el, renderer) {
+	        var _this = this;
+	        _super.call(this, el, renderer);
 	        this.activateAnimationListener();
-	        this.style = {
+	        var style = {
 	            position: 'absolute',
 	            top: 0,
 	            left: 0,
 	            width: '100%',
 	            height: '100%'
 	        };
-	        this.applyStyle();
+	        Object.keys(style).forEach(function (k) { return _this.setStyle(k, style[k]); });
 	    }
 	    CSSBackdrop = __decorate([
 	        core_1.Component({
@@ -284,7 +266,7 @@ webpackJsonp([2],{
 	            encapsulation: core_1.ViewEncapsulation.None,
 	            template: ""
 	        }), 
-	        __metadata('design:paramtypes', [(typeof (_a = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof platform_browser_1.DomSanitizationService !== 'undefined' && platform_browser_1.DomSanitizationService) === 'function' && _b) || Object])
+	        __metadata('design:paramtypes', [(typeof (_a = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _a) || Object, (typeof (_b = typeof core_1.Renderer !== 'undefined' && core_1.Renderer) === 'function' && _b) || Object])
 	    ], CSSBackdrop);
 	    return CSSBackdrop;
 	    var _a, _b;
@@ -313,16 +295,15 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var platform_browser_1 = __webpack_require__(46);
 	var base_dynamic_component_1 = __webpack_require__(243);
-	var dialog_ref_1 = __webpack_require__(85);
+	var dialog_ref_1 = __webpack_require__(84);
 	/**
 	 * A component that acts as a top level container for an open modal window.
 	 */
 	var CSSDialogContainer = (function (_super) {
 	    __extends(CSSDialogContainer, _super);
-	    function CSSDialogContainer(dialog, el, sanitizer) {
-	        _super.call(this, sanitizer, el);
+	    function CSSDialogContainer(dialog, el, renderer) {
+	        _super.call(this, el, renderer);
 	        this.dialog = dialog;
 	        this.tabIndex = -1;
 	        this.role = 'dialog';
@@ -347,7 +328,7 @@ webpackJsonp([2],{
 	            encapsulation: core_1.ViewEncapsulation.None,
 	            template: "<span #modalDialog></span>"
 	        }), 
-	        __metadata('design:paramtypes', [(typeof (_b = typeof dialog_ref_1.DialogRef !== 'undefined' && dialog_ref_1.DialogRef) === 'function' && _b) || Object, (typeof (_c = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _c) || Object, (typeof (_d = typeof platform_browser_1.DomSanitizationService !== 'undefined' && platform_browser_1.DomSanitizationService) === 'function' && _d) || Object])
+	        __metadata('design:paramtypes', [(typeof (_b = typeof dialog_ref_1.DialogRef !== 'undefined' && dialog_ref_1.DialogRef) === 'function' && _b) || Object, (typeof (_c = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _c) || Object, (typeof (_d = typeof core_1.Renderer !== 'undefined' && core_1.Renderer) === 'function' && _d) || Object])
 	    ], CSSDialogContainer);
 	    return CSSDialogContainer;
 	    var _a, _b, _c, _d;
@@ -631,7 +612,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 84:
+/***/ 83:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -730,7 +711,7 @@ webpackJsonp([2],{
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
 	__export(__webpack_require__(396));
-	var utils_1 = __webpack_require__(84);
+	var utils_1 = __webpack_require__(83);
 	exports.extend = utils_1.extend;
 	exports.arrayUnion = utils_1.arrayUnion;
 	exports.PromiseCompleter = utils_1.PromiseCompleter;
@@ -738,7 +719,7 @@ webpackJsonp([2],{
 	var createComponent_1 = __webpack_require__(245);
 	exports.createComponent = createComponent_1.createComponent;
 	__export(__webpack_require__(397));
-	var dialog_ref_1 = __webpack_require__(85);
+	var dialog_ref_1 = __webpack_require__(84);
 	exports.DialogRef = dialog_ref_1.DialogRef;
 	var tokens_1 = __webpack_require__(246);
 	exports.DROP_IN_TYPE = tokens_1.DROP_IN_TYPE;
@@ -776,44 +757,15 @@ webpackJsonp([2],{
 /***/ function(module, exports) {
 
 	"use strict";
+	var BASKET_GROUP = {};
 	/**
 	 * A dumb stack implementation over an array.
 	 */
 	var DialogRefStack = (function () {
 	    function DialogRefStack() {
 	        this._stack = [];
+	        this._stackMap = new Map();
 	    }
-	    DialogRefStack.prototype.push = function (dialogRef) {
-	        var idx = this._stack.indexOf(dialogRef);
-	        if (idx === -1)
-	            this._stack.push(dialogRef);
-	    };
-	    /**
-	     * Push a DialogRef into the stack and manage it so when it's done
-	     * it will automatically kick itself out of the stack.
-	     * @param dialogRef
-	     */
-	    DialogRefStack.prototype.pushManaged = function (dialogRef) {
-	        this.push(dialogRef);
-	    };
-	    DialogRefStack.prototype.pop = function () {
-	        this._stack.pop();
-	    };
-	    /**
-	     * Remove a DialogRef from the stack.
-	     * @param dialogRef
-	     */
-	    DialogRefStack.prototype.remove = function (dialogRef) {
-	        var idx = this._stack.indexOf(dialogRef);
-	        if (idx > -1)
-	            this._stack.splice(idx, 1);
-	    };
-	    DialogRefStack.prototype.index = function (index) {
-	        return this._stack[index];
-	    };
-	    DialogRefStack.prototype.indexOf = function (dialogRef) {
-	        return this._stack.indexOf(dialogRef);
-	    };
 	    Object.defineProperty(DialogRefStack.prototype, "length", {
 	        get: function () {
 	            return this._stack.length;
@@ -821,6 +773,69 @@ webpackJsonp([2],{
 	        enumerable: true,
 	        configurable: true
 	    });
+	    DialogRefStack.prototype.push = function (dialogRef, group) {
+	        if (this._stack.indexOf(dialogRef) === -1) {
+	            this._stack.push(dialogRef);
+	            this._stackMap.set(dialogRef, group || BASKET_GROUP);
+	        }
+	    };
+	    /**
+	     * Push a DialogRef into the stack and manage it so when it's done
+	     * it will automatically kick itself out of the stack.
+	     * @param dialogRef
+	     */
+	    DialogRefStack.prototype.pushManaged = function (dialogRef, group) {
+	        var _this = this;
+	        this.push(dialogRef, group);
+	        dialogRef.onDestroy.subscribe(function () { return _this.remove(dialogRef); });
+	    };
+	    DialogRefStack.prototype.pop = function () {
+	        var dialogRef = this._stack.pop();
+	        this._stackMap.delete(dialogRef);
+	        return dialogRef;
+	    };
+	    /**
+	     * Remove a DialogRef from the stack.
+	     * @param dialogRef
+	     */
+	    DialogRefStack.prototype.remove = function (dialogRef) {
+	        var idx = this.indexOf(dialogRef);
+	        if (idx > -1) {
+	            this._stack.splice(idx, 1);
+	            this._stackMap.delete(dialogRef);
+	        }
+	    };
+	    DialogRefStack.prototype.index = function (index) {
+	        return this._stack[index];
+	    };
+	    DialogRefStack.prototype.indexOf = function (dialogRef) {
+	        return this._stack.indexOf(dialogRef);
+	    };
+	    DialogRefStack.prototype.groupOf = function (dialogRef) {
+	        return this._stackMap.get(dialogRef);
+	    };
+	    DialogRefStack.prototype.groupBy = function (group) {
+	        var arr = [];
+	        if (group) {
+	            this._stackMap.forEach(function (value, key) {
+	                if (value === group) {
+	                    arr.push(key);
+	                }
+	            });
+	        }
+	        return arr;
+	    };
+	    DialogRefStack.prototype.groupLength = function (group) {
+	        var count = 0;
+	        if (group) {
+	            this._stackMap.forEach(function (value, key) {
+	                if (value === group) {
+	                    count++;
+	                }
+	            });
+	        }
+	        return count;
+	    };
 	    return DialogRefStack;
 	}());
 	exports.DialogRefStack = DialogRefStack;
@@ -828,12 +843,12 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 85:
+/***/ 84:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var Subject_1 = __webpack_require__(36);
-	var utils_1 = __webpack_require__(84);
+	var utils_1 = __webpack_require__(83);
 	var errors_1 = __webpack_require__(397);
 	/**
 	 * API to an open modal window.
@@ -911,17 +926,20 @@ webpackJsonp([2],{
 	        var _this = this;
 	        if (this.destroyed !== true) {
 	            this.destroyed = true;
-	            this._onDestroy.next(null);
-	            this._onDestroy.complete();
 	            if (typeof this.overlayRef.instance.canDestroy === 'function') {
 	                this.overlayRef.instance.canDestroy()
 	                    .catch(function () { })
-	                    .then(function () { return _this.overlayRef.destroy(); });
+	                    .then(function () { return _this._destroy(); });
 	            }
 	            else {
-	                this.overlayRef.destroy();
+	                this._destroy();
 	            }
 	        }
+	    };
+	    DialogRef.prototype._destroy = function () {
+	        this._onDestroy.next(null);
+	        this._onDestroy.complete();
+	        this.overlayRef.destroy();
 	    };
 	    DialogRef.prototype._fireHook = function (name) {
 	        var gurad = this.closeGuard, fn = gurad && typeof gurad[name] === 'function' && gurad[name];
@@ -978,7 +996,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var utils_1 = __webpack_require__(84);
+	var utils_1 = __webpack_require__(83);
 	var overlay_context_1 = __webpack_require__(399);
 	exports.DEFAULT_VALUES = {};
 	var DEFAULT_SETTERS = [
@@ -1026,7 +1044,7 @@ webpackJsonp([2],{
 	};
 	var index_1 = __webpack_require__(253);
 	var modal_context_1 = __webpack_require__(398);
-	var utils_1 = __webpack_require__(84);
+	var utils_1 = __webpack_require__(83);
 	var DEFAULT_SETTERS = [
 	    'component'
 	];
@@ -1102,7 +1120,7 @@ webpackJsonp([2],{
 	};
 	var core_1 = __webpack_require__(1);
 	var fluent_assign_1 = __webpack_require__(396);
-	var utils_1 = __webpack_require__(84);
+	var utils_1 = __webpack_require__(83);
 	exports.DEFAULT_VALUES = {
 	    inElement: false,
 	    isBlocking: true,
@@ -1252,40 +1270,26 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var platform_browser_1 = __webpack_require__(46);
-	var utils_1 = __webpack_require__(84);
-	var dialog_ref_1 = __webpack_require__(85);
+	var utils_1 = __webpack_require__(83);
+	var dialog_ref_1 = __webpack_require__(84);
 	var index_1 = __webpack_require__(244);
 	/**
 	 * Represents the modal overlay.
 	 */
 	var ModalOverlay = (function (_super) {
 	    __extends(ModalOverlay, _super);
-	    function ModalOverlay(dialogRef, appRef, el, sanitizer) {
-	        _super.call(this, sanitizer, el);
+	    function ModalOverlay(dialogRef, appRef, el, renderer) {
+	        _super.call(this, el, renderer);
 	        this.dialogRef = dialogRef;
 	        this.appRef = appRef;
 	        this.activateAnimationListener();
 	    }
-	    /**
-	     * Performs an ApplicationRef.tick
-	     *
-	     */
-	    ModalOverlay.prototype.tick = function () {
-	        // this.cdr.markForCheck();
-	        // this.cdr.detectChanges();
-	        this.appRef.tick();
-	        // TODO:
-	        // Change detection doesn't run after doing some operations in plugins.
-	        // this function is a workaround for those situations. (see bootstrap/vex modal implementations)
-	        // strange enough, only ApplicationRef.tick() works, the CDR does not... probably due to
-	        // the need to trigger from a higher change detector, needs investigation.
-	    };
 	    ModalOverlay.prototype.addComponent = function (type, bindings) {
 	        return _super.prototype._addComponent.call(this, type, this.vcRef, bindings);
 	    };
 	    ModalOverlay.prototype.fullscreen = function () {
-	        this.style = {
+	        var _this = this;
+	        var style = {
 	            position: 'fixed',
 	            top: 0,
 	            left: 0,
@@ -1293,10 +1297,11 @@ webpackJsonp([2],{
 	            right: 0,
 	            'z-index': 1500
 	        };
-	        this.applyStyle();
+	        Object.keys(style).forEach(function (k) { return _this.setStyle(k, style[k]); });
 	    };
 	    ModalOverlay.prototype.insideElement = function () {
-	        this.style = {
+	        var _this = this;
+	        var style = {
 	            position: 'absolute',
 	            width: '100%',
 	            height: '100%',
@@ -1305,7 +1310,7 @@ webpackJsonp([2],{
 	            bottom: 0,
 	            right: 0
 	        };
-	        this.applyStyle();
+	        Object.keys(style).forEach(function (k) { return _this.setStyle(k, style[k]); });
 	    };
 	    /**
 	     * Define an element that click inside it will not trigger modal close.
@@ -1418,14 +1423,12 @@ webpackJsonp([2],{
 	        core_1.Component({
 	            selector: 'modal-overlay',
 	            host: {
-	                '[attr.style]': 'styleStr',
-	                '[attr.class]': 'cssClass',
 	                '(body:keydown)': 'documentKeypress($event)'
 	            },
 	            encapsulation: core_1.ViewEncapsulation.None,
 	            template: "<span #vcRef></span>"
 	        }), 
-	        __metadata('design:paramtypes', [(typeof (_b = typeof dialog_ref_1.DialogRef !== 'undefined' && dialog_ref_1.DialogRef) === 'function' && _b) || Object, (typeof (_c = typeof core_1.ApplicationRef !== 'undefined' && core_1.ApplicationRef) === 'function' && _c) || Object, (typeof (_d = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _d) || Object, (typeof (_e = typeof platform_browser_1.DomSanitizationService !== 'undefined' && platform_browser_1.DomSanitizationService) === 'function' && _e) || Object])
+	        __metadata('design:paramtypes', [(typeof (_b = typeof dialog_ref_1.DialogRef !== 'undefined' && dialog_ref_1.DialogRef) === 'function' && _b) || Object, (typeof (_c = typeof core_1.ApplicationRef !== 'undefined' && core_1.ApplicationRef) === 'function' && _c) || Object, (typeof (_d = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _d) || Object, (typeof (_e = typeof core_1.Renderer !== 'undefined' && core_1.Renderer) === 'function' && _e) || Object])
 	    ], ModalOverlay);
 	    return ModalOverlay;
 	    var _a, _b, _c, _d, _e;
@@ -1449,7 +1452,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var dialog_ref_1 = __webpack_require__(85);
+	var dialog_ref_1 = __webpack_require__(84);
 	var vc_ref_store_1 = __webpack_require__(400);
 	/**
 	 * A directive use to signal the overlay that the host of this directive
@@ -1527,7 +1530,7 @@ webpackJsonp([2],{
 	var tokens_1 = __webpack_require__(246);
 	var dialog_ref_stack_1 = __webpack_require__(698);
 	var vc_ref_store_1 = __webpack_require__(400);
-	var dialog_ref_1 = __webpack_require__(85);
+	var dialog_ref_1 = __webpack_require__(84);
 	var _stack = new dialog_ref_stack_1.DialogRefStack();
 	var Overlay = (function () {
 	    function Overlay(_modalRenderer) {
@@ -1552,10 +1555,16 @@ webpackJsonp([2],{
 	    Overlay.prototype.stackPosition = function (dialogRef) {
 	        return _stack.indexOf(dialogRef);
 	    };
+	    Overlay.prototype.groupStackLength = function (dialogRef) {
+	        return _stack.groupLength(_stack.groupOf(dialogRef));
+	    };
 	    /**
-	     * Opens a modal window inside an existing component.
+	     * Creates an overlay and returns a dialog ref.
+	     * @param config instructions how to create the overlay
+	     * @param group A token to associate the new overlay with, used for reference (stacks usually)
+	     * @returns {DialogRef<T>[]}
 	     */
-	    Overlay.prototype.open = function (config) {
+	    Overlay.prototype.open = function (config, group) {
 	        var _this = this;
 	        var viewContainer = config.viewContainer, containers = [];
 	        if (typeof viewContainer === 'string') {
@@ -1573,9 +1582,10 @@ webpackJsonp([2],{
 	            }
 	            containers = [this.defaultViewContainer];
 	        }
-	        return containers.map(function (vc) { return _this.createOverlay(config.renderer || _this._modalRenderer, vc, config); });
+	        return containers
+	            .map(function (vc) { return _this.createOverlay(config.renderer || _this._modalRenderer, vc, config, group); });
 	    };
-	    Overlay.prototype.createOverlay = function (renderer, vcRef, config) {
+	    Overlay.prototype.createOverlay = function (renderer, vcRef, config, group) {
 	        if (config.context) {
 	            config.context.normalize();
 	        }
@@ -1583,8 +1593,7 @@ webpackJsonp([2],{
 	        dialog.inElement = !!config.context.inElement;
 	        var cmpRef = renderer.render(dialog, vcRef);
 	        Object.defineProperty(dialog, 'overlayRef', { value: cmpRef });
-	        _stack.pushManaged(dialog);
-	        dialog.onDestroy.subscribe(function () { return _stack.remove(dialog); });
+	        _stack.pushManaged(dialog, group);
 	        return dialog;
 	    };
 	    Overlay = __decorate([
@@ -1826,12 +1835,11 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var platform_browser_1 = __webpack_require__(46);
 	var angular2_modal_1 = __webpack_require__(8);
 	var BSModalContainer = (function (_super) {
 	    __extends(BSModalContainer, _super);
-	    function BSModalContainer(dialog, el, sanitizer) {
-	        _super.call(this, sanitizer, el);
+	    function BSModalContainer(dialog, el, renderer) {
+	        _super.call(this, el, renderer);
 	        this.dialog = dialog;
 	    }
 	    BSModalContainer.prototype.addComponent = function (type, bindings) {
@@ -1847,7 +1855,7 @@ webpackJsonp([2],{
 	            encapsulation: core_1.ViewEncapsulation.None,
 	            template: "<div [ngClass]=\"dialog.context.dialogClass\" \n      [class.modal-lg]=\"dialog.context.size == 'lg'\"\n      [class.modal-sm]=\"dialog.context.size == 'sm'\">\n  <div class=\"modal-content\" style=\"display:block\" role=\"document\" overlayDialogBoundary>\n    <span #dlg></span>\n  </div>    \n</div>"
 	        }), 
-	        __metadata('design:paramtypes', [(typeof (_b = typeof angular2_modal_1.DialogRef !== 'undefined' && angular2_modal_1.DialogRef) === 'function' && _b) || Object, (typeof (_c = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _c) || Object, (typeof (_d = typeof platform_browser_1.DomSanitizationService !== 'undefined' && platform_browser_1.DomSanitizationService) === 'function' && _d) || Object])
+	        __metadata('design:paramtypes', [(typeof (_b = typeof angular2_modal_1.DialogRef !== 'undefined' && angular2_modal_1.DialogRef) === 'function' && _b) || Object, (typeof (_c = typeof core_1.ElementRef !== 'undefined' && core_1.ElementRef) === 'function' && _c) || Object, (typeof (_d = typeof core_1.Renderer !== 'undefined' && core_1.Renderer) === 'function' && _d) || Object])
 	    ], BSModalContainer);
 	    return BSModalContainer;
 	    var _a, _b, _c, _d;
@@ -1958,15 +1966,12 @@ webpackJsonp([2],{
 	        if (!document.body.classList.contains('modal-open')) {
 	            document.body.classList.add('modal-open');
 	        }
-	        // on removal, remove if last.
-	        dialogRef.onDestroy
-	            .subscribe(function () { return _this.overlay.stackLength === 0 && document.body.classList.remove('modal-open'); });
-	        backdrop.addClass('modal-backdrop fade');
-	        backdrop.addClass('in', true);
-	        container.addClass('modal fade');
+	        backdrop.addClass('modal-backdrop fade', true);
 	        container.setStyle('position', 'absolute');
 	        container.setStyle('display', 'block');
-	        container.addClass('in', true);
+	        container.addClass('modal fade', true);
+	        backdrop.addClass('in');
+	        container.addClass('in');
 	        if (refs.containerRef.location.nativeElement) {
 	            refs.containerRef.location.nativeElement.focus();
 	        }
@@ -1974,15 +1979,10 @@ webpackJsonp([2],{
 	            var completer = new angular2_modal_1.PromiseCompleter();
 	            backdrop.removeClass('in');
 	            container.removeClass('in');
-	            // TODO:
-	            // Change detection doesn't run after removing these classes, not even in 'nextTurn'
-	            // e.g: backdrop.removeClass('in', true);
-	            // the only solution is to change immediately and tick the change detection.
-	            // this only happen when clicking outside of the bounds (overlayDialogBoundary).
-	            // oddly using ChangeDetectorRef.detectChanges() doesn't work... ???
-	            // running inside zone didn't help.
-	            overlay.tick();
-	            backdrop.animationEnd$.first().subscribe(function (type) { return completer.resolve(); });
+	            backdrop.animationEnd$.first().subscribe(function (type) {
+	                _this.overlay.groupStackLength(dialogRef) === 1 && document.body.classList.remove('modal-open');
+	                completer.resolve();
+	            });
 	            return completer.promise;
 	        });
 	        return dialogRef;
@@ -2641,9 +2641,6 @@ webpackJsonp([2],{
 	        if (!document.body.classList.contains('vex-open')) {
 	            document.body.classList.add('vex-open');
 	        }
-	        // on removal, remove if last.
-	        dialogRef.onDestroy
-	            .subscribe(function () { return _this.overlay.stackLength === 0 && document.body.classList.remove('vex-open'); });
 	        overlay.addClass("vex vex-theme-" + dialogRef.context.className);
 	        backdrop.addClass('vex-overlay');
 	        container.addClass(dialogRef.context.contentClassName);
@@ -2657,16 +2654,12 @@ webpackJsonp([2],{
 	        }
 	        overlay.beforeDestroy(function () {
 	            overlay.addClass('vex-closing');
-	            // TODO:
-	            // Change detection doesn't run after removing these classes, not even in 'nextTurn'
-	            // e.g: backdrop.removeClass('in', true);
-	            // the only solution is to change immediately and tick the change detection.
-	            // This happen for every click (unlike bootstrap plugin).
-	            // oddly using ChangeDetectorRef.detectChanges() doesn't work... ???
-	            // running inside zone didn't help.
-	            overlay.tick();
 	            var completer = new angular2_modal_1.PromiseCompleter();
-	            container.animationEnd$.first().subscribe(function (type) { return completer.resolve(); });
+	            container.animationEnd$.first().subscribe(function (type) {
+	                // on removal, remove if last.
+	                _this.overlay.groupStackLength(dialogRef) === 1 && document.body.classList.remove('vex-open');
+	                completer.resolve();
+	            });
 	            return completer.promise;
 	        });
 	        if (dialogRef.context.className === 'bottom-right-corner') {
@@ -2903,7 +2896,7 @@ webpackJsonp([2],{
 	};
 	var core_1 = __webpack_require__(1);
 	var createComponent_1 = __webpack_require__(245);
-	var dialog_ref_1 = __webpack_require__(85);
+	var dialog_ref_1 = __webpack_require__(84);
 	var index_1 = __webpack_require__(247);
 	var DOMOverlayRenderer = (function () {
 	    function DOMOverlayRenderer(_cr) {
@@ -2958,7 +2951,7 @@ webpackJsonp([2],{
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var core_1 = __webpack_require__(1);
-	var dialog_ref_1 = __webpack_require__(85);
+	var dialog_ref_1 = __webpack_require__(84);
 	var UnsupportedDropInError = (function (_super) {
 	    __extends(UnsupportedDropInError, _super);
 	    function UnsupportedDropInError(dropInName) {
@@ -2990,7 +2983,7 @@ webpackJsonp([2],{
 	    Modal.prototype.open = function (componentType, config) {
 	        config = config || {};
 	        try {
-	            var dialogs = this.overlay.open(config);
+	            var dialogs = this.overlay.open(config, this.constructor);
 	            if (dialogs.length > 1) {
 	                console.warn("Attempt to open more then 1 overlay detected.\n        Multiple modal copies are not supported at the moment, \n        only the first viewContainer will display.");
 	            }
@@ -3039,7 +3032,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var utils_1 = __webpack_require__(84);
+	var utils_1 = __webpack_require__(83);
 	var eventMap = {
 	    clickOutside: 'click',
 	    mousedownOutside: 'mousedown',
@@ -3147,7 +3140,7 @@ webpackJsonp([2],{
 	};
 	var core_1 = __webpack_require__(1);
 	var common_1 = __webpack_require__(22);
-	var platform_browser_1 = __webpack_require__(46);
+	var platform_browser_1 = __webpack_require__(98);
 	var angular2_modal_1 = __webpack_require__(8);
 	var shared_module_1 = __webpack_require__(169);
 	var bootstrap_demo_module_1 = __webpack_require__(712);
@@ -4385,4 +4378,4 @@ webpackJsonp([2],{
 /***/ }
 
 });
-//# sourceMappingURL=main.049b7c8d32efb1a38eb2.bundle.map
+//# sourceMappingURL=main.fa01a22c09739f762c35.bundle.map
