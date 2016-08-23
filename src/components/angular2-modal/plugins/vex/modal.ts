@@ -57,9 +57,6 @@ export class Modal extends Modal_ {
     if (!document.body.classList.contains('vex-open')) {
       document.body.classList.add('vex-open');
     }
-    // on removal, remove if last.
-    dialogRef.onDestroy
-      .subscribe(() => this.overlay.stackLength === 0 && document.body.classList.remove('vex-open'));
 
     overlay.addClass(`vex vex-theme-${dialogRef.context.className}`);
     backdrop.addClass('vex-overlay');
@@ -87,7 +84,12 @@ export class Modal extends Modal_ {
       overlay.tick();
 
       const completer = new PromiseCompleter<void>();
-      container.animationEnd$.first().subscribe(type => completer.resolve());
+      container.animationEnd$.first().subscribe(type => {
+        // on removal, remove if last.
+
+        this.overlay.groupStackLength(dialogRef) === 1 && document.body.classList.remove('vex-open');
+        completer.resolve()
+      });
       return completer.promise;
     });
 

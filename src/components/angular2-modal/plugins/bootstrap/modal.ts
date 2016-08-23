@@ -62,8 +62,8 @@ export class Modal extends Modal_ {
     }
 
     // on removal, remove if last.
-    dialogRef.onDestroy
-      .subscribe(() => this.overlay.stackLength === 0 && document.body.classList.remove('modal-open'));
+    // dialogRef.onDestroy
+    //   .subscribe(() => this.overlay.groupStackLength(dialogRef) === 0 && document.body.classList.remove('modal-open'));
 
     backdrop.addClass('modal-backdrop fade');
     backdrop.addClass('in', true);
@@ -90,7 +90,10 @@ export class Modal extends Modal_ {
       // running inside zone didn't help.
       overlay.tick();
 
-      backdrop.animationEnd$.first().subscribe(type => completer.resolve());
+      backdrop.animationEnd$.first().subscribe(type => {
+        this.overlay.groupStackLength(dialogRef) === 1 && document.body.classList.remove('modal-open');
+        completer.resolve()
+      });
 
       return completer.promise;
     });
