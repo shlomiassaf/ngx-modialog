@@ -5,9 +5,9 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
   ResolvedReflectiveProvider,
-  ComponentRef
+  ComponentRef,
+  Renderer
 } from '@angular/core';
-import { DomSanitizationService } from '@angular/platform-browser';
 
 import { BaseDynamicComponent, DialogRef } from '../../../../components/angular2-modal';
 
@@ -29,8 +29,8 @@ export class BSModalContainer extends BaseDynamicComponent {
   @ViewChild('dlg', {read: ViewContainerRef}) private vcRef: ViewContainerRef;
 
   constructor(public dialog: DialogRef<MessageModalPreset>,
-              el: ElementRef, sanitizer: DomSanitizationService) {
-    super(sanitizer, el);
+              el: ElementRef, renderer: Renderer) {
+    super(el, renderer);
   }
 
   addComponent<T>(type: any, bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {

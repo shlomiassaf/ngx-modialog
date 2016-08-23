@@ -61,16 +61,14 @@ export class Modal extends Modal_ {
       document.body.classList.add('modal-open');
     }
 
-    // on removal, remove if last.
-    // dialogRef.onDestroy
-    //   .subscribe(() => this.overlay.groupStackLength(dialogRef) === 0 && document.body.classList.remove('modal-open'));
 
-    backdrop.addClass('modal-backdrop fade');
-    backdrop.addClass('in', true);
-    container.addClass('modal fade');
+    backdrop.addClass('modal-backdrop fade', true);
     container.setStyle('position', 'absolute');
     container.setStyle('display', 'block');
-    container.addClass('in', true);
+    container.addClass('modal fade', true);
+
+    backdrop.addClass('in');
+    container.addClass('in');
 
     if (refs.containerRef.location.nativeElement) {
       refs.containerRef.location.nativeElement.focus();
@@ -78,17 +76,8 @@ export class Modal extends Modal_ {
 
     overlay.beforeDestroy(() => {
       const completer = new PromiseCompleter<void>();
-
       backdrop.removeClass('in');
       container.removeClass('in');
-      // TODO:
-      // Change detection doesn't run after removing these classes, not even in 'nextTurn'
-      // e.g: backdrop.removeClass('in', true);
-      // the only solution is to change immediately and tick the change detection.
-      // this only happen when clicking outside of the bounds (overlayDialogBoundary).
-      // oddly using ChangeDetectorRef.detectChanges() doesn't work... ???
-      // running inside zone didn't help.
-      overlay.tick();
 
       backdrop.animationEnd$.first().subscribe(type => {
         this.overlay.groupStackLength(dialogRef) === 1 && document.body.classList.remove('modal-open');

@@ -1,9 +1,9 @@
 import {
   Component,
   ElementRef,
-  ViewEncapsulation
+  ViewEncapsulation,
+  Renderer
 } from '@angular/core';
-import { DomSanitizationService } from '@angular/platform-browser';
 
 import { BaseDynamicComponent } from './base-dynamic-component';
 
@@ -21,17 +21,17 @@ import { BaseDynamicComponent } from './base-dynamic-component';
 })
 export class CSSBackdrop extends BaseDynamicComponent {
 
-  constructor(el: ElementRef, sanitizer: DomSanitizationService) {
-    super(sanitizer, el);
+  constructor(el: ElementRef, renderer: Renderer) {
+    super(el, renderer);
     this.activateAnimationListener();
 
-    this.style = {
+    const style = {
       position: 'absolute',
       top: 0,
       left: 0,
       width: '100%',
       height: '100%'
-    } as any;
-    this.applyStyle();
+    };
+    Object.keys(style).forEach( k => this.setStyle(k, style[k]) );
   }
 }

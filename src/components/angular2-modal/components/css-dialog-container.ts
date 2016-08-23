@@ -5,9 +5,9 @@ import {
   ResolvedReflectiveProvider,
   ViewChild,
   ViewEncapsulation,
-  ElementRef
+  ElementRef,
+  Renderer
 } from '@angular/core';
-import { DomSanitizationService } from '@angular/platform-browser';
 
 import { BaseDynamicComponent } from './base-dynamic-component';
 import { DialogRef } from '../models/dialog-ref';
@@ -34,8 +34,8 @@ export class CSSDialogContainer extends BaseDynamicComponent {
   @ViewChild('modalDialog', {read: ViewContainerRef}) private vcRef: ViewContainerRef;
 
   constructor(public dialog: DialogRef<any>,
-              el: ElementRef, sanitizer: DomSanitizationService) {
-    super(sanitizer, el);
+              el: ElementRef, renderer: Renderer) {
+    super(el, renderer);
     this.activateAnimationListener();
   }
 

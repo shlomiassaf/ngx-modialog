@@ -4,13 +4,13 @@ import {
   ElementRef,
   ResolvedReflectiveProvider,
   OnDestroy,
-  ViewContainerRef
+  ViewContainerRef,
+  Renderer
 } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { DomSanitizationService, SafeStyle } from '@angular/platform-browser';
 import { createComponent } from '../framework/createComponent';
 
 const BROWSER_PREFIX = ['webkit', 'moz', 'MS', 'o', ''];
@@ -22,7 +22,19 @@ function register(eventName, element, cb) {
 }
 
 /**
- * A base class that expose customisation methods in derived components.
+ * A base class for supporting dynamic components.
+ * There are 3 main support areas:
+ * 1 - Easy wrapper for dynamic styling via CSS classes and inline styles.
+ * 2 - Easy wrapper for interception of transition/animation end events.
+ * 3 - Easy wrapper for component creation and injection.
+ *
+ * Dynamic css is done via direct element manipulation (via renderer), it does not use change detection
+ * or binding. This is to allow better control over animation.
+ *
+ * Animation support is limited, only transition/keyframes END even are notified.
+ * The animation support is needed since currently the angular animation module is limited as well and
+ * does not support CSS animation that are not pre-parsed and are not in the styles metadata of a component.
+ *
  * Capabilities: Add/Remove styls, Add/Remove classes, listen to animation/transition end event,
  * add components
  */
@@ -30,14 +42,9 @@ export class BaseDynamicComponent implements OnDestroy {
   animationEnd$: Observable<'transition' | 'animation'>;
 
   protected animationEnd: Subject<'transition' | 'animation'>;
-  protected style: { [prop: string]: string } = {} as any;
-  protected styleStr: SafeStyle = '';
-  protected cssClass: SafeStyle = '';
-  protected classArray: string[] = [];
-  private applyOnNextTurn: boolean;
 
-  constructor(protected sanitizer: DomSanitizationService, 
-              protected el: ElementRef) {}
+  constructor(protected el: ElementRef,
+              protected renderer: Renderer) {}
   
   activateAnimationListener() {
     if (this.animationEnd) return;
@@ -53,36 +60,24 @@ export class BaseDynamicComponent implements OnDestroy {
    * @returns {ModalOverlay}
    */
   setStyle(prop: string, value: string): this {
-    if (this.style[prop] !== value) {
-      if (value === undefined) {
-        delete this.style[prop];
-      } else {
-        this.style[prop] = value;
-      }
-
-      this.applyStyle();
-    }
+    this.renderer.setElementStyle(this.el.nativeElement, prop, value);
     return this;
   }
-  
-  /**
-   * Remove's all inline styles from the overlay host element.
-   */
-  clearStyles(): void {
-    this.style = {} as any;
-    this.applyStyle();
+
+  forceReflow() {
+    this.el.nativeElement.offsetWidth;
   }
 
-  addClass(css: string, nextTurn: boolean = false): void {
-    if (typeof css === 'string') {
-      css.split(' ').forEach( c => this._addClass(c, nextTurn) );
-    }
+  addClass(css: string, forceReflow: boolean = false): void {
+    css.split(' ')
+      .forEach( c => this.renderer.setElementClass(this.el.nativeElement, c, true) );
+    if (forceReflow) this.forceReflow();
   }
 
-  removeClass(css: string, nextTurn: boolean = false): void {
-    if (typeof css === 'string') {
-      css.split(' ').forEach( c => this._removeClass(c, nextTurn) );
-    }
+  removeClass(css: string, forceReflow: boolean = false): void {
+    css.split(' ')
+      .forEach( c => this.renderer.setElementClass(this.el.nativeElement, c, false) );
+    if (forceReflow) this.forceReflow();
   }
 
   ngOnDestroy(): void {
@@ -91,28 +86,6 @@ export class BaseDynamicComponent implements OnDestroy {
     }
   }
 
-  protected applyStyle(): void {
-    this.styleStr = this.sanitizer.bypassSecurityTrustStyle(JSON.stringify(this.style)
-      .replace('{', '')
-      .replace('}', '')
-      .replace(/,/g, ';')
-      .replace(/"/g, ''));
-  }
-  
-  protected applyClasses(nextTurn: boolean) {
-    if (nextTurn === true) {
-      if (!this.applyOnNextTurn) {
-        this.applyOnNextTurn = true;
-        setTimeout(() => {
-          this.applyOnNextTurn = false;
-          this.applyClasses(false);
-        });
-      }
-    } else {
-      this.cssClass = this.classArray.join(' ');
-    }
-  }
-   
   /**
    * Add a component, supply a view container ref.
    * Note: The components vcRef will result in a sibling.
@@ -145,17 +118,4 @@ export class BaseDynamicComponent implements OnDestroy {
     }
   }
 
-  private _addClass(css: string, nextTurn: boolean = false): void {
-    if (this.classArray.indexOf(css) > -1) return;
-    this.classArray.push(css);
-    this.applyClasses(nextTurn);
-  }
-
-  private _removeClass(css: string, nextTurn: boolean = false): void {
-    const idx = this.classArray.indexOf(css);
-    if (idx > -1) {
-      this.classArray.splice(idx, 1);
-      this.applyClasses(nextTurn);
-    }
-  }
 }

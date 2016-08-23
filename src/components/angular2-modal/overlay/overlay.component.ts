@@ -8,10 +8,9 @@ import {
   ResolvedReflectiveProvider,
   ViewChild,
   ViewContainerRef,
-  ViewEncapsulation
+  ViewEncapsulation,
+  Renderer
 } from '@angular/core';
-
-import { DomSanitizationService } from '@angular/platform-browser';
 
 import { PromiseCompleter, supportsKey } from '../framework/utils';
 import { DialogRef } from '../models/dialog-ref';
@@ -24,8 +23,6 @@ import { BaseDynamicComponent } from '../components/index';
 @Component({
   selector: 'modal-overlay',
   host: {
-    '[attr.style]': 'styleStr',
-    '[attr.class]': 'cssClass',
     '(body:keydown)': 'documentKeypress($event)'
   },
   encapsulation: ViewEncapsulation.None,
@@ -38,45 +35,30 @@ export class ModalOverlay extends BaseDynamicComponent {
   constructor(private dialogRef: DialogRef<any>,
               private appRef: ApplicationRef,
               el: ElementRef,
-              sanitizer: DomSanitizationService) {
-    super(sanitizer, el);
+              renderer: Renderer) {
+    super(el, renderer);
     this.activateAnimationListener();
   }
 
-  /**
-   * Performs an ApplicationRef.tick
-   *
-   */
-  tick(): void {
-    // this.cdr.markForCheck();
-    // this.cdr.detectChanges();
-    this.appRef.tick();
-
-    // TODO:
-    // Change detection doesn't run after doing some operations in plugins.
-    // this function is a workaround for those situations. (see bootstrap/vex modal implementations)
-    // strange enough, only ApplicationRef.tick() works, the CDR does not... probably due to
-    // the need to trigger from a higher change detector, needs investigation.
-  }
 
   addComponent<T>(type: any, bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {
     return super._addComponent<T>(type, this.vcRef, bindings);
   }
 
   fullscreen(): void {
-    this.style = {
+    const style = {
       position: 'fixed',
       top: 0,
       left: 0,
       bottom: 0,
       right: 0,
       'z-index': 1500
-    } as any;
-    this.applyStyle();
+    };
+    Object.keys(style).forEach( k => this.setStyle(k, style[k]) );
   }
   
   insideElement(): void {
-    this.style = {
+    const style = {
       position: 'absolute',
       width: '100%',
       height: '100%',
@@ -84,8 +66,8 @@ export class ModalOverlay extends BaseDynamicComponent {
       left: 0,
       bottom: 0,
       right: 0
-    } as any;
-    this.applyStyle();
+    };
+    Object.keys(style).forEach( k => this.setStyle(k, style[k]) );
   }
 
   /**
