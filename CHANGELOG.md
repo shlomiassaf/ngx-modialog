@@ -1,3 +1,24 @@
+<a name="2.0.0-beta.10"></a>
+# [2.0.0-beta.10](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.9...v2.0.0-beta.10) (2016-08-23)
+
+
+### Code Refactoring
+* implement overlay stack per plugin for vex & bootstrap ([2c9bca5](https://github.com/shlomiassaf/angular2-modal/commit/2c9bca5))
+* move dynamic CSS/Style component to use direct element update (via renderer) instead of binding. Binding is bad for animation and since the whole purpose of this base class is to support animation direct access is needed. ([7fb6c12](https://github.com/shlomiassaf/angular2-modal/commit/7fb6c12))
+
+### Bug Fixes
+
+* wrong banner in build ([2c9bca5](https://github.com/shlomiassaf/angular2-modal/commit/2c9bca5))
+* change overlay destroy order, first run hooks, then observable then destroy overlay component ref ([18acd51](https://github.com/shlomiassaf/angular2-modal/commit/18acd51))
+* fix backdrop "on show" flicker in bootstrap plugin ([7fb6c12](https://github.com/shlomiassaf/angular2-modal/commit/7fb6c12))
+
+### Features
+
+* allow registering dynamic components ([250f234](https://github.com/shlomiassaf/angular2-modal/commit/250f234))
+* support stacks of a specific group (i.e: overlay stack per plugin) ([18acd51](https://github.com/shlomiassaf/angular2-modal/commit/18acd51))
+
+
+
 <a name="2.0.0-beta.9"></a>
 # [2.0.0-beta.9](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.8...v2.0.0-beta.9) (2016-08-22)
 
