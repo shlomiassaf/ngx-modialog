@@ -42,7 +42,7 @@ export abstract class Modal {
   open(componentType: any, config?: OverlayConfig): Promise<DialogRef<any>> {
     config = config || {} as any;
     try {
-      let dialogs = this.overlay.open(config);
+      let dialogs = this.overlay.open(config, this.constructor);
 
       if (dialogs.length > 1) {
         console.warn(`Attempt to open more then 1 overlay detected.

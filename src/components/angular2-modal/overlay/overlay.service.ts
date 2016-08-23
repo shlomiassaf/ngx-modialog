@@ -39,11 +39,18 @@ export class Overlay {
     return _stack.indexOf(dialogRef);
   }
 
+  groupStackLength(dialogRef: DialogRef<any>): number {
+    return _stack.groupLength(_stack.groupOf(dialogRef));
+  }
+
 
   /**
-   * Opens a modal window inside an existing component.
+   * Creates an overlay and returns a dialog ref.
+   * @param config instructions how to create the overlay
+   * @param group A token to associate the new overlay with, used for reference (stacks usually)
+   * @returns {DialogRef<T>[]}
    */
-  open<T extends OverlayContext>(config: OverlayConfig): DialogRef<T>[] {
+  open<T extends OverlayContext>(config: OverlayConfig, group?: any): DialogRef<T>[] {
     let viewContainer = config.viewContainer,
         containers: Array<ViewContainerRef> = [];
 
@@ -62,12 +69,14 @@ export class Overlay {
       containers = [this.defaultViewContainer];
     }
 
-    return containers.map( vc => this.createOverlay(config.renderer || this._modalRenderer, vc, config));
+    return containers
+      .map( vc => this.createOverlay(config.renderer || this._modalRenderer, vc, config, group));
   }
 
   private createOverlay(renderer: OverlayRenderer,
                         vcRef: ViewContainerRef,
-                        config: OverlayConfig): DialogRef<any> {
+                        config: OverlayConfig,
+                        group: any): DialogRef<any> {
     if (config.context) {
       config.context.normalize();
     }
@@ -78,8 +87,7 @@ export class Overlay {
     let cmpRef = renderer.render(dialog, vcRef);
 
     Object.defineProperty(dialog, 'overlayRef', {value: cmpRef});
-    _stack.pushManaged(dialog);
-    dialog.onDestroy.subscribe(() => _stack.remove(dialog));
+    _stack.pushManaged(dialog, group);
 
     return dialog;
   }

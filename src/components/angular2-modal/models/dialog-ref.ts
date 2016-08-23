@@ -102,18 +102,21 @@ export class DialogRef<T> {
   destroy() {
     if (this.destroyed !== true) {
       this.destroyed = true;
-      this._onDestroy.next(null);
-
-      this._onDestroy.complete();
 
       if (typeof this.overlayRef.instance.canDestroy === 'function') {
         this.overlayRef.instance.canDestroy()
           .catch( () => {})
-          .then ( () => this.overlayRef.destroy() );
+          .then ( () => this._destroy() );
       } else {
-        this.overlayRef.destroy();
+        this._destroy();
       }
     }
+  }
+
+  private _destroy(): void {
+    this._onDestroy.next(null);
+    this._onDestroy.complete();
+    this.overlayRef.destroy()
   }
 
   private _fireHook<T>(name: 'beforeClose' | 'beforeDismiss'): Promise<T> {
