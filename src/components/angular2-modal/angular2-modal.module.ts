@@ -27,6 +27,7 @@ import { Overlay, ModalOverlay, OverlayDialogBoundary, OverlayTarget } from './o
   ]
 })
 export class ModalModule {
+
   /**
    * Returns a ModalModule pre-loaded with a list of dynamically inserted components.
    * Since dynamic components are not analysed by the angular compiler they must register manually

@@ -3,7 +3,7 @@ const ts = require('typescript');
 const $ = require('gulp-load-plugins')();
 
 // package.json as JS object
-module.exports.pkg = require(path.join(__dirname, '../src/components/angular2-modal/package.json'));
+module.exports.pkg = require(path.join(__dirname, '../package.json'));
 
 // note: for all paths, the base dir is ../
 module.exports.PATHS = {
