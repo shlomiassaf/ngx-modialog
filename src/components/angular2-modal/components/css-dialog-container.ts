@@ -20,9 +20,7 @@ import { Class } from '../framework/utils';
   selector: 'css-dialog-container',
   host: {
     '[attr.tabindex]': 'tabIndex',
-    '[attr.role]': 'role',
-    '[attr.class]': 'cssClass',
-    '[attr.style]': 'styleStr'
+    '[attr.role]': 'role'
   },
   encapsulation: ViewEncapsulation.None,
   template: `<span #modalDialog></span>`

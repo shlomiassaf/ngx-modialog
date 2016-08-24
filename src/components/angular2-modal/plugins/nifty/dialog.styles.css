@@ -1,0 +1,22 @@
+.nifty-dialog .nifty-title {
+  margin: 0;
+  padding: 0.4em;
+  text-align: center;
+  font-size: 2.4em;
+  font-weight: 300;
+  opacity: 0.8;
+  background: rgba(0,0,0,0.1);
+  border-radius: 3px 3px 0 0;
+}
+
+.nifty-dialog .nifty-body {
+  padding: 15px 40px 30px;
+  margin: 0;
+  font-weight: 300;
+  font-size: 1.15em;
+}
+
+.nifty-effect-12 .nifty-dialog .nifty-title,
+.nifty-effect-12 .nifty-content {
+  background: transparent;
+}

@@ -7,6 +7,7 @@ import { ModalModule } from '../../components/angular2-modal';
 import { SharedModule } from './shared.module';
 import { BootstrapDemoModule } from './bootstrap-demo/bootstrap-demo.module';
 import { VexDemoModule } from './vex-demo/vex-demo.module';
+import { NiftyDemoModule } from './nifty-demo/nifty-demo.module';
 import { JSNativeDemoModule } from './js-native-demo/js-native-demo.module';
 
 import { App }  from './app';
@@ -22,6 +23,7 @@ import { InAppModalModule } from './home/in-app-plugin/index';
     ModalModule.forRoot(),
     BootstrapDemoModule,
     VexDemoModule,
+    NiftyDemoModule,
     JSNativeDemoModule,
     InAppModalModule
   ],

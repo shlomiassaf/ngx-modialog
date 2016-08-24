@@ -62,6 +62,9 @@ export class Modal extends Modal_ {
     }
 
 
+    if (dialogRef.inElement) {
+      backdrop.setStyle('position', 'absolute');
+    }
     backdrop.addClass('modal-backdrop fade', true);
     container.setStyle('position', 'absolute');
     container.setStyle('display', 'block');

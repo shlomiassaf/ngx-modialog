@@ -1,0 +1,27 @@
+.nifty-theme-default .nifty-content {
+    color: #ffffff;
+    background-color: #e74c3c;
+    border-radius: 3px;
+}
+
+.nifty-theme-default .nifty-backdrop {
+    border-radius: 3px;
+    background: rgba(143,27,15,0.8);
+}
+
+.nifty-buttons button {
+    border: none;
+    padding: 0.6em 1.2em;
+    background: #c0392b;
+    color: #fff;
+    font-family: 'Lato', Calibri, Arial, sans-serif;
+    font-size: 1em;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: inline-block;
+    margin: 3px 2px;
+    border-radius: 2px;
+    box-sizing: border-box;
+    outline: none;
+}
