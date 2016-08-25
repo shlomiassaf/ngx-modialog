@@ -60,6 +60,7 @@ export class ModalOverlay extends BaseDynamicComponent {
   insideElement(): void {
     const style = {
       position: 'absolute',
+      overflow: 'hidden',
       width: '100%',
       height: '100%',
       top: 0,
