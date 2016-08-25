@@ -18,8 +18,7 @@ const DEFAULT_VALUES = {
 const DEFAULT_SETTERS = [
   'okBtn',
   'cancelBtn',
-  'placeholder',
-  'showCloseButton'
+  'placeholder'
 ];
 
 /**
