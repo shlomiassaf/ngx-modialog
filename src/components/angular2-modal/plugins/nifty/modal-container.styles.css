@@ -374,10 +374,6 @@ nifty-modal-container {
   transition: all 0.3s;
 }
 
-.nifty-show.nifty-effect-12 .nifty-backdrop {
-  background: #e74c3c;
-}
-
 .nifty-show.nifty-effect-12 .nifty-content {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);

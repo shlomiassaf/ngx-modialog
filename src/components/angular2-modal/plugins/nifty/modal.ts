@@ -15,9 +15,13 @@ import {
 } from '../../../../components/angular2-modal';
 
 import { NiftyContainer } from './modal-container.component';
-import { DialogPresetBuilder } from './presets/dialog-preset';
+import { DialogPreset, DialogPresetBuilder, PromptPresetBuilder } from './presets/dialog-preset';
 import { NiftyDialog } from "./dialog.component";
 
+
+const OK_HANDLER = (cmp: NiftyDialog, $event: MouseEvent) => cmp.dialog.close(true);
+const PROMPT_HANDLER = (cmp: any, $event: MouseEvent) => cmp.dialog.close(cmp.dialog.context.value);
+const CANCEL_HANDLER = (cmp: NiftyDialog, $event: MouseEvent) => cmp.dialog.dismiss();
 
 @Injectable()
 export class Modal extends Modal_ {
@@ -25,17 +29,21 @@ export class Modal extends Modal_ {
     super(overlay);
   }
 
-  alert(): DialogPresetBuilder {
-    return new DialogPresetBuilder(this, <any>{isBlocking: false})
-      .addButton('btn', 'OK', (cmp: NiftyDialog, $event: MouseEvent) => cmp.dialog.close(true));
+  alert(): DialogPresetBuilder<DialogPreset> {
+    return new DialogPresetBuilder<DialogPreset>(this, <any>{isBlocking: false})
+      .addButton('nifty-btn-default', 'OK', OK_HANDLER);
   }
 
-  prompt(): DialogPresetBuilder {
-    return new DialogPresetBuilder(this, <any>{isBlocking: true, keyboard: null});
+  prompt(): PromptPresetBuilder {
+    return new PromptPresetBuilder(this, <any>{isBlocking: true, keyboard: null})
+      .addButton('nifty-btn-default', 'OK', PROMPT_HANDLER)
+      .addButton('nifty-btn-cancel', 'CANCEL', CANCEL_HANDLER);
   }
 
-  confirm(): DialogPresetBuilder {
-    return new DialogPresetBuilder(this, <any>{isBlocking: true, keyboard: null});
+  confirm(): DialogPresetBuilder<DialogPreset> {
+    return new DialogPresetBuilder<DialogPreset>(this, <any>{isBlocking: true, keyboard: null})
+      .addButton('nifty-btn-default', 'OK', OK_HANDLER)
+      .addButton('nifty-btn-cancel', 'CANCEL', CANCEL_HANDLER);
   }
 
   protected create(dialogRef: DialogRef<any>,

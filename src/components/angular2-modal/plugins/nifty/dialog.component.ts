@@ -3,17 +3,10 @@ import {
   Input,
   Output,
   EventEmitter,
-  ElementRef,
-  ViewChild,
-  ViewContainerRef,
-  ViewEncapsulation,
-  ResolvedReflectiveProvider,
-  ComponentRef,
-  Renderer
+  ViewEncapsulation
 } from '@angular/core';
 
 import {
-  createComponent,
   DialogRef,
   ModalComponent
 } from '../../../../components/angular2-modal';
@@ -26,9 +19,17 @@ import { DialogPreset, NiftyButtonConfig, NiftyButtonClickEvent } from './preset
   encapsulation: ViewEncapsulation.None,
   template:
 `<div class="nifty-dialog">
-  <div class="nifty-title">{{dialog.context.title}}</div>
-  <div class="nifty-body">{{dialog.context.message}}</div>
+  <div class="nifty-title-container">
+    <span>{{dialog.context.title}}</span>    
+  </div>
+  <div class="nifty-body-container">
+    <div class="nifty-message">{{dialog.context.message}}</div>
+    <input  *ngIf="dialog.context.isPrompt" class="nifty-input"
+            #input (change)="dialog.context.value = input.value" 
+            placeholder="{{dialog.context.placeholder}}" type="text" required>
+  </div>  
   <nifty-buttons [buttons]="dialog.context.buttons" (onButtonClick)="onButtonClick($event)"></nifty-buttons>
+  <button class="nifty-close-button" *ngIf="dialog.context.showCloseButton" (click)="dialog.dismiss()">X</button>
 </div>`
 })
 export class NiftyDialog implements ModalComponent<DialogPreset> {
@@ -50,7 +51,7 @@ export class NiftyDialog implements ModalComponent<DialogPreset> {
   template: `<div class="nifty-buttons">
     <button type="button" 
          *ngFor="let btn of buttons;"
-         [class]="btn.cssClass"
+         [class]="'nifty-btn ' + btn.cssClass"
          (click)="onClick(btn, $event)">{{btn.caption}}</button>
 </div>`
 })

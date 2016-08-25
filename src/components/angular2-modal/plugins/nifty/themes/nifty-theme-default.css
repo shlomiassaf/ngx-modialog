@@ -9,19 +9,68 @@
     background: rgba(143,27,15,0.8);
 }
 
-.nifty-buttons button {
+.nifty-theme-default.nifty-show.nifty-effect-12 .nifty-backdrop {
+    background: #e74c3c;
+}
+
+input.nifty-input::-webkit-input-placeholder {
+    font-family: 'roboto', sans-serif;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+input.nifty-input {
+    display: block;
+    border: none;
+    border-bottom: solid 1px #C0392B;
+    padding: 10px;
+    -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+    transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+    background-color: transparent;
+    color: #FFFFFF;
+}
+
+input.nifty-input::-webkit-input-placeholder {
+    color: #C0392B;
+}
+
+input.nifty-input:focus {
+    box-shadow: none;
+    outline: none;
+    border-color: #FFFFFF;
+    background-position: 0 0;
+    color: #FFFFFF;
+}
+
+.nifty-btn {
     border: none;
     padding: 0.6em 1.2em;
-    background: #c0392b;
-    color: #fff;
-    font-family: 'Lato', Calibri, Arial, sans-serif;
+    font-family: 'roboto', Calibri, Arial, sans-serif;
     font-size: 1em;
     letter-spacing: 1px;
     text-transform: uppercase;
     cursor: pointer;
     display: inline-block;
     margin: 3px 2px;
-    border-radius: 2px;
     box-sizing: border-box;
     outline: none;
+}
+
+.nifty-btn.nifty-btn-default {
+    background-color: #C0392B;
+    border: 1px solid #C0392B;
+    color: #FFFFFF;
+}
+.nifty-btn.nifty-btn-default:hover {
+    background-color: #A5281B;
+}
+
+.nifty-btn.nifty-btn-cancel {
+    background: transparent;
+    border: 1px solid #C0392B;
+    color: #FFFFFF;
+}
+
+.nifty-btn.nifty-btn-cancel:hover {
+    background-color: #A5281B;
 }

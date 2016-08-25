@@ -1,43 +1,49 @@
 import {
   Modal,
+  DialogPreset,
   DialogPresetBuilder
 } from '../../../components/angular2-modal/plugins/nifty';
+import { PromptPresetBuilder } from "../../../components/angular2-modal/plugins/nifty/presets/dialog-preset";
 
-export function alert(modal: Modal): DialogPresetBuilder {
+export function alert(modal: Modal): DialogPresetBuilder<DialogPreset> {
   return modal.alert()
     .niftyEffectId(this.effect)
     .title('Nifty')
     .message('An alert message!');
 }
 
-export function prompt(modal: Modal): DialogPresetBuilder {
+export function prompt(modal: Modal): PromptPresetBuilder {
   return modal.prompt()
     .niftyEffectId(this.effect)
-    .message('Please type a value!');
+    .title('A nifty prompt!')
+    .message('Please type a value!')
+    .placeholder('Enter something...');
 }
 
-export function confirm(modal: Modal): DialogPresetBuilder {
+export function confirm(modal: Modal): DialogPresetBuilder<DialogPreset> {
   return modal.confirm()
     .niftyEffectId(this.effect)
     .message('Yes or No?');
 }
 
-export function noButtons(modal: Modal): DialogPresetBuilder {
+export function noButtons(modal: Modal): DialogPresetBuilder<DialogPreset> {
   return modal.alert()
     .niftyEffectId(this.effect)
     .isBlocking(true)
+    .showCloseButton(true)
+    .clearButtons()
     .message('Luckily I have an X button, phew...');
 
 }
 
-export function customButtons(modal: Modal): DialogPresetBuilder {
+export function customButtons(modal: Modal): DialogPresetBuilder<DialogPreset> {
   return modal.alert()
     .niftyEffectId(this.effect)
     .isBlocking(true)
     .message(`Let's show some bootstrap style buttons...`);
 }
 
-export function cascading(modal: Modal): DialogPresetBuilder {
+export function cascading(modal: Modal): DialogPresetBuilder<DialogPreset> {
   let presets = [];
 
   presets.push(alert.call(this, modal));

@@ -76,4 +76,24 @@ export class DialogPresetBuilder<T extends DialogPreset> extends NiftyContextBui
     return this;
   }
 
+  clearButtons(): this {
+    let arr = this[privateKey('buttons')] as Array<any>;
+    arr.splice(0, arr.length);
+    return this;
+  }
+
+}
+export class PromptPreset extends DialogPreset {
+  readonly isPrompt = true;
+  placeholder: string;
+
+  value: string;
+}
+
+export class PromptPresetBuilder extends DialogPresetBuilder<PromptPreset> {
+  placeholder: FluentAssignMethod<string, this>;
+
+  constructor(modal: Modal, defaultValues: PromptPreset = undefined) {
+    super(modal, defaultValues, ['placeholder'], PromptPreset);
+  }
 }
