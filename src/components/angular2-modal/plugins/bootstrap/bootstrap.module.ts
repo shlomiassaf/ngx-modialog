@@ -25,7 +25,8 @@ function getProviders(): any[] {
     BSModalFooter,
     BSMessageModalTitle,
     BSMessageModalBody,
-    BSMessageModal
+    BSMessageModal,
+    BSModalContainer
   ],
   providers: getProviders(),
   entryComponents: [
