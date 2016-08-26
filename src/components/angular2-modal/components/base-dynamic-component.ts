@@ -10,6 +10,7 @@ import {
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/filter';
 
 import { createComponent } from '../framework/createComponent';
 
@@ -39,19 +40,19 @@ function register(eventName, element, cb) {
  * add components
  */
 export class BaseDynamicComponent implements OnDestroy {
-  animationEnd$: Observable<'transition' | 'animation'>;
+  animationEnd$: Observable<TransitionEvent | AnimationEvent>;
 
-  protected animationEnd: Subject<'transition' | 'animation'>;
+  protected animationEnd: Subject<TransitionEvent | AnimationEvent>;
 
   constructor(protected el: ElementRef,
               protected renderer: Renderer) {}
   
   activateAnimationListener() {
     if (this.animationEnd) return;
-    this.animationEnd = new Subject<'transition' | 'animation'>();
+    this.animationEnd = new Subject<TransitionEvent | AnimationEvent>();
     this.animationEnd$ = this.animationEnd.asObservable();
-    register('TransitionEnd', this.el.nativeElement, this.onEndTransition.bind(this));
-    register('AnimationEnd', this.el.nativeElement, this.onEndAnimation.bind(this));
+    register('TransitionEnd', this.el.nativeElement, (e: TransitionEvent) => this.onEnd(e));
+    register('AnimationEnd', this.el.nativeElement, (e: AnimationEvent) => this.onEnd(e));
   }
   /**
    * Set a specific inline style on the overlay host element.
@@ -86,6 +87,11 @@ export class BaseDynamicComponent implements OnDestroy {
     }
   }
 
+  myAnimationEnd$(): Observable<AnimationEvent | TransitionEvent> {
+    return this.animationEnd$
+      .filter( e => e.target === this.el.nativeElement );
+  }
+
   /**
    * Add a component, supply a view container ref.
    * Note: The components vcRef will result in a sibling.
@@ -105,16 +111,10 @@ export class BaseDynamicComponent implements OnDestroy {
     return cmpRef;
   }
 
-  private onEndTransition() {
-    if (!this.animationEnd.isUnsubscribed) {
-      this.animationEnd.next('transition');
-    }
+  private onEnd(event: TransitionEvent | AnimationEvent): void {
 
-  }
-
-  private onEndAnimation() {
     if (!this.animationEnd.isUnsubscribed) {
-      this.animationEnd.next('animation');
+      this.animationEnd.next(event);
     }
   }
 

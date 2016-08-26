@@ -1,4 +1,4 @@
-import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/combineLatest';
 
 import {
   Injectable,
@@ -82,10 +82,12 @@ export class Modal extends Modal_ {
       backdrop.removeClass('in');
       container.removeClass('in');
 
-      backdrop.animationEnd$.first().subscribe(type => {
-        this.overlay.groupStackLength(dialogRef) === 1 && document.body.classList.remove('modal-open');
-        completer.resolve()
-      });
+      backdrop.myAnimationEnd$()
+        .combineLatest(container.myAnimationEnd$(), (s1, s2) => [s1,s2] )
+        .subscribe( sources => {
+          this.overlay.groupStackLength(dialogRef) === 1 && document.body.classList.remove('modal-open');
+          completer.resolve();
+        });
 
       return completer.promise;
     });

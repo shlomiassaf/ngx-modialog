@@ -71,29 +71,28 @@ export class Modal extends Modal_ {
       refs.containerRef.location.nativeElement.focus();
     }
 
-    overlay.beforeDestroy(() => {
-      overlay.addClass('vex-closing');
-
-      const completer = new PromiseCompleter<void>();
-      container.animationEnd$.first().subscribe(type => {
-        // on removal, remove if last.
-
-        this.overlay.groupStackLength(dialogRef) === 1 && document.body.classList.remove('vex-open');
-        completer.resolve()
-      });
-      return completer.promise;
-    });
-
     if (dialogRef.context.className === 'bottom-right-corner') {
       overlay.setStyle('overflow-y', 'hidden');
       container.setStyle('position', 'absolute');
-    } else {
-      overlay.beforeDestroy(() => {
-        const completer = new PromiseCompleter<void>();
-        backdrop.animationEnd$.first().subscribe(type => completer.resolve());
-        return completer.promise;
-      });
     }
+
+    overlay.beforeDestroy(() => {
+      overlay.addClass('vex-closing');
+      const completer = new PromiseCompleter<void>();
+
+      let animationEnd$ = container.myAnimationEnd$();
+      if (dialogRef.context.className !== 'bottom-right-corner') {
+        animationEnd$ = animationEnd$.combineLatest(backdrop.myAnimationEnd$(), (s1, s2) => [s1,s2] );
+      }
+
+      animationEnd$.subscribe( sources => {
+        this.overlay.groupStackLength(dialogRef) === 1 && document.body.classList.remove('vex-open');
+        completer.resolve();
+      });
+
+      return completer.promise;
+    });
+
 
     overlay.setClickBoundary(refs.containerRef.location.nativeElement);
 
