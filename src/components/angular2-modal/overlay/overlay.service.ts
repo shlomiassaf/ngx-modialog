@@ -64,7 +64,9 @@ export class Overlay {
 
     if (!containers || !containers[0]) {
       if (!this.defaultViewContainer) {
-        throw new Error('defaultViewContainer not set.');
+        throw new Error('Default view container not set. Add the "defaultOverlayTarget" directive ' +
+          'to the application root component template (e.g: <span defaultOverlayTarget></span>. ' +
+          'You can also set it manually using the "Overlay" service "defaultViewContainer" property.');
       }
       containers = [this.defaultViewContainer];
     }

@@ -1,5 +1,4 @@
-import { Component, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { Overlay } from '../../components/angular2-modal';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 /*
  * App Component
@@ -14,11 +13,5 @@ import { Overlay } from '../../components/angular2-modal';
   templateUrl: './app.html'
 })
 export class App {
-  constructor(baseModal: Overlay, vcRef: ViewContainerRef) {
-    /**
-     * A Default view container ref, usually the app root container ref.
-     * Has to be set manually until we can find a way to get it automatically.
-     */
-    baseModal.defaultViewContainer = vcRef;
-  }
+  constructor() { }
 }

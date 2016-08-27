@@ -1,3 +1,4 @@
+import { Observable } from "rxjs";
 import 'rxjs/add/operator/first';
 
 import { Injectable, ResolvedReflectiveProvider as RRP } from '@angular/core';
@@ -14,6 +15,7 @@ import {
 } from '../../../../components/angular2-modal';
 
 import { DropInPresetBuilder } from './presets/dropin-preset';
+
 
 @Injectable()
 export class Modal extends Modal_ {
@@ -80,7 +82,7 @@ export class Modal extends Modal_ {
       overlay.addClass('vex-closing');
       const completer = new PromiseCompleter<void>();
 
-      let animationEnd$ = container.myAnimationEnd$();
+      let animationEnd$: Observable<any> = container.myAnimationEnd$();
       if (dialogRef.context.className !== 'bottom-right-corner') {
         animationEnd$ = animationEnd$.combineLatest(backdrop.myAnimationEnd$(), (s1, s2) => [s1,s2] );
       }

@@ -4,7 +4,13 @@ import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 import { DOMOutsideEventPlugin, DOMOverlayRenderer } from './providers/index';
 import { OverlayRenderer } from './models/tokens';
 import { CSSBackdrop, CSSDialogContainer } from './components/index';
-import { Overlay, ModalOverlay, OverlayDialogBoundary, OverlayTarget } from './overlay/index';
+import {
+  Overlay,
+  ModalOverlay,
+  OverlayDialogBoundary,
+  OverlayTarget,
+  DefaultOverlayTarget
+} from './overlay/index';
 
 @NgModule({
   declarations: [
@@ -12,13 +18,15 @@ import { Overlay, ModalOverlay, OverlayDialogBoundary, OverlayTarget } from './o
     CSSBackdrop,
     CSSDialogContainer,
     OverlayDialogBoundary,
-    OverlayTarget
+    OverlayTarget,
+    DefaultOverlayTarget
   ],
   exports: [
     CSSBackdrop,
     CSSDialogContainer,
     OverlayDialogBoundary,
-    OverlayTarget
+    OverlayTarget,
+    DefaultOverlayTarget
   ],
   entryComponents: [
     ModalOverlay,
@@ -38,8 +46,8 @@ export class ModalModule {
   static withComponents(entryComponents: Array<Type | any[]>): ModuleWithProviders {
     return {
       ngModule: ModalModule,
-      providers : [
-        { provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true }
+      providers: [
+        {provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents, multi: true}
       ]
     }
   }
@@ -54,9 +62,9 @@ export class ModalModule {
       ngModule: ModalModule,
       providers: [
         Overlay,
-        { provide: OverlayRenderer, useClass: DOMOverlayRenderer },
-        { provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true },
-        { provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true }
+        {provide: OverlayRenderer, useClass: DOMOverlayRenderer},
+        {provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},
+        {provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true}
       ]
     };
   }

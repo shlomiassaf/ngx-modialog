@@ -1,6 +1,14 @@
-import { Directive, Input, ElementRef, ViewContainerRef, OnDestroy } from '@angular/core';
+import {
+  Directive,
+  Input,
+  ElementRef,
+  ViewContainerRef,
+  OnDestroy
+} from '@angular/core';
+
 import { DialogRef } from '../models/dialog-ref';
 import { vcRefStore } from '../models/vc-ref-store';
+import { Overlay } from "./overlay.service";
 
 /**
  * A directive use to signal the overlay that the host of this directive
@@ -38,5 +46,19 @@ export class OverlayTarget implements OnDestroy {
     if (this._targetKey) {
       vcRefStore.delVCRef(this._targetKey, this.vcRef);
     }
+  }
+}
+
+const noop = () => {};
+@Directive({
+  selector: '[defaultOverlayTarget]'
+})
+export class DefaultOverlayTarget implements OnDestroy {
+  constructor(private overlay: Overlay, vcRef: ViewContainerRef) {
+    overlay.defaultViewContainer = vcRef;
+  }
+
+  ngOnDestroy() {
+    this.overlay.defaultViewContainer = undefined;
   }
 }
