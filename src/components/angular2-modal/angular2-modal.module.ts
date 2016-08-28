@@ -3,7 +3,7 @@ import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 
 import { DOMOutsideEventPlugin, DOMOverlayRenderer } from './providers/index';
 import { OverlayRenderer } from './models/tokens';
-import { CSSBackdrop, CSSDialogContainer } from './components/index';
+import { SwapComponentDirective, CSSBackdrop, CSSDialogContainer } from './components/index';
 import {
   Overlay,
   ModalOverlay,
@@ -15,6 +15,7 @@ import {
 @NgModule({
   declarations: [
     ModalOverlay,
+    SwapComponentDirective,
     CSSBackdrop,
     CSSDialogContainer,
     OverlayDialogBoundary,
