@@ -1,11 +1,11 @@
-import { 
+import {
   ComponentRef,
   ComponentFactoryResolver,
   ElementRef,
   ResolvedReflectiveProvider,
   OnDestroy,
   ViewContainerRef,
-  Renderer
+  Renderer, TemplateRef, Type
 } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -109,6 +109,21 @@ export class BaseDynamicComponent implements OnDestroy {
     cmpRef.changeDetectorRef.detectChanges();
 
     return cmpRef;
+  }
+
+  protected _addContent<T>(content: string | TemplateRef<any>,
+                           vcRef: ViewContainerRef,
+                           context: any): any[] {
+
+    if (!content) return [];
+
+    if (typeof content === 'string') {
+      return [[this.renderer.createText(null, `${content}`)]];
+    } else if (content instanceof TemplateRef) {
+      return vcRef.createEmbeddedView(content, context).rootNodes;
+    } else {
+
+    }
   }
 
   private onEnd(event: TransitionEvent | AnimationEvent): void {
