@@ -15,9 +15,15 @@ import { MessageModalPreset } from'./presets/message-modal-preset';
 
 @Component({
   selector: 'bs-modal-container',
+  host: {
+    'tabindex': '-1',
+    'role': 'dialog',
+    'class': 'modal fade',
+    'style': 'position: absolute; display: block'
+  },
   encapsulation: ViewEncapsulation.None,
   template:
-    `<div [ngClass]="dialog.context.dialogClass" 
+`<div [ngClass]="dialog.context.dialogClass" 
       [class.modal-lg]="dialog.context.size == \'lg\'"
       [class.modal-sm]="dialog.context.size == \'sm\'">
   <div class="modal-content" style="display:block" role="document" overlayDialogBoundary>
@@ -31,6 +37,7 @@ export class BSModalContainer extends BaseDynamicComponent {
   constructor(public dialog: DialogRef<MessageModalPreset>,
               el: ElementRef, renderer: Renderer) {
     super(el, renderer);
+    this.activateAnimationListener();
   }
 
   addComponent<T>(type: any, bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {

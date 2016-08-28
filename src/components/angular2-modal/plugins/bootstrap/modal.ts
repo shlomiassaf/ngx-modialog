@@ -43,10 +43,9 @@ export class Modal extends Modal_ {
                    type: any,
                    bindings?: RRP[]): Maybe<DialogRef<any>> {
 
-    let refs = this.createModal(dialogRef, CSSBackdrop, CSSDialogContainer);
+    let refs = this.createModal(dialogRef, CSSBackdrop, BSModalContainer);
 
     refs.containerRef
-      .instance.addComponent(BSModalContainer, bindings)
       .instance.addComponent(type, bindings);
 
 
@@ -66,9 +65,6 @@ export class Modal extends Modal_ {
       backdrop.setStyle('position', 'absolute');
     }
     backdrop.addClass('modal-backdrop fade', true);
-    container.setStyle('position', 'absolute');
-    container.setStyle('display', 'block');
-    container.addClass('modal fade', true);
 
     backdrop.addClass('in');
     container.addClass('in');
