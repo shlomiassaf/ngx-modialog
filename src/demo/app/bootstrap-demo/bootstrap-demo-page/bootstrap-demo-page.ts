@@ -1,9 +1,10 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 
-import { Modal, BSModalContextBuilder } from '../../../../components/angular2-modal/plugins/bootstrap';
+import { overlayConfigFactory } from "../../../../components/angular2-modal";
+import { Modal, BSModalContext } from '../../../../components/angular2-modal/plugins/bootstrap';
 
 import { ModalCommandDescriptor } from '../../demo-head/index';
-import { CustomModalContext, CustomModal } from './custom-modal-sample';
+import { CustomModal } from './custom-modal-sample';
 import * as presets from '../presets';
 
 
@@ -41,24 +42,18 @@ export class BootstrapDemoPage {
       {
         text: 'String content',
         factory: () => this.modal
-          .open('Hello modal!', new BSModalContextBuilder().isBlocking(false).toOverlayConfig())
+          .open('Hello modal!', overlayConfigFactory({ isBlocking: false }, BSModalContext))
       },
       {
         text: 'TemplateRef content',
         factory: () => this.modal
-          .open(this.templateRef, new BSModalContextBuilder({ abd: 123 } as any).isBlocking(false).toOverlayConfig())
+          .open(this.templateRef, overlayConfigFactory({ isBlocking: false }, BSModalContext))
       },
       {
         text: 'Custom Modal content',
         factory: () => {
-          const builder = new BSModalContextBuilder<CustomModalContext>(
-            { num1: 2, num2: 3 } as any,
-            undefined,
-            CustomModalContext
-          );
-
-
-          return this.modal.open(CustomModal, builder.toOverlayConfig());
+          return this.modal.open(CustomModal, overlayConfigFactory({ num1: 2, num2: 3 }, BSModalContext));
+          // we set the baseContextType to BSModalContext so the defaults for bootstrap will apply
         }
 
       }

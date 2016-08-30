@@ -20,6 +20,7 @@ export {
 export { Modal, DOMOverlayRenderer } from './providers/index';
 
 export {
+  overlayConfigFactory,
   OverlayContext,
   OverlayContextBuilder,
   ModalControllingContextBuilder

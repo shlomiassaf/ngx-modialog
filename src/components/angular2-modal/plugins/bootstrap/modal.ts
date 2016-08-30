@@ -3,7 +3,6 @@ import 'rxjs/add/operator/combineLatest';
 import {
   Injectable,
   ResolvedReflectiveProvider as RRP,
-  ReflectiveInjector,
   Renderer
 } from '@angular/core';
 

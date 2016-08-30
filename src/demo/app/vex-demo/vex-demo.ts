@@ -1,12 +1,13 @@
 import { Component, ViewEncapsulation, ViewChild, TemplateRef } from '@angular/core';
 
+import { overlayConfigFactory } from "../../../components/angular2-modal";
 import {
   VEXBuiltInThemes,
   Modal,
   DialogPreset,
   DialogFormModal,
   DialogPresetBuilder,
-  VEXModalContextBuilder,
+  VEXModalContext,
   VexModalModule
 } from '../../../components/angular2-modal/plugins/vex';
 
@@ -65,12 +66,12 @@ export class VexDemo {
       {
         text: 'String content',
         factory: () => this.modal
-          .open('Hello modal!', new VEXModalContextBuilder().isBlocking(false).toOverlayConfig())
+          .open('Hello modal!', overlayConfigFactory({ isBlocking: false }, VEXModalContext))
       },
       {
         text: 'TemplateRef content',
         factory: () => this.modal
-          .open(this.templateRef, new VEXModalContextBuilder().isBlocking(false).toOverlayConfig())
+          .open(this.templateRef, overlayConfigFactory({ isBlocking: false }, VEXModalContext))
       },
       {
         text: 'Custom Modal example',

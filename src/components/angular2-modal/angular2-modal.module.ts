@@ -25,6 +25,7 @@ import {
   exports: [
     CSSBackdrop,
     CSSDialogContainer,
+    SwapComponentDirective,
     OverlayDialogBoundary,
     OverlayTarget,
     DefaultOverlayTarget
