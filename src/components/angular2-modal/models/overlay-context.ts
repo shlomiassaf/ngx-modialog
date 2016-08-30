@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { FluentAssign, FluentAssignMethod } from './../framework/fluent-assign';
 import { extend, arrayUnion } from './../framework/utils';
 import { DialogRef } from './dialog-ref';
-import { WideVCRef } from './tokens';
+import { WideVCRef, OverlayConfig } from './tokens';
 
 export const DEFAULT_VALUES = {
   inElement: false,
@@ -94,6 +94,17 @@ export class OverlayContextBuilder<T extends OverlayContext> extends FluentAssig
       arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
       baseType
     );
+  }
+
+  /**
+   * Returns an new OverlayConfig with a context property representing the data in this builder.
+   * @param base A base configuration that the result will extend
+   * @returns OverlayConfig
+   */
+  toOverlayConfig(base?: OverlayConfig): OverlayConfig {
+    return extend(base || {}, {
+      context: this.toJSON()
+    });
   }
 }
 
