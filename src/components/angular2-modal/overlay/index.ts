@@ -1,4 +1,4 @@
 export { OverlayTarget, OverlayDialogBoundary, DefaultOverlayTarget } from './overlay.directives'
-export { ModalOverlay } from './overlay.component';
+export { ModalOverlay, EmbedComponentConfig } from './overlay.component';
 export { Overlay } from './overlay.service';
 

@@ -18,11 +18,12 @@ import { DialogRef } from '../models/dialog-ref';
 import { BaseDynamicComponent } from '../components/index';
 
 
-interface ComponentLinkerData {
+export interface EmbedComponentConfig {
   component: any;
   bindings?: ResolvedReflectiveProvider[];
   projectableNodes?: any[][];
 }
+
 /**
  * Represents the modal overlay.
  */
@@ -53,9 +54,9 @@ export class ModalOverlay extends BaseDynamicComponent {
   }
 
 
-  addEmbeddedComponent(linkData: ComponentLinkerData): EmbeddedViewRef<ComponentLinkerData> {
+  embedComponent(config: EmbedComponentConfig): EmbeddedViewRef<EmbedComponentConfig> {
     return this.vcr.createEmbeddedView(this.template, {
-      $implicit: linkData
+      $implicit: config
     });
   }
 

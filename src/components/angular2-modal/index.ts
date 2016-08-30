@@ -28,6 +28,7 @@ export {
 
 export {
   Overlay,
+  EmbedComponentConfig,
   ModalOverlay,
   OverlayDialogBoundary,
   OverlayTarget

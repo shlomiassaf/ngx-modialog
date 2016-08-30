@@ -94,7 +94,7 @@ export abstract class Modal {
     } else if (content instanceof TemplateRef) {
       nodes = [this.overlay.defaultViewContainer.createEmbeddedView(content, { dialogRef }).rootNodes];
     } else {
-      nodes = [dialogRef.overlayRef.instance.addEmbeddedComponent({ component: content, bindings: b }).rootNodes];
+      nodes = [dialogRef.overlayRef.instance.embedComponent({ component: content, bindings: b }).rootNodes];
     }
     return dialogRef.overlayRef.instance.addComponent<T>(ContainerComponent, b, nodes);
   }
