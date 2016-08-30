@@ -1,6 +1,8 @@
 import {
   ComponentRef,
   ViewContainerRef,
+  TemplateRef,
+  Type,
   ResolvedReflectiveProvider
 } from '@angular/core';
 
@@ -16,6 +18,8 @@ export enum DROP_IN_TYPE {
 }
 
 export type WideVCRef = ViewContainerRef | string;
+
+export type ContainerContent = string | TemplateRef<any> | Type;
 
 export interface OverlayPlugin extends Function {
   <T>(component: any, dialogRef: DialogRef<T>, config: OverlayConfig): Maybe<DialogRef<any>>;

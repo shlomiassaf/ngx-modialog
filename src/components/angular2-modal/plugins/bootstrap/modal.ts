@@ -2,16 +2,18 @@ import 'rxjs/add/operator/combineLatest';
 
 import {
   Injectable,
-  ResolvedReflectiveProvider as RRP
+  ResolvedReflectiveProvider as RRP,
+  ReflectiveInjector,
+  Renderer
 } from '@angular/core';
 
 import {
   Maybe,
+  ContainerContent,
   Overlay,
   DialogRef,
   Modal as Modal_,
   CSSBackdrop,
-  CSSDialogContainer,
   PromiseCompleter
 } from '../../../../components/angular2-modal';
 
@@ -23,8 +25,8 @@ import { TwoButtonPresetBuilder } from './../bootstrap/presets/two-button-preset
 
 @Injectable()
 export class Modal extends Modal_ {
-  constructor(overlay: Overlay) {
-    super(overlay);
+  constructor(overlay: Overlay, renderer: Renderer) {
+    super(overlay, renderer);
   }
 
   alert(): OneButtonPresetBuilder {
@@ -40,18 +42,15 @@ export class Modal extends Modal_ {
   }
 
   protected create(dialogRef: DialogRef<any>,
-                   type: any,
+                   content: ContainerContent,
                    bindings?: RRP[]): Maybe<DialogRef<any>> {
 
-    let refs = this.createModal(dialogRef, CSSBackdrop, BSModalContainer);
-
-    refs.containerRef
-      .instance.addComponent(type, bindings);
-
+    const backdropRef = this.createBackdrop(dialogRef, CSSBackdrop);
+    const containerRef = this.createContainer(dialogRef, BSModalContainer, content, bindings);
 
     let overlay = dialogRef.overlayRef.instance;
-    let backdrop = refs.backdropRef.instance;
-    let container = refs.containerRef.instance;
+    let backdrop = backdropRef.instance;
+    let container = containerRef.instance;
 
     dialogRef.inElement ? overlay.insideElement() : overlay.fullscreen();
 
@@ -69,8 +68,8 @@ export class Modal extends Modal_ {
     backdrop.addClass('in');
     container.addClass('in');
 
-    if (refs.containerRef.location.nativeElement) {
-      refs.containerRef.location.nativeElement.focus();
+    if (containerRef.location.nativeElement) {
+      containerRef.location.nativeElement.focus();
     }
 
     overlay.beforeDestroy(() => {

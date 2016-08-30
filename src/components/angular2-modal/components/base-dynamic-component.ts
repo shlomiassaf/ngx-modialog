@@ -102,29 +102,16 @@ export class BaseDynamicComponent implements OnDestroy {
    */
   protected _addComponent<T>(type: any,
                              vcRef: ViewContainerRef,
-                             bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {
+                             bindings: ResolvedReflectiveProvider[] = [],
+                             projectableNodes: any[][] = []): ComponentRef<T> {
     const cmpRef =
-      createComponent(vcRef.injector.get(ComponentFactoryResolver), type, vcRef, bindings || []);
+      createComponent(vcRef.injector.get(ComponentFactoryResolver), type, vcRef, bindings, projectableNodes);
 
     cmpRef.changeDetectorRef.detectChanges();
 
     return cmpRef;
   }
 
-  protected _addContent<T>(content: string | TemplateRef<any>,
-                           vcRef: ViewContainerRef,
-                           context: any): any[] {
-
-    if (!content) return [];
-
-    if (typeof content === 'string') {
-      return [[this.renderer.createText(null, `${content}`)]];
-    } else if (content instanceof TemplateRef) {
-      return vcRef.createEmbeddedView(content, context).rootNodes;
-    } else {
-
-    }
-  }
 
   private onEnd(event: TransitionEvent | AnimationEvent): void {
 

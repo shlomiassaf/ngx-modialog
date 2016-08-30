@@ -1,15 +1,16 @@
 declare const clearTimeout: any;
 
 import {
-  ApplicationRef,
   Component,
   ComponentRef,
   ElementRef,
+  EmbeddedViewRef,
   ResolvedReflectiveProvider,
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
-  Renderer
+  Renderer,
+  TemplateRef
 } from '@angular/core';
 
 import { PromiseCompleter, supportsKey } from '../framework/utils';
@@ -17,6 +18,11 @@ import { DialogRef } from '../models/dialog-ref';
 import { BaseDynamicComponent } from '../components/index';
 
 
+interface ComponentLinkerData {
+  component: any;
+  bindings?: ResolvedReflectiveProvider[];
+  projectableNodes?: any[][];
+}
 /**
  * Represents the modal overlay.
  */
@@ -26,14 +32,20 @@ import { BaseDynamicComponent } from '../components/index';
     '(body:keydown)': 'documentKeypress($event)'
   },
   encapsulation: ViewEncapsulation.None,
-  template: `<span #vcRef></span>`
+  template:
+`<template #innerView></template>
+<template #template let-ctx>
+    <template [swapCmp]="ctx.component" [swapCmpBindings]="ctx.bindings" [swapCmpProjectables]="ctx.projectableNodes"></template>
+</template>
+`
 })
 export class ModalOverlay extends BaseDynamicComponent {
   private beforeDestroyHandlers: Array<() => Promise<void>>;
-  @ViewChild('vcRef', {read: ViewContainerRef}) private vcRef: ViewContainerRef;
-  
+  @ViewChild('innerView', {read: ViewContainerRef}) private innerVcr: ViewContainerRef;
+  @ViewChild('template') private template: TemplateRef<any>;
+
   constructor(private dialogRef: DialogRef<any>,
-              private appRef: ApplicationRef,
+              private vcr: ViewContainerRef,
               el: ElementRef,
               renderer: Renderer) {
     super(el, renderer);
@@ -41,8 +53,14 @@ export class ModalOverlay extends BaseDynamicComponent {
   }
 
 
-  addComponent<T>(type: any, bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {
-    return super._addComponent<T>(type, this.vcRef, bindings);
+  addEmbeddedComponent(linkData: ComponentLinkerData): EmbeddedViewRef<ComponentLinkerData> {
+    return this.vcr.createEmbeddedView(this.template, {
+      $implicit: linkData
+    });
+  }
+
+  addComponent<T>(type: any, bindings: ResolvedReflectiveProvider[] = [], projectableNodes: any[][] = []): ComponentRef<T> {
+    return super._addComponent<T>(type, this.innerVcr, bindings, projectableNodes);
   }
 
   fullscreen(): void {

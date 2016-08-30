@@ -1,12 +1,13 @@
 import {
   ComponentRef,
+  TemplateRef,
   ReflectiveInjector,
-  ResolvedReflectiveProvider
+  ResolvedReflectiveProvider, Type, Renderer
 } from '@angular/core';
 
 import { Overlay } from '../overlay/index';
 import { Class, Maybe } from '../framework/utils';
-import { OverlayConfig } from '../models/tokens';
+import { OverlayConfig, ContainerContent } from '../models/tokens';
 import { DialogRef } from '../models/dialog-ref';
 import { ModalControllingContextBuilder } from '../models/overlay-context';
 
@@ -18,7 +19,7 @@ export class UnsupportedDropInError extends Error {
 }
 
 export abstract class Modal {
-  constructor(public overlay: Overlay) { }
+  constructor(public overlay: Overlay, private renderer: Renderer) { }
 
 
   alert(): ModalControllingContextBuilder<any> {
@@ -35,11 +36,11 @@ export abstract class Modal {
 
   /**
    * Opens a modal window inside an existing component.
-   * @param componentType The angular Component to render as the modal content.
+   * @param content The content to display, either string, template ref or a component.
    * @param config Additional settings.
    * @returns {Promise<DialogRef>}
    */
-  open(componentType: any, config?: OverlayConfig): Promise<DialogRef<any>> {
+  open(content: ContainerContent, config?: OverlayConfig): Promise<DialogRef<any>> {
     config = config || {} as any;
     try {
       let dialogs = this.overlay.open(config, this.constructor);
@@ -52,7 +53,7 @@ export abstract class Modal {
       // TODO:  Currently supporting 1 view container, hence working on dialogs[0].
       //        upgrade to multiple containers.
       return Promise.resolve(
-        this.create(dialogs[0], componentType, config.bindings)
+        this.create(dialogs[0], content, config.bindings)
       );
 
     } catch (e) {
@@ -69,8 +70,34 @@ export abstract class Modal {
    * @returns {MaybeDialogRef<any>}
    */
   protected abstract create(dialogRef: DialogRef<any>,
-                            type: any,
+                            type: ContainerContent,
                             bindings?: ResolvedReflectiveProvider[]): Maybe<DialogRef<any>>;
+
+
+  protected createBackdrop<T>(dialogRef: DialogRef<any>, BackdropComponent: Class<T>): ComponentRef<T> {
+    const b = ReflectiveInjector.resolve([{provide: DialogRef, useValue: dialogRef}]);
+    return dialogRef.overlayRef.instance.addComponent<T>(BackdropComponent, b);
+  }
+
+  protected createContainer<T>(
+    dialogRef: DialogRef<any>,
+    ContainerComponent: Class<T>,
+    content: string | TemplateRef<any> | Type,
+    bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {
+
+    const b = ReflectiveInjector.resolve([{provide: DialogRef, useValue: dialogRef}])
+      .concat(bindings || []);
+
+    let nodes: any[];
+    if (typeof content === 'string') {
+      nodes = [[this.renderer.createText(null, `${content}`)]];
+    } else if (content instanceof TemplateRef) {
+      nodes = [this.overlay.defaultViewContainer.createEmbeddedView(content, dialogRef.context).rootNodes];
+    } else {
+      nodes = [dialogRef.overlayRef.instance.addEmbeddedComponent({ component: content, bindings: b }).rootNodes];
+    }
+    return dialogRef.overlayRef.instance.addComponent<T>(ContainerComponent, b, nodes);
+  }
 
 
   /**
@@ -79,6 +106,8 @@ export abstract class Modal {
    * @param backdrop
    * @param container
    * @returns { backdropRef: ComponentRef<B>, containerRef: ComponentRef<C> }
+   *
+   * @deprecated use createBackdrop and createContainer instead
    */
   protected createModal<B, C>(dialogRef: DialogRef<any>, backdrop: Class<B>, container: Class<C>)
                                 : { backdropRef: ComponentRef<B>, containerRef: ComponentRef<C> } {
