@@ -19,26 +19,17 @@ import { Class } from '../framework/utils';
 @Component({
   selector: 'css-dialog-container',
   host: {
-    '[attr.tabindex]': 'tabIndex',
-    '[attr.role]': 'role'
+    'tabindex': '-1',
+    'role': 'dialog'
   },
   encapsulation: ViewEncapsulation.None,
-  template: `<span #modalDialog></span>`
+  template: `<ng-content></ng-content>`
 })
 export class CSSDialogContainer extends BaseDynamicComponent {
-  tabIndex: number = -1;
-  role: string = 'dialog';
-  
-  @ViewChild('modalDialog', {read: ViewContainerRef}) private vcRef: ViewContainerRef;
 
   constructor(public dialog: DialogRef<any>,
               el: ElementRef, renderer: Renderer) {
     super(el, renderer);
     this.activateAnimationListener();
   }
-
-  addComponent<T>(type: Class<T>, bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {
-    return super._addComponent<T>(type, this.vcRef, bindings);
-  }
-
 }

@@ -13,12 +13,14 @@ export {
   ModalComponent,
   OverlayRenderer,
   OverlayConfig,
-  CloseGuard
+  CloseGuard,
+  ContainerContent
 } from './models/tokens';
 
 export { Modal, DOMOverlayRenderer } from './providers/index';
 
 export {
+  overlayConfigFactory,
   OverlayContext,
   OverlayContextBuilder,
   ModalControllingContextBuilder

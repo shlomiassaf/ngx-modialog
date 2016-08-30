@@ -1,17 +1,12 @@
 import {
   Component,
-  ComponentFactoryResolver,
-  ViewContainerRef,
-  ViewChild,
   ViewEncapsulation,
-  AfterViewInit,
   Input,
   Output,
   EventEmitter
 } from '@angular/core';
 
 import {
-  createComponent,
   DialogRef,
   ModalComponent
 } from '../../../../components/angular2-modal';
@@ -77,35 +72,16 @@ export class VEXDialogButtons {
   selector: 'modal-dialog',
   encapsulation: ViewEncapsulation.None,
   template: `<form class="vex-dialog-form">
-    <div style="display: none" #modalDialog></div> 
+    <template [swapCmp]="context.content"></template>
     <vex-dialog-buttons [buttons]="context.buttons"
                         (onButtonClick)="onButtonClick($event)"></vex-dialog-buttons>
 </form>`
 })
-export class DialogFormModal implements AfterViewInit, ModalComponent<DialogPreset> {
+export class DialogFormModal implements ModalComponent<DialogPreset> {
   private context: DialogPreset;
-  @ViewChild('modalDialog', {read: ViewContainerRef}) private _viewContainer: ViewContainerRef;
 
-  constructor(public dialog: DialogRef<DialogPreset>,
-              private _cr: ComponentFactoryResolver) {
+  constructor(public dialog: DialogRef<DialogPreset>) {
     this.context = dialog.context;
-  }
-
-  ngAfterViewInit() {
-    /*  TODO:
-     In RC5 dynamic component creation is no longer async.
-     Somewhere down the pipe of the created component a value change happens that fires
-     a CD exception. setTimeout is a workaround that mimics the async behavior.
-     Find out the error and remove setTimeout.
-     */
-    setTimeout( () => {
-        createComponent(
-          this._cr,
-          this.context.content,
-          this._viewContainer,
-          []
-        );
-    });
   }
 
   onButtonClick($event: VEXButtonClickEvent) {

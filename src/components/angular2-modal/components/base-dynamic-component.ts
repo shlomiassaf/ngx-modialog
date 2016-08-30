@@ -1,11 +1,11 @@
-import { 
+import {
   ComponentRef,
   ComponentFactoryResolver,
   ElementRef,
   ResolvedReflectiveProvider,
   OnDestroy,
   ViewContainerRef,
-  Renderer
+  Renderer, TemplateRef, Type
 } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -102,14 +102,16 @@ export class BaseDynamicComponent implements OnDestroy {
    */
   protected _addComponent<T>(type: any,
                              vcRef: ViewContainerRef,
-                             bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {
+                             bindings: ResolvedReflectiveProvider[] = [],
+                             projectableNodes: any[][] = []): ComponentRef<T> {
     const cmpRef =
-      createComponent(vcRef.injector.get(ComponentFactoryResolver), type, vcRef, bindings || []);
+      createComponent(vcRef.injector.get(ComponentFactoryResolver), type, vcRef, bindings, projectableNodes);
 
     cmpRef.changeDetectorRef.detectChanges();
 
     return cmpRef;
   }
+
 
   private onEnd(event: TransitionEvent | AnimationEvent): void {
 

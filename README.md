@@ -25,6 +25,7 @@ Take 5 minutes to read a [quick walk through](https://github.com/shlomiassaf/ang
 ## Features  
 
   - Easy to use API via Fluent API Presets (alert, propmt, confirm)
+  - Can render Component's, TemplateRef's and literal string
   - Extendable via plugins.  
 
 #### Bootstrap / VEX
@@ -87,6 +88,9 @@ You can apply custom modals based on components.
 
 
 # Issues and TODO's
+## Declarative modal component
+Create a modal from declarative tepmlate syntax
+
 ## ~~Animation~~ IMPLEMENTED
 ~~Not so complicated but not in angular 2 at the moment.~~  
 

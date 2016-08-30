@@ -2,16 +2,17 @@ import 'rxjs/add/operator/combineLatest';
 
 import {
   Injectable,
-  ResolvedReflectiveProvider as RRP
+  ResolvedReflectiveProvider as RRP,
+  Renderer
 } from '@angular/core';
 
 import {
   Maybe,
+  ContainerContent,
   Overlay,
   DialogRef,
   Modal as Modal_,
   CSSBackdrop,
-  CSSDialogContainer,
   PromiseCompleter
 } from '../../../../components/angular2-modal';
 
@@ -23,8 +24,8 @@ import { TwoButtonPresetBuilder } from './../bootstrap/presets/two-button-preset
 
 @Injectable()
 export class Modal extends Modal_ {
-  constructor(overlay: Overlay) {
-    super(overlay);
+  constructor(overlay: Overlay, renderer: Renderer) {
+    super(overlay, renderer);
   }
 
   alert(): OneButtonPresetBuilder {
@@ -40,19 +41,15 @@ export class Modal extends Modal_ {
   }
 
   protected create(dialogRef: DialogRef<any>,
-                   type: any,
+                   content: ContainerContent,
                    bindings?: RRP[]): Maybe<DialogRef<any>> {
 
-    let refs = this.createModal(dialogRef, CSSBackdrop, CSSDialogContainer);
-
-    refs.containerRef
-      .instance.addComponent(BSModalContainer, bindings)
-      .instance.addComponent(type, bindings);
-
+    const backdropRef = this.createBackdrop(dialogRef, CSSBackdrop);
+    const containerRef = this.createContainer(dialogRef, BSModalContainer, content, bindings);
 
     let overlay = dialogRef.overlayRef.instance;
-    let backdrop = refs.backdropRef.instance;
-    let container = refs.containerRef.instance;
+    let backdrop = backdropRef.instance;
+    let container = containerRef.instance;
 
     dialogRef.inElement ? overlay.insideElement() : overlay.fullscreen();
 
@@ -66,15 +63,12 @@ export class Modal extends Modal_ {
       backdrop.setStyle('position', 'absolute');
     }
     backdrop.addClass('modal-backdrop fade', true);
-    container.setStyle('position', 'absolute');
-    container.setStyle('display', 'block');
-    container.addClass('modal fade', true);
 
     backdrop.addClass('in');
     container.addClass('in');
 
-    if (refs.containerRef.location.nativeElement) {
-      refs.containerRef.location.nativeElement.focus();
+    if (containerRef.location.nativeElement) {
+      containerRef.location.nativeElement.focus();
     }
 
     overlay.beforeDestroy(() => {

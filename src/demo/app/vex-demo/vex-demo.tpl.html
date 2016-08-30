@@ -23,3 +23,17 @@
         <br><br>
     </div>
 </demo-head>
+<template #templateRef let-dialogRef="dialogRef" let-ctx="dialogRef.context">
+    <div style="padding: 10px">
+        <div class="page-header">
+            <h1>TemplateRef Example</h1>
+        </div>
+        <div class="jumbotron">
+            <h1>Hello, modal!</h1>
+            <p> I'm a declarative TemplateRef!</p>
+            <p>TemplateRef can also access the DialogRef for context and modal control:</p>
+            <pre>{{ ctx | json }}</pre>
+            <button class="btn btn-primary" (click)="dialogRef.close(true)">Close Me</button>
+        </div>
+    </div>
+</template>

@@ -9,11 +9,13 @@ import {
 export function createComponent(cfr: ComponentFactoryResolver,
                                         type: any,
                                         vcr: ViewContainerRef,
-                                        bindings: ResolvedReflectiveProvider[]): ComponentRef<any> {
+                                        bindings: ResolvedReflectiveProvider[],
+                                        projectableNodes?: any[][]): ComponentRef<any> {
   return vcr.createComponent(
     cfr.resolveComponentFactory(type),
     vcr.length,
-    getInjector(vcr, bindings)
+    getInjector(vcr, bindings),
+    projectableNodes
   );
 }
 

@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 
-import { OverlayConfig } from '../../../../components/angular2-modal';
-import { Modal, BSModalContextBuilder } from '../../../../components/angular2-modal/plugins/bootstrap';
+import { overlayConfigFactory } from "../../../../components/angular2-modal";
+import { Modal, BSModalContext } from '../../../../components/angular2-modal/plugins/bootstrap';
 
 import { ModalCommandDescriptor } from '../../demo-head/index';
-import { CustomModalContext, CustomModal } from './custom-modal-sample';
+import { CustomModal } from './custom-modal-sample';
 import * as presets from '../presets';
 
 
@@ -14,7 +14,8 @@ import * as presets from '../presets';
   templateUrl: './bootstrap-demo-page.tpl.html'
 })
 export class BootstrapDemoPage {
-  public modalCommands: ModalCommandDescriptor[];
+  modalCommands: ModalCommandDescriptor[];
+  @ViewChild('templateRef') private templateRef: TemplateRef<any>;
 
   constructor(public modal: Modal) {
     this.modalCommands = [
@@ -39,22 +40,24 @@ export class BootstrapDemoPage {
         factory: () => presets.inElement(this.modal).open('demo-head')
       },
       {
-        text: 'Custom Modal example',
+        text: 'String content',
+        factory: () => this.modal
+          .open('Hello modal!', overlayConfigFactory({ isBlocking: false }, BSModalContext))
+      },
+      {
+        text: 'TemplateRef content',
+        factory: () => this.modal
+          .open(this.templateRef, overlayConfigFactory({ isBlocking: false }, BSModalContext))
+      },
+      {
+        text: 'Custom Modal content',
         factory: () => {
-          const builder = new BSModalContextBuilder<CustomModalContext>(
-            { num1: 2, num2: 3 } as any,
-            undefined,
-            CustomModalContext
-          );
-
-          let overlayConfig: OverlayConfig = {
-            context: builder.toJSON()
-          };
-
-          return this.modal.open(CustomModal, overlayConfig);
+          return this.modal.open(CustomModal, overlayConfigFactory({ num1: 2, num2: 3 }, BSModalContext));
+          // we set the baseContextType to BSModalContext so the defaults for bootstrap will apply
         }
 
       }
     ];
   }
+
 }

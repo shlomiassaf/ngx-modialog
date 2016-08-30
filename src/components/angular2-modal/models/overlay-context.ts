@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { FluentAssign, FluentAssignMethod } from './../framework/fluent-assign';
 import { extend, arrayUnion } from './../framework/utils';
 import { DialogRef } from './dialog-ref';
-import { WideVCRef } from './tokens';
+import { WideVCRef, OverlayConfig } from './tokens';
 
 export const DEFAULT_VALUES = {
   inElement: false,
@@ -92,11 +92,39 @@ export class OverlayContextBuilder<T extends OverlayContext> extends FluentAssig
     super(
       extend<any>(DEFAULT_VALUES, defaultValues || {}),
       arrayUnion<string>(DEFAULT_SETTERS, initialSetters || []),
-      baseType
+      baseType || <any>OverlayContext // https://github.com/Microsoft/TypeScript/issues/7234
     );
+  }
+
+  /**
+   * Returns an new OverlayConfig with a context property representing the data in this builder.
+   * @param base A base configuration that the result will extend
+   * @returns OverlayConfig
+   */
+  toOverlayConfig(base?: OverlayConfig): OverlayConfig {
+    return extend(base || {}, {
+      context: this.toJSON()
+    });
   }
 }
 
 export interface ModalControllingContextBuilder<T> {
   open(viewContainer?: WideVCRef): Promise<DialogRef<T>>;
+}
+
+/**
+ * A helper to create an `OverlayConfig` on the fly.
+ * Since `OverlayConfig` requires context it means a builder is needed, this process had some boilerplate.
+ * When a quick, on the fly overlay config is needed use this helper to avoid that boilerplate.
+ *
+ * A builder is used as an API to allow setting the context and providing some operations around the modal.
+ * When a developers knows the context before hand we can skip this step, this is what this factory is for.
+ *
+ * @param context The context for the modal
+ * @param baseContextType Optional. The type/class of the context. This is the class used to init a new instance of the context
+ * @param baseConfig A base configuration that the result will extend
+ * @returns {OverlayConfig}
+ */
+export function overlayConfigFactory<T>(context: T, baseContextType?: any, baseConfig?: OverlayConfig): OverlayConfig {
+  return new OverlayContextBuilder<T & OverlayContext>(<any>context, undefined, baseContextType).toOverlayConfig(baseConfig);
 }
