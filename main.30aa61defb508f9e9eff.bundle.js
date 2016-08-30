@@ -1,28 +1,28 @@
 webpackJsonp([2],{
 
-/***/ 735:
+/***/ 737:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var Observable_1 = __webpack_require__(7);
-	var combineLatest_1 = __webpack_require__(749);
+	var Observable_1 = __webpack_require__(8);
+	var combineLatest_1 = __webpack_require__(751);
 	Observable_1.Observable.prototype.combineLatest = combineLatest_1.combineLatest;
 	//# sourceMappingURL=combineLatest.js.map
 
 /***/ },
 
-/***/ 737:
+/***/ 739:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var Observable_1 = __webpack_require__(7);
-	var filter_1 = __webpack_require__(752);
+	var Observable_1 = __webpack_require__(8);
+	var filter_1 = __webpack_require__(754);
 	Observable_1.Observable.prototype.filter = filter_1.filter;
 	//# sourceMappingURL=filter.js.map
 
 /***/ },
 
-/***/ 749:
+/***/ 751:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -31,9 +31,9 @@ webpackJsonp([2],{
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var ArrayObservable_1 = __webpack_require__(257);
+	var ArrayObservable_1 = __webpack_require__(258);
 	var isArray_1 = __webpack_require__(121);
-	var isScheduler_1 = __webpack_require__(266);
+	var isScheduler_1 = __webpack_require__(267);
 	var OuterSubscriber_1 = __webpack_require__(171);
 	var subscribeToResult_1 = __webpack_require__(175);
 	/**
@@ -213,7 +213,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 752:
+/***/ 754:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -355,10 +355,10 @@ webpackJsonp([2],{
 	};
 	var core_1 = __webpack_require__(1);
 	var platform_browser_1 = __webpack_require__(98);
-	var index_1 = __webpack_require__(255);
-	var tokens_1 = __webpack_require__(248);
-	var index_2 = __webpack_require__(246);
-	var index_3 = __webpack_require__(249);
+	var index_1 = __webpack_require__(256);
+	var tokens_1 = __webpack_require__(249);
+	var index_2 = __webpack_require__(247);
+	var index_3 = __webpack_require__(250);
 	var ModalModule = (function () {
 	    function ModalModule() {
 	    }
@@ -427,14 +427,14 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 245:
+/***/ 246:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var core_1 = __webpack_require__(1);
 	var Subject_1 = __webpack_require__(36);
-	__webpack_require__(737);
-	var createComponent_1 = __webpack_require__(247);
+	__webpack_require__(739);
+	var createComponent_1 = __webpack_require__(248);
 	var BROWSER_PREFIX = ['webkit', 'moz', 'MS', 'o', ''];
 	function register(eventName, element, cb) {
 	    BROWSER_PREFIX.forEach(function (p) {
@@ -557,7 +557,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var base_dynamic_component_1 = __webpack_require__(245);
+	var base_dynamic_component_1 = __webpack_require__(246);
 	/**
 	 * Represents the modal backdrop shaped by CSS.
 	 */
@@ -615,7 +615,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var base_dynamic_component_1 = __webpack_require__(245);
+	var base_dynamic_component_1 = __webpack_require__(246);
 	var dialog_ref_1 = __webpack_require__(84);
 	/**
 	 * A component that acts as a top level container for an open modal window.
@@ -647,13 +647,13 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 246:
+/***/ 247:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	var swap_component_directive_1 = __webpack_require__(699);
 	exports.SwapComponentDirective = swap_component_directive_1.SwapComponentDirective;
-	var base_dynamic_component_1 = __webpack_require__(245);
+	var base_dynamic_component_1 = __webpack_require__(246);
 	exports.BaseDynamicComponent = base_dynamic_component_1.BaseDynamicComponent;
 	var css_backdrop_1 = __webpack_require__(697);
 	exports.CSSBackdrop = css_backdrop_1.CSSBackdrop;
@@ -773,7 +773,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 247:
+/***/ 248:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1122,7 +1122,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 8:
+/***/ 7:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1135,19 +1135,19 @@ webpackJsonp([2],{
 	exports.arrayUnion = utils_1.arrayUnion;
 	exports.PromiseCompleter = utils_1.PromiseCompleter;
 	exports.Maybe = utils_1.Maybe;
-	var createComponent_1 = __webpack_require__(247);
+	var createComponent_1 = __webpack_require__(248);
 	exports.createComponent = createComponent_1.createComponent;
 	__export(__webpack_require__(398));
 	var dialog_ref_1 = __webpack_require__(84);
 	exports.DialogRef = dialog_ref_1.DialogRef;
-	var tokens_1 = __webpack_require__(248);
+	var tokens_1 = __webpack_require__(249);
 	exports.DROP_IN_TYPE = tokens_1.DROP_IN_TYPE;
 	exports.ModalComponent = tokens_1.ModalComponent;
 	exports.OverlayRenderer = tokens_1.OverlayRenderer;
 	exports.OverlayConfig = tokens_1.OverlayConfig;
 	exports.CloseGuard = tokens_1.CloseGuard;
 	exports.ContainerContent = tokens_1.ContainerContent;
-	var index_1 = __webpack_require__(255);
+	var index_1 = __webpack_require__(256);
 	exports.Modal = index_1.Modal;
 	exports.DOMOverlayRenderer = index_1.DOMOverlayRenderer;
 	var overlay_context_1 = __webpack_require__(400);
@@ -1155,7 +1155,7 @@ webpackJsonp([2],{
 	exports.OverlayContext = overlay_context_1.OverlayContext;
 	exports.OverlayContextBuilder = overlay_context_1.OverlayContextBuilder;
 	exports.ModalControllingContextBuilder = overlay_context_1.ModalControllingContextBuilder;
-	var index_2 = __webpack_require__(249);
+	var index_2 = __webpack_require__(250);
 	exports.Overlay = index_2.Overlay;
 	exports.ModalOverlay = index_2.ModalOverlay;
 	exports.OverlayDialogBoundary = index_2.OverlayDialogBoundary;
@@ -1167,7 +1167,7 @@ webpackJsonp([2],{
 	var modal_open_context_1 = __webpack_require__(701);
 	exports.ModalOpenContext = modal_open_context_1.ModalOpenContext;
 	exports.ModalOpenContextBuilder = modal_open_context_1.ModalOpenContextBuilder;
-	__export(__webpack_require__(246));
+	__export(__webpack_require__(247));
 	var angular2_modal_module_1 = __webpack_require__(696);
 	exports.ModalModule = angular2_modal_module_1.ModalModule;
 
@@ -1463,7 +1463,7 @@ webpackJsonp([2],{
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var index_1 = __webpack_require__(255);
+	var index_1 = __webpack_require__(256);
 	var modal_context_1 = __webpack_require__(399);
 	var utils_1 = __webpack_require__(83);
 	var DEFAULT_SETTERS = [
@@ -1625,7 +1625,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 248:
+/***/ 249:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -1685,7 +1685,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 249:
+/***/ 250:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -1722,7 +1722,7 @@ webpackJsonp([2],{
 	var core_1 = __webpack_require__(1);
 	var utils_1 = __webpack_require__(83);
 	var dialog_ref_1 = __webpack_require__(84);
-	var index_1 = __webpack_require__(246);
+	var index_1 = __webpack_require__(247);
 	/**
 	 * Represents the modal overlay.
 	 */
@@ -2009,7 +2009,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var tokens_1 = __webpack_require__(248);
+	var tokens_1 = __webpack_require__(249);
 	var dialog_ref_stack_1 = __webpack_require__(700);
 	var vc_ref_store_1 = __webpack_require__(401);
 	var dialog_ref_1 = __webpack_require__(84);
@@ -2107,10 +2107,10 @@ webpackJsonp([2],{
 	};
 	var core_1 = __webpack_require__(1);
 	var common_1 = __webpack_require__(22);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var modal_1 = __webpack_require__(404);
-	var modal_container_component_1 = __webpack_require__(251);
-	var message_modal_component_1 = __webpack_require__(250);
+	var modal_container_component_1 = __webpack_require__(252);
+	var message_modal_component_1 = __webpack_require__(251);
 	function getProviders() {
 	    return [
 	        { provide: angular2_modal_1.Modal, useClass: modal_1.Modal },
@@ -2156,19 +2156,19 @@ webpackJsonp([2],{
 	exports.BootstrapModalSize = modal_context_1.BootstrapModalSize;
 	exports.BSModalContext = modal_context_1.BSModalContext;
 	exports.BSModalContextBuilder = modal_context_1.BSModalContextBuilder;
-	var modal_container_component_1 = __webpack_require__(251);
+	var modal_container_component_1 = __webpack_require__(252);
 	exports.BSModalContainer = modal_container_component_1.BSModalContainer;
-	var message_modal_component_1 = __webpack_require__(250);
+	var message_modal_component_1 = __webpack_require__(251);
 	exports.BSMessageModal = message_modal_component_1.BSMessageModal;
 	exports.BSMessageModalTitle = message_modal_component_1.BSMessageModalTitle;
 	exports.BSMessageModalBody = message_modal_component_1.BSMessageModalBody;
 	exports.BSModalFooter = message_modal_component_1.BSModalFooter;
 	exports.BSMessageModalButtonConfig = message_modal_component_1.BSMessageModalButtonConfig;
 	exports.BSMessageModalButtonHandler = message_modal_component_1.BSMessageModalButtonHandler;
-	var message_modal_preset_1 = __webpack_require__(252);
+	var message_modal_preset_1 = __webpack_require__(253);
 	exports.MessageModalPreset = message_modal_preset_1.MessageModalPreset;
 	exports.MessageModalPresetBuilder = message_modal_preset_1.MessageModalPresetBuilder;
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	exports.ModalOpenContext = angular2_modal_1.ModalOpenContext;
 	exports.ModalOpenContextBuilder = angular2_modal_1.ModalOpenContextBuilder;
 	var one_button_preset_1 = __webpack_require__(405);
@@ -2185,7 +2185,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 250:
+/***/ 251:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2199,7 +2199,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var BSMessageModalTitle = (function () {
 	    function BSMessageModalTitle(dialog) {
 	        this.dialog = dialog;
@@ -2301,7 +2301,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 251:
+/***/ 252:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2320,7 +2320,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var BSModalContainer = (function (_super) {
 	    __extends(BSModalContainer, _super);
 	    function BSModalContainer(dialog, el, renderer) {
@@ -2359,7 +2359,7 @@ webpackJsonp([2],{
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var DEFAULT_VALUES = {
 	    dialogClass: 'modal-dialog',
 	    showClose: false
@@ -2417,10 +2417,10 @@ webpackJsonp([2],{
 	var __metadata = (this && this.__metadata) || function (k, v) {
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
-	__webpack_require__(735);
+	__webpack_require__(737);
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
-	var modal_container_component_1 = __webpack_require__(251);
+	var angular2_modal_1 = __webpack_require__(7);
+	var modal_container_component_1 = __webpack_require__(252);
 	var one_button_preset_1 = __webpack_require__(405);
 	var two_button_preset_1 = __webpack_require__(406);
 	var Modal = (function (_super) {
@@ -2484,7 +2484,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 252:
+/***/ 253:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2493,8 +2493,8 @@ webpackJsonp([2],{
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var angular2_modal_1 = __webpack_require__(8);
-	var message_modal_component_1 = __webpack_require__(250);
+	var angular2_modal_1 = __webpack_require__(7);
+	var message_modal_component_1 = __webpack_require__(251);
 	var modal_context_1 = __webpack_require__(403);
 	var DEFAULT_VALUES = {
 	    component: message_modal_component_1.BSMessageModal,
@@ -2549,8 +2549,8 @@ webpackJsonp([2],{
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var angular2_modal_1 = __webpack_require__(8);
-	var message_modal_preset_1 = __webpack_require__(252);
+	var angular2_modal_1 = __webpack_require__(7);
+	var message_modal_preset_1 = __webpack_require__(253);
 	/**
 	 * A Preset for a classic 1 button modal window.
 	 */
@@ -2587,8 +2587,8 @@ webpackJsonp([2],{
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var angular2_modal_1 = __webpack_require__(8);
-	var message_modal_preset_1 = __webpack_require__(252);
+	var angular2_modal_1 = __webpack_require__(7);
+	var message_modal_preset_1 = __webpack_require__(253);
 	/**
 	 * A Preset for a classic 2 button modal window.
 	 */
@@ -2621,11 +2621,11 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 253:
+/***/ 254:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var modal_1 = __webpack_require__(254);
+	var modal_1 = __webpack_require__(255);
 	exports.Modal = modal_1.Modal;
 	var modal_context_1 = __webpack_require__(408);
 	exports.JSNativeModalContext = modal_context_1.JSNativeModalContext;
@@ -2654,7 +2654,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var JSNativeModalRenderer = (function () {
 	    function JSNativeModalRenderer() {
 	    }
@@ -2709,8 +2709,8 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
-	var modal_1 = __webpack_require__(254);
+	var angular2_modal_1 = __webpack_require__(7);
+	var modal_1 = __webpack_require__(255);
 	function getProviders() {
 	    return [
 	        { provide: angular2_modal_1.Modal, useClass: modal_1.Modal },
@@ -2745,7 +2745,7 @@ webpackJsonp([2],{
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var DEFAULT_SETTERS = [
 	    'promptDefault'
 	];
@@ -2778,7 +2778,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 254:
+/***/ 255:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -2797,7 +2797,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var js_native_preset_1 = __webpack_require__(409);
 	var Modal = (function (_super) {
 	    __extends(Modal, _super);
@@ -2837,7 +2837,7 @@ webpackJsonp([2],{
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var modal_1 = __webpack_require__(254);
+	var modal_1 = __webpack_require__(255);
 	var modal_context_1 = __webpack_require__(408);
 	var js_native_modal_renderer_1 = __webpack_require__(407);
 	var JSNativePresetBuilder = (function (_super) {
@@ -2891,7 +2891,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	/**
 	 * A Dialog is a
 	 */
@@ -3009,7 +3009,7 @@ webpackJsonp([2],{
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var DEFAULT_VALUES = {
 	    className: 'default',
 	    overlayClassName: 'vex-overlay',
@@ -3090,7 +3090,7 @@ webpackJsonp([2],{
 	};
 	__webpack_require__(430);
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var dropin_preset_1 = __webpack_require__(414);
 	var Modal = (function (_super) {
 	    __extends(Modal, _super);
@@ -3176,7 +3176,7 @@ webpackJsonp([2],{
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var modal_context_1 = __webpack_require__(411);
 	var dialog_form_modal_1 = __webpack_require__(169);
 	var DEFAULT_SETTERS = [
@@ -3243,7 +3243,7 @@ webpackJsonp([2],{
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var dialog_form_modal_1 = __webpack_require__(169);
 	var dialog_preset_1 = __webpack_require__(413);
 	var DEFAULT_VALUES = {
@@ -3321,7 +3321,7 @@ webpackJsonp([2],{
 	};
 	var core_1 = __webpack_require__(1);
 	var common_1 = __webpack_require__(22);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var modal_1 = __webpack_require__(412);
 	var dialog_form_modal_1 = __webpack_require__(169);
 	function getProviders() {
@@ -3373,9 +3373,9 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var createComponent_1 = __webpack_require__(247);
+	var createComponent_1 = __webpack_require__(248);
 	var dialog_ref_1 = __webpack_require__(84);
-	var index_1 = __webpack_require__(249);
+	var index_1 = __webpack_require__(250);
 	var DOMOverlayRenderer = (function () {
 	    function DOMOverlayRenderer(_cr) {
 	        this._cr = _cr;
@@ -3405,7 +3405,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 255:
+/***/ 256:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -3611,14 +3611,14 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 803:
+/***/ 805:
 /***/ function(module, exports) {
 
 	module.exports = "/* \n========================================= \n========================================= \n\nStartup Template By Bootstrapious.com\n========================================= \n========================================= */\n/*variant 2 - green */\n/*\n\n=====================\nGENERAL\n=====================\n\n*/\nhtml {\n  height: 100%;\n}\nbody {\n  height: 100%;\n  font-weight: 300;\n  padding-top: 80px;\n}\nheader {\n  z-index: 1000;\n}\nsection {\n  position: relative;\n  padding-top: 90px;\n  padding-bottom: 90px;\n}\nsection.background-gray-lighter {\n  background: #cdcdcd;\n}\nsection.background-gray-lightest {\n  background: #f7f7f7;\n  border-top: solid 1px #cdcdcd;\n  border-bottom: solid 1px #cdcdcd;\n}\nsection.background-secondary {\n  background: #9fb1bc;\n  border-top: solid 1px #658090;\n  border-bottom: solid 1px #658090;\n}\n.section-inverse {\n  color: #fff;\n}\n.section-inverse h1,\n.section-inverse h2,\n.section-inverse h3,\n.section-inverse h4,\n.section-inverse h5,\n.section-inverse h6 {\n  color: #fff;\n}\n.section-inverse .heading:after {\n  background: #fff;\n}\n.italic {\n  font-style: italic;\n  font-family: \"Georgia\", \"Times New Roman\", Times, serif;\n}\n.heading {\n  text-align: left;\n  margin-bottom: 40px;\n}\n.heading:after {\n  content: \" \";\n  display: block;\n  width: 100px;\n  height: 2px;\n  margin: 20px 0 20px;\n  background: #2b7551;\n}\n@media (min-width: 1200px) {\n  h1.heading {\n    font-size: 68px;\n  }\n  h2.heading {\n    font-size: 58px;\n  }\n}\n.img-responsive {\n  margin: 0 auto;\n}\n.no-space .box {\n  margin: 0 -15px;\n}\n.margin-top {\n  margin-top: 30px;\n}\n.margin-top--big {\n  margin-top: 60px !important;\n}\n.margin-bottom {\n  margin-bottom: 30px;\n}\n.margin-bottom--big {\n  margin-bottom: 60px !important;\n}\n.margin-bottom--zero {\n  margin-bottom: 0 !important;\n}\n.no-padding-top {\n  padding-top: 0;\n}\n.no-padding-bottom {\n  padding-bottom: 0;\n}\n.padding--small {\n  padding-top: 30px;\n  padding-bottom: 30px;\n}\n.weight-300 {\n  font-weight: 300 !important;\n}\n.weight-500 {\n  font-weight: 500 !important;\n}\n.weight-700 {\n  font-weight: 700 !important;\n}\n.text-gray {\n  color: #555555;\n}\n.text-gray-light {\n  color: #999999;\n}\n.text-gray-lighter {\n  color: #cdcdcd;\n}\n@media (max-width: 991px) {\n  .text-center-mobile {\n    text-align: center !important;\n  }\n}\na,\nbutton {\n  -webkit-transition: all 0.2s ease-out;\n  -moz-transition: all 0.2s ease-out;\n  transition: all 0.2s ease-out;\n}\na i.fa,\nbutton i.fa {\n  margin: 0 5px;\n}\n.clickable {\n  cursor: pointer !important;\n}\n.required {\n  color: #2b7551;\n}\n.accent {\n  color: #2b7551;\n}\n.text-uppercase {\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n}\n.list-style-none {\n  list-style: none;\n}\n.pages {\n  text-align: center;\n}\n#map {\n  height: 500px;\n  border-top: solid 1px #cdcdcd;\n  border-bottom: solid 1px #cdcdcd;\n}\n.btn-ghost {\n  color: #2b7551;\n  background-color: transparent;\n  border-color: #2b7551;\n}\n.btn-ghost:hover,\n.btn-ghost:focus,\n.btn-ghost:active,\n.btn-ghost.active,\n.open .dropdown-toggle.btn-ghost {\n  color: #2b7551;\n  background-color: rgba(0, 0, 0, 0);\n  border-color: #1b4832;\n}\n.btn-ghost:active,\n.btn-ghost.active,\n.open .dropdown-toggle.btn-ghost {\n  background-image: none;\n}\n.btn-ghost.disabled,\n.btn-ghost[disabled],\nfieldset[disabled] .btn-ghost,\n.btn-ghost.disabled:hover,\n.btn-ghost[disabled]:hover,\nfieldset[disabled] .btn-ghost:hover,\n.btn-ghost.disabled:focus,\n.btn-ghost[disabled]:focus,\nfieldset[disabled] .btn-ghost:focus,\n.btn-ghost.disabled:active,\n.btn-ghost[disabled]:active,\nfieldset[disabled] .btn-ghost:active,\n.btn-ghost.disabled.active,\n.btn-ghost[disabled].active,\nfieldset[disabled] .btn-ghost.active {\n  background-color: transparent;\n  border-color: #2b7551;\n}\n.btn-ghost .badge {\n  color: transparent;\n  background-color: #2b7551;\n}\n.btn-ghost:hover,\n.btn-ghost:focus,\n.btn-ghost:active,\n.btn-ghost.active,\n.open .dropdown-toggle.btn-ghost {\n  color: #fff;\n  background-color: #2b7551;\n  border-color: #2b7551;\n}\n.btn-white {\n  color: #ffffff;\n  background-color: transparent;\n  border-color: #ffffff;\n}\n.btn-white:hover,\n.btn-white:focus,\n.btn-white:active,\n.btn-white.active,\n.open .dropdown-toggle.btn-white {\n  color: #ffffff;\n  background-color: rgba(0, 0, 0, 0);\n  border-color: #e0e0e0;\n}\n.btn-white:active,\n.btn-white.active,\n.open .dropdown-toggle.btn-white {\n  background-image: none;\n}\n.btn-white.disabled,\n.btn-white[disabled],\nfieldset[disabled] .btn-white,\n.btn-white.disabled:hover,\n.btn-white[disabled]:hover,\nfieldset[disabled] .btn-white:hover,\n.btn-white.disabled:focus,\n.btn-white[disabled]:focus,\nfieldset[disabled] .btn-white:focus,\n.btn-white.disabled:active,\n.btn-white[disabled]:active,\nfieldset[disabled] .btn-white:active,\n.btn-white.disabled.active,\n.btn-white[disabled].active,\nfieldset[disabled] .btn-white.active {\n  background-color: transparent;\n  border-color: #ffffff;\n}\n.btn-white .badge {\n  color: transparent;\n  background-color: #ffffff;\n}\n.btn-white:hover,\n.btn-white:focus,\n.btn-white:active,\n.btn-white.active,\n.open .dropdown-toggle.btn-white {\n  color: #ffffff;\n  background-color: #fff;\n  border-color: #fff;\n}\n.icon {\n  display: inline-block;\n  width: 60px;\n  height: 60px;\n  line-height: 60px;\n  border-radius: 30px;\n  border: solid 1px #2b7551;\n  color: #2b7551;\n  -webkit-transition: all 0.2s ease-out;\n  -moz-transition: all 0.2s ease-out;\n  transition: all 0.2s ease-out;\n  font-size: 30px;\n  margin: 0 auto 30px;\n  text-align: center;\n}\n.icon.brand-secondary {\n  border-color: #9fb1bc;\n  color: #9fb1bc;\n}\n.icon.brand-terciary {\n  border-color: #6e8898;\n  color: #6e8898;\n}\n.icon.brand-four {\n  border-color: #1c3738;\n  color: #1c3738;\n}\n/*\n\n=====================\nINTRO\n=====================\n\n*/\n.text-intro {\n  text-align: center;\n  color: #ffffff;\n}\n.text-intro h1 {\n  font-weight: 700;\n}\n.text-intro a {\n  color: #fff;\n  text-decoration: underline;\n}\n.text-intro h1,\n.text-intro h2,\n.text-intro h3,\n.text-intro h4 {\n  color: #ffffff;\n}\n.text-intro span {\n  color: #2b7551;\n}\n@media (min-width: 1200px) {\n  .text-intro {\n    background: rgba(0, 0, 0, 0) linear-gradient(135deg, #8ec64e 0%, #41aba0 100%) repeat scroll 0 0;\n\n  }\n}\n@media (max-width: 1199px) {\n  .text-intro {\n    background: #6bb2b5;\n  }\n}\n/*\n\n=====================\nSERVICES / INTEGRATIONS\n=====================\n\n*/\n.services {\n  margin-top: 80px;\n  text-align: center;\n}\n.services .services-heading {\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  font-size: 18px;\n  font-weight: 400;\n  color: #999999;\n  margin-bottom: 40px;\n}\n.services .heading {\n  font-size: 18px;\n  font-weight: 700;\n  margin-bottom: 20px;\n  text-align: center;\n}\n.services .heading:after {\n  content: \" \";\n  display: block;\n  width: 100px;\n  height: 1px;\n  margin: 20px auto 20px;\n  background: #2b7551;\n}\n.services p {\n  font-size: 14px;\n  line-height: 1.5;\n  margin-bottom: 60px;\n  color: #999999;\n}\n/*\n\n=====================\nCUSTOMERS\n=====================\n\n*/\n.customer {\n  text-align: center;\n}\n.customer img {\n  display: inline-block;\n  margin-top: 10px;\n  margin-bottom: 10px;\n  -webkit-filter: grayscale(100%);\n  filter: grayscale(100%);\n}\n.customer img:hover {\n  -webkit-filter: grayscale(0);\n  filter: grayscale(0);\n}\n/*\n\n=====================\nSIGN UP FORM\n=====================\n\n*/\n@media (max-width: 991px) {\n  .sign-up-form .form-control {\n    margin-bottom: 20px;\n  }\n  .sign-up-form .btn {\n    margin-bottom: 20px;\n  }\n}\n@media (min-width: 768px) {\n  .sign-up-form .form-control {\n    width: 350px;\n  }\n}\n/*\n\n=====================\nEKKO LIGHTBOX\n=====================\n\n*/\n.ekko-lightbox-container {\n  position: relative;\n}\n.ekko-lightbox-nav-overlay {\n  position: absolute;\n  top: 0;\n  left: 0;\n  z-index: 100;\n  width: 100%;\n  height: 100%;\n}\n.ekko-lightbox-nav-overlay a {\n  z-index: 100;\n  display: block;\n  width: 49%;\n  height: 100%;\n  font-size: 30px;\n  color: #fff;\n  opacity: 0;\n  text-decoration: none !important;\n  -webkit-transition: opacity 0.5s;\n  -moz-transition: opacity 0.5s;\n  -o-transition: opacity 0.5s;\n  transition: opacity 0.5s;\n}\n.ekko-lightbox-nav-overlay a:empty {\n  width: 49%;\n  color: transparent;\n}\n.ekko-lightbox a:hover,\na:focus,\na:active {\n  text-decoration: none;\n  opacity: 1;\n  color: #fff;\n}\n.ekko-lightbox .glyphicon-chevron-left {\n  left: 0;\n  float: left;\n  padding-left: 15px;\n  text-align: left;\n}\n.ekko-lightbox .glyphicon-chevron-right {\n  right: 0;\n  float: right;\n  padding-right: 15px;\n  text-align: right;\n}\n.ekko-lightbox .modal-footer {\n  text-align: left;\n}\n.owl-carousel .owl-controls .owl-page.active span,\n.owl-theme .owl-controls .owl-page.active span,\n.owl-carousel .owl-controls.clickable .owl-page:hover span,\n.owl-theme .owl-controls.clickable .owl-page:hover span {\n  background: #2b7551;\n}\n.owl-carousel .owl-controls .owl-buttons,\n.owl-theme .owl-controls .owl-buttons {\n  position: absolute;\n  top: 5px;\n  right: 0;\n}\n.owl-carousel .owl-controls .owl-buttons div,\n.owl-theme .owl-controls .owl-buttons div {\n  width: 26px;\n  height: 26px;\n  line-height: 25px;\n  margin: 0 5px 0 0;\n  font-size: 18px;\n  color: #2b7551;\n  padding: 0;\n  background: #fff;\n  border-radius: 13px;\n  vertical-align: middle;\n  text-align: center;\n  opacity: 1;\n  filter: alpha(opacity=100);\n}\n.testimonials {\n  padding: 0;\n  margin-bottom: 40px;\n}\n.testimonials .item {\n  list-style-type: none;\n  margin: 0 5px;\n  background: #fff;\n  padding-bottom: 60px;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n}\n.testimonials .item .testimonial {\n  position: relative;\n  padding: 20px;\n}\n.testimonials .item .testimonial:before,\n.testimonials .item .testimonial:after {\n  content: \" \";\n  display: table;\n}\n.testimonials .item .testimonial:after {\n  clear: both;\n}\n.testimonials .item .testimonial .text {\n  color: #999999;\n  margin-bottom: 50px;\n  font-size: 14px;\n  font-weight: 400;\n}\n.testimonials .item .testimonial .bottom {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  padding: 20px;\n  height: 50px;\n}\n.testimonials .item .testimonial .bottom .testimonial-icon {\n  display: inline-block;\n  width: 30px;\n  height: 30px;\n  line-height: 30px;\n  border-radius: 15px;\n  color: #6e8898;\n  font-size: 40px;\n  float: left;\n  text-align: center;\n}\n.testimonials .item .testimonial .name-picture {\n  float: right;\n  width: 80%;\n  text-align: right;\n}\n.testimonials .item .testimonial .name-picture h5 {\n  font-size: 16px;\n  text-transform: uppercase;\n  letter-spacing: 0.08em;\n}\n.testimonials .item .testimonial .name-picture p {\n  color: #999999;\n  margin: 0;\n  font-size: 14px;\n}\n.testimonials .item .testimonial .name-picture img {\n  float: right;\n  width: 60px;\n  border-radius: 30px;\n  margin-left: 10px;\n}\n.box-simple {\n  text-align: center;\n  margin-bottom: 48px;\n}\n.box-simple h3 {\n  font-weight: normal;\n  font-size: 24px;\n  line-height: 1.5;\n  color: #555555;\n  font-weight: 400;\n}\n.box-simple h3 a {\n  color: #555555;\n}\n.box-simple p {\n  color: #999999;\n}\n.box-simple:hover .icon {\n  -webkit-transform: scale(1.1, 1.1);\n  -ms-transform: scale(1.1, 1.1);\n  transform: scale(1.1, 1.1);\n}\n.box-simple:hover .icon i {\n  -webkit-transform: scale(1, 1);\n  -ms-transform: scale(1, 1);\n  transform: scale(1, 1);\n}\n.box-simple.box-white {\n  padding: 20px;\n  border: dotted 1px #999999;\n}\n.box-simple.box-white .icon {\n  color: #555555;\n  border-color: transparent;\n  font-size: 70px;\n}\n.box-simple.box-dark {\n  padding: 20px;\n  border: dotted 1px #999999;\n  background: #555555;\n  color: #fff;\n}\n.box-simple.box-dark .icon {\n  color: #f7f7f7;\n  border-color: transparent;\n  font-size: 70px;\n}\n.box-simple.box-dark h3 {\n  color: #fff;\n}\n.box-simple.box-dark h3 a {\n  color: #fff;\n}\n.box-simple.box-dark p {\n  color: #fff;\n}\n.box-image {\n  position: relative;\n  overflow: hidden;\n  text-align: center;\n  margin: 15px 0;\n}\n.box-image .bg {\n  position: absolute;\n  top: auto;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  opacity: 0;\n  filter: alpha(opacity=0);\n  background: #2b7551;\n}\n.box-image .name {\n  position: absolute;\n  width: 100%;\n  height: 50%;\n  bottom: 0;\n  -webkit-transform: translate(0, 100%);\n  -ms-transform: translate(0, 100%);\n  transform: translate(0, 100%);\n  -webkit-transition: all 0.2s ease-out;\n  -moz-transition: all 0.2s ease-out;\n  transition: all 0.2s ease-out;\n  color: #fff;\n  padding: 0 20px;\n}\n.box-image .name h3 {\n  color: #fff;\n  text-transform: uppercase;\n  font-size: 24px;\n  letter-spacing: 0.08em;\n}\n.box-image .name h3 a {\n  color: #fff;\n  text-decoration: none;\n}\n.box-image .text {\n  position: absolute;\n  width: 100%;\n  height: 50%;\n  top: 0;\n  -webkit-transform: translate(0, -150%);\n  -ms-transform: translate(0, -150%);\n  transform: translate(0, -150%);\n  -webkit-transition: all 0.2s ease-out;\n  -moz-transition: all 0.2s ease-out;\n  transition: all 0.2s ease-out;\n  color: #fff;\n  padding: 0 20px;\n}\n.box-image:hover .bg {\n  opacity: 0.7;\n  filter: alpha(opacity=70);\n}\n.box-image:hover .name {\n  position: absolute;\n  -webkit-transform: translate(0, -75%);\n  -ms-transform: translate(0, -75%);\n  transform: translate(0, -75%);\n}\n.box-image:hover .text {\n  position: absolute;\n  -webkit-transform: translate(0, 100%);\n  -ms-transform: translate(0, 100%);\n  transform: translate(0, 100%);\n}\n.box-image-text {\n  position: relative;\n  background: #fff;\n  overflow: hidden;\n  text-align: center;\n  margin: 15px 0;\n}\n.box-image-text .top {\n  position: relative;\n  margin-bottom: 10px;\n}\n.box-image-text .top .bg {\n  position: absolute;\n  top: auto;\n  bottom: 0;\n  width: 100%;\n  height: 100%;\n  opacity: 0;\n  filter: alpha(opacity=0);\n  background: #fff;\n}\n.box-image-text .top .logo {\n  width: 100%;\n  position: absolute;\n  text-align: center;\n  top: 50%;\n  -webkit-transform: translate(0, -50%);\n  -ms-transform: translate(0, -50%);\n  transform: translate(0, -50%);\n}\n.box-image-text .top .name {\n  position: absolute;\n  width: 100%;\n  height: 50%;\n  bottom: 0;\n  -webkit-transform: translate(0, 100%);\n  -ms-transform: translate(0, 100%);\n  transform: translate(0, 100%);\n  -webkit-transition: all 0.2s ease-out;\n  -moz-transition: all 0.2s ease-out;\n  transition: all 0.2s ease-out;\n  color: #fff;\n  padding: 0 20px;\n}\n.box-image-text .top .name h3 {\n  color: #fff;\n  text-transform: uppercase;\n  font-size: 24px;\n  letter-spacing: 0.08em;\n}\n.box-image-text .top .name h3 a {\n  color: #fff;\n  text-decoration: none;\n}\n.box-image-text .top .name h4 {\n  color: #fff;\n  text-transform: uppercase;\n  font-size: 24px;\n  letter-spacing: 0.08em;\n}\n.box-image-text .top .name h4 a {\n  color: #fff;\n  text-decoration: none;\n}\n.box-image-text .top .text {\n  position: absolute;\n  width: 100%;\n  height: 50%;\n  top: 0;\n  -webkit-transform: translate(0, -150%);\n  -ms-transform: translate(0, -150%);\n  transform: translate(0, -150%);\n  -webkit-transition: all 0.2s ease-out;\n  -moz-transition: all 0.2s ease-out;\n  transition: all 0.2s ease-out;\n  color: #fff;\n  padding: 0 20px;\n}\n.box-image-text .content {\n  padding: 15px 15px 0 15px;\n}\n.box-image-text .content h3,\n.box-image-text .content h4 {\n  text-transform: uppercase;\n  line-height: 1.5;\n  color: #555555;\n  font-weight: 800;\n  letter-spacing: 0.08em;\n}\n.box-image-text .content p {\n  color: #999999;\n}\n.box-image-text.bg-visible .bg {\n  opacity: 0.8;\n  filter: alpha(opacity=80);\n}\n.box-image-text:hover .bg {\n  opacity: 0.7;\n  filter: alpha(opacity=70);\n}\n.box-image-text:hover .name {\n  position: absolute;\n  -webkit-transform: translate(0, -75%);\n  -ms-transform: translate(0, -75%);\n  transform: translate(0, -75%);\n}\n.box-image-text:hover .text {\n  position: absolute;\n  -webkit-transform: translate(0, 100%);\n  -ms-transform: translate(0, 100%);\n  transform: translate(0, 100%);\n}\n/*\n\n=====================\nNAVBAR\n=====================\n\n*/\n.header {\n  width: 100%;\n}\n.navbar {\n  font-weight: 700;\n  box-shadow: 0 1px 5px #666;\n}\n@media (min-width: 768px) {\n  .navbar ul.nav > li > a {\n    border-top: solid 5px transparent;\n    padding-top: 23px;\n  }\n  .navbar ul.nav > li > a:hover {\n    border-top-color: #2b7551;\n  }\n  .navbar ul.nav > li.active > a,\n  .navbar ul.nav > li.open > a {\n    text-decoration: none !important;\n    border-top-color: #2b7551;\n  }\n}\n.navbar-toggle {\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  color: #6e8898;\n}\nul.dropdown-menu li a {\n  -webkit-transition: all 0.2s ease-out;\n  -moz-transition: all 0.2s ease-out;\n  transition: all 0.2s ease-out;\n}\nul.dropdown-menu li a:hover {\n  -webkit-transition: all 0.2s ease-out;\n  -moz-transition: all 0.2s ease-out;\n  transition: all 0.2s ease-out;\n}\n#login-modal {\n  overflow: hidden;\n}\n#login-modal .modal-header h4 {\n  text-transform: uppercase;\n}\n#login-modal form {\n  margin-bottom: 24px;\n}\n#login-modal a {\n  color: #2b7551;\n}\n#login-modal p {\n  font-weight: 300;\n  margin-bottom: 24px;\n  font-size: 15px;\n}\n.modal-backdrop {\n  z-index: 1035;\n}\n.footer__copyright {\n  background: #1c3738;\n  color: #ccc;\n  padding: 20px 0;\n  font-size: 14px;\n  line-height: 28px;\n}\n.footer__copyright p {\n  margin: 0;\n}\n@media (max-width: 991px) {\n  .footer__copyright p {\n    float: none !important;\n    text-align: center;\n    margin-bottom: 10px;\n  }\n}\n/*\n\n=====================\nCOPYRIGHT\n=====================\n\n*/\n.copyright {\n  margin-top: 40px;\n  color: #999999;\n}\n.copyright p.credit {\n  text-align: right;\n}\n.copyright p.credit a {\n  color: #999999;\n}\n@media (max-width: 991px) {\n  .copyright p.credit {\n    text-align: center !important;\n  }\n}\n@media (min-width: 1200px) {\n  .copyright {\n    margin-top: 60px;\n  }\n}\n@media (max-width: 991px) {\n  .copyright {\n    text-align: center !important;\n  }\n}\n/*\n\n=====================\nSTYLE SWITCHER FOR DEMO\n=====================\n\n*/\n#style-switch-button {\n  position: fixed;\n  top: 120px;\n  left: 0px;\n  border-radius: 0;\n  z-index: 2;\n}\n#style-switch {\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  width: 300px;\n  padding: 20px;\n  position: fixed;\n  top: 160px;\n  left: 0;\n  background: #fff;\n  border: solid 1px #cdcdcd;\n  z-index: 2000;\n}\n#style-switch h4 {\n  color: #555555;\n}\n/* ========================================= */\n/* THEMING OF BOOTSTRAP COMPONENTS           */\n/* ========================================= */\n/* nav */\n.nav {\n  margin-bottom: 0;\n  padding-left: 0;\n  list-style: none;\n}\n.nav > li > a {\n  padding: 10px 15px;\n}\n.nav > li > a:hover,\n.nav > li > a:focus {\n  background-color: #cdcdcd;\n}\n.nav > li.disabled > a {\n  color: #999999;\n}\n.nav > li.disabled > a:hover,\n.nav > li.disabled > a:focus {\n  color: #999999;\n}\n.nav .open > a,\n.nav .open > a:hover,\n.nav .open > a:focus {\n  background-color: #cdcdcd;\n  border-color: #2b7551;\n}\n.nav-tabs {\n  border-bottom: 1px solid #dddddd;\n}\n.nav-tabs > li > a {\n  line-height: 1.55;\n  border-radius: 2px 2px 0 0;\n}\n.nav-tabs > li > a:hover {\n  border-color: #cdcdcd #cdcdcd #dddddd;\n}\n.nav-tabs > li.active > a,\n.nav-tabs > li.active > a:hover,\n.nav-tabs > li.active > a:focus {\n  color: #555555;\n  background-color: #ffffff;\n  border: 1px solid #dddddd;\n}\n.nav-pills > li > a {\n  border-radius: 0;\n}\n.nav-pills > li.active > a,\n.nav-pills > li.active > a:hover,\n.nav-pills > li.active > a:focus {\n  color: #ffffff;\n  background-color: #2b7551;\n}\n.nav-tabs-justified > li > a {\n  border-radius: 2px;\n}\n.nav-tabs-justified > .active > a,\n.nav-tabs-justified > .active > a:hover,\n.nav-tabs-justified > .active > a:focus {\n  border: 1px solid #dddddd;\n}\n@media (min-width: 768px) {\n  .nav-tabs-justified > li > a {\n    border-bottom: 1px solid #dddddd;\n    border-radius: 2px 2px 0 0;\n  }\n  .nav-tabs-justified > .active > a,\n  .nav-tabs-justified > .active > a:hover,\n  .nav-tabs-justified > .active > a:focus {\n    border-bottom-color: #ffffff;\n  }\n}\n/* navbar */\n.navbar {\n  font-family: \"Open Sans\", Helvetica, Arial, sans-serif;\n  min-height: 80px;\n  margin-bottom: 0;\n  border-top: none;\n  border-bottom: none;\n}\n@media (min-width: 768px) {\n  .navbar {\n    border-radius: 0;\n  }\n}\n.navbar-collapse {\n  max-height: 340px;\n  overflow-x: visible;\n  padding-right: 15px;\n  padding-left: 15px;\n}\n.navbar-collapse.in {\n  overflow-y: auto;\n}\n@media (min-width: 768px) and (max-width: 991px) {\n  .navbar-collapse {\n    font-size: 14px;\n  }\n}\n@media (min-width: 768px) {\n  .navbar-collapse {\n    width: auto;\n    border-top: 0;\n    box-shadow: none;\n  }\n  .navbar-collapse.collapse {\n    display: block !important;\n    height: auto !important;\n    padding-bottom: 0;\n    overflow: visible !important;\n  }\n  .navbar-collapse.in {\n    overflow-y: visible;\n  }\n  .navbar-collapse.right {\n    float: right;\n  }\n  .navbar-fixed-top .navbar-collapse,\n  .navbar-static-top .navbar-collapse,\n  .navbar-fixed-bottom .navbar-collapse {\n    padding-left: 0;\n    padding-right: 0;\n  }\n}\n.container > .navbar-header,\n.container-fluid > .navbar-header,\n.container > .navbar-collapse,\n.container-fluid > .navbar-collapse {\n  margin-right: -15px;\n  margin-left: -15px;\n}\n@media (min-width: 768px) {\n  .container > .navbar-header,\n  .container-fluid > .navbar-header,\n  .container > .navbar-collapse,\n  .container-fluid > .navbar-collapse {\n    margin-right: 0;\n    margin-left: 0;\n  }\n}\n.navbar-brand {\n  float: left;\n  padding: 10px 15px;\n  font-size: 20px;\n  line-height: 24px;\n  height: 80px;\n}\n.navbar-brand:hover,\n.navbar-brand:focus {\n  text-decoration: none;\n}\n@media (min-width: 768px) {\n  .navbar > .container .navbar-brand,\n  .navbar > .container-fluid .navbar-brand {\n    margin-left: -15px;\n  }\n}\n.navbar-toggle {\n  padding: 9px 10px !important;\n  margin-right: 15px;\n  border-radius: 2px;\n}\n.navbar-nav {\n  margin: 14px -15px;\n}\n.navbar-nav > li > a {\n  padding-top: 10px;\n  padding-bottom: 10px;\n  line-height: 24px;\n}\n@media (max-width: 767px) {\n  .navbar-nav .open .dropdown-menu > li > a,\n  .navbar-nav .open .dropdown-menu .dropdown-header {\n    padding: 5px 15px 5px 25px;\n  }\n  .navbar-nav .open .dropdown-menu > li > a {\n    line-height: 24px;\n  }\n  .navbar-nav .open .dropdown-menu > li > a:hover,\n  .navbar-nav .open .dropdown-menu > li > a:focus {\n    background-image: none;\n  }\n}\n@media (min-width: 768px) {\n  .navbar-nav {\n    margin: 0 auto;\n    display: table;\n    table-layout: fixed;\n    float: left;\n  }\n  .navbar-nav > li {\n    float: left;\n  }\n  .navbar-nav > li > a {\n    padding-top: 28px;\n    padding-bottom: 28px;\n  }\n  .navbar-nav.navbar-right:last-child {\n    margin-right: -15px;\n  }\n}\n.navbar-form {\n  margin-left: -15px;\n  margin-right: -15px;\n  padding: 10px 15px;\n  border: none;\n  margin-top: 21px;\n  margin-bottom: 21px;\n}\n@media (max-width: 767px) {\n  .navbar-form .form-group {\n    margin-bottom: 5px;\n  }\n}\n.navbar-btn {\n  margin-top: 21px;\n  margin-bottom: 21px;\n}\n.navbar-btn.btn-sm {\n  margin-top: 23.5px;\n  margin-bottom: 23.5px;\n}\n.navbar-btn.btn-xs {\n  margin-top: 29px;\n  margin-bottom: 29px;\n}\n.navbar-text {\n  margin-top: 28px;\n  margin-bottom: 28px;\n}\n@media (min-width: 768px) {\n  .navbar-text {\n    float: left;\n    margin-left: 15px;\n    margin-right: 15px;\n  }\n  .navbar-text.navbar-right:last-child {\n    margin-right: 0;\n  }\n}\n.navbar-default {\n  background-color: #ffffff;\n  border-bottom-color: transparent;\n}\n.navbar-default .navbar-brand {\n  color: #6e8898;\n}\n.navbar-default .navbar-brand:hover,\n.navbar-default .navbar-brand:focus {\n  color: #586e7b;\n  background-color: transparent;\n}\n.navbar-default .navbar-text {\n  color: #777777;\n}\n.navbar-default .navbar-nav > li > a {\n  color: #6e8898;\n}\n.navbar-default .navbar-nav > li > a:hover,\n.navbar-default .navbar-nav > li > a:focus {\n  color: #555555;\n  background-color: transparent;\n}\n.navbar-default .navbar-nav > .active > a,\n.navbar-default .navbar-nav > .active > a:hover,\n.navbar-default .navbar-nav > .active > a:focus {\n  color: #555555;\n  background-color: transparent;\n}\n.navbar-default .navbar-nav > .disabled > a,\n.navbar-default .navbar-nav > .disabled > a:hover,\n.navbar-default .navbar-nav > .disabled > a:focus {\n  color: #cccccc;\n  background-color: transparent;\n}\n.navbar-default .navbar-toggle {\n  border-color: transparent;\n}\n.navbar-default .navbar-toggle:hover,\n.navbar-default .navbar-toggle:focus {\n  background-color: transparent;\n}\n.navbar-default .navbar-toggle .icon-bar {\n  background-color: #6e8898;\n}\n.navbar-default .navbar-collapse {\n  border-color: transparent;\n}\n.navbar-default .navbar-nav > .open > a,\n.navbar-default .navbar-nav > .open > a:hover,\n.navbar-default .navbar-nav > .open > a:focus {\n  background-color: transparent;\n  color: #555555;\n}\n@media (max-width: 767px) {\n  .navbar-default .navbar-nav .open .dropdown-menu > li > a {\n    color: #6e8898;\n  }\n  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,\n  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {\n    color: #555555;\n    background-color: transparent;\n  }\n  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,\n  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,\n  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {\n    color: #555555;\n    background-color: transparent;\n  }\n  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,\n  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,\n  .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {\n    color: #cccccc;\n    background-color: transparent;\n  }\n}\n.navbar-default .navbar-link {\n  color: #6e8898;\n}\n.navbar-default .navbar-link:hover {\n  color: #555555;\n}\n/* dropdowns */\n.dropdown-menu {\n  z-index: 1000;\n  font-size: 14px;\n  background-color: #ffffff;\n  border: 1px solid #cccccc;\n  border: 1px solid rgba(0, 0, 0, 0.15);\n  border-radius: 2px;\n}\n.dropdown-menu .divider {\n  height: 1px;\n  margin: 11px 0;\n  overflow: hidden;\n  background-color: #e5e5e5;\n}\n.dropdown-menu > li > a {\n  line-height: 1.55;\n  color: #555555;\n}\n.dropdown-menu > li > a:hover,\n.dropdown-menu > li > a:focus {\n  color: #262626;\n  background-color: #f5f5f5;\n}\n.dropdown-menu > .active > a,\n.dropdown-menu > .active > a:hover,\n.dropdown-menu > .active > a:focus {\n  color: #ffffff;\n  background-color: #2b7551;\n}\n/* modal */\n.modal-content {\n  background-color: #ffffff;\n  border: 1px solid #999999;\n  border: 1px solid rgba(0, 0, 0, 0.2);\n  border-radius: 0;\n}\n/* scaffolding */\nbody {\n  font-family: \"Open Sans\", Helvetica, Arial, sans-serif;\n  font-size: 16px;\n  line-height: 1.55;\n  color: #000000;\n  background-color: #ffffff;\n}\na {\n  color: #2b7551;\n  text-decoration: none;\n}\na:hover,\na:focus {\n  color: #163d2a;\n  text-decoration: underline;\n}\na:focus {\n  outline: thin dotted;\n  outline: 5px auto -webkit-focus-ring-color;\n  outline-offset: -2px;\n}\n.img-rounded {\n  border-radius: 0;\n}\nhr {\n  margin-top: 24px;\n  margin-bottom: 24px;\n  border: 0;\n  border-top: 1px solid #cdcdcd;\n}\n.progress {\n  overflow: hidden;\n  height: 24px;\n  margin-bottom: 24px;\n  background-color: #f5f5f5;\n  border-radius: 2px;\n  -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);\n  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);\n}\n.progress-bar {\n  float: left;\n  width: 0%;\n  height: 100%;\n  font-size: 14px;\n  line-height: 24px;\n  text-align: center;\n  -webkit-box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);\n  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);\n  -webkit-transition: width 0.6s ease;\n  transition: width 0.6s ease;\n}\n/* breadcrumbs */\n.breadcrumb {\n  padding: 8px 0;\n  margin-bottom: 24px;\n  background-color: transparent;\n  border-radius: 0;\n  text-align: center;\n}\n.breadcrumb > li + li:before {\n  content: \"/\\A0\";\n  color: #cccccc;\n}\n.breadcrumb > .active {\n  color: #999999;\n}\n.breadcrumb a {\n  color: #2b7551;\n}\n@media (max-width: 991px) {\n  .breadcrumb {\n    padding: 8px 0;\n    text-align: center;\n  }\n}\n/* buttons  */\n.btn {\n  font-weight: 400;\n  font-family: \"Open Sans\", Helvetica, Arial, sans-serif;\n  padding: 6px 12px;\n  font-size: 16px;\n  line-height: 1.55;\n  border-radius: ;\n}\n.btn-primary {\n  color: #ffffff;\n  background-color: #2b7551;\n  border-color: #2b7551;\n}\n.btn-primary:hover,\n.btn-primary:focus,\n.btn-primary:active,\n.btn-primary.active,\n.open .dropdown-toggle.btn-primary {\n  color: #ffffff;\n  background-color: #20573c;\n  border-color: #1b4832;\n}\n.btn-primary:active,\n.btn-primary.active,\n.open .dropdown-toggle.btn-primary {\n  background-image: none;\n}\n.btn-primary.disabled,\n.btn-primary[disabled],\nfieldset[disabled] .btn-primary,\n.btn-primary.disabled:hover,\n.btn-primary[disabled]:hover,\nfieldset[disabled] .btn-primary:hover,\n.btn-primary.disabled:focus,\n.btn-primary[disabled]:focus,\nfieldset[disabled] .btn-primary:focus,\n.btn-primary.disabled:active,\n.btn-primary[disabled]:active,\nfieldset[disabled] .btn-primary:active,\n.btn-primary.disabled.active,\n.btn-primary[disabled].active,\nfieldset[disabled] .btn-primary.active {\n  background-color: #2b7551;\n  border-color: #2b7551;\n}\n.btn-primary .badge {\n  color: #2b7551;\n  background-color: #ffffff;\n}\n.btn-transparent {\n  color: #555555;\n  background-color: transparent;\n  border-color: #555555;\n}\n.btn-transparent:hover,\n.btn-transparent:focus,\n.btn-transparent:active,\n.btn-transparent.active,\n.open .dropdown-toggle.btn-transparent {\n  color: #555555;\n  background-color: rgba(0, 0, 0, 0);\n  border-color: #373737;\n}\n.btn-transparent:active,\n.btn-transparent.active,\n.open .dropdown-toggle.btn-transparent {\n  background-image: none;\n}\n.btn-transparent.disabled,\n.btn-transparent[disabled],\nfieldset[disabled] .btn-transparent,\n.btn-transparent.disabled:hover,\n.btn-transparent[disabled]:hover,\nfieldset[disabled] .btn-transparent:hover,\n.btn-transparent.disabled:focus,\n.btn-transparent[disabled]:focus,\nfieldset[disabled] .btn-transparent:focus,\n.btn-transparent.disabled:active,\n.btn-transparent[disabled]:active,\nfieldset[disabled] .btn-transparent:active,\n.btn-transparent.disabled.active,\n.btn-transparent[disabled].active,\nfieldset[disabled] .btn-transparent.active {\n  background-color: transparent;\n  border-color: #555555;\n}\n.btn-transparent .badge {\n  color: transparent;\n  background-color: #555555;\n}\n.btn-transparent:hover,\n.btn-transparent:focus,\n.btn-transparent:active,\n.btn-transparent.active {\n  background: #ffffff;\n  color: #2b7551;\n}\n.btn-lg {\n  padding: 10px 16px;\n  font-size: 20px;\n  line-height: 1.33;\n  border-radius: 2px;\n}\n.btn-sm {\n  padding: 5px 10px;\n  font-size: 14px;\n  line-height: 1.5;\n  border-radius: ;\n}\n.btn-xs {\n  padding: 1px 5px;\n  font-size: 14px;\n  line-height: 1.5;\n  border-radius: ;\n}\n/* dropdowns */\n.dropdown-menu > li > a {\n  padding: 8px 20px;\n}\n/* labels */\n.label {\n  font-family: \"Open Sans\", Helvetica, Arial, sans-serif;\n  font-weight: normal;\n  text-transform: uppercase;\n}\n/* forms.less */\nlabel {\n  font-weight: normal;\n}\n.form-control {\n  display: block;\n  width: 100%;\n  height: 38px;\n  padding: 6px 12px;\n  font-size: 16px;\n  line-height: 1.55;\n  color: #555555;\n  background-color: #ffffff;\n  background-image: none;\n  border: 1px solid #cccccc;\n  border-radius: 2px;\n  -webkit-box-shadow: none;\n  box-shadow: none;\n}\n.form-control::-moz-placeholder {\n  color: #999999;\n  opacity: 1;\n}\n.form-control:-ms-input-placeholder {\n  color: #999999;\n}\n.form-control::-webkit-input-placeholder {\n  color: #999999;\n}\n.form-control:focus {\n  border-color: #2b7551;\n  outline: 0;\n  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(43, 117, 81, 0.6);\n  box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(43, 117, 81, 0.6);\n}\n.form-group {\n  margin-bottom: 20px;\n}\n/* pager*/\n.pager {\n  margin: 24px 0;\n  border-top: solid 1px #cdcdcd;\n  padding-top: 24px;\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  font-size: 14px;\n  font-family: \"Open Sans\", Helvetica, Arial, sans-serif;\n  font-weight: bold;\n}\n.pager li {\n  display: inline;\n}\n.pager li > a,\n.pager li > span {\n  background-color: #ffffff;\n  border: 1px solid #2b7551;\n  border-radius: 2px;\n}\n.pager li > a:hover,\n.pager li > a:focus {\n  text-decoration: none;\n  color: #fff;\n  background-color: #2b7551;\n}\n.pager .disabled > a,\n.pager .disabled > a:hover,\n.pager .disabled > a:focus,\n.pager .disabled > span {\n  color: #999999;\n  background-color: #ffffff;\n  border-color: #ddd;\n}\n/* pagination */\n.pagination {\n  margin: 24px 0;\n  font-family: \"Open Sans\", Helvetica, Arial, sans-serif;\n  border-radius: 0;\n}\n.pagination > li > a,\n.pagination > li > span {\n  padding: 6px 12px;\n  line-height: 1.55;\n  text-decoration: none;\n  color: #2b7551;\n  background-color: #ffffff;\n  border: 1px solid #dddddd;\n}\n.pagination > li:first-child > a,\n.pagination > li:first-child > span {\n  margin-left: 0;\n  border-bottom-left-radius: 2px;\n  border-top-left-radius: 2px;\n}\n.pagination > li:last-child > a,\n.pagination > li:last-child > span {\n  border-bottom-right-radius: 2px;\n  border-top-right-radius: 2px;\n}\n.pagination > li > a:hover,\n.pagination > li > span:hover,\n.pagination > li > a:focus,\n.pagination > li > span:focus {\n  color: #2b7551;\n  background-color: #6fca9e;\n  border-color: #dddddd;\n}\n.pagination > .active > a,\n.pagination > .active > span,\n.pagination > .active > a:hover,\n.pagination > .active > span:hover,\n.pagination > .active > a:focus,\n.pagination > .active > span:focus {\n  z-index: 2;\n  color: #ffffff;\n  background-color: #2b7551;\n  border-color: #2b7551;\n}\n.pagination > .disabled > span,\n.pagination > .disabled > span:hover,\n.pagination > .disabled > span:focus,\n.pagination > .disabled > a,\n.pagination > .disabled > a:hover,\n.pagination > .disabled > a:focus {\n  color: #999999;\n  background-color: #ffffff;\n  border-color: #dddddd;\n}\n/* responsive utilities */\n@media (max-width: 767px) {\n  .text-center-xs {\n    text-align: center !important;\n  }\n  .text-center-xs img {\n    display: block;\n    margin-left: auto;\n    margin-right: auto;\n  }\n}\n@media (min-width: 768px) and (max-width: 991px) {\n  .text-center-sm {\n    text-align: center !important;\n  }\n  .text-center-sm img {\n    display: block;\n    margin-left: auto;\n    margin-right: auto;\n  }\n}\n/* type */\nh1,\nh2,\nh3,\nh4,\nh5,\nh6,\n.h1,\n.h2,\n.h3,\n.h4,\n.h5,\n.h6 {\n  font-family: \"Open Sans\", Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  line-height: 1.2;\n  color: #555555;\n}\nh1,\n.h1 {\n  font-size: 48px;\n}\nh2,\n.h2 {\n  font-size: 38px;\n}\nh3,\n.h3 {\n  font-size: 32px;\n  font-weight: 700;\n}\nh4,\n.h4 {\n  font-size: 24px;\n  font-weight: 700;\n}\nh5,\n.h5 {\n  font-size: 16px;\n  font-weight: 700;\n}\nh6,\n.h6 {\n  font-size: 14px;\n  font-weight: 700;\n}\nh1,\n.h1,\nh2,\n.h2,\nh3,\n.h3 {\n  margin-top: 0;\n  margin-bottom: 24px;\n}\np {\n  margin: 0 0 24px;\n}\n.lead {\n  margin-bottom: 24px;\n  font-size: 18px;\n}\n@media (min-width: 768px) {\n  .lead {\n    font-size: 24px;\n  }\n}\n.text-small {\n  font-size: 14px;\n}\n.text-large {\n  font-size: 20px;\n}\n.text-italic {\n  font-style: italic;\n}\n.text-primary {\n  color: #2b7551;\n}\na.text-primary:hover {\n  color: #1d5037;\n}\n.bg-primary {\n  color: #fff;\n  background-color: #2b7551;\n}\na.bg-primary:hover {\n  background-color: #1d5037;\n}\nabbr[title],\nabbr[data-original-title] {\n  border-bottom: 1px dotted #999999;\n}\nblockquote {\n  padding: 12px 24px;\n  margin: 0 0 24px;\n  font-size: 16px;\n  border-left: 5px solid #2b7551;\n}\nblockquote footer,\nblockquote small,\nblockquote .small {\n  display: block;\n  font-size: 80%;\n  line-height: 1.55;\n  color: #999999;\n}\nblockquote footer:before,\nblockquote small:before,\nblockquote .small:before {\n  content: '\\2014   \\A0';\n}\n.blockquote-reverse,\nblockquote.pull-right {\n  border-right: 5px solid #2b7551;\n}\naddress {\n  margin-bottom: 24px;\n  line-height: 1.55;\n}\n\n.panel-default {\n  border-color: #666666;\n}\n.panel-default > .panel-heading {\n  color: #333333;\n  background-color: #ffffff;\n  border-color: #666666;\n}\n.panel-default > .panel-heading + .panel-collapse .panel-body {\n  border-top-color: #666666;\n}\n.panel-default > .panel-footer + .panel-collapse .panel-body {\n  border-bottom-color: #666666;\n}\n.panel-primary {\n  border-color: #2b7551;\n}\n.panel-primary > .panel-heading {\n  color: #ffffff;\n  background-color: #2b7551;\n  border-color: #2b7551;\n}\n.panel-primary > .panel-heading + .panel-collapse .panel-body {\n  border-top-color: #2b7551;\n}\n.panel-primary > .panel-footer + .panel-collapse .panel-body {\n  border-bottom-color: #2b7551;\n}\n.panel-primary .panel-title {\n  font-weight: 300;\n}\n.panel-primary .panel-title a:hover {\n  color: #fff;\n  text-decoration: none;\n}\na.badge:hover,\na.badge:focus {\n  color: #ffffff;\n  text-decoration: none;\n  cursor: pointer;\n}\na.list-group-item.active > .badge,\n.nav-pills > .active > a > .badge {\n  color: #2b7551;\n  background-color: #ffffff;\n}\n.nav-pills > li > a > .badge {\n  margin-left: 3px;\n}\n/*\n\n=====================\nSOCIAL LINKS\n=====================\n\n*/\n.contact-form {\n  margin-bottom: 20px;\n}\np.social {\n  text-align: center;\n  margin-top: 20px;\n}\np.social a {\n  margin: 0 10px 0 0;\n  color: #fff;\n  display: inline-block;\n  width: 40px;\n  height: 40px;\n  border-radius: 20px;\n  line-height: 40px;\n  font-size: 15px;\n  text-align: center;\n  -webkit-transition: all 0.2s ease-out;\n  -moz-transition: all 0.2s ease-out;\n  transition: all 0.2s ease-out;\n  vertical-align: bottom;\n  border: solid 1px #ccc;\n}\np.social a i {\n  vertical-align: bottom;\n  line-height: 40px;\n}\np.social a.facebook {\n  background-color: #4460ae;\n  border-color: #4460ae;\n}\np.social a.gplus {\n  background-color: #c21f25;\n  border-color: #c21f25;\n}\np.social a.twitter {\n  background-color: #3cf;\n  border-color: #3cf;\n}\np.social a.instagram {\n  background-color: #cd4378;\n  border-color: #cd4378;\n}\np.social a.email {\n  background-color: #4a7f45;\n  border-color: #4a7f45;\n}\np.social a.link {\n  background-color: #871AFF;\n  border-color: #871AFF;\n}\np.social.social--outline a {\n  background: transparent;\n}\np.social.social--outline a.facebook {\n  color: #4460ae;\n  border-color: #4460ae;\n}\np.social.social--outline a.gplus {\n  color: #c21f25;\n  border-color: #c21f25;\n}\np.social.social--outline a.twitter {\n  color: #3cf;\n  border-color: #3cf;\n}\np.social.social--outline a.instagram {\n  color: #cd4378;\n  border-color: #cd4378;\n}\np.social.social--outline a.email {\n  color: #4a7f45;\n  border-color: #4a7f45;\n}\np.social.social--outline a.link {\n  color: #871AFF;\n  border-color: #871AFF;\n}\n"
 
 /***/ },
 
-/***/ 724:
+/***/ 725:
 /***/ function(module, exports) {
 
 	module.exports = "<span defaultOverlayTarget></span>\n<header class=\"header\">\n    <div role=\"navigation\" class=\"navbar navbar-default navbar-fixed-top\">\n        <div class=\"container\">\n            <div class=\"navbar-header\">\n\n            </div>\n            <div id=\"navigation\" class=\"navbar-right\">\n                <ul class=\"nav navbar-nav\">\n                    <li><a [routerLink]=\"['/home']\" class=\"scroll-to\">Home</a></li>\n                    <li><a [routerLink]=\"['/bootstrap-demo']\" class=\"scroll-to\">Bootstrap Plugin</a></li>\n                    <li><a [routerLink]=\"['/vex-demo']\" class=\"scroll-to\">VEX Plugin</a></li>\n                    <li><a [routerLink]=\"['/js-native-demo']\" class=\"scroll-to\">JS Native Plugin</a></li>\n                </ul>\n                <a class=\"btn navbar-btn btn-ghost\" href=\"https://github.com/shlomiassaf/angular2-modal\" target=\"_blank\">Fork on GitHub</a>\n            </div>\n        </div>\n    </div>\n</header>\n<main>\n    <router-outlet></router-outlet>\n</main>\n\n"
@@ -3641,11 +3641,11 @@ webpackJsonp([2],{
 	var core_1 = __webpack_require__(1);
 	var common_1 = __webpack_require__(22);
 	var platform_browser_1 = __webpack_require__(98);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var shared_module_1 = __webpack_require__(170);
 	var bootstrap_demo_module_1 = __webpack_require__(713);
-	var vex_demo_module_1 = __webpack_require__(721);
-	var js_native_demo_module_1 = __webpack_require__(717);
+	var vex_demo_module_1 = __webpack_require__(722);
+	var js_native_demo_module_1 = __webpack_require__(718);
 	var app_1 = __webpack_require__(712);
 	var home_1 = __webpack_require__(419);
 	var app_routes_1 = __webpack_require__(711);
@@ -3721,9 +3721,9 @@ webpackJsonp([2],{
 	            selector: 'app',
 	            encapsulation: core_1.ViewEncapsulation.None,
 	            styles: [
-	                __webpack_require__(803)
+	                __webpack_require__(805)
 	            ],
-	            template: __webpack_require__(724)
+	            template: __webpack_require__(725)
 	        }), 
 	        __metadata('design:paramtypes', [])
 	    ], App);
@@ -3734,14 +3734,14 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 804:
+/***/ 806:
 /***/ function(module, exports) {
 
 	module.exports = ".simple-element {\n    position: relative;\n    display:block;\n    background-color: #219161\n}"
 
 /***/ },
 
-/***/ 725:
+/***/ 726:
 /***/ function(module, exports) {
 
 	module.exports = "<demo-head title=\"Bootstrap Modal plugin\"\n           description=\"An implementation of <a href='http://getbootstrap.com/javascript/#modals' target='_blank'>Bootstrap</a>\"\n           [modalCommands]=\"modalCommands\">\n    <br>\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-xs-12\">\n                <a class=\"lead\" [routerLink]=\"['customizeModals']\">Or use the modal code Generator!</a>\n            </div>\n        </div>\n    </div>\n</demo-head>\n<template #templateRef let-dialogRef=\"dialogRef\" let-ctx=\"dialogRef.context\">\n    <div style=\"padding: 10px\">\n        <div class=\"page-header\">\n            <h1>TemplateRef Example</h1>\n        </div>\n        <div class=\"jumbotron\">\n            <h1>Hello, modal!</h1>\n            <p>I'm a declarative TemplateRef!</p>\n            <p>TemplateRef can also access the DialogRef for context and modal control:</p>\n            <pre>{{ ctx | json }}</pre>\n            <button class=\"btn btn-primary\" (click)=\"dialogRef.close(true)\">Close Me</button>\n        </div>\n    </div>\n</template>"
@@ -3762,10 +3762,10 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var bootstrap_1 = __webpack_require__(168);
 	var custom_modal_sample_1 = __webpack_require__(416);
-	var presets = __webpack_require__(715);
+	var presets = __webpack_require__(716);
 	var BootstrapDemoPage = (function () {
 	    function BootstrapDemoPage(modal) {
 	        var _this = this;
@@ -3817,8 +3817,8 @@ webpackJsonp([2],{
 	    BootstrapDemoPage = __decorate([
 	        core_1.Component({
 	            selector: 'bootstrap-demo-page',
-	            styles: [__webpack_require__(804)],
-	            template: __webpack_require__(725)
+	            styles: [__webpack_require__(806)],
+	            template: __webpack_require__(726)
 	        }), 
 	        __metadata('design:paramtypes', [(typeof (_b = typeof bootstrap_1.Modal !== 'undefined' && bootstrap_1.Modal) === 'function' && _b) || Object])
 	    ], BootstrapDemoPage);
@@ -3849,7 +3849,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var index_1 = __webpack_require__(168);
 	var CustomModalContext = (function (_super) {
 	    __extends(CustomModalContext, _super);
@@ -3912,6 +3912,7 @@ webpackJsonp([2],{
 	};
 	var core_1 = __webpack_require__(1);
 	var common_1 = __webpack_require__(22);
+	var forms_1 = __webpack_require__(230);
 	var bootstrap_1 = __webpack_require__(168);
 	var shared_module_1 = __webpack_require__(170);
 	var bootstrap_demo_routes_1 = __webpack_require__(714);
@@ -3923,7 +3924,7 @@ webpackJsonp([2],{
 	    }
 	    BootstrapDemoModule = __decorate([
 	        core_1.NgModule({
-	            imports: [common_1.CommonModule, bootstrap_1.BootstrapModalModule, bootstrap_demo_routes_1.routing, shared_module_1.SharedModule],
+	            imports: [forms_1.FormsModule, common_1.CommonModule, bootstrap_1.BootstrapModalModule, bootstrap_demo_routes_1.routing, shared_module_1.SharedModule],
 	            declarations: [
 	                bootstrap_demo_1.BootstrapDemo,
 	                bootstrap_demo_page_1.BootstrapDemoPage,
@@ -3947,9 +3948,11 @@ webpackJsonp([2],{
 	var router_1 = __webpack_require__(118);
 	var bootstrap_demo_1 = __webpack_require__(417);
 	var bootstrap_demo_page_1 = __webpack_require__(415);
+	var modal_customisation_wizard_1 = __webpack_require__(715);
 	exports.routing = router_1.RouterModule.forChild([
 	    { path: 'bootstrap-demo', component: bootstrap_demo_1.BootstrapDemo, children: [
 	            { path: '', component: bootstrap_demo_page_1.BootstrapDemoPage, terminal: true },
+	            { path: 'customizeModals', component: modal_customisation_wizard_1.ModalCustomisationWizard }
 	        ]
 	    }
 	]);
@@ -3994,7 +3997,90 @@ webpackJsonp([2],{
 
 /***/ },
 
+/***/ 727:
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"container-fluid\">\n    <h1>Customize A modal window</h1>\n    <p class=\"lead\">Configure a modal, see the code and view the output!</p>\n    <hr>\n    <div class=\"col-md-6\">\n        <div class=\"col-xs-6\">\n            <h3>Configuration:</h3>\n        </div>\n        <div class=\"col-xs-6 col-md-4\">\n            <button class=\"btn btn-success pull-right\" (click)=\"createModal()\">Open Modal</button>\n        </div>\n        <div class=\"col-xs-12\">\n            <form class=\"form-horizontal\" #form=\"ngForm\" (ngSubmit)=\"logForm(form.value)\">\n                <fieldset>\n\n                    <!-- Select Basic -->\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"modalType\">Type</label>\n                        <div class=\"col-md-6\">\n                            <select id=\"modalType\" name=\"modalType\" class=\"form-control\"\n                                    [(ngModel)]=\"type\">\n                                <option value=\"alert\">Alert</option>\n                                <option value=\"prompt\">Prompt</option>\n                                <option value=\"confirm\">Confirm</option>\n                            </select>\n                        </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"modalSize\">Modal Size</label>\n                        <div class=\"col-md-6\">\n                            <select id=\"modalSize\" name=\"modalSize\" class=\"form-control\"\n                                    [(ngModel)]=\"preset.size\">\n                                <option value=\"sm\">Small</option>\n                                <option value=\"lg\">Large</option>\n                            </select>\n                        </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"checkbox\">Blocking?</label>\n                        <div class=\"col-md-6\">\n                            <input type=\"checkbox\" name=\"checkbox\" id=\"checkbox\"\n                                   [(ngModel)]=\"preset.isBlocking\">\n                        </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"showClose\">Show Close Button?</label>\n                        <div class=\"col-md-6\">\n                            <input type=\"checkbox\" name=\"checkbox\" id=\"showClose\"\n                                   [(ngModel)]=\"preset.showClose\">\n                        </div>\n                    </div>\n\n                    <!-- Text input-->\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"closeKeys\">Close Key</label>\n                        <div class=\"col-md-6\">\n                            <input id=\"closeKeys\" name=\"closeKeys\" type=\"number\" placeholder=\"27\"\n                                   class=\"form-control input-md\" [(ngModel)]=\"preset.keyboard\">\n                            <span class=\"help-block\">Key code for closing the window (e.g: 27 for ESC)</span>\n                        </div>\n                    </div>\n\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"dialogClass\">Dialog Class</label>\n                        <div class=\"col-md-6\">\n                            <input id=\"dialogClass\" name=\"dialogClass\" type=\"text\"\n                                   placeholder=\"modal-dialog\"  class=\"form-control input-md\"\n                                   [(ngModel)]=\"preset.dialogClass\">\n                            <span class=\"help-block\">A Class for the dialog container.  Default: modal-dialog</span>\n                        </div>\n                    </div>\n\n                    <!-- Text input-->\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"headerClass\">Header Class</label>\n                        <div class=\"col-md-6\">\n                            <input id=\"headerClass\" name=\"headerClass\" type=\"text\"\n                                   placeholder=\"modal-header\" class=\"form-control input-md\"\n                                   [(ngModel)]=\"preset.headerClass\">\n                            <span class=\"help-block\"> A Class for the header (title) container.  Default: modal-header</span>\n                        </div>\n                    </div>\n\n                    <!-- Text input-->\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"title\">Title</label>\n                        <div class=\"col-md-6\">\n                            <input id=\"title\" name=\"title\" type=\"text\" placeholder=\"This is a title\"\n                                   class=\"form-control input-md\" [(ngModel)]=\"preset.title\">\n                            <span class=\"help-block\">Caption for the title, enclosed in a H3 container.</span>\n                        </div>\n                    </div>\n\n                    <!-- Textarea -->\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"titleHtml\">Title (HTML)</label>\n                        <div class=\"col-md-6\">\n                        <textarea class=\"form-control\" id=\"titleHtml\" name=\"titleHtml\"\n                                  [(ngModel)]=\"preset.titleHtml\"></textarea>\n                        </div>\n                        <p class=\"help-block\">An HTML (not compiled) body, if set Title is ignored.</p>\n                    </div>\n\n                    <!-- Textarea -->\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"body\">Body</label>\n                        <div class=\"col-md-4\">\n                        <textarea class=\"form-control\" id=\"body\" name=\"body\"\n                                  [(ngModel)]=\"preset.body\"></textarea>\n                        </div>\n                    </div>\n\n                    <!-- Text input-->\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"bodyClass\">Body Class</label>\n                        <div class=\"col-md-6\">\n                            <input id=\"bodyClass\" name=\"bodyClass\" type=\"text\" placeholder=\"modal-body\"\n                                   class=\"form-control input-md\" [(ngModel)]=\"preset.bodyClass\">\n                            <span class=\"help-block\">A Class for the body container. Default: modal-body</span>\n                        </div>\n                    </div>\n\n                    <!-- Text input-->\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"footerClass\">Footer Class</label>\n                        <div class=\"col-md-6\">\n                            <input id=\"footerClass\" name=\"footerClass\" type=\"text\"\n                                   placeholder=\"modal-footer\" class=\"form-control input-md\"\n                                   [(ngModel)]=\"preset.footerClass\">\n                            <span class=\"help-block\">A Class for the footer container. Default: modal-footer</span>\n                        </div>\n                    </div>\n\n                    <!-- Text input-->\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"okBtn\">OK Button Text</label>\n                        <div class=\"col-md-6\">\n                            <input id=\"okBtn\" name=\"okBtn\" type=\"text\" placeholder=\"OK\"\n                                   class=\"form-control input-md\"\n                                   [(ngModel)]=\"preset.okBtn\">\n                            <span class=\"help-block\">Caption for the OK button. Default: OK</span>\n                        </div>\n                    </div>\n\n                    <!-- Text input-->\n                    <div class=\"form-group\">\n                        <label class=\"col-md-4 control-label\" for=\"okBtnClass\">OK Button Class</label>\n                        <div class=\"col-md-6\">\n                            <input id=\"okBtnClass\" name=\"okBtnClass\" type=\"text\"\n                                   placeholder=\"btn btn-primary\" class=\"form-control input-md\"\n                                   [(ngModel)]=\"preset.okBtnClass\">\n                            <span class=\"help-block\">A Class for the OK button. Default: btn btn-primary</span>\n                        </div>\n                    </div>\n\n                    <!-- Text input-->\n                    <div class=\"form-group\" *ngIf=\"type === 'confirm'\">\n                        <label class=\"col-md-4 control-label\" for=\"cancelBtn\">Cancel Button Text</label>\n                        <div class=\"col-md-6\">\n                            <input id=\"cancelBtn\" name=\"cancelBtn\" type=\"text\" placeholder=\"Cancel\"\n                                   class=\"form-control input-md\" [(ngModel)]=\"preset.cancelBtn\">\n                            <span class=\"help-block\">Caption for the Cancel button. Default: Cancel</span>\n                        </div>\n                    </div>\n\n                    <!-- Text input-->\n                    <div class=\"form-group\" *ngIf=\"type === 'confirm'\">\n                        <label class=\"col-md-4 control-label\" for=\"cancelBtnClass\">Cancel Button Class</label>\n                        <div class=\"col-md-6\">\n                            <input id=\"cancelBtnClass\" name=\"cancelBtnClass\" type=\"text\"\n                                   placeholder=\"btn btn-default\" class=\"form-control input-md\"\n                                   [(ngModel)]=\"preset.cancelBtnClass\">\n                            <span class=\"help-block\">A Class for the Cancel button. Default: btn btn-default</span>\n                        </div>\n                    </div>\n\n                </fieldset>\n            </form>\n        </div>\n    </div>\n    <div class=\"col-md-6\">\n        <h3>Code:</h3>\n        <pre>{{code}}</pre>\n    </div>\n</div>"
+
+/***/ },
+
 /***/ 715:
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+	    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+	    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+	    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+	    return c > 3 && r && Object.defineProperty(target, key, r), r;
+	};
+	var __metadata = (this && this.__metadata) || function (k, v) {
+	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+	};
+	var core_1 = __webpack_require__(1);
+	var angular2_modal_1 = __webpack_require__(7);
+	var ModalCustomisationWizard = (function () {
+	    function ModalCustomisationWizard(modal) {
+	        this.modal = modal;
+	        this.type = 'alert';
+	        this.preset = {
+	            size: 'lg',
+	            isBlocking: true,
+	            showClose: true,
+	            keyboard: 27,
+	            dialogClass: '',
+	            headerClass: '',
+	            title: 'Hello World',
+	            titleHtml: '',
+	            body: 'A Customized Modal',
+	            bodyClass: '',
+	            footerClass: '',
+	            okBtn: '',
+	            okBtnClass: '',
+	        };
+	    }
+	    ModalCustomisationWizard.prototype.createModal = function () {
+	        var p = this.preset;
+	        var fluent = this.modal[this.type]();
+	        for (var key in p) {
+	            var value = p[key];
+	            if (value === null || value === '')
+	                continue;
+	            fluent[key](value);
+	        }
+	        fluent.open();
+	    };
+	    Object.defineProperty(ModalCustomisationWizard.prototype, "code", {
+	        get: function () {
+	            var p = this.preset, code = "modal." + this.type + "()\n";
+	            for (var key in p) {
+	                var value = p[key];
+	                if (value === null || value === '')
+	                    continue;
+	                code += "    ." + key + "(" + (typeof value === 'string' ? "'" + value + "'" : value) + ")\n";
+	            }
+	            code += '    .open();';
+	            return code;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    ModalCustomisationWizard = __decorate([
+	        core_1.Component({
+	            selector: 'customize-wizard',
+	            template: __webpack_require__(727)
+	        }), 
+	        __metadata('design:paramtypes', [(typeof (_a = typeof angular2_modal_1.Modal !== 'undefined' && angular2_modal_1.Modal) === 'function' && _a) || Object])
+	    ], ModalCustomisationWizard);
+	    return ModalCustomisationWizard;
+	    var _a;
+	}());
+	exports.ModalCustomisationWizard = ModalCustomisationWizard;
+
+
+/***/ },
+
+/***/ 716:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -4051,7 +4137,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 716:
+/***/ 717:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4106,7 +4192,7 @@ webpackJsonp([2],{
 	            styles: [
 	                "\n      .btn-dropin {\n          text-transform: uppercase;\n          margin: 15px;\n          background-color: #219161;\n          border: none;\n          box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);\n          border-radius: 0;\n      }\n      "
 	            ],
-	            template: __webpack_require__(726),
+	            template: __webpack_require__(728),
 	            encapsulation: core_1.ViewEncapsulation.Emulated
 	        }), 
 	        __metadata('design:paramtypes', [])
@@ -4119,7 +4205,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 726:
+/***/ 728:
 /***/ function(module, exports) {
 
 	module.exports = "<section class=\"section  padding--small\">\n    <div class=\"container\">\n        <h2>{{title}}</h2>\n        <p class=\"lead\" [innerHtml]=\"description\"></p>\n        <br>\n        <ng-content select=\"[extra-desc-content]\"></ng-content>\n    </div>\n    <section overlayTarget=\"demo-head\" class=\"section background-gray-lighter padding--small\" style=\"text-align: center\">\n        <button class=\"btn btn-white btn-dropin\" *ngFor=\"let btn of modalCommands\" (click)=\"onClick($event, btn)\">{{btn.text}}</button>\n        <h5>Last modal result: {{result}}</h5>\n    </section>\n\n\n    <ng-content></ng-content>\n</section>\n"
@@ -4133,12 +4219,12 @@ webpackJsonp([2],{
 	function __export(m) {
 	    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 	}
-	__export(__webpack_require__(716));
+	__export(__webpack_require__(717));
 
 
 /***/ },
 
-/***/ 727:
+/***/ 729:
 /***/ function(module, exports) {
 
 	module.exports = "<section id=\"intro\" class=\"text-intro\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-md-12\"  overlayTarget=\"home-overlay-container\">\n            </div>\n        </div>\n    </div>\n</section>\n\n<template #myTemplate>\n    <span>UI agnostic, Plugin oriented, easy to use.</span>\n    <div style=\"padding: 15px 20%;\"><pre class=\"text-left\"><p>modal.alert()<br>  .message('Angular 2 Modal')<br>  .open();</p></pre>\n    </div>\n    <div class=\"text-gray\">\n        <sub>* This window ia a ad-hoc plugin built within the demo application.</sub>\n        <br>\n        <sub>It is a simple OSX style modal plugin that display's a title and a <b>TemplateRef</b> provided to it.</sub>\n        <br>\n        <sub>Check it out in the demo application. (home component)</sub>\n    </div>\n</template>\n\n<section class=\"section no-padding-bottom\">\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-md-offset-2 col-md-8\">\n                A generic, customizable and fluent modal/dialog window implementation for Angular 2.\n                UI platform/framework agnostic, plugins are used to describe a UI implementation (e.g: Bootstrap)\n                This means virtually any modal implementation out there can be ported into the library.\n                Comes with some built in UI platforms, external UI platform can be added in the future or externally used using NPM modules.\n            </div>\n        </div>\n    </div>\n</section>\n"
@@ -4187,7 +4273,7 @@ webpackJsonp([2],{
 	        core_1.Component({
 	            selector: 'home',
 	            providers: index_1.InAppModalModule.getProviders(),
-	            template: __webpack_require__(727),
+	            template: __webpack_require__(729),
 	            encapsulation: core_1.ViewEncapsulation.None
 	        }), 
 	        __metadata('design:paramtypes', [(typeof (_b = typeof index_1.Modal !== 'undefined' && index_1.Modal) === 'function' && _b) || Object])
@@ -4215,7 +4301,7 @@ webpackJsonp([2],{
 	};
 	var core_1 = __webpack_require__(1);
 	var common_1 = __webpack_require__(22);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var modal_1 = __webpack_require__(423);
 	var modal_backdrop_1 = __webpack_require__(421);
 	var modal_2 = __webpack_require__(423);
@@ -4269,7 +4355,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var InAppModalBackdrop = (function () {
 	    function InAppModalBackdrop(dialog) {
 	        this.dialog = dialog;
@@ -4312,7 +4398,7 @@ webpackJsonp([2],{
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var InAppModalContext = (function (_super) {
 	    __extends(InAppModalContext, _super);
 	    function InAppModalContext() {
@@ -4356,7 +4442,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var modal_backdrop_1 = __webpack_require__(421);
 	var modal_context_1 = __webpack_require__(422);
 	var Modal = (function (_super) {
@@ -4391,7 +4477,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 717:
+/***/ 718:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4407,8 +4493,8 @@ webpackJsonp([2],{
 	var core_1 = __webpack_require__(1);
 	var common_1 = __webpack_require__(22);
 	var shared_module_1 = __webpack_require__(170);
-	var js_native_1 = __webpack_require__(253);
-	var js_native_demo_routes_1 = __webpack_require__(718);
+	var js_native_1 = __webpack_require__(254);
+	var js_native_demo_routes_1 = __webpack_require__(719);
 	var js_native_demo_1 = __webpack_require__(424);
 	var JSNativeDemoModule = (function () {
 	    function JSNativeDemoModule() {
@@ -4427,7 +4513,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 718:
+/***/ 719:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4440,7 +4526,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 728:
+/***/ 730:
 /***/ function(module, exports) {
 
 	module.exports = "<demo-head title=\"JS Native Dialog\"\n           description=\"A (useless?) proof of concept how to apply a different renderer, ain't angular 2 great?\"\n           [modalCommands]=\"modalCommands\">\n</demo-head>\n"
@@ -4461,8 +4547,8 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var js_native_1 = __webpack_require__(253);
-	var presets = __webpack_require__(719);
+	var js_native_1 = __webpack_require__(254);
+	var presets = __webpack_require__(720);
 	var JSNativeDemo = (function () {
 	    function JSNativeDemo(modal) {
 	        var _this = this;
@@ -4477,7 +4563,7 @@ webpackJsonp([2],{
 	    JSNativeDemo = __decorate([
 	        core_1.Component({
 	            selector: 'js-native-demo',
-	            template: __webpack_require__(728),
+	            template: __webpack_require__(730),
 	            // We override providers set by the Module since this app is using multiple module plugins
 	            // (js-native, vex, bootstrap) which messes up the provider tree (last plugin wins)
 	            // usually an app will use one plugin and this line is not needed.
@@ -4494,11 +4580,11 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 719:
+/***/ 720:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-	var js_native_1 = __webpack_require__(253);
+	var js_native_1 = __webpack_require__(254);
 	exports.JSNativePresetBuilder = js_native_1.JSNativePresetBuilder;
 	function alert(modal) {
 	    return modal.alert().message('This is a native alert!');
@@ -4533,7 +4619,7 @@ webpackJsonp([2],{
 	};
 	var core_1 = __webpack_require__(1);
 	var common_1 = __webpack_require__(22);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var index_1 = __webpack_require__(418);
 	var SharedModule = (function () {
 	    function SharedModule() {
@@ -4559,56 +4645,56 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 805:
+/***/ 807:
 /***/ function(module, exports) {
 
 	module.exports = "@keyframes vex-slideup {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 0; }\n  1% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px);\n    opacity: 0; }\n  2% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px);\n    opacity: 1; }\n  100% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 1; } }\n\n@-webkit-keyframes vex-slideup {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 0; }\n  1% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px);\n    opacity: 0; }\n  2% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px);\n    opacity: 1; }\n  100% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 1; } }\n\n@-moz-keyframes vex-slideup {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 0; }\n  1% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px);\n    opacity: 0; }\n  2% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px);\n    opacity: 1; }\n  100% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 1; } }\n\n@-ms-keyframes vex-slideup {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 0; }\n  1% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px);\n    opacity: 0; }\n  2% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px);\n    opacity: 1; }\n  100% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 1; } }\n\n@-o-keyframes vex-slideup {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 0; }\n  1% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px);\n    opacity: 0; }\n  2% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px);\n    opacity: 1; }\n  100% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 1; } }\n\n@keyframes vex-slidedown {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px); } }\n\n@-webkit-keyframes vex-slidedown {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px); } }\n\n@-moz-keyframes vex-slidedown {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px); } }\n\n@-ms-keyframes vex-slidedown {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px); } }\n\n@-o-keyframes vex-slidedown {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    transform: translateY(800px);\n    -webkit-transform: translateY(800px);\n    -moz-transform: translateY(800px);\n    -ms-transform: translateY(800px);\n    -o-transform: translateY(800px); } }\n\n@keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-webkit-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-moz-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-ms-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-o-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n.vex.vex-theme-bottom-right-corner {\n  top: auto;\n  bottom: 0;\n  right: 0;\n  overflow: visible; }\n  .vex.vex-theme-bottom-right-corner .vex-overlay {\n    display: none; }\n  .vex.vex-theme-bottom-right-corner.vex-closing .vex-content {\n    animation: vex-slidedown 0.5s;\n    -webkit-animation: vex-slidedown 0.5s;\n    -moz-animation: vex-slidedown 0.5s;\n    -ms-animation: vex-slidedown 0.5s;\n    -o-animation: vex-slidedown 0.5s;\n    -webkit-backface-visibility: hidden; }\n  .vex.vex-theme-bottom-right-corner .vex-content {\n    animation: vex-slideup 0.5s;\n    -webkit-animation: vex-slideup 0.5s;\n    -moz-animation: vex-slideup 0.5s;\n    -ms-animation: vex-slideup 0.5s;\n    -o-animation: vex-slideup 0.5s;\n    -webkit-backface-visibility: hidden; }\n  .vex.vex-theme-bottom-right-corner .vex-content {\n    -moz-border-radius: 5px 0 0 0;\n    -webkit-border-radius: 5px 0 0 0;\n    border-radius: 5px 0 0 0;\n    font-family: \"Helvetica Neue\", sans-serif;\n    background: #f0f0f0;\n    color: #444;\n    padding: 1em;\n    max-width: 100%;\n    width: 450px;\n    font-size: 1.1em;\n    line-height: 1.5em;\n    position: fixed;\n    bottom: 0;\n    right: 0;\n    left: auto; }\n    .vex.vex-theme-bottom-right-corner .vex-content h1, .vex.vex-theme-bottom-right-corner .vex-content h2, .vex.vex-theme-bottom-right-corner .vex-content h3, .vex.vex-theme-bottom-right-corner .vex-content h4, .vex.vex-theme-bottom-right-corner .vex-content h5, .vex.vex-theme-bottom-right-corner .vex-content h6, .vex.vex-theme-bottom-right-corner .vex-content p, .vex.vex-theme-bottom-right-corner .vex-content ul, .vex.vex-theme-bottom-right-corner .vex-content li {\n      color: inherit; }\n  .vex.vex-theme-bottom-right-corner .vex-close {\n    -moz-border-radius: 5px;\n    -webkit-border-radius: 5px;\n    border-radius: 5px;\n    position: absolute;\n    top: 0;\n    right: 0;\n    cursor: pointer; }\n    .vex.vex-theme-bottom-right-corner .vex-close:before {\n      -moz-border-radius: 3px;\n      -webkit-border-radius: 3px;\n      border-radius: 3px;\n      position: absolute;\n      content: \"\\D7\";\n      font-size: 26px;\n      font-weight: normal;\n      line-height: 31px;\n      height: 30px;\n      width: 30px;\n      text-align: center;\n      top: 3px;\n      right: 3px;\n      color: #bbb;\n      background: transparent; }\n    .vex.vex-theme-bottom-right-corner .vex-close:hover:before, .vex.vex-theme-bottom-right-corner .vex-close:active:before {\n      color: #777;\n      background: #e0e0e0; }\n  .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-message {\n    margin-bottom: .5em; }\n  .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input {\n    margin-bottom: 1em; }\n    .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input textarea, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"date\"], .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"datetime\"], .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"], .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"email\"], .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"month\"], .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"number\"], .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"password\"], .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"search\"], .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"tel\"], .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"text\"], .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"time\"], .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"url\"], .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"week\"] {\n      -moz-border-radius: 3px;\n      -webkit-border-radius: 3px;\n      border-radius: 3px;\n      background: #fff;\n      width: 100%;\n      padding: .25em .67em;\n      border: 0;\n      font-family: inherit;\n      font-weight: inherit;\n      font-size: inherit;\n      min-height: 2.5em;\n      margin: 0 0 .25em; }\n      .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input textarea:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"date\"]:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"datetime\"]:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"]:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"email\"]:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"month\"]:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"number\"]:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"password\"]:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"search\"]:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"tel\"]:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"text\"]:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"time\"]:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"url\"]:focus, .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-input input[type=\"week\"]:focus {\n        -moz-box-shadow: inset 0 0 0 2px #8dbdf1;\n        -webkit-box-shadow: inset 0 0 0 2px #8dbdf1;\n        box-shadow: inset 0 0 0 2px #8dbdf1;\n        outline: none; }\n  .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-buttons {\n    *zoom: 1; }\n    .vex.vex-theme-bottom-right-corner .vex-dialog-form .vex-dialog-buttons:after {\n      content: \"\";\n      display: table;\n      clear: both; }\n  .vex.vex-theme-bottom-right-corner .vex-dialog-button {\n    -moz-border-radius: 3px;\n    -webkit-border-radius: 3px;\n    border-radius: 3px;\n    border: 0;\n    float: right;\n    margin: 0 0 0 .5em;\n    font-family: inherit;\n    text-transform: uppercase;\n    letter-spacing: .1em;\n    font-size: .8em;\n    line-height: 1em;\n    padding: .75em 2em; }\n    .vex.vex-theme-bottom-right-corner .vex-dialog-button.vex-last {\n      margin-left: 0; }\n    .vex.vex-theme-bottom-right-corner .vex-dialog-button:focus {\n      animation: vex-pulse 1.1s infinite;\n      -webkit-animation: vex-pulse 1.1s infinite;\n      -moz-animation: vex-pulse 1.1s infinite;\n      -ms-animation: vex-pulse 1.1s infinite;\n      -o-animation: vex-pulse 1.1s infinite;\n      -webkit-backface-visibility: hidden;\n      outline: none; }\n      @media (max-width: 568px) {\n        .vex.vex-theme-bottom-right-corner .vex-dialog-button:focus {\n          animation: none;\n          -webkit-animation: none;\n          -moz-animation: none;\n          -ms-animation: none;\n          -o-animation: none;\n          -webkit-backface-visibility: hidden; } }\n    .vex.vex-theme-bottom-right-corner .vex-dialog-button.vex-dialog-button-primary {\n      background: #3288e6;\n      color: #fff; }\n    .vex.vex-theme-bottom-right-corner .vex-dialog-button.vex-dialog-button-secondary {\n      background: #e0e0e0;\n      color: #777; }\n\n.vex-loading-spinner.vex-theme-bottom-right-corner {\n  -moz-box-shadow: 0 0 0 0.5em #f0f0f0, 0 0 1px 0.5em rgba(0, 0, 0, 0.3);\n  -webkit-box-shadow: 0 0 0 0.5em #f0f0f0, 0 0 1px 0.5em rgba(0, 0, 0, 0.3);\n  box-shadow: 0 0 0 0.5em #f0f0f0, 0 0 1px 0.5em rgba(0, 0, 0, 0.3);\n  -moz-border-radius: 100%;\n  -webkit-border-radius: 100%;\n  border-radius: 100%;\n  background: #f0f0f0;\n  border: .2em solid transparent;\n  border-top-color: #bbb;\n  top: -1.1em;\n  bottom: auto; }\n\nbody.vex-open {\n  overflow: initial; }\n"
 
 /***/ },
 
-/***/ 806:
+/***/ 808:
 /***/ function(module, exports) {
 
 	module.exports = "@keyframes vex-flyin {\n  0% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); } }\n\n@-webkit-keyframes vex-flyin {\n  0% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); } }\n\n@-moz-keyframes vex-flyin {\n  0% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); } }\n\n@-ms-keyframes vex-flyin {\n  0% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); } }\n\n@-o-keyframes vex-flyin {\n  0% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); } }\n\n@keyframes vex-flyout {\n  0% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); } }\n\n@-webkit-keyframes vex-flyout {\n  0% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); } }\n\n@-moz-keyframes vex-flyout {\n  0% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); } }\n\n@-ms-keyframes vex-flyout {\n  0% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); } }\n\n@-o-keyframes vex-flyout {\n  0% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); } }\n\n@keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-webkit-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-moz-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-ms-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-o-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n.vex.vex-theme-default {\n  padding-top: 160px;\n  padding-bottom: 160px; }\n  .vex.vex-theme-default.vex-closing .vex-content {\n    animation: vex-flyout 0.5s;\n    -webkit-animation: vex-flyout 0.5s;\n    -moz-animation: vex-flyout 0.5s;\n    -ms-animation: vex-flyout 0.5s;\n    -o-animation: vex-flyout 0.5s;\n    -webkit-backface-visibility: hidden; }\n  .vex.vex-theme-default .vex-content {\n    animation: vex-flyin 0.5s;\n    -webkit-animation: vex-flyin 0.5s;\n    -moz-animation: vex-flyin 0.5s;\n    -ms-animation: vex-flyin 0.5s;\n    -o-animation: vex-flyin 0.5s;\n    -webkit-backface-visibility: hidden; }\n  .vex.vex-theme-default .vex-content {\n    -moz-border-radius: 5px;\n    -webkit-border-radius: 5px;\n    border-radius: 5px;\n    font-family: \"Helvetica Neue\", sans-serif;\n    background: #f0f0f0;\n    color: #444;\n    padding: 1em;\n    position: relative;\n    margin: 0 auto;\n    max-width: 100%;\n    width: 450px;\n    font-size: 1.1em;\n    line-height: 1.5em; }\n    .vex.vex-theme-default .vex-content h1, .vex.vex-theme-default .vex-content h2, .vex.vex-theme-default .vex-content h3, .vex.vex-theme-default .vex-content h4, .vex.vex-theme-default .vex-content h5, .vex.vex-theme-default .vex-content h6, .vex.vex-theme-default .vex-content p, .vex.vex-theme-default .vex-content ul, .vex.vex-theme-default .vex-content li {\n      color: inherit; }\n  .vex.vex-theme-default .vex-close {\n    -moz-border-radius: 5px;\n    -webkit-border-radius: 5px;\n    border-radius: 5px;\n    position: absolute;\n    top: 0;\n    right: 0;\n    cursor: pointer; }\n    .vex.vex-theme-default .vex-close:before {\n      -moz-border-radius: 3px;\n      -webkit-border-radius: 3px;\n      border-radius: 3px;\n      position: absolute;\n      content: \"\\D7\";\n      font-size: 26px;\n      font-weight: normal;\n      line-height: 31px;\n      height: 30px;\n      width: 30px;\n      text-align: center;\n      top: 3px;\n      right: 3px;\n      color: #bbb;\n      background: transparent; }\n    .vex.vex-theme-default .vex-close:hover:before, .vex.vex-theme-default .vex-close:active:before {\n      color: #777;\n      background: #e0e0e0; }\n  .vex.vex-theme-default .vex-dialog-form .vex-dialog-message {\n    margin-bottom: .5em; }\n  .vex.vex-theme-default .vex-dialog-form .vex-dialog-input {\n    margin-bottom: 1em; }\n    .vex.vex-theme-default .vex-dialog-form .vex-dialog-input textarea, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"date\"], .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"datetime\"], .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"], .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"email\"], .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"month\"], .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"number\"], .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"password\"], .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"search\"], .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"tel\"], .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"text\"], .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"time\"], .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"url\"], .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"week\"] {\n      -moz-border-radius: 3px;\n      -webkit-border-radius: 3px;\n      border-radius: 3px;\n      background: #fff;\n      width: 100%;\n      padding: .25em .67em;\n      border: 0;\n      font-family: inherit;\n      font-weight: inherit;\n      font-size: inherit;\n      min-height: 2.5em;\n      margin: 0 0 .25em; }\n      .vex.vex-theme-default .vex-dialog-form .vex-dialog-input textarea:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"date\"]:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"datetime\"]:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"]:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"email\"]:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"month\"]:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"number\"]:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"password\"]:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"search\"]:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"tel\"]:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"text\"]:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"time\"]:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"url\"]:focus, .vex.vex-theme-default .vex-dialog-form .vex-dialog-input input[type=\"week\"]:focus {\n        -moz-box-shadow: inset 0 0 0 2px #8dbdf1;\n        -webkit-box-shadow: inset 0 0 0 2px #8dbdf1;\n        box-shadow: inset 0 0 0 2px #8dbdf1;\n        outline: none; }\n  .vex.vex-theme-default .vex-dialog-form .vex-dialog-buttons {\n    *zoom: 1; }\n    .vex.vex-theme-default .vex-dialog-form .vex-dialog-buttons:after {\n      content: \"\";\n      display: table;\n      clear: both; }\n  .vex.vex-theme-default .vex-dialog-button {\n    -moz-border-radius: 3px;\n    -webkit-border-radius: 3px;\n    border-radius: 3px;\n    border: 0;\n    float: right;\n    margin: 0 0 0 .5em;\n    font-family: inherit;\n    text-transform: uppercase;\n    letter-spacing: .1em;\n    font-size: .8em;\n    line-height: 1em;\n    padding: .75em 2em; }\n    .vex.vex-theme-default .vex-dialog-button.vex-last {\n      margin-left: 0; }\n    .vex.vex-theme-default .vex-dialog-button:focus {\n      animation: vex-pulse 1.1s infinite;\n      -webkit-animation: vex-pulse 1.1s infinite;\n      -moz-animation: vex-pulse 1.1s infinite;\n      -ms-animation: vex-pulse 1.1s infinite;\n      -o-animation: vex-pulse 1.1s infinite;\n      -webkit-backface-visibility: hidden;\n      outline: none; }\n      @media (max-width: 568px) {\n        .vex.vex-theme-default .vex-dialog-button:focus {\n          animation: none;\n          -webkit-animation: none;\n          -moz-animation: none;\n          -ms-animation: none;\n          -o-animation: none;\n          -webkit-backface-visibility: hidden; } }\n    .vex.vex-theme-default .vex-dialog-button.vex-dialog-button-primary {\n      background: #3288e6;\n      color: #fff; }\n    .vex.vex-theme-default .vex-dialog-button.vex-dialog-button-secondary {\n      background: #e0e0e0;\n      color: #777; }\n\n.vex-loading-spinner.vex-theme-default {\n  -moz-box-shadow: 0 0 0 0.5em #f0f0f0, 0 0 1px 0.5em rgba(0, 0, 0, 0.3);\n  -webkit-box-shadow: 0 0 0 0.5em #f0f0f0, 0 0 1px 0.5em rgba(0, 0, 0, 0.3);\n  box-shadow: 0 0 0 0.5em #f0f0f0, 0 0 1px 0.5em rgba(0, 0, 0, 0.3);\n  -moz-border-radius: 100%;\n  -webkit-border-radius: 100%;\n  border-radius: 100%;\n  background: #f0f0f0;\n  border: .2em solid transparent;\n  border-top-color: #bbb;\n  top: -1.1em;\n  bottom: auto; }\n"
 
 /***/ },
 
-/***/ 807:
+/***/ 809:
 /***/ function(module, exports) {
 
 	module.exports = "@keyframes vex-flipin-horizontal {\n  0% {\n    opacity: 0;\n    transform: rotateY(-90deg);\n    -webkit-transform: rotateY(-90deg);\n    -moz-transform: rotateY(-90deg);\n    -ms-transform: rotateY(-90deg);\n    -o-transform: rotateY(-90deg); }\n  100% {\n    opacity: 1;\n    transform: rotateY(0deg);\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg); } }\n\n@-webkit-keyframes vex-flipin-horizontal {\n  0% {\n    opacity: 0;\n    transform: rotateY(-90deg);\n    -webkit-transform: rotateY(-90deg);\n    -moz-transform: rotateY(-90deg);\n    -ms-transform: rotateY(-90deg);\n    -o-transform: rotateY(-90deg); }\n  100% {\n    opacity: 1;\n    transform: rotateY(0deg);\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg); } }\n\n@-moz-keyframes vex-flipin-horizontal {\n  0% {\n    opacity: 0;\n    transform: rotateY(-90deg);\n    -webkit-transform: rotateY(-90deg);\n    -moz-transform: rotateY(-90deg);\n    -ms-transform: rotateY(-90deg);\n    -o-transform: rotateY(-90deg); }\n  100% {\n    opacity: 1;\n    transform: rotateY(0deg);\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg); } }\n\n@-ms-keyframes vex-flipin-horizontal {\n  0% {\n    opacity: 0;\n    transform: rotateY(-90deg);\n    -webkit-transform: rotateY(-90deg);\n    -moz-transform: rotateY(-90deg);\n    -ms-transform: rotateY(-90deg);\n    -o-transform: rotateY(-90deg); }\n  100% {\n    opacity: 1;\n    transform: rotateY(0deg);\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg); } }\n\n@-o-keyframes vex-flipin-horizontal {\n  0% {\n    opacity: 0;\n    transform: rotateY(-90deg);\n    -webkit-transform: rotateY(-90deg);\n    -moz-transform: rotateY(-90deg);\n    -ms-transform: rotateY(-90deg);\n    -o-transform: rotateY(-90deg); }\n  100% {\n    opacity: 1;\n    transform: rotateY(0deg);\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg); } }\n\n@keyframes vex-flipout-horizontal {\n  0% {\n    opacity: 1;\n    transform: rotateY(0deg);\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg); }\n  100% {\n    opacity: 0;\n    transform: rotateY(90deg);\n    -webkit-transform: rotateY(90deg);\n    -moz-transform: rotateY(90deg);\n    -ms-transform: rotateY(90deg);\n    -o-transform: rotateY(90deg); } }\n\n@-webkit-keyframes vex-flipout-horizontal {\n  0% {\n    opacity: 1;\n    transform: rotateY(0deg);\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg); }\n  100% {\n    opacity: 0;\n    transform: rotateY(90deg);\n    -webkit-transform: rotateY(90deg);\n    -moz-transform: rotateY(90deg);\n    -ms-transform: rotateY(90deg);\n    -o-transform: rotateY(90deg); } }\n\n@-moz-keyframes vex-flipout-horizontal {\n  0% {\n    opacity: 1;\n    transform: rotateY(0deg);\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg); }\n  100% {\n    opacity: 0;\n    transform: rotateY(90deg);\n    -webkit-transform: rotateY(90deg);\n    -moz-transform: rotateY(90deg);\n    -ms-transform: rotateY(90deg);\n    -o-transform: rotateY(90deg); } }\n\n@-ms-keyframes vex-flipout-horizontal {\n  0% {\n    opacity: 1;\n    transform: rotateY(0deg);\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg); }\n  100% {\n    opacity: 0;\n    transform: rotateY(90deg);\n    -webkit-transform: rotateY(90deg);\n    -moz-transform: rotateY(90deg);\n    -ms-transform: rotateY(90deg);\n    -o-transform: rotateY(90deg); } }\n\n@-o-keyframes vex-flipout-horizontal {\n  0% {\n    opacity: 1;\n    transform: rotateY(0deg);\n    -webkit-transform: rotateY(0deg);\n    -moz-transform: rotateY(0deg);\n    -ms-transform: rotateY(0deg);\n    -o-transform: rotateY(0deg); }\n  100% {\n    opacity: 0;\n    transform: rotateY(90deg);\n    -webkit-transform: rotateY(90deg);\n    -moz-transform: rotateY(90deg);\n    -ms-transform: rotateY(90deg);\n    -o-transform: rotateY(90deg); } }\n\n.vex.vex-theme-flat-attack {\n  -moz-perspective: 1300px;\n  -webkit-perspective: 1300px;\n  perspective: 1300px;\n  -moz-perspective-origin: 50% 150px;\n  -webkit-perspective-origin: 50% 150px;\n  perspective-origin: 50% 150px;\n  padding-top: 100px;\n  padding-bottom: 100px;\n  font-size: 1.5em; }\n  .vex.vex-theme-flat-attack.vex-closing .vex-content {\n    animation: vex-flipout-horizontal 0.5s;\n    -webkit-animation: vex-flipout-horizontal 0.5s;\n    -moz-animation: vex-flipout-horizontal 0.5s;\n    -ms-animation: vex-flipout-horizontal 0.5s;\n    -o-animation: vex-flipout-horizontal 0.5s;\n    -webkit-backface-visibility: hidden; }\n  .vex.vex-theme-flat-attack .vex-content {\n    -webkit-transform-style: preserve-3d;\n    -moz-transform-style: preserve-3d;\n    transform-style: preserve-3d;\n    animation: vex-flipin-horizontal 0.5s;\n    -webkit-animation: vex-flipin-horizontal 0.5s;\n    -moz-animation: vex-flipin-horizontal 0.5s;\n    -ms-animation: vex-flipin-horizontal 0.5s;\n    -o-animation: vex-flipin-horizontal 0.5s;\n    -webkit-backface-visibility: hidden; }\n  .vex.vex-theme-flat-attack .vex-content {\n    font-family: \"Helvetica Neue\", sans-serif;\n    font-weight: 200;\n    background: #fff;\n    color: #444;\n    padding: 2em 2em 3em 2em;\n    line-height: 1.5em;\n    position: relative;\n    margin: 0 auto;\n    max-width: 100%;\n    width: 600px; }\n    .vex.vex-theme-flat-attack .vex-content h1, .vex.vex-theme-flat-attack .vex-content h2, .vex.vex-theme-flat-attack .vex-content h3, .vex.vex-theme-flat-attack .vex-content h4, .vex.vex-theme-flat-attack .vex-content h5, .vex.vex-theme-flat-attack .vex-content h6, .vex.vex-theme-flat-attack .vex-content p, .vex.vex-theme-flat-attack .vex-content ul, .vex.vex-theme-flat-attack .vex-content li {\n      color: inherit; }\n  .vex.vex-theme-flat-attack .vex-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    cursor: pointer; }\n    .vex.vex-theme-flat-attack .vex-close:before {\n      font-family: \"Helvetica Neue\", sans-serif;\n      font-weight: 100;\n      line-height: 1px;\n      padding-top: .5em;\n      display: block;\n      font-size: 2em;\n      text-indent: 1px;\n      overflow: hidden;\n      height: 1.25em;\n      width: 1.25em;\n      text-align: center;\n      top: 0;\n      right: 0;\n      color: #fff;\n      background: #666; }\n  .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-message {\n    margin-bottom: .5em; }\n  .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input {\n    margin-bottom: .5em; }\n    .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input textarea, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"date\"], .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"datetime\"], .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"], .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"email\"], .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"month\"], .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"number\"], .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"password\"], .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"search\"], .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"tel\"], .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"text\"], .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"time\"], .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"url\"], .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"week\"] {\n      -moz-border-radius: 3px;\n      -webkit-border-radius: 3px;\n      border-radius: 3px;\n      background: #f0f0f0;\n      width: 100%;\n      padding: .25em .67em;\n      border: 0;\n      font-family: inherit;\n      font-weight: inherit;\n      font-size: inherit;\n      min-height: 2.5em;\n      margin: 0 0 .25em; }\n      .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input textarea:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"date\"]:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"datetime\"]:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"]:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"email\"]:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"month\"]:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"number\"]:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"password\"]:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"search\"]:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"tel\"]:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"text\"]:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"time\"]:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"url\"]:focus, .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-input input[type=\"week\"]:focus {\n        -moz-box-shadow: inset 0 0 0 2px #666;\n        -webkit-box-shadow: inset 0 0 0 2px #666;\n        box-shadow: inset 0 0 0 2px #666;\n        outline: none; }\n  .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-buttons {\n    *zoom: 1;\n    padding-top: 1em;\n    margin-bottom: -3em;\n    margin-left: -2em;\n    margin-right: -2em; }\n    .vex.vex-theme-flat-attack .vex-dialog-form .vex-dialog-buttons:after {\n      content: \"\";\n      display: table;\n      clear: both; }\n  .vex.vex-theme-flat-attack .vex-dialog-button {\n    -moz-border-radius: 0;\n    -webkit-border-radius: 0;\n    border-radius: 0;\n    border: 0;\n    margin: 0;\n    float: right;\n    padding: .5em 1em;\n    font-size: 1.13em;\n    text-transform: uppercase;\n    font-weight: 200;\n    letter-spacing: .1em;\n    line-height: 1em;\n    font-family: inherit; }\n    .vex.vex-theme-flat-attack .vex-dialog-button.vex-last {\n      margin-left: 0; }\n    .vex.vex-theme-flat-attack .vex-dialog-button:focus {\n      outline: none; }\n    .vex.vex-theme-flat-attack .vex-dialog-button.vex-dialog-button-primary {\n      background: #666;\n      color: #fff; }\n      .vex.vex-theme-flat-attack .vex-dialog-button.vex-dialog-button-primary:focus {\n        -moz-box-shadow: inset 0 3px rgba(0, 0, 0, 0.2);\n        -webkit-box-shadow: inset 0 3px rgba(0, 0, 0, 0.2);\n        box-shadow: inset 0 3px rgba(0, 0, 0, 0.2); }\n    .vex.vex-theme-flat-attack .vex-dialog-button.vex-dialog-button-secondary {\n      background: #fff;\n      color: #ccc; }\n      .vex.vex-theme-flat-attack .vex-dialog-button.vex-dialog-button-secondary:focus {\n        -moz-box-shadow: inset 0 3px #aaa;\n        -webkit-box-shadow: inset 0 3px #aaa;\n        box-shadow: inset 0 3px #aaa;\n        background: #eee;\n        color: #777; }\n      .vex.vex-theme-flat-attack .vex-dialog-button.vex-dialog-button-secondary:hover, .vex.vex-theme-flat-attack .vex-dialog-button.vex-dialog-button-secondary:active {\n        color: #777; }\n  .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-close:before {\n    background: #ff7ea7; }\n  .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input textarea:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"date\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"datetime\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"email\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"month\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"number\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"password\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"search\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"tel\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"text\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"time\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"url\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-input input[type=\"week\"]:focus {\n    -moz-box-shadow: inset 0 0 0 2px #ff7ea7;\n    -webkit-box-shadow: inset 0 0 0 2px #ff7ea7;\n    box-shadow: inset 0 0 0 2px #ff7ea7; }\n  .vex.vex-theme-flat-attack.vex-theme-flat-attack-pink .vex-dialog-form .vex-dialog-buttons .vex-dialog-button.vex-dialog-button-primary {\n    background: #ff7ea7; }\n  .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-close:before {\n    background: #ce4a55; }\n  .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input textarea:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"date\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"datetime\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"email\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"month\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"number\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"password\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"search\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"tel\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"text\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"time\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"url\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-input input[type=\"week\"]:focus {\n    -moz-box-shadow: inset 0 0 0 2px #ce4a55;\n    -webkit-box-shadow: inset 0 0 0 2px #ce4a55;\n    box-shadow: inset 0 0 0 2px #ce4a55; }\n  .vex.vex-theme-flat-attack.vex-theme-flat-attack-red .vex-dialog-form .vex-dialog-buttons .vex-dialog-button.vex-dialog-button-primary {\n    background: #ce4a55; }\n  .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-close:before {\n    background: #34b989; }\n  .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input textarea:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"date\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"datetime\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"email\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"month\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"number\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"password\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"search\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"tel\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"text\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"time\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"url\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-input input[type=\"week\"]:focus {\n    -moz-box-shadow: inset 0 0 0 2px #34b989;\n    -webkit-box-shadow: inset 0 0 0 2px #34b989;\n    box-shadow: inset 0 0 0 2px #34b989; }\n  .vex.vex-theme-flat-attack.vex-theme-flat-attack-green .vex-dialog-form .vex-dialog-buttons .vex-dialog-button.vex-dialog-button-primary {\n    background: #34b989; }\n  .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-close:before {\n    background: #477FA5; }\n  .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input textarea:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"date\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"datetime\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"email\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"month\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"number\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"password\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"search\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"tel\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"text\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"time\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"url\"]:focus, .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-input input[type=\"week\"]:focus {\n    -moz-box-shadow: inset 0 0 0 2px #477FA5;\n    -webkit-box-shadow: inset 0 0 0 2px #477FA5;\n    box-shadow: inset 0 0 0 2px #477FA5; }\n  .vex.vex-theme-flat-attack.vex-theme-flat-attack-blue .vex-dialog-form .vex-dialog-buttons .vex-dialog-button.vex-dialog-button-primary {\n    background: #477FA5; }\n\n.vex-loading-spinner.vex-theme-flat-attack {\n  height: 4em;\n  width: 4em; }\n"
 
 /***/ },
 
-/***/ 808:
+/***/ 810:
 /***/ function(module, exports) {
 
 	module.exports = "@keyframes vex-flyin {\n  0% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); } }\n\n@-webkit-keyframes vex-flyin {\n  0% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); } }\n\n@-moz-keyframes vex-flyin {\n  0% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); } }\n\n@-ms-keyframes vex-flyin {\n  0% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); } }\n\n@-o-keyframes vex-flyin {\n  0% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); }\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); } }\n\n@keyframes vex-flyout {\n  0% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); } }\n\n@-webkit-keyframes vex-flyout {\n  0% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); } }\n\n@-moz-keyframes vex-flyout {\n  0% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); } }\n\n@-ms-keyframes vex-flyout {\n  0% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); } }\n\n@-o-keyframes vex-flyout {\n  0% {\n    opacity: 1;\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    opacity: 0;\n    transform: translateY(-40px);\n    -webkit-transform: translateY(-40px);\n    -moz-transform: translateY(-40px);\n    -ms-transform: translateY(-40px);\n    -o-transform: translateY(-40px); } }\n\n@keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-webkit-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-moz-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-ms-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-o-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n.vex.vex-theme-os {\n  padding-top: 160px;\n  padding-bottom: 160px; }\n  .vex.vex-theme-os.vex-closing .vex-content {\n    animation: vex-flyout 0.5s;\n    -webkit-animation: vex-flyout 0.5s;\n    -moz-animation: vex-flyout 0.5s;\n    -ms-animation: vex-flyout 0.5s;\n    -o-animation: vex-flyout 0.5s;\n    -webkit-backface-visibility: hidden; }\n  .vex.vex-theme-os .vex-content {\n    animation: vex-flyin 0.5s;\n    -webkit-animation: vex-flyin 0.5s;\n    -moz-animation: vex-flyin 0.5s;\n    -ms-animation: vex-flyin 0.5s;\n    -o-animation: vex-flyin 0.5s;\n    -webkit-backface-visibility: hidden; }\n  .vex.vex-theme-os .vex-content {\n    -moz-border-radius: 5px;\n    -webkit-border-radius: 5px;\n    border-radius: 5px;\n    -moz-box-shadow: inset 0 1px #a6a6a6, 0 0 0 1px rgba(0, 0, 0, 0.08);\n    -webkit-box-shadow: inset 0 1px #a6a6a6, 0 0 0 1px rgba(0, 0, 0, 0.08);\n    box-shadow: inset 0 1px #a6a6a6, 0 0 0 1px rgba(0, 0, 0, 0.08);\n    font-family: \"Helvetica Neue\", sans-serif;\n    border-top: 20px solid #bbb;\n    background: #f0f0f0;\n    color: #444;\n    padding: 1em;\n    position: relative;\n    margin: 0 auto;\n    max-width: 100%;\n    width: 450px;\n    font-size: 1.1em;\n    line-height: 1.5em; }\n    .vex.vex-theme-os .vex-content h1, .vex.vex-theme-os .vex-content h2, .vex.vex-theme-os .vex-content h3, .vex.vex-theme-os .vex-content h4, .vex.vex-theme-os .vex-content h5, .vex.vex-theme-os .vex-content h6, .vex.vex-theme-os .vex-content p, .vex.vex-theme-os .vex-content ul, .vex.vex-theme-os .vex-content li {\n      color: inherit; }\n  .vex.vex-theme-os .vex-close {\n    -moz-border-radius: 0 5px 0 0;\n    -webkit-border-radius: 0 5px 0 0;\n    border-radius: 0 5px 0 0;\n    position: absolute;\n    top: 0;\n    right: 0;\n    cursor: pointer; }\n    .vex.vex-theme-os .vex-close:before {\n      -moz-border-radius: 3px;\n      -webkit-border-radius: 3px;\n      border-radius: 3px;\n      position: absolute;\n      content: \"\\D7\";\n      font-size: 26px;\n      font-weight: normal;\n      line-height: 31px;\n      height: 30px;\n      width: 30px;\n      text-align: center;\n      top: 3px;\n      right: 3px;\n      color: #bbb;\n      background: transparent; }\n    .vex.vex-theme-os .vex-close:hover:before, .vex.vex-theme-os .vex-close:active:before {\n      color: #777;\n      background: #e0e0e0; }\n  .vex.vex-theme-os .vex-dialog-form .vex-dialog-message {\n    margin-bottom: .5em; }\n  .vex.vex-theme-os .vex-dialog-form .vex-dialog-input {\n    margin-bottom: 1em; }\n    .vex.vex-theme-os .vex-dialog-form .vex-dialog-input textarea, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"date\"], .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"datetime\"], .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"], .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"email\"], .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"month\"], .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"number\"], .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"password\"], .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"search\"], .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"tel\"], .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"text\"], .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"time\"], .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"url\"], .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"week\"] {\n      -moz-border-radius: 3px;\n      -webkit-border-radius: 3px;\n      border-radius: 3px;\n      background: #fff;\n      width: 100%;\n      padding: .25em .67em;\n      border: 0;\n      font-family: inherit;\n      font-weight: inherit;\n      font-size: inherit;\n      min-height: 2.5em;\n      margin: 0 0 .25em; }\n      .vex.vex-theme-os .vex-dialog-form .vex-dialog-input textarea:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"date\"]:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"datetime\"]:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"]:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"email\"]:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"month\"]:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"number\"]:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"password\"]:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"search\"]:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"tel\"]:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"text\"]:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"time\"]:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"url\"]:focus, .vex.vex-theme-os .vex-dialog-form .vex-dialog-input input[type=\"week\"]:focus {\n        -moz-box-shadow: inset 0 0 0 1px #3288e6;\n        -webkit-box-shadow: inset 0 0 0 1px #3288e6;\n        box-shadow: inset 0 0 0 1px #3288e6;\n        outline: none; }\n  .vex.vex-theme-os .vex-dialog-form .vex-dialog-buttons {\n    *zoom: 1; }\n    .vex.vex-theme-os .vex-dialog-form .vex-dialog-buttons:after {\n      content: \"\";\n      display: table;\n      clear: both; }\n  .vex.vex-theme-os .vex-dialog-button {\n    -moz-border-radius: 3px;\n    -webkit-border-radius: 3px;\n    border-radius: 3px;\n    border: 0;\n    float: right;\n    margin: 0 0 0 .5em;\n    font-family: inherit;\n    text-transform: uppercase;\n    letter-spacing: .1em;\n    font-size: .8em;\n    line-height: 1em;\n    padding: .75em 2em; }\n    .vex.vex-theme-os .vex-dialog-button.vex-last {\n      margin-left: 0; }\n    .vex.vex-theme-os .vex-dialog-button:focus {\n      animation: vex-pulse 1.1s infinite;\n      -webkit-animation: vex-pulse 1.1s infinite;\n      -moz-animation: vex-pulse 1.1s infinite;\n      -ms-animation: vex-pulse 1.1s infinite;\n      -o-animation: vex-pulse 1.1s infinite;\n      -webkit-backface-visibility: hidden;\n      outline: none; }\n      @media (max-width: 568px) {\n        .vex.vex-theme-os .vex-dialog-button:focus {\n          animation: none;\n          -webkit-animation: none;\n          -moz-animation: none;\n          -ms-animation: none;\n          -o-animation: none;\n          -webkit-backface-visibility: hidden; } }\n    .vex.vex-theme-os .vex-dialog-button.vex-dialog-button-primary {\n      background: #3288e6;\n      color: #fff; }\n    .vex.vex-theme-os .vex-dialog-button.vex-dialog-button-secondary {\n      background: #e0e0e0;\n      color: #777; }\n\n.vex-loading-spinner.vex-theme-os {\n  -moz-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 0.5em rgba(0, 0, 0, 0.2);\n  -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 0.5em rgba(0, 0, 0, 0.2);\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 0.5em rgba(0, 0, 0, 0.2);\n  -moz-border-radius: 100%;\n  -webkit-border-radius: 100%;\n  border-radius: 100%;\n  background: rgba(255, 255, 255, 0.2);\n  width: 0;\n  height: 0;\n  border: 1.2em solid #bbb;\n  border-top-color: #f0f0f0;\n  border-bottom-color: #f0f0f0; }\n"
 
 /***/ },
 
-/***/ 809:
+/***/ 811:
 /***/ function(module, exports) {
 
 	module.exports = "@keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-webkit-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-moz-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-ms-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-o-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n.vex.vex-theme-plain {\n  padding-top: 160px;\n  padding-bottom: 160px; }\n  .vex.vex-theme-plain .vex-content {\n    font-family: \"Helvetica Neue\", sans-serif;\n    background: #fff;\n    color: #444;\n    padding: 1em;\n    position: relative;\n    margin: 0 auto;\n    max-width: 100%;\n    width: 450px;\n    font-size: 1.1em;\n    line-height: 1.5em; }\n    .vex.vex-theme-plain .vex-content h1, .vex.vex-theme-plain .vex-content h2, .vex.vex-theme-plain .vex-content h3, .vex.vex-theme-plain .vex-content h4, .vex.vex-theme-plain .vex-content h5, .vex.vex-theme-plain .vex-content h6, .vex.vex-theme-plain .vex-content p, .vex.vex-theme-plain .vex-content ul, .vex.vex-theme-plain .vex-content li {\n      color: inherit; }\n  .vex.vex-theme-plain .vex-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    cursor: pointer; }\n    .vex.vex-theme-plain .vex-close:before {\n      position: absolute;\n      content: \"\\D7\";\n      font-size: 26px;\n      font-weight: normal;\n      line-height: 31px;\n      height: 30px;\n      width: 30px;\n      text-align: center;\n      top: 3px;\n      right: 3px;\n      color: #bbb;\n      background: transparent; }\n    .vex.vex-theme-plain .vex-close:hover:before, .vex.vex-theme-plain .vex-close:active:before {\n      color: #777;\n      background: #e0e0e0; }\n  .vex.vex-theme-plain .vex-dialog-form .vex-dialog-message {\n    margin-bottom: .5em; }\n  .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input {\n    margin-bottom: 1em; }\n    .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input textarea, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"date\"], .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"datetime\"], .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"], .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"email\"], .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"month\"], .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"number\"], .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"password\"], .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"search\"], .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"tel\"], .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"text\"], .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"time\"], .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"url\"], .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"week\"] {\n      background: #f0f0f0;\n      width: 100%;\n      padding: .25em .67em;\n      border: 0;\n      font-family: inherit;\n      font-weight: inherit;\n      font-size: inherit;\n      min-height: 2.5em;\n      margin: 0 0 .25em; }\n      .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input textarea:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"date\"]:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"datetime\"]:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"]:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"email\"]:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"month\"]:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"number\"]:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"password\"]:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"search\"]:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"tel\"]:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"text\"]:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"time\"]:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"url\"]:focus, .vex.vex-theme-plain .vex-dialog-form .vex-dialog-input input[type=\"week\"]:focus {\n        -moz-box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.2);\n        -webkit-box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.2);\n        box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.2);\n        outline: none; }\n  .vex.vex-theme-plain .vex-dialog-form .vex-dialog-buttons {\n    *zoom: 1; }\n    .vex.vex-theme-plain .vex-dialog-form .vex-dialog-buttons:after {\n      content: \"\";\n      display: table;\n      clear: both; }\n  .vex.vex-theme-plain .vex-dialog-button {\n    -moz-border-radius: 0;\n    -webkit-border-radius: 0;\n    border-radius: 0;\n    border: 0;\n    float: right;\n    margin: 0 0 0 .5em;\n    font-family: inherit;\n    text-transform: uppercase;\n    letter-spacing: .1em;\n    font-size: .8em;\n    line-height: 1em;\n    padding: .75em 2em; }\n    .vex.vex-theme-plain .vex-dialog-button.vex-last {\n      margin-left: 0; }\n    .vex.vex-theme-plain .vex-dialog-button:focus {\n      animation: vex-pulse 1.1s infinite;\n      -webkit-animation: vex-pulse 1.1s infinite;\n      -moz-animation: vex-pulse 1.1s infinite;\n      -ms-animation: vex-pulse 1.1s infinite;\n      -o-animation: vex-pulse 1.1s infinite;\n      -webkit-backface-visibility: hidden;\n      outline: none; }\n      @media (max-width: 568px) {\n        .vex.vex-theme-plain .vex-dialog-button:focus {\n          animation: none;\n          -webkit-animation: none;\n          -moz-animation: none;\n          -ms-animation: none;\n          -o-animation: none;\n          -webkit-backface-visibility: hidden; } }\n    .vex.vex-theme-plain .vex-dialog-button.vex-dialog-button-primary {\n      background: #3288e6;\n      color: #fff; }\n    .vex.vex-theme-plain .vex-dialog-button.vex-dialog-button-secondary {\n      background: #e0e0e0;\n      color: #777; }\n\n.vex-loading-spinner.vex-theme-plain {\n  height: 2.5em;\n  width: 2.5em; }\n"
 
 /***/ },
 
-/***/ 810:
+/***/ 812:
 /***/ function(module, exports) {
 
 	module.exports = "@keyframes vex-dropin {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 0; }\n  1% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px);\n    opacity: 0; }\n  2% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px);\n    opacity: 1; }\n  100% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 1; } }\n\n@-webkit-keyframes vex-dropin {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 0; }\n  1% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px);\n    opacity: 0; }\n  2% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px);\n    opacity: 1; }\n  100% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 1; } }\n\n@-moz-keyframes vex-dropin {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 0; }\n  1% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px);\n    opacity: 0; }\n  2% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px);\n    opacity: 1; }\n  100% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 1; } }\n\n@-ms-keyframes vex-dropin {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 0; }\n  1% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px);\n    opacity: 0; }\n  2% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px);\n    opacity: 1; }\n  100% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 1; } }\n\n@-o-keyframes vex-dropin {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 0; }\n  1% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px);\n    opacity: 0; }\n  2% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px);\n    opacity: 1; }\n  100% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0);\n    opacity: 1; } }\n\n@keyframes vex-dropout {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px); } }\n\n@-webkit-keyframes vex-dropout {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px); } }\n\n@-moz-keyframes vex-dropout {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px); } }\n\n@-ms-keyframes vex-dropout {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px); } }\n\n@-o-keyframes vex-dropout {\n  0% {\n    transform: translateY(0);\n    -webkit-transform: translateY(0);\n    -moz-transform: translateY(0);\n    -ms-transform: translateY(0);\n    -o-transform: translateY(0); }\n  100% {\n    transform: translateY(-800px);\n    -webkit-transform: translateY(-800px);\n    -moz-transform: translateY(-800px);\n    -ms-transform: translateY(-800px);\n    -o-transform: translateY(-800px); } }\n\n@keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-webkit-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-moz-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-ms-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-o-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n.vex.vex-theme-top.vex-closing .vex-content {\n  animation: vex-dropout 0.5s;\n  -webkit-animation: vex-dropout 0.5s;\n  -moz-animation: vex-dropout 0.5s;\n  -ms-animation: vex-dropout 0.5s;\n  -o-animation: vex-dropout 0.5s;\n  -webkit-backface-visibility: hidden; }\n\n.vex.vex-theme-top .vex-content {\n  animation: vex-dropin 0.5s;\n  -webkit-animation: vex-dropin 0.5s;\n  -moz-animation: vex-dropin 0.5s;\n  -ms-animation: vex-dropin 0.5s;\n  -o-animation: vex-dropin 0.5s;\n  -webkit-backface-visibility: hidden; }\n\n.vex.vex-theme-top .vex-content {\n  -moz-border-radius: 0 0 5px 5px;\n  -webkit-border-radius: 0 0 5px 5px;\n  border-radius: 0 0 5px 5px;\n  font-family: \"Helvetica Neue\", sans-serif;\n  background: #f0f0f0;\n  color: #444;\n  padding: 1em;\n  position: relative;\n  margin: 0 auto;\n  max-width: 100%;\n  width: 450px;\n  font-size: 1.1em;\n  line-height: 1.5em; }\n  .vex.vex-theme-top .vex-content h1, .vex.vex-theme-top .vex-content h2, .vex.vex-theme-top .vex-content h3, .vex.vex-theme-top .vex-content h4, .vex.vex-theme-top .vex-content h5, .vex.vex-theme-top .vex-content h6, .vex.vex-theme-top .vex-content p, .vex.vex-theme-top .vex-content ul, .vex.vex-theme-top .vex-content li {\n    color: inherit; }\n\n.vex.vex-theme-top .vex-close {\n  -moz-border-radius: 5px;\n  -webkit-border-radius: 5px;\n  border-radius: 5px;\n  position: absolute;\n  top: 0;\n  right: 0;\n  cursor: pointer; }\n  .vex.vex-theme-top .vex-close:before {\n    -moz-border-radius: 3px;\n    -webkit-border-radius: 3px;\n    border-radius: 3px;\n    position: absolute;\n    content: \"\\D7\";\n    font-size: 26px;\n    font-weight: normal;\n    line-height: 31px;\n    height: 30px;\n    width: 30px;\n    text-align: center;\n    top: 3px;\n    right: 3px;\n    color: #bbb;\n    background: transparent; }\n  .vex.vex-theme-top .vex-close:hover:before, .vex.vex-theme-top .vex-close:active:before {\n    color: #777;\n    background: #e0e0e0; }\n\n.vex.vex-theme-top .vex-dialog-form .vex-dialog-message {\n  margin-bottom: .5em; }\n\n.vex.vex-theme-top .vex-dialog-form .vex-dialog-input {\n  margin-bottom: 1em; }\n  .vex.vex-theme-top .vex-dialog-form .vex-dialog-input textarea, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"date\"], .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"datetime\"], .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"], .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"email\"], .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"month\"], .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"number\"], .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"password\"], .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"search\"], .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"tel\"], .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"text\"], .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"time\"], .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"url\"], .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"week\"] {\n    -moz-border-radius: 3px;\n    -webkit-border-radius: 3px;\n    border-radius: 3px;\n    background: #fff;\n    width: 100%;\n    padding: .25em .67em;\n    border: 0;\n    font-family: inherit;\n    font-weight: inherit;\n    font-size: inherit;\n    min-height: 2.5em;\n    margin: 0 0 .25em; }\n    .vex.vex-theme-top .vex-dialog-form .vex-dialog-input textarea:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"date\"]:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"datetime\"]:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"]:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"email\"]:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"month\"]:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"number\"]:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"password\"]:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"search\"]:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"tel\"]:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"text\"]:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"time\"]:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"url\"]:focus, .vex.vex-theme-top .vex-dialog-form .vex-dialog-input input[type=\"week\"]:focus {\n      -moz-box-shadow: inset 0 0 0 2px #8dbdf1;\n      -webkit-box-shadow: inset 0 0 0 2px #8dbdf1;\n      box-shadow: inset 0 0 0 2px #8dbdf1;\n      outline: none; }\n\n.vex.vex-theme-top .vex-dialog-form .vex-dialog-buttons {\n  *zoom: 1; }\n  .vex.vex-theme-top .vex-dialog-form .vex-dialog-buttons:after {\n    content: \"\";\n    display: table;\n    clear: both; }\n\n.vex.vex-theme-top .vex-dialog-button {\n  -moz-border-radius: 3px;\n  -webkit-border-radius: 3px;\n  border-radius: 3px;\n  border: 0;\n  float: right;\n  margin: 0 0 0 .5em;\n  font-family: inherit;\n  text-transform: uppercase;\n  letter-spacing: .1em;\n  font-size: .8em;\n  line-height: 1em;\n  padding: .75em 2em; }\n  .vex.vex-theme-top .vex-dialog-button.vex-last {\n    margin-left: 0; }\n  .vex.vex-theme-top .vex-dialog-button:focus {\n    animation: vex-pulse 1.1s infinite;\n    -webkit-animation: vex-pulse 1.1s infinite;\n    -moz-animation: vex-pulse 1.1s infinite;\n    -ms-animation: vex-pulse 1.1s infinite;\n    -o-animation: vex-pulse 1.1s infinite;\n    -webkit-backface-visibility: hidden;\n    outline: none; }\n    @media (max-width: 568px) {\n      .vex.vex-theme-top .vex-dialog-button:focus {\n        animation: none;\n        -webkit-animation: none;\n        -moz-animation: none;\n        -ms-animation: none;\n        -o-animation: none;\n        -webkit-backface-visibility: hidden; } }\n  .vex.vex-theme-top .vex-dialog-button.vex-dialog-button-primary {\n    background: #3288e6;\n    color: #fff; }\n  .vex.vex-theme-top .vex-dialog-button.vex-dialog-button-secondary {\n    background: #e0e0e0;\n    color: #777; }\n\n.vex-loading-spinner.vex-theme-top {\n  -moz-box-shadow: 0 0 0 0.5em #f0f0f0, 0 0 1px 0.5em rgba(0, 0, 0, 0.3);\n  -webkit-box-shadow: 0 0 0 0.5em #f0f0f0, 0 0 1px 0.5em rgba(0, 0, 0, 0.3);\n  box-shadow: 0 0 0 0.5em #f0f0f0, 0 0 1px 0.5em rgba(0, 0, 0, 0.3);\n  -moz-border-radius: 100%;\n  -webkit-border-radius: 100%;\n  border-radius: 100%;\n  background: #f0f0f0;\n  border: .2em solid transparent;\n  border-top-color: #bbb;\n  top: -1.1em;\n  bottom: auto; }\n"
 
 /***/ },
 
-/***/ 811:
+/***/ 813:
 /***/ function(module, exports) {
 
 	module.exports = "@keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-webkit-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-moz-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-ms-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n@-o-keyframes vex-pulse {\n  0% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; }\n  70% {\n    -moz-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    -webkit-box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25);\n    box-shadow: inset 0 0 0 300px rgba(255, 255, 255, 0.25); }\n  100% {\n    -moz-box-shadow: inset 0 0 0 300px transparent;\n    -webkit-box-shadow: inset 0 0 0 300px transparent;\n    box-shadow: inset 0 0 0 300px transparent; } }\n\n.vex.vex-theme-wireframe {\n  padding-top: 160px;\n  padding-bottom: 160px; }\n  .vex.vex-theme-wireframe .vex-overlay {\n    background: rgba(255, 255, 255, 0.4); }\n  .vex.vex-theme-wireframe .vex-content {\n    font-family: \"Helvetica Neue\", sans-serif;\n    background: #fff;\n    color: #000;\n    border: 2px solid #000;\n    padding: 2em;\n    position: relative;\n    margin: 0 auto;\n    max-width: 100%;\n    width: 400px;\n    font-size: 1.1em;\n    line-height: 1.5em; }\n    .vex.vex-theme-wireframe .vex-content h1, .vex.vex-theme-wireframe .vex-content h2, .vex.vex-theme-wireframe .vex-content h3, .vex.vex-theme-wireframe .vex-content h4, .vex.vex-theme-wireframe .vex-content h5, .vex.vex-theme-wireframe .vex-content h6, .vex.vex-theme-wireframe .vex-content p, .vex.vex-theme-wireframe .vex-content ul, .vex.vex-theme-wireframe .vex-content li {\n      color: inherit; }\n  .vex.vex-theme-wireframe .vex-close {\n    position: absolute;\n    top: 0;\n    right: 0;\n    cursor: pointer; }\n    .vex.vex-theme-wireframe .vex-close:before {\n      position: absolute;\n      content: \"\\D7\";\n      font-size: 40px;\n      font-weight: normal;\n      line-height: 80px;\n      height: 80px;\n      width: 80px;\n      text-align: center;\n      top: 3px;\n      right: 3px;\n      color: #000; }\n    .vex.vex-theme-wireframe .vex-close:hover:before, .vex.vex-theme-wireframe .vex-close:active:before {\n      color: #000; }\n  .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-message {\n    margin-bottom: .5em; }\n  .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input {\n    margin-bottom: 1em; }\n    .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input textarea, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"date\"], .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"datetime\"], .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"], .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"email\"], .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"month\"], .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"number\"], .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"password\"], .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"search\"], .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"tel\"], .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"text\"], .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"time\"], .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"url\"], .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"week\"] {\n      background: #fff;\n      width: 100%;\n      padding: .25em .67em;\n      font-family: inherit;\n      font-weight: inherit;\n      font-size: inherit;\n      min-height: 2.5em;\n      margin: 0 0 .25em;\n      border: 2px solid #000; }\n      .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input textarea:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"date\"]:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"datetime\"]:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"datetime-local\"]:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"email\"]:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"month\"]:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"number\"]:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"password\"]:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"search\"]:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"tel\"]:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"text\"]:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"time\"]:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"url\"]:focus, .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-input input[type=\"week\"]:focus {\n        border-style: dashed;\n        outline: none; }\n  .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-buttons {\n    *zoom: 1; }\n    .vex.vex-theme-wireframe .vex-dialog-form .vex-dialog-buttons:after {\n      content: \"\";\n      display: table;\n      clear: both; }\n  .vex.vex-theme-wireframe .vex-dialog-button {\n    -moz-border-radius: 0;\n    -webkit-border-radius: 0;\n    border-radius: 0;\n    border: 0;\n    float: right;\n    margin: 0 0 0 .5em;\n    font-family: inherit;\n    text-transform: uppercase;\n    letter-spacing: .1em;\n    font-size: .8em;\n    line-height: 1em;\n    padding: .75em 2em; }\n    .vex.vex-theme-wireframe .vex-dialog-button.vex-last {\n      margin-left: 0; }\n    .vex.vex-theme-wireframe .vex-dialog-button:focus {\n      animation: vex-pulse 1.1s infinite;\n      -webkit-animation: vex-pulse 1.1s infinite;\n      -moz-animation: vex-pulse 1.1s infinite;\n      -ms-animation: vex-pulse 1.1s infinite;\n      -o-animation: vex-pulse 1.1s infinite;\n      -webkit-backface-visibility: hidden;\n      outline: none; }\n      @media (max-width: 568px) {\n        .vex.vex-theme-wireframe .vex-dialog-button:focus {\n          animation: none;\n          -webkit-animation: none;\n          -moz-animation: none;\n          -ms-animation: none;\n          -o-animation: none;\n          -webkit-backface-visibility: hidden; } }\n    .vex.vex-theme-wireframe .vex-dialog-button.vex-dialog-button-primary {\n      background: #000;\n      color: #fff;\n      border: 2px solid transparent; }\n    .vex.vex-theme-wireframe .vex-dialog-button.vex-dialog-button-secondary {\n      background: #fff;\n      color: #000;\n      border: 2px solid #000; }\n\n.vex-loading-spinner.vex-theme-wireframe {\n  height: 2.5em;\n  width: 2.5em; }\n"
 
 /***/ },
 
-/***/ 812:
+/***/ 814:
 /***/ function(module, exports) {
 
 	module.exports = "@keyframes vex-fadein {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@-webkit-keyframes vex-fadein {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@-moz-keyframes vex-fadein {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@-ms-keyframes vex-fadein {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@-o-keyframes vex-fadein {\n  0% {\n    opacity: 0; }\n  100% {\n    opacity: 1; } }\n\n@keyframes vex-fadeout {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n@-webkit-keyframes vex-fadeout {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n@-moz-keyframes vex-fadeout {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n@-ms-keyframes vex-fadeout {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n@-o-keyframes vex-fadeout {\n  0% {\n    opacity: 1; }\n  100% {\n    opacity: 0; } }\n\n@keyframes vex-rotation {\n  0% {\n    transform: rotate(0deg);\n    -webkit-transform: rotate(0deg);\n    -moz-transform: rotate(0deg);\n    -ms-transform: rotate(0deg);\n    -o-transform: rotate(0deg); }\n  100% {\n    transform: rotate(359deg);\n    -webkit-transform: rotate(359deg);\n    -moz-transform: rotate(359deg);\n    -ms-transform: rotate(359deg);\n    -o-transform: rotate(359deg); } }\n\n@-webkit-keyframes vex-rotation {\n  0% {\n    transform: rotate(0deg);\n    -webkit-transform: rotate(0deg);\n    -moz-transform: rotate(0deg);\n    -ms-transform: rotate(0deg);\n    -o-transform: rotate(0deg); }\n  100% {\n    transform: rotate(359deg);\n    -webkit-transform: rotate(359deg);\n    -moz-transform: rotate(359deg);\n    -ms-transform: rotate(359deg);\n    -o-transform: rotate(359deg); } }\n\n@-moz-keyframes vex-rotation {\n  0% {\n    transform: rotate(0deg);\n    -webkit-transform: rotate(0deg);\n    -moz-transform: rotate(0deg);\n    -ms-transform: rotate(0deg);\n    -o-transform: rotate(0deg); }\n  100% {\n    transform: rotate(359deg);\n    -webkit-transform: rotate(359deg);\n    -moz-transform: rotate(359deg);\n    -ms-transform: rotate(359deg);\n    -o-transform: rotate(359deg); } }\n\n@-ms-keyframes vex-rotation {\n  0% {\n    transform: rotate(0deg);\n    -webkit-transform: rotate(0deg);\n    -moz-transform: rotate(0deg);\n    -ms-transform: rotate(0deg);\n    -o-transform: rotate(0deg); }\n  100% {\n    transform: rotate(359deg);\n    -webkit-transform: rotate(359deg);\n    -moz-transform: rotate(359deg);\n    -ms-transform: rotate(359deg);\n    -o-transform: rotate(359deg); } }\n\n@-o-keyframes vex-rotation {\n  0% {\n    transform: rotate(0deg);\n    -webkit-transform: rotate(0deg);\n    -moz-transform: rotate(0deg);\n    -ms-transform: rotate(0deg);\n    -o-transform: rotate(0deg); }\n  100% {\n    transform: rotate(359deg);\n    -webkit-transform: rotate(359deg);\n    -moz-transform: rotate(359deg);\n    -ms-transform: rotate(359deg);\n    -o-transform: rotate(359deg); } }\n\n.vex, .vex *, .vex *:before, .vex *:after {\n  -moz-box-sizing: border-box;\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box; }\n\n.vex {\n  position: fixed;\n  overflow: auto;\n  -webkit-overflow-scrolling: touch;\n  z-index: 1111;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0; }\n\n.vex-scrollbar-measure {\n  position: absolute;\n  top: -9999px;\n  width: 50px;\n  height: 50px;\n  overflow: scroll; }\n\n.vex-overlay {\n  background: #000;\n  filter: alpha(opacity=40);\n  -ms-filter: \"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)\"; }\n\n.vex-overlay {\n  animation: vex-fadein 0.5s;\n  -webkit-animation: vex-fadein 0.5s;\n  -moz-animation: vex-fadein 0.5s;\n  -ms-animation: vex-fadein 0.5s;\n  -o-animation: vex-fadein 0.5s;\n  -webkit-backface-visibility: hidden;\n  position: fixed;\n  background: rgba(0, 0, 0, 0.4);\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0; }\n  .vex.vex-closing .vex-overlay {\n    animation: vex-fadeout 0.5s;\n    -webkit-animation: vex-fadeout 0.5s;\n    -moz-animation: vex-fadeout 0.5s;\n    -ms-animation: vex-fadeout 0.5s;\n    -o-animation: vex-fadeout 0.5s;\n    -webkit-backface-visibility: hidden; }\n\n.vex-content {\n  animation: vex-fadein 0.5s;\n  -webkit-animation: vex-fadein 0.5s;\n  -moz-animation: vex-fadein 0.5s;\n  -ms-animation: vex-fadein 0.5s;\n  -o-animation: vex-fadein 0.5s;\n  -webkit-backface-visibility: hidden;\n  background: #fff; }\n  .vex.vex-closing .vex-content {\n    animation: vex-fadeout 0.5s;\n    -webkit-animation: vex-fadeout 0.5s;\n    -moz-animation: vex-fadeout 0.5s;\n    -ms-animation: vex-fadeout 0.5s;\n    -o-animation: vex-fadeout 0.5s;\n    -webkit-backface-visibility: hidden; }\n\n.vex-close:before {\n  font-family: Arial, sans-serif;\n  content: \"\\D7\"; }\n\n.vex-dialog-form {\n  margin: 0; }\n\n.vex-dialog-button {\n  text-rendering: optimizeLegibility;\n  -moz-appearance: none;\n  -webkit-appearance: none;\n  cursor: pointer;\n  -webkit-tap-highlight-color: transparent; }\n\n.vex-loading-spinner {\n  animation: vex-rotation 0.7s linear infinite;\n  -webkit-animation: vex-rotation 0.7s linear infinite;\n  -moz-animation: vex-rotation 0.7s linear infinite;\n  -ms-animation: vex-rotation 0.7s linear infinite;\n  -o-animation: vex-rotation 0.7s linear infinite;\n  -webkit-backface-visibility: hidden;\n  -moz-box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);\n  -webkit-box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);\n  box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);\n  position: fixed;\n  z-index: 1112;\n  margin: auto;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  height: 2em;\n  width: 2em;\n  background: #fff; }\n\nbody.vex-open {\n  overflow: hidden; }\n"
@@ -4629,7 +4715,7 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var LoginDialog = (function () {
 	    function LoginDialog(dialog) {
 	        this.dialog = dialog;
@@ -4651,7 +4737,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 720:
+/***/ 721:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -4722,7 +4808,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 721:
+/***/ 722:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4737,10 +4823,10 @@ webpackJsonp([2],{
 	};
 	var core_1 = __webpack_require__(1);
 	var common_1 = __webpack_require__(22);
-	var forms_1 = __webpack_require__(373);
+	var forms_1 = __webpack_require__(230);
 	var vex_1 = __webpack_require__(410);
 	var shared_module_1 = __webpack_require__(170);
-	var vex_demo_routes_1 = __webpack_require__(722);
+	var vex_demo_routes_1 = __webpack_require__(723);
 	var vex_demo_1 = __webpack_require__(426);
 	var login_dialog_1 = __webpack_require__(425);
 	var VexDemoModule = (function () {
@@ -4761,7 +4847,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 722:
+/***/ 723:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4774,7 +4860,7 @@ webpackJsonp([2],{
 
 /***/ },
 
-/***/ 729:
+/***/ 731:
 /***/ function(module, exports) {
 
 	module.exports = "<demo-head title=\"VEX dialog plugin\"\n           description=\"An implementation of <a href='http://github.hubspot.com/vex/docs/welcome/' target='_blank'>VEX</a>\"\n           [modalCommands]=\"modalCommands\">\n    <div extra-desc-content>\n        <div class=\"row\">\n            <div class=\"col-xs-12\">\n                <div class=\"form-group\">\n                    <label class=\"col-md-4 control-label\" for=\"theme\">Select a VEX Theme:</label>\n                    <div class=\"col-md-6\">\n                        <select id=\"theme\" name=\"theme\" class=\"form-control\" [(ngModel)]=\"theme\">\n                            <option value=\"default\">default</option>\n                            <option value=\"os\">os</option>\n                            <option value=\"plain\">plain</option>\n                            <option value=\"wireframe\">wireframe</option>\n                            <option value=\"flat-attack\">flat-attack</option>\n                            <option value=\"top\">top</option>\n                            <option value=\"bottom-right-corner\">bottom-right-corner</option>\n                        </select>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <br><br>\n    </div>\n</demo-head>\n<template #templateRef let-dialogRef=\"dialogRef\" let-ctx=\"dialogRef.context\">\n    <div style=\"padding: 10px\">\n        <div class=\"page-header\">\n            <h1>TemplateRef Example</h1>\n        </div>\n        <div class=\"jumbotron\">\n            <h1>Hello, modal!</h1>\n            <p> I'm a declarative TemplateRef!</p>\n            <p>TemplateRef can also access the DialogRef for context and modal control:</p>\n            <pre>{{ ctx | json }}</pre>\n            <button class=\"btn btn-primary\" (click)=\"dialogRef.close(true)\">Close Me</button>\n        </div>\n    </div>\n</template>"
@@ -4795,10 +4881,10 @@ webpackJsonp([2],{
 	    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 	};
 	var core_1 = __webpack_require__(1);
-	var angular2_modal_1 = __webpack_require__(8);
+	var angular2_modal_1 = __webpack_require__(7);
 	var vex_1 = __webpack_require__(410);
 	var index_1 = __webpack_require__(418);
-	var presets = __webpack_require__(720);
+	var presets = __webpack_require__(721);
 	var login_dialog_1 = __webpack_require__(425);
 	var VexDemo = (function () {
 	    function VexDemo(modal) {
@@ -4871,16 +4957,16 @@ webpackJsonp([2],{
 	        core_1.Component({
 	            selector: 'vex-demo',
 	            styles: [
-	                __webpack_require__(812),
-	                __webpack_require__(806),
+	                __webpack_require__(814),
 	                __webpack_require__(808),
-	                __webpack_require__(809),
-	                __webpack_require__(811),
-	                __webpack_require__(807),
 	                __webpack_require__(810),
-	                __webpack_require__(805)
+	                __webpack_require__(811),
+	                __webpack_require__(813),
+	                __webpack_require__(809),
+	                __webpack_require__(812),
+	                __webpack_require__(807)
 	            ],
-	            template: __webpack_require__(729),
+	            template: __webpack_require__(731),
 	            // We override providers set by the Module since this app is using multiple module plugins
 	            // (js-native, vex, bootstrap) which messes up the provider tree (last plugin wins)
 	            // usually an app will use one plugin and this line is not needed.
@@ -4898,4 +4984,4 @@ webpackJsonp([2],{
 /***/ }
 
 });
-//# sourceMappingURL=main.673207ab2648c3b7009c.bundle.map
+//# sourceMappingURL=main.30aa61defb508f9e9eff.bundle.map
