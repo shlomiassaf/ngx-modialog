@@ -3,9 +3,7 @@ import {
   ViewEncapsulation,
   Input,
   Output,
-  EventEmitter,
-  ViewChild,
-  ViewContainerRef
+  EventEmitter
 } from '@angular/core';
 
 import { DialogRef } from '../../../components/angular2-modal';

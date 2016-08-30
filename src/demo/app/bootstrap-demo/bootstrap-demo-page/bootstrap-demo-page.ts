@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 
-import { OverlayConfig } from '../../../../components/angular2-modal';
 import { Modal, BSModalContextBuilder } from '../../../../components/angular2-modal/plugins/bootstrap';
 
 import { ModalCommandDescriptor } from '../../demo-head/index';
@@ -14,7 +13,8 @@ import * as presets from '../presets';
   templateUrl: './bootstrap-demo-page.tpl.html'
 })
 export class BootstrapDemoPage {
-  public modalCommands: ModalCommandDescriptor[];
+  modalCommands: ModalCommandDescriptor[];
+  @ViewChild('templateRef') private templateRef: TemplateRef<any>;
 
   constructor(public modal: Modal) {
     this.modalCommands = [
@@ -39,7 +39,17 @@ export class BootstrapDemoPage {
         factory: () => presets.inElement(this.modal).open('demo-head')
       },
       {
-        text: 'Custom Modal example',
+        text: 'String content',
+        factory: () => this.modal
+          .open('Hello modal!', new BSModalContextBuilder().isBlocking(false).toOverlayConfig())
+      },
+      {
+        text: 'TemplateRef content',
+        factory: () => this.modal
+          .open(this.templateRef, new BSModalContextBuilder().isBlocking(false).toOverlayConfig())
+      },
+      {
+        text: 'Custom Modal content',
         factory: () => {
           const builder = new BSModalContextBuilder<CustomModalContext>(
             { num1: 2, num2: 3 } as any,
@@ -47,14 +57,12 @@ export class BootstrapDemoPage {
             CustomModalContext
           );
 
-          let overlayConfig: OverlayConfig = {
-            context: builder.toJSON()
-          };
 
-          return this.modal.open(CustomModal, overlayConfig);
+          return this.modal.open(CustomModal, builder.toOverlayConfig());
         }
 
       }
     ];
   }
+
 }

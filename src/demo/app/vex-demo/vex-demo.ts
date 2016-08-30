@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, TemplateRef } from '@angular/core';
 
 import {
   VEXBuiltInThemes,
@@ -6,6 +6,7 @@ import {
   DialogPreset,
   DialogFormModal,
   DialogPresetBuilder,
+  VEXModalContextBuilder,
   VexModalModule
 } from '../../../components/angular2-modal/plugins/vex';
 
@@ -36,6 +37,7 @@ export class VexDemo {
   modalCommands: ModalCommandDescriptor[];
   theme: VEXBuiltInThemes = <VEXBuiltInThemes>'default';
   @ViewChild(DemoHead) private demoHead: DemoHead;
+  @ViewChild('templateRef') private templateRef: TemplateRef<any>;
 
   constructor(public modal: Modal) {
 
@@ -59,6 +61,16 @@ export class VexDemo {
       {
         text: 'In Element example',
         factory: () => presets.alert.call(this, this.modal).inElement(true).open('demo-head')
+      },
+      {
+        text: 'String content',
+        factory: () => this.modal
+          .open('Hello modal!', new VEXModalContextBuilder().isBlocking(false).toOverlayConfig())
+      },
+      {
+        text: 'TemplateRef content',
+        factory: () => this.modal
+          .open(this.templateRef, new VEXModalContextBuilder().isBlocking(false).toOverlayConfig())
       },
       {
         text: 'Custom Modal example',
