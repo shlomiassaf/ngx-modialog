@@ -1,9 +1,10 @@
 import { Observable } from "rxjs";
 import 'rxjs/add/operator/first';
 
-import { Injectable, ResolvedReflectiveProvider as RRP } from '@angular/core';
+import { Injectable, ResolvedReflectiveProvider as RRP, Renderer } from '@angular/core';
 
 import {
+  ContainerContent,
   Maybe,
   Overlay,
   DialogRef,
@@ -19,8 +20,8 @@ import { DropInPresetBuilder } from './presets/dropin-preset';
 
 @Injectable()
 export class Modal extends Modal_ {
-  constructor(base: Overlay) {
-    super(base);
+  constructor(overlay: Overlay, renderer: Renderer) {
+    super(overlay, renderer);
   }
 
   alert(): DropInPresetBuilder {
@@ -42,16 +43,15 @@ export class Modal extends Modal_ {
   }
 
   protected create(dialogRef: DialogRef<any>,
-                   type: any,
+                   content: ContainerContent,
                    bindings?: RRP[]): Maybe<DialogRef<any>> {
 
-    let refs = this.createModal(dialogRef, CSSBackdrop, CSSDialogContainer);
-
-    refs.containerRef.instance.addComponent(type, bindings);
+    const backdropRef = this.createBackdrop(dialogRef, CSSBackdrop);
+    const containerRef = this.createContainer(dialogRef, CSSDialogContainer, content, bindings);
 
     let overlay = dialogRef.overlayRef.instance;
-    let backdrop = refs.backdropRef.instance;
-    let container = refs.containerRef.instance;
+    let backdrop = backdropRef.instance;
+    let container = containerRef.instance;
 
     dialogRef.inElement ? overlay.insideElement() : overlay.fullscreen();
 
@@ -69,8 +69,8 @@ export class Modal extends Modal_ {
       container.setStyle('margin-top', '20px');
     }
 
-    if (refs.containerRef.location.nativeElement) {
-      refs.containerRef.location.nativeElement.focus();
+    if (containerRef.location.nativeElement) {
+      containerRef.location.nativeElement.focus();
     }
 
     if (dialogRef.context.className === 'bottom-right-corner') {
@@ -96,7 +96,7 @@ export class Modal extends Modal_ {
     });
 
 
-    overlay.setClickBoundary(refs.containerRef.location.nativeElement);
+    overlay.setClickBoundary(containerRef.location.nativeElement);
 
     return dialogRef;
   }
