@@ -46,7 +46,7 @@ export class BootstrapDemoPage {
       {
         text: 'TemplateRef content',
         factory: () => this.modal
-          .open(this.templateRef, new BSModalContextBuilder().isBlocking(false).toOverlayConfig())
+          .open(this.templateRef, new BSModalContextBuilder({ abd: 123 } as any).isBlocking(false).toOverlayConfig())
       },
       {
         text: 'Custom Modal content',

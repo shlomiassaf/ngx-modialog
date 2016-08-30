@@ -92,7 +92,7 @@ export abstract class Modal {
     if (typeof content === 'string') {
       nodes = [[this.renderer.createText(null, `${content}`)]];
     } else if (content instanceof TemplateRef) {
-      nodes = [this.overlay.defaultViewContainer.createEmbeddedView(content, dialogRef.context).rootNodes];
+      nodes = [this.overlay.defaultViewContainer.createEmbeddedView(content, { dialogRef }).rootNodes];
     } else {
       nodes = [dialogRef.overlayRef.instance.addEmbeddedComponent({ component: content, bindings: b }).rootNodes];
     }
