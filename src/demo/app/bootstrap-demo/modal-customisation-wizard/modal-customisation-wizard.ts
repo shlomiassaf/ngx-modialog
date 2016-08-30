@@ -8,8 +8,7 @@ import {
 
 @Component({
     selector: 'customize-wizard',
-    templateUrl:
-        './modal-customisation-wizard.tpl.html'
+    templateUrl: './modal-customisation-wizard.tpl.html'
 })
 export class ModalCustomisationWizard {
     type: 'alert' | 'prompt' | 'confirm' = 'alert';

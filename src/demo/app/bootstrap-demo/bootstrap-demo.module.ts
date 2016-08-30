@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { BootstrapModalModule } from '../../../components/angular2-modal/plugins/bootstrap';
 import { SharedModule } from '../shared.module';
 
@@ -11,7 +12,7 @@ import { BootstrapDemoPage } from './bootstrap-demo-page/bootstrap-demo-page';
 import { CustomModal } from './bootstrap-demo-page/custom-modal-sample';
 
 @NgModule({
-  imports: [ CommonModule, BootstrapModalModule, routing, SharedModule ],
+  imports: [ FormsModule, CommonModule, BootstrapModalModule, routing, SharedModule ],
   declarations: [
     BootstrapDemo,
     BootstrapDemoPage,
