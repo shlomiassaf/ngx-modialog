@@ -10,7 +10,7 @@ import {
 
 const DEFAULT_VALUES = {
   className: <VEXBuiltInThemes>'default',
-  overlayClassName: 'vex-overlay/index',
+  overlayClassName: 'vex-overlay',
   contentClassName: 'vex-content',
   closeClassName: 'vex-close'
 };
@@ -37,6 +37,27 @@ export class VEXModalContext extends ModalOpenContext {
   closeClassName: string;
 
   showCloseButton: boolean;
+
+
+  normalize(): void {
+    if (!this.className) {
+      this.className = DEFAULT_VALUES.className;
+    }
+
+    if (!this.overlayClassName) {
+      this.overlayClassName = DEFAULT_VALUES.overlayClassName;
+    }
+
+    if (!this.contentClassName) {
+      this.contentClassName = DEFAULT_VALUES.contentClassName;
+    }
+
+    if (!this.closeClassName) {
+      this.closeClassName = DEFAULT_VALUES.closeClassName;
+    }
+
+    super.normalize();
+  }
 }
 
 export class VEXModalContextBuilder<T extends VEXModalContext> extends ModalOpenContextBuilder<T> {
