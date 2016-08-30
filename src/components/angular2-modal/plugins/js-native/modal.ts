@@ -1,4 +1,4 @@
-import { Injectable,   ResolvedReflectiveProvider as RRP } from '@angular/core';
+import { Injectable, ResolvedReflectiveProvider as RRP, Renderer } from '@angular/core';
 
 import {
   DialogRef,
@@ -12,8 +12,8 @@ import { JSNativePresetBuilder } from './presets/js-native-preset';
 
 @Injectable()
 export class Modal extends Modal_ {
-  constructor(overlay: Overlay) {
-    super(overlay);
+  constructor(overlay: Overlay, renderer: Renderer) {
+    super(overlay, renderer);
   }
 
   alert(): JSNativePresetBuilder {

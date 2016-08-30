@@ -1,6 +1,6 @@
 import {
   Injectable,
-  ReflectiveInjector,
+  Renderer,
   ResolvedReflectiveProvider as RRP
 } from '@angular/core';
 
@@ -8,6 +8,7 @@ import {
   Maybe,
   Overlay,
   DialogRef,
+  ContainerContent,
   Modal as Modal_
 } from '../../../../components/angular2-modal';
 
@@ -16,8 +17,8 @@ import { InAppModalContextBuilder } from './modal-context';
 
 @Injectable()
 export class Modal extends Modal_ {
-  constructor(base: Overlay) {
-    super(base);
+  constructor(overlay: Overlay, renderer: Renderer) {
+    super(overlay, renderer);
   }
 
   alert(): InAppModalContextBuilder {
@@ -25,7 +26,7 @@ export class Modal extends Modal_ {
   }
 
   protected create(dialogRef: DialogRef<any>,
-                   type: any,
+                   content: ContainerContent,
                    bindings?: RRP[]): Maybe<DialogRef<any>> {
     if (dialogRef.inElement) {
       dialogRef.overlayRef.instance.insideElement();
