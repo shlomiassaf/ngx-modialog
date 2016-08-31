@@ -44,10 +44,26 @@ export class BSMessageModalTitle {
 @Component({
   selector: 'modal-body',
   encapsulation: ViewEncapsulation.None,
-  template: `<div [ngClass]="dialog.context.bodyClass" [innerHtml]="dialog.context.message"></div>`
+  styles: [`.form-group {
+    margin-top: 10px;
+  }`],
+  template: `<div [ngClass]="context.bodyClass"> 
+    <div [innerHtml]="context.message"></div>
+      <div *ngIf="context.showInput" class="form-group">
+        <input autofocus 
+            name="bootstrap" 
+            type="text" 
+            class="form-control"
+            [(ngModel)]="context.defaultValue" 
+            placeholder="{{context.placeholder}}">
+      </div>
+    </div>
+`
 })
 export class BSMessageModalBody {
+  private context: MessageModalPreset;
   constructor(public dialog: DialogRef<MessageModalPreset>) {
+    this.context = dialog.context;
   }
 }
 

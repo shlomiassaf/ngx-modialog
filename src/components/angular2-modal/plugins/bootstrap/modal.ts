@@ -19,7 +19,7 @@ import {
 import { BSModalContainer } from './modal-container.component';
 
 import { OneButtonPresetBuilder } from './../bootstrap/presets/one-button-preset';
-import { TwoButtonPresetBuilder } from './../bootstrap/presets/two-button-preset';
+import { TwoButtonPresetBuilder, PromptPresetBuilder } from './../bootstrap/presets/two-button-preset';
 
 
 @Injectable()
@@ -32,8 +32,8 @@ export class Modal extends Modal_ {
     return new OneButtonPresetBuilder(this, <any>{isBlocking: false});
   }
 
-  prompt(): OneButtonPresetBuilder {
-    return new OneButtonPresetBuilder(this, <any>{isBlocking: true, keyboard: null});
+  prompt(): PromptPresetBuilder {
+    return new PromptPresetBuilder(this, <any>{isBlocking: true, keyboard: null});
   }
 
   confirm(): TwoButtonPresetBuilder {

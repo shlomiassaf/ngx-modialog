@@ -16,7 +16,12 @@ export {
 
 export { ModalOpenContext, ModalOpenContextBuilder } from '../../../../components/angular2-modal';
 export { OneButtonPreset, OneButtonPresetBuilder } from './presets/one-button-preset';
-export { TwoButtonPreset, TwoButtonPresetBuilder } from './presets/two-button-preset';
+export { 
+  TwoButtonPreset, 
+  TwoButtonPresetBuilder, 
+  PromptPreset, 
+  PromptPresetBuilder 
+} from './presets/two-button-preset';
 export { Modal } from './modal';
 
 export { BootstrapModalModule } from './bootstrap.module';
