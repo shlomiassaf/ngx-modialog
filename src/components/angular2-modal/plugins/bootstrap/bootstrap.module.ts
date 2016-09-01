@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 import { ModalModule, Modal as BaseModal } from '../../../../components/angular2-modal';
 
@@ -21,7 +20,7 @@ function getProviders(): any[] {
 }
 
 @NgModule({
-  imports: [ ModalModule, CommonModule, FormsModule ],
+  imports: [ ModalModule, CommonModule ],
   declarations: [
     BSModalFooter,
     BSMessageModalTitle,
