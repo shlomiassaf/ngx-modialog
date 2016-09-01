@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 import { DialogRef, ModalComponent } from '../../../../components/angular2-modal';
 
@@ -54,23 +54,18 @@ export class BSMessageModalTitle {
             name="bootstrap" 
             type="text" 
             class="form-control"
+            [value]="context.defaultValue"
             (change)="context.defaultValue = input.value"  
             placeholder="{{context.placeholder}}">
       </div>
     </div>
 `
 })
-export class BSMessageModalBody implements AfterViewInit {
+export class BSMessageModalBody {
   private context: MessageModalPreset;
-  @ViewChild('input') private inputElement: ElementRef;
+
   constructor(public dialog: DialogRef<MessageModalPreset>) {
     this.context = dialog.context;
-  }
-
-  ngAfterViewInit() {
-    const ctx = this.context as any;
-    if (ctx.showInput && this.inputElement && ctx.defaultValue != null)
-      this.inputElement.nativeElement.value = ctx.defaultValue;
   }
 }
 
