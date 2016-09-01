@@ -1,3 +1,19 @@
+<a name="2.0.0-beta.12"></a>
+# [2.0.0-beta.12](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.11...v2.0.0-beta.12) (2016-09-01)
+
+
+### Bug Fixes
+
+* **bootstrap:** removed the dependency of the FormModule in the prompt modal ([07fcce8](https://github.com/shlomiassaf/angular2-modal/commit/07fcce8))
+* remove `Renderer` use in the `Modal` service, create projetables in the overlay component ([71a5c2c](https://github.com/shlomiassaf/angular2-modal/commit/71a5c2c)), closes [#174](https://github.com/shlomiassaf/angular2-modal/issues/174) [#175](https://github.com/shlomiassaf/angular2-modal/issues/175)
+
+
+### Features
+
+* **bootstrap:** Added proper prompt support in bootstrap. closes #https://github.com/shlomiassaf/angular2-modal/issues/119 ([329f987](https://github.com/shlomiassaf/angular2-modal/commit/329f987))
+
+
+
 <a name="2.0.0-beta.11"></a>
 # [2.0.0-beta.11](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.9...v2.0.0-beta.11) (2016-08-30)
 
