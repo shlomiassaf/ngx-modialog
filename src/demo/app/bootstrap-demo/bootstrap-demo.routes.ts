@@ -7,7 +7,7 @@ import { ModalCustomisationWizard } from './modal-customisation-wizard/modal-cus
 
 export const routing: ModuleWithProviders = RouterModule.forChild([
   { path: 'bootstrap-demo', component: BootstrapDemo, children: [
-      { path: '', component: BootstrapDemoPage, terminal: true },
+      { path: '', component: BootstrapDemoPage, pathMatch: 'full'},
       { path: 'customizeModals', component: ModalCustomisationWizard }
     ]
   }

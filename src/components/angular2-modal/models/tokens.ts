@@ -19,7 +19,7 @@ export enum DROP_IN_TYPE {
 
 export type WideVCRef = ViewContainerRef | string;
 
-export type ContainerContent = string | TemplateRef<any> | Type;
+export type ContainerContent = string | TemplateRef<any> | Type<any>;
 
 export interface OverlayPlugin extends Function {
   <T>(component: any, dialogRef: DialogRef<T>, config: OverlayConfig): Maybe<DialogRef<any>>;

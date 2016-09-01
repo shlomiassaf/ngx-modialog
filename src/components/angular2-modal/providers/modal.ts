@@ -82,7 +82,7 @@ export abstract class Modal {
   protected createContainer<T>(
     dialogRef: DialogRef<any>,
     ContainerComponent: Class<T>,
-    content: string | TemplateRef<any> | Type,
+    content: string | TemplateRef<any> | Type<any>,
     bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {
 
     const b = ReflectiveInjector.resolve([{provide: DialogRef, useValue: dialogRef}])

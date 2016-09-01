@@ -23,7 +23,7 @@ const DEFAULT_SETTERS = [
  */
 export class DialogPreset extends VEXModalContext {
   defaultResult: any;
-  content: Type;
+  content: Type<any>;
   buttons: VEXButtonConfig[];
 }
 
@@ -37,7 +37,7 @@ extends VEXModalContextBuilder<T> {
   /**
    * the message to display on the modal.
    */
-  content: FluentAssignMethod<Type, this>;
+  content: FluentAssignMethod<Type<any>, this>;
 
   constructor(modal: Modal,
               defaultValues: T = undefined,

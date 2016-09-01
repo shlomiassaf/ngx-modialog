@@ -82,7 +82,7 @@ export class BaseDynamicComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.animationEnd && !this.animationEnd.isUnsubscribed) {
+    if (this.animationEnd && !this.animationEnd.closed) {
       this.animationEnd.complete();
     }
   }
@@ -115,7 +115,7 @@ export class BaseDynamicComponent implements OnDestroy {
 
   private onEnd(event: TransitionEvent | AnimationEvent): void {
 
-    if (!this.animationEnd.isUnsubscribed) {
+    if (!this.animationEnd.closed) {
       this.animationEnd.next(event);
     }
   }

@@ -36,15 +36,15 @@
     "start": "npm run server:dev"
   },
   "dependencies": {
-    "@angular/common": "2.0.0-rc.5",
-    "@angular/compiler": "2.0.0-rc.5",
-    "@angular/core": "2.0.0-rc.5",
-    "@angular/forms": "^0.3.0",
-    "@angular/platform-browser": "2.0.0-rc.5",
-    "@angular/platform-browser-dynamic": "2.0.0-rc.5",
-    "@angular/router": "3.0.0-rc.1",
-    "rxjs": "5.0.0-beta.6",
-    "zone.js": "^0.6.12"
+    "@angular/common": "2.0.0-rc.6",
+    "@angular/compiler": "2.0.0-rc.6",
+    "@angular/core": "2.0.0-rc.6",
+    "@angular/forms": "2.0.0-rc.6",
+    "@angular/platform-browser": "2.0.0-rc.6",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.6",
+    "@angular/router": "3.0.0-rc.2",
+    "rxjs": "5.0.0-beta.11",
+    "zone.js": "^0.6.17"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.28",
@@ -99,7 +99,7 @@
     "tsconfig-lint": "^0.6.0",
     "tslint": "^3.5.0 ",
     "tslint-loader": "^2.1.1",
-    "typescript": "^2.0.0",
+    "typescript": "^2.0.2",
     "typings": "^0.3.1",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.9",

@@ -45,7 +45,7 @@ export class ModalModule {
    * @param entryComponents A list of dynamically inserted components (dialog's).
    * @returns {{ngModule: ModalModule, providers: {provide: OpaqueToken, useValue: Array<Type|any[]>, multi: boolean}[]}}
    */
-  static withComponents(entryComponents: Array<Type | any[]>): ModuleWithProviders {
+  static withComponents(entryComponents: Array<Type<any> | any[]>): ModuleWithProviders {
     return {
       ngModule: ModalModule,
       providers: [
@@ -59,7 +59,7 @@ export class ModalModule {
    * @param entryComponents A list of dynamically inserted components (dialog's).
    * @returns ModuleWithProviders
    */
-  static forRoot(entryComponents?: Array<Type | any[]>): ModuleWithProviders {
+  static forRoot(entryComponents?: Array<Type<any> | any[]>): ModuleWithProviders {
     return {
       ngModule: ModalModule,
       providers: [

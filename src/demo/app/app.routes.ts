@@ -5,7 +5,7 @@ import { Home } from './home/home';
 
 export const routes: Routes = [
   { path: 'home', component: Home },
-  { path: '', redirectTo: 'home', terminal: true }
+  { path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);
