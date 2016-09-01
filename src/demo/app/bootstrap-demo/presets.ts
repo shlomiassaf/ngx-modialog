@@ -1,7 +1,8 @@
 import {
   Modal,
   OneButtonPresetBuilder,
-  TwoButtonPresetBuilder
+  TwoButtonPresetBuilder,
+  PromptPresetBuilder
 } from '../../../components/angular2-modal/plugins/bootstrap/index';
 
 export function alert(modal: Modal): OneButtonPresetBuilder {
@@ -22,20 +23,12 @@ export function alert(modal: Modal): OneButtonPresetBuilder {
         </ul>`);
 }
 
-export function prompt(modal: Modal): OneButtonPresetBuilder {
+export function prompt(modal: Modal): PromptPresetBuilder {
   return modal.prompt()
     .size('lg')
     .title('A simple Prompt style modal window')
-    .body(`
-            <h4>Prompt is a classic (title/body/footer) 1 button modal window that 
-            blocks.</h4>
-            <b>Configuration:</b>
-            <ul>
-                <li>Blocks (only button click can dismiss)</li>
-                <li>Size large</li>
-                <li>Keyboard can not dismiss</li>
-                <li>HTML content</li>
-            </ul>`);
+    .placeholder('This is a placeholder')
+    .body('Please type a value!');
 }
 
 export function confirm(modal: Modal): TwoButtonPresetBuilder {
