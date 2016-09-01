@@ -1,6 +1,5 @@
 import {
   Injectable,
-  Renderer,
   ResolvedReflectiveProvider as RRP
 } from '@angular/core';
 
@@ -17,8 +16,8 @@ import { InAppModalContextBuilder } from './modal-context';
 
 @Injectable()
 export class Modal extends Modal_ {
-  constructor(overlay: Overlay, renderer: Renderer) {
-    super(overlay, renderer);
+  constructor(overlay: Overlay) {
+    super(overlay);
   }
 
   alert(): InAppModalContextBuilder {

@@ -10,7 +10,8 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
   Renderer,
-  TemplateRef
+  TemplateRef,
+  Type
 } from '@angular/core';
 
 import { PromiseCompleter, supportsKey } from '../framework/utils';
@@ -53,6 +54,28 @@ export class ModalOverlay extends BaseDynamicComponent {
     this.activateAnimationListener();
   }
 
+  /**
+   * @internal
+   */
+  getProjectables<T> (
+    content: string | TemplateRef<any> | Type<any>,
+    bindings?: ResolvedReflectiveProvider[]): any[][] {
+
+
+    let nodes: any[];
+    if (typeof content === 'string') {
+      nodes = [[this.renderer.createText(null, `${content}`)]];
+    } else if (content instanceof TemplateRef) {
+      nodes = [
+        this.dialogRef.overlay.defaultViewContainer
+          .createEmbeddedView(content, { dialogRef: this.dialogRef }).rootNodes
+      ];
+    } else {
+      nodes = [this.embedComponent({ component: content, bindings: bindings }).rootNodes];
+    }
+
+    return nodes;
+  }
 
   embedComponent(config: EmbedComponentConfig): EmbeddedViewRef<EmbedComponentConfig> {
     return this.vcr.createEmbeddedView(this.template, {

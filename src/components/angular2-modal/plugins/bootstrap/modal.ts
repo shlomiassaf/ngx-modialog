@@ -2,8 +2,7 @@ import 'rxjs/add/operator/combineLatest';
 
 import {
   Injectable,
-  ResolvedReflectiveProvider as RRP,
-  Renderer
+  ResolvedReflectiveProvider as RRP
 } from '@angular/core';
 
 import {
@@ -24,8 +23,8 @@ import { TwoButtonPresetBuilder, PromptPresetBuilder } from './../bootstrap/pres
 
 @Injectable()
 export class Modal extends Modal_ {
-  constructor(overlay: Overlay, renderer: Renderer) {
-    super(overlay, renderer);
+  constructor(overlay: Overlay) {
+    super(overlay);
   }
 
   alert(): OneButtonPresetBuilder {

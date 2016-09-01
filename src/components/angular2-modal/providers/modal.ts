@@ -2,7 +2,7 @@ import {
   ComponentRef,
   TemplateRef,
   ReflectiveInjector,
-  ResolvedReflectiveProvider, Type, Renderer
+  ResolvedReflectiveProvider, Type
 } from '@angular/core';
 
 import { Overlay } from '../overlay/index';
@@ -19,7 +19,7 @@ export class UnsupportedDropInError extends Error {
 }
 
 export abstract class Modal {
-  constructor(public overlay: Overlay, private renderer: Renderer) { }
+  constructor(public overlay: Overlay) { }
 
 
   alert(): ModalControllingContextBuilder<any> {
@@ -88,14 +88,7 @@ export abstract class Modal {
     const b = ReflectiveInjector.resolve([{provide: DialogRef, useValue: dialogRef}])
       .concat(bindings || []);
 
-    let nodes: any[];
-    if (typeof content === 'string') {
-      nodes = [[this.renderer.createText(null, `${content}`)]];
-    } else if (content instanceof TemplateRef) {
-      nodes = [this.overlay.defaultViewContainer.createEmbeddedView(content, { dialogRef }).rootNodes];
-    } else {
-      nodes = [dialogRef.overlayRef.instance.embedComponent({ component: content, bindings: b }).rootNodes];
-    }
+    let nodes: any[] = dialogRef.overlayRef.instance.getProjectables(content, b);
     return dialogRef.overlayRef.instance.addComponent<T>(ContainerComponent, b, nodes);
   }
 

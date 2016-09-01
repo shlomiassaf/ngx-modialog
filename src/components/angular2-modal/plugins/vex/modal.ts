@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 import 'rxjs/add/operator/first';
 
-import { Injectable, ResolvedReflectiveProvider as RRP, Renderer } from '@angular/core';
+import { Injectable, ResolvedReflectiveProvider as RRP } from '@angular/core';
 
 import {
   ContainerContent,
@@ -20,8 +20,8 @@ import { DropInPresetBuilder } from './presets/dropin-preset';
 
 @Injectable()
 export class Modal extends Modal_ {
-  constructor(overlay: Overlay, renderer: Renderer) {
-    super(overlay, renderer);
+  constructor(overlay: Overlay) {
+    super(overlay);
   }
 
   alert(): DropInPresetBuilder {
