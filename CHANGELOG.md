@@ -1,3 +1,8 @@
+<a name="2.0.0-beta.13"></a>
+# [2.0.0-beta.13](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.12...v2.0.0-beta.13) (2016-09-17)
+
+
+
 <a name="2.0.0-beta.12"></a>
 # [2.0.0-beta.12](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.11...v2.0.0-beta.12) (2016-09-01)
 
