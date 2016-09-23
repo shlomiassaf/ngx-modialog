@@ -79,6 +79,7 @@ export class DialogRef<T> {
   dismiss() {
     const _dismiss = () => {
       this.destroy();
+      this._resultDeferred.promise.catch(() => {});
       this._resultDeferred.reject();
     };
     this._fireHook<boolean>('beforeDismiss')
