@@ -15,7 +15,7 @@ import * as presets from '../presets';
 })
 export class BootstrapDemoPage {
   modalCommands: ModalCommandDescriptor[];
-  @ViewChild('templateRef') private templateRef: TemplateRef<any>;
+  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
 
   constructor(public modal: Modal) {
     this.modalCommands = [

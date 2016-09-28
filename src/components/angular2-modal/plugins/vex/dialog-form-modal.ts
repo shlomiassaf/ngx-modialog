@@ -78,7 +78,7 @@ export class VEXDialogButtons {
 </form>`
 })
 export class DialogFormModal implements ModalComponent<DialogPreset> {
-  private context: DialogPreset;
+  public context: DialogPreset;
 
   constructor(public dialog: DialogRef<DialogPreset>) {
     this.context = dialog.context;
@@ -108,7 +108,7 @@ export class DialogFormModal implements ModalComponent<DialogPreset> {
       (click)="dialog.dismiss()"></div>`
 })
 export class FormDropIn implements ModalComponent<DropInPreset> {
-  private context: DropInPreset;
+  public context: DropInPreset;
 
   constructor(public dialog: DialogRef<DropInPreset>) {
     this.context = dialog.context;

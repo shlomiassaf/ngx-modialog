@@ -25,6 +25,7 @@ export class DialogPreset extends VEXModalContext {
   defaultResult: any;
   content: Type<any>;
   buttons: VEXButtonConfig[];
+  showInput: any;
 }
 
 /**

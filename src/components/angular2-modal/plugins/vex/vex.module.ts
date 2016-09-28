@@ -6,7 +6,7 @@ import { ModalModule, Modal as BaseModal } from '../../../../components/angular2
 import { Modal } from './modal';
 import { DialogFormModal, FormDropIn, VEXDialogButtons } from './dialog-form-modal';
 
-function getProviders(): any[] {
+export function getProviders(): any[] {
   return [
     { provide: BaseModal, useClass: Modal },
     { provide: Modal, useClass: Modal }

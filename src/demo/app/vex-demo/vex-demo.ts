@@ -37,8 +37,8 @@ import { LoginDialog } from './login-dialog';
 export class VexDemo {
   modalCommands: ModalCommandDescriptor[];
   theme: VEXBuiltInThemes = <VEXBuiltInThemes>'default';
-  @ViewChild(DemoHead) private demoHead: DemoHead;
-  @ViewChild('templateRef') private templateRef: TemplateRef<any>;
+  @ViewChild(DemoHead) public demoHead: DemoHead;
+  @ViewChild('templateRef') public templateRef: TemplateRef<any>;
 
   constructor(public modal: Modal) {
 

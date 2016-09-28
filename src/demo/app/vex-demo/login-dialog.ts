@@ -23,7 +23,7 @@ import {
 })
 
 export class LoginDialog implements ModalComponent<DialogPreset> {
-  private context: DialogPreset;
+  public context: DialogPreset;
 
   constructor(public dialog: DialogRef<DialogPreset>) {
     this.context = dialog.context;

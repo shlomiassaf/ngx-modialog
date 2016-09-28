@@ -62,7 +62,7 @@ export class BSMessageModalTitle {
 `
 })
 export class BSMessageModalBody {
-  private context: MessageModalPreset;
+  public context: MessageModalPreset;
 
   constructor(public dialog: DialogRef<MessageModalPreset>) {
     this.context = dialog.context;

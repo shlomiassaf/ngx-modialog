@@ -26,5 +26,8 @@
     "dist",
     "gulp",
     "typings"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "genDir": "compiled"
+  }
 }

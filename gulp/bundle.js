@@ -17,7 +17,7 @@ function prepareCommands(pluginName) {
   const rollupRoot = pluginName ? path.join(config.PATHS.pluginDir, pluginName) : '';
 
   return {
-    ts: `./node_modules/.bin/tsc --out ${path.join(config.PATHS.dist.bundles, filename)} --target es5 --allowJs ${path.join(config.PATHS.tmp, filename)}`,
+    ts: `./node_modules/.bin/ngc --out ${path.join(config.PATHS.dist.bundles, filename)} --target es5 --allowJs ${path.join(config.PATHS.tmp, filename)}`,
     rollup: `./node_modules/.bin/rollup -c ${path.join(rollupRoot, ROLLUP_CONFIG)}`
   }
 }
