@@ -9,7 +9,7 @@ export { Modal } from './modal';
 export { InAppModalContext, InAppModalContextBuilder } from './modal-context';
 
 
-function getProviders(): any[] {
+export function getProviders(): any[] {
   return [
     { provide: Modal_, useClass: InAppModal },
     InAppModal

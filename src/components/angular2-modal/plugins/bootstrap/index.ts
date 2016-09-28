@@ -24,4 +24,4 @@ export {
 } from './presets/two-button-preset';
 export { Modal } from './modal';
 
-export { BootstrapModalModule } from './bootstrap.module';
+export { BootstrapModalModule, providers } from './bootstrap.module';

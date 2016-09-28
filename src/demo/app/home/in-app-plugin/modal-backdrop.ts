@@ -82,8 +82,8 @@ article .content {
 </div>`
 })
 export class InAppModalBackdrop {
-  private zoomState: 'in' | 'out' = 'in';
+  public zoomState: 'in' | 'out' = 'in';
 
-  constructor(private dialog: DialogRef<InAppModalContext>) {
+  constructor(public dialog: DialogRef<InAppModalContext>) {
   }
 }

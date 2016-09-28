@@ -6,7 +6,7 @@ import {
   ReflectiveInjector
 } from '@angular/core';
 
-import createComponent from '../framework/createComponent';
+import { createComponent } from '../framework/createComponent';
 import { DialogRef } from '../models/dialog-ref';
 import { OverlayRenderer } from '../models/tokens';
 import { ModalOverlay } from '../overlay/index';

@@ -43,6 +43,10 @@ export class ModalCustomisationWizard {
         fluent.open();
     }
 
+    public logForm(value: any) {
+        // do something
+    }
+
     get code(): string {
         let p = this.preset,
             code = `modal.${this.type}()\n`;
