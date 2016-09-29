@@ -4,7 +4,7 @@ import {
   FluentAssignMethod,
   extend,
   arrayUnion
-} from '../../../angular2-modal';
+} from '../../../../components/angular2-modal';
 
 const DEFAULT_VALUES = {
     dialogClass: 'modal-dialog',

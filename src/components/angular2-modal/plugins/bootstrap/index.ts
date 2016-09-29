@@ -14,7 +14,7 @@ export {
   MessageModalPresetBuilder
 } from './presets/message-modal-preset';
 
-export { ModalOpenContext, ModalOpenContextBuilder } from '../../../angular2-modal';
+export { ModalOpenContext, ModalOpenContextBuilder } from '../../../../components/angular2-modal';
 export { OneButtonPreset, OneButtonPresetBuilder } from './presets/one-button-preset';
 export {
   TwoButtonPreset,
