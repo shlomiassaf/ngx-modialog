@@ -25,5 +25,3 @@ function getInjector(viewContainer: ViewContainerRef, bindings: ResolvedReflecti
     ReflectiveInjector.fromResolvedProviders(bindings, ctxInjector) : ctxInjector;
 
 }
-
-export default createComponent;

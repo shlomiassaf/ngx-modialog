@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ModalModule, Modal as BaseModal } from '../../../../components/angular2-modal';
+import { ModalModule, Modal as BaseModal } from '../../../angular2-modal';
 
 import { Modal } from './modal';
 import { DialogFormModal, FormDropIn, VEXDialogButtons } from './dialog-form-modal';
 
-export function getProviders(): any[] {
-  return [
-    { provide: BaseModal, useClass: Modal },
-    { provide: Modal, useClass: Modal }
-  ];
-}
+export const providers: any[] = [
+  { provide: BaseModal, useClass: Modal },
+  { provide: Modal, useClass: Modal }
+];
 
 @NgModule({
   imports: [ ModalModule, CommonModule ],
@@ -20,7 +18,10 @@ export function getProviders(): any[] {
     FormDropIn,
     DialogFormModal
   ],
-  providers: getProviders(),
+  providers: [
+    { provide: BaseModal, useClass: Modal },
+    { provide: Modal, useClass: Modal }
+  ],
   entryComponents: [
     DialogFormModal,
     FormDropIn
@@ -28,8 +29,8 @@ export function getProviders(): any[] {
 })
 export class VexModalModule {
 
-  static getProviders(): any[] {
-    return getProviders();
-  }
+  // static getProviders(): any[] {
+  //   return getProviders();
+  // }
 
 }
