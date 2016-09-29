@@ -18,10 +18,7 @@ export const providers: any[] = [
     FormDropIn,
     DialogFormModal
   ],
-  providers: [
-    { provide: BaseModal, useClass: Modal },
-    { provide: Modal, useClass: Modal }
-  ],
+  providers,
   entryComponents: [
     DialogFormModal,
     FormDropIn
@@ -29,8 +26,8 @@ export const providers: any[] = [
 })
 export class VexModalModule {
 
-  // static getProviders(): any[] {
-  //   return getProviders();
-  // }
+  static getProviders(): any[] {
+    return providers;
+  }
 
 }

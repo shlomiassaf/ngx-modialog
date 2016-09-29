@@ -26,18 +26,15 @@ export const providers: any[] = [
     BSMessageModal,
     BSModalContainer
   ],
-  providers: [
-    { provide: BaseModal, useClass: Modal },
-    { provide: Modal, useClass: Modal }
-  ],
+  providers,
   entryComponents: [
     BSModalContainer,
     BSMessageModal
   ]
 })
 export class BootstrapModalModule {
-  // static getProviders(): any[] {
-  //   return getProviders();
-  // }
+  static getProviders(): any[] {
+    return providers;
+  }
 }
 

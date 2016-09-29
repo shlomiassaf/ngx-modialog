@@ -10,15 +10,12 @@ export const providers: any[] = [
 ];
 
 @NgModule({
-  providers: [
-    { provide: BaseModal, useClass: Modal },
-    { provide: Modal, useClass: Modal }
-  ]
+  providers
 })
 export class JSNativeModalModule {
 
-  // static getProviders(): any[] {
-  //   return getProviders();
-  // }
+  static getProviders(): any[] {
+    return providers;
+  }
 
 }
