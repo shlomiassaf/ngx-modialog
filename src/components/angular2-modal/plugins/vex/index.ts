@@ -12,5 +12,5 @@ export {
 export { DialogPreset, DialogPresetBuilder } from './presets/dialog-preset';
 
 
-export { VexModalModule } from './vex.module';
+export { VexModalModule, providers } from './vex.module';
 

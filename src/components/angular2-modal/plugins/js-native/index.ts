@@ -8,4 +8,4 @@ export {
 export { JSNativeModalRenderer } from './js-native-modal-renderer';
 export { JSNativePresetBuilder } from './presets/js-native-preset';
 
-export { JSNativeModalModule } from './js-native.module';
+export { JSNativeModalModule, providers } from './js-native.module';

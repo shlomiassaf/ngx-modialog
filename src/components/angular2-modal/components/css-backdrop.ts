@@ -20,6 +20,8 @@ import { BaseDynamicComponent } from './base-dynamic-component';
   template: ``
 })
 export class CSSBackdrop extends BaseDynamicComponent {
+  public cssClass: string;
+  public styleStr: string;
 
   constructor(el: ElementRef, renderer: Renderer) {
     super(el, renderer);

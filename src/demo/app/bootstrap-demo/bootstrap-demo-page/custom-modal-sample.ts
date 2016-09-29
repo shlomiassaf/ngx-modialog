@@ -53,6 +53,7 @@ export class CustomModal implements CloseGuard, ModalComponent<CustomModalContex
   context: CustomModalContext;
 
   public wrongAnswer: boolean;
+  public shouldUseMyClass: boolean;
 
   constructor(public dialog: DialogRef<CustomModalContext>) {
     this.context = dialog.context;

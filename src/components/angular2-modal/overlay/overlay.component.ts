@@ -43,8 +43,8 @@ export interface EmbedComponentConfig {
 })
 export class ModalOverlay extends BaseDynamicComponent {
   private beforeDestroyHandlers: Array<() => Promise<void>>;
-  @ViewChild('innerView', {read: ViewContainerRef}) private innerVcr: ViewContainerRef;
-  @ViewChild('template') private template: TemplateRef<any>;
+  @ViewChild('innerView', {read: ViewContainerRef}) public innerVcr: ViewContainerRef;
+  @ViewChild('template') public template: TemplateRef<any>;
 
   constructor(private dialogRef: DialogRef<any>,
               private vcr: ViewContainerRef,
