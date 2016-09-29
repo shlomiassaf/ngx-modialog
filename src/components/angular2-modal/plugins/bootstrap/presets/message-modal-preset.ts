@@ -4,7 +4,7 @@ import {
   setAssignAlias,
   extend,
   arrayUnion
-} from '../../../../../components/angular2-modal';
+} from '../../../../angular2-modal';
 import {
   BSMessageModal,
   BSMessageModalButtonConfig,
