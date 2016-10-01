@@ -1,6 +1,6 @@
 # Update
 Version 1.1.2 & 2.0.0-beta.3 now support UMD bundles.
-
+Version 2.0.0-beta.14 now supports AoT compilation.
 
 # Angular 2: AIO Modal / Dialog window
 

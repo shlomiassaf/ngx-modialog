@@ -1,4 +1,3 @@
-const transform = require('gulp-transform-js-ast');
 const rename = require('gulp-es6-imports-renamer');
 const replace = require('gulp-replace');
 
@@ -15,38 +14,6 @@ function renameFn(originalPath, parentPath, callback) {
   }
 }
 
-const visitCallExpression = (function() {
-  function isRequireMethod (path) {
-    var node = path.value;
-
-    return node.type === 'CallExpression' &&
-      node.callee &&
-      node.callee.type === 'Identifier' &&
-      node.callee.name === 'require';
-  }
-
-  function isLiteral(path) {
-    var args = path.value.arguments;
-    return args &&
-      args.length === 1 &&
-      args[0].type === 'Literal';
-  }
-
-  function isCandidate(path) {
-    return isRequireMethod(path) && isLiteral(path);
-  }
-
-  return function visitCallExpression(path) {
-    if (isCandidate(path)) {
-      var match,
-        arg = path.value.arguments["0"];
-      if ((match = CORE_IMPORT_REGEX.exec(arg.value)) !== null) {
-        arg.value = arg.value.replace(CORE_IMPORT_REGEX, `${CORE_PACKAGE_NAME}$2`);
-      }
-    }
-    return path.value;
-  }
-})();
 
 
 function tsDefinitionImportRename() {
@@ -54,6 +21,11 @@ function tsDefinitionImportRename() {
   return replace(CORE_IMPORT_REGEX, `$1$2${CORE_PACKAGE_NAME}$4`);
 }
 
+function ngcMetadataRename() {
+  const CORE_IMPORT_REGEX = /(\.\..*?\/components\/angular2-modal)/g;
+  return replace(CORE_IMPORT_REGEX, `${CORE_PACKAGE_NAME}`);
+}
+
 module.exports.tsDefinitionImportRename = tsDefinitionImportRename();
+module.exports.ngcMetadataRename = ngcMetadataRename();
 module.exports.es6ImportRename = rename({renameFn: renameFn});
-module.exports.es5RequireVisitor = transform( { visitCallExpression: visitCallExpression } );

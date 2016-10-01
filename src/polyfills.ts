@@ -38,7 +38,7 @@ if ('production' === ENV) {
 } else {
   // Development
 
-  Error.stackTraceLimit = Infinity;
+  (Error as any).stackTraceLimit = Infinity;
 
   require('zone.js/dist/long-stack-trace-zone');
 

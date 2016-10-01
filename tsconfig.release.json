@@ -1,17 +1,20 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "module": "ES6",
+    "target": "ES6",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "noEmitHelpers": true,
+    "noEmitHelpers": false,
     "noImplicitAny": false,
-    "baseUrl": "./src",
-    "paths": {
-    },
+    "removeComments": false,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "inlineSources": true,
+    "outDir": "dist/esm",
     "lib": [
       "dom",
       "es6"
@@ -28,8 +31,14 @@
     "forkChecker": true,
     "useWebpackText": true
   },
+  "include": [
+    "src/components/**/*"
+  ],
   "exclude": [
     "node_modules",
-    "dist"
+    "node_modules/@types/core-js/index.d.ts",
+    "dist",
+    "gulp",
+    "typings"
   ]
 }
