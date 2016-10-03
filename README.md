@@ -88,8 +88,9 @@ You can apply custom modals based on components.
 
 
 # Issues and TODO's
-## Declarative modal component
-Create a modal from declarative tepmlate syntax
+## ~~Declarative modal component~~ IMPLEMENTED
+~~Create a modal from declarative template syntax~~  
+
 
 ## ~~Animation~~ IMPLEMENTED
 ~~Not so complicated but not in angular 2 at the moment.~~  
