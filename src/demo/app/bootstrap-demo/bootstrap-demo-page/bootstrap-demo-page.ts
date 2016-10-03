@@ -69,9 +69,10 @@ export class BootstrapDemoPage {
           }
 
           return runtimeModuleRefPromise.then(module => {
-              return this.modal.open(RuntimeCompiledComponent, overlayConfigFactory({isBlocking: false}, BSModalContext, {
-                injector: module.injector
-              }));
+              return this.modal
+                .open(RuntimeCompiledComponent, overlayConfigFactory({isBlocking: false}, BSModalContext, {
+                  injector: module.injector
+                }));
             });
         }
       }

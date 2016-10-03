@@ -33,7 +33,7 @@
     "build-site": "npm run build-site:prod",
     "build-site:prod": "webpack --config config/webpack.prod.js --progress --profile --bail",
     "github-deploy": "npm run github-deploy:prod",
-    "github-deploy:prod": "webpack --config config/webpack.github-deploy.js --progress --profile --github-prod",
+    "github-deploy:prod": "webpack --config config/webpack.github-deploy.js --progress --profile",
     "start": "npm run server:dev"
   },
   "dependencies": {

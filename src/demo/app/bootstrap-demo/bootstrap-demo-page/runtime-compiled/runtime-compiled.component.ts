@@ -18,11 +18,37 @@ let runtimeModuleRefPromise: Promise<NgModuleRef<any>>;
   <p>To JIT compile another (different) module inside this (JIT) compiled module press the button below.
   The value selected on the popup opened will bubble down.</p>
   <button class="btn btn-primary" (click)="openModal()">Compile and open again!</button>
+  
+  <hr>
+  
+  <p>To demonstrate opening a JIT compiled component inside a view container ref that was created before the component was compiled press the button below.</p>
+  <button class="btn btn-warning" (click)="openInElement()">Open in element!</button>
 </div>`
 })
 export class RuntimeCompiledComponent {
+  private toKill: DialogRef<any>[] = [];
+
   constructor(private dialogRef: DialogRef<any>, private compiler: Compiler, private modal: Modal) {
 
+  }
+
+  openInElement() {
+    if (!runtimeModuleRefPromise) {
+      runtimeModuleRefPromise = this.compiler.compileModuleAsync(InnerRuntimeCompiledModule)
+        .then(moduleFactory => moduleFactory.create(this.modal.overlay.defaultViewContainer.parentInjector));
+    }
+
+    runtimeModuleRefPromise
+      .then( module => overlayConfigFactory({inElement: true}, BSModalContext, { injector: module.injector, viewContainer: 'demo-head' }) )
+      .then( overlayConfig => this.modal.open(InnerRuntimeCompiledComponent, overlayConfig) )
+      .then( dialogRef => this.toKill.push(dialogRef) );
+  }
+
+  ngOnDestroy(): void {
+    let dlgRef: DialogRef<any>;
+    while(dlgRef = this.toKill.pop()) {
+      dlgRef.close('');
+    }
   }
 
   openModal(): void {
