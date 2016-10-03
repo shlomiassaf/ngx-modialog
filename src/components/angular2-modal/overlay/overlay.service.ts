@@ -86,7 +86,7 @@ export class Overlay {
     let dialog = new DialogRef<any>(this, config.context || {});
     dialog.inElement = config.context && !!config.context.inElement;
 
-    let cmpRef = renderer.render(dialog, vcRef);
+    let cmpRef = renderer.render(dialog, vcRef, config.injector);
 
     Object.defineProperty(dialog, 'overlayRef', {value: cmpRef});
     _stack.pushManaged(dialog, group);

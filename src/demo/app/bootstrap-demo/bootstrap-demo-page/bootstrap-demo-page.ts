@@ -1,4 +1,4 @@
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Compiler, Component, Injector, TemplateRef, ViewChild, NgModuleRef } from '@angular/core';
 
 import { overlayConfigFactory } from "../../../../components/angular2-modal";
 import { Modal, BSModalContext } from '../../../../components/angular2-modal/plugins/bootstrap';
@@ -7,6 +7,9 @@ import { ModalCommandDescriptor } from '../../demo-head/index';
 import { CustomModal } from './custom-modal-sample';
 import * as presets from '../presets';
 
+import { RuntimeCompiledModule, RuntimeCompiledComponent } from './runtime-compiled';
+
+let runtimeModuleRefPromise: Promise<NgModuleRef<any>>;
 
 @Component({
   selector: 'bootstrap-demo-page',
@@ -17,7 +20,7 @@ export class BootstrapDemoPage {
   modalCommands: ModalCommandDescriptor[];
   @ViewChild('templateRef') public templateRef: TemplateRef<any>;
 
-  constructor(public modal: Modal) {
+  constructor(public modal: Modal, private compiler: Compiler, private injector: Injector) {
     this.modalCommands = [
       {
         text: 'alert drop in',
@@ -56,6 +59,21 @@ export class BootstrapDemoPage {
           // we set the baseContextType to BSModalContext so the defaults for bootstrap will apply
         }
 
+      },
+      {
+        text: 'JIT Compiled component',
+        factory: () => {
+          if (!runtimeModuleRefPromise) {
+            runtimeModuleRefPromise = this.compiler.compileModuleAsync(RuntimeCompiledModule)
+              .then(moduleFactory => moduleFactory.create(this.injector));
+          }
+
+          return runtimeModuleRefPromise.then(module => {
+              return this.modal.open(RuntimeCompiledComponent, overlayConfigFactory({isBlocking: false}, BSModalContext, {
+                injector: module.injector
+              }));
+            });
+        }
       }
     ];
   }

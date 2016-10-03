@@ -1,7 +1,7 @@
 import {
   ViewContainerRef,
-  ComponentFactoryResolver,
   ComponentRef,
+  Injector,
   Injectable,
   ReflectiveInjector
 } from '@angular/core';
@@ -13,15 +13,18 @@ import { ModalOverlay } from '../overlay/index';
 
 @Injectable()
 export class DOMOverlayRenderer implements OverlayRenderer {
-  constructor(private _cr: ComponentFactoryResolver) {
-  }
 
-  render(dialog: DialogRef<any>, vcRef: ViewContainerRef): ComponentRef<ModalOverlay> {
-    const b = ReflectiveInjector.resolve([
+  render(dialog: DialogRef<any>, vcRef: ViewContainerRef, injector?: Injector): ComponentRef<ModalOverlay> {
+    const bindings = ReflectiveInjector.resolve([
       { provide: DialogRef, useValue: dialog }
     ]);
 
-    const cmpRef = createComponent(this._cr, ModalOverlay, vcRef, b);
+    const cmpRef = createComponent({
+      component: ModalOverlay,
+      vcRef,
+      injector,
+      bindings
+    });
 
     if (dialog.inElement) {
       vcRef.element.nativeElement.appendChild(cmpRef.location.nativeElement);

@@ -1,5 +1,6 @@
 import {
   ComponentRef,
+  Injector,
   ViewContainerRef,
   TemplateRef,
   Type,
@@ -31,6 +32,8 @@ export interface OverlayConfig {
    * Default: {}
    */
   context?: OverlayContext;
+
+  injector?: Injector;
 
   /**
    * Resolved providers that will inject into the component provided.
@@ -71,5 +74,6 @@ export interface CloseGuard {
 
 export abstract class OverlayRenderer {
   public abstract render(dialogRef: DialogRef<any>,
-                         vcRef: ViewContainerRef): ComponentRef<ModalOverlay>;
+                         vcRef: ViewContainerRef,
+                         injector?: Injector): ComponentRef<ModalOverlay>;
 }

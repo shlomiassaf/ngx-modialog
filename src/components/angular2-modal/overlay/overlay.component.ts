@@ -84,7 +84,12 @@ export class ModalOverlay extends BaseDynamicComponent {
   }
 
   addComponent<T>(type: any, bindings: ResolvedReflectiveProvider[] = [], projectableNodes: any[][] = []): ComponentRef<T> {
-    return super._addComponent<T>(type, this.innerVcr, bindings, projectableNodes);
+    return super._addComponent<T>({
+      component: type,
+      vcRef: this.innerVcr,
+      bindings,
+      projectableNodes
+    });
   }
 
   fullscreen(): void {
