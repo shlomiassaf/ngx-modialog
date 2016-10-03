@@ -1,18 +1,17 @@
 import {
   ComponentRef,
-  ComponentFactoryResolver,
   ElementRef,
   ResolvedReflectiveProvider,
   OnDestroy,
   ViewContainerRef,
-  Renderer, TemplateRef, Type
+  Renderer
 } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/filter';
 
-import { createComponent } from '../framework/createComponent';
+import { createComponent, CreateComponentArgs } from '../framework/createComponent';
 
 const BROWSER_PREFIX = ['webkit', 'moz', 'MS', 'o', ''];
 
@@ -95,18 +94,13 @@ export class BaseDynamicComponent implements OnDestroy {
   /**
    * Add a component, supply a view container ref.
    * Note: The components vcRef will result in a sibling.
-   * @param type The component to add
+   * @param component The component to add
    * @param vcRef The container to add to
    * @param bindings Bindings to use (added on top of the ViewContainerRef)
    * @returns {Promise<ComponentRef<any>>}
    */
-  protected _addComponent<T>(type: any,
-                             vcRef: ViewContainerRef,
-                             bindings: ResolvedReflectiveProvider[] = [],
-                             projectableNodes: any[][] = []): ComponentRef<T> {
-    const cmpRef =
-      createComponent(vcRef.injector.get(ComponentFactoryResolver), type, vcRef, bindings, projectableNodes);
-
+  protected _addComponent<T>(instructions: CreateComponentArgs): ComponentRef<T> {
+    const cmpRef = createComponent(instructions);
     cmpRef.changeDetectorRef.detectChanges();
 
     return cmpRef;

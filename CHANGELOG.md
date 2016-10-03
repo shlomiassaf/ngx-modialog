@@ -1,3 +1,34 @@
+<a name="2.0.0-beta.14"></a>
+# [2.0.0-beta.14](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.13...v2.0.0-beta.14) (2016-10-03)
+
+
+### Bug Fixes
+
+* suppress unhandled rejection ([a383762](https://github.com/shlomiassaf/angular2-modal/commit/a383762)), closes [#188](https://github.com/shlomiassaf/angular2-modal/issues/188)
+
+
+### Code Refactoring
+
+* **build:** refactor to support AoT ([9db8f5e](https://github.com/shlomiassaf/angular2-modal/commit/9db8f5e)), closes [#206](https://github.com/shlomiassaf/angular2-modal/issues/206) [#207](https://github.com/shlomiassaf/angular2-modal/issues/207) [#204](https://github.com/shlomiassaf/angular2-modal/issues/204)
+
+
+### Features
+
+* support setting an injector when creating a modal (overlay). injector is optional. ([c0a9b71](https://github.com/shlomiassaf/angular2-modal/commit/c0a9b71))
+
+
+### BREAKING CHANGES
+
+* build: NPM Package now comes with ES6 Module version (ESM) and an ES5 UMD bundle (1 file), this should'nt have any effect. (CJS version removed)
+ES6 version contains `d.ts` files as well as `metadata.json` files for AoT Compilation.
+
+This breaking change mainly effect the development process of angular2-modal.
+To support AoT a complete restructiing of the NPM package and build process was needed. Some devDependencies removed and some changed.
+Development process is now managed by Webpack 2.
+It is recommended to delete the node_modules directory and `npm install` again.
+
+
+
 <a name="2.0.0-beta.13"></a>
 # [2.0.0-beta.13](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.12...v2.0.0-beta.13) (2016-09-17)
 

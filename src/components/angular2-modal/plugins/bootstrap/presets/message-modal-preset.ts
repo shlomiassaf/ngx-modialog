@@ -83,6 +83,7 @@ export interface MessageModalPreset extends BSModalContext {
   footerClass: string;
 
   buttons: BSMessageModalButtonConfig[];
+  showInput?: any;
 }
 
 /**

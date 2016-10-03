@@ -12,12 +12,10 @@ import {
   BSModalFooter
 } from './message-modal.component';
 
-function getProviders(): any[] {
-  return [
-    { provide: BaseModal, useClass: Modal },
-    { provide: Modal, useClass: Modal }
-  ];
-}
+export const providers: any[] = [
+  { provide: BaseModal, useClass: Modal },
+  { provide: Modal, useClass: Modal }
+];
 
 @NgModule({
   imports: [ ModalModule, CommonModule ],
@@ -28,7 +26,7 @@ function getProviders(): any[] {
     BSMessageModal,
     BSModalContainer
   ],
-  providers: getProviders(),
+  providers,
   entryComponents: [
     BSModalContainer,
     BSMessageModal
@@ -36,7 +34,7 @@ function getProviders(): any[] {
 })
 export class BootstrapModalModule {
   static getProviders(): any[] {
-    return getProviders();
+    return providers;
   }
 }
 

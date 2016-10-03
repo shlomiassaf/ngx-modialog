@@ -1,6 +1,6 @@
 # Update
 Version 1.1.2 & 2.0.0-beta.3 now support UMD bundles.
-
+Version 2.0.0-beta.14 now supports AoT compilation.
 
 # Angular 2: AIO Modal / Dialog window
 
@@ -88,8 +88,9 @@ You can apply custom modals based on components.
 
 
 # Issues and TODO's
-## Declarative modal component
-Create a modal from declarative tepmlate syntax
+## ~~Declarative modal component~~ IMPLEMENTED
+~~Create a modal from declarative template syntax~~  
+
 
 ## ~~Animation~~ IMPLEMENTED
 ~~Not so complicated but not in angular 2 at the moment.~~  

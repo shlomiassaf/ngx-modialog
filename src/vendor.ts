@@ -1,4 +1,5 @@
 // Typescript emit helpers polyfill
+
 import 'ts-helpers';
 
 import '@angular/platform-browser';

@@ -9,7 +9,7 @@ import { InAppModalModule, Modal } from './in-app-plugin/index';
   encapsulation: ViewEncapsulation.None
 })
 export class Home {
-  @ViewChild('myTemplate', {read: TemplateRef}) private myTemplate: TemplateRef<any>;
+  @ViewChild('myTemplate', {read: TemplateRef}) public myTemplate: TemplateRef<any>;
 
   constructor(private modal: Modal) {
   }

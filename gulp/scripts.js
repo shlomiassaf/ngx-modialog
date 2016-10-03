@@ -1,87 +1,77 @@
 const fs = require('fs');
 const path = require('path');
+const exec = require('child_process').exec;
+
+const del = require('del');
 const gulp = require('gulp');
+const runSequence = require('run-sequence');
 const $ = require('gulp-load-plugins')();
+const ngc = require('@angular/compiler-cli');
 const config = require('./config');
-const merge = require('merge2');
 const sourcemaps = require('gulp-sourcemaps');
 const relativeImports = require('./relative-imports');
 
 function replaceSrcDir(path) {
-  path.dirname = path.dirname.replace(/^src\/components\/angular2-modal/ig, ''); // eslint-disable-line no-param-reassign
+  if (path.dirname.indexOf('dist/esm/plugins/') !== 0) {
+    path.dirname = 'dist/esm/plugins/' + path.dirname;
+  }
+  // path.dirname = path.dirname.replace(/^src\/components\/angular2-modal/ig, ''); // eslint-disable-line no-param-reassign
 }
 
 
-gulp.task('scripts:esm', () => {
-  const taskConfig = $.typescript.createProject(config.PATHS.tsConfig, {
-    module: 'ES6',
-    target: 'ES6',
-    moduleResolution: 'node',
-    emitDecoratorMetadata: true,
-    experimentalDecorators: true,
+gulp.task('scripts:esm-ngc', (cb) => {
+  exec('./node_modules/.bin/ngc -p tsconfig.release.json', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    if (err) {
+      cb(err);
+    } else {
+      // delete all *.ngfactory files.
+      del.sync(config.PATHS.dist.esm + '**/*.ngfactory.*');
+      cb();
+    }
   });
+});
+
+
+gulp.task('scripts:esm-rename-js', () => {
   // todo: this emit errors right now because of duplicate ES6 declarations.
   // should be fixed when https://github.com/angular/angular/issues/4882 is included a new Angular2 version.
-  const tsResult = gulp.src(config.PATHS.tsSrcFiles)
-    .pipe($.sourcemaps.init())
-    .pipe($.typescript(taskConfig, undefined, $.typescript.reporter.nullReporter()));
-  return tsResult.js
+
+  return gulp.src(['dist/esm/plugins/**/*.js'])
     .pipe(relativeImports.es6ImportRename)
     .pipe($.header(config.banner, {
       pkg: config.pkg,
     }))
     .pipe($.rename(replaceSrcDir))
-    .pipe($.sourcemaps.write('.'))
-    .pipe(gulp.dest(config.PATHS.dist.esm));
+    .pipe(gulp.dest('.'));
 });
 
 
-gulp.task('scripts:cjs', () => {
-  // todo: figure out why gulp-typescript don't write to the defined root dir (dist)
-  const tsResult = gulp.src([config.PATHS.tsSrcFiles, 'typings/browser.d.ts'])
-    .pipe($.sourcemaps.init())
-    .pipe($.typescript(config.tscConfigCjs));
-
-  return merge([
-    tsResult.dts
-      .pipe(relativeImports.tsDefinitionImportRename)
-      .pipe($.header(config.banner, {
-        pkg: config.pkg,
-      }))
-      .pipe($.rename(replaceSrcDir))
-      .pipe(gulp.dest(config.PATHS.dist.cjs)),
-
-    tsResult.js.pipe($.header(config.banner, {
+gulp.task('scripts:esm-rename-dts', () => {
+  return gulp.src(['dist/esm/plugins/**/*.d.ts'])
+    .pipe(relativeImports.tsDefinitionImportRename)
+    .pipe($.header(config.banner, {
       pkg: config.pkg,
     }))
-      .pipe(relativeImports.es5RequireVisitor)
-      .pipe($.rename(replaceSrcDir))
-      .pipe($.sourcemaps.write('.'))
-      .pipe(gulp.dest(config.PATHS.dist.cjs)),
-  ]);
+    .pipe($.rename(replaceSrcDir))
+    .pipe(gulp.dest('.'));
 });
 
-gulp.task('scripts:test', () => {
-  const tsResult = gulp.src(config.PATHS.tsTestFiles)
-    .pipe(sourcemaps.init())
-    .pipe($.typescript(config.taskConfigCjs));
-
-  // todo: figure out why gulp-typescript don't write to the defined root dir (test-built)
-  function replaceTestDir(path) {
-    path.dirname = path.dirname.replace('test/', ''); // eslint-disable-line no-param-reassign
-  }
-  return merge([
-    tsResult.dts
-      .pipe($.header(config.banner, {
-        pkg: config.pkg,
-      }))
-      .pipe($.rename(replaceTestDir))
-      .pipe(gulp.dest(config.PATHS.testBuilt)),
-    tsResult.js
-      .pipe($.rename(replaceTestDir))
-      .pipe($.sourcemaps.write('.'))
-      .pipe(gulp.dest(config.PATHS.testBuilt)),
-  ]);
+gulp.task('scripts:esm-rename-ngcMetadata', () => {
+  return gulp.src(['dist/esm/plugins/**/*.metadata.json'])
+    .pipe(relativeImports.ngcMetadataRename)
+    .pipe($.rename(replaceSrcDir))
+    .pipe(gulp.dest('.'));
 });
 
-gulp.task('scripts', ['scripts:cjs', 'scripts:esm']);
+gulp.task('scripts:esm', (done) => {
+  runSequence(
+    ['scripts:esm-ngc'],
+    // plugins requires change to import literals, ../../components/angular2-modal -> angular2-modal
+    ['scripts:esm-rename-js', 'scripts:esm-rename-dts', 'scripts:esm-rename-ngcMetadata'],
+    done
+  );
+});
+
+gulp.task('scripts', ['scripts:esm']);
