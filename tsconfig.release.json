@@ -21,7 +21,6 @@
     ],
     "types": [
       "hammerjs",
-      "node",
       "source-map",
       "uglify-js",
       "webpack"
