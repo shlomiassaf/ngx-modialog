@@ -28,10 +28,12 @@ export class BSModalContext extends ModalOpenContext {
     dialogClass: string;
 
     /**
-     * Size of the modal.
-     * 'lg' or 'sm' only.
+     * Size of the modal. 'lg' or 'sm' only.
+     *
+     * If you want to use custom sizes leave this empty and set the dialogClass property.
+     * e.g: dialogClass = 'modal-dialog my-custom-dialog`
      * NOTE: No validation.
-     * Default to ''
+     * Default: ''
      */
     size: BootstrapModalSize;
 
@@ -50,24 +52,24 @@ export class BSModalContext extends ModalOpenContext {
     }
 }
 
-interface Class<T> {
-    new(): T;
-}
 
 export class BSModalContextBuilder<T extends BSModalContext> extends ModalOpenContextBuilder<T> {
-    /**
-     * Size of the modal.
-     * 'lg' or 'sm' only.
-     * NOTE: No validation.
-     * Default to 'lg'
-     */
-    size: FluentAssignMethod<string, this>;
-
     /**
      * A Class for the modal dialog container.
      * Default: modal-dialog
      */
-    dialogClass: FluentAssignMethod<BootstrapModalSize, this>;
+    dialogClass: FluentAssignMethod<string, this>;
+
+    /**
+     * Size of the modal. 'lg' or 'sm' only.
+     *
+     * If you want to use custom sizes leave this empty and set the dialogClass property.
+     * e.g: dialogClass = 'modal-dialog my-custom-dialog`
+     * NOTE: No validation.
+     * Default: ''
+     */
+    size: FluentAssignMethod<BootstrapModalSize, this>;
+
 
     /**
      * When true, show a close button on the top right corner.
