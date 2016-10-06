@@ -1,3 +1,14 @@
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.14...v2.0.1) (2016-10-06)
+
+
+### Bug Fixes
+
+* do not include `node` reference in package output ([5dfc9aa](https://github.com/shlomiassaf/angular2-modal/commit/5dfc9aa)), closes [#213](https://github.com/shlomiassaf/angular2-modal/issues/213)
+* **bootstrap:** set proper types for `size` and `dialogClass` in `BSModalContextBuilder` ([955b02b](https://github.com/shlomiassaf/angular2-modal/commit/955b02b)), closes [#205](https://github.com/shlomiassaf/angular2-modal/issues/205)
+
+
+
 <a name="2.0.0-beta.14"></a>
 # [2.0.0-beta.14](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.13...v2.0.0-beta.14) (2016-10-03)
 
