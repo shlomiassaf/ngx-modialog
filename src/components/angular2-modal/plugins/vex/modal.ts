@@ -1,5 +1,6 @@
 import { Observable } from "rxjs";
 import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/combineLatest';
 
 import { Injectable, ResolvedReflectiveProvider as RRP } from '@angular/core';
 
