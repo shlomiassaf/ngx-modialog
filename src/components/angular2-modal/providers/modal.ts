@@ -89,7 +89,12 @@ export abstract class Modal {
       .concat(bindings || []);
 
     let nodes: any[] = dialogRef.overlayRef.instance.getProjectables(content, b);
-    return dialogRef.overlayRef.instance.addComponent<T>(ContainerComponent, b, nodes);
+
+    let containerRef: ComponentRef<T> = dialogRef.overlayRef.instance.addComponent<T>(ContainerComponent, b, nodes);
+    
+    containerRef.changeDetectorRef.markForCheck();
+
+    return containerRef;
   }
 
 
