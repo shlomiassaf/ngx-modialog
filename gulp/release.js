@@ -4,7 +4,8 @@
 const fs = require('fs');
 const path = require('path');
 const gulp = require('gulp');
-const $ = require('gulp-load-plugins')();
+const conventionalChangelog = require('gulp-conventional-changelog');
+const git = require('gulp-git');
 const config = require('./config');
 
 
@@ -17,7 +18,7 @@ gulp.task('changelog', () =>
   gulp.src('CHANGELOG.md', {
     buffer: false,
   })
-    .pipe($.conventionalChangelog({
+    .pipe(conventionalChangelog({
       preset: 'angular',
     }))
     .pipe(gulp.dest('.'))
@@ -25,21 +26,13 @@ gulp.task('changelog', () =>
 
 gulp.task('createPackageJson', () => {
   const basePkgJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+  const releasePkgJson = JSON.parse(fs.readFileSync('./package.release.json', 'utf8'));
 
-  // remove scripts
-  delete basePkgJson.scripts;
+  Object.keys(releasePkgJson).forEach( key => {
+    basePkgJson[key] = releasePkgJson[key];
+  });
 
-  // remove devDependencies (as there are important for the sourcecode only)
-  delete basePkgJson.devDependencies;
-
-  // transform dependencies to peerDependencies for the release
-  basePkgJson.peerDependencies = Object.assign({}, basePkgJson.dependencies);
-  basePkgJson.dependencies = {};
-  basePkgJson.scripts = {};
-
-  config.removeDeps.forEach( dep => delete basePkgJson.peerDependencies[dep] );
-
-  const filepath = path.join(__dirname, '../dist/package.json');
+  const filepath = path.join(config.PATHS.dist.base, 'package.json');
   fs.writeFileSync(filepath, JSON.stringify(basePkgJson, null, 2), 'utf-8');
 });
 
@@ -51,7 +44,7 @@ gulp.task('create-tag', (cb) => {
   }
 
   const version = getPackageJsonVersion();
-  return $.git.tag(version, `chore(version): ${version}`, (error) => {
+  return git.tag(version, `chore(version): ${version}`, (error) => {
     if (error) {
       return cb(error);
     }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { DialogRef, ModalComponent, CloseGuard } from '../../../../components/angular2-modal';
-import { BSModalContext } from '../../../../components/angular2-modal/plugins/bootstrap/index';
+import { DialogRef, ModalComponent, CloseGuard } from 'angular2-modal';
+import { BSModalContext } from 'angular2-modal/plugins/bootstrap/index';
 
 export class CustomModalContext extends BSModalContext {
   public num1: number;

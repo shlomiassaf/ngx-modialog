@@ -2,7 +2,7 @@ import {
     DialogFormModal,
     DropInPresetBuilder,
     Modal
-} from '../../../components/angular2-modal/plugins/vex';
+} from 'angular2-modal/plugins/vex';
 
 export function alert(modal: Modal): DropInPresetBuilder {
     return modal.alert()

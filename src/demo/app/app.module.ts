@@ -2,7 +2,7 @@ import { NgModule }      from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { BrowserModule } from '@angular/platform-browser';
-import { ModalModule } from '../../components/angular2-modal';
+import { ModalModule } from 'angular2-modal';
 
 import { SharedModule } from './shared.module';
 import { BootstrapDemoModule } from './bootstrap-demo/bootstrap-demo.module';

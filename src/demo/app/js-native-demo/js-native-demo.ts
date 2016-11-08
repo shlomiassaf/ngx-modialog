@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { Modal, JSNativeModalModule, providers } from '../../../components/angular2-modal/plugins/js-native';
+import { Modal, JSNativeModalModule, providers } from 'angular2-modal/plugins/js-native';
 import { ModalCommandDescriptor } from '../demo-head/index';
 import * as presets from './presets';
 

@@ -1,9 +1,9 @@
 import {
     Modal,
     JSNativePresetBuilder
-} from '../../../components/angular2-modal/plugins/js-native';
+} from 'angular2-modal/plugins/js-native';
 
-export { JSNativePresetBuilder } from '../../../components/angular2-modal/plugins/js-native';
+export { JSNativePresetBuilder } from 'angular2-modal/plugins/js-native';
 
 export function alert(modal: Modal): JSNativePresetBuilder {
     return modal.alert().message('This is a native alert!');

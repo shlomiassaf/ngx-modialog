@@ -1,8 +1,8 @@
 const gulp = require('gulp');
 const fs = require('fs');
 const path = require('path');
+const shell = require('gulp-shell');
 const config = require('./config');
-const $ = require('gulp-load-plugins')();
 
 const ROLLUP_CONFIG = 'rollup.config.js';
 
@@ -42,9 +42,9 @@ function getShellCommands() {
 
 const commands = getShellCommands();
 
-gulp.task('rollup:umd', ['scripts'], $.shell.task(commands.rollup));
+gulp.task('rollup:umd', ['scripts'], shell.task(commands.rollup));
 
-gulp.task('bundle:umd', ['rollup:umd'], $.shell.task(commands.ts, { ignoreErrors: true }));
+gulp.task('bundle:umd', ['rollup:umd'], shell.task(commands.ts, { ignoreErrors: true }));
 
 gulp.task('bundle:umd:min', ['bundle:umd'], (done) => {
   done();

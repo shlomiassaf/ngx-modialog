@@ -1,8 +1,6 @@
 const del = require('del');
 const gulp = require('gulp');
-const transform = require('gulp-transform-js-ast');
 require('require-dir')('./gulp');
-const config = require('./gulp/config');
 const runSequence = require('run-sequence');
 
 const distPluginPath = { from: 'dist/esm/plugins/**/*', to: 'dist/plugins' };
@@ -16,7 +14,7 @@ gulp.task('extractPlugins', ['copyDistPlugins'], (done) => {
   done();
 });
 
-gulp.task('build', (done) => {
+gulp.task('release', (done) => {
   runSequence(
     ['clean:dist', 'clean:tmp'],
     ['copyReleaseAssets', 'bundle'],

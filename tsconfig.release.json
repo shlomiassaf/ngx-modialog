@@ -15,11 +15,16 @@
     "declaration": true,
     "inlineSources": true,
     "outDir": "dist/esm",
+    "baseUrl": ".",
+    "paths": {
+      "angular2-modal": ["src/angular2-modal"]
+    },
     "lib": [
       "dom",
       "es6"
     ],
     "types": [
+      "chai",
       "hammerjs",
       "source-map",
       "uglify-js",
@@ -31,7 +36,7 @@
     "useWebpackText": true
   },
   "include": [
-    "src/components/**/*"
+    "src/angular2-modal/**/*"
   ],
   "exclude": [
     "node_modules",
@@ -39,5 +44,10 @@
     "dist",
     "gulp",
     "typings"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "genDir": ".tmp",
+    "debug": false,
+    "skipMetadataEmit": false
+  }
 }

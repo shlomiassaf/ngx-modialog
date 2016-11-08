@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Modal as Modal_ } from '../../../../components/angular2-modal';
+import { Modal as Modal_ } from 'angular2-modal';
 import { Modal as InAppModal } from './modal';
 import { InAppModalBackdrop } from './modal-backdrop';
 
