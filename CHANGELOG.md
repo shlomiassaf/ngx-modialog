@@ -1,3 +1,13 @@
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/shlomiassaf/angular2-modal/compare/2.0.1...v2.0.2) (2016-11-08)
+
+
+### Bug Fixes
+
+* non ESM module bundlers (webpack1) can't load plugins ([ef35c80](https://github.com/shlomiassaf/angular2-modal/commit/ef35c80)), closes [#244](https://github.com/shlomiassaf/angular2-modal/issues/244)
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/shlomiassaf/angular2-modal/compare/2.0.0-beta.14...v2.0.1) (2016-10-06)
 
