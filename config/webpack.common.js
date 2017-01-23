@@ -106,7 +106,7 @@ module.exports = function (options) {
             {
               loader: 'awesome-typescript-loader',
               options: {
-                configFileName: `tsconfig.webpack${AOT ? '.aot' : ''}.json`
+                configFileName: `tsconfig.webpack${NPM_LIKE ? '-npmlike' : AOT ? '.aot' : ''}.json`
               }
             },
             {
@@ -232,7 +232,7 @@ module.exports = function (options) {
 
       new ngcWebpack.NgcWebpackPlugin({
         disabled: !AOT,
-        tsConfig: helpers.root('tsconfig.webpack.json'),
+        tsConfig: helpers.root(`tsconfig.webpack${NPM_LIKE ? '-npmlike' : ''}.json`),
         resourceOverride: helpers.root('config/resource-override.js')
       })
     ],
@@ -251,6 +251,10 @@ module.exports = function (options) {
       clearImmediate: false,
       setImmediate: false
     }
+  };
+
+  if (NPM_LIKE) {
+    delete config.resolve.alias;
   }
 
   return config;
