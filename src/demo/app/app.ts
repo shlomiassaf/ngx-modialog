@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+require('!!style-loader!css-loader!bootstrap/dist/css/bootstrap.css');
 
 /*
  * App Component

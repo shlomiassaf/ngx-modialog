@@ -16,7 +16,7 @@ fi
 set -ex
 
 
-npm publish --access public ./dist
+npm publish --access public ./dist_package
 
 
 # Always log out of npm when publish is complete.

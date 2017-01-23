@@ -10,19 +10,25 @@ const helpers = require('./helpers');
  */
 // problem with copy-webpack-plugin
 const AssetsPlugin = require('assets-webpack-plugin');
+const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ForkCheckerPlugin = require('awesome-typescript-loader').ForkCheckerPlugin;
+const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
 const HtmlElementsPlugin = require('./html-elements-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
+
+const ngcWebpack = require('ngc-webpack');
+
 
 /*
  * Webpack Constants
  */
 const HMR = helpers.hasProcessFlag('hot');
+const AOT = helpers.hasNpmFlag('aot');
+const NPM_LIKE = helpers.hasNpmFlag('npmlike');
 const METADATA = {
   title: 'Angular2 modal demo application',
   baseUrl: '/',
@@ -36,7 +42,7 @@ const METADATA = {
  */
 module.exports = function (options) {
   isProd = options.env === 'production';
-  return {
+  const config = {
 
     /*
      * Cache generated modules and chunks to improve performance for multiple incremental builds.
@@ -55,8 +61,8 @@ module.exports = function (options) {
      */
     entry: {
       'polyfills': './src/polyfills.ts',
-      'vendor':    './src/vendor.ts',
-      'main':      './src/bootstrap.ts'
+      'main':      AOT ? './src/bootstrap.aot.ts'
+                       : './src/bootstrap.ts'
     },
 
     /*
@@ -66,7 +72,10 @@ module.exports = function (options) {
      */
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.json', '.css', '.html'],
-      modules: [helpers.root('src'), 'node_modules']
+      modules: [helpers.root('src'), 'node_modules'],
+      alias: {
+        'angular2-modal': helpers.root('src/lib')
+      }
     },
 
     /*
@@ -78,10 +87,31 @@ module.exports = function (options) {
       rules: [
         {
           test: /\.ts$/,
-          loaders: [
-            '@angularclass/hmr-loader?pretty=' + !isProd + '&prod=' + isProd,
-            'awesome-typescript-loader',
-            'angular2-template-loader'
+          use: [
+            {
+              loader: '@angularclass/hmr-loader',
+              options: {
+                pretty: !isProd,
+                prod: isProd
+              }
+            },
+            { // MAKE SURE TO CHAIN VANILLA JS CODE, I.E. TS COMPILATION OUTPUT.
+              loader: 'ng-router-loader',
+              options: {
+                loader: 'async-import',
+                genDir: 'compiled',
+                aot: AOT
+              }
+            },
+            {
+              loader: 'awesome-typescript-loader',
+              options: {
+                configFileName: `tsconfig.webpack${AOT ? '.aot' : ''}.json`
+              }
+            },
+            {
+              loader: 'angular2-template-loader'
+            }
           ],
           exclude: [/\.(spec|e2e)\.ts$/]
         },
@@ -100,24 +130,24 @@ module.exports = function (options) {
         },
         {
           test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-          loader: "url?limit=10000&minetype=application/font-woff"
+          loader: "url-loader?limit=10000&minetype=application/font-woff"
         },
         {
           test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-          loader: "url?limit=10000&minetype=application/font-woff"
+          loader: "url-loader?limit=10000&minetype=application/font-woff"
         },
         {
           test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-          loader: "url?limit=10000&minetype=application/octet-stream"
+          loader: "url-loader?limit=10000&minetype=application/octet-stream"
         },
-        {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file"},
-        {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url?limit=10000&minetype=image/svg+xml"},
+        {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader"},
+        {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: "url-loader?limit=10000&minetype=image/svg+xml"},
 
         /* File loader for supporting images, for example, in CSS files.
          */
         {
           test: /\.(jpg|png|gif)$/,
-          loader: 'file'
+          loader: 'file-loader'
         }
       ]
   },
@@ -128,15 +158,41 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#plugins
      */
     plugins: [
-      new ForkCheckerPlugin(),
+      new AssetsPlugin({
+        path: helpers.root('dist'),
+        filename: 'webpack-assets.json',
+        prettyPrint: true
+      }),
+
+      new TsConfigPathsPlugin(),
+
+
+      new CheckerPlugin(),
+
+      new CommonsChunkPlugin({
+        name: 'polyfills',
+        chunks: ['polyfills']
+      }),
+      // This enables tree shaking of the vendor modules
+      new CommonsChunkPlugin({
+        name: 'vendor',
+        chunks: ['main'],
+        minChunks: module => /node_modules\//.test(module.resource)
+      }),
+      // Specify the correct order the scripts will be injected in
       new CommonsChunkPlugin({
         name: ['polyfills', 'vendor'].reverse()
       }),
+
       new ContextReplacementPlugin(
         // The (\\|\/) piece accounts for path separators in *nix and Windows
-        /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-        helpers.root('src') // location of your src
+        /angular(\\|\/)core(\\|\/)src(\\|\/)linker/,
+        helpers.root('src'), // location of your src
+        {
+          // your Angular Async Route paths relative to this root directory
+        }
       ),
+
       new HtmlWebpackPlugin({
         template: 'src/index.html',
         title: METADATA.title,
@@ -144,6 +200,7 @@ module.exports = function (options) {
         metadata: METADATA,
         inject: 'head'
       }),
+
       new ScriptExtHtmlWebpackPlugin({
         defaultAttribute: 'defer'
       }),
@@ -152,6 +209,32 @@ module.exports = function (options) {
       }),
       new LoaderOptionsPlugin({}),
 
+      new NormalModuleReplacementPlugin(
+        /facade(\\|\/)async/,
+        helpers.root('node_modules/@angular/core/src/facade/async.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /facade(\\|\/)collection/,
+        helpers.root('node_modules/@angular/core/src/facade/collection.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /facade(\\|\/)errors/,
+        helpers.root('node_modules/@angular/core/src/facade/errors.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /facade(\\|\/)lang/,
+        helpers.root('node_modules/@angular/core/src/facade/lang.js')
+      ),
+      new NormalModuleReplacementPlugin(
+        /facade(\\|\/)math/,
+        helpers.root('node_modules/@angular/core/src/facade/math.js')
+      ),
+
+      new ngcWebpack.NgcWebpackPlugin({
+        disabled: !AOT,
+        tsConfig: helpers.root('tsconfig.webpack.json'),
+        resourceOverride: helpers.root('config/resource-override.js')
+      })
     ],
 
     /*
@@ -169,4 +252,6 @@ module.exports = function (options) {
       setImmediate: false
     }
   }
+
+  return config;
 };

@@ -6,17 +6,17 @@ module.exports.pkg = require(path.join(__dirname, '../package.json'));
 
 // note: for all paths, the base dir is ../
 module.exports.PATHS = {
-  srcDir: 'src/angular2-modal',
-  pluginDir: 'src/angular2-modal/plugins',
-  tsSrcFiles: 'src/angular2-modal/**/*.ts',
+  srcDir: 'src/lib',
+  pluginDir: 'src/lib/plugins',
+  tsSrcFiles: 'src/lib/**/*.ts',
   releaseAssets: ['LICENSE', 'README.md'],
   jsFiles: ['gulpfile.js', 'gulp/*.js'],
   tsConfig: path.join(__dirname, '../tsconfig.json'),
   tmp: '.tmp/',
   dist: {
-    base: 'dist/',
-    esm: 'dist/esm/',
-    bundles: 'dist/bundles/',
+    base: 'dist_package/',
+    esm: 'dist_package/esm/',
+    bundles: 'dist_package/bundles/',
   }
 };
 
