@@ -3,28 +3,30 @@ const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const helpers = require('../helpers');
 
-const REPO_NAME_RE = /Push {2}URL: https:\/\/github\.com\/.*\/(.*)\.git/;
+const REPO_NAME_RE = /Push {2}URL: ((git@github\.com:)|(https:\/\/github\.com\/)).+\/(.+)\.git/;
 
-function getWebpackConfigModule(options) {
-  if (options.githubDev) {
+
+function getWebpackConfigModule() {
+  if (helpers.hasNpmFlag('dev')) {
     return require('../webpack.dev.js');
-  } else if (options.githubProd) {
+  } else if (helpers.hasNpmFlag('prod')) {
     return require('../webpack.prod.js');
   } else {
     throw new Error('Invalid compile option.');
   }
 }
 
+
 function getRepoName(remoteName) {
   remoteName = remoteName || 'origin';
 
   var stdout = execSync('git remote show ' + remoteName),
-    match = REPO_NAME_RE.exec(stdout);
+      match = REPO_NAME_RE.exec(stdout);
 
   if (!match) {
     throw new Error('Could not find a repository on remote ' + remoteName);
   } else {
-    return match[1];
+    return match[4];
   }
 }
 

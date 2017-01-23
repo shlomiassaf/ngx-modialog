@@ -30,6 +30,10 @@ tmp
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 /dist
+/dist_package
+/compiled
+/dll
+src/angular2-modal
 .idea
 *.ngfactory.ts
 

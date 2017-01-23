@@ -1,9 +1,9 @@
 
 export default {
-  entry: 'dist/esm/plugins/vex/index.js',
-  dest: '.tmp/angular2-modal.vex.umd.js',
+  entry: 'dist_package/esm/plugins/js-native/index.js',
+  dest: '.tmp/angular2-modal.js-native.umd.js',
   format: 'umd',
-  moduleName: 'angular2Modal.plugins.vex',
+  moduleName: 'angular2Modal.plugins.jsNative',
   globals: {
     '@angular/core': 'ng.core',
     '@angular/common': 'ng.common',

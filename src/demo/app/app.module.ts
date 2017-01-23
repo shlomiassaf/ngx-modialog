@@ -1,6 +1,5 @@
 import { NgModule }      from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-
+import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { ModalModule } from 'angular2-modal';
 
@@ -11,13 +10,14 @@ import { JSNativeDemoModule } from './js-native-demo/js-native-demo.module';
 
 import { App }  from './app';
 import { Home } from './home/home';
-import { routing } from './app.routes';
+import { routes } from './app.routes';
 import { InAppModalModule } from './home/in-app-plugin/index';
+
 
 @NgModule({
   imports: [
     BrowserModule,
-    routing,
+    RouterModule.forRoot(routes, { useHash: true, preloadingStrategy: PreloadAllModules }),
     SharedModule.forRoot(),
     ModalModule.forRoot(),
     BootstrapDemoModule,
@@ -26,9 +26,6 @@ import { InAppModalModule } from './home/in-app-plugin/index';
     InAppModalModule
   ],
   declarations: [ App, Home ],
-  bootstrap:    [ App ],
-  providers: [
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
-  ]
+  bootstrap:    [ App ]
 })
 export class AppModule { }

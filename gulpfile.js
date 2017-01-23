@@ -6,7 +6,7 @@ require('require-dir')('./gulp');
 const runSequence = require('run-sequence');
 const config = require('./gulp/config');
 
-const ESM_PLUGINS_PATH = 'dist/plugins';
+const ESM_PLUGINS_PATH = 'dist_package/plugins';
 gulp.task('copyPluginsDummyPackageJson', (done) => {
   const absPath = path.join(__dirname, ESM_PLUGINS_PATH);
   const dirs = fs.readdirSync(absPath);
@@ -17,14 +17,14 @@ gulp.task('copyPluginsDummyPackageJson', (done) => {
   done();
 });
 
-const distPluginPath = { from: 'dist/esm/plugins/**/*', to: 'dist/plugins' };
+const distPluginPath = { from: 'dist_package/esm/plugins/**/*', to: 'dist_package/plugins' };
 gulp.task('copyDistPlugins', () => {
   return gulp.src(distPluginPath.from)
     .pipe(gulp.dest(distPluginPath.to));
 });
 
 gulp.task('extractPlugins', ['copyDistPlugins'], (done) => {
-  del.sync('dist/esm/plugins', {force: true});
+  del.sync('dist_package/esm/plugins', {force: true});
   done();
 });
 
