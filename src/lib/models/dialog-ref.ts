@@ -121,9 +121,9 @@ export class DialogRef<T> {
   }
 
   private _fireHook<T>(name: 'beforeClose' | 'beforeDismiss'): Promise<T> {
-    const gurad = this.closeGuard,
-          fn: Function = gurad && typeof gurad[name] === 'function' && gurad[name];
+    const guard = this.closeGuard,
+          fn: Function = guard && typeof guard[name] === 'function' && guard[name];
 
-    return Promise.resolve(fn ? fn.call(gurad) : false);
+    return Promise.resolve(fn ? fn.call(guard) : false);
   }
 }
