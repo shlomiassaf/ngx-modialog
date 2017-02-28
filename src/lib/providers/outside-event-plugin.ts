@@ -38,7 +38,7 @@ export class DOMOutsideEventPlugin { // extends EventManagerPlugin
 
     constructor() {
         // TODO: use DI factory for this.
-        if (!document || typeof document.addEventListener !== 'function') {
+        if (typeof document === 'undefined' || !document || typeof document.addEventListener !== 'function') {
             this.addEventListener = noop as any;
         }
     }
