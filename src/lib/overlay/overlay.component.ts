@@ -35,10 +35,10 @@ export interface EmbedComponentConfig {
   },
   encapsulation: ViewEncapsulation.None,
   template:
-`<template #innerView></template>
-<template #template let-ctx>
-    <template [swapCmp]="ctx.component" [swapCmpBindings]="ctx.bindings" [swapCmpProjectables]="ctx.projectableNodes"></template>
-</template>
+`<ng-template #innerView></ng-template>
+<ng-template #template let-ctx>
+    <ng-template [swapCmp]="ctx.component" [swapCmpBindings]="ctx.bindings" [swapCmpProjectables]="ctx.projectableNodes"></ng-template>
+</ng-template>
 `
 })
 export class ModalOverlay extends BaseDynamicComponent {
@@ -103,7 +103,7 @@ export class ModalOverlay extends BaseDynamicComponent {
     };
     Object.keys(style).forEach( k => this.setStyle(k, style[k]) );
   }
-  
+
   insideElement(): void {
     const style = {
       position: 'absolute',
@@ -204,7 +204,7 @@ export class ModalOverlay extends BaseDynamicComponent {
    * A handler running before destruction of the overlay
    * use to delay destruction due to animation.
    * This is part of the workaround for animation, see canDestroy.
-   * 
+   *
    * NOTE: There is no guarantee that the listeners will fire, use dialog.onDestory for that.
    * @param fn
    */
@@ -214,7 +214,7 @@ export class ModalOverlay extends BaseDynamicComponent {
     }
     this.beforeDestroyHandlers.push(fn);
   }
-  
+
   documentKeypress(event: KeyboardEvent) {
     // check that this modal is the last in the stack.
     if (!this.dialogRef.overlay.isTopMost(this.dialogRef)) return;

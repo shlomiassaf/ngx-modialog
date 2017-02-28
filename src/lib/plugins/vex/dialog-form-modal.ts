@@ -39,7 +39,7 @@ export interface VEXButtonClickEvent {
   selector: 'vex-dialog-buttons',
   encapsulation: ViewEncapsulation.None,
   template: `<div class="vex-dialog-buttons">
-    <button type="button" 
+    <button type="button"
          *ngFor="let btn of buttons;"
          [class]="btn.cssClass"
          (click)="onClick(btn, $event)">{{btn.caption}}</button>
@@ -72,7 +72,7 @@ export class VEXDialogButtons {
   selector: 'modal-dialog',
   encapsulation: ViewEncapsulation.None,
   template: `<form class="vex-dialog-form">
-    <template [swapCmp]="context.content"></template>
+    <ng-template [swapCmp]="context.content"></ng-template>
     <vex-dialog-buttons [buttons]="context.buttons"
                         (onButtonClick)="onButtonClick($event)"></vex-dialog-buttons>
 </form>`
@@ -97,13 +97,13 @@ export class DialogFormModal implements ModalComponent<DialogPreset> {
  <div *ngIf="context.showInput" class="vex-dialog-input">
    <input #input
           autofocus
-          name="vex" 
-          type="text" 
+          name="vex"
+          type="text"
           class="vex-dialog-prompt-input"
-           (change)="context.defaultResult = input.value" 
+           (change)="context.defaultResult = input.value"
           placeholder="{{context.placeholder}}">
  </div>
- <div *ngIf="context.showCloseButton" 
+ <div *ngIf="context.showCloseButton"
       [class]="context.closeClassName"
       (click)="dialog.dismiss()"></div>`
 })
