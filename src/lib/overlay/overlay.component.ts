@@ -35,10 +35,10 @@ export interface EmbedComponentConfig {
   },
   encapsulation: ViewEncapsulation.None,
   template:
-`<template #innerView></template>
-<template #template let-ctx>
-    <template [swapCmp]="ctx.component" [swapCmpBindings]="ctx.bindings" [swapCmpProjectables]="ctx.projectableNodes"></template>
-</template>
+`<ng-template #innerView></ng-template>
+<ng-template #template let-ctx>
+    <ng-template [swapCmp]="ctx.component" [swapCmpBindings]="ctx.bindings" [swapCmpProjectables]="ctx.projectableNodes"></ng-template>
+</ng-template>
 `
 })
 export class ModalOverlay extends BaseDynamicComponent {
