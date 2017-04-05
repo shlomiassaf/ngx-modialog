@@ -24,7 +24,7 @@ Take 5 minutes to read a [quick walk through](https://github.com/shlomiassaf/ang
 
 ## Features  
 
-  - Easy to use API via Fluent API Presets (alert, propmt, confirm)
+  - Easy to use API via Fluent API Presets (alert, prompt, confirm)
   - Can render Component's, TemplateRef's and literal string
   - Extendable via plugins.  
 
