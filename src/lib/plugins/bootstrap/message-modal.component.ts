@@ -51,6 +51,7 @@ export class BSMessageModalTitle {
     <div [innerHtml]="context.message"></div>
       <div *ngIf="context.showInput" class="form-group">
         <input autofocus #input
+            [attr.list]="context.datalistId"
             name="bootstrap" 
             type="text" 
             class="form-control"
