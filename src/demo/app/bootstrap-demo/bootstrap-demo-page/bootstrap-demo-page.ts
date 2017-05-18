@@ -60,22 +60,24 @@ export class BootstrapDemoPage {
         }
 
       },
-      {
-        text: 'JIT Compiled component',
-        factory: () => {
-          if (!runtimeModuleRefPromise) {
-            runtimeModuleRefPromise = this.compiler.compileModuleAsync(RuntimeCompiledModule)
-              .then(moduleFactory => moduleFactory.create(this.injector));
-          }
-
-          return runtimeModuleRefPromise.then(module => {
-              return this.modal
-                .open(RuntimeCompiledComponent, overlayConfigFactory({isBlocking: false}, BSModalContext, {
-                  injector: module.injector
-                }));
-            });
-        }
-      }
+      // TODO: Currently AOT build can't support this, need to implement lazy compiler
+      // see https://github.com/shlomiassaf/lazy-jit
+      // {
+      //   text: 'JIT Compiled component',
+      //   factory: () => {
+      //     if (!runtimeModuleRefPromise) {
+      //       runtimeModuleRefPromise = this.compiler.compileModuleAsync(RuntimeCompiledModule)
+      //         .then(moduleFactory => moduleFactory.create(this.injector));
+      //     }
+      //
+      //     return runtimeModuleRefPromise.then(module => {
+      //         return this.modal
+      //           .open(RuntimeCompiledComponent, overlayConfigFactory({isBlocking: false}, BSModalContext, {
+      //             injector: module.injector
+      //           }));
+      //       });
+      //   }
+      // }
     ];
   }
 

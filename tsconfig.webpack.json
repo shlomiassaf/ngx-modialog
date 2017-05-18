@@ -1,31 +1,27 @@
 {
   "compilerOptions": {
-    "module": "ES6",
-    "target": "ES5",
+    "target": "es5",
+    "module": "es2015",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "noEmitHelpers": false,
-    "noImplicitAny": false,
-    "removeComments": false,
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-    "declaration": true,
-    "inlineSources": true,
-    "outDir": "dist_package/esm",
-    "baseUrl": ".",
+    "noEmit": true,
+    "noEmitHelpers": true,
+    "strictNullChecks": false,
+    "baseUrl": "./src",
     "paths": {
-      "angular2-modal": ["src/lib"]
+      "angular2-modal": [ "./lib" ],
+      "angular2-modal/*": [ "./lib/*" ]
     },
     "lib": [
       "dom",
       "es6"
     ],
     "types": [
-      "chai",
       "hammerjs",
+      "node",
       "source-map",
       "uglify-js",
       "webpack"
@@ -35,19 +31,14 @@
     "forkChecker": true,
     "useWebpackText": true
   },
-  "include": [
-    "src/lib/**/*"
-  ],
   "exclude": [
     "node_modules",
-    "node_modules/@types/core-js/index.d.ts",
     "dist",
-    "gulp",
-    "typings"
+    "compiled",
+    "src/bootstrap.aot.ts"
   ],
   "angularCompilerOptions": {
-    "genDir": ".tmp",
-    "debug": false,
-    "skipMetadataEmit": false
+    "genDir": "./compiled",
+    "skipMetadataEmit": true
   }
 }

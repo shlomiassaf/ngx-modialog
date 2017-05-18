@@ -1,5 +1,3 @@
-import { Injectable } from '@angular/core';
-
 import { FluentAssignMethod } from './../framework/fluent-assign';
 import { extend, arrayUnion } from './../framework/utils';
 import { OverlayContext, OverlayContextBuilder } from './overlay-context';
@@ -23,7 +21,6 @@ export class ModalContext extends OverlayContext {
  * A core context builder for a modal window instance, used to define the context upon
  * a modal choose it's behaviour.
  */
-@Injectable()
 export class ModalContextBuilder<T extends ModalContext> extends OverlayContextBuilder<T> {
     /**
      * The core message to display.

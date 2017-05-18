@@ -1,5 +1,3 @@
-import { Injectable } from '@angular/core';
-
 import { FluentAssign, FluentAssignMethod } from './../framework/fluent-assign';
 import { extend, arrayUnion } from './../framework/utils';
 import { DialogRef } from './dialog-ref';
@@ -61,7 +59,6 @@ export class OverlayContext {
  * A core context builder for a modal window instance, used to define the context upon
  * a modal choose it's behaviour.
  */
-@Injectable()
 export class OverlayContextBuilder<T extends OverlayContext> extends FluentAssign<T> {
   /**
    * Describes if the modal is rendered within the container element.
