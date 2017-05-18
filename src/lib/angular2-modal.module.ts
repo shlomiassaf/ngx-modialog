@@ -1,3 +1,4 @@
+import { providers } from './plugins/vex/vex.module';
 import { ANALYZE_FOR_ENTRY_COMPONENTS, NgModule, ModuleWithProviders, Type } from '@angular/core';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser';
 
@@ -34,6 +35,9 @@ import {
     ModalOverlay,
     CSSBackdrop,
     CSSDialogContainer
+  ],
+  providers: [
+    Overlay
   ]
 })
 export class ModalModule {
@@ -63,7 +67,7 @@ export class ModalModule {
     return {
       ngModule: ModalModule,
       providers: [
-        Overlay,
+        // Overlay,
         {provide: OverlayRenderer, useClass: DOMOverlayRenderer},
         {provide: EVENT_MANAGER_PLUGINS, useClass: DOMOutsideEventPlugin, multi: true},
         {provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: entryComponents || [], multi: true}

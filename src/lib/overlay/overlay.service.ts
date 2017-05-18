@@ -1,4 +1,5 @@
-import { ViewContainerRef, Injectable } from '@angular/core';
+import { ModalOverlay } from './overlay.component';
+import { ViewContainerRef, Injectable, ApplicationRef, Injector, ComponentFactoryResolver, ReflectiveInjector, ComponentRef } from '@angular/core';
 
 import { OverlayRenderer, OverlayConfig } from '../models/tokens';
 import { DialogRefStack } from '../models/dialog-ref-stack';
@@ -22,7 +23,10 @@ export class Overlay {
     return _stack.length;
   }
 
-  constructor(private _modalRenderer: OverlayRenderer) {
+  constructor(private _modalRenderer: OverlayRenderer,
+              private _applicationRef: ApplicationRef,
+              private _injector: Injector,
+              private _componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   /**
@@ -63,12 +67,13 @@ export class Overlay {
     }
 
     if (!containers || !containers[0]) {
-      if (!this.defaultViewContainer) {
-        throw new Error('Default view container not set. Add the "defaultOverlayTarget" directive ' +
-          'to the application root component template (e.g: <span defaultOverlayTarget></span>. ' +
-          'You can also set it manually using the "Overlay" service "defaultViewContainer" property.');
-      }
-      containers = [this.defaultViewContainer];
+      // if (!this.defaultViewContainer) {
+      //   throw new Error('Default view container not set. Add the "defaultOverlayTarget" directive ' +
+      //     'to the application root component template (e.g: <span defaultOverlayTarget></span>. ' +
+      //     'You can also set it manually using the "Overlay" service "defaultViewContainer" property.');
+      // }
+      // containers = [this.defaultViewContainer];
+      containers = [null];
     }
 
     return containers
@@ -86,7 +91,17 @@ export class Overlay {
     let dialog = new DialogRef<any>(this, config.context || {});
     dialog.inElement = config.context && !!config.context.inElement;
 
-    let cmpRef = renderer.render(dialog, vcRef, config.injector);
+    let cmpRef: ComponentRef<ModalOverlay>;
+    if (vcRef) {
+      cmpRef = renderer.render(dialog, vcRef, config.injector);
+    } else {
+      let contentComponentFactory = this._componentFactoryResolver.resolveComponentFactory(ModalOverlay);
+      let modalContentInjector =
+          ReflectiveInjector.resolveAndCreate([{provide: DialogRef, useValue: dialog}], this._injector);
+      cmpRef = contentComponentFactory.create(modalContentInjector);
+      this._applicationRef.attachView(cmpRef.hostView);
+      document.body.appendChild(cmpRef.location.nativeElement);
+    }
 
     Object.defineProperty(dialog, 'overlayRef', {value: cmpRef});
     _stack.pushManaged(dialog, group);
