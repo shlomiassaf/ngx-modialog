@@ -2,6 +2,7 @@
 // try { require('fancy-log').apply = function() {}; } catch (err) {}
 
 const path = require('path');
+const fs = require('fs');
 const gulp = require('gulp');
 
 require('ts-node/register');
