@@ -1,3 +1,22 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/shlomiassaf/angular2-modal/compare/2.0.2...3.0.0) (2017-06-20)
+
+
+### Bug Fixes
+
+* handle document for angular universal ([2f98e75](https://github.com/shlomiassaf/angular2-modal/commit/2f98e75))
+* refactor: use ng-template instead of template
+* refactor: remove defaultOverlayTarget directive
+* build: revamp the build process, use FESM and flat compiler metadata for faster, smaller bundles.
+* refactor: replace custom <swpCmp> with ngComponentOutlet
+
+### BREAKING CHANGES
+
+  - Moving to use <ng-template> will break applications running on < 4
+  - Applications using defaultOverlayTarget (all of them) will have to omit it
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/shlomiassaf/angular2-modal/compare/2.0.1...v2.0.2) (2016-11-08)
 
