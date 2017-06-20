@@ -1,4 +1,4 @@
-import { ViewContainerRef, Injectable } from '@angular/core';
+import { ViewContainerRef, Injectable, Injector } from '@angular/core';
 
 import { OverlayRenderer, OverlayConfig } from '../models/tokens';
 import { DialogRefStack } from '../models/dialog-ref-stack';
@@ -14,7 +14,7 @@ export class Overlay {
     return _stack.length;
   }
 
-  constructor(private _modalRenderer: OverlayRenderer) {
+  constructor(private _modalRenderer: OverlayRenderer, protected injector: Injector) {
   }
 
   /**
@@ -67,6 +67,10 @@ export class Overlay {
 
     if (config.context) {
       config.context.normalize();
+    }
+
+    if (!config.injector) {
+      config.injector = this.injector;
     }
 
     let dialog = new DialogRef<any>(this, config.context || {});
