@@ -1,3 +1,24 @@
+---
+
+# HELP WANTED!
+
+As a sole author I find it difficult to maintain multiple open source projects.
+As a result it is hard for me to replay rapidly to requests/help/etc...
+
+If you would like to contribute, please contact me, the community will thank you.
+
+You can contribute via:
+
+  - Implementing features & Bug fixes
+  - Documentation (Extremely important)
+  - Issue management
+
+Thank you!
+
+Shlomi.
+
+---
+
 # Update
 Version 1.1.2 & 2.0.0-beta.3 now support UMD bundles.
 Version 2.0.0-beta.14 now supports AoT compilation.
