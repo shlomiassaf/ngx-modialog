@@ -1,44 +1,54 @@
 {
+  "extends": "./tsconfig",
   "compilerOptions": {
     "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
+    "removeComments": false,
     "sourceMap": true,
-    "noEmit": true,
-    "noEmitHelpers": true,
+    "inlineSources": true,
     "strictNullChecks": false,
-    "baseUrl": "./src",
-    "paths": {
-      "angular2-modal": [ "./lib" ],
-      "angular2-modal/*": [ "./lib/*" ]
-    },
     "lib": [
-      "dom",
-      "es6"
+      "es2015",
+      "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
     ],
     "types": [
+      "jasmine",
       "hammerjs",
-      "node",
-      "source-map",
-      "uglify-js",
-      "webpack"
-    ]
+      "node"
+    ],
+    "noEmit": false,
+    "declaration": false,
+    "outDir": "./dist"
   },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "scripts/**/*",
+    "node_modules",
+    "dist",
+    "dist_package",
+    "e2e",
+    "src/**/*.spec.ts"
+  ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
     "useWebpackText": true
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "compiled",
-    "src/bootstrap.aot.ts"
-  ],
   "angularCompilerOptions": {
     "genDir": "./compiled",
     "skipMetadataEmit": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
   }
 }

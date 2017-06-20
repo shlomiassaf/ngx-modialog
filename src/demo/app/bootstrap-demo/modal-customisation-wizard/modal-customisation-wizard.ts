@@ -3,7 +3,7 @@ import {Modal} from 'angular2-modal';
 import {
     TwoButtonPreset,
     TwoButtonPresetBuilder
-} from 'angular2-modal/plugins/bootstrap/index';
+} from 'angular2-modal/plugins/bootstrap';
 
 
 @Component({

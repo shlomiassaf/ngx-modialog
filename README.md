@@ -1,6 +1,7 @@
 # Update
 Version 1.1.2 & 2.0.0-beta.3 now support UMD bundles.
 Version 2.0.0-beta.14 now supports AoT compilation.
+Version 3 support angular@4.x.x features and FESM bundle
 
 # Angular 2: AIO Modal / Dialog window
 
@@ -20,11 +21,11 @@ Take 5 minutes to read a [quick walk through](https://github.com/shlomiassaf/ang
   * POC implementation of JS Native modal (window.alert/prompt/confirm) to demonstrate a hostile takeover :)
 
 
-## Built with angular 2
+## Built with angular
 
 ## Features  
 
-  - Easy to use API via Fluent API Presets (alert, propmt, confirm)
+  - Easy to use API via Fluent API Presets (alert, prompt, confirm)
   - Can render Component's, TemplateRef's and literal string
   - Extendable via plugins.  
 

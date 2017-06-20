@@ -1,7 +1,0 @@
-{
-  "name": "angular2-modal-bootstrap-plugin",
-  "version": "2.0.3",
-  "main": "../../bundles/angular2-modal.bootstrap.umd.js",
-  "module": "index.js",
-  "typings": "index.d.ts"
-}

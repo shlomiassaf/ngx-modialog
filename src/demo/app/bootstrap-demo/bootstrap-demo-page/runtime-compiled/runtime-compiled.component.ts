@@ -1,4 +1,4 @@
-import { Component, Compiler, NgModuleRef } from '@angular/core';
+import { Component, Compiler, NgModuleRef, ViewContainerRef } from '@angular/core';
 
 import { DialogRef, overlayConfigFactory } from "angular2-modal";
 import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
@@ -28,14 +28,17 @@ let runtimeModuleRefPromise: Promise<NgModuleRef<any>>;
 export class RuntimeCompiledComponent {
   private toKill: DialogRef<any>[] = [];
 
-  constructor(private dialogRef: DialogRef<any>, private compiler: Compiler, private modal: Modal) {
+  constructor(private dialogRef: DialogRef<any>,
+              private vcRef: ViewContainerRef,
+              private compiler: Compiler,
+              private modal: Modal) {
 
   }
 
   openInElement() {
     if (!runtimeModuleRefPromise) {
       runtimeModuleRefPromise = this.compiler.compileModuleAsync(InnerRuntimeCompiledModule)
-        .then(moduleFactory => moduleFactory.create(this.modal.overlay.defaultViewContainer.parentInjector));
+        .then(moduleFactory => moduleFactory.create(this.vcRef.parentInjector));
     }
 
     runtimeModuleRefPromise
@@ -54,7 +57,7 @@ export class RuntimeCompiledComponent {
   openModal(): void {
     if (!runtimeModuleRefPromise) {
       runtimeModuleRefPromise = this.compiler.compileModuleAsync(InnerRuntimeCompiledModule)
-        .then(moduleFactory => moduleFactory.create(this.modal.overlay.defaultViewContainer.parentInjector));
+        .then(moduleFactory => moduleFactory.create(this.vcRef.parentInjector));
     }
 
     runtimeModuleRefPromise

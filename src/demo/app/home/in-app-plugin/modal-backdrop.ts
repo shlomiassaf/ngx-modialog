@@ -76,7 +76,7 @@ article .content {
             <span>{{dialog.context.title}}</span>
         </div>
         <div class="content">
-            <template [ngTemplateOutlet]="dialog.context.templateRef"></template>
+            <ng-template [ngTemplateOutlet]="dialog.context.templateRef"></ng-template>
         </div>
     </article>    
 </div>`

@@ -3,33 +3,65 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
-    "sourceMap": true,
-    "noEmitHelpers": true,
-    "noImplicitAny": false,
-    "baseUrl": "./src",
-    "paths": {
-    },
     "lib": [
-      "dom",
-      "es6"
+      "es2015",
+      "dom"
     ],
     "types": [
+      "jasmine",
       "hammerjs",
       "node",
       "source-map",
       "uglify-js",
       "webpack"
-    ]
+    ],
+    "noEmit": true,
+    "baseUrl": "./src",
+    "paths": {
+      "angular2-modal": [
+        "angular2-modal/src/angular2-modal.ts"
+      ],
+      "angular2-modal/plugins/bootstrap": [
+        "angular2-modal/plugins/bootstrap/src/bootstrap.ts"
+      ],
+      "angular2-modal/plugins/bootstrap/src/*": [
+        "angular2-modal/plugins/bootstrap/src/*"
+      ],
+      "angular2-modal/plugins/vex": [
+        "angular2-modal/plugins/vex/src/vex.ts"
+      ],
+      "angular2-modal/plugins/vex/src/*": [
+        "angular2-modal/plugins/vex/src/*"
+      ],
+      "angular2-modal/plugins/js-native": [
+        "angular2-modal/plugins/js-native/src/js-native.ts"
+      ],
+      "angular2-modal/plugins/js-native/src/*": [
+        "angular2-modal/plugins/js-native/src/*"
+      ],
+      "angular2-modal/src/*": [
+        "angular2-modal/src/*"
+      ]
+    }
   },
+  "exclude": [
+    "scripts/**/*.ts",
+    "node_modules",
+    "dist",
+    "dist_package",
+    "e2e",
+    "src/**/*.spec.ts"
+  ],
   "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
     "useWebpackText": true
   },
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }
