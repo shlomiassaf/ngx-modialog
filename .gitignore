@@ -1,5 +1,5 @@
-# Created by .ignore support plugin (hsz.mobi)
-### Node template
+# @AngularClass
+
 # Logs
 logs
 *.log
@@ -18,22 +18,59 @@ coverage
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
-# node-waf configuration
-.lock-wscript
-
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
-tmp
-.tmp
 
-# Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules
+# Users Environment Variables
+.lock-wscript
+
+# OS generated files #
+.DS_Store
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# Node Files #
+/node_modules/
+/bower_components/
+npm-debug.log
+/npm-debug.log.*
+
+# Coverage #
+/coverage/
+
+# Typing #
+/src/typings/tsd/
+/typings/
+/tsd_typings/
+
+# Dist #
 /dist
-/dist_package
-/compiled
-/dll
-src/angular2-modal
-.idea
-*.ngfactory.ts
+/public/__build__/
+/src/*/__build__/
+/__build__/**
+/public/dist/
+/src/*/dist/
+/dist/**
+/.awcache
+.webpack.json
+/compiled/
+dll/
 
+# Doc #
+/doc/
+
+# IDE #
+.idea/
+*.swp
+
+
+# Angular #
+*.ngfactory.ts
+*.css.shim.ts
+*.ngsummary.json
+*.shim.ngstyle.ts
+
+dist_package
+.tmp
+.tsconfig.*.json

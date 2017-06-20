@@ -1,0 +1,26 @@
+{
+  "name": "angular2-modal",
+  "description": "Angular2 Modal (dialog) window.",
+  "version": "3.0.0",
+  "libConfig": {
+    "entry": "angular2-modal",
+    "inlineResources": true,
+    "libExtensions": [
+      {
+        "name": "bootstrap",
+        "dir": "plugins/bootstrap",
+        "entry": "bootstrap.ts"
+      },
+      {
+        "name": "vex",
+        "dir": "plugins/vex",
+        "entry": "vex.ts"
+      },
+      {
+        "name": "js-native",
+        "dir": "plugins/js-native",
+        "entry": "js-native.ts"
+      }
+    ]
+  }
+}

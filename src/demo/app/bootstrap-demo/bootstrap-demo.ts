@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { providers } from 'angular2-modal/plugins/bootstrap';
 
-
 @Component({
   selector: 'bootstrap-demo',
   template: `<router-outlet></router-outlet>`,

@@ -7,8 +7,6 @@ const helpers = require('./helpers');
 const ghDeploy = require('./github-deploy');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
 
-
-
 /**
  * Webpack Constants
  */
@@ -20,7 +18,9 @@ module.exports = function (options) {
   const webpackConfigFactory = ghDeploy.getWebpackConfigModule(options); // the settings that are common to prod and dev
   const webpackConfig = webpackConfigFactory(options);
 
-  // replace the instance of HtmlWebpackPlugin with an updated one.
+  /**
+   * Replace the instance of HtmlWebpackPlugin with an updated one.
+   */
   ghDeploy.replaceHtmlWebpackPlugin(webpackConfig.plugins, GH_REPO_NAME);
 
   return webpackMerge(webpackConfig, {
@@ -56,16 +56,14 @@ module.exports = function (options) {
            message: COMMIT_MESSAGE,
            dotfiles: true // for .nojekyll
          };
-
-         // Since GitHub moved to Jekyll 3.3, their server ignores the "node_modules" and "vendors" folder by default.
-         // but, as of now, it also ignores "vendors*" files.
-         // This means vendor.bundle.js or vendor.[chunk].bundle.js will return 404.
-         // this is the fix for now.
+         /**
+          * Since GitHub moved to Jekyll 3.3, their server ignores the "node_modules" and "vendors" folder by default.
+          * but, as of now, it also ignores "vendors*" files.
+          * This means vendor.bundle.js or vendor.[chunk].bundle.js will return 404.
+          * this is the fix for now.
+          */
          fs.writeFileSync(path.join(webpackConfig.output.path, '.nojekyll'), '');
 
-         // gh-pages contains a package that alters a core prototype (maybe array)
-         // which makes awesome-typescript-loader fail (common)
-         // so require here, after it runs
          const ghpages = require('gh-pages');
          ghpages.publish(webpackConfig.output.path, options, function(err) {
            if (err) {

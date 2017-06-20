@@ -1,39 +1,11 @@
+// try { require('gulplog').info = function() {}; } catch (err) {}
+// try { require('fancy-log').apply = function() {}; } catch (err) {}
+
 const path = require('path');
-const fs = require('fs');
-const del = require('del');
 const gulp = require('gulp');
-require('require-dir')('./gulp');
-const runSequence = require('run-sequence');
-const config = require('./gulp/config');
 
-const ESM_PLUGINS_PATH = 'dist_package/plugins';
-gulp.task('copyPluginsDummyPackageJson', (done) => {
-  const absPath = path.join(__dirname, ESM_PLUGINS_PATH);
-  const dirs = fs.readdirSync(absPath);
-  dirs.forEach( dir => {
-    const data = fs.readFileSync(path.join(config.PATHS.pluginDir, dir, 'package.json'));
-    fs.writeFileSync(path.join(__dirname, ESM_PLUGINS_PATH, dir, 'package.json'), data);
-  });
-  done();
-});
+require('ts-node/register');
+require('require-dir')(path.join(__dirname, 'scripts', 'gulp'));
 
-const distPluginPath = { from: 'dist_package/esm/plugins/**/*', to: 'dist_package/plugins' };
-gulp.task('copyDistPlugins', () => {
-  return gulp.src(distPluginPath.from)
-    .pipe(gulp.dest(distPluginPath.to));
-});
 
-gulp.task('extractPlugins', ['copyDistPlugins'], (done) => {
-  del.sync('dist_package/esm/plugins', {force: true});
-  done();
-});
-
-gulp.task('release', (done) => {
-  runSequence(
-    ['clean:dist', 'clean:tmp'],
-    ['copyReleaseAssets', 'bundle'],
-    ['extractPlugins','createPackageJson'],
-    ['copyPluginsDummyPackageJson'],
-    done
-  );
-});
+gulp.task('build', ['!compile']);

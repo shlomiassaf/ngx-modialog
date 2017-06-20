@@ -1,13 +1,7 @@
-import {
-  Component,
-  ViewEncapsulation
-} from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 import { ModalComponent, DialogRef } from 'angular2-modal';
-
-import {
-  DialogPreset
-} from 'angular2-modal/plugins/vex/index';
+import { DialogPreset } from 'angular2-modal/plugins/vex';
 
 @Component({
   selector: 'login-dialog',

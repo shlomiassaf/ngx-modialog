@@ -1,0 +1,39 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "inlineSources": true,
+    "strictNullChecks": false,
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "jasmine",
+      "hammerjs",
+      "node"
+    ],
+    "noEmit": false,
+    "declaration": true,
+    "outDir": "."
+  },
+  "exclude": [
+    "scripts",
+    "node_modules",
+    "dist",
+    "dist_package",
+    "e2e",
+    "src/**/*.spec.ts",
+    "src/demo"
+  ]
+}
