@@ -21,29 +21,29 @@
     "noEmit": true,
     "baseUrl": "./src",
     "paths": {
-      "angular2-modal": [
-        "angular2-modal/src/angular2-modal.ts"
+      "ngx-modialog": [
+        "ngx-modialog/src/ngx-modialog.ts"
       ],
-      "angular2-modal/plugins/bootstrap": [
-        "angular2-modal/plugins/bootstrap/src/bootstrap.ts"
+      "ngx-modialog/plugins/bootstrap": [
+        "ngx-modialog/plugins/bootstrap/src/bootstrap.ts"
       ],
-      "angular2-modal/plugins/bootstrap/src/*": [
-        "angular2-modal/plugins/bootstrap/src/*"
+      "ngx-modialog/plugins/bootstrap/src/*": [
+        "ngx-modialog/plugins/bootstrap/src/*"
       ],
-      "angular2-modal/plugins/vex": [
-        "angular2-modal/plugins/vex/src/vex.ts"
+      "ngx-modialog/plugins/vex": [
+        "ngx-modialog/plugins/vex/src/vex.ts"
       ],
-      "angular2-modal/plugins/vex/src/*": [
-        "angular2-modal/plugins/vex/src/*"
+      "ngx-modialog/plugins/vex/src/*": [
+        "ngx-modialog/plugins/vex/src/*"
       ],
-      "angular2-modal/plugins/js-native": [
-        "angular2-modal/plugins/js-native/src/js-native.ts"
+      "ngx-modialog/plugins/js-native": [
+        "ngx-modialog/plugins/js-native/src/js-native.ts"
       ],
-      "angular2-modal/plugins/js-native/src/*": [
-        "angular2-modal/plugins/js-native/src/*"
+      "ngx-modialog/plugins/js-native/src/*": [
+        "ngx-modialog/plugins/js-native/src/*"
       ],
-      "angular2-modal/src/*": [
-        "angular2-modal/src/*"
+      "ngx-modialog/src/*": [
+        "ngx-modialog/src/*"
       ]
     }
   },

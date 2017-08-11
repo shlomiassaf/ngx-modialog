@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared.module';
-import { JSNativeModalModule } from 'angular2-modal/plugins/js-native';
+import { JSNativeModalModule } from 'ngx-modialog/plugins/js-native';
 
 import { routing } from './js-native-demo.routes';
 import { JSNativeDemo } from './js-native-demo';

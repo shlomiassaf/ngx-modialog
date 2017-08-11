@@ -26,14 +26,14 @@
     "node_modules/(?!@ngrx)"
   ],
   "moduleNameMapper": {
-    "^angular2-modal$": "<rootDir>/src/angular2-modal/src/angular2-modal.ts",
-    "^angular2-modal/src/(.*)": "<rootDir>/src/angular2-modal/src/$1",
-    "^angular2-modal/plugins/bootstrap$": "<rootDir>/src/angular2-modal/plugins/bootstrap/src/bootstrap.ts",
-    "^angular2-modal/plugins/bootstrap/src/(.*)": "<rootDir>/src/angular2-modal/plugins/bootstrap/src/$1",
-    "^angular2-modal/plugins/vex$": "<rootDir>/src/angular2-modal/plugins/vex/src/vex.ts",
-    "^angular2-modal/plugins/vex/src/(.*)": "<rootDir>/src/angular2-modal/plugins/vex/src/$1",
-    "^angular2-modal/plugins/js-native$": "<rootDir>/src/angular2-modal/plugins/js-native/src/js-native.ts",
-    "^angular2-modal/plugins/js-native/src/(.*)": "<rootDir>/src/angular2-modal/plugins/js-native/src/$1",
+    "^ngx-modialog$": "<rootDir>/src/ngx-modialog/src/ngx-modialog.ts",
+    "^ngx-modialog/src/(.*)": "<rootDir>/src/ngx-modialog/src/$1",
+    "^ngx-modialog/plugins/bootstrap$": "<rootDir>/src/ngx-modialog/plugins/bootstrap/src/bootstrap.ts",
+    "^ngx-modialog/plugins/bootstrap/src/(.*)": "<rootDir>/src/ngx-modialog/plugins/bootstrap/src/$1",
+    "^ngx-modialog/plugins/vex$": "<rootDir>/src/ngx-modialog/plugins/vex/src/vex.ts",
+    "^ngx-modialog/plugins/vex/src/(.*)": "<rootDir>/src/ngx-modialog/plugins/vex/src/$1",
+    "^ngx-modialog/plugins/js-native$": "<rootDir>/src/ngx-modialog/plugins/js-native/src/js-native.ts",
+    "^ngx-modialog/plugins/js-native/src/(.*)": "<rootDir>/src/ngx-modialog/plugins/js-native/src/$1",
     "(.*)": "<rootDir>/src/$1"
   }
 }
