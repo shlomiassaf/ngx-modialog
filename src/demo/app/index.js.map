@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../src/demo/app/index.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,cAAc,cAAc,CAAC","file":"index.js","sourceRoot":"","sourcesContent":["/**\n * App\n */\nexport * from './app.module';\n"]}

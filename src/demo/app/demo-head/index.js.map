@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../src/demo/app/demo-head/index.ts"],"names":[],"mappings":"AAAA,cAAc,aAAa,CAAC","file":"index.js","sourceRoot":"","sourcesContent":["export * from './deam-head';\n"]}
