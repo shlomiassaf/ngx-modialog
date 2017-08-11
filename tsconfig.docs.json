@@ -12,6 +12,6 @@
     "src/demo",
     "build_hooks.ts",
     "compiled",
-    "src/angular2-modal/plugins/**/*.ts"
+    "src/ngx-modialog/plugins/**/*.ts"
   ]
 }

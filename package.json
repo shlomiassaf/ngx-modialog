@@ -1,10 +1,10 @@
 {
-  "name": "angular2-modal",
-  "description": "Angular2 Modal (dialog) window.",
+  "name": "ngx-modialog",
+  "description": "Modal / Dialog for Angular",
   "version": "3.0.2",
   "repository": {
     "type": "git",
-    "url": "https://github.com/shlomiassaf/angular2-modal.git"
+    "url": "https://github.com/shlomiassaf/ngx-modialog.git"
   },
   "keywords": [
     "angular",
@@ -15,9 +15,9 @@
   ],
   "author": "Shlomi Assaf",
   "license": "MIT",
-  "homepage": "https://github.com/shlomiassaf/angular2-modal",
+  "homepage": "https://github.com/shlomiassaf/ngx-modialog",
   "bugs": {
-    "url": "https://github.com/shlomiassaf/angular2-modal/issues"
+    "url": "https://github.com/shlomiassaf/ngx-modialog/issues"
   },
   "scripts": {
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && cross-env BUILD_AOT=1 npm run webpack -- --config config/webpack.prod.js  --progress --profile --bail",
@@ -38,7 +38,7 @@
     "clean:install": "npm set progress=false && npm install",
     "clean": "npm cache clean --force && npm run rimraf -- node_modules doc coverage dist compiled dll",
     "docker": "docker",
-    "docs": "./node_modules/.bin/compodoc -p tsconfig.docs.json --disablePrivateOrInternalSupport --disableSourceCode --theme laravel",
+    "docs": "./node_modules/.bin/compodoc -p tsconfig.docs.json --disablePrivateOrInternalSupport --disableSourceCode --theme laravel --includes docs",
     "e2e:live": "npm-run-all -p -r server:prod:ci protractor:live",
     "e2e:travis": "npm-run-all -p -r server:prod:ci protractor:delay",
     "e2e": "npm-run-all -p -r server:prod:ci protractor",
@@ -207,7 +207,7 @@
   },
   "libConfig": {
     "packages": [
-      "angular2-modal"
+      "ngx-modialog"
     ]
   }
 }

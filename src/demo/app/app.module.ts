@@ -2,7 +2,7 @@ import { NgModule }      from '@angular/core';
 import { RouterModule, PreloadAllModules } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ModalModule } from 'angular2-modal';
+import { ModalModule } from 'ngx-modialog';
 
 import { ENV_PROVIDERS } from './environment';
 import { SharedModule } from './shared.module';

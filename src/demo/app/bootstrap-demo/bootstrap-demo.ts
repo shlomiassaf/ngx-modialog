@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { providers, bootstrap4Mode } from 'angular2-modal/plugins/bootstrap';
+import { providers, bootstrap4Mode } from 'ngx-modialog/plugins/bootstrap';
 
 bootstrap4Mode();
 

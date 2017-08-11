@@ -7,7 +7,7 @@ import {
   transition
 } from '@angular/core';
 
-import { DialogRef } from 'angular2-modal';
+import { DialogRef } from 'ngx-modialog';
 import { InAppModalContext } from './modal-context';
 
 
