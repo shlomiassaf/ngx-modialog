@@ -1,5 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { providers } from 'angular2-modal/plugins/bootstrap';
+import { providers, bootstrap4Mode } from 'angular2-modal/plugins/bootstrap';
+
+bootstrap4Mode();
 
 @Component({
   selector: 'bootstrap-demo',

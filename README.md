@@ -19,12 +19,7 @@ Shlomi.
 
 ---
 
-# Update
-Version 1.1.2 & 2.0.0-beta.3 now support UMD bundles.
-Version 2.0.0-beta.14 now supports AoT compilation.
-Version 3 support angular@4.x.x features and FESM bundle
-
-# Angular 2: AIO Modal / Dialog window
+# Angular AIO Modal / Dialog window
 
 A fully generic, customizable and fluent modal window implementation for Angular.
 `angular2-modal` is UI platform/framework agnostic, **plugins**** are used to describe a UI implementation (e.g: Bootstrap)  

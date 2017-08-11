@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.package",
+
+  "exclude": [
+    "config",
+    "scripts",
+    "node_modules",
+    "dist",
+    "dist_package",
+    "e2e",
+    "src/**/*.spec.ts",
+    "src/demo",
+    "build_hooks.ts",
+    "compiled",
+    "src/angular2-modal/plugins/**/*.ts"
+  ]
+}

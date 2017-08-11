@@ -11,9 +11,11 @@ import { JSNativeDemoModule } from './js-native-demo/js-native-demo.module';
 
 import { App }  from './app.component';
 import { Home } from './home/home';
+import { DocumentationComponent } from './documentation/documentation.component';
 import { routes } from './app.routes';
 import { InAppModalModule } from './home/in-app-plugin/index';
 
+import '../styles/styles.scss';
 
 @NgModule({
   imports: [
@@ -26,7 +28,7 @@ import { InAppModalModule } from './home/in-app-plugin/index';
     JSNativeDemoModule,
     InAppModalModule
   ],
-  declarations: [ App, Home ],
+  declarations: [ App, Home, DocumentationComponent ],
   bootstrap:    [ App ],
   providers: [
     ENV_PROVIDERS
