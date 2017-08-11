@@ -24,6 +24,15 @@ import { TwoButtonPresetBuilder, PromptPresetBuilder } from './presets/two-butto
 // TODO: consolidate dup code
 const isDoc: boolean = !(typeof document === 'undefined' || !document);
 
+let animationClass: string = 'in';
+
+/**
+ * Execute this method to flag that you are working with Bootstrap version 4.
+ */
+export function bootstrap4Mode(): void {
+  animationClass = 'show';
+}
+
 @Injectable()
 export class Modal extends Modal_ {
   constructor(overlay: Overlay) {
@@ -66,8 +75,8 @@ export class Modal extends Modal_ {
     }
     backdrop.addClass('modal-backdrop fade', true);
 
-    backdrop.addClass('in');
-    container.addClass('in');
+    backdrop.addClass(animationClass);
+    container.addClass(animationClass);
 
     if (containerRef.location.nativeElement) {
       containerRef.location.nativeElement.focus();
@@ -75,8 +84,8 @@ export class Modal extends Modal_ {
 
     overlay.beforeDestroy(() => {
       const completer = new PromiseCompleter<void>();
-      backdrop.removeClass('in');
-      container.removeClass('in');
+      backdrop.removeClass(animationClass);
+      container.removeClass(animationClass);
 
       combineLatest.call(backdrop.myAnimationEnd$(), container.myAnimationEnd$(), (s1, s2) => [s1,s2])
         .subscribe( sources => {
