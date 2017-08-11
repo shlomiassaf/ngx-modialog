@@ -1,4 +1,4 @@
-# ngx-modialog (previously ngx-modialog)
+# ngx-modialog (previously `angular2-modal`)
 
 ## Library has been renamed from version 3.0.2
 

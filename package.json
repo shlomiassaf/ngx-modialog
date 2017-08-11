@@ -38,7 +38,7 @@
     "clean:install": "npm set progress=false && npm install",
     "clean": "npm cache clean --force && npm run rimraf -- node_modules doc coverage dist compiled dll",
     "docker": "docker",
-    "docs": "./node_modules/.bin/compodoc -p tsconfig.docs.json --disablePrivateOrInternalSupport --disableSourceCode --theme laravel --includes docs",
+    "docs": "./node_modules/.bin/compodoc -p tsconfig.docs.json --disablePrivateOrInternalSupport --disableSourceCode --theme laravel --includes additional-documentation",
     "e2e:live": "npm-run-all -p -r server:prod:ci protractor:live",
     "e2e:travis": "npm-run-all -p -r server:prod:ci protractor:delay",
     "e2e": "npm-run-all -p -r server:prod:ci protractor",
