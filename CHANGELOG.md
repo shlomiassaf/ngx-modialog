@@ -1,3 +1,23 @@
+<a name="3.0.2"></a>
+## [3.0.2](https://github.com/shlomiassaf/angular2-modal/compare/3.0.1...3.0.2) (2017-08-11)
+
+
+### Features
+
+* **bootstrap:** support bootstrap 4 ([23cb2a0](https://github.com/shlomiassaf/angular2-modal/commit/23cb2a0)), closes [#280](https://github.com/shlomiassaf/angular2-modal/issues/280)
+
+
+
+<a name="3.0.1"></a>
+## [3.0.1](https://github.com/shlomiassaf/angular2-modal/compare/3.0.0...3.0.1) (2017-06-21)
+
+
+### Bug Fixes
+
+* lazy loading issue ([f9f6d2e](https://github.com/shlomiassaf/angular2-modal/commit/f9f6d2e)), closes [#366](https://github.com/shlomiassaf/angular2-modal/issues/366)
+
+
+
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/shlomiassaf/angular2-modal/compare/2.0.2...3.0.0) (2017-06-20)
 
