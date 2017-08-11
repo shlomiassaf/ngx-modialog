@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>angular2-modal documentation</title>
+        <title>ngx-modialog documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,7 +14,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="./" class="navbar-brand">angular2-modal documentation</a>
+            <a href="./" class="navbar-brand">ngx-modialog documentation</a>
             <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
         </div>
 
@@ -27,7 +27,7 @@
                 <ul class="list">
             
                     <li class="title">
-                        <a href="./index.html">angular2-modal documentation</a>
+                        <a href="./index.html">ngx-modialog documentation</a>
                     </li>
             
                     <li class="divider"></li>
@@ -63,6 +63,22 @@
                         </ul>
                     </li>
             
+                    <li class="chapter">
+                        <div class="simple menu-toggler" data-toggle="collapse"
+                                data-target="#xs-additional-pages"
+                            >
+                            <span class="fa fa-book"></span>
+                            <span>Additional documentation</span>
+                            <span class="fa fa-angle-down"></span>
+                        </div>
+                        <ul class="links collapse "
+                                id="xs-additional-pages"
+                            >
+                                <li class="link ">
+                                    <a href="./additional-documentation/todo.html" >TODO</a>
+                                </li>
+                        </ul>
+                    </li>
             
                     <li class="chapter">
                         <a data-type="chapter-link" href="./modules.html" >
@@ -285,7 +301,7 @@
                        <ul class="list">
                    
                            <li class="title">
-                               <a href="./index.html">angular2-modal documentation</a>
+                               <a href="./index.html">ngx-modialog documentation</a>
                            </li>
                    
                            <li class="divider"></li>
@@ -324,6 +340,22 @@
                                </ul>
                            </li>
                    
+                           <li class="chapter">
+                               <div class="simple menu-toggler" data-toggle="collapse"
+                                       data-target="#additional-pages"
+                   >
+                                   <span class="fa fa-book"></span>
+                                   <span>Additional documentation</span>
+                                   <span class="fa fa-angle-down"></span>
+                               </div>
+                               <ul class="links collapse "
+                                       id="additional-pages"
+                   >
+                                       <li class="link ">
+                                           <a href="./additional-documentation/todo.html" >TODO</a>
+                                       </li>
+                               </ul>
+                           </li>
                    
                            <li class="chapter">
                                <a data-type="chapter-link" href="./modules.html" >
@@ -540,6 +572,110 @@
                <div class="content getting-started">
                    <div class="content-data">
 
+<h1 id="ngx-modialog-previously-ngx-modialog-">ngx-modialog (previously ngx-modialog)</h1>
+<h2 id="library-has-been-renamed-from-version-3-0-2">Library has been renamed from version 3.0.2</h2>
+<p>Modal / Dialog implementation for angular.</p>
+<ul>
+<li>Easy to use API via Fluent API Presets (alert, prompt, confirm)</li>
+<li>Can render Component&#39;s, TemplateRef&#39;s and literal string</li>
+<li>Extendable via plugins.</li>
+<li>Easy to use<pre class="line-numbers"><code class="language-typescript">modal.alert()
+.title(&#39;Hello World&#39;)
+.body(&#39;In Angular&#39;)
+.open();</code></pre></li>
+</ul>
+<p>Available plugins: </p>
+<ul>
+<li>Bootstrap (3 &amp; 4)</li>
+<li><a href="http://github.hubspot.com/vex/docs/welcome/">Vex</a></li>
+</ul>
+<h2 id="install">Install</h2>
+<pre class="line-numbers"><code class="language-bash">npm install ngx-modialog</code></pre><h2 id="quick-start">Quick start</h2>
+<p><strong>In your application root module definition add <code>ModalModule</code> and the plugin you want to use:</strong></p>
+<p>We will use the bootstrap plugin (<code>BootstrapModalModule</code>) for this introduction.</p>
+<pre class="line-numbers"><code class="language-typescript">import { ModalModule } from &#39;ngx-modialog&#39;;
+import { BootstrapModalModule } from &#39;ngx-modialog/plugins/bootstrap&#39;;
+
+// lots of code...
+
+&#64;NgModule({
+  bootstrap: [ /* ... */ ],
+  declarations: [ /* ... */ ],
+  imports: [
+    /* ... */
+    ModalModule.forRoot(),
+    BootstrapModalModule
+  ],
+})
+export class AppModule { /* lots of code... */ }</code></pre><p><strong>In any angular component or service inject the <code>Modal</code> service and open a modal</strong>:</p>
+<pre class="line-numbers"><code class="language-typescript">import { Component, ViewContainerRef } from &#39;&#64;angular/core&#39;;
+import { Overlay } from &#39;ngx-modialog&#39;;
+import { Modal } from &#39;ngx-modialog/plugins/bootstrap&#39;;
+
+&#64;Component({
+  selector: &#39;my-app&#39;,
+  template: `&lt;button (click)=&quot;onClick()&quot;&gt;Alert&lt;/button&gt;`
+})
+export class AppComponent {
+  constructor(public modal: Modal) { }
+
+  onClick() {
+    this.modal.alert()
+        .size(&#39;lg&#39;)
+        .showClose(true)
+        .title(&#39;A simple Alert style modal window&#39;)
+        .body(`
+            &lt;h4&gt;Alert is a classic (title/body/footer) 1 button modal window that 
+            does not block.&lt;/h4&gt;
+            &lt;b&gt;Configuration:&lt;/b&gt;
+            &lt;ul&gt;
+                &lt;li&gt;Non blocking (click anywhere outside to dismiss)&lt;/li&gt;
+                &lt;li&gt;Size large&lt;/li&gt;
+                &lt;li&gt;Dismissed with default keyboard key (ESC)&lt;/li&gt;
+                &lt;li&gt;Close wth button click&lt;/li&gt;
+                &lt;li&gt;HTML content&lt;/li&gt;
+            &lt;/ul&gt;`)
+        .open()
+        .then( dialogRef =&gt; {
+            dialogRef.result.then( result =&gt; alert(`The result is: ${result}`);
+        });
+  }
+}</code></pre><p>We are using the <code>alert()</code> method, one of 3 (prompt, confirm)) fluent-api methods we call <code>drop-ins</code></p>
+<p>The object returned from calling the <code>open()</code> method is a <code>Promise</code> to a {@link DialogRef} instance, <code>DialogRef</code> is how you can control an open modal instance.</p>
+<p>We then use the <code>result</code> property to wait for the modal closing event.</p>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>The <code>Promise</code> returned from <code>open()</code> is not required and exists due to legacy angular implementation when creating components dynamically was an async operation.</li>
+<li>Fluent API methods (drop-ins) are pre-configured (presets) methods that allow easy configuration and execution, you can create custom presets - see the demo application.</li>
+<li>For more control use the <code>open()</code> method, which is used by all drop in&#39;s internally.</li>
+<li>We import the <code>Modal</code> service from the plugin and not from the root library.
+Import from the root should work but being explicit allow using multiple plugins.</li>
+</ul>
+<h2 id="demo-app">Demo App</h2>
+<p>The Demo application is a full implementation of the library with the native plugins.</p>
+<p>View it at <a href="http://shlomiassaf.github.io/ngx-modialog/">shlomiassaf.github.io/ngx-modialog</a></p>
+<p>The demo application is <a href="https://github.com/shlomiassaf/ngx-modialog/tree/master/src/demo/app">part of this repository</a> and it is a great place to learn by example.</p>
+<h4 id="bootstrap-vex-features-">Bootstrap / VEX features:</h4>
+<ul>
+<li>Customizable with components, Presets and more...  </li>
+<li>Select cancel/quit key.</li>
+<li>Cascading modals.  </li>
+<li>Element blocking.  </li>
+<li>Blocking / Non blocking modal.  </li>
+<li>Modal as a component, replace the content by supplying a custom component.   </li>
+</ul>
+<p>The demo application comes with a <a href="http://shlomiassaf.github.io/ngx-modialog#/bootstrap-demo/customizeModals">dynamic modal generator</a> for the <strong>Boostrap</strong> plugin</p>
+<h2 id="plugins">Plugins</h2>
+<p>Plugins serve as a concrete UI implementation for a modal.</p>
+<p>It can be an implementation for a known library (e.g: bootstrap) or something completely unique</p>
+<p>While <code>ngx-modialog</code> has some built in plugins it is also possible to use external plugins from NPM, if someone decide to build one.</p>
+<blockquote>
+<p>Built a plugin? I would love to know :)</p>
+</blockquote>
+<h1 id="known-bugs">Known bugs</h1>
+<h3 id="the-dialog-closes-when-removing-the-target-dom-element-in-a-click-event">The dialog closes when removing the target DOM element in a click event</h3>
+<p>ref <a href="https://github.com/shlomiassaf/ngx-modialog/issues/111">issue#111</a></p>
+<p>To avoid this problem use <code>event.stopPropagation();</code> or put the element removal inside a <code>setTimeout</code> call</p>
 <hr>
 <h1 id="help-wanted-">HELP WANTED!</h1>
 <p>As a sole author I find it difficult to maintain multiple open source projects.
@@ -554,84 +690,6 @@ As a result it is hard for me to replay rapidly to requests/help/etc...</p>
 <p>Thank you!</p>
 <p>Shlomi.</p>
 <hr>
-<h1 id="update">Update</h1>
-<p>Version 1.1.2 &amp; 2.0.0-beta.3 now support UMD bundles.
-Version 2.0.0-beta.14 now supports AoT compilation.
-Version 3 support angular@4.x.x features and FESM bundle</p>
-<h1 id="angular-2-aio-modal-dialog-window">Angular 2: AIO Modal / Dialog window</h1>
-<p>A fully generic, customizable and fluent modal window implementation for Angular.
-<code>angular2-modal</code> is UI platform/framework agnostic, <strong>plugins**</strong> are used to describe a UI implementation (e.g: Bootstrap)<br>This means virtually any modal implementation out there can be ported into <code>angular2-modal</code>.
-<code>angular2-modal</code> will come with some built in UI platforms, external UI platform can be added in the future or externally used using NPM modules.</p>
-<p>See the DEMO: <a href="http://shlomiassaf.github.io/angular2-modal/">shlomiassaf.github.io/angular2-modal</a></p>
-<h2 id="quick-walk-through">Quick walk through</h2>
-<p>Take 5 minutes to read a <a href="https://github.com/shlomiassaf/angular2-modal/tree/master/QUICKTHROUGH.md">quick walk through</a> with samples of how to use <strong>Angular 2 Modal</strong></p>
-<h2 id="built-in-plugins-">Built in plugins:</h2>
-<ul>
-<li><a href="">Bootstrap</a></li>
-<li><a href="http://github.hubspot.com/vex/docs/welcome/">Vex</a></li>
-<li>POC implementation of JS Native modal (window.alert/prompt/confirm) to demonstrate a hostile takeover :)</li>
-</ul>
-<h2 id="built-with-angular">Built with angular</h2>
-<h2 id="features">Features</h2>
-<ul>
-<li>Easy to use API via Fluent API Presets (alert, prompt, confirm)</li>
-<li>Can render Component&#39;s, TemplateRef&#39;s and literal string</li>
-<li>Extendable via plugins.  </li>
-</ul>
-<h4 id="bootstrap-vex">Bootstrap / VEX</h4>
-<ul>
-<li>Customizable with components, Presets and more...  </li>
-<li>Select cancel/quit key.</li>
-<li>Cascading modals.  </li>
-<li>Element blocking.  </li>
-<li>Blocking / Non blocking modal.  </li>
-<li>Modal as a component, replace the content by supplying a custom component.   </li>
-</ul>
-<p>That&#39;s how easy it is:  </p>
-<pre class="line-numbers"><code class="language-none">modal.alert()
-    .title(&#39;Hello World&#39;)
-    .body(&#39;In Angular 2&#39;)
-    .open();</code></pre><p>Click <a href="https://github.com/shlomiassaf/angular2-modal/tree/master/QUICKTHROUGH.md">HERE</a> for a quick walkthrough<br>Click for the <a href="http://shlomiassaf.github.io/angular2-modal/">Demo</a> Make sure to check the <a href="http://shlomiassaf.github.io/angular2-modal#/bootstrap-demo/customizeModals">code generator!</a>  </p>
-<h2 id="plunker">Plunker</h2>
-<p>Use <a href="http://plnkr.co/edit/ZAZqZu?p=preview">this plunker</a> for quick showcasing and issue reports.</p>
-<h2 id="sample-code-custom-modal-dialog">Sample code: Custom Modal dialog</h2>
-<p><a href="http://embed.plnkr.co/mbPzd8/">http://embed.plnkr.co/mbPzd8/</a></p>
-<p><a href="http://embed.plnkr.co/ZAZqZu/">http://embed.plnkr.co/ZAZqZu/</a>   (version 1.1.1)</p>
-<p><img src="/preview.png" alt="Code Generator!" class="img-responsive"></p>
-<p>See <a href="https://github.com/shlomiassaf/angular2-modal/tree/master/src/demo">src/demo</a> for demo app with examples.</p>
-<h2 id="installation">Installation</h2>
-<pre class="line-numbers"><code class="language-none">    npm install angular2-modal --save</code></pre><h2 id="systemjs">SystemJS</h2>
-<p>See systemJS example in <a href="http://embed.plnkr.co/mbPzd8/">this plunker</a>
-Include both module and UMD bundle approach</p>
-<h2 id="plugins">Plugins</h2>
-<p>Plugins serve as a concrete UI implementation for a modal. It can be an implementation for a known library (e.g: bootstrap) or something unique.<br>While <code>angular2-modal</code> has some built in plugins it is also possible to use external plugins from NPM, if someone decide to build one.</p>
-<h2 id="running-locally">Running locally</h2>
-<pre class="line-numbers"><code class="language-none">git clone https://github.com/shlomiassaf/angular2-modal.git  
-npm install  
-typings install  
-npm run start
-browse to localhost:3000  </code></pre><p>You can apply custom modals based on components.</p>
-<h1 id="issues-and-todo-s">Issues and TODO&#39;s</h1>
-<h2 id="-declarative-modal-component-implemented"><del>Declarative modal component</del> IMPLEMENTED</h2>
-<p><del>Create a modal from declarative template syntax</del>  </p>
-<h2 id="-animation-implemented"><del>Animation</del> IMPLEMENTED</h2>
-<p><del>Not so complicated but not in angular 2 at the moment.</del>  </p>
-<h2 id="-overlay-implemented"><del>Overlay</del> IMPLEMENTED</h2>
-<p><del>Switch to material2 overlay implementation when done.</del>  </p>
-<h2 id="-bundle-implemented"><del>Bundle</del> IMPLEMENTED</h2>
-<p><del>Build a umd bundle.</del>  </p>
-<h2 id="-base-support-implemented"><del>Base support</del> IMPLEMENTED</h2>
-<p><del>Provide base classes for generic components</del>  </p>
-<h2 id="unit-e2e-test">Unit &amp; E2E test</h2>
-<p>Add tests...</p>
-<h2 id="support-universal">Support Universal</h2>
-<p>Test against <code>universal-starter</code> to enable universal support.</p>
-<h2 id="support-change-detection">Support Change detection</h2>
-<p>Support <code>OnPush</code> with an observable api model (fluent observables)</p>
-<h1 id="known-bugs">Known bugs</h1>
-<h3 id="the-dialog-closes-when-removing-the-target-dom-element-in-a-click-event">The dialog closes when removing the target DOM element in a click event</h3>
-<p>ref <a href="https://github.com/shlomiassaf/angular2-modal/issues/111">issue#111</a></p>
-<p>To avoid this problem use <code>event.stopPropagation();</code> or put the element removal inside a <code>setTimeout</code> call</p>
 
 
 
