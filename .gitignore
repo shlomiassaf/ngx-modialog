@@ -74,3 +74,4 @@ dll/
 dist_package
 .tmp
 .tsconfig.*.json
+documentation

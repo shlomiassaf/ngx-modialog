@@ -6,6 +6,7 @@ const path = require('path');
 const helpers = require('./helpers');
 const ghDeploy = require('./github-deploy');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
+const execSync = require('child_process').execSync;
 
 /**
  * Webpack Constants
@@ -63,6 +64,8 @@ module.exports = function (options) {
           * this is the fix for now.
           */
          fs.writeFileSync(path.join(webpackConfig.output.path, '.nojekyll'), '');
+
+         execSync(`npm run docs -- -d ${webpackConfig.output.path}/documentation`, {stdio:[0,1,2]});
 
          const ghpages = require('gh-pages');
          ghpages.publish(webpackConfig.output.path, options, function(err) {

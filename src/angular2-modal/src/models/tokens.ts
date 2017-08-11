@@ -41,8 +41,7 @@ export interface OverlayConfig {
   bindings?: ResolvedReflectiveProvider[];
 
   /**
-   *  The element to block using the modal.
-   *  Default: The value set in defaultViewContainer.
+   * The element to block using the modal.
    */
   viewContainer?: WideVCRef;
 

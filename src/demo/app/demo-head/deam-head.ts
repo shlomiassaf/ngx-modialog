@@ -24,7 +24,7 @@ export interface DropInClickEvent {
       .btn-dropin {
           text-transform: uppercase;
           margin: 15px;
-          background-color: #219161;
+          /*background-color: #219161;*/
           border: none;
           box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
           border-radius: 0;
