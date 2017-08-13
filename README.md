@@ -1,6 +1,8 @@
 # ngx-modialog (previously `angular2-modal`)
 
-# IMPORTANT: Version 4.x.x contains some breaking changes, please see the [CHANGELOG]('./CHANGELOG.md')
+# IMPORTANT - V4 BREAKING CHANGE:
+Version 4.x.x contains some breaking changes, please see the [CHANGELOG](./CHANGELOG.md)
+
 ## Library has been renamed from version 3.0.2
 
 
