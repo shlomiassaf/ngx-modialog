@@ -133,6 +133,8 @@ module.exports = function (options) {
        * NOTE: when adding more properties, make sure you include them in custom-typings.d.ts
        */
       new DefinePlugin({
+        "VERSION": JSON.stringify(require(helpers.root('package.json')).version),
+        "NG_VERSION": JSON.stringify(require(helpers.root('node_modules', '@angular', 'core', 'package.json')).version),
         'ENV': JSON.stringify(METADATA.ENV),
         'HMR': METADATA.HMR,
         'process.env': {

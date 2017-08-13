@@ -46,9 +46,7 @@ export abstract class ModalOpenContextBuilder<T extends ModalOpenContext>
    * Hook to alter config and return bindings.
    * @param config
    */
-  protected $$beforeOpen(config: T): ResolvedReflectiveProvider[] {
-    return [];
-  }
+  protected $$beforeOpen(config: T): void { }
 
   /**
    * Open a modal window based on the configuration of this config instance.
@@ -62,10 +60,11 @@ export abstract class ModalOpenContextBuilder<T extends ModalOpenContext>
       return <any>Promise.reject(new Error('Configuration Error: modal service not set.'));
     }
 
+    this.$$beforeOpen(context);
+
     let overlayConfig: OverlayConfig = {
       context: context,
-      viewContainer: viewContainer,
-      bindings: typeof this.$$beforeOpen === 'function' && this.$$beforeOpen(context)
+      viewContainer: viewContainer
     };
 
     return context.modal.open(context.component, overlayConfig);

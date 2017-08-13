@@ -2,7 +2,7 @@ import {
   ComponentRef,
   ElementRef,
   OnDestroy,
-  Renderer
+  Renderer2
 } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -42,7 +42,7 @@ export class BaseDynamicComponent implements OnDestroy {
   protected animationEnd: Subject<TransitionEvent | AnimationEvent>;
 
   constructor(protected el: ElementRef,
-              protected renderer: Renderer) {}
+              protected renderer: Renderer2) {}
   
   activateAnimationListener() {
     if (this.animationEnd) return;
@@ -58,7 +58,7 @@ export class BaseDynamicComponent implements OnDestroy {
    * @returns {ModalOverlay}
    */
   setStyle(prop: string, value: string): this {
-    this.renderer.setElementStyle(this.el.nativeElement, prop, value);
+    this.renderer.setStyle(this.el.nativeElement, prop, value);
     return this;
   }
 
@@ -68,13 +68,13 @@ export class BaseDynamicComponent implements OnDestroy {
 
   addClass(css: string, forceReflow: boolean = false): void {
     css.split(' ')
-      .forEach( c => this.renderer.setElementClass(this.el.nativeElement, c, true) );
+      .forEach( c => this.renderer.addClass(this.el.nativeElement, c) );
     if (forceReflow) this.forceReflow();
   }
 
   removeClass(css: string, forceReflow: boolean = false): void {
     css.split(' ')
-      .forEach( c => this.renderer.setElementClass(this.el.nativeElement, c, false) );
+      .forEach( c => this.renderer.removeClass(this.el.nativeElement, c) );
     if (forceReflow) this.forceReflow();
   }
 
@@ -91,9 +91,6 @@ export class BaseDynamicComponent implements OnDestroy {
   /**
    * Add a component, supply a view container ref.
    * Note: The components vcRef will result in a sibling.
-   * @param component The component to add
-   * @param vcRef The container to add to
-   * @param bindings Bindings to use (added on top of the ViewContainerRef)
    * @returns {Promise<ComponentRef<any>>}
    */
   protected _addComponent<T>(instructions: CreateComponentArgs): ComponentRef<T> {

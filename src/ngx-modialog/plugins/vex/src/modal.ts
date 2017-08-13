@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs';
 import { combineLatest } from 'rxjs/operator/combineLatest';
-
-import { Injectable, ResolvedReflectiveProvider as RRP } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import {
   ContainerContent,
@@ -45,12 +44,10 @@ export class Modal extends Modal_ {
     }  as any);
   }
 
-  protected create(dialogRef: DialogRef<any>,
-                   content: ContainerContent,
-                   bindings?: RRP[]): Maybe<DialogRef<any>> {
+  protected create(dialogRef: DialogRef<any>, content: ContainerContent): Maybe<DialogRef<any>> {
 
     const backdropRef = this.createBackdrop(dialogRef, CSSBackdrop);
-    const containerRef = this.createContainer(dialogRef, CSSDialogContainer, content, bindings);
+    const containerRef = this.createContainer(dialogRef, CSSDialogContainer, content);
 
     let overlay = dialogRef.overlayRef.instance;
     let backdrop = backdropRef.instance;

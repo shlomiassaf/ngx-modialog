@@ -11,6 +11,9 @@ import { InAppModalModule, Modal } from './in-app-plugin/index';
 export class Home {
   @ViewChild('myTemplate', {read: TemplateRef}) public myTemplate: TemplateRef<any>;
 
+  readonly version = VERSION;
+  readonly ngVersion = NG_VERSION;
+
   constructor(private modal: Modal) {
   }
 

@@ -1,9 +1,4 @@
-import {
-  ComponentRef,
-  TemplateRef,
-  ReflectiveInjector,
-  ResolvedReflectiveProvider, Type
-} from '@angular/core';
+import { ComponentRef } from '@angular/core';
 
 import { Overlay } from '../overlay/index';
 import { Class, Maybe } from '../framework/utils';
@@ -11,11 +6,8 @@ import { OverlayConfig, ContainerContent } from '../models/tokens';
 import { DialogRef } from '../models/dialog-ref';
 import { ModalControllingContextBuilder } from '../models/overlay-context';
 
-export class UnsupportedDropInError extends Error {
-  constructor(dropInName: string) {
-    super();
-    this.message = `Unsupported Drop-In ${dropInName}`;
-  }
+export function unsupportedDropInError(dropInName: string): Error {
+  return new Error(`Unsupported Drop-In ${dropInName}`);
 }
 
 export abstract class Modal {
@@ -23,15 +15,15 @@ export abstract class Modal {
 
 
   alert(): ModalControllingContextBuilder<any> {
-    throw new UnsupportedDropInError('alert');
+    throw unsupportedDropInError('alert');
   }
 
   prompt(): ModalControllingContextBuilder<any> {
-    throw new UnsupportedDropInError('prompt');
+    throw unsupportedDropInError('prompt');
   }
 
   confirm(): ModalControllingContextBuilder<any> {
-    throw new UnsupportedDropInError('confirm');
+    throw unsupportedDropInError('confirm');
   }
 
   /**
@@ -53,7 +45,7 @@ export abstract class Modal {
       // TODO:  Currently supporting 1 view container, hence working on dialogs[0].
       //        upgrade to multiple containers.
       return Promise.resolve(
-        this.create(dialogs[0], content, config.bindings)
+        this.create(dialogs[0], content)
       );
 
     } catch (e) {
@@ -66,50 +58,22 @@ export abstract class Modal {
    * A Hook that enables derived classes to add content to the overlay.
    * @param dialogRef
    * @param type
-   * @param bindings
-   * @returns {MaybeDialogRef<any>}
+   * @returns {Maybe<DialogRef<any>>}
    */
-  protected abstract create(dialogRef: DialogRef<any>,
-                            type: ContainerContent,
-                            bindings?: ResolvedReflectiveProvider[]): Maybe<DialogRef<any>>;
+  protected abstract create(dialogRef: DialogRef<any>, type: ContainerContent): Maybe<DialogRef<any>>;
 
 
   protected createBackdrop<T>(dialogRef: DialogRef<any>, BackdropComponent: Class<T>): ComponentRef<T> {
-    const b = ReflectiveInjector.resolve([{provide: DialogRef, useValue: dialogRef}]);
-    return dialogRef.overlayRef.instance.addComponent<T>(BackdropComponent, b);
+    return dialogRef.overlayRef.instance.addComponent<T>(BackdropComponent);
   }
 
   protected createContainer<T>(
     dialogRef: DialogRef<any>,
     ContainerComponent: Class<T>,
-    content: string | TemplateRef<any> | Type<any>,
-    bindings?: ResolvedReflectiveProvider[]): ComponentRef<T> {
+    content: ContainerContent): ComponentRef<T> {
 
-    const b = ReflectiveInjector.resolve([{provide: DialogRef, useValue: dialogRef}])
-      .concat(bindings || []);
-
-    let nodes: any[] = dialogRef.overlayRef.instance.getProjectables(content, b);
-    return dialogRef.overlayRef.instance.addComponent<T>(ContainerComponent, b, nodes);
-  }
-
-
-  /**
-   * A helper function for derived classes to create backdrop & container
-   * @param dialogRef
-   * @param backdrop
-   * @param container
-   * @returns { backdropRef: ComponentRef<B>, containerRef: ComponentRef<C> }
-   *
-   * @deprecated use createBackdrop and createContainer instead
-   */
-  protected createModal<B, C>(dialogRef: DialogRef<any>, backdrop: Class<B>, container: Class<C>)
-                                : { backdropRef: ComponentRef<B>, containerRef: ComponentRef<C> } {
-    const b = ReflectiveInjector.resolve([{provide: DialogRef, useValue: dialogRef}]);
-
-    return {
-      backdropRef: dialogRef.overlayRef.instance.addComponent<B>(backdrop, b),
-      containerRef: dialogRef.overlayRef.instance.addComponent<C>(container, b)
-    };
+    let nodes: any[] = dialogRef.overlayRef.instance.getProjectables(content);
+    return dialogRef.overlayRef.instance.addComponent<T>(ContainerComponent, nodes);
   }
 
 }

@@ -37,7 +37,7 @@ const util = require('../scripts/util.ts');
 const HMR = helpers.hasProcessFlag('hot');
 const AOT = process.env.BUILD_AOT || helpers.hasNpmFlag('aot');
 const METADATA = {
-  title: 'Angular Library Starter Demo App',
+  title: 'ngx-modialog',
   baseUrl: '/',
   isDevServer: helpers.isWebpackDevServer(),
   HMR: HMR

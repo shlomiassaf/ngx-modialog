@@ -1,4 +1,3 @@
-import { ResolvedReflectiveProvider } from '@angular/core';
 import {
   DROP_IN_TYPE,
   FluentAssignMethod,
@@ -93,7 +92,9 @@ export class DropInPresetBuilder extends DialogPresetBuilder<DropInPreset> {
     );
   }
 
-  $$beforeOpen(config: DropInPreset): ResolvedReflectiveProvider[] {
+  $$beforeOpen(config: DropInPreset): void {
+    super.$$beforeOpen(config);
+
     if (config.okBtn) {
       this.addOkButton(config.okBtn);
     }
@@ -101,12 +102,12 @@ export class DropInPresetBuilder extends DialogPresetBuilder<DropInPreset> {
     switch (config.dropInType) {
       case DROP_IN_TYPE.prompt:
         config.defaultResult = undefined;
+        break;
       case DROP_IN_TYPE.confirm:
         if (config.cancelBtn) {
           this.addCancelButton(config.cancelBtn);
         }
         break;
     }
-    return super.$$beforeOpen(config);
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "ngx-modialog",
   "description": "Modal / Dialog for Angular",
-  "version": "3.0.2",
+  "version": "4.0.0-beta.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/shlomiassaf/ngx-modialog.git"
@@ -86,16 +86,16 @@
     "webpack": "node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js"
   },
   "devDependencies": {
-    "@angular/animations": "^4.2.3",
-    "@angular/common": "^4.2.3",
-    "@angular/compiler": "^4.2.3",
-    "@angular/compiler-cli": "^4.2.3",
-    "@angular/core": "^4.2.3",
-    "@angular/forms": "^4.2.3",
-    "@angular/http": "^4.2.3",
-    "@angular/platform-browser": "^4.2.3",
-    "@angular/platform-browser-dynamic": "^4.2.3",
-    "@angular/platform-server": "^4.2.3",
+    "@angular/animations": "5.0.0-beta.3",
+    "@angular/common": "5.0.0-beta.3",
+    "@angular/compiler": "5.0.0-beta.3",
+    "@angular/compiler-cli": "5.0.0-beta.3",
+    "@angular/core": "5.0.0-beta.3",
+    "@angular/forms": "5.0.0-beta.3",
+    "@angular/http": "5.0.0-beta.3",
+    "@angular/platform-browser": "5.0.0-beta.3",
+    "@angular/platform-browser-dynamic": "5.0.0-beta.3",
+    "@angular/platform-server": "5.0.0-beta.3",
     "@angular/router": "^4.2.3",
     "@angularclass/hmr": "~1.2.2",
     "@angularclass/hmr-loader": "~3.0.2",

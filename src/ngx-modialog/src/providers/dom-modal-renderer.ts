@@ -3,8 +3,7 @@ import {
   ViewContainerRef,
   ComponentRef,
   Injector,
-  Injectable,
-  ReflectiveInjector
+  Injectable
 } from '@angular/core';
 
 import { createComponent } from '../framework/createComponent';
@@ -24,15 +23,12 @@ export class DOMOverlayRenderer implements OverlayRenderer {
       injector = this.injector;
     }
 
-    const bindings = ReflectiveInjector.resolve([
-      { provide: DialogRef, useValue: dialog }
-    ]);
-
     const cmpRef = createComponent({
       component: ModalOverlay,
       vcRef,
-      injector,
-      bindings
+      injector: Injector.create([
+        { provide: DialogRef, useValue: dialog }
+      ], injector)
     });
 
     if (!vcRef) {

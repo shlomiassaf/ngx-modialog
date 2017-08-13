@@ -2,7 +2,7 @@ import {
   Component,
   ElementRef,
   ViewEncapsulation,
-  Renderer
+  Renderer2
 } from '@angular/core';
 
 import { BaseDynamicComponent, DialogRef } from 'ngx-modialog';
@@ -29,7 +29,7 @@ import { MessageModalPreset } from'./presets/message-modal-preset';
 })
 export class BSModalContainer extends BaseDynamicComponent {
    constructor(public dialog: DialogRef<MessageModalPreset>,
-              el: ElementRef, renderer: Renderer) {
+              el: ElementRef, renderer: Renderer2) {
     super(el, renderer);
     this.activateAnimationListener();
   }

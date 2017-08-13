@@ -1,4 +1,3 @@
-import { ResolvedReflectiveProvider } from '@angular/core';
 import {
   Modal,
   FluentAssignMethod,
@@ -47,14 +46,13 @@ export abstract class AbstractTwoButtonPresetBuilder extends MessageModalPresetB
     ], initialSetters));
   }
 
-  $$beforeOpen(config: TwoButtonPreset): ResolvedReflectiveProvider[] {
+  $$beforeOpen(config: TwoButtonPreset): void {
+    super.$$beforeOpen(config);
     this.addButton(
       config.cancelBtnClass,
       config.cancelBtn,
       (cmp: BSMessageModal, $event: MouseEvent) => cmp.dialog.dismiss()
     );
-
-    return super.$$beforeOpen(config);
   }
 }
 
@@ -67,14 +65,13 @@ export class TwoButtonPresetBuilder extends AbstractTwoButtonPresetBuilder {
     super(modal, defaultValues);
   }
 
-  $$beforeOpen(config: TwoButtonPreset): ResolvedReflectiveProvider[] {
+  $$beforeOpen(config: TwoButtonPreset): void {
+    super.$$beforeOpen(config);
     this.addButton(
       config.okBtnClass,
       config.okBtn,
       (cmp: BSMessageModal, $event: MouseEvent) => cmp.dialog.close(true)
     );
-
-    return super.$$beforeOpen(config);
   }
 }
 
@@ -96,15 +93,14 @@ export class PromptPresetBuilder extends AbstractTwoButtonPresetBuilder {
       ['placeholder', 'defaultValue']);
   }
 
-  $$beforeOpen(config: PromptPreset): ResolvedReflectiveProvider[] {
+  $$beforeOpen(config: PromptPreset): void {
+    super.$$beforeOpen(config);
     this.addButton(
       config.okBtnClass,
       config.okBtn,
       (cmp: BSMessageModal, $event: MouseEvent) =>
         cmp.dialog.close((cmp.dialog.context as PromptPreset).defaultValue)
     );
-
-    return super.$$beforeOpen(config);
   }
 }
 

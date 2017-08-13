@@ -1,9 +1,5 @@
 import { combineLatest } from 'rxjs/operator/combineLatest';
-
-import {
-  Injectable,
-  ResolvedReflectiveProvider as RRP
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import {
   Maybe,
@@ -51,12 +47,10 @@ export class Modal extends Modal_ {
     return new TwoButtonPresetBuilder(this, <any>{isBlocking: true, keyboard: null});
   }
 
-  protected create(dialogRef: DialogRef<any>,
-                   content: ContainerContent,
-                   bindings?: RRP[]): Maybe<DialogRef<any>> {
+  protected create(dialogRef: DialogRef<any>, content: ContainerContent): Maybe<DialogRef<any>> {
 
     const backdropRef = this.createBackdrop(dialogRef, CSSBackdrop);
-    const containerRef = this.createContainer(dialogRef, BSModalContainer, content, bindings);
+    const containerRef = this.createContainer(dialogRef, BSModalContainer, content);
 
     let overlay = dialogRef.overlayRef.instance;
     let backdrop = backdropRef.instance;
