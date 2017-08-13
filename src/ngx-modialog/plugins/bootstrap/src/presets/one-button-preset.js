@@ -27,8 +27,8 @@ var OneButtonPresetBuilder = (function (_super) {
         ]) || this;
     }
     OneButtonPresetBuilder.prototype.$$beforeOpen = function (config) {
+        _super.prototype.$$beforeOpen.call(this, config);
         this.addButton(config.okBtnClass, config.okBtn, function (cmp, $event) { return cmp.dialog.close(true); });
-        return _super.prototype.$$beforeOpen.call(this, config);
     };
     return OneButtonPresetBuilder;
 }(MessageModalPresetBuilder));

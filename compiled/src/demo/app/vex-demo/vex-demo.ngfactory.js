@@ -76,27 +76,27 @@ export function View_VexDemo_0(_l) {
                 ad = (pd_2 && ad);
             }
             return ad;
-        }, null, null)), i8.ɵdid(16384, null, 0, i13.SelectControlValueAccessor, [i8.Renderer, i8.ElementRef], null, null), i8.ɵprd(1024, null, i13.NG_VALUE_ACCESSOR, function (p0_0) {
+        }, null, null)), i8.ɵdid(16384, null, 0, i13.SelectControlValueAccessor, [i8.Renderer2, i8.ElementRef], null, null), i8.ɵprd(1024, null, i13.NG_VALUE_ACCESSOR, function (p0_0) {
             return [p0_0];
         }, [i13.SelectControlValueAccessor]), i8.ɵdid(671744, null, 0, i13.NgModel, [[8, null], [8, null], [8, null], [2, i13.NG_VALUE_ACCESSOR]], { name: [0, 'name'], model: [1, 'model'] }, { update: 'ngModelChange' }), i8.ɵprd(2048, null, i13.NgControl, null, [i13.NgModel]), i8.ɵdid(16384, null, 0, i13.NgControlStatus, [i13.NgControl], null, null), (_l()(),
-            i8.ɵted(null, ['\n                            '])), (_l()(), i8.ɵeld(0, null, null, 3, 'option', [['value', 'default']], null, null, null, null, null)), i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer, [2, i13.SelectControlValueAccessor]], { value: [0, 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef, i8.Renderer, [8, null]], { value: [0, 'value'] }, null),
+            i8.ɵted(null, ['\n                            '])), (_l()(), i8.ɵeld(0, null, null, 3, 'option', [['value', 'default']], null, null, null, null, null)), i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer2, [2, i13.SelectControlValueAccessor]], { value: [0, 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef, i8.Renderer2, [8, null]], { value: [0, 'value'] }, null),
         (_l()(), i8.ɵted(null, ['default'])), (_l()(), i8.ɵted(null, ['\n                            '])),
-        (_l()(), i8.ɵeld(0, null, null, 3, 'option', [['value', 'os']], null, null, null, null, null)), i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer, [2, i13.SelectControlValueAccessor]], { value: [0, 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef, i8.Renderer, [8, null]], { value: [0, 'value'] }, null),
+        (_l()(), i8.ɵeld(0, null, null, 3, 'option', [['value', 'os']], null, null, null, null, null)), i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer2, [2, i13.SelectControlValueAccessor]], { value: [0, 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef, i8.Renderer2, [8, null]], { value: [0, 'value'] }, null),
         (_l()(), i8.ɵted(null, ['os'])), (_l()(), i8.ɵted(null, ['\n                            '])),
         (_l()(), i8.ɵeld(0, null, null, 3, 'option', [['value', 'plain']], null, null, null, null, null)),
-        i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer,
-            [2, i13.SelectControlValueAccessor]], { value: [0, 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef, i8.Renderer, [8, null]], { value: [0,
+        i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer2,
+            [2, i13.SelectControlValueAccessor]], { value: [0, 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef, i8.Renderer2, [8, null]], { value: [0,
                 'value'] }, null), (_l()(), i8.ɵted(null, ['plain'])), (_l()(),
-            i8.ɵted(null, ['\n                            '])), (_l()(), i8.ɵeld(0, null, null, 3, 'option', [['value', 'wireframe']], null, null, null, null, null)), i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer, [2, i13.SelectControlValueAccessor]], { value: [0, 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef, i8.Renderer, [8, null]], { value: [0, 'value'] }, null),
-        (_l()(), i8.ɵted(null, ['wireframe'])), (_l()(), i8.ɵted(null, ['\n                            '])), (_l()(), i8.ɵeld(0, null, null, 3, 'option', [['value', 'flat-attack']], null, null, null, null, null)), i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer, [2, i13.SelectControlValueAccessor]], { value: [0,
+            i8.ɵted(null, ['\n                            '])), (_l()(), i8.ɵeld(0, null, null, 3, 'option', [['value', 'wireframe']], null, null, null, null, null)), i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer2, [2, i13.SelectControlValueAccessor]], { value: [0, 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef, i8.Renderer2, [8, null]], { value: [0, 'value'] }, null),
+        (_l()(), i8.ɵted(null, ['wireframe'])), (_l()(), i8.ɵted(null, ['\n                            '])), (_l()(), i8.ɵeld(0, null, null, 3, 'option', [['value', 'flat-attack']], null, null, null, null, null)), i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer2, [2, i13.SelectControlValueAccessor]], { value: [0,
                 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef,
-            i8.Renderer, [8, null]], { value: [0, 'value'] }, null), (_l()(),
+            i8.Renderer2, [8, null]], { value: [0, 'value'] }, null), (_l()(),
             i8.ɵted(null, ['flat-attack'])), (_l()(), i8.ɵted(null, ['\n                            '])),
-        (_l()(), i8.ɵeld(0, null, null, 3, 'option', [['value', 'top']], null, null, null, null, null)), i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer, [2, i13.SelectControlValueAccessor]], { value: [0, 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef, i8.Renderer, [8, null]], { value: [0, 'value'] }, null),
+        (_l()(), i8.ɵeld(0, null, null, 3, 'option', [['value', 'top']], null, null, null, null, null)), i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer2, [2, i13.SelectControlValueAccessor]], { value: [0, 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef, i8.Renderer2, [8, null]], { value: [0, 'value'] }, null),
         (_l()(), i8.ɵted(null, ['top'])), (_l()(), i8.ɵted(null, ['\n                            '])),
         (_l()(), i8.ɵeld(0, null, null, 3, 'option', [['value', 'bottom-right-corner']], null, null, null, null, null)),
-        i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer,
-            [2, i13.SelectControlValueAccessor]], { value: [0, 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef, i8.Renderer, [8, null]], { value: [0,
+        i8.ɵdid(147456, null, 0, i13.NgSelectOption, [i8.ElementRef, i8.Renderer2,
+            [2, i13.SelectControlValueAccessor]], { value: [0, 'value'] }, null), i8.ɵdid(147456, null, 0, i13.ɵq, [i8.ElementRef, i8.Renderer2, [8, null]], { value: [0,
                 'value'] }, null), (_l()(), i8.ɵted(null, ['bottom-right-corner'])),
         (_l()(), i8.ɵted(null, ['\n                        '])), (_l()(), i8.ɵted(null, ['\n                    '])), (_l()(), i8.ɵted(null, ['\n                '])),
         (_l()(), i8.ɵted(null, ['\n            '])), (_l()(), i8.ɵted(null, ['\n        '])), (_l()(), i8.ɵted(null, ['\n        '])), (_l()(),

@@ -40,14 +40,14 @@ export var AppModuleNgFactory = i0.ɵcmf(i1.AppModule, [i2.App], function (_l) {
                     i4.DialogFormModalNgFactory, i4.FormDropInNgFactory, i5.VexDemoNgFactory,
                     i6.LoginDialogNgFactory, i7.JSNativeDemoNgFactory, i8.InAppModalBackdropNgFactory,
                     i9.HomeNgFactory, i10.DocumentationComponentNgFactory, i11.AppNgFactory]],
-            [3, i0.ComponentFactoryResolver], i0.NgModuleRef]), i0.ɵmpd(5120, i0.LOCALE_ID, i0.ɵm, [[3, i0.LOCALE_ID]]), i0.ɵmpd(4608, i12.NgLocalization, i12.NgLocaleLocalization, [i0.LOCALE_ID]), i0.ɵmpd(5120, i0.APP_ID, i0.ɵf, []), i0.ɵmpd(5120, i0.IterableDiffers, i0.ɵk, []), i0.ɵmpd(5120, i0.KeyValueDiffers, i0.ɵl, []), i0.ɵmpd(4608, i13.DomSanitizer, i13.ɵe, [i13.DOCUMENT]),
-        i0.ɵmpd(6144, i0.Sanitizer, null, [i13.DomSanitizer]), i0.ɵmpd(4608, i13.HAMMER_GESTURE_CONFIG, i13.HammerGestureConfig, []), i0.ɵmpd(5120, i13.EVENT_MANAGER_PLUGINS, function (p0_0, p1_0, p2_0, p2_1) {
-            return [new i13.ɵDomEventsPlugin(p0_0), new i13.ɵKeyEventsPlugin(p1_0),
+            [3, i0.ComponentFactoryResolver], i0.NgModuleRef]), i0.ɵmpd(5120, i0.LOCALE_ID, i0.ɵo, [[3, i0.LOCALE_ID]]), i0.ɵmpd(4608, i12.NgLocalization, i12.NgLocaleLocalization, [i0.LOCALE_ID]), i0.ɵmpd(5120, i0.APP_ID, i0.ɵh, []), i0.ɵmpd(5120, i0.IterableDiffers, i0.ɵm, []), i0.ɵmpd(5120, i0.KeyValueDiffers, i0.ɵn, []), i0.ɵmpd(4608, i13.DomSanitizer, i13.ɵe, [i12.DOCUMENT]),
+        i0.ɵmpd(6144, i0.Sanitizer, null, [i13.DomSanitizer]), i0.ɵmpd(4608, i13.HAMMER_GESTURE_CONFIG, i13.HammerGestureConfig, []), i0.ɵmpd(5120, i13.EVENT_MANAGER_PLUGINS, function (p0_0, p0_1, p1_0, p2_0, p2_1) {
+            return [new i13.ɵDomEventsPlugin(p0_0, p0_1), new i13.ɵKeyEventsPlugin(p1_0),
                 new i13.ɵHammerGesturesPlugin(p2_0, p2_1), new i14.ɵa()];
-        }, [i13.DOCUMENT, i13.DOCUMENT, i13.DOCUMENT, i13.HAMMER_GESTURE_CONFIG]),
+        }, [i12.DOCUMENT, i0.NgZone, i12.DOCUMENT, i12.DOCUMENT, i13.HAMMER_GESTURE_CONFIG]),
         i0.ɵmpd(4608, i13.EventManager, i13.EventManager, [i13.EVENT_MANAGER_PLUGINS,
-            i0.NgZone]), i0.ɵmpd(135680, i13.ɵDomSharedStylesHost, i13.ɵDomSharedStylesHost, [i13.DOCUMENT]), i0.ɵmpd(4608, i13.ɵDomRendererFactory2, i13.ɵDomRendererFactory2, [i13.EventManager, i13.ɵDomSharedStylesHost]), i0.ɵmpd(5120, i15.AnimationDriver, i16.ɵc, []), i0.ɵmpd(5120, i15.ɵAnimationStyleNormalizer, i16.ɵd, []), i0.ɵmpd(4608, i15.ɵAnimationEngine, i16.ɵb, [i15.AnimationDriver,
-            i15.ɵAnimationStyleNormalizer]), i0.ɵmpd(5120, i0.RendererFactory2, i16.ɵe, [i13.ɵDomRendererFactory2, i15.ɵAnimationEngine, i0.NgZone]), i0.ɵmpd(6144, i13.ɵSharedStylesHost, null, [i13.ɵDomSharedStylesHost]), i0.ɵmpd(4608, i0.Testability, i0.Testability, [i0.NgZone]), i0.ɵmpd(4608, i13.Meta, i13.Meta, [i13.DOCUMENT]), i0.ɵmpd(4608, i13.Title, i13.Title, [i13.DOCUMENT]), i0.ɵmpd(4608, i17.AnimationBuilder, i16.ɵBrowserAnimationBuilder, [i0.RendererFactory2]),
+            i0.NgZone]), i0.ɵmpd(135680, i13.ɵDomSharedStylesHost, i13.ɵDomSharedStylesHost, [i12.DOCUMENT]), i0.ɵmpd(4608, i13.ɵDomRendererFactory2, i13.ɵDomRendererFactory2, [i13.EventManager, i13.ɵDomSharedStylesHost]), i0.ɵmpd(5120, i15.AnimationDriver, i16.ɵc, []), i0.ɵmpd(5120, i15.ɵAnimationStyleNormalizer, i16.ɵd, []), i0.ɵmpd(4608, i15.ɵAnimationEngine, i16.ɵb, [i15.AnimationDriver,
+            i15.ɵAnimationStyleNormalizer]), i0.ɵmpd(5120, i0.RendererFactory2, i16.ɵe, [i13.ɵDomRendererFactory2, i15.ɵAnimationEngine, i0.NgZone]), i0.ɵmpd(6144, i13.ɵSharedStylesHost, null, [i13.ɵDomSharedStylesHost]), i0.ɵmpd(4608, i0.Testability, i0.Testability, [i0.NgZone]), i0.ɵmpd(4608, i13.Meta, i13.Meta, [i12.DOCUMENT]), i0.ɵmpd(4608, i13.Title, i13.Title, [i12.DOCUMENT]), i0.ɵmpd(4608, i17.AnimationBuilder, i16.ɵBrowserAnimationBuilder, [i0.RendererFactory2]),
         i0.ɵmpd(4608, i14.OverlayRenderer, i14.DOMOverlayRenderer, [i0.ApplicationRef,
             i0.Injector]), i0.ɵmpd(4608, i14.Overlay, i14.Overlay, [i14.OverlayRenderer,
             i0.Injector]), i0.ɵmpd(4608, i18.ɵi, i18.ɵi, []), i0.ɵmpd(4608, i14.Modal, i19.Modal, [i14.Overlay]), i0.ɵmpd(4608, i20.Modal, i20.Modal, [i14.Overlay]), i0.ɵmpd(4608, i21.Modal, i21.Modal, [i14.Overlay]), i0.ɵmpd(4608, i19.Modal, i19.Modal, [i14.Overlay]), i0.ɵmpd(5120, i22.ActivatedRoute, i22.ɵf, [i22.Router]), i0.ɵmpd(4608, i22.PreloadAllModules, i22.PreloadAllModules, []), i0.ɵmpd(6144, i22.PreloadingStrategy, null, [i22.PreloadAllModules]),
@@ -58,8 +58,8 @@ export var AppModuleNgFactory = i0.ɵcmf(i1.AppModule, [i2.App], function (_l) {
             return [i22.ɵb()];
         }, []), i0.ɵmpd(512, i22.ɵg, i22.ɵg, [i0.Injector]), i0.ɵmpd(1024, i0.APP_INITIALIZER, function (p0_0, p0_1, p1_0) {
             return [i13.ɵc(p0_0, p0_1), i22.ɵh(p1_0)];
-        }, [[2, i13.NgProbeToken], [2, i0.NgProbeToken], i22.ɵg]), i0.ɵmpd(512, i0.ApplicationInitStatus, i0.ApplicationInitStatus, [[2, i0.APP_INITIALIZER]]), i0.ɵmpd(131584, i0.ɵe, i0.ɵe, [i0.NgZone, i0.ɵConsole, i0.Injector, i0.ErrorHandler, i0.ComponentFactoryResolver,
-            i0.ApplicationInitStatus]), i0.ɵmpd(2048, i0.ApplicationRef, null, [i0.ɵe]), i0.ɵmpd(512, i0.ApplicationModule, i0.ApplicationModule, [i0.ApplicationRef]),
+        }, [[2, i13.NgProbeToken], [2, i0.NgProbeToken], i22.ɵg]), i0.ɵmpd(512, i0.ApplicationInitStatus, i0.ApplicationInitStatus, [[2, i0.APP_INITIALIZER]]), i0.ɵmpd(131584, i0.ɵg, i0.ɵg, [i0.NgZone, i0.ɵConsole, i0.Injector, i0.ErrorHandler, i0.ComponentFactoryResolver,
+            i0.ApplicationInitStatus]), i0.ɵmpd(2048, i0.ApplicationRef, null, [i0.ɵg]), i0.ɵmpd(512, i0.ApplicationModule, i0.ApplicationModule, [i0.ApplicationRef]),
         i0.ɵmpd(512, i13.BrowserModule, i13.BrowserModule, [[3, i13.BrowserModule]]),
         i0.ɵmpd(512, i16.BrowserAnimationsModule, i16.BrowserAnimationsModule, []),
         i0.ɵmpd(1024, i22.ɵa, i22.ɵd, [[3, i22.Router]]), i0.ɵmpd(512, i22.UrlSerializer, i22.DefaultUrlSerializer, []), i0.ɵmpd(512, i22.ChildrenOutletContexts, i22.ChildrenOutletContexts, []), i0.ɵmpd(256, i22.ROUTER_CONFIGURATION, { useHash: true, preloadingStrategy: i22.PreloadAllModules }, []),

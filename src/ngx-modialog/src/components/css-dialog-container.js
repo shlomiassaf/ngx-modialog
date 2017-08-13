@@ -17,7 +17,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, ViewEncapsulation, ElementRef, Renderer } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, Renderer2 } from '@angular/core';
 import { BaseDynamicComponent } from './base-dynamic-component';
 import { DialogRef } from '../models/dialog-ref';
 /**
@@ -42,7 +42,7 @@ var CSSDialogContainer = (function (_super) {
             template: "<ng-content></ng-content>"
         }),
         __metadata("design:paramtypes", [DialogRef,
-            ElementRef, Renderer])
+            ElementRef, Renderer2])
     ], CSSDialogContainer);
     return CSSDialogContainer;
 }(BaseDynamicComponent));

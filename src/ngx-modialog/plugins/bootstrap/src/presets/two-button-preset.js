@@ -30,8 +30,8 @@ var AbstractTwoButtonPresetBuilder = (function (_super) {
         ], initialSetters)) || this;
     }
     AbstractTwoButtonPresetBuilder.prototype.$$beforeOpen = function (config) {
+        _super.prototype.$$beforeOpen.call(this, config);
         this.addButton(config.cancelBtnClass, config.cancelBtn, function (cmp, $event) { return cmp.dialog.dismiss(); });
-        return _super.prototype.$$beforeOpen.call(this, config);
     };
     return AbstractTwoButtonPresetBuilder;
 }(MessageModalPresetBuilder));
@@ -46,8 +46,8 @@ var TwoButtonPresetBuilder = (function (_super) {
         return _super.call(this, modal, defaultValues) || this;
     }
     TwoButtonPresetBuilder.prototype.$$beforeOpen = function (config) {
+        _super.prototype.$$beforeOpen.call(this, config);
         this.addButton(config.okBtnClass, config.okBtn, function (cmp, $event) { return cmp.dialog.close(true); });
-        return _super.prototype.$$beforeOpen.call(this, config);
     };
     return TwoButtonPresetBuilder;
 }(AbstractTwoButtonPresetBuilder));
@@ -59,10 +59,10 @@ var PromptPresetBuilder = (function (_super) {
         return _super.call(this, modal, extend({ showInput: true, defaultValue: '' }, defaultValues || {}), ['placeholder', 'defaultValue']) || this;
     }
     PromptPresetBuilder.prototype.$$beforeOpen = function (config) {
+        _super.prototype.$$beforeOpen.call(this, config);
         this.addButton(config.okBtnClass, config.okBtn, function (cmp, $event) {
             return cmp.dialog.close(cmp.dialog.context.defaultValue);
         });
-        return _super.prototype.$$beforeOpen.call(this, config);
     };
     return PromptPresetBuilder;
 }(AbstractTwoButtonPresetBuilder));

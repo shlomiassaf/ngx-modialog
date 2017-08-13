@@ -1,6 +1,6 @@
-import { ComponentFactoryResolver, ReflectiveInjector } from '@angular/core';
+import { ComponentFactoryResolver } from '@angular/core';
 export function createComponent(instructions) {
-    var injector = getInjector(instructions);
+    var injector = instructions.injector || instructions.vcRef.parentInjector;
     var cmpFactory = injector.get(ComponentFactoryResolver).resolveComponentFactory(instructions.component);
     if (instructions.vcRef) {
         return instructions.vcRef.createComponent(cmpFactory, instructions.vcRef.length, injector, instructions.projectableNodes);
@@ -8,10 +8,5 @@ export function createComponent(instructions) {
     else {
         return cmpFactory.create(injector);
     }
-}
-function getInjector(instructions) {
-    var ctxInjector = instructions.injector || instructions.vcRef.parentInjector;
-    return Array.isArray(instructions.bindings) && instructions.bindings.length > 0 ?
-        ReflectiveInjector.fromResolvedProviders(instructions.bindings, ctxInjector) : ctxInjector;
 }
 //# sourceMappingURL=createComponent.js.map

@@ -17,7 +17,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, ElementRef, ReflectiveInjector, ViewChild, ViewContainerRef, ViewEncapsulation, Renderer, TemplateRef } from '@angular/core';
+import { Component, ElementRef, ViewChild, ViewContainerRef, ViewEncapsulation, Renderer2, TemplateRef } from '@angular/core';
 import { PromiseCompleter, supportsKey } from '../framework/utils';
 import { DialogRef } from '../models/dialog-ref';
 import { BaseDynamicComponent } from '../components/index';
@@ -39,35 +39,30 @@ var ModalOverlay = (function (_super) {
     /**
      * @internal
      */
-    ModalOverlay.prototype.getProjectables = function (content, bindings) {
+    ModalOverlay.prototype.getProjectables = function (content) {
         var nodes;
         if (typeof content === 'string') {
-            nodes = [[this.renderer.createText(null, "" + content)]];
+            nodes = [[this.renderer.createText("" + content)]];
         }
         else if (content instanceof TemplateRef) {
-            nodes = [this.vcr.createEmbeddedView(content, { dialogRef: this.dialogRef }).rootNodes];
+            nodes = [this.vcr.createEmbeddedView(content, { $implicit: this.dialogRef.context, dialogRef: this.dialogRef }).rootNodes];
         }
         else {
-            nodes = [this.embedComponent({ component: content, bindings: bindings }).rootNodes];
+            nodes = [this.embedComponent({ component: content }).rootNodes];
         }
         return nodes;
     };
     ModalOverlay.prototype.embedComponent = function (config) {
         var ctx = config;
-        if (ctx.bindings) {
-            ctx.injector = ReflectiveInjector.fromResolvedProviders(ctx.bindings, this.vcr.parentInjector);
-        }
         return this.vcr.createEmbeddedView(this.template, {
             $implicit: ctx
         });
     };
-    ModalOverlay.prototype.addComponent = function (type, bindings, projectableNodes) {
-        if (bindings === void 0) { bindings = []; }
+    ModalOverlay.prototype.addComponent = function (type, projectableNodes) {
         if (projectableNodes === void 0) { projectableNodes = []; }
         return _super.prototype._addComponent.call(this, {
             component: type,
             vcRef: this.innerVcr,
-            bindings: bindings,
             projectableNodes: projectableNodes
         });
     };
@@ -222,7 +217,7 @@ var ModalOverlay = (function (_super) {
         __metadata("design:paramtypes", [DialogRef,
             ViewContainerRef,
             ElementRef,
-            Renderer])
+            Renderer2])
     ], ModalOverlay);
     return ModalOverlay;
 }(BaseDynamicComponent));

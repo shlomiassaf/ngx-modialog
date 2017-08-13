@@ -7,15 +7,14 @@
 import * as i0 from '@angular/core';
 import * as i1 from 'ngx-modialog/plugins/vex';
 import * as i2 from '../../../src/ngx-modialog.ng-flat.ngfactory';
-import * as i3 from './ngx-modialog-vex.ng-flat.ngfactory';
-import * as i4 from '@angular/common';
-import * as i5 from 'ngx-modialog';
+import * as i3 from '@angular/common';
+import * as i4 from 'ngx-modialog';
 export var VexModalModuleNgFactory = i0.ɵcmf(i1.VexModalModule, [], function (_l) {
     return i0.ɵmod([i0.ɵmpd(512, i0.ComponentFactoryResolver, i0.ɵCodegenComponentFactoryResolver, [[8, [i2.ModalOverlayNgFactory, i2.CSSBackdropNgFactory, i2.CSSDialogContainerNgFactory,
-                    i3.DialogFormModalNgFactory, i3.FormDropInNgFactory]], [3, i0.ComponentFactoryResolver],
-            i0.NgModuleRef]), i0.ɵmpd(4608, i4.NgLocalization, i4.NgLocaleLocalization, [i0.LOCALE_ID]), i0.ɵmpd(4608, i5.Overlay, i5.Overlay, [i5.OverlayRenderer, i0.Injector]),
-        i0.ɵmpd(4608, i5.Modal, i1.Modal, [i5.Overlay]), i0.ɵmpd(4608, i1.Modal, i1.Modal, [i5.Overlay]), i0.ɵmpd(512, i4.CommonModule, i4.CommonModule, []),
-        i0.ɵmpd(512, i5.ModalModule, i5.ModalModule, []), i0.ɵmpd(512, i1.VexModalModule, i1.VexModalModule, [])]);
+                    DialogFormModalNgFactory, FormDropInNgFactory]], [3, i0.ComponentFactoryResolver],
+            i0.NgModuleRef]), i0.ɵmpd(4608, i3.NgLocalization, i3.NgLocaleLocalization, [i0.LOCALE_ID]), i0.ɵmpd(4608, i4.Overlay, i4.Overlay, [i4.OverlayRenderer, i0.Injector]),
+        i0.ɵmpd(4608, i4.Modal, i1.Modal, [i4.Overlay]), i0.ɵmpd(4608, i1.Modal, i1.Modal, [i4.Overlay]), i0.ɵmpd(512, i3.CommonModule, i3.CommonModule, []),
+        i0.ɵmpd(512, i4.ModalModule, i4.ModalModule, []), i0.ɵmpd(512, i1.VexModalModule, i1.VexModalModule, [])]);
 });
 var styles_VEXDialogButtons = [];
 export var RenderType_VEXDialogButtons = i0.ɵcrt({ encapsulation: 2,
@@ -39,14 +38,14 @@ function View_VEXDialogButtons_1(_l) {
 }
 export function View_VEXDialogButtons_0(_l) {
     return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 4, 'div', [['class',
-                'vex-dialog-buttons']], null, null, null, null, null)), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_VEXDialogButtons_1)), i0.ɵdid(802816, null, 0, i4.NgForOf, [i0.ViewContainerRef, i0.TemplateRef, i0.IterableDiffers], { ngForOf: [0, 'ngForOf'] }, null), (_l()(), i0.ɵted(null, ['\n']))], function (_ck, _v) {
+                'vex-dialog-buttons']], null, null, null, null, null)), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_VEXDialogButtons_1)), i0.ɵdid(802816, null, 0, i3.NgForOf, [i0.ViewContainerRef, i0.TemplateRef, i0.IterableDiffers], { ngForOf: [0, 'ngForOf'] }, null), (_l()(), i0.ɵted(null, ['\n']))], function (_ck, _v) {
         var _co = _v.component;
         var currVal_0 = _co.buttons;
         _ck(_v, 3, 0, currVal_0);
     }, null);
 }
 export function View_VEXDialogButtons_Host_0(_l) {
-    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 1, 'vex-dialog-buttons', [], null, null, null, i3.View_VEXDialogButtons_0, i3.RenderType_VEXDialogButtons)), i0.ɵdid(49152, null, 0, i1.VEXDialogButtons, [], null, null)], null, null);
+    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 1, 'vex-dialog-buttons', [], null, null, null, View_VEXDialogButtons_0, RenderType_VEXDialogButtons)), i0.ɵdid(49152, null, 0, i1.VEXDialogButtons, [], null, null)], null, null);
 }
 export var VEXDialogButtonsNgFactory = i0.ɵccf('vex-dialog-buttons', i1.VEXDialogButtons, View_VEXDialogButtons_Host_0, { buttons: 'buttons' }, { onButtonClick: 'onButtonClick' }, []);
 var styles_FormDropIn = [];
@@ -86,8 +85,8 @@ function View_FormDropIn_2(_l) {
 }
 export function View_FormDropIn_0(_l) {
     return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 1, 'div', [['class',
-                'vex-dialog-message']], null, null, null, null, null)), (_l()(), i0.ɵted(null, ['', ''])), (_l()(), i0.ɵted(null, ['\n '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_FormDropIn_1)), i0.ɵdid(16384, null, 0, i4.NgIf, [i0.ViewContainerRef,
-            i0.TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), i0.ɵted(null, ['\n '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_FormDropIn_2)), i0.ɵdid(16384, null, 0, i4.NgIf, [i0.ViewContainerRef,
+                'vex-dialog-message']], null, null, null, null, null)), (_l()(), i0.ɵted(null, ['', ''])), (_l()(), i0.ɵted(null, ['\n '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_FormDropIn_1)), i0.ɵdid(16384, null, 0, i3.NgIf, [i0.ViewContainerRef,
+            i0.TemplateRef], { ngIf: [0, 'ngIf'] }, null), (_l()(), i0.ɵted(null, ['\n '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_FormDropIn_2)), i0.ɵdid(16384, null, 0, i3.NgIf, [i0.ViewContainerRef,
             i0.TemplateRef], { ngIf: [0, 'ngIf'] }, null)], function (_ck, _v) {
         var _co = _v.component;
         var currVal_1 = _co.context.showInput;
@@ -101,7 +100,8 @@ export function View_FormDropIn_0(_l) {
     });
 }
 export function View_FormDropIn_Host_0(_l) {
-    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 1, 'drop-in-dialog', [], null, null, null, i3.View_FormDropIn_0, i3.RenderType_FormDropIn)), i0.ɵdid(49152, null, 0, i1.FormDropIn, [i5.DialogRef], null, null)], null, null);
+    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 1, 'drop-in-dialog', [], null, null, null, View_FormDropIn_0, RenderType_FormDropIn)),
+        i0.ɵdid(49152, null, 0, i1.FormDropIn, [i4.DialogRef], null, null)], null, null);
 }
 export var FormDropInNgFactory = i0.ɵccf('drop-in-dialog', i1.FormDropIn, View_FormDropIn_Host_0, {}, {}, []);
 var styles_DialogFormModal = [];
@@ -112,7 +112,7 @@ function View_DialogFormModal_1(_l) {
 }
 export function View_DialogFormModal_0(_l) {
     return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 7, 'form', [['class',
-                'vex-dialog-form']], null, null, null, null, null)), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_DialogFormModal_1)), i0.ɵdid(671744, null, 0, i4.NgComponentOutlet, [i0.ViewContainerRef], { ngComponentOutlet: [0,
+                'vex-dialog-form']], null, null, null, null, null)), (_l()(), i0.ɵted(null, ['\n    '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_DialogFormModal_1)), i0.ɵdid(671744, null, 0, i3.NgComponentOutlet, [i0.ViewContainerRef], { ngComponentOutlet: [0,
                 'ngComponentOutlet'] }, null), (_l()(), i0.ɵted(null, ['\n    '])),
         (_l()(), i0.ɵeld(0, null, null, 1, 'vex-dialog-buttons', [], null, [[null, 'onButtonClick']], function (_v, en, $event) {
             var ad = true;
@@ -122,7 +122,8 @@ export function View_DialogFormModal_0(_l) {
                 ad = (pd_0 && ad);
             }
             return ad;
-        }, i3.View_VEXDialogButtons_0, i3.RenderType_VEXDialogButtons)), i0.ɵdid(49152, null, 0, i1.VEXDialogButtons, [], { buttons: [0, 'buttons'] }, { onButtonClick: 'onButtonClick' }), (_l()(), i0.ɵted(null, ['\n']))], function (_ck, _v) {
+        }, View_VEXDialogButtons_0, RenderType_VEXDialogButtons)), i0.ɵdid(49152, null, 0, i1.VEXDialogButtons, [], { buttons: [0, 'buttons'] }, { onButtonClick: 'onButtonClick' }),
+        (_l()(), i0.ɵted(null, ['\n']))], function (_ck, _v) {
         var _co = _v.component;
         var currVal_0 = _co.context.content;
         _ck(_v, 3, 0, currVal_0);
@@ -131,7 +132,7 @@ export function View_DialogFormModal_0(_l) {
     }, null);
 }
 export function View_DialogFormModal_Host_0(_l) {
-    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 1, 'modal-dialog', [], null, null, null, i3.View_DialogFormModal_0, i3.RenderType_DialogFormModal)), i0.ɵdid(49152, null, 0, i1.DialogFormModal, [i5.DialogRef], null, null)], null, null);
+    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 1, 'modal-dialog', [], null, null, null, View_DialogFormModal_0, RenderType_DialogFormModal)), i0.ɵdid(49152, null, 0, i1.DialogFormModal, [i4.DialogRef], null, null)], null, null);
 }
 export var DialogFormModalNgFactory = i0.ɵccf('modal-dialog', i1.DialogFormModal, View_DialogFormModal_Host_0, {}, {}, []);
 //# sourceMappingURL=ngx-modialog-vex.ng-flat.ngfactory.js.map

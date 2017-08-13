@@ -7,7 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { ApplicationRef, Injector, Injectable, ReflectiveInjector } from '@angular/core';
+import { ApplicationRef, Injector, Injectable } from '@angular/core';
 import { createComponent } from '../framework/createComponent';
 import { DialogRef } from '../models/dialog-ref';
 import { ModalOverlay } from '../overlay/index';
@@ -22,14 +22,12 @@ var DOMOverlayRenderer = (function () {
         if (!injector) {
             injector = this.injector;
         }
-        var bindings = ReflectiveInjector.resolve([
-            { provide: DialogRef, useValue: dialog }
-        ]);
         var cmpRef = createComponent({
             component: ModalOverlay,
             vcRef: vcRef,
-            injector: injector,
-            bindings: bindings
+            injector: Injector.create([
+                { provide: DialogRef, useValue: dialog }
+            ], injector)
         });
         if (!vcRef) {
             this.appRef.attachView(cmpRef.hostView);

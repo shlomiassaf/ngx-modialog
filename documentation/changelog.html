@@ -198,9 +198,6 @@
                                 <li class="link">
                                     <a href="./classes/PromiseCompleter.html" >PromiseCompleter</a>
                                 </li>
-                                <li class="link">
-                                    <a href="./classes/UnsupportedDropInError.html" >UnsupportedDropInError</a>
-                                </li>
                         </ul>
                     </li>
             
@@ -475,9 +472,6 @@
                                        <li class="link">
                                            <a href="./classes/PromiseCompleter.html" >PromiseCompleter</a>
                                        </li>
-                                       <li class="link">
-                                           <a href="./classes/UnsupportedDropInError.html" >UnsupportedDropInError</a>
-                                       </li>
                                </ul>
                            </li>
                    
@@ -572,6 +566,22 @@
                <div class="content getting-started">
                    <div class="content-data">
 
+<p><a name="4.0.0-beta.0"></a></p>
+<h1 id="-4-0-0-beta-0-https-github-com-shlomiassaf-ngx-modialog-compare-3-0-2-4-0-0-beta-0-2017-08-13-"><a href="https://github.com/shlomiassaf/ngx-modialog/compare/3.0.2...4.0.0-beta.0">4.0.0-beta.0</a> (2017-08-13)</h1>
+<h3 id="code-refactoring">Code Refactoring</h3>
+<ul>
+<li>support angular version 5 (<a href="https://github.com/shlomiassaf/ngx-modialog/issues/382">#382</a>) (<a href="https://github.com/shlomiassaf/ngx-modialog/commit/e628875">e628875</a>)</li>
+</ul>
+<h3 id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li>Angular version 5 comes with a breaking change which results in an internal breaking change which remove API options</li>
+</ul>
+<p>Bindings are no longer supported when opening a modal.
+Providing bindings was, from day one, a shortcut to a manual operation.
+If you used bindings before, instead provide an injector with the bindings inside.</p>
+<p>Most of the users should not feel this change as usage of bindings should be minimal.</p>
+<p>If you wrote a plugin you should feel this, follow the change set for one
+of the native plugins as an conversion example.</p>
 <p><a name="3.0.2"></a></p>
 <h2 id="-3-0-2-https-github-com-shlomiassaf-angular2-modal-compare-3-0-1-3-0-2-2017-08-11-"><a href="https://github.com/shlomiassaf/angular2-modal/compare/3.0.1...3.0.2">3.0.2</a> (2017-08-11)</h2>
 <h3 id="features">Features</h3>

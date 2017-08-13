@@ -1,37 +1,18 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-import { ReflectiveInjector } from '@angular/core';
-import { DialogRef } from '../models/dialog-ref';
-var UnsupportedDropInError = (function (_super) {
-    __extends(UnsupportedDropInError, _super);
-    function UnsupportedDropInError(dropInName) {
-        var _this = _super.call(this) || this;
-        _this.message = "Unsupported Drop-In " + dropInName;
-        return _this;
-    }
-    return UnsupportedDropInError;
-}(Error));
-export { UnsupportedDropInError };
+export function unsupportedDropInError(dropInName) {
+    return new Error("Unsupported Drop-In " + dropInName);
+}
 var Modal = (function () {
     function Modal(overlay) {
         this.overlay = overlay;
     }
     Modal.prototype.alert = function () {
-        throw new UnsupportedDropInError('alert');
+        throw unsupportedDropInError('alert');
     };
     Modal.prototype.prompt = function () {
-        throw new UnsupportedDropInError('prompt');
+        throw unsupportedDropInError('prompt');
     };
     Modal.prototype.confirm = function () {
-        throw new UnsupportedDropInError('confirm');
+        throw unsupportedDropInError('confirm');
     };
     /**
      * Opens a modal window inside an existing component.
@@ -48,37 +29,18 @@ var Modal = (function () {
             }
             // TODO:  Currently supporting 1 view container, hence working on dialogs[0].
             //        upgrade to multiple containers.
-            return Promise.resolve(this.create(dialogs[0], content, config.bindings));
+            return Promise.resolve(this.create(dialogs[0], content));
         }
         catch (e) {
             return Promise.reject(e);
         }
     };
     Modal.prototype.createBackdrop = function (dialogRef, BackdropComponent) {
-        var b = ReflectiveInjector.resolve([{ provide: DialogRef, useValue: dialogRef }]);
-        return dialogRef.overlayRef.instance.addComponent(BackdropComponent, b);
+        return dialogRef.overlayRef.instance.addComponent(BackdropComponent);
     };
-    Modal.prototype.createContainer = function (dialogRef, ContainerComponent, content, bindings) {
-        var b = ReflectiveInjector.resolve([{ provide: DialogRef, useValue: dialogRef }])
-            .concat(bindings || []);
-        var nodes = dialogRef.overlayRef.instance.getProjectables(content, b);
-        return dialogRef.overlayRef.instance.addComponent(ContainerComponent, b, nodes);
-    };
-    /**
-     * A helper function for derived classes to create backdrop & container
-     * @param dialogRef
-     * @param backdrop
-     * @param container
-     * @returns { backdropRef: ComponentRef<B>, containerRef: ComponentRef<C> }
-     *
-     * @deprecated use createBackdrop and createContainer instead
-     */
-    Modal.prototype.createModal = function (dialogRef, backdrop, container) {
-        var b = ReflectiveInjector.resolve([{ provide: DialogRef, useValue: dialogRef }]);
-        return {
-            backdropRef: dialogRef.overlayRef.instance.addComponent(backdrop, b),
-            containerRef: dialogRef.overlayRef.instance.addComponent(container, b)
-        };
+    Modal.prototype.createContainer = function (dialogRef, ContainerComponent, content) {
+        var nodes = dialogRef.overlayRef.instance.getProjectables(content);
+        return dialogRef.overlayRef.instance.addComponent(ContainerComponent, nodes);
     };
     return Modal;
 }());

@@ -6,11 +6,10 @@
 /* tslint:disable */
 import * as i0 from '@angular/core';
 import * as i1 from 'ngx-modialog';
-import * as i2 from './ngx-modialog.ng-flat.ngfactory';
-import * as i3 from '@angular/common';
+import * as i2 from '@angular/common';
 export var ModalModuleNgFactory = i0.ɵcmf(i1.ModalModule, [], function (_l) {
-    return i0.ɵmod([i0.ɵmpd(512, i0.ComponentFactoryResolver, i0.ɵCodegenComponentFactoryResolver, [[8, [i2.ModalOverlayNgFactory, i2.CSSBackdropNgFactory, i2.CSSDialogContainerNgFactory]],
-            [3, i0.ComponentFactoryResolver], i0.NgModuleRef]), i0.ɵmpd(4608, i3.NgLocalization, i3.NgLocaleLocalization, [i0.LOCALE_ID]), i0.ɵmpd(4608, i1.Overlay, i1.Overlay, [i1.OverlayRenderer, i0.Injector]), i0.ɵmpd(512, i3.CommonModule, i3.CommonModule, []), i0.ɵmpd(512, i1.ModalModule, i1.ModalModule, [])]);
+    return i0.ɵmod([i0.ɵmpd(512, i0.ComponentFactoryResolver, i0.ɵCodegenComponentFactoryResolver, [[8, [ModalOverlayNgFactory, CSSBackdropNgFactory, CSSDialogContainerNgFactory]],
+            [3, i0.ComponentFactoryResolver], i0.NgModuleRef]), i0.ɵmpd(4608, i2.NgLocalization, i2.NgLocaleLocalization, [i0.LOCALE_ID]), i0.ɵmpd(4608, i1.Overlay, i1.Overlay, [i1.OverlayRenderer, i0.Injector]), i0.ɵmpd(512, i2.CommonModule, i2.CommonModule, []), i0.ɵmpd(512, i1.ModalModule, i1.ModalModule, [])]);
 });
 var styles_ModalOverlay = [];
 export var RenderType_ModalOverlay = i0.ɵcrt({ encapsulation: 2, styles: styles_ModalOverlay,
@@ -22,7 +21,7 @@ function View_ModalOverlay_3(_l) {
     return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 0, null, null, null, null, null, null, null))], null, null);
 }
 function View_ModalOverlay_2(_l) {
-    return i0.ɵvid(0, [(_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_ModalOverlay_3)), i0.ɵdid(671744, null, 0, i3.NgComponentOutlet, [i0.ViewContainerRef], { ngComponentOutlet: [0,
+    return i0.ɵvid(0, [(_l()(), i0.ɵted(null, ['\n  '])), (_l()(), i0.ɵand(16777216, null, null, 1, null, View_ModalOverlay_3)), i0.ɵdid(671744, null, 0, i2.NgComponentOutlet, [i0.ViewContainerRef], { ngComponentOutlet: [0,
                 'ngComponentOutlet'], ngComponentOutletInjector: [1, 'ngComponentOutletInjector'],
             ngComponentOutletContent: [2, 'ngComponentOutletContent'] }, null),
         (_l()(), i0.ɵted(null, ['\n']))], function (_ck, _v) {
@@ -44,7 +43,7 @@ export function View_ModalOverlay_Host_0(_l) {
                 ad = (pd_0 && ad);
             }
             return ad;
-        }, i2.View_ModalOverlay_0, i2.RenderType_ModalOverlay)), i0.ɵdid(180224, null, 0, i1.ModalOverlay, [i1.DialogRef, i0.ViewContainerRef, i0.ElementRef, i0.Renderer], null, null)], null, null);
+        }, View_ModalOverlay_0, RenderType_ModalOverlay)), i0.ɵdid(180224, null, 0, i1.ModalOverlay, [i1.DialogRef, i0.ViewContainerRef, i0.ElementRef, i0.Renderer2], null, null)], null, null);
 }
 export var ModalOverlayNgFactory = i0.ɵccf('modal-overlay', i1.ModalOverlay, View_ModalOverlay_Host_0, {}, {}, []);
 var styles_CSSBackdrop = [];
@@ -54,8 +53,8 @@ export function View_CSSBackdrop_0(_l) {
     return i0.ɵvid(0, [], null, null);
 }
 export function View_CSSBackdrop_Host_0(_l) {
-    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 1, 'css-backdrop', [], [[1, 'class', 0], [1, 'style', 2]], null, null, i2.View_CSSBackdrop_0, i2.RenderType_CSSBackdrop)), i0.ɵdid(180224, null, 0, i1.CSSBackdrop, [i0.ElementRef,
-            i0.Renderer], null, null)], null, function (_ck, _v) {
+    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 1, 'css-backdrop', [], [[1, 'class', 0], [1, 'style', 2]], null, null, View_CSSBackdrop_0, RenderType_CSSBackdrop)), i0.ɵdid(180224, null, 0, i1.CSSBackdrop, [i0.ElementRef,
+            i0.Renderer2], null, null)], null, function (_ck, _v) {
         var currVal_0 = i0.ɵnov(_v, 1).cssClass;
         var currVal_1 = i0.ɵnov(_v, 1).styleStr;
         _ck(_v, 0, 0, currVal_0, currVal_1);
@@ -69,7 +68,7 @@ export function View_CSSDialogContainer_0(_l) {
     return i0.ɵvid(0, [i0.ɵncd(null, 0)], null, null);
 }
 export function View_CSSDialogContainer_Host_0(_l) {
-    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 1, 'css-dialog-container', [['role', 'dialog'], ['tabindex', '-1']], null, null, null, i2.View_CSSDialogContainer_0, i2.RenderType_CSSDialogContainer)), i0.ɵdid(180224, null, 0, i1.CSSDialogContainer, [i1.DialogRef, i0.ElementRef, i0.Renderer], null, null)], null, null);
+    return i0.ɵvid(0, [(_l()(), i0.ɵeld(0, null, null, 1, 'css-dialog-container', [['role', 'dialog'], ['tabindex', '-1']], null, null, null, View_CSSDialogContainer_0, RenderType_CSSDialogContainer)), i0.ɵdid(180224, null, 0, i1.CSSDialogContainer, [i1.DialogRef, i0.ElementRef, i0.Renderer2], null, null)], null, null);
 }
 export var CSSDialogContainerNgFactory = i0.ɵccf('css-dialog-container', i1.CSSDialogContainer, View_CSSDialogContainer_Host_0, {}, {}, ['*']);
 //# sourceMappingURL=ngx-modialog.ng-flat.ngfactory.js.map

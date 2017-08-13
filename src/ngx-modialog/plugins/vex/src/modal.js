@@ -44,10 +44,10 @@ var Modal = (function (_super) {
             keyboard: null
         });
     };
-    Modal.prototype.create = function (dialogRef, content, bindings) {
+    Modal.prototype.create = function (dialogRef, content) {
         var _this = this;
         var backdropRef = this.createBackdrop(dialogRef, CSSBackdrop);
-        var containerRef = this.createContainer(dialogRef, CSSDialogContainer, content, bindings);
+        var containerRef = this.createContainer(dialogRef, CSSDialogContainer, content);
         var overlay = dialogRef.overlayRef.instance;
         var backdrop = backdropRef.instance;
         var container = containerRef.instance;

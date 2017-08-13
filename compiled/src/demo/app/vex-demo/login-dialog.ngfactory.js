@@ -44,7 +44,7 @@ function View_LoginDialog_1(_l) {
                 ad = (pd_4 && ad);
             }
             return ad;
-        }, null, null)), i0.ɵdid(16384, null, 0, i1.DefaultValueAccessor, [i0.Renderer, i0.ElementRef, [2, i1.COMPOSITION_BUFFER_MODE]], null, null),
+        }, null, null)), i0.ɵdid(16384, null, 0, i1.DefaultValueAccessor, [i0.Renderer2, i0.ElementRef, [2, i1.COMPOSITION_BUFFER_MODE]], null, null),
         i0.ɵprd(1024, null, i1.NG_VALUE_ACCESSOR, function (p0_0) {
             return [p0_0];
         }, [i1.DefaultValueAccessor]), i0.ɵdid(671744, null, 0, i1.NgModel, [[8, null],

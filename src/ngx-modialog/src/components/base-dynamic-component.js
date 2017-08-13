@@ -45,7 +45,7 @@ var BaseDynamicComponent = (function () {
      * @returns {ModalOverlay}
      */
     BaseDynamicComponent.prototype.setStyle = function (prop, value) {
-        this.renderer.setElementStyle(this.el.nativeElement, prop, value);
+        this.renderer.setStyle(this.el.nativeElement, prop, value);
         return this;
     };
     BaseDynamicComponent.prototype.forceReflow = function () {
@@ -55,7 +55,7 @@ var BaseDynamicComponent = (function () {
         var _this = this;
         if (forceReflow === void 0) { forceReflow = false; }
         css.split(' ')
-            .forEach(function (c) { return _this.renderer.setElementClass(_this.el.nativeElement, c, true); });
+            .forEach(function (c) { return _this.renderer.addClass(_this.el.nativeElement, c); });
         if (forceReflow)
             this.forceReflow();
     };
@@ -63,7 +63,7 @@ var BaseDynamicComponent = (function () {
         var _this = this;
         if (forceReflow === void 0) { forceReflow = false; }
         css.split(' ')
-            .forEach(function (c) { return _this.renderer.setElementClass(_this.el.nativeElement, c, false); });
+            .forEach(function (c) { return _this.renderer.removeClass(_this.el.nativeElement, c); });
         if (forceReflow)
             this.forceReflow();
     };
@@ -79,9 +79,6 @@ var BaseDynamicComponent = (function () {
     /**
      * Add a component, supply a view container ref.
      * Note: The components vcRef will result in a sibling.
-     * @param component The component to add
-     * @param vcRef The container to add to
-     * @param bindings Bindings to use (added on top of the ViewContainerRef)
      * @returns {Promise<ComponentRef<any>>}
      */
     BaseDynamicComponent.prototype._addComponent = function (instructions) {

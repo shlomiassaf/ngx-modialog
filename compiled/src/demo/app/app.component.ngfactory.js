@@ -30,7 +30,7 @@ export function View_App_0(_l) {
             return ad;
         }, null, null)), i1.ɵdid(671744, [[2, 4]], 0, i2.RouterLinkWithHref, [i2.Router, i2.ActivatedRoute, i3.LocationStrategy], { routerLink: [0, 'routerLink'] }, null), i1.ɵpad(1), i1.ɵdid(1720320, null, 2, i2.RouterLinkActive, [i2.Router, i1.ElementRef, i1.Renderer, i1.ChangeDetectorRef], { routerLinkActiveOptions: [0,
                 'routerLinkActiveOptions'], routerLinkActive: [1, 'routerLinkActive'] }, null), i1.ɵqud(603979776, 1, { links: 1 }), i1.ɵqud(603979776, 2, { linksWithHrefs: 1 }),
-        i1.ɵpod(['exact']), (_l()(), i1.ɵted(null, ['\n                    Home\n                '])),
+        i1.ɵpod({ exact: 0 }), (_l()(), i1.ɵted(null, ['\n                    Home\n                '])),
         (_l()(), i1.ɵted(null, ['\n            '])), (_l()(), i1.ɵted(null, ['\n            '])), (_l()(), i1.ɵeld(0, null, null, 10, 'li', [['class', 'nav-item']], null, null, null, null, null)), (_l()(), i1.ɵted(null, ['\n                '])), (_l()(),
             i1.ɵeld(0, null, null, 7, 'a', [['class', 'nav-link'], ['routerLinkActive',
                     'active']], [[1, 'target', 0], [8, 'href', 4]], [[null, 'click']], function (_v, en, $event) {
@@ -42,7 +42,7 @@ export function View_App_0(_l) {
                 return ad;
             }, null, null)), i1.ɵdid(671744, [[4, 4]], 0, i2.RouterLinkWithHref, [i2.Router, i2.ActivatedRoute, i3.LocationStrategy], { routerLink: [0, 'routerLink'] }, null), i1.ɵpad(1), i1.ɵdid(1720320, null, 2, i2.RouterLinkActive, [i2.Router, i1.ElementRef, i1.Renderer, i1.ChangeDetectorRef], { routerLinkActiveOptions: [0,
                 'routerLinkActiveOptions'], routerLinkActive: [1, 'routerLinkActive'] }, null), i1.ɵqud(603979776, 3, { links: 1 }), i1.ɵqud(603979776, 4, { linksWithHrefs: 1 }),
-        i1.ɵpod(['exact']), (_l()(), i1.ɵted(null, ['\n                    Documentation\n                '])),
+        i1.ɵpod({ exact: 0 }), (_l()(), i1.ɵted(null, ['\n                    Documentation\n                '])),
         (_l()(), i1.ɵted(null, ['\n            '])), (_l()(), i1.ɵted(null, ['\n            '])), (_l()(), i1.ɵeld(0, null, null, 10, 'li', [['class', 'nav-item']], null, null, null, null, null)), (_l()(), i1.ɵted(null, ['\n                '])), (_l()(),
             i1.ɵeld(0, null, null, 7, 'a', [['class', 'nav-link'], ['routerLinkActive',
                     'active']], [[1, 'target', 0], [8, 'href', 4]], [[null, 'click']], function (_v, en, $event) {
@@ -54,7 +54,7 @@ export function View_App_0(_l) {
                 return ad;
             }, null, null)), i1.ɵdid(671744, [[6, 4]], 0, i2.RouterLinkWithHref, [i2.Router, i2.ActivatedRoute, i3.LocationStrategy], { routerLink: [0, 'routerLink'] }, null), i1.ɵpad(1), i1.ɵdid(1720320, null, 2, i2.RouterLinkActive, [i2.Router, i1.ElementRef, i1.Renderer, i1.ChangeDetectorRef], { routerLinkActiveOptions: [0,
                 'routerLinkActiveOptions'], routerLinkActive: [1, 'routerLinkActive'] }, null), i1.ɵqud(603979776, 5, { links: 1 }), i1.ɵqud(603979776, 6, { linksWithHrefs: 1 }),
-        i1.ɵpod(['exact']), (_l()(), i1.ɵted(null, ['\n                    Bootstrap Plugin\n                '])),
+        i1.ɵpod({ exact: 0 }), (_l()(), i1.ɵted(null, ['\n                    Bootstrap Plugin\n                '])),
         (_l()(), i1.ɵted(null, ['\n            '])), (_l()(), i1.ɵted(null, ['\n            '])), (_l()(), i1.ɵeld(0, null, null, 10, 'li', [['class', 'nav-item']], null, null, null, null, null)), (_l()(), i1.ɵted(null, ['\n                '])), (_l()(),
             i1.ɵeld(0, null, null, 7, 'a', [['class', 'nav-link'], ['routerLinkActive',
                     'active']], [[1, 'target', 0], [8, 'href', 4]], [[null, 'click']], function (_v, en, $event) {
@@ -66,7 +66,7 @@ export function View_App_0(_l) {
                 return ad;
             }, null, null)), i1.ɵdid(671744, [[8, 4]], 0, i2.RouterLinkWithHref, [i2.Router, i2.ActivatedRoute, i3.LocationStrategy], { routerLink: [0, 'routerLink'] }, null), i1.ɵpad(1), i1.ɵdid(1720320, null, 2, i2.RouterLinkActive, [i2.Router, i1.ElementRef, i1.Renderer, i1.ChangeDetectorRef], { routerLinkActiveOptions: [0,
                 'routerLinkActiveOptions'], routerLinkActive: [1, 'routerLinkActive'] }, null), i1.ɵqud(603979776, 7, { links: 1 }), i1.ɵqud(603979776, 8, { linksWithHrefs: 1 }),
-        i1.ɵpod(['exact']), (_l()(), i1.ɵted(null, ['\n                    VEX Plugin\n                '])),
+        i1.ɵpod({ exact: 0 }), (_l()(), i1.ɵted(null, ['\n                    VEX Plugin\n                '])),
         (_l()(), i1.ɵted(null, ['\n            '])), (_l()(), i1.ɵted(null, ['\n            '])), (_l()(), i1.ɵeld(0, null, null, 10, 'li', [['class', 'nav-item']], null, null, null, null, null)), (_l()(), i1.ɵted(null, ['\n                '])), (_l()(),
             i1.ɵeld(0, null, null, 7, 'a', [['class', 'nav-link'], ['routerLinkActive',
                     'active']], [[1, 'target', 0], [8, 'href', 4]], [[null, 'click']], function (_v, en, $event) {
@@ -78,7 +78,7 @@ export function View_App_0(_l) {
                 return ad;
             }, null, null)), i1.ɵdid(671744, [[10, 4]], 0, i2.RouterLinkWithHref, [i2.Router, i2.ActivatedRoute, i3.LocationStrategy], { routerLink: [0, 'routerLink'] }, null), i1.ɵpad(1), i1.ɵdid(1720320, null, 2, i2.RouterLinkActive, [i2.Router, i1.ElementRef, i1.Renderer, i1.ChangeDetectorRef], { routerLinkActiveOptions: [0,
                 'routerLinkActiveOptions'], routerLinkActive: [1, 'routerLinkActive'] }, null), i1.ɵqud(603979776, 9, { links: 1 }), i1.ɵqud(603979776, 10, { linksWithHrefs: 1 }),
-        i1.ɵpod(['exact']), (_l()(), i1.ɵted(null, ['\n                    JS Native Plugin\n                '])),
+        i1.ɵpod({ exact: 0 }), (_l()(), i1.ɵted(null, ['\n                    JS Native Plugin\n                '])),
         (_l()(), i1.ɵted(null, ['\n            '])), (_l()(), i1.ɵted(null, ['\n        '])), (_l()(), i1.ɵted(null, ['\n        '])), (_l()(),
             i1.ɵeld(0, null, null, 6, 'div', [['class', 'navbar-nav']], null, null, null, null, null)), (_l()(), i1.ɵted(null, ['\n            '])), (_l()(), i1.ɵeld(0, null, null, 3, 'a', [['class', 'nav-link'], ['href', 'https://github.com/shlomiassaf/ngx-modialog'],
             ['target', '_blank']], null, null, null, null, null)), (_l()(), i1.ɵted(null, ['\n                '])), (_l()(),

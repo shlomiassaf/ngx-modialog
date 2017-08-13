@@ -17,13 +17,6 @@ var JSNativePresetBuilder = (function (_super) {
         return _super.call(this, { modal: modal, dialogType: dialogType }) || this;
     }
     /**
-     * Hook to alter config and return bindings.
-     * @param config
-     */
-    JSNativePresetBuilder.prototype.$$beforeOpen = function (config) {
-        return [];
-    };
-    /**
      * Open a modal window based on the configuration of this config instance.
      * @param viewContainer If set opens the modal inside the supplied viewContainer
      * @returns Promise<DialogRef>
@@ -33,11 +26,11 @@ var JSNativePresetBuilder = (function (_super) {
         if (!(context.modal instanceof Modal)) {
             return Promise.reject(new Error('Configuration Error: modal service not set.'));
         }
+        this.$$beforeOpen(context);
         var overlayConfig = {
             context: context,
             renderer: new JSNativeModalRenderer(),
-            viewContainer: viewContainer,
-            bindings: typeof this.$$beforeOpen === 'function' && this.$$beforeOpen(context)
+            viewContainer: viewContainer
         };
         return context.modal.open(context.component, overlayConfig);
     };

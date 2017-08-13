@@ -17,7 +17,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, ElementRef, ViewEncapsulation, Renderer } from '@angular/core';
+import { Component, ElementRef, ViewEncapsulation, Renderer2 } from '@angular/core';
 import { BaseDynamicComponent, DialogRef } from 'ngx-modialog';
 var BSModalContainer = (function (_super) {
     __extends(BSModalContainer, _super);
@@ -40,7 +40,7 @@ var BSModalContainer = (function (_super) {
             template: "<div [ngClass]=\"dialog.context.dialogClass\" \n      [class.modal-lg]=\"dialog.context.size == 'lg'\"\n      [class.modal-sm]=\"dialog.context.size == 'sm'\">\n  <div class=\"modal-content\" style=\"display:block\" role=\"document\" overlayDialogBoundary>\n    <ng-content></ng-content>\n  </div>    \n</div>"
         }),
         __metadata("design:paramtypes", [DialogRef,
-            ElementRef, Renderer])
+            ElementRef, Renderer2])
     ], BSModalContainer);
     return BSModalContainer;
 }(BaseDynamicComponent));

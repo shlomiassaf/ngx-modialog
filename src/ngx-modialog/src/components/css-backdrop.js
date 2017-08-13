@@ -17,7 +17,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { Component, ElementRef, ViewEncapsulation, Renderer } from '@angular/core';
+import { Component, ElementRef, ViewEncapsulation, Renderer2 } from '@angular/core';
 import { BaseDynamicComponent } from './base-dynamic-component';
 /**
  * Represents the modal backdrop shaped by CSS.
@@ -47,7 +47,7 @@ var CSSBackdrop = (function (_super) {
             encapsulation: ViewEncapsulation.None,
             template: ""
         }),
-        __metadata("design:paramtypes", [ElementRef, Renderer])
+        __metadata("design:paramtypes", [ElementRef, Renderer2])
     ], CSSBackdrop);
     return CSSBackdrop;
 }(BaseDynamicComponent));

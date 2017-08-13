@@ -39,9 +39,7 @@ var ModalOpenContextBuilder = (function (_super) {
      * Hook to alter config and return bindings.
      * @param config
      */
-    ModalOpenContextBuilder.prototype.$$beforeOpen = function (config) {
-        return [];
-    };
+    ModalOpenContextBuilder.prototype.$$beforeOpen = function (config) { };
     /**
      * Open a modal window based on the configuration of this config instance.
      * @param viewContainer If set opens the modal inside the supplied viewContainer
@@ -52,10 +50,10 @@ var ModalOpenContextBuilder = (function (_super) {
         if (!(context.modal instanceof Modal)) {
             return Promise.reject(new Error('Configuration Error: modal service not set.'));
         }
+        this.$$beforeOpen(context);
         var overlayConfig = {
             context: context,
-            viewContainer: viewContainer,
-            bindings: typeof this.$$beforeOpen === 'function' && this.$$beforeOpen(context)
+            viewContainer: viewContainer
         };
         return context.modal.open(context.component, overlayConfig);
     };

@@ -50,19 +50,20 @@ var DropInPresetBuilder = (function (_super) {
         return _super.call(this, modal, extend(extend({ modal: modal, dropInType: dropInType }, DEFAULT_VALUES), defaultValues || {}), DEFAULT_SETTERS, DropInPreset) || this;
     }
     DropInPresetBuilder.prototype.$$beforeOpen = function (config) {
+        _super.prototype.$$beforeOpen.call(this, config);
         if (config.okBtn) {
             this.addOkButton(config.okBtn);
         }
         switch (config.dropInType) {
             case DROP_IN_TYPE.prompt:
                 config.defaultResult = undefined;
+                break;
             case DROP_IN_TYPE.confirm:
                 if (config.cancelBtn) {
                     this.addCancelButton(config.cancelBtn);
                 }
                 break;
         }
-        return _super.prototype.$$beforeOpen.call(this, config);
     };
     return DropInPresetBuilder;
 }(DialogPresetBuilder));

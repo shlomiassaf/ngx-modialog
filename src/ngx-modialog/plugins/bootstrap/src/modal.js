@@ -47,10 +47,10 @@ var Modal = (function (_super) {
     Modal.prototype.confirm = function () {
         return new TwoButtonPresetBuilder(this, { isBlocking: true, keyboard: null });
     };
-    Modal.prototype.create = function (dialogRef, content, bindings) {
+    Modal.prototype.create = function (dialogRef, content) {
         var _this = this;
         var backdropRef = this.createBackdrop(dialogRef, CSSBackdrop);
-        var containerRef = this.createContainer(dialogRef, BSModalContainer, content, bindings);
+        var containerRef = this.createContainer(dialogRef, BSModalContainer, content);
         var overlay = dialogRef.overlayRef.instance;
         var backdrop = backdropRef.instance;
         var container = containerRef.instance;

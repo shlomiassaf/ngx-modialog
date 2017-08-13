@@ -29,14 +29,14 @@ var Modal = (function (_super) {
     Modal.prototype.alert = function () {
         return new InAppModalContextBuilder(this);
     };
-    Modal.prototype.create = function (dialogRef, content, bindings) {
+    Modal.prototype.create = function (dialogRef, content) {
         if (dialogRef.inElement) {
             dialogRef.overlayRef.instance.insideElement();
         }
         else {
             dialogRef.overlayRef.instance.fullscreen();
         }
-        dialogRef.overlayRef.instance.addComponent(InAppModalBackdrop, bindings);
+        dialogRef.overlayRef.instance.addComponent(InAppModalBackdrop);
         dialogRef.overlayRef.instance.setStyle('position', 'relative');
         dialogRef.overlayRef.instance.setStyle('display', 'block');
         return dialogRef;
