@@ -36,11 +36,6 @@ export interface OverlayConfig {
   injector?: Injector;
 
   /**
-   * Resolved providers that will inject into the component provided.
-   */
-  bindings?: ResolvedReflectiveProvider[];
-
-  /**
    * The element to block using the modal.
    */
   viewContainer?: WideVCRef;

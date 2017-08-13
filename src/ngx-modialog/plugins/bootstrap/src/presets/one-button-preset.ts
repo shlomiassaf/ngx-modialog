@@ -1,4 +1,3 @@
-import { ResolvedReflectiveProvider } from '@angular/core';
 import { Modal, FluentAssignMethod, extend } from 'ngx-modialog';
 import { BSMessageModal } from '../message-modal.component';
 import { MessageModalPresetBuilder, MessageModalPreset } from './message-modal-preset';
@@ -35,13 +34,14 @@ export class OneButtonPresetBuilder extends MessageModalPresetBuilder<OneButtonP
     ]);
   }
 
-  $$beforeOpen(config: OneButtonPreset): ResolvedReflectiveProvider[] {
+  $$beforeOpen(config: OneButtonPreset): void {
+    super.$$beforeOpen(config);
+
     this.addButton(
       config.okBtnClass,
       config.okBtn,
       (cmp: BSMessageModal, $event: MouseEvent) => cmp.dialog.close(true)
     );
-    return super.$$beforeOpen(config);
   }
 }
 

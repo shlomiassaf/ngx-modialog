@@ -6,18 +6,16 @@ import {
   ElementRef,
   EmbeddedViewRef,
   Injector,
-  ReflectiveInjector,
-  ResolvedReflectiveProvider,
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
-  Renderer,
-  TemplateRef,
-  Type
+  Renderer2,
+  TemplateRef
 } from '@angular/core';
 
 import { PromiseCompleter, supportsKey } from '../framework/utils';
 import { DialogRef } from '../models/dialog-ref';
+import { ContainerContent } from '../models/tokens';
 import { BaseDynamicComponent } from '../components/index';
 
 // TODO: use DI factory for this.
@@ -26,7 +24,6 @@ const isDoc: boolean = !(typeof document === 'undefined' || !document);
 
 export interface EmbedComponentConfig {
   component: any;
-  bindings?: ResolvedReflectiveProvider[];
   projectableNodes?: any[][];
 }
 
@@ -49,7 +46,7 @@ export class ModalOverlay extends BaseDynamicComponent {
   constructor(private dialogRef: DialogRef<any>,
               private vcr: ViewContainerRef,
               el: ElementRef,
-              renderer: Renderer) {
+              renderer: Renderer2) {
     super(el, renderer);
     this.activateAnimationListener();
   }
@@ -57,18 +54,15 @@ export class ModalOverlay extends BaseDynamicComponent {
   /**
    * @internal
    */
-  getProjectables<T> (
-    content: string | TemplateRef<any> | Type<any>,
-    bindings?: ResolvedReflectiveProvider[]): any[][] {
-
+  getProjectables<T> (content: ContainerContent): any[][] {
 
     let nodes: any[];
     if (typeof content === 'string') {
-      nodes = [ [this.renderer.createText(null, `${content}`)] ];
+      nodes = [ [this.renderer.createText(`${content}`)] ];
     } else if (content instanceof TemplateRef) {
-      nodes = [ this.vcr.createEmbeddedView(content, { dialogRef: this.dialogRef }).rootNodes ];
+      nodes = [ this.vcr.createEmbeddedView(content, { $implicit: this.dialogRef.context, dialogRef: this.dialogRef }).rootNodes ];
     } else {
-      nodes = [ this.embedComponent({ component: content, bindings: bindings }).rootNodes ];
+      nodes = [ this.embedComponent({ component: content }).rootNodes ];
     }
 
     return nodes;
@@ -77,20 +71,15 @@ export class ModalOverlay extends BaseDynamicComponent {
   embedComponent(config: EmbedComponentConfig): EmbeddedViewRef<EmbedComponentConfig> {
     const ctx: EmbedComponentConfig & { injector: Injector } = <any>config;
 
-    if (ctx.bindings) {
-      ctx.injector = ReflectiveInjector.fromResolvedProviders(ctx.bindings, this.vcr.parentInjector);
-    }
-
-    return this.vcr.createEmbeddedView(this.template, {
+    return this.vcr.createEmbeddedView(this.template, <any> {
       $implicit: ctx
     });
   }
 
-  addComponent<T>(type: any, bindings: ResolvedReflectiveProvider[] = [], projectableNodes: any[][] = []): ComponentRef<T> {
+  addComponent<T>(type: any, projectableNodes: any[][] = []): ComponentRef<T> {
     return super._addComponent<T>({
       component: type,
       vcRef: this.innerVcr,
-      bindings,
       projectableNodes
     });
   }

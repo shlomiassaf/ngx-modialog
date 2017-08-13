@@ -1,4 +1,4 @@
-import { ViewContainerRef, ResolvedReflectiveProvider } from '@angular/core';
+import { ViewContainerRef } from '@angular/core';
 import { DialogRef, DROP_IN_TYPE, OverlayConfig } from 'ngx-modialog';
 import { Modal } from '../modal';
 
@@ -15,14 +15,6 @@ export class JSNativePresetBuilder extends JSNativeModalContextBuilder<JSNativeM
   }
 
   /**
-   * Hook to alter config and return bindings.
-   * @param config
-   */
-  protected $$beforeOpen(config: JSNativeModalContext): ResolvedReflectiveProvider[] {
-    return [];
-  }
-
-  /**
    * Open a modal window based on the configuration of this config instance.
    * @param viewContainer If set opens the modal inside the supplied viewContainer
    * @returns Promise<DialogRef>
@@ -34,11 +26,12 @@ export class JSNativePresetBuilder extends JSNativeModalContextBuilder<JSNativeM
       return <any>Promise.reject(new Error('Configuration Error: modal service not set.'));
     }
 
+    this.$$beforeOpen(context);
+
     let overlayConfig: OverlayConfig = {
       context: context,
       renderer: new JSNativeModalRenderer(),
-      viewContainer: viewContainer,
-      bindings: typeof this.$$beforeOpen === 'function' && this.$$beforeOpen(context)
+      viewContainer: viewContainer
     };
 
     return context.modal.open(context.component, overlayConfig);

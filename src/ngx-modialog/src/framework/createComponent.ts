@@ -3,21 +3,18 @@ import {
   ComponentFactory,
   ComponentFactoryResolver,
   Injector,
-  ViewContainerRef,
-  ReflectiveInjector,
-  ResolvedReflectiveProvider
+  ViewContainerRef
 } from '@angular/core';
 
 export interface CreateComponentArgs {
   component: any;
   vcRef: ViewContainerRef;
   injector?: Injector;
-  bindings?: ResolvedReflectiveProvider[];
   projectableNodes?: any[][];
 }
 
 export function createComponent(instructions: CreateComponentArgs): ComponentRef<any> {
-  const injector: Injector = getInjector(instructions);
+  const injector: Injector =  instructions.injector || instructions.vcRef.parentInjector;
   const cmpFactory: ComponentFactory<any>
     = injector.get(ComponentFactoryResolver).resolveComponentFactory(instructions.component);
 
@@ -31,12 +28,5 @@ export function createComponent(instructions: CreateComponentArgs): ComponentRef
   } else {
     return cmpFactory.create(injector);
   }
-}
-
-function getInjector(instructions: CreateComponentArgs) {
-  const ctxInjector = instructions.injector || instructions.vcRef.parentInjector;
-  return Array.isArray(instructions.bindings) && instructions.bindings.length > 0 ?
-    ReflectiveInjector.fromResolvedProviders(instructions.bindings, ctxInjector) : ctxInjector;
-
 }
 

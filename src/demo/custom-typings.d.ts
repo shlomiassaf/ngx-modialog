@@ -57,6 +57,9 @@ declare module 'modern-lru' {
 */
 
 // Extra variables that live on Global that will be replaced by webpack DefinePlugin
+declare var VERSION: string;
+declare var NG_VERSION: string;
+declare var ENV: string;
 declare var ENV: string;
 declare var HMR: boolean;
 declare var System: SystemJS;

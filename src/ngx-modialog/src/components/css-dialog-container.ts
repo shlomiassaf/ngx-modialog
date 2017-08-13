@@ -1,17 +1,12 @@
 import {
   Component,
-  ComponentRef,
-  ViewContainerRef,
-  ResolvedReflectiveProvider,
-  ViewChild,
   ViewEncapsulation,
   ElementRef,
-  Renderer
+  Renderer2
 } from '@angular/core';
 
 import { BaseDynamicComponent } from './base-dynamic-component';
 import { DialogRef } from '../models/dialog-ref';
-import { Class } from '../framework/utils';
 
 /**
  * A component that acts as a top level container for an open modal window.
@@ -28,7 +23,7 @@ import { Class } from '../framework/utils';
 export class CSSDialogContainer extends BaseDynamicComponent {
 
   constructor(public dialog: DialogRef<any>,
-              el: ElementRef, renderer: Renderer) {
+              el: ElementRef, renderer: Renderer2) {
     super(el, renderer);
     this.activateAnimationListener();
   }

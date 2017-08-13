@@ -2,7 +2,7 @@ import {
   Component,
   ElementRef,
   ViewEncapsulation,
-  Renderer
+  Renderer2
 } from '@angular/core';
 
 import { BaseDynamicComponent } from './base-dynamic-component';
@@ -23,7 +23,7 @@ export class CSSBackdrop extends BaseDynamicComponent {
   public cssClass: string;
   public styleStr: string;
 
-  constructor(el: ElementRef, renderer: Renderer) {
+  constructor(el: ElementRef, renderer: Renderer2) {
     super(el, renderer);
     this.activateAnimationListener();
 
