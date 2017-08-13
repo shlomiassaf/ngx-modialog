@@ -53,7 +53,7 @@ export abstract class ModalOpenContextBuilder<T extends ModalOpenContext>
    * @param viewContainer If set opens the modal inside the supplied viewContainer
    * @returns Promise<DialogRef>
    */
-  open(viewContainer?: WideVCRef): Promise<DialogRef<T>> {
+  open(viewContainer?: WideVCRef): DialogRef<T> {
     let context: T = this.toJSON();
 
     if (!(context.modal instanceof Modal)) {

@@ -67,7 +67,7 @@ export class AppComponent {
   constructor(public modal: Modal) { }
 
   onClick() {
-    this.modal.alert()
+    const dialogRef = this.modal.alert()
         .size('lg')
         .showClose(true)
         .title('A simple Alert style modal window')
@@ -82,22 +82,27 @@ export class AppComponent {
                 <li>Close wth button click</li>
                 <li>HTML content</li>
             </ul>`)
-        .open()
-        .then( dialogRef => {
-            dialogRef.result.then( result => alert(`The result is: ${result}`);
-        });
+        .open();
+
+    dialogRef.result
+        .then( result => alert(`The result is: ${result}`) );
   }
 }
 ```
 
-We are using the `alert()` method, one of 3 (prompt, confirm)) fluent-api methods we call `drop-ins`
+If you are using **ngx-modialog** version 3.X.X or below, `open()` returned a promise so replace the last 2 lines with:
+```typescript
+   dialogRef
+       .then( dialogRef => {
+           dialogRef.result.then( result => alert(`The result is: ${result}`);
+       });
+```
 
-The object returned from calling the `open()` method is a `Promise` to a {@link DialogRef} instance, `DialogRef` is how you can control an open modal instance.
+We are using the `alert()` method, one of 3 (prompt, confirm)) fluent-api methods we call `drop-ins`
 
 We then use the `result` property to wait for the modal closing event.
 
 **Notes:**
-  - The `Promise` returned from `open()` is not required and exists due to legacy angular implementation when creating components dynamically was an async operation.
   - Fluent API methods (drop-ins) are pre-configured (presets) methods that allow easy configuration and execution, you can create custom presets - see the demo application.
   - For more control use the `open()` method, which is used by all drop in's internally.
   - We import the `Modal` service from the plugin and not from the root library.

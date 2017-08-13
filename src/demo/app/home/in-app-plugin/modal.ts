@@ -1,10 +1,6 @@
-import {
-  Injectable,
-  ResolvedReflectiveProvider as RRP
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import {
-  Maybe,
   Overlay,
   DialogRef,
   ContainerContent,
@@ -24,7 +20,7 @@ export class Modal extends Modal_ {
     return new InAppModalContextBuilder(this);
   }
 
-  protected create(dialogRef: DialogRef<any>, content: ContainerContent): Maybe<DialogRef<any>> {
+  protected create(dialogRef: DialogRef<any>, content: ContainerContent): DialogRef<any> {
     if (dialogRef.inElement) {
       dialogRef.overlayRef.instance.insideElement();
     } else {
