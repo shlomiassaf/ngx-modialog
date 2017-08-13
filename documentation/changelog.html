@@ -566,6 +566,22 @@
                <div class="content getting-started">
                    <div class="content-data">
 
+<p><a name="4.0.0-beta.1"></a></p>
+<h1 id="-4-0-0-beta-1-https-github-com-shlomiassaf-ngx-modialog-compare-4-0-0-beta-0-4-0-0-beta-1-2017-08-13-"><a href="https://github.com/shlomiassaf/ngx-modialog/compare/4.0.0-beta.0...4.0.0-beta.1">4.0.0-beta.1</a> (2017-08-13)</h1>
+<h3 id="code-refactoring">Code Refactoring</h3>
+<ul>
+<li>dont return a promise when opening a dialog (<a href="https://github.com/shlomiassaf/ngx-modialog/issues/383">#383</a>) (<a href="https://github.com/shlomiassaf/ngx-modialog/commit/21f54ee">21f54ee</a>)</li>
+</ul>
+<h3 id="breaking-changes">BREAKING CHANGES</h3>
+<ul>
+<li>Calling <code>modal.open()</code> returned a Promise of <code>DialogRef</code>. The async operation is not required and exists due to legacy angular implementation of dynamic components.
+<code>modal.open()</code> now returns the <code>DialogRef</code> instance and NOT the <code>Promise</code>.</li>
+</ul>
+<p>You need to refactor your codebase to accomodate this change, this is a big change
+and it is required to remove the complexity working with <code>DialogRef</code>.</p>
+<p>Plugin authoers: <code>Maybe</code> type does not exists anymore.
+If you retuned the dialog instance from your <code>Modal</code> implementations there is not much to refactor other then types here and there.</p>
+<p>If you return <code>Promise</code> of <code>DialogRef</code> you will have to refactor your code.</p>
 <p><a name="4.0.0-beta.0"></a></p>
 <h1 id="-4-0-0-beta-0-https-github-com-shlomiassaf-ngx-modialog-compare-3-0-2-4-0-0-beta-0-2017-08-13-"><a href="https://github.com/shlomiassaf/ngx-modialog/compare/3.0.2...4.0.0-beta.0">4.0.0-beta.0</a> (2017-08-13)</h1>
 <h3 id="code-refactoring">Code Refactoring</h3>
