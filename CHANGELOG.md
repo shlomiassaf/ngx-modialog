@@ -1,3 +1,27 @@
+<a name="4.0.0-beta.1"></a>
+# [4.0.0-beta.1](https://github.com/shlomiassaf/ngx-modialog/compare/4.0.0-beta.0...4.0.0-beta.1) (2017-08-13)
+
+
+### Code Refactoring
+
+* dont return a promise when opening a dialog ([#383](https://github.com/shlomiassaf/ngx-modialog/issues/383)) ([21f54ee](https://github.com/shlomiassaf/ngx-modialog/commit/21f54ee))
+
+
+### BREAKING CHANGES
+
+* Calling `modal.open()` returned a Promise of `DialogRef`. The async operation is not required and exists due to legacy angular implementation of dynamic components.
+`modal.open()` now returns the `DialogRef` instance and NOT the `Promise`.
+
+You need to refactor your codebase to accomodate this change, this is a big change
+and it is required to remove the complexity working with `DialogRef`.
+
+Plugin authoers: `Maybe` type does not exists anymore.
+If you retuned the dialog instance from your `Modal` implementations there is not much to refactor other then types here and there.
+
+If you return `Promise` of `DialogRef` you will have to refactor your code.
+
+
+
 <a name="4.0.0-beta.0"></a>
 # [4.0.0-beta.0](https://github.com/shlomiassaf/ngx-modialog/compare/3.0.2...4.0.0-beta.0) (2017-08-13)
 
