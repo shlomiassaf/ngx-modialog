@@ -43,7 +43,7 @@
     "e2e:travis": "npm-run-all -p -r server:prod:ci protractor:delay",
     "e2e": "npm-run-all -p -r server:prod:ci protractor",
     "github-deploy:dev": "npm run webpack -- --config config/webpack.github-deploy.js --progress --profile --env.githubDev",
-    "github-deploy:prod": "npm run webpack -- --config config/webpack.github-deploy.js --progress --profile --env.githubProd",
+    "github-deploy:prod": "gulp build && npm run webpack -- --config config/webpack.github-deploy.js --progress --profile --env.githubProd --env.sim",
     "github-deploy": "npm run github-deploy:dev",
     "gulp": "gulp",
     "jest": "jest",
