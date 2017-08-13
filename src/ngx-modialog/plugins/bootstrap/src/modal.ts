@@ -2,7 +2,6 @@ import { combineLatest } from 'rxjs/operator/combineLatest';
 import { Injectable } from '@angular/core';
 
 import {
-  Maybe,
   ContainerContent,
   Overlay,
   DialogRef,
@@ -47,7 +46,7 @@ export class Modal extends Modal_ {
     return new TwoButtonPresetBuilder(this, <any>{isBlocking: true, keyboard: null});
   }
 
-  protected create(dialogRef: DialogRef<any>, content: ContainerContent): Maybe<DialogRef<any>> {
+  protected create(dialogRef: DialogRef<any>, content: ContainerContent): DialogRef<any> {
 
     const backdropRef = this.createBackdrop(dialogRef, CSSBackdrop);
     const containerRef = this.createContainer(dialogRef, BSModalContainer, content);

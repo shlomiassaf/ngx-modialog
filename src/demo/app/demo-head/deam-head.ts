@@ -10,7 +10,7 @@ import { DialogRef } from 'ngx-modialog';
 
 export interface ModalCommandDescriptor {
   text: string;
-  factory: () => Promise<DialogRef<any>>;
+  factory: () => DialogRef<any>;
 }
 export interface DropInClickEvent {
   event: Event;
@@ -51,11 +51,10 @@ export class DemoHead {
     this.processDialog(btn.factory());
   }
 
-  private processDialog(dialog: Promise<DialogRef<any>>) {
-    dialog.then((resultPromise) => {
-      return resultPromise.result.then((result) => {
+  private processDialog(dialog: DialogRef<any>) {
+    return dialog.result.then((result) => {
         this.result = result;
       }, () => this.result = 'Rejected!');
-    });
+
   }
 }

@@ -1,7 +1,7 @@
 import { ComponentRef } from '@angular/core';
 
 import { Overlay } from '../overlay/index';
-import { Class, Maybe } from '../framework/utils';
+import { Class } from '../framework/utils';
 import { OverlayConfig, ContainerContent } from '../models/tokens';
 import { DialogRef } from '../models/dialog-ref';
 import { ModalControllingContextBuilder } from '../models/overlay-context';
@@ -32,26 +32,18 @@ export abstract class Modal {
    * @param config Additional settings.
    * @returns {Promise<DialogRef>}
    */
-  open(content: ContainerContent, config?: OverlayConfig): Promise<DialogRef<any>> {
+  open(content: ContainerContent, config?: OverlayConfig): DialogRef<any> {
     config = config || {} as any;
-    try {
-      let dialogs = this.overlay.open(config, this.constructor);
+    let dialogs = this.overlay.open(config, this.constructor);
 
-      if (dialogs.length > 1) {
-        console.warn(`Attempt to open more then 1 overlay detected.
-        Multiple modal copies are not supported at the moment, 
-        only the first viewContainer will display.`);
-      }
-      // TODO:  Currently supporting 1 view container, hence working on dialogs[0].
-      //        upgrade to multiple containers.
-      return Promise.resolve(
-        this.create(dialogs[0], content)
-      );
-
-    } catch (e) {
-      return Promise.reject<DialogRef<any>>(e);
+    if (dialogs.length > 1) {
+      console.warn(`Attempt to open more then 1 overlay detected.
+      Multiple modal copies are not supported at the moment, 
+      only the first viewContainer will display.`);
     }
-
+    // TODO:  Currently supporting 1 view container, hence working on dialogs[0].
+    //        upgrade to multiple containers.
+    return this.create(dialogs[0], content)
   }
 
   /**
@@ -60,7 +52,7 @@ export abstract class Modal {
    * @param type
    * @returns {Maybe<DialogRef<any>>}
    */
-  protected abstract create(dialogRef: DialogRef<any>, type: ContainerContent): Maybe<DialogRef<any>>;
+  protected abstract create(dialogRef: DialogRef<any>, type: ContainerContent): DialogRef<any>;
 
 
   protected createBackdrop<T>(dialogRef: DialogRef<any>, BackdropComponent: Class<T>): ComponentRef<T> {

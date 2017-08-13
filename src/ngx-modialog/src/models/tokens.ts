@@ -3,14 +3,12 @@ import {
   Injector,
   ViewContainerRef,
   TemplateRef,
-  Type,
-  ResolvedReflectiveProvider
+  Type
 } from '@angular/core';
 
 import { ModalOverlay } from '../overlay/index';
 import { DialogRef } from './dialog-ref';
 import { OverlayContext } from '../models/overlay-context';
-import { Maybe } from '../framework/utils';
 
 export enum DROP_IN_TYPE {
   alert,
@@ -23,7 +21,7 @@ export type WideVCRef = ViewContainerRef | string;
 export type ContainerContent = string | TemplateRef<any> | Type<any>;
 
 export interface OverlayPlugin extends Function {
-  <T>(component: any, dialogRef: DialogRef<T>, config: OverlayConfig): Maybe<DialogRef<any>>;
+  <T>(component: any, dialogRef: DialogRef<T>, config: OverlayConfig): DialogRef<any>;
 }
 
 export interface OverlayConfig {

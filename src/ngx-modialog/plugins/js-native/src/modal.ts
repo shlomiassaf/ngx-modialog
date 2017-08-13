@@ -1,8 +1,7 @@
-import { Injectable, ResolvedReflectiveProvider as RRP } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import {
   DialogRef,
-  Maybe,
   Overlay,
   DROP_IN_TYPE,
   Modal as Modal_
@@ -28,9 +27,7 @@ export class Modal extends Modal_ {
     return new JSNativePresetBuilder(this, DROP_IN_TYPE.confirm);
   }
 
-  protected create(dialogRef: DialogRef<any>,
-                   type: any,
-                   bindings?: RRP[]): Maybe<DialogRef<any>> {
+  protected create(dialogRef: DialogRef<any>, type: any): DialogRef<any> {
     return dialogRef;
   }
 

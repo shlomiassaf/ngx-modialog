@@ -23,13 +23,14 @@ export class Home {
       .templateRef(this.myTemplate)
       .inElement(true)
       .open('home-overlay-container')
-      .then(d => d.result)
-      .catch((e) => {
-        console.log('This message should appear if you navigate away from the home page.');
-        console.log('If a modal is opened in a view container within a component that is the page or' +
-          'part of the page, navigation will destroy the page thus destroy the modal. To prevent ' +
-          'memory leaks and unexpected behavior a "DialogBailOutError" error is thrown.');
-        console.log(e);
-      });
+      .result
+        .then(d => d.result)
+        .catch((e) => {
+            console.log('This message should appear if you navigate away from the home page.');
+            console.log('If a modal is opened in a view container within a component that is the page or' +
+              'part of the page, navigation will destroy the page thus destroy the modal. To prevent ' +
+              'memory leaks and unexpected behavior a "DialogBailOutError" error is thrown.');
+            console.log(e);
+        });
   }
 }

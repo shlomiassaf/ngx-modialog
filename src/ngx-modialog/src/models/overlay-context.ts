@@ -106,7 +106,7 @@ export class OverlayContextBuilder<T extends OverlayContext> extends FluentAssig
 }
 
 export interface ModalControllingContextBuilder<T> {
-  open(viewContainer?: WideVCRef): Promise<DialogRef<T>>;
+  open(viewContainer?: WideVCRef): DialogRef<T>;
 }
 
 /**

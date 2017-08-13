@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 
 import {
   ContainerContent,
-  Maybe,
   Overlay,
   DialogRef,
   DROP_IN_TYPE,
@@ -44,7 +43,7 @@ export class Modal extends Modal_ {
     }  as any);
   }
 
-  protected create(dialogRef: DialogRef<any>, content: ContainerContent): Maybe<DialogRef<any>> {
+  protected create(dialogRef: DialogRef<any>, content: ContainerContent): DialogRef<any> {
 
     const backdropRef = this.createBackdrop(dialogRef, CSSBackdrop);
     const containerRef = this.createContainer(dialogRef, CSSDialogContainer, content);
