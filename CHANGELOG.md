@@ -1,3 +1,27 @@
+<a name="4.0.0-beta.0"></a>
+# [4.0.0-beta.0](https://github.com/shlomiassaf/ngx-modialog/compare/3.0.2...4.0.0-beta.0) (2017-08-13)
+
+
+### Code Refactoring
+
+* support angular version 5 ([#382](https://github.com/shlomiassaf/ngx-modialog/issues/382)) ([e628875](https://github.com/shlomiassaf/ngx-modialog/commit/e628875))
+
+
+### BREAKING CHANGES
+
+* Angular version 5 comes with a breaking change which results in an internal breaking change which remove API options
+
+Bindings are no longer supported when opening a modal.
+Providing bindings was, from day one, a shortcut to a manual operation.
+If you used bindings before, instead provide an injector with the bindings inside.
+
+Most of the users should not feel this change as usage of bindings should be minimal.
+
+If you wrote a plugin you should feel this, follow the change set for one
+of the native plugins as an conversion example.
+
+
+
 <a name="3.0.2"></a>
 ## [3.0.2](https://github.com/shlomiassaf/angular2-modal/compare/3.0.1...3.0.2) (2017-08-11)
 
