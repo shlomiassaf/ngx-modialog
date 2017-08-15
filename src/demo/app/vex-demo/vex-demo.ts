@@ -8,7 +8,7 @@ import {
   DialogFormModal,
   DialogPresetBuilder,
   VEXModalContext,
-  VexModalModule,
+  vexV3Mode,
   providers
 } from 'ngx-modialog/plugins/vex';
 
@@ -16,17 +16,21 @@ import { DemoHead, ModalCommandDescriptor } from '../demo-head/index';
 import * as presets from './presets';
 import { LoginDialog } from './login-dialog';
 
+// uncomment if you are using VEX version 3
+// vexV3Mode();
+
 @Component({
   selector: 'vex-demo',
   styleUrls: [
-    './css/vex.css',
-    './css/vex-theme-default.css',
-    './css/vex-theme-os.css',
-    './css/vex-theme-plain.css',
-    './css/vex-theme-wireframe.css',
-    './css/vex-theme-flat-attack.css',
-    './css/vex-theme-top.css',
-    './css/vex-theme-bottom-right-corner.css'
+    '../../../../node_modules/vex-js/dist/css/vex.css',
+    '../../../../node_modules/vex-js/dist/css/vex.css',
+    '../../../../node_modules/vex-js/dist/css/vex-theme-default.css',
+    '../../../../node_modules/vex-js/dist/css/vex-theme-os.css',
+    '../../../../node_modules/vex-js/dist/css/vex-theme-plain.css',
+    '../../../../node_modules/vex-js/dist/css/vex-theme-wireframe.css',
+    '../../../../node_modules/vex-js/dist/css/vex-theme-flat-attack.css',
+    '../../../../node_modules/vex-js/dist/css/vex-theme-top.css',
+    '../../../../node_modules/vex-js/dist/css/vex-theme-bottom-right-corner.css'
   ],
   templateUrl: './vex-demo.tpl.html',
   // We override providers set by the Module since this app is using multiple module plugins

@@ -2,6 +2,9 @@
   "name": "ngx-modialog",
   "description": "Modal / Dialog for Angular",
   "version": "3.0.3",
+  "peerDependencies": {
+    "@angular/core": "^4.0.0"
+  },
   "libConfig": {
     "entry": "ngx-modialog",
     "inlineResources": true,

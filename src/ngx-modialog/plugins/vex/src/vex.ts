@@ -1,4 +1,4 @@
-export { Modal } from './modal';
+export { Modal, vexV3Mode } from './modal';
 export { VEXBuiltInThemes, VEXModalContext, VEXModalContextBuilder } from './modal-context';
 export { DropInPreset, DropInPresetBuilder } from './presets/dropin-preset';
 export {

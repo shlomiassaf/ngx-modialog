@@ -1,9 +1,5 @@
 import {
   Component,
-  ComponentRef,
-  ViewContainerRef,
-  ResolvedReflectiveProvider,
-  ViewChild,
   ViewEncapsulation,
   ElementRef,
   Renderer
@@ -11,7 +7,6 @@ import {
 
 import { BaseDynamicComponent } from './base-dynamic-component';
 import { DialogRef } from '../models/dialog-ref';
-import { Class } from '../framework/utils';
 
 /**
  * A component that acts as a top level container for an open modal window.
