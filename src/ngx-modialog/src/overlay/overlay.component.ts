@@ -40,6 +40,8 @@ export interface EmbedComponentConfig {
 })
 export class ModalOverlay extends BaseDynamicComponent {
   private beforeDestroyHandlers: Array<() => Promise<void>>;
+
+  @ViewChild('container', {read: ElementRef}) public container: ElementRef;
   @ViewChild('innerView', {read: ViewContainerRef}) public innerVcr: ViewContainerRef;
   @ViewChild('template') public template: TemplateRef<any>;
 
@@ -108,6 +110,31 @@ export class ModalOverlay extends BaseDynamicComponent {
       right: 0
     };
     Object.keys(style).forEach( k => this.setStyle(k, style[k]) );
+  }
+
+  /**
+   * Set a specific inline style for the container of the whole dialog component
+   * The dialog component root element is the host of this component, it contains only 1 direct
+   * child which is the container.
+   *
+   * Structure:
+   *
+   * ```html
+   * <modal-overlay>
+   *   <div>
+   *     <!-- BACKDROP ELEMENT -->
+   *     <!-- DIALOG CONTAINER ELEMENT -->
+   *   </div>
+   * </modal-overlay>
+   * ```
+   *
+   * @param prop The style key
+   * @param value The value, undefined to remove
+   * @returns {ModalOverlay}
+   */
+  setContainerStyle(prop: string, value: string): this {
+    this.renderer.setStyle(this.container.nativeElement, prop, value);
+    return this;
   }
 
   /**

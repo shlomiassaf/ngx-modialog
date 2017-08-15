@@ -51,6 +51,7 @@ export class BaseDynamicComponent implements OnDestroy {
     register('TransitionEnd', this.el.nativeElement, (e: TransitionEvent) => this.onEnd(e));
     register('AnimationEnd', this.el.nativeElement, (e: AnimationEvent) => this.onEnd(e));
   }
+
   /**
    * Set a specific inline style on the overlay host element.
    * @param prop The style key

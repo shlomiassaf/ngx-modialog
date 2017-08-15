@@ -1261,6 +1261,10 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
+classlist-polyfill@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/classlist-polyfill/-/classlist-polyfill-1.0.3.tgz#7cd5a9207c8d6932f592fdeaa6b45352ed71690d"
+
 clean-css@4.1.x:
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.1.4.tgz#eec8811db27457e0078d8ca921fa81b72fa82bf4"
@@ -2128,6 +2132,10 @@ domhandler@^2.3.0:
   dependencies:
     domelementtype "1"
 
+domify@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/domify/-/domify-1.4.0.tgz#11483617f764f8695975b4bdc79b14f0803b629b"
+
 domutils@1.1:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/domutils/-/domutils-1.1.6.tgz#bddc3de099b9a2efacc51c623f28f416ecc57485"
@@ -2304,6 +2312,10 @@ es-to-primitive@^1.1.1:
     is-callable "^1.1.1"
     is-date-object "^1.0.1"
     is-symbol "^1.0.1"
+
+es6-object-assign@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/es6-object-assign/-/es6-object-assign-1.0.2.tgz#ff676ec54546b5871c9a164c9c658eb1190ce4b5"
 
 es6-promise@^3.1.2:
   version "3.3.1"
@@ -2714,6 +2726,10 @@ form-data@~2.1.1:
     asynckit "^0.4.0"
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
+
+form-serialize@0.7.1:
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/form-serialize/-/form-serialize-0.7.1.tgz#48f74e37d041de4f7d140dd2c54b37fff8d2e843"
 
 forwarded@~0.1.0:
   version "0.1.0"
@@ -7642,6 +7658,26 @@ verror@1.3.6:
   resolved "https://registry.yarnpkg.com/verror/-/verror-1.3.6.tgz#cff5df12946d297d2baaefaa2689e25be01c005c"
   dependencies:
     extsprintf "1.0.2"
+
+vex-dialog@1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/vex-dialog/-/vex-dialog-1.0.7.tgz#b48e7a9da14a61eee31970cf92d6cd2f66d33c1f"
+  dependencies:
+    domify "1.4.0"
+    form-serialize "0.7.1"
+
+vex-js@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/vex-js/-/vex-js-4.0.0.tgz#5f230a77b624bf3f32b6ebbfce663682a7eed4a5"
+  dependencies:
+    classlist-polyfill "1.0.3"
+    domify "1.4.0"
+    es6-object-assign "1.0.2"
+    vex-dialog "1.0.7"
+
+vex@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/vex/-/vex-0.0.4.tgz#a22d7fb02e97be938e4b2b4327c314d25d82f402"
 
 vinyl-buffer@^1.0.0:
   version "1.0.0"

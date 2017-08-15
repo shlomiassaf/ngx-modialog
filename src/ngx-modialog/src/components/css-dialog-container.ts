@@ -22,9 +22,9 @@ import { DialogRef } from '../models/dialog-ref';
 })
 export class CSSDialogContainer extends BaseDynamicComponent {
 
-  constructor(public dialog: DialogRef<any>,
-              el: ElementRef, renderer: Renderer2) {
+  constructor(public dialog: DialogRef<any>, el: ElementRef, renderer: Renderer2) {
     super(el, renderer);
     this.activateAnimationListener();
   }
+
 }
