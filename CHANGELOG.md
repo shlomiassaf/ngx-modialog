@@ -1,3 +1,18 @@
+<a name="4.0.0-beta.2"></a>
+# [4.0.0-beta.2](https://github.com/shlomiassaf/ngx-modialog/compare/4.0.0-beta.1...4.0.0-beta.2) (2017-08-15)
+
+
+### Bug Fixes
+
+* error with OutsideEventPlugin that would lead to calling undefined function ([#379](https://github.com/shlomiassaf/ngx-modialog/issues/379)) ([c313962](https://github.com/shlomiassaf/ngx-modialog/commit/c313962)), closes [#239](https://github.com/shlomiassaf/ngx-modialog/issues/239)
+
+
+### Features
+
+* **vex:** Full Support for VEX v4 and v3 ([#386](https://github.com/shlomiassaf/ngx-modialog/issues/386)) ([b8f02e1](https://github.com/shlomiassaf/ngx-modialog/commit/b8f02e1)), closes [#384](https://github.com/shlomiassaf/ngx-modialog/issues/384)
+
+
+
 <a name="4.0.0-beta.1"></a>
 # [4.0.0-beta.1](https://github.com/shlomiassaf/ngx-modialog/compare/4.0.0-beta.0...4.0.0-beta.1) (2017-08-13)
 
