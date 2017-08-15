@@ -1,7 +1,4 @@
-IMPORTANT: Please provide a sample using:  
-
-  * V1: http://plnkr.co/edit/hwbmF9?p=preview 
-  * V2: http://plnkr.co/edit/7c0pGE?p=preview
+IMPORTANT: Please provide a sample using: http://plnkr.co/edit/lV7zsw7Yqossgs9JOfQU?p=preview
 
 * **I'm submitting a ...**
 [ ] bug report
@@ -31,7 +28,7 @@ https://plnkr.co or similar (you can use one of the templates above as a startin
 
 * **Please tell us about your environment:**
 
-- Angular version: 2.0.0-beta.X
+- Angular version: ?
 - Browser: [all | Chrome XX | Firefox XX | IE XX | Safari XX | Mobile Chrome XX | Android X.X Web Browser | iOS XX Safari | iOS XX UIWebView | iOS XX WKWebView ]
 
 

@@ -30,6 +30,9 @@ Available plugins:
 npm install ngx-modialog
 ```
 
+## Basic plunker playground (bootstrap plugin):
+http://plnkr.co/edit/lV7zsw7Yqossgs9JOfQU?p=preview
+
 ## Quick start
 
 **In your application root module definition add `ModalModule` and the plugin you want to use:**
