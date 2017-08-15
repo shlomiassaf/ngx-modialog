@@ -23,7 +23,7 @@ modal.alert()
 Available plugins: 
 
   - Bootstrap (3 & 4)
-  - [Vex](http://github.hubspot.com/vex/docs/welcome/)
+  - [Vex 3 & 4](http://github.hubspot.com/vex/docs/welcome/)
 
 ## Install
 ```bash

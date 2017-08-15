@@ -5,6 +5,7 @@ import { ModalModule, Modal as BaseModal } from 'ngx-modialog';
 
 import { Modal } from './modal';
 import { DialogFormModal, FormDropIn, VEXDialogButtons } from './dialog-form-modal';
+import { VexCSSDialogContainer } from './vex-css-dialog-container';
 
 export const providers: any[] = [
   { provide: BaseModal, useClass: Modal },
@@ -14,12 +15,14 @@ export const providers: any[] = [
 @NgModule({
   imports: [ ModalModule, CommonModule ],
   declarations: [
+    VexCSSDialogContainer,
     VEXDialogButtons,
     FormDropIn,
     DialogFormModal
   ],
   providers,
   entryComponents: [
+    VexCSSDialogContainer,
     DialogFormModal,
     FormDropIn
   ]
