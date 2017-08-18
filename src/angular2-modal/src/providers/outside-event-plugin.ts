@@ -81,7 +81,9 @@ export class DOMOutsideEventPlugin { // extends EventManagerPlugin
         return zone.runOutsideAngular(() => {
             let fn: Function;
             setTimeout(() => fn = onceOnOutside(), 0);
-            return () => fn();
+            return () => {
+                if (fn) fn();
+            };
         });
     }
 
