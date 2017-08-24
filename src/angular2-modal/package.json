@@ -1,7 +1,7 @@
 {
   "name": "angular2-modal",
   "description": "Angular2 Modal (dialog) window.",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "libConfig": {
     "entry": "angular2-modal",
     "inlineResources": true,
