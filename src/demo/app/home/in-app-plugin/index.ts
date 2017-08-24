@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Modal as Modal_ } from 'angular2-modal';
+import { Modal as Modal_ } from 'ngx-modialog';
 import { Modal as InAppModal } from './modal';
 import { InAppModalBackdrop } from './modal-backdrop';
 
@@ -27,6 +27,7 @@ export function getProviders(): any[] {
   ]
 })
 export class InAppModalModule {
+
   static getProviders(): any[] {
     return getProviders();
   }
