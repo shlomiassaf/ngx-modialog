@@ -31,7 +31,12 @@ npm install ngx-modialog
 ```
 
 ## Basic plunker playground (bootstrap plugin):
+
+##### ngx-modialog @ 4.x.x
 http://plnkr.co/edit/lV7zsw7Yqossgs9JOfQU?p=preview
+
+##### ngx-modialog @ 3.x.x
+http://plnkr.co/edit/2ppVYl517GI1Byv8vVbG?p=preview
 
 ## Quick start
 
