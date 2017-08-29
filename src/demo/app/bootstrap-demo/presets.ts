@@ -57,17 +57,30 @@ export function cascading(modal: Modal) {
   presets.push(prompt(modal));
   presets.push(confirm(modal));
   presets.push(
-    modal.prompt()
+    modal.alert()
       .size('sm')
       .title('Cascading modals!')
-      .body('Find your way out...')
+      .body('Find your way out step by step or click CLOSE ALL to close all open dialogs at once')
+      .addButton('btn-primary', 'CLOSE ALL',
+        (cmp: any, $event: MouseEvent) => cmp.dialog.close('all'))
   );
 
   return {
     open: () => {
-      let ret = presets.shift().open();
-      while (presets.length > 0) presets.shift().open();
-      return ret;
+      let first = presets.shift().open();
+      let last: any;
+      while (presets.length > 0) {
+        last = presets.shift().open();
+      }
+
+      last.result.then( value => {
+        if (value === 'all' && modal.overlay.stackLength > 0) {
+          // you can also inject OverlayService and use it to close all.
+          modal.overlay.closeAll();
+        }
+      });
+
+      return first;
     }
   };
 }
