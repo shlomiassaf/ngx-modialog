@@ -35,6 +35,9 @@ export class Overlay {
     return _stack.groupLength(_stack.groupOf(dialogRef));
   }
 
+  closeAll(result: any = null): void {
+      _stack.closeAll(result);
+  }
 
   /**
    * Creates an overlay and returns a dialog ref.

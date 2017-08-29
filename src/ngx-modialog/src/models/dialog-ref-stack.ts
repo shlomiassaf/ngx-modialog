@@ -18,6 +18,12 @@ export class DialogRefStack<T> {
     this._stackMap = new Map<DialogRef<T>, any>();
   }
 
+  closeAll(result: any = null): void {
+    for (let i=0, len=this._stack.length; i<len; i++) {
+      this._stack.pop().close(result);
+    }
+  }
+
   push(dialogRef: DialogRef<T>, group?: any): void {
     if (this._stack.indexOf(dialogRef) === -1) {
       this._stack.push(dialogRef);

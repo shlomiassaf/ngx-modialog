@@ -61,16 +61,29 @@ export function cascading(modal: Modal): DropInPresetBuilder {
     presets.push(prompt.call(this, modal));
     presets.push(confirm.call(this, modal));
     presets.push(
-        modal.alert()
-            .className(this.theme)
-            .message('Cascading modals! Find your way out...')
+      modal.alert()
+        .className(this.theme)
+        .message('Find your way out step by step or click CLOSE ALL to close all open dialogs at once')
+        .addButton('btn-primary', 'CLOSE ALL',
+          (cmp: any, $event: MouseEvent) => cmp.dialog.close('all'))
     );
 
     return <any>{
         open: () => {
-            let ret = presets.shift().open();
-            while (presets.length > 0) presets.shift().open();
-            return ret;
+            let first = presets.shift().open();
+            let last: any;
+            while (presets.length > 0) {
+                last = presets.shift().open();
+            }
+
+            last.then( dRef => dRef.result.then( value => {
+                if (value === 'all' && modal.overlay.stackLength > 0) {
+                    // you can also inject OverlayService and use it to close all.
+                    modal.overlay.closeAll();
+                }
+            }));
+
+            return first;
         }
     };
 }
