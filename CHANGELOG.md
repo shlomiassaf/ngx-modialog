@@ -1,3 +1,13 @@
+<a name="4.0.0-beta.3"></a>
+# [4.0.0-beta.3](https://github.com/shlomiassaf/ngx-modialog/compare/4.0.0-beta.2...4.0.0-beta.3) (2017-08-29)
+
+
+### Features
+
+* close all open dialogs ([#393](https://github.com/shlomiassaf/ngx-modialog/issues/393)) ([ec1e4d6](https://github.com/shlomiassaf/ngx-modialog/commit/ec1e4d6)), closes [#341](https://github.com/shlomiassaf/ngx-modialog/issues/341) [#314](https://github.com/shlomiassaf/ngx-modialog/issues/314)
+
+
+
 <a name="4.0.0-beta.2"></a>
 # [4.0.0-beta.2](https://github.com/shlomiassaf/ngx-modialog/compare/4.0.0-beta.1...4.0.0-beta.2) (2017-08-15)
 
