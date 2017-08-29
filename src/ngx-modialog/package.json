@@ -1,7 +1,7 @@
 {
   "name": "ngx-modialog",
   "description": "Modal / Dialog for Angular",
-  "version": "4.0.0-beta.2",
+  "version": "4.0.0-beta.3",
   "libConfig": {
     "entry": "ngx-modialog",
     "inlineResources": true,
