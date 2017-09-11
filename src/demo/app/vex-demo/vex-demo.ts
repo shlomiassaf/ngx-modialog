@@ -23,7 +23,6 @@ import { LoginDialog } from './login-dialog';
   selector: 'vex-demo',
   styleUrls: [
     '../../../../node_modules/vex-js/dist/css/vex.css',
-    '../../../../node_modules/vex-js/dist/css/vex.css',
     '../../../../node_modules/vex-js/dist/css/vex-theme-default.css',
     '../../../../node_modules/vex-js/dist/css/vex-theme-os.css',
     '../../../../node_modules/vex-js/dist/css/vex-theme-plain.css',
