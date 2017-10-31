@@ -21,12 +21,12 @@ export interface BSMessageModalButtonConfig {
   selector: 'modal-title',
   encapsulation: ViewEncapsulation.None,
   template: `<div [ngClass]="context.headerClass" [ngSwitch]="titleHtml">
+      <div *ngSwitchCase="1" [innerHtml]="context.titleHtml"></div>
+      <h3 *ngSwitchDefault class="modal-title">{{context.title}}</h3>
       <button *ngIf="context.showClose" type="button" class="close" 
               aria-label="Close" (click)="dialog.dismiss()">
           <span aria-hidden="true">×</span>
       </button>
-      <div *ngSwitchCase="1" [innerHtml]="context.titleHtml"></div>
-      <h3 *ngSwitchDefault class="modal-title">{{context.title}}</h3>
  </div>`
 })
 export class BSMessageModalTitle {
