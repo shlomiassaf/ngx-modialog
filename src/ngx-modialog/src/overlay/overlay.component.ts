@@ -97,7 +97,7 @@ export class ModalOverlay extends BaseDynamicComponent {
     };
     Object.keys(style).forEach( k => this.setStyle(k, style[k]) );
   }
-  
+
   insideElement(): void {
     const style = {
       position: 'absolute',
@@ -130,7 +130,6 @@ export class ModalOverlay extends BaseDynamicComponent {
    *
    * @param prop The style key
    * @param value The value, undefined to remove
-   * @returns {ModalOverlay}
    */
   setContainerStyle(prop: string, value: string): this {
     this.renderer.setStyle(this.container.nativeElement, prop, value);
@@ -190,7 +189,6 @@ export class ModalOverlay extends BaseDynamicComponent {
    * Temp workaround for animation where destruction of the top level component does not
    * trigger child animations. Solution should be found either in animation module or in design
    * of the modal component tree.
-   * @returns {Promise<void>}
    */
   canDestroy(): Promise<void> {
     const completer = new PromiseCompleter<void>();
@@ -225,7 +223,7 @@ export class ModalOverlay extends BaseDynamicComponent {
    * A handler running before destruction of the overlay
    * use to delay destruction due to animation.
    * This is part of the workaround for animation, see canDestroy.
-   * 
+   *
    * NOTE: There is no guarantee that the listeners will fire, use dialog.onDestory for that.
    * @param fn
    */
@@ -235,7 +233,7 @@ export class ModalOverlay extends BaseDynamicComponent {
     }
     this.beforeDestroyHandlers.push(fn);
   }
-  
+
   documentKeypress(event: KeyboardEvent) {
     // check that this modal is the last in the stack.
     if (!this.dialogRef.overlay.isTopMost(this.dialogRef)) return;

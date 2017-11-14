@@ -13,7 +13,6 @@ function validateMethodName(name: string) {
 /**
  * Returns a list of assigned property names (non private)
  * @param subject
- * @returns {string[]}
  */
 function getAssignedPropertyNames(subject: any): string[] {
   return Object.getOwnPropertyNames(subject)
@@ -155,7 +154,6 @@ export class FluentAssignFactory<T> {
    * Create a setter method on the FluentAssign instance.
    * @param name The name of the setter function.
    * @param defaultValue If set (not undefined) set's the value on the instance immediately.
-   * @returns {FluentAssignFactory}
    */
   setMethod(name: string, defaultValue: any = undefined): FluentAssignFactory<T> {
     setAssignMethod(this._fluentAssign, name);
@@ -167,7 +165,6 @@ export class FluentAssignFactory<T> {
 
   /**
    * The FluentAssign instance.
-   * @returns {FluentAssign<T>}
    */
   get fluentAssign(): FluentAssign<T> {
     return this._fluentAssign;
@@ -194,7 +191,6 @@ export class FluentAssign<T> {
    * Returns a FluentAssignFactory<FluentAssign<T>> ready to define a FluentAssign type.
    * @param defaultValues An object representing default values for the instance.
    * @param initialSetters A list of initial setters for the instance.
-   * @returns {FluentAssignFactory<T>}
    */
   static compose<T>(defaultValues: T = undefined,
                     initialSetters: string[] = undefined): FluentAssignFactory<T> {
@@ -207,7 +203,6 @@ export class FluentAssign<T> {
    * Returns a FluentAssignFactory<Z> where Z is an instance of FluentAssign<?> or a derived
    * class of it.
    * @param fluentAssign An instance of FluentAssign<?> or a derived class of FluentAssign<?>.
-   * @returns {any}
    */
   static composeWith<Z>(fluentAssign: Z): IFluentAssignFactory<Z> {
     return <any>new FluentAssignFactory<any>(<any>fluentAssign);

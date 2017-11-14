@@ -76,7 +76,6 @@ Compiling library ${curPkg.dirName}
       '!build:fesm:es5',
       '!build:rollup:umd',
       '!minifyAndGzip',
-      '!pureAnnotation',
       '!manifest',
       err => this.handleRunEnd(err)
     );

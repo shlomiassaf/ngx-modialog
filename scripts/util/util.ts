@@ -85,8 +85,25 @@ export function resolveWebpackConfig(config: string | any, ...args: any[]): any 
  * @param umd the umd name (from metadata, not the while filename) of the bundle
  */
 export function minifyAndGzip(destDir: string, srcNameNoExt: string) {
-  const unminified = fs.readFileSync(Path.join(destDir, `${srcNameNoExt}.js`)).toString();
-  const minified = uglify.minify(unminified);
+  const sourcePath = Path.join(destDir, `${srcNameNoExt}.js`);
+
+  const unminified = fs.readFileSync(sourcePath).toString();
+
+  const minified = uglify.minify(unminified, {
+    sourceMap: {
+      content: fs.readFileSync(sourcePath + '.map').toString(),
+      url: Path.basename(sourcePath + '.map')
+    },
+    parse: {
+      bare_returns: true,
+    },
+    ie8: true,
+    warnings: true,
+    output: {
+      comments: 'some'
+    }
+  });
+
   const gzipBuffer = zlib.gzipSync(Buffer.from(minified.code));
 
   fs.writeFileSync(Path.join(destDir, `${srcNameNoExt}.min.js`), minified.code, 'utf-8');

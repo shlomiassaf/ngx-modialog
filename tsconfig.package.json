@@ -11,6 +11,12 @@
     "sourceMap": true,
     "inlineSources": true,
     "strictNullChecks": false,
+    "skipLibCheck": true,
+    "noEmitHelpers": true,
+    "noEmit": false,
+    "declaration": true,
+    "stripInternal": false,
+    "outDir": ".",
     "lib": [
       "es2015",
       "dom"
@@ -22,10 +28,7 @@
       "jasmine",
       "hammerjs",
       "node"
-    ],
-    "noEmit": false,
-    "declaration": true,
-    "outDir": "."
+    ]
   },
   "exclude": [
     "scripts",

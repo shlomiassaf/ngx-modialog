@@ -21,8 +21,22 @@ export const FS_REF = {
   VERSION_CACHE: 'version_cache.json'
 };
 
+const cleanOnNextItems: string[] = [];
+
+/**
+ * Marks the path given for deletion on the next call to cleanup()
+ * Relative paths are relative to root.
+ * @param filePath
+ */
+export function cleanOnNext(...filePath: string[]): void {
+  filePath.forEach( p => {
+    cleanOnNextItems.push(Path.isAbsolute(p) ? p :  root(p));
+  });
+}
+
 export function cleanup(): Promise<string[]> {
-  return del([root(FS_REF.TEMP_DIR), root(FS_REF.TS_CONFIG_TMP)]);
+  const pending = cleanOnNextItems.splice(0, cleanOnNextItems.length);
+  return del([root(FS_REF.TEMP_DIR), root(FS_REF.TS_CONFIG_TMP), ...pending]);
 }
 
 /**

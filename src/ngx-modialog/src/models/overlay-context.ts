@@ -96,7 +96,6 @@ export class OverlayContextBuilder<T extends OverlayContext> extends FluentAssig
   /**
    * Returns an new OverlayConfig with a context property representing the data in this builder.
    * @param base A base configuration that the result will extend
-   * @returns OverlayConfig
    */
   toOverlayConfig(base?: OverlayConfig): OverlayConfig {
     return extend(base || {}, {
@@ -120,7 +119,6 @@ export interface ModalControllingContextBuilder<T> {
  * @param context The context for the modal
  * @param baseContextType Optional. The type/class of the context. This is the class used to init a new instance of the context
  * @param baseConfig A base configuration that the result will extend
- * @returns {OverlayConfig}
  */
 export function overlayConfigFactory<T>(context: T, baseContextType?: any, baseConfig?: OverlayConfig): OverlayConfig {
   return new OverlayContextBuilder<T & OverlayContext>(<any>context, undefined, baseContextType).toOverlayConfig(baseConfig);

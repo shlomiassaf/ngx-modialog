@@ -30,7 +30,6 @@ export abstract class Modal {
    * Opens a modal window inside an existing component.
    * @param content The content to display, either string, template ref or a component.
    * @param config Additional settings.
-   * @returns {Promise<DialogRef>}
    */
   open(content: ContainerContent, config?: OverlayConfig): DialogRef<any> {
     config = config || {} as any;
@@ -50,7 +49,6 @@ export abstract class Modal {
    * A Hook that enables derived classes to add content to the overlay.
    * @param dialogRef
    * @param type
-   * @returns {Maybe<DialogRef<any>>}
    */
   protected abstract create(dialogRef: DialogRef<any>, type: ContainerContent): DialogRef<any>;
 

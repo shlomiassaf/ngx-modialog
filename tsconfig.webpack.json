@@ -4,12 +4,12 @@
     "target": "es5",
     "module": "es2015",
     "moduleResolution": "node",
-    "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "removeComments": false,
     "sourceMap": true,
-    "inlineSources": true,
+    "noEmitHelpers": true,
+    "importHelpers": true,
     "strictNullChecks": false,
     "lib": [
       "es2015",
@@ -23,7 +23,6 @@
       "hammerjs",
       "node"
     ],
-    "noEmit": false,
     "declaration": false,
     "outDir": "./dist"
   },
@@ -38,17 +37,5 @@
     "e2e",
     "src/**/*.spec.ts"
   ],
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "useWebpackText": true
-  },
-  "angularCompilerOptions": {
-    "genDir": "./compiled",
-    "skipMetadataEmit": true
-  },
-  "compileOnSave": false,
-  "buildOnSave": false,
-  "atom": {
-    "rewriteTsconfig": false
-  }
+  "compileOnSave": false
 }
