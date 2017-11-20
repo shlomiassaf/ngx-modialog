@@ -1,5 +1,12 @@
 # ngx-modialog (previously `angular2-modal`)
 
+
+---
+
+**This project is looking for a new maintainer, see [#414](https://github.com/shlomiassaf/ngx-modialog/issues/414) for details.**
+
+---
+
 ### ngx-modialog version 5.x.x works with angular 5.x.x
 
 # IMPORTANT - V4 BREAKING CHANGE:
