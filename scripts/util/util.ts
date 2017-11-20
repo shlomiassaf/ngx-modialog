@@ -13,9 +13,19 @@ import { PackageMetadata, LocalLibConfig } from './types';
 import { libConfig, currentPackage } from './state';
 import { normalizeLibExtension } from './config';
 
-export function log(msg: string): void {
-  process.stdout.write(msg + '\n');
+export interface FluentLog {
+  log: (msg: string, newLineAfter?: number, newLineBefore?: number) => FluentLog;
 }
+
+export function log(msg: string, newLineAfter: number = 1, newLineBefore: number = 0): FluentLog {
+  for (let i = 0; i < newLineBefore; i++) { process.stdout.write('\n'); }
+  process.stdout.write(msg);
+  for (let i = 0; i < newLineAfter; i++) { process.stdout.write('\n'); }
+
+  return fluentLog;
+}
+
+const fluentLog: FluentLog = { log };
 
 /**
  * Returns the package name.

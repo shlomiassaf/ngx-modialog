@@ -1,5 +1,7 @@
 # ngx-modialog (previously `angular2-modal`)
 
+### ngx-modialog version 5.x.x works with angular 5.x.x
+
 # IMPORTANT - V4 BREAKING CHANGE:
 Version 4.x.x contains some breaking changes, please see the [CHANGELOG](./CHANGELOG.md)
 

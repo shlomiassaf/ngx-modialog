@@ -1,9 +1,5 @@
-const fs = require('fs');
-const path = require('path');
 const helpers = require('./helpers');
 const webpack = require('webpack');
-import * as mkdirp from 'mkdirp';
-
 
 /**
  * Webpack Plugins

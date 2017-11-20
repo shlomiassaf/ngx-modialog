@@ -87,6 +87,8 @@ Compiling library ${curPkg.dirName}
       this.cleanup().then( () => this.promiseContainer.reject(err) );
     } else {
 
+      util.tryRunHook(util.currentPackage().dir, 'done');
+
       util.log(chalk.green(
         `=============================================
 Compile OK: ${this.getName()} (${this.getElapsed('ms')} ms)

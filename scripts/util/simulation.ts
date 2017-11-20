@@ -2,13 +2,11 @@ import * as Path from 'path';
 import * as tsConfigLoader from 'tsconfig';
 import { CompilerOptions, MapLike } from 'typescript';
 import { Configuration, NewModule, NewResolve, Rule, Plugin } from 'webpack';
-import * as del from 'del';
 import { NgcWebpackPlugin } from 'ngc-webpack';
 
-import { root, FS_REF, jsonPatch } from './fs';
+import { root, FS_REF, jsonPatch, cleanOnNext } from './fs';
 import { tsConfigPaths, tsConfigPathsForSimulation } from './config';
 import { webpackAlias } from './util';
-
 
 function findPluginIndex<T>(plugins: Plugin[], type: new(...args: any[]) => T): number {
   return <any>plugins.findIndex( p => p instanceof type);
@@ -83,10 +81,7 @@ export function applySimulation(webpackConfig: Configuration, isProd: boolean): 
     }
   });
   webpackConfig.plugins.splice(ngcWebpackPluginIdx, 1, plugin);
-  webpackConfig.plugins.push( {
-    apply(compiler) {
-      compiler.plugin('done', () => del.sync(simulatorTsConfigPath) );
-      compiler.plugin('watch-close', () => del.sync(simulatorTsConfigPath) );
-    }
-  });
+
+  cleanOnNext(simulatorTsConfigPath);
+
 }

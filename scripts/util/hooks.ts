@@ -3,7 +3,7 @@ import {
   FS_REF
 } from './fs';
 
-export type HOOKS = 'rollupUMD' | 'rollupFESM' | 'packageJSON' | 'tsconfig' | 'jestConfig';
+export type HOOKS = 'rollupUMD' | 'rollupFESM' | 'packageJSON' | 'tsconfig' | 'jestConfig' | 'done';
 const constraints: { [hook: string]: 'global' | 'local'} = {
   'jestConfig': 'global'
 };
