@@ -27,7 +27,6 @@ export function buildPackageMetadata(dirName: string): PackageMetadata {
     umd: dirName,
     externals,
     entry: pkgJson.libConfig && pkgJson.libConfig.entry || 'index',
-    inlineResources: (pkgJson.libConfig && pkgJson.libConfig.inlineResources) || false,
     externalsWebpack: [/^\@angular\//].concat(getExternalsWebpack(getPackageName(dirName), ...getExternalsRaw(pkgJson))),
     tsConfig: `./${FS_REF.TS_CONFIG_TMP}`,
     tsConfigObj: undefined,
@@ -41,8 +40,6 @@ export function buildPackageMetadata(dirName: string): PackageMetadata {
   const tsConfig = tsConfigUpdate(jsonfile.readFileSync(root(FS_REF.TS_CONFIG_TEMPLATE)), meta);
   tryRunHook(meta.dir, 'tsconfig', tsConfig);
   meta.tsConfigObj = tsConfig;
-
-  normalizeTsConfig(meta);
 
   return PKG_METADATA_CACHE[dirName] = meta;
 }
@@ -75,25 +72,10 @@ export function buildExtensionMetadata(pkg: PackageMetadata): Array<PackageMetad
     tsConfigUpdate(meta.tsConfigObj, meta);
     tryRunHook(meta.dir, 'tsconfig', meta.tsConfigObj);
 
-    normalizeTsConfig(meta);
-
     meta.libExtensions = undefined;
 
     return meta;
   });
-}
-
-/**
- * Normalize settings after hooks, based on config
- * @param meta
- */
-function normalizeTsConfig(meta: PackageMetadata): void {
-  if (meta.inlineResources) {
-    meta.tsConfigObj.angularCompilerOptions.skipTemplateCodegen = false;
-    meta.tsConfigObj.angularCompilerOptions.genDir = `${FS_REF.TEMP_DIR}/.compiled`;
-  } else {
-    meta.tsConfigObj.angularCompilerOptions.skipTemplateCodegen = true;
-  }
 }
 
 /**
@@ -146,8 +128,9 @@ export function tsConfigUpdate<T extends any>(config: T, meta: PackageMetadata):
 
   config.angularCompilerOptions = {
     annotateForClosureCompiler: true,
+    skipMetadataEmit: false,
+    skipTemplateCodegen: true,
     strictMetadataEmit: true,
-    skipTemplateCodegen: true, // redundant, this value is controlled by "inlineResources"
     flatModuleOutFile: `${meta.umd}${FS_REF.NG_FLAT_MODULE_EXT}.js`,
     flatModuleId: meta.dir // needs to be the dir name, if has scope add it as well.
   };

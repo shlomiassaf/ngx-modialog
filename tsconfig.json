@@ -10,6 +10,9 @@
       "es2015",
       "dom"
     ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "types": [
       "jasmine",
       "hammerjs",
@@ -18,7 +21,6 @@
       "uglify-js",
       "webpack"
     ],
-    "noEmit": true,
     "baseUrl": "./src",
     "paths": {
       "ngx-modialog": [
@@ -55,10 +57,6 @@
     "e2e",
     "src/**/*.spec.ts"
   ],
-  "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true,
-    "useWebpackText": true
-  },
   "compileOnSave": false,
   "buildOnSave": false,
   "atom": {

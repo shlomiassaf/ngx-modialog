@@ -1,27 +1,20 @@
-const fs = require('fs');
-const path = require('path');
 const helpers = require('./helpers');
 const webpack = require('webpack');
-import * as mkdirp from 'mkdirp';
-
 
 /**
  * Webpack Plugins
  */
-const DefinePlugin = require('webpack/lib/DefinePlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
 const BannerPlugin = webpack.BannerPlugin;
 const NgcWebpackPlugin = require('ngc-webpack').NgcWebpackPlugin;
 
-import { PackageMetadata, FS_REF, getOutDir, webpackAlias, getCopyInstruction, root, getMainOutputFileName } from '../scripts/util';
+import { PackageMetadata, FS_REF, webpackAlias, getCopyInstruction, root } from '../scripts/util';
 
 module.exports = function(metadata: PackageMetadata) {
   const banner = `/** 
  * ${metadata.name} Copyright ${new Date().getFullYear()}
  * Licensed under MIT
  */`;
-
 
   /*
       The entry point references a file that does not exists at the time of definition.
@@ -36,26 +29,14 @@ module.exports = function(metadata: PackageMetadata) {
       But this will result in an incorrect bundle since internal aot compiler exports (ɵ) will not bundle.
    */
   const entry = {
-    [metadata.umd]: path.join(getOutDir(metadata, true, getMainOutputFileName(metadata) + '.js'))
+    // [metadata.umd]: path.join(getOutDir(metadata, true, getMainOutputFileName(metadata) + '.js'))
+    [metadata.umd]: metadata.tsConfigObj.files[0]
   };
 
   const ngcWebpackConfig = {
-    tsConfig: metadata.tsConfig,
-    resourceTransformer: function(filePath, data) {
-      if (data) {
-        const relativePath = path.relative(root('src', metadata.dir, FS_REF.SRC_CONTAINER), filePath);
-        const absPath = path.resolve(getCopyInstruction(metadata).from, relativePath);
-        mkdirp.sync(path.dirname(absPath));
-        fs.writeFileSync(absPath, data, 'utf-8');
-      }
-      return data;
-    }
+    mainPath: metadata.tsConfigObj.files[0],
+    tsConfigPath: metadata.tsConfig
   };
-
-  // don't transform resource if we don't have inlined resources
-  if (!metadata.inlineResources) {
-    delete ngcWebpackConfig.resourceTransformer;
-  }
 
   return {
     bail: true,
@@ -86,17 +67,8 @@ module.exports = function(metadata: PackageMetadata) {
     module: {
       rules: [
         {
-          test: /\.ts$/,
-          use: [
-            {
-              loader: `awesome-typescript-loader`,
-              options: {
-                configFileName: '.tsconfig.tmp.json',
-                declaration: false
-              }
-            }
-          ],
-          exclude: [/\.e2e\.ts$/]
+          test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
+          use: [ '@ngtools/webpack' ]
         },
         {
           test: /\.css$/,
@@ -129,19 +101,6 @@ module.exports = function(metadata: PackageMetadata) {
     },
 
     plugins: [
-      // new webpack.ProvidePlugin({
-      //   '__assign': ['tslib', '__assign'],
-      //   '__extends': ['tslib', '__extends'],
-      // }),
-
-      new TsConfigPathsPlugin(),
-
-      // fix the warning in ./~/@angular/core/src/linker/system_js_ng_module_factory_loader.js
-      new webpack.ContextReplacementPlugin(
-        /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
-        helpers.root('./src')
-      ),
-
       new NgcWebpackPlugin(ngcWebpackConfig),
 
       new BannerPlugin({

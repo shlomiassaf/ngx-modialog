@@ -13,7 +13,6 @@ import { DialogBailOutError } from '../models/errors';
 export class DialogRef<T> {
   /**
    * Reference to the overlay component ref.
-   * @return {ComponentRef<ModalOverlay>}
    */
   overlayRef: ComponentRef<ModalOverlay>;
 
@@ -42,7 +41,6 @@ export class DialogRef<T> {
 
   /**
    * A Promise that is resolved on a close event and rejected on a dismiss event.
-   * @returns {Promise<T>|any|*|Promise<any>}
    */
   get result(): Promise<any> {
     return this._resultDeferred.promise;

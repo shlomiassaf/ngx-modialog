@@ -86,7 +86,7 @@ export class DialogRefStack<T> {
   groupLength(group: any): number {
     let count = 0;
     if (group) {
-      this._stackMap.forEach( (value, key) => {
+      this._stackMap.forEach( (value) => {
         if (value === group) {
           count++;
         }

@@ -21,7 +21,6 @@ const eventMap = {
  * if the event target is not an ancestor of the given element.
  * @param element
  * @param handler
- * @returns {function(any): undefined}
  */
 function bubbleNonAncestorHandlerFactory(element: HTMLElement, handler: (event) => void) {
     return (event) => {
@@ -87,7 +86,4 @@ export class DOMOutsideEventPlugin { // extends EventManagerPlugin
         });
     }
 
-    addGlobalEventListener(target: string, eventName: string, handler: Function): Function {
-        throw 'not supported';
-    }
 }

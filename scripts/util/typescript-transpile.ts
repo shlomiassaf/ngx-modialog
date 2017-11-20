@@ -18,7 +18,11 @@ export function transpileFile(inputPath: string, outputPath: string, options: ts
   fs.writeFileSync(outputPath, transpiled.outputText);
 
   if (transpiled.sourceMapText) {
-    fs.writeFileSync(`${outputPath}.map`, transpiled.sourceMapText);
+    const sourceMap = JSON.parse(transpiled.sourceMapText);
+    sourceMap.file = path.basename(outputPath);
+    sourceMap.sources = [path.basename(inputPath)];
+
+    fs.writeFileSync(`${outputPath}.map`, JSON.stringify(sourceMap));
   }
 }
 

@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-modialog';
 
-import { ENV_PROVIDERS } from './environment';
+import { environment } from 'environments/environment';
 import { SharedModule } from './shared.module';
 import { VexDemoModule } from './vex-demo/vex-demo.module';
 import { JSNativeDemoModule } from './js-native-demo/js-native-demo.module';
@@ -31,7 +31,7 @@ import '../styles/styles.scss';
   declarations: [ App, Home, DocumentationComponent ],
   bootstrap:    [ App ],
   providers: [
-    ENV_PROVIDERS
+    environment.ENV_PROVIDERS
   ]
 })
 export class AppModule { }

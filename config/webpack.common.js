@@ -1,47 +1,24 @@
-/**
- * @author: @AngularClass
- */
-const fs = require('fs');
-const Path = require('path');
-const webpack = require('webpack');
-const helpers = require('./helpers');
-const del = require('del');
-
 require('ts-node/register');
+const helpers = require('./helpers');
+const buildUtils = require('./build-utils');
+const util = require('../scripts/util.ts');
 
 /**
  * Webpack Plugins
  *
  * problem with copy-webpack-plugin
  */
-const AssetsPlugin = require('assets-webpack-plugin');
-const NormalModuleReplacementPlugin = require('webpack/lib/NormalModuleReplacementPlugin');
-const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
+const DefinePlugin = require('webpack/lib/DefinePlugin');
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CheckerPlugin = require('awesome-typescript-loader').CheckerPlugin;
-const TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
 const HtmlElementsPlugin = require('./html-elements-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const ngcWebpack = require('ngc-webpack');
-//const PreloadWebpackPlugin = require('preload-webpack-plugin');
 
-const util = require('../scripts/util.ts');
 
-/*
- * Webpack Constants
- */
-const HMR = helpers.hasProcessFlag('hot');
-const AOT = process.env.BUILD_AOT || helpers.hasNpmFlag('aot');
-const METADATA = {
-  title: 'ngx-modialog',
-  baseUrl: '/',
-  isDevServer: helpers.isWebpackDevServer(),
-  HMR: HMR
-};
 
 /**
  * Webpack configuration
@@ -50,31 +27,20 @@ const METADATA = {
  */
 module.exports = function (options) {
   const isProd = options.env === 'production';
+  const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, {title: 'ngx-modialog'}, options.metadata || {});
+  const ngcWebpackConfig = buildUtils.ngcWebpackSetup(isProd, METADATA);
+  const supportES2015 = buildUtils.supportES2015(METADATA.tsConfigPath);
 
+  const entry = {
+    polyfills: './src/demo/polyfills.browser.ts',
+    main:      './src/demo/main.browser.ts'
+  };
+  Object.assign(ngcWebpackConfig.plugin, {
+    tsConfigPath: METADATA.tsConfigPath,
+    mainPath: entry.main
+  });
   const webpackConfig = {
-
-    /**
-     * Cache generated modules and chunks to improve performance for multiple incremental builds.
-     * This is enabled by default in watch mode.
-     * You can pass false to disable it.
-     *
-     * See: http://webpack.github.io/docs/configuration.html#cache
-     */
-    //cache: false,
-
-    /**
-     * The entry point for the bundle
-     * Our Angular.js app
-     *
-     * See: http://webpack.github.io/docs/configuration.html#entry
-     */
-    entry: {
-
-      'polyfills': './src/demo/polyfills.browser.ts',
-      'main':      AOT ? './src/demo/main.browser.aot.ts' :
-                  './src/demo/main.browser.ts'
-
-    },
+    entry,
 
     /**
      * Options affecting the resolving of modules.
@@ -82,6 +48,7 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#resolve
      */
     resolve: {
+      mainFields: [ ...(supportES2015 ? ['es2015'] : []), 'browser', 'module', 'main' ],
 
       /**
        * An array of extensions that should be used to resolve modules.
@@ -98,7 +65,7 @@ module.exports = function (options) {
       /**
        * Aliasing the libraries for webpack, the alias points to the source code.
        */
-      alias: util.webpackAlias()
+      alias: Object.assign(buildUtils.rxjsAlias(supportES2015), util.webpackAlias())
     },
 
     /**
@@ -109,55 +76,8 @@ module.exports = function (options) {
     module: {
 
       rules: [
+        ...ngcWebpackConfig.loaders,
 
-        /**
-         * Typescript loader support for .ts
-         *
-         * Component Template/Style integration using `angular2-template-loader`
-         * Angular 2 lazy loading (async routes) via `ng-router-loader`
-         *
-         * `ng-router-loader` expects vanilla JavaScript code, not TypeScript code. This is why the
-         * order of the loader matter.
-         *
-         * See: https://github.com/s-panferov/awesome-typescript-loader
-         * See: https://github.com/TheLarkInn/angular2-template-loader
-         * See: https://github.com/shlomiassaf/ng-router-loader
-         */
-        {
-          test: /\.ts$/,
-          use: [
-            {
-              loader: '@angularclass/hmr-loader',
-              options: {
-                pretty: !isProd,
-                prod: isProd
-              }
-            },
-            {
-              /**
-               *  MAKE SURE TO CHAIN VANILLA JS CODE, I.E. TS COMPILATION OUTPUT.
-               */
-              loader: 'ng-router-loader',
-              options: {
-                loader: 'async-import',
-                genDir: 'compiled',
-                aot: AOT
-              }
-            },
-            {
-              loader: 'awesome-typescript-loader',
-              options: {
-                configFileName: 'tsconfig.webpack.json',
-                useCache: !isProd,
-                baseUrl: './src' // for some reason, ATL won't behave when baseUrl is taken from the base tsconfig (via extends), so we set it hard
-              }
-            },
-            {
-              loader: 'angular2-template-loader'
-            }
-          ],
-          exclude: [/\.(spec|e2e)\.ts$/]
-        },
 
         /**
          * Json loader support for *.json files.
@@ -228,24 +148,28 @@ module.exports = function (options) {
      * See: http://webpack.github.io/docs/configuration.html#plugins
      */
     plugins: [
-      // Use for DLLs
-      // new AssetsPlugin({
-      //   path: helpers.root('dist'),
-      //   filename: 'webpack-assets.json',
-      //   prettyPrint: true
-      // }),
+      /**
+       * Plugin: DefinePlugin
+       * Description: Define free variables.
+       * Useful for having development builds with debug logging or adding global constants.
+       *
+       * Environment helpers
+       *
+       * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
+       */
+      // NOTE: when adding more properties make sure you include them in custom-typings.d.ts
+      new DefinePlugin({
+        "VERSION": JSON.stringify(require(helpers.root('package.json')).version),
+        "NG_VERSION": JSON.stringify(require(helpers.root('node_modules', '@angular', 'core', 'package.json')).version),
+        'ENV': JSON.stringify(METADATA.ENV),
+        'HMR': METADATA.HMR,
+        'AOT': METADATA.AOT,
+        'process.env.ENV': JSON.stringify(METADATA.ENV),
+        'process.env.NODE_ENV': JSON.stringify(METADATA.ENV),
+        'process.env.HMR': METADATA.HMR
+      }),
 
       /**
-       * Plugin: ForkCheckerPlugin
-       * Description: Do type checking in a separate process, so webpack don't need to wait.
-       *
-       * See: https://github.com/s-panferov/awesome-typescript-loader#forkchecker-boolean-defaultfalse
-       */
-      new CheckerPlugin(),
-
-      new TsConfigPathsPlugin(),
-
-      /*
        * Plugin: CommonsChunkPlugin
        * Description: Shares common code between the pages.
        * It identifies common modules and put them into a commons chunk.
@@ -257,44 +181,17 @@ module.exports = function (options) {
         name: 'polyfills',
         chunks: ['polyfills']
       }),
-      /**
-       * This enables tree shaking of the vendor modules
-       */
-      // new CommonsChunkPlugin({
-      //   name: 'vendor',
-      //   chunks: ['main'],
-      //   minChunks: module => /node_modules/.test(module.resource)
-      // }),
-      /**
-       * Specify the correct order the scripts will be injected in
-       */
-      // new CommonsChunkPlugin({
-      //   name: ['polyfills', 'vendor'].reverse()
-      // }),
-      // new CommonsChunkPlugin({
-      //   name: ['manifest'],
-      //   minChunks: Infinity,
-      // }),
 
-      /**
-       * Plugin: ContextReplacementPlugin
-       * Description: Provides context to Angular's use of System.import
-       *
-       * See: https://webpack.github.io/docs/list-of-plugins.html#contextreplacementplugin
-       * See: https://github.com/angular/angular/issues/11580
-       */
-      new ContextReplacementPlugin(
-        /**
-         * The (\\|\/) piece accounts for path separators in *nix and Windows
-         */
-        /angular(\\|\/)core(\\|\/)@angular/,
-        helpers.root('src'), // location of your src
-        {
-          /**
-           * Your Angular Async Route paths relative to this root directory
-           */
-        }
-      ),
+      new CommonsChunkPlugin({
+        minChunks: Infinity,
+        name: 'inline'
+      }),
+      new CommonsChunkPlugin({
+        name: 'main',
+        async: 'common',
+        children: true,
+        minChunks: 2
+      }),
 
       /**
        * Plugin: CopyWebpackPlugin
@@ -312,39 +209,6 @@ module.exports = function (options) {
       ),
 
       /*
-       * Plugin: PreloadWebpackPlugin
-       * Description: Preload is a web standard aimed at improving
-       * performance and granular loading of resources.
-       *
-       * See: https://github.com/GoogleChrome/preload-webpack-plugin
-       */
-      //new PreloadWebpackPlugin({
-      //  rel: 'preload',
-      //  as: 'script',
-      //  include: ['polyfills', 'vendor', 'main'].reverse(),
-      //  fileBlacklist: ['.css', '.map']
-      //}),
-      //new PreloadWebpackPlugin({
-      //  rel: 'prefetch',
-      //  as: 'script',
-      //  include: 'asyncChunks'
-      //}),
-
-      /**
-       * Plugin: ScriptExtHtmlWebpackPlugin
-       * Description: Enhances html-webpack-plugin functionality
-       * with different deployment options for your scripts including:
-       *
-       * See: https://github.com/numical/script-ext-html-webpack-plugin
-       */
-      new ScriptExtHtmlWebpackPlugin({
-        sync: /polyfill|vendor/,
-        defaultAttribute: 'async',
-        preload: [/polyfill|vendor|main/],
-        prefetch: [/chunk/]
-      }),
-
-      /*
       * Plugin: HtmlWebpackPlugin
       * Description: Simplifies creation of HTML files to serve your webpack bundles.
       * This is especially useful for webpack bundles that include a hash in the filename
@@ -355,9 +219,32 @@ module.exports = function (options) {
       new HtmlWebpackPlugin({
         template: 'src/demo/index.html',
         title: METADATA.title,
-        chunksSortMode: 'dependency',
+        chunksSortMode: function (a, b) {
+          const entryPoints = ["inline","polyfills","sw-register","styles","vendor","main"];
+          return entryPoints.indexOf(a.names[0]) - entryPoints.indexOf(b.names[0]);
+        },
         metadata: METADATA,
-        inject: 'body'
+        inject: 'body',
+        xhtml: true,
+        minify: isProd ? {
+          caseSensitive: true,
+          collapseWhitespace: true,
+          keepClosingSlash: true
+        } : false
+      }),
+
+       /**
+       * Plugin: ScriptExtHtmlWebpackPlugin
+       * Description: Enhances html-webpack-plugin functionality
+       * with different deployment options for your scripts including:
+       *
+       * See: https://github.com/numical/script-ext-html-webpack-plugin
+       */
+      new ScriptExtHtmlWebpackPlugin({
+        sync: /inline|polyfills|vendor/,
+        defaultAttribute: 'async',
+        preload: [/polyfills|vendor|main/],
+        prefetch: [/chunk/]
       }),
 
       /**
@@ -393,40 +280,7 @@ module.exports = function (options) {
        */
       new LoaderOptionsPlugin({}),
 
-      new ngcWebpack.NgcWebpackPlugin({
-        /**
-         * If false the plugin is a ghost, it will not perform any action.
-         * This property can be used to trigger AOT on/off depending on your build target (prod, staging etc...)
-         *
-         * The state can not change after initializing the plugin.
-         * @default true
-         */
-        disabled: !AOT,
-        tsConfig: helpers.root('tsconfig.webpack.json'),
-        /**
-         * A path to a file (resource) that will replace all resource referenced in @Components.
-         * For each `@Component` the AOT compiler compiles it creates new representation for the templates (html, styles)
-         * of that `@Components`. It means that there is no need for the source templates, they take a lot of
-         * space and they will be replaced by the content of this resource.
-         *
-         * To leave the template as is set to a falsy value (the default).
-         *
-         * TIP: Use an empty file as an overriding resource. It is recommended to use a ".js" file which
-         * usually has small amount of loaders hence less performance impact.
-         *
-         * > This feature is doing NormalModuleReplacementPlugin for AOT compiled resources.
-         *
-         * ### resourceOverride and assets
-         * If you reference assets in your styles/html that are not inlined and you expect a loader (e.g. url-loader)
-         * to copy them, don't use the `resourceOverride` feature as it does not support this feature at the moment.
-         * With `resourceOverride` the end result is that webpack will replace the asset with an href to the public
-         * assets folder but it will not copy the files. This happens because the replacement is done in the AOT compilation
-         * phase but in the bundling it won't happen (it's being replaced with and empty file...)
-         *
-         * @default undefined
-         */
-        resourceOverride: helpers.root('config/resource-override.js')
-      }),
+      new ngcWebpack.NgcWebpackPlugin(ngcWebpackConfig.plugin),
 
       /**
        * Plugin: InlineManifestWebpackPlugin
@@ -468,11 +322,21 @@ module.exports = function (options) {
      * before publishing but without the need for npm link and other crazy things so webpack and AOT
      * will consume the right thing.
      */
-    console.log('\n==============================================================================');
-    console.log('  LIBRARY RUNNING IN SIMULATION MODE - WEBPACK WILL USE THE COMPILED LIBRARY');
-    console.log('==============================================================================\n');
+    util.log('==============================================================================', 1, 1)
+      .log('  LIBRARY RUNNING IN SIMULATION MODE - WEBPACK WILL USE THE COMPILED LIBRARY')
+      .log(`==============================================================================`, 2);
 
     util.applySimulation(webpackConfig, isProd);
+
+    class SelfCleanUp {
+      apply(compiler) {
+        compiler.plugin('after-emit', (compilation, done) => {
+          util.cleanup().catch(e => {}).then( () => done() );
+        });
+      }
+    }
+
+    webpackConfig.plugins.push(new SelfCleanUp());
   }
 
   return webpackConfig;

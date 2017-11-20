@@ -76,7 +76,6 @@ Compiling library ${curPkg.dirName}
       '!build:fesm:es5',
       '!build:rollup:umd',
       '!minifyAndGzip',
-      '!pureAnnotation',
       '!manifest',
       err => this.handleRunEnd(err)
     );
@@ -87,6 +86,8 @@ Compiling library ${curPkg.dirName}
       util.log(chalk.red(`ERROR: ${err.message}`));
       this.cleanup().then( () => this.promiseContainer.reject(err) );
     } else {
+
+      util.tryRunHook(util.currentPackage().dir, 'done');
 
       util.log(chalk.green(
         `=============================================

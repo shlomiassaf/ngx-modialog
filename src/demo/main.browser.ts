@@ -2,7 +2,7 @@
  * Angular bootstrapping
  */
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { decorateModuleRef } from './app/environment';
+import { environment } from 'environments/environment';
 
 /**
  * App Module
@@ -16,7 +16,7 @@ import { AppModule } from './app';
 export function main(): Promise<any> {
   return platformBrowserDynamic()
     .bootstrapModule(AppModule)
-    .then(decorateModuleRef)
+    .then(environment.decorateModuleRef)
     .catch((err) => console.error(err));
 }
 

@@ -2,7 +2,6 @@
  * Simple object extend
  * @param m1
  * @param m2
- * @returns {{}}
  */
 export function extend<T>(m1: any, m2: any): T {
   var m: T = <T>{};
@@ -25,7 +24,6 @@ export function extend<T>(m1: any, m2: any): T {
  * Simple, not optimized, array union of unique values.
  * @param arr1
  * @param arr2
- * @returns {T[]|any[]|any[][]|any[]}
  */
 export function arrayUnion<T>(arr1: any[], arr2: any[]): T[] {
   return arr1
@@ -36,7 +34,6 @@ export function arrayUnion<T>(arr1: any[], arr2: any[]): T[] {
 /**
  * Returns true if the config supports a given key.
  * @param key
- * @returns {boolean}
  */
 export function supportsKey(keyCode: number, config: Array<number>): boolean {
   if (!Array.isArray(config)) return config === null ? false : true;
@@ -58,7 +55,6 @@ export function supportsKey(keyCode: number, config: Array<number>): boolean {
  * }));
  * // position:absolute;width:100%;height:100%;top:0;left:0;right:0;bottom:0
  * @param obj
- * @returns {string}
  */
 export function toStyleString(obj: any | CSSStyleDeclaration): string {
   return Object.getOwnPropertyNames(obj)

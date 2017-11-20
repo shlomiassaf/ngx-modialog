@@ -1,36 +1,15 @@
-/**
- * @author: @AngularClass
- */
-
 const helpers = require('./helpers');
+const buildUtils = require('./build-utils');
 const webpackMerge = require('webpack-merge'); // used to merge webpack configs
-// const webpackMergeDll = webpackMerge.strategy({plugins: 'replace'});
 const commonConfig = require('./webpack.common.js'); // the settings that are common to prod and dev
 
 /**
  * Webpack Plugins
  */
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-const DefinePlugin = require('webpack/lib/DefinePlugin');
-const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
+const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
+const EvalSourceMapDevToolPlugin = require('webpack/lib/EvalSourceMapDevToolPlugin');
 
-/**
- * Webpack Constants
- */
-const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
-const HOST = process.env.HOST || 'localhost';
-const PORT = process.env.PORT || 3000;
-const HMR = helpers.hasProcessFlag('hot');
-const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
-  host: HOST,
-  port: PORT,
-  ENV: ENV,
-  HMR: HMR
-});
-
-
-// const DllBundlesPlugin = require('webpack-dll-bundles-plugin').DllBundlesPlugin;
 
 /**
  * Webpack configuration
@@ -38,16 +17,19 @@ const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
  * See: http://webpack.github.io/docs/configuration.html#cli
  */
 module.exports = function (options) {
-  return webpackMerge(commonConfig(Object.assign(options || {}, {env: ENV})), {
+  const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
+  const HOST = process.env.HOST || 'localhost';
+  const PORT = process.env.PORT || 3000;
 
-    /**
-     * Developer tool to enhance debugging
-     *
-     * See: http://webpack.github.io/docs/configuration.html#devtool
-     * See: https://github.com/webpack/docs/wiki/build-performance#sourcemaps
-     */
-    devtool: 'cheap-module-source-map',
+  const METADATA = Object.assign({}, buildUtils.DEFAULT_METADATA, {
+    host: HOST,
+    port: PORT,
+    ENV: ENV,
+    HMR: helpers.hasProcessFlag('hot'),
+    PUBLIC: process.env.PUBLIC_DEV || HOST + ':' + PORT
+  });
 
+  return webpackMerge(commonConfig(Object.assign(options || {}, {env: ENV, metadata: METADATA})), {
     /**
      * Options affecting the output of the compilation.
      *
@@ -120,74 +102,10 @@ module.exports = function (options) {
     },
 
     plugins: [
-
-      /**
-       * Plugin: DefinePlugin
-       * Description: Define free variables.
-       * Useful for having development builds with debug logging or adding global constants.
-       *
-       * Environment helpers
-       *
-       * See: https://webpack.github.io/docs/list-of-plugins.html#defineplugin
-       *
-       * NOTE: when adding more properties, make sure you include them in custom-typings.d.ts
-       */
-      new DefinePlugin({
-        "VERSION": JSON.stringify(require(helpers.root('package.json')).version),
-        "NG_VERSION": JSON.stringify(require(helpers.root('node_modules', '@angular', 'core', 'package.json')).version),
-        'ENV': JSON.stringify(METADATA.ENV),
-        'HMR': METADATA.HMR,
-        'process.env': {
-          'ENV': JSON.stringify(METADATA.ENV),
-          'NODE_ENV': JSON.stringify(METADATA.ENV),
-          'HMR': METADATA.HMR,
-        }
+      new EvalSourceMapDevToolPlugin({
+        moduleFilenameTemplate: '[resource-path]',
+        sourceRoot: 'webpack:///'
       }),
-
-      // new DllBundlesPlugin({
-      //   bundles: {
-      //     polyfills: [
-      //       'core-js',
-      //       {
-      //         name: 'zone.js',
-      //         path: 'zone.js/dist/zone.js'
-      //       },
-      //       {
-      //         name: 'zone.js',
-      //         path: 'zone.js/dist/long-stack-trace-zone.js'
-      //       },
-      //     ],
-      //     vendor: [
-      //       '@angular/platform-browser',
-      //       '@angular/platform-browser-dynamic',
-      //       '@angular/core',
-      //       '@angular/common',
-      //       '@angular/forms',
-      //       '@angular/http',
-      //       '@angular/router',
-      //       '@angularclass/hmr',
-      //       'rxjs',
-      //     ]
-      //   },
-      //   dllDir: helpers.root('dll'),
-      //   webpackConfig: webpackMergeDll(commonConfig({env: ENV}), {
-      //     devtool: 'cheap-module-source-map',
-      //     plugins: []
-      //   })
-      // }),
-
-      /**
-       * Plugin: AddAssetHtmlPlugin
-       * Description: Adds the given JS or CSS file to the files
-       * Webpack knows about, and put it into the list of assets
-       * html-webpack-plugin injects into the generated html.
-       *
-       * See: https://github.com/SimenB/add-asset-html-webpack-plugin
-       */
-      // new AddAssetHtmlPlugin([
-      //   { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('polyfills')}`) },
-      //   { filepath: helpers.root(`dll/${DllBundlesPlugin.resolveFile('vendor')}`) }
-      // ]),
 
       /**
        * Plugin: NamedModulesPlugin (experimental)
@@ -195,7 +113,7 @@ module.exports = function (options) {
        *
        * See: https://github.com/webpack/webpack/commit/a04ffb928365b19feb75087c63f13cadfc08e1eb
        */
-      // new NamedModulesPlugin(),
+      new NamedModulesPlugin(),
 
       /**
        * Plugin LoaderOptionsPlugin (experimental)
@@ -204,11 +122,10 @@ module.exports = function (options) {
        */
       new LoaderOptionsPlugin({
         debug: true,
-        options: {
-
-        }
+        options: { }
       }),
 
+      // TODO: HMR
     ],
 
     /**
@@ -222,6 +139,8 @@ module.exports = function (options) {
     devServer: {
       port: METADATA.port,
       host: METADATA.host,
+      hot: METADATA.HMR,
+      public: METADATA.PUBLIC,
       historyApiFallback: true,
       watchOptions: {
         // if you're using Docker you may need this

@@ -21,7 +21,6 @@ export class Overlay {
    * Check if a given DialogRef is the top most ref in the stack.
    * TODO: distinguish between body modal vs in element modal.
    * @param dialogRef
-   * @returns {boolean}
    */
   isTopMost(dialogRef: DialogRef<any>): boolean {
     return _stack.indexOf(dialogRef) === _stack.length - 1;
@@ -43,7 +42,6 @@ export class Overlay {
    * Creates an overlay and returns a dialog ref.
    * @param config instructions how to create the overlay
    * @param group A token to associate the new overlay with, used for reference (stacks usually)
-   * @returns {DialogRef<T>[]}
    */
   open<T extends OverlayContext>(config: OverlayConfig, group?: any): DialogRef<T>[] {
     let viewContainer = config.viewContainer,

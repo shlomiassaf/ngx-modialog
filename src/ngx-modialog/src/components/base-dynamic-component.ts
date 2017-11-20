@@ -43,7 +43,7 @@ export class BaseDynamicComponent implements OnDestroy {
 
   constructor(protected el: ElementRef,
               protected renderer: Renderer2) {}
-  
+
   activateAnimationListener() {
     if (this.animationEnd) return;
     this.animationEnd = new Subject<TransitionEvent | AnimationEvent>();
@@ -56,7 +56,6 @@ export class BaseDynamicComponent implements OnDestroy {
    * Set a specific inline style on the overlay host element.
    * @param prop The style key
    * @param value The value, undefined to remove
-   * @returns {ModalOverlay}
    */
   setStyle(prop: string, value: string): this {
     this.renderer.setStyle(this.el.nativeElement, prop, value);
@@ -92,7 +91,6 @@ export class BaseDynamicComponent implements OnDestroy {
   /**
    * Add a component, supply a view container ref.
    * Note: The components vcRef will result in a sibling.
-   * @returns {Promise<ComponentRef<any>>}
    */
   protected _addComponent<T>(instructions: CreateComponentArgs): ComponentRef<T> {
     const cmpRef = createComponent(instructions);

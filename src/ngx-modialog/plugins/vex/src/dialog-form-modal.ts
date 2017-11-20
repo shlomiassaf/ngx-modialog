@@ -54,7 +54,6 @@ export class VEXDialogButtons {
 
   /**
    * Emitted when a button was clicked
-   * @type {EventEmitter<VEXButtonClickEvent>}
    */
   @Output() public onButtonClick = new EventEmitter<VEXButtonClickEvent>();
 

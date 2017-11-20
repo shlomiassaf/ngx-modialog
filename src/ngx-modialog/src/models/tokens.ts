@@ -53,13 +53,11 @@ export interface ModalComponent<T> {
 export interface CloseGuard {
   /**
    * Invoked before a modal is dismissed.
-   * @return true or a promise that resolves to true to cancel dismissal.
    */
   beforeDismiss?(): boolean | Promise<boolean>;
 
   /**
    * Invoked before a modal is closed.
-   * @return true or a promise that resolves to true to cancel closing.
    */
   beforeClose?(): boolean | Promise<boolean>;
 }

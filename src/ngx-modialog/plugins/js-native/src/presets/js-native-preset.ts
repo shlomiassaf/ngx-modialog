@@ -17,7 +17,6 @@ export class JSNativePresetBuilder extends JSNativeModalContextBuilder<JSNativeM
   /**
    * Open a modal window based on the configuration of this config instance.
    * @param viewContainer If set opens the modal inside the supplied viewContainer
-   * @returns Promise<DialogRef>
    */
   open(viewContainer?: ViewContainerRef): DialogRef<JSNativeModalContext> {
     let context: JSNativeModalContext = this.toJSON();
