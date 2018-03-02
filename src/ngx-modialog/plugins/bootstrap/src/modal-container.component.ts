@@ -22,7 +22,7 @@ import { MessageModalPreset } from'./presets/message-modal-preset';
 `<div [ngClass]="dialog.context.dialogClass" 
       [class.modal-lg]="dialog.context.size == \'lg\'"
       [class.modal-sm]="dialog.context.size == \'sm\'">
-  <div class="modal-content" style="display:block" role="document" overlayDialogBoundary>
+  <div class="modal-content" [ngStyle]="{display:'block'}" role="document" overlayDialogBoundary>
     <ng-content></ng-content>
   </div>    
 </div>`
