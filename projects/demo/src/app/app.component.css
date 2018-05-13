@@ -1,0 +1,54 @@
+
+
+nav {
+    box-shadow: 0 1px 5px #666;
+}
+nav .navbar-nav .nav-link {
+  color: rgba(255,255,255,.5);
+}
+nav .navbar-nav .nav-link:hover {
+  color: rgba(255,255,255,.75);
+}
+nav .navbar-brand,
+nav .navbar-nav .nav-link.active {
+  color: #fff;
+}
+section {
+    position: relative;
+    padding-top: 90px;
+    padding-bottom: 90px;
+}
+
+section.background-gray-lighter {
+    background: #cdcdcd;
+}
+
+.padding--small {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.text-intro {
+    background: transparent linear-gradient(180deg, #0275d8, #6795ab) repeat scroll 0 0;
+}
+
+.text-intro {
+    text-align: center;
+    color: #ffffff;
+}
+.text-intro h1 {
+    font-weight: 700;
+}
+.text-intro a {
+    color: #fff;
+    text-decoration: underline;
+}
+.text-intro h1,
+.text-intro h2,
+.text-intro h3,
+.text-intro h4 {
+    color: #ffffff;
+}
+.text-intro span {
+    color: #2b7551;
+}
