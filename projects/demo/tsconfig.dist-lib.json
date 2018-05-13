@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.app",
+  "compilerOptions": {
+    "paths": {
+      "ngx-modialog": [
+        "dist/ngx-modialog"
+      ],
+      "ngx-modialog/plugins/*": [
+        "dist/ngx-modialog/plugins/*"
+      ]
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "ngx-modialog",
+  "version": "5.0.0",
+  "description": "Modal / Dialog for Angular",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shlomiassaf/ngx-modialog.git"
+  },
+  "keywords": [
+    "angular",
+    "bootstrap",
+    "vex",
+    "modal"
+  ],
+  "author": "Shlomi Assaf",
+  "license": "MIT",
+  "homepage": "https://github.com/shlomiassaf/ngx-modialog",
+  "bugs": {
+    "url": "https://github.com/shlomiassaf/ngx-modialog/issues"
+  },
+  "peerDependencies": {
+    "@angular/common": "^6.0.0",
+    "@angular/core": "^6.0.0"
+  }
+}
