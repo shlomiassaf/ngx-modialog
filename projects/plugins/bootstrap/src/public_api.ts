@@ -22,6 +22,6 @@ export {
   PromptPreset,
   PromptPresetBuilder
 } from './lib/presets/two-button-preset';
-export { Modal, bootstrap4Mode } from './lib/modal';
+export { Modal, bootstrap3Mode, bootstrap4Mode } from './lib/modal';
 
 export { BootstrapModalModule, providers } from './lib/bootstrap.module';
