@@ -165,7 +165,7 @@ To avoid this problem use `event.stopPropagation();` or put the element removal 
 # HELP WANTED!
 
 As a sole author I find it difficult to maintain multiple open source projects.
-As a result it is hard for me to replay rapidly to requests/help/etc...
+As a result it is hard for me to reply rapidly to requests/help/etc...
 
 If you would like to contribute, please contact me, the community will thank you.
 
